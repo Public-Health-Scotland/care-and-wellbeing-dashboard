@@ -70,7 +70,9 @@ section_lookup = read_excel("data/tab values.xlsx") %>%
 
 summary_final <- summary_table %>%
   mutate(geography_type = ifelse(is.na(geography_type), "Scotland", geography_type),
-         geography = ifelse(is.na(geography), "Scotland", geography))
+         geography = ifelse(is.na(geography), "Scotland", geography),
+         pillar = case_when(section == "Population health" ~ "Care and Wellbeing",
+                            T ~ "COVID Recovery"))
 
 
 
