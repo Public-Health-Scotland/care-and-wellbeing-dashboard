@@ -28,7 +28,7 @@ library(lubridate)
 # LOAD FUNCTIONS ----
 ##############################################.
 
-source("functions/Functions.R")
+#source("functions/Functions.R")
 
 
 
