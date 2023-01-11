@@ -156,6 +156,10 @@ yaxis_number = list(title = FALSE,
                     titlefont = list(size=18),
                     showline = FALSE)
 
-
+home_list<- c("About"= "about",
+              "Using the dashboard"= "use",
+              "News and future updates"="future",
+              "Further information"= "info",
+              "Accessibility"= "accessibility")
 
 
