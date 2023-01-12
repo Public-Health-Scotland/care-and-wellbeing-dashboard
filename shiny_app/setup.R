@@ -29,11 +29,11 @@ library(shinymanager)
 # LOAD FUNCTIONS ----
 ##############################################.
 
-source("functions/Functions.R")
 
 credentials <- readRDS("admin/credentials.rds")
 
-
+source(file.path("functions/core_functions.R"), local = TRUE)$value
+source(file.path("functions/generic_charts.R"), local = TRUE)$value
 
 ## Plotting ----
 # Style of x and y axis

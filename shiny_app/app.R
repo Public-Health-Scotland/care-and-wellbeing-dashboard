@@ -139,21 +139,25 @@ server <- function(input, output, session) {
 
 
     # Get functions
-    source(file.path("functions/core_functions.R"), local = TRUE)$value
-    # source(file.path("functions/intro_page_functions.R"), local = TRUE)$value
-    # source(file.path("functions/page_1_functions.R"), local = TRUE)$value
-    source(file.path("functions/generic_charts.R"), local = TRUE)$value
+    # source(file.path("functions/core_functions.R"), local = TRUE)$value
+    # source(file.path("functions/generic_charts.R"), local = TRUE)$value
+    source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
+    source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
+    source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/mortality/functions_mortality.R"), local = TRUE)$value
+    source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
+
+
+    #Navigation buttons
+    source(file.path("functions/navigation_buttons.R"), local = TRUE)$value
+
+    #Modals
+    source(file.path("functions/modals.R"), local = TRUE)$value
 
     # Get content for pages
     source(file.path("indicators/home/server_home.R"), local = TRUE)$value
     source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
     source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value
-
-    #Navigation buttons
-    source(file.path("functions/navigation_buttons.R"), local = TRUE)$value
-
-    #Navigation buttons
-    source(file.path("functions/modals.R"), local = TRUE)$value
 
     # Get content for Covid Recovery pages
     source(file.path("indicators/covid_recovery/wellbeing/server_wellbeing.R"), local = TRUE)$value

@@ -23,6 +23,32 @@ fuel_afford_plot_line = function(data, title = NULL) {
 #yaxis = yaxis_proportion
 
 
+##############################################.
+# HOUSEHOLD SPENDING----
+##############################################.
+
+household_expenditure_barplot = function(data) {
+
+  data %>%
+    plot_ly(x=~household_spending,
+            y=~scotland,
+            color=~year,
+            type = 'bar',
+            text = paste0("Time period: ", data$year, "<br>",
+                          "Proportion of total household expenditure (",
+                          data$household_spending, "): ", data$scotland, "%"),
+            hoverinfo='text',
+            colors = c(palette[2], palette[5])) %>%
+    layout(yaxis = yaxis_proportion,
+           xaxis = list(title = "Household Spending",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = TRUE,
+                        fixedrange=TRUE),
+           legend = list(title = list(text = "Time Period (Financial Years)"))) %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+}
+
 
 ##############################################.
 # MANAGING FINANCIALLY----
@@ -149,3 +175,35 @@ unmanageable_debt_plot_line = function(data, title = NULL) {
            legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
+
+
+##############################################.
+# CHILDCARE UPTAKE----
+##############################################.
+
+childcare_uptake_plot <- function(data) {
+
+  data %>%
+    plot_ly(x = ~date,
+            y = ~percent*100,
+            color = ~breakdown,
+            type="scatter",
+            mode="lines+markers",
+            colors = c(palette[2], palette[3]),
+            text = paste0("Collection date: ", data$date, "<br>",
+                          "Proportion (%): ",
+                          scales::percent(data$percent, accuracy = .1),
+                          "<br>",
+                          "Number of eligible children accessing 1140 hours of funded ELC: ",
+                          format(data$n, big.mark = ",")),
+            hoverinfo = "text",
+            textposition="none") %>%
+    layout(yaxis = yaxis_proportion,
+           xaxis = xaxis_month) %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+
+}
+
+
+
+
