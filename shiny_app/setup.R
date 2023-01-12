@@ -23,6 +23,7 @@ library(DT)
 library(htmltools)
 library(leaflet)
 library(lubridate)
+library(shinymanager)
 
 ##############################################
 # LOAD FUNCTIONS ----
@@ -30,6 +31,7 @@ library(lubridate)
 
 source("functions/Functions.R")
 
+credentials <- readRDS("admin/credentials.rds")
 
 
 
@@ -71,7 +73,8 @@ section_lookup = read_excel("data/tab values.xlsx") %>%
 summary_final <- summary_table %>%
   mutate(geography_type = ifelse(is.na(geography_type), "Scotland", geography_type),
          geography = ifelse(is.na(geography), "Scotland", geography),
-         pillar = case_when(section == "Population health" ~ "Care and Wellbeing",
+         pillar = case_when(section %in% c("Adult risk of health", "Giving every child the best start in life", "Hospital admissions",
+                                           "Mortality", "Social carers survey") ~ "Care and Wellbeing",
                             T ~ "COVID Recovery"))
 
 
