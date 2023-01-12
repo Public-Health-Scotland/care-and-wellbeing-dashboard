@@ -133,3 +133,38 @@ output$drug_deaths_data = DT::renderDataTable({
                              geogtype = "none")
 })
 
+
+
+###### ALCOHOL-SPECIFIC DEATHS ############
+
+
+output$alcohol_deaths_plot <- renderPlotly({
+
+  plot <- alcohol_deaths %>%
+    filter(sex == input$choose_sex_alcohol_deaths) %>%
+    mutate(indicator = round(as.integer(indicator), 1)) %>%
+    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate") %>%
+    layout(yaxis = yaxis_proportion)
+
+})
+
+output$alcohol_deaths_data_table <- DT::renderDataTable({
+
+  alcohol_deaths %>%
+    select(c(year, breakdown, indicator, sex)) %>%
+    mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
+    rename(Year = "year",
+           Sex = "sex",
+           `Age Group` = "breakdown",
+           Rate = "indicator") %>%
+    datatable_style_download(.,
+                             datetype = "year",
+                             data_name = "alcohol_deaths",
+                             geogtype = "none")
+})
+
+
+
+
+
+
