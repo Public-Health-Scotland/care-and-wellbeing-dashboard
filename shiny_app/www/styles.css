@@ -159,7 +159,49 @@ th, td {
 
 
 
+/* Changes the background colours of the buttons to match PHS colours, and adds rounded corners */
+.btn-home {
+  color:black;
+  font-weight: bold;
+  background-color:var(--phs-purple-50);
+  border-color:white;
+  border-radius:10px;
+  padding:5px;
+  min-width:250px;
+  box-shadow:none;
+}
 
+/* This changes the colour of the button when you hover over it */
+.btn-home:hover, .btn-home.active:focus, .btn-home.active:hover {
+  color:white;
+  font-weight: bold;
+  background-color:var(--phs-purple);
+  border-color:white;
+  box-shadow:none;
+}
+
+
+/* This defines the colour of the button that is selected when you first go to the tab */
+
+.btn-home.active, .btn-home:active, .open>.dropdown-toggle.btn-home {
+  color:white;
+  font-weight: bold;
+  background-color:var(--phs-purple);
+  border-color:white;
+  box-shadow:none;
+}
+
+
+
+/* This defines the colour of the button in the instant it is clicked  */
+
+.btn-home:hover:focus:active {
+  color:white;
+  font-weight: bold;
+  background-color:var(--phs-purple);
+  border-color:white;
+  box-shadow:none;
+}
 
 
 
