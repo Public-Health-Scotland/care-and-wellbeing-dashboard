@@ -23,6 +23,7 @@ library(DT)
 library(htmltools)
 library(leaflet)
 library(lubridate)
+library(shinymanager)
 
 ##############################################
 # LOAD FUNCTIONS ----
@@ -30,6 +31,7 @@ library(lubridate)
 
 source("functions/Functions.R")
 
+credentials <- readRDS("admin/credentials.rds")
 
 
 

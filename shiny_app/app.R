@@ -10,11 +10,12 @@
 # LOAD SET-UP ----
 ##############################################.
 
+
 source("setup.R")
 
-
 # UI
-ui <- fluidPage(
+ui <- shinymanager::secure_app(
+fluidPage(
 tagList(
 # Specify most recent fontawesome library - change version as needed
 tags$style("@import url(https://use.fontawesome.com/releases/v6.1.2/css/all.css);"),
@@ -125,11 +126,17 @@ tabPanel(title = "Information and Notes",
     ) # navbar
   ) # taglist
 ) # ui fluidpage
+) # secureapp
 
 # ----------------------------------------------
 # Server
 
 server <- function(input, output, session) {
+
+  res_auth <- secure_server(
+    check_credentials = check_credentials(credentials)
+  )
+
 
     # Get functions
     source(file.path("functions/core_functions.R"), local = TRUE)$value
