@@ -19,9 +19,4 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title) {
 
 }
 
-test
-test <- alcohol_deaths %>%
-
-  filter(sex == "Persons") %>%
-  make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate")
 
