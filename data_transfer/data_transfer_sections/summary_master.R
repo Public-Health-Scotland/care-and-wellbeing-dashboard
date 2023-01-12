@@ -230,16 +230,16 @@ summary_birthweight = birthweight %>%
   filter(birthweight_for_gestational_age == "Appropriate") %>%
   summary_fn(.)
 
-## children at risk of obesity 
+## children at risk of obesity
 
 summary_child_obesity <- childhood_obesity %>%
   summary_fn()
 
-## adults living with long term condition 
+## adults living with long term condition
 summary_adult_long_term_condition <- adult_living_limiting_long_term_condition %>%
   summary_fn()
 
-## adults self assessed health 
+## adults self assessed health
 summary_adult_self_assessed_health <- adult_self_assessed_health %>%
   summary_fn()
 
@@ -247,17 +247,24 @@ summary_adult_self_assessed_health <- adult_self_assessed_health %>%
 summary_unpaid_carers <- experience_unpaid_carers %>%
   summary_fn()
 
+## alcohol deaths
+
+# alcohol_deaths_all <- input_alcohol_deaths
+# summary_alcohol_deaths <- alcohol_deaths_all %>%
+#   group_by(sex, breakdown) %>%
+#   summary_fn()
+
 
 ## Summary pop health ----
 summary_pop_health = do.call(rbind,
                              list(summary_all_cause_mortality, summary_chd,
                                   drug_stays_summary, drug_deaths_summary,
-                                  summary_birthweight, summary_child_obesity, 
-                                  summary_adult_long_term_condition, summary_adult_self_assessed_health, 
+                                  summary_birthweight, summary_child_obesity,
+                                  summary_adult_long_term_condition, summary_adult_self_assessed_health,
                                   summary_unpaid_carers))
 rm(summary_all_cause_mortality, summary_chd, drug_stays_summary, drug_deaths_summary,
-   summary_birthweight, summary_child_obesity, 
-   summary_adult_long_term_condition, summary_adult_self_assessed_health, 
+   summary_birthweight, summary_child_obesity,
+   summary_adult_long_term_condition, summary_adult_self_assessed_health,
    summary_unpaid_carers)
 
 

@@ -38,6 +38,7 @@ source(paste0(path_pop_health, "transfer_alcohol_admissions.R"))
 ##############################################.
 # ALCOHOL SPECIFIC DEATHS (45-74)----
 ##############################################.
+source(paste0(path_pop_health, "transfer_alcohol_deaths.R"))
 
 ##############################################.
 # ASTHMA HOSPITAL ADMISSIONS----

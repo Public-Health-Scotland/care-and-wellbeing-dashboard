@@ -87,7 +87,7 @@ tagList(
                         value = "drug_deaths",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Drug relatedf deaths"),
+                        h3("Drug related deaths"),
 
 
 
@@ -126,7 +126,24 @@ tagList(
                         value = "alcohol_specific_deaths",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Alcohol specific deaths")
+                        h3("Alcohol specific deaths"),
+
+                        fluidRow(
+                          column(3,
+                                 selectizeInput("choose_sex_alcohol_deaths",
+                                                "1. Select sex",
+                                                choices = unique(alcohol_deaths$sex),
+                                                selected = "Persons"))
+                        ),
+
+                        plot_title("Rate of Alcohol-Specific Deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                   "alcohol_deaths_plot"),
+
+                        h3("Data Table"),
+                        DT::dataTableOutput("alcohol_deaths_data_table")
+
+
+
                )
   )
 
