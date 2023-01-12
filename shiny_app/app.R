@@ -139,11 +139,13 @@ server <- function(input, output, session) {
 
 
     # Get functions
-    source(file.path("functions/core_functions.R"), local = TRUE)$value
-    source(file.path("functions/generic_charts.R"), local = TRUE)$value
+    # source(file.path("functions/core_functions.R"), local = TRUE)$value
+    # source(file.path("functions/generic_charts.R"), local = TRUE)$value
     source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
     source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
     source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/mortality/functions_mortality.R"), local = TRUE)$value
+    source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
 
 
     #Navigation buttons
