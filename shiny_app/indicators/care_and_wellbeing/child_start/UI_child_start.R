@@ -45,28 +45,7 @@ tagList(
                     DT::dataTableOutput("infant_data_2")
                   ),
 
-         ##############################################.
-         # HEALTHY BIRTHWEIGHT BABIES----
-         ##############################################.
 
-         tabPanel(title = "Healthy birthweight babies",
-                  value = "birthweight",
-                  icon = icon_no_warning_fn("baby"),
-
-                  h3("Healthy birthweight babies"),
-
-                  fluidRow(
-                    column(2,
-                           selectizeInput("geog_type_healthy_birthweight", "1. Select a geography type",
-                                          choices = c("Scotland", "Health Board", "Council Area"))),
-
-                    column(10,
-                           uiOutput("geography_healthy_birthweight"))),
-
-                  plot_title("Birthweight of babies based on gestational age by financial year",
-                             "healthy_birthweight_stacked_chart"),
-
-                  DT::dataTableOutput("healthy_birthweight_data")),
 
          ##############################################.
          # CHILDREN (2-15) AT RISK OF OBESITY----
