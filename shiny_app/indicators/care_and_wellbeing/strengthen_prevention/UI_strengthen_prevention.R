@@ -199,7 +199,7 @@ tagList(
                         value = "drugs",
                         icon = icon_no_warning_fn("lemon"),
 
-                   tabBox( title = "", id = "drugs_tabBox",
+                   tabBox( title = "", id = "drugs_tabBox", width = NULL,
 
                         ##############################################.
                         # DRUG RELATED HOSPITAL ADMISSIONS ----
