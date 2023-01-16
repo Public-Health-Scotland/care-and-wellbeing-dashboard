@@ -142,15 +142,14 @@ tabPanel(title = "Information and Notes",
   ) # taglist
 ) # ui fluidpage
 ) # secureapp
-#) # secureapp
 
 # ----------------------------------------------
 # Server
 
 server <- function(input, output, session) {
 
-  # res_auth <- secure_server(
-  #   check_credentials = check_credentials(credentials)
+  res_auth <- secure_server(
+    check_credentials = check_credentials(credentials))
 
 
     #### Get functions ----
