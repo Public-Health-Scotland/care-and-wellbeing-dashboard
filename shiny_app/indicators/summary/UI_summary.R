@@ -34,6 +34,8 @@ tabPanel(title = "Summary",
            h3("Summary Table"),
            column(12,
                   DT::dataTableOutput("summary"))
-         )
+         ),
+
+         fluidRow(column(12,linebreaks(5)))
 
 ) # End of navbarMenu SUMMARY
