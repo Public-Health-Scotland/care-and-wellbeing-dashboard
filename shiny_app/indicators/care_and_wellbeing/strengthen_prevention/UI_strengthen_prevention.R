@@ -272,7 +272,7 @@ tagList(
                         value = "alcohol",
                         icon = icon_no_warning_fn("lemon"),
 
-                tabBox( title = "", id = "alcohol_tabBox",
+                tabBox( title = "", id = "alcohol_tabBox", width = NULL,
 
 
                         ##############################################.
