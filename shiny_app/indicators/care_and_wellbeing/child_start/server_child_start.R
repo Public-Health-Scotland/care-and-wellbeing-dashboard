@@ -1,6 +1,99 @@
 
+
 ##############################################.
-# Infant mortality----
+# CHILD SOCIAL AND PHYSICAL DEVELOPMENT----
+##############################################.
+
+# Show geography names dependent on geography type input
+
+output$geog_child_development_ui = renderUI({
+
+  areas_summary = geog_lookup %>%
+    filter(geography_type == input$geog_type_child_development)
+
+  selectizeInput("geog_name_child_development", label = "2. Select geography",
+                 choices = unique(areas_summary$geography),
+                 selected = "")
+})
+
+output$child_development_chart_line2 = renderPlotly({
+  data = preschool %>%
+    filter(geography %in% c("Scotland", input$HB_input, input$LA_input))
+
+  child_development_plot_line2(data)
+
+})
+
+
+output$child_development_chart_line = renderPlotly({
+
+  data = geog_all_filter_table(preschool,
+                               input$geog_type_child_development,
+                               input$geog_name_child_development)
+
+
+  if(input$geog_type_child_development == "Health Board") {
+    data_baseline = preschool %>%
+      filter(geography_type=="Scotland")
+
+    p = child_development_plot_line(data, data_baseline, TRUE,
+                            input$geog_name_child_development,
+                            "Scotland")
+
+  } else if (input$geog_type_child_development == "Council Area") {
+    hb = data %>%
+      slice(1) %>%
+      .$hb2019name
+
+    data_baseline = preschool %>%
+      filter(hb2019name == hb &
+               geography_type == "Health Board")
+
+    p = child_development_plot_line(data, data_baseline, TRUE,
+                            input$geog_name_child_development,
+                            hb)
+  } else {
+    p = child_development_plot_line(data)
+  }
+
+  return(p)
+
+})
+
+output$child_development_data = DT::renderDataTable({
+
+  child_development_out = preschool %>%
+    filter(geography_type == input$child_development_radiobuttons) %>%
+    select(financial_year, geography, number_of_reviews,
+           concern_any, proportion = prop_concern_any)
+  datatable_style_download(child_development_out,
+                           datetype = "financial_year",
+                           data_name = "preschool",
+                           geogtype = "council_area")
+})
+
+##############################################.
+# CHILD WELLBEING AND HAPPINESS----
+##############################################.
+
+
+##############################################.
+# PERINATAL MORTALITY RATE----
+##############################################.
+
+
+##############################################.
+# CHILD MATERIAL DEPRIVATION----
+##############################################.
+
+
+##############################################.
+# PHYSICAL ACTIVITY OF CHILDREN----
+##############################################.
+
+
+##############################################.
+# INFANT MORTALITY----
 ##############################################.
 
 
