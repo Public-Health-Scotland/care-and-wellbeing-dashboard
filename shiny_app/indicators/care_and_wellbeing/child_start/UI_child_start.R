@@ -7,6 +7,134 @@ tagList(
 
   navlistPanel(widths = c(2,10),
 
+               ##############################################.
+               # CHILD SOCIAL AND PHYSICAL DEVELOPMENT----
+               ##############################################.
+               tabPanel(title = "Child social and physical development",
+                        value = "child_development",
+                        icon = icon_no_warning_fn("shapes"),
+
+                        h3("Child social and physical development"),
+
+                        #bsButton("jump_home_preschool", "Go to home page"),
+                        #bsButton("preschooldevelopment_to_info", "Go to information page"),
+                        br(),
+                        br(),
+
+                        actionButton("child_development_modal_info",
+                                     tags$b("Background information and source"),
+                                     icon = icon_no_warning_fn("info-circle")),
+                        br(),
+                        br(),
+
+                        h4("Use the drop downs to select a geography area (Scotland, Health Board or Council Area)",
+                           " and a specific geography of interest to filter the visualisation"),
+
+
+                        fluidRow(
+                          column(4,
+                                 selectizeInput("geog_type_child_development",
+                                                label = "1. Select geography type",
+                                                choices = c("Scotland", "Health Board", "Council Area"),
+                                                selected = "Scotland")),
+                          column(8,
+                                 uiOutput("geog_child_development_ui"))),
+
+
+                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                                   "child_development_chart_line",
+                                   subtitle = "This chart will display a comparison line on the chart.
+                                   For health boards, Scotland data will also be provided.
+                                   For council areas, health board data will also be provided."),
+
+
+                        h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
+                        p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
+                          "Scotland will always be displayed"),
+
+                        fluidRow(
+
+                          column(4,
+                                 selectizeInput("HB_input",
+                                                label = "Select Health Board(s) (3 Max)",
+                                                choices = unique(master_lookup$hb2019name),
+                                                multiple = TRUE,
+                                                selected = "NHS Ayrshire and Arran",
+                                                options = list(maxItems = 3,
+                                                               plugins = c('remove_button')))
+                          ),
+                          column(8,
+                                 selectizeInput("LA_input",
+                                                label = "Select Council Area(s) (3 Max)",
+                                                choices = unique(lookup_LA),
+                                                multiple = TRUE,
+                                                selected = "Aberdeen City",
+                                                options = list(maxItems = 3,
+                                                               plugins = c('remove_button')))
+                          )),
+
+
+
+
+                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                                   "child_development_chart_line2"),
+
+
+
+                        h3("Data table"),
+                        radioButtons("child_development_radiobuttons",
+                                     "Select geography type for data table",
+                                     choices = unique(preschool$geography_type),
+                                     inline = TRUE),
+                        DT::dataTableOutput("child_development_data")
+                        ),
+
+         ##############################################.
+         # CHILD WELLBEING AND HAPPINESS----
+         ##############################################.
+
+         tabPanel(title = "Child wellbeing and happiness",
+                  value = "child_wellbeing",
+                  icon = icon_no_warning_fn("lemon"),
+
+                  h3("Child wellbeing and happiness")
+         ),
+
+         ##############################################.
+         # PERINATAL MORTALITY RATE----
+         ##############################################.
+
+         tabPanel(title = "Perinatal Mortality Rate",
+                  value = "perinatal_mortality",
+                  icon = icon_no_warning_fn("lemon"),
+
+                  h3("Perinatal Mortality Rate")
+         ),
+
+         ##############################################.
+         # CHILD MATERIAL DEPRIVATION----
+         ##############################################.
+
+         tabPanel(title = "Child material deprivation",
+                  value = "child_material_deprevation",
+                  icon = icon_no_warning_fn("lemon"),
+
+                  h3("Child material deprivation")
+         ),
+
+         ##############################################.
+         # PHYSICAL ACTIVITY OF CHILDREN----
+         ##############################################.
+
+         tabPanel(title = "Physical Activity (of children)",
+                  value = "physical_activity_children",
+                  icon = icon_no_warning_fn("lemon"),
+
+                  h3("Physical Activity (of children)")
+         ),
+
+
+
          ##############################################.
          # INFANT MORTALITY ----
          ##############################################.
@@ -45,31 +173,10 @@ tagList(
                     DT::dataTableOutput("infant_data_2")
                   ),
 
-         ##############################################.
-         # HEALTHY BIRTHWEIGHT BABIES----
-         ##############################################.
 
-         tabPanel(title = "Healthy birthweight babies",
-                  value = "birthweight",
-                  icon = icon_no_warning_fn("baby"),
-
-                  h3("Healthy birthweight babies"),
-
-                  fluidRow(
-                    column(2,
-                           selectizeInput("geog_type_healthy_birthweight", "1. Select a geography type",
-                                          choices = c("Scotland", "Health Board", "Council Area"))),
-
-                    column(10,
-                           uiOutput("geography_healthy_birthweight"))),
-
-                  plot_title("Birthweight of babies based on gestational age by financial year",
-                             "healthy_birthweight_stacked_chart"),
-
-                  DT::dataTableOutput("healthy_birthweight_data")),
 
          ##############################################.
-         # CHILDREN (2-15) AT RISK OF OBESITY----
+         # AT RISK OF OBESITY----
          ##############################################.
 
          tabPanel(title = "Children at risk of obesity",

@@ -84,31 +84,46 @@ navbarMenu("Covid Recovery", icon = icon_no_warning_fn("lemon"),
 navbarMenu(title = "Care and Wellbeing", icon = icon_no_warning_fn("lemon"),
 
 
-           tabPanel(title = "Adult risk of health",
+           tabPanel(title = "Strengthen the role and impact of ill health prevention",
                     icon = icon_no_warning_fn("lemon"),
-                    value = "adult_risk",
-                    source(file.path("indicators/care_and_wellbeing/adult_risk/UI_adult_risk.R"), local = TRUE)$value),
+                    value = "strengthen_prevention",
+                    source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
 
 
-           tabPanel(title = "Giving every child the best start in life",
+           tabPanel(title = "Give every child the best start in life",
                     icon = icon_no_warning_fn("lemon"),
                     value = "child_start",
                     source(file.path("indicators/care_and_wellbeing/child_start/UI_child_start.R"), local = TRUE)$value),
 
-           tabPanel(title = "Hospital admissions",
+           tabPanel(title = "Enable all children, young people and adults to maximise their capabilities and control their lives",
                     icon = icon_no_warning_fn("lemon"),
-                    value = "hospital_admissions",
-                    source(file.path("indicators/care_and_wellbeing/hospital_admissions/UI_hospital_admissions.R"), local = TRUE)$value),
+                    value = "control_lives",
+                    source(file.path("indicators/care_and_wellbeing/control_lives/UI_control_lives.R"), local = TRUE)$value),
 
-           tabPanel(title = "Mortality",
+           tabPanel(title = "Create fair employment and good work for all",
                     icon = icon_no_warning_fn("lemon"),
-                    value = "mortality",
-                    source(file.path("indicators/care_and_wellbeing/mortality/UI_mortality.R"), local = TRUE)$value),
+                    value = "fair_work",
+                    source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
-           tabPanel(title = "Social Carers Survey",
+           tabPanel(title = "Ensure healthy standard of living for all",
                     icon = icon_no_warning_fn("lemon"),
-                    value = "carers_survey",
-                    source(file.path("indicators/care_and_wellbeing/carers_survey/UI_carers_survey.R"), local = TRUE)$value)
+                    value = "healthy_standard",
+                    source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
+
+           tabPanel(title = "Create and develop healthy and sustainable places and communities",
+                    icon = icon_no_warning_fn("lemon"),
+                    value = "sustainable_communities",
+                    source(file.path("indicators/care_and_wellbeing/sustainable_communities/UI_sustainable_communities.R"), local = TRUE)$value),
+
+           tabPanel(title = "Tackling discrimination, racism and their outcomes",
+                    icon = icon_no_warning_fn("lemon"),
+                    value = "discrimination_racism",
+                    source(file.path("indicators/care_and_wellbeing/discrimination_racism/UI_discrimination_racism.R"), local = TRUE)$value),
+
+           tabPanel(title = "Pursuing environmental sustainability and health equity together",
+                    icon = icon_no_warning_fn("lemon"),
+                    value = "environmental_sustainability",
+                    source(file.path("indicators/care_and_wellbeing/environmental_sustainability/UI_environmental_sustainability.R"), local = TRUE)$value)
 
 ), # navbarMenu
 
@@ -127,25 +142,40 @@ tabPanel(title = "Information and Notes",
   ) # taglist
 ) # ui fluidpage
 ) # secureapp
+#) # secureapp
 
 # ----------------------------------------------
 # Server
 
 server <- function(input, output, session) {
 
-  res_auth <- secure_server(
-    check_credentials = check_credentials(credentials)
-  )
+  # res_auth <- secure_server(
+  #   check_credentials = check_credentials(credentials)
 
 
-    # Get functions
+    #### Get functions ----
     # source(file.path("functions/core_functions.R"), local = TRUE)$value
     # source(file.path("functions/generic_charts.R"), local = TRUE)$value
+
+    #Covid recovery functions
     source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
     source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
     source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
-    source(file.path("indicators/care_and_wellbeing/mortality/functions_mortality.R"), local = TRUE)$value
+
+    #Care and wellbeing functions
+    source(file.path("indicators/care_and_wellbeing/strengthen_prevention/functions_strengthen_prevention.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/child_start/functions_child_start.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/control_lives/functions_control_lives.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/fair_work/functions_fair_work.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/healthy_standard/functions_healthy_standard.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/sustainable_communities/functions_sustainable_communities.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/discrimination_racism/functions_discrimination_racism.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/environmental_sustainability/functions_environmental_sustainability.R"), local = TRUE)$value
+
+    #Pages functions
+    source(file.path("indicators/home/functions_home.R"), local = TRUE)$value
     source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
+    source(file.path("indicators/info_notes/functions_info_notes.R"), local = TRUE)$value
 
 
     #Navigation buttons
@@ -153,6 +183,9 @@ server <- function(input, output, session) {
 
     #Modals
     source(file.path("functions/modals.R"), local = TRUE)$value
+
+
+    ####Get servers ----
 
     # Get content for pages
     source(file.path("indicators/home/server_home.R"), local = TRUE)$value
@@ -165,11 +198,14 @@ server <- function(input, output, session) {
     source(file.path("indicators/covid_recovery/good_green/server_good_green.R"), local = TRUE)$value
 
     # Get content for Care and Wellbeing pages
-    source(file.path("indicators/care_and_wellbeing/adult_risk/server_adult_risk.R"), local = TRUE)$value
-    source(file.path("indicators/care_and_wellbeing/carers_survey/server_carers_survey.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/strengthen_prevention/server_strengthen_prevention.R"), local = TRUE)$value
     source(file.path("indicators/care_and_wellbeing/child_start/server_child_start.R"), local = TRUE)$value
-    source(file.path("indicators/care_and_wellbeing/hospital_admissions/server_hospital_admissions.R"), local = TRUE)$value
-    source(file.path("indicators/care_and_wellbeing/mortality/server_mortality.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/control_lives/server_control_lives.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/fair_work/server_fair_work.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/healthy_standard/server_healthy_standard.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/sustainable_communities/server_sustainable_communities.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/discrimination_racism/server_discrimination_racism.R"), local = TRUE)$value
+    source(file.path("indicators/care_and_wellbeing/environmental_sustainability/server_environmental_sustainability.R"), local = TRUE)$value
 }
 
 # Run the application
