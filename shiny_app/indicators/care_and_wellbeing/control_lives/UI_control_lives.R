@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Wellbeing of children and young people"),
+  h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
   br(),
   h4(strong("Select indicator: ")),
 
