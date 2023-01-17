@@ -7,9 +7,10 @@ output$indicator_type_ui = renderUI({
   summary_filtered = summary_final %>%
     filter(pillar == input$pillar_type_summary)
 
-  radioButtons("indicator_type_summary",
+  selectizeInput("indicator_type_summary",
                label = "2. Select indicator section",
-               choices = unique(summary_filtered$section))
+               choices = unique(summary_filtered$section),
+               selected = "")
 
 })
 
