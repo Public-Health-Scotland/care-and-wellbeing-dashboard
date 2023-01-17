@@ -1,7 +1,6 @@
 tagList(
   h1("Strengthen the role and impact of ill health prevention" ),
   br(),
-  #bsButton("adult_risk_to_info", "Go to 'Adult risk of health' information page", class = "to_info-btn"),
   h4(strong("Select indicator: ")),
   navlistPanel(widths = c(2,10),
 
@@ -71,16 +70,16 @@ tagList(
                         h3("Quality of care experience")
                ),
 
-               ##############################################.
-               # JOURNEYS BY ACTIVE TRAVEL----
-               ##############################################.
-
-               tabPanel(title = "Journeys by active travel",
-                        value = "journeys_active",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Journeys by active travel")
-               ),
+               # ##############################################.
+               # # JOURNEYS BY ACTIVE TRAVEL----
+               # ##############################################.
+               #
+               # tabPanel(title = "Journeys by active travel",
+               #          value = "journeys_active",
+               #          icon = icon_no_warning_fn("lemon"),
+               #
+               #          h3("Journeys by active travel")
+               # ),
 
                ##############################################.
                # WORK-RELATED ILL HEALTH----
