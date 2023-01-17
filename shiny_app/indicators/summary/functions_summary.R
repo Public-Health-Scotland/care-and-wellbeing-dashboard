@@ -9,7 +9,7 @@ datatable_style_summary = function(data, names=NA) {
     DT::datatable(rownames = FALSE,
                   filter = "none",
                   options = list(
-                    pageLength = 22,
+                    pageLength = 30,
                     dom="t",
                     initComplete = JS(
                       "function(settings, json) {",
