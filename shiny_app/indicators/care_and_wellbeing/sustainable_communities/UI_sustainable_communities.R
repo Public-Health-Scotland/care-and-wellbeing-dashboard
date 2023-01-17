@@ -46,16 +46,16 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Loneliness")
-               ),
+               )#,
 
-               ##############################################.
-               # ACCESS TO GREEN AND BLUE SPACE----
-               ##############################################.
-               tabPanel(title = "Access to green and blue space",
-                        value = "blue_green_space",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Access to green and blue space")
-               )
+               # ##############################################.
+               # # ACCESS TO GREEN AND BLUE SPACE----
+               # ##############################################.
+               # tabPanel(title = "Access to green and blue space",
+               #          value = "blue_green_space",
+               #          icon = icon_no_warning_fn("lemon"),
+               #
+               #          h3("Access to green and blue space")
+               # )
   )
 )
