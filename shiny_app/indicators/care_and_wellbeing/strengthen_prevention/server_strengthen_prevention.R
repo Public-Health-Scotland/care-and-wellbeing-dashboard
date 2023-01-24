@@ -48,7 +48,7 @@
 # ALL-CAUSE MORTALITY (15-44)----
 ##############################################.
 
-output$mortality_input_ui = renderUI({
+output$mortality_ui = renderUI({
 
   areas = all_cause_mortality %>%
     filter(geography_type == input$geog_type_mortality)
@@ -60,7 +60,7 @@ output$mortality_input_ui = renderUI({
 })
 
 
-output$mortality_line_chart = renderPlotly({
+output$mortality_plot = renderPlotly({
 
   data = all_cause_mortality %>%
     filter(geography_type == input$geog_type_mortality,
@@ -90,7 +90,7 @@ output$mortality_line_chart = renderPlotly({
 })
 
 
-output$mortality_data = DT::renderDataTable(
+output$mortality_table = DT::renderDataTable(
 
   all_cause_mortality  %>%
     select(-pop) %>%
@@ -107,7 +107,7 @@ output$mortality_data = DT::renderDataTable(
 # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
 ##############################################.
 
-output$chd_input_ui = renderUI({
+output$chd_ui = renderUI({
 
 
   areas = chd_deaths %>%
@@ -120,7 +120,7 @@ output$chd_input_ui = renderUI({
 })
 
 
-output$chd_CI_chart = renderPlotly({
+output$chd_plot = renderPlotly({
   data = chd_deaths %>%
     filter(geography_type == input$geog_type_chd,
            geography == input$geog_name_chd) %>%
@@ -129,7 +129,7 @@ output$chd_CI_chart = renderPlotly({
 })
 
 
-output$chd_data = DT::renderDataTable({
+output$chd_table = DT::renderDataTable({
 
   chd_deaths %>%
     select(area_name, year, period, measure, lower_confidence_interval,
@@ -153,17 +153,17 @@ output$chd_data = DT::renderDataTable({
 # DRUG RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 
-output$drugstays = renderPlotly({
+output$drug_admissions_plot = renderPlotly({
 
   data = drug_stays %>%
-    filter(age_group == input$age_drugstays) %>%
+    filter(age_group == input$drug_admissions_age) %>%
     mutate(indicator = rate, date = financial_year)
 
   line_chart_function(data, "Rate of stays per 100,00")
 
 })
 
-output$drugstays_data = DT::renderDataTable({
+output$drug_admissions_table = DT::renderDataTable({
 
   drug_stays %>%
     datatable_style_download(.,
@@ -177,33 +177,33 @@ output$drugstays_data = DT::renderDataTable({
 # DRUG RELATED DEATHS----
 ##############################################.
 
-output$geography_drug_deaths = renderUI({
+output$drug_deaths_ui = renderUI({
 
   data = drug_related_deaths %>%
     filter(geography_type == input$geog_type_drug_deaths)
 
-  selectizeInput("geography_drug_deaths", "2. Select a geography",
+  selectizeInput("geog_name_drug_deaths", "2. Select a geography",
                  choices = unique(data$geography))
 })
 
-output$drug_deaths_chart = renderPlotly({
+output$drug_deaths_plot = renderPlotly({
 
   if (input$rate_number_drug_deaths == "Rate") {
     drug_related_deaths %>%
       mutate(date = year) %>%
       filter(geography_type == input$geog_type_drug_deaths,
-             geography == input$geography_drug_deaths) %>%
+             geography == input$geog_name_drug_deaths) %>%
       confidence_line_function(., "Age standardised rate of deaths")
   } else if (input$rate_number_drug_deaths == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
       filter(geography_type == input$geog_type_drug_deaths,
-             geography == input$geography_drug_deaths) %>%
+             geography == input$geog_name_drug_deaths) %>%
       line_chart_function(., "Number of deaths")
   }
 })
 
-output$drug_deaths_data = DT::renderDataTable({
+output$drug_deaths_table = DT::renderDataTable({
 
   drug_related_deaths %>%
     select(-c(pretty_date, indicator, value)) %>%
@@ -233,14 +233,14 @@ output$alcohol_admissions_plot = renderPlotly({
 output$alcohol_deaths_plot <- renderPlotly({
 
   plot <- alcohol_deaths %>%
-    filter(sex == input$choose_sex_alcohol_deaths) %>%
+    filter(sex == input$alcohol_deaths_sex) %>%
     mutate(indicator = round(as.integer(indicator), 1)) %>%
     make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate") %>%
     layout(yaxis = yaxis_proportion)
 
 })
 
-output$alcohol_deaths_data_table <- DT::renderDataTable({
+output$alcohol_deaths_table <- DT::renderDataTable({
 
   alcohol_deaths %>%
     select(c(year, breakdown, indicator, sex)) %>%

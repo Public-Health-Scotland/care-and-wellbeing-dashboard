@@ -52,11 +52,11 @@ tagList(
                # PHYSICAL ACTIVITY----
                ##############################################.
 
-               tabPanel(title = "Physical Activity",
+               tabPanel(title = "Physical activity",
                         value = "physical_activity",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Physical Activity")
+                        h3("Physical activity")
                ),
 
                ##############################################.
@@ -70,16 +70,6 @@ tagList(
                         h3("Quality of care experience")
                ),
 
-               # ##############################################.
-               # # JOURNEYS BY ACTIVE TRAVEL----
-               # ##############################################.
-               #
-               # tabPanel(title = "Journeys by active travel",
-               #          value = "journeys_active",
-               #          icon = icon_no_warning_fn("lemon"),
-               #
-               #          h3("Journeys by active travel")
-               # ),
 
                ##############################################.
                # WORK-RELATED ILL HEALTH----
@@ -122,7 +112,7 @@ tagList(
                                                             "Health Board",
                                                             "Council Area"))),
                           column(2,
-                                 uiOutput("mortality_input_ui")),
+                                 uiOutput("mortality_ui")),
                           column(8,
                                  radioButtons("rate_number_mortality",
                                               "3. View rate per 100,000 population or number of deaths",
@@ -133,9 +123,9 @@ tagList(
 
 
                         h3("All-cause mortality, ages 15-44"),
-                        plotlyOutput("mortality_line_chart"),
+                        plotlyOutput("mortality_plot"),
                         h3("Data table"),
-                        DT::dataTableOutput("mortality_data")
+                        DT::dataTableOutput("mortality_table")
 
 
                ),
@@ -144,12 +134,12 @@ tagList(
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
-               tabPanel(title = "Coronary Heart Disease (CHD): deaths (age 45-74)",
+               tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
                         value = "chd_deaths",
                         icon = icon_no_warning_fn("heart"),
 
 
-                        h3("Coronary Heart Disease (CHD): deaths (age 45-74)"),
+                        h3("Coronary heart disease (CHD): deaths (age 45-74)"),
 
                         fluidRow(
                           column(2,
@@ -163,15 +153,15 @@ tagList(
                                                             "Intermediate Zone"))
                           ),
                           column(10,
-                                 uiOutput("chd_input_ui"))
+                                 uiOutput("chd_ui"))
                         ),
 
                         plot_title("Coronary heart disease deaths (aged <75), age-sex standardised rates per 100,000",
-                                   "chd_CI_chart",
+                                   "chd_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
                         h3("Data table"),
-                        DT::dataTableOutput("chd_data")
+                        DT::dataTableOutput("chd_table")
 
 
 
@@ -206,21 +196,21 @@ tagList(
 
 
                    tabPanel(title = "Drug-related hospital admissions",
-                          value = "drug_related_admissions",
+                          value = "drug_admissions",
                           icon = icon_no_warning_fn("lemon"),
 
-                          h3("Drug related hospital admissions"),
+                          h3("Drug-related hospital admissions"),
 
 
-                          selectizeInput("age_drugstays", "Select an age group",
+                          selectizeInput("drug_admissions_age", "Select an age group",
                                          choices = unique(drug_stays$age_group)),
 
                           plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
-                                     "drugstays"),
+                                     "drug_admissions_plot"),
 
                           h3("Data table"),
 
-                          DT::dataTableOutput("drugstays_data")
+                          DT::dataTableOutput("drug_admissions_table")
                ),
 
 
@@ -243,7 +233,7 @@ tagList(
 
                             column(2,
 
-                                   uiOutput("geography_drug_deaths")),
+                                   uiOutput("drug_deaths_ui")),
 
                             column(8,
                                    radioButtons("rate_number_drug_deaths",
@@ -253,11 +243,11 @@ tagList(
                           ),
 
                           plot_title("Drug misuse deaths by 5 year periods",
-                                     "drug_deaths_chart",
+                                     "drug_deaths_plot",
                                      subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
 
                           h3("Data table"),
-                          DT::dataTableOutput("drug_deaths_data")
+                          DT::dataTableOutput("drug_deaths_table")
 
 
 
@@ -285,7 +275,7 @@ tagList(
                         h3("Alcohol related hospital admissions"),
 
 
-                        selectizeInput("hb_alcohol_admissions","Select Health Board",
+                        selectizeInput("geog_name_alcohol_admissions","Select Health Board",
                                        choices = unique(alcohol_admissions$sub_group_select_group_first)),
 
                         plotlyOutput("alcohol_admissions_plot")
@@ -297,24 +287,24 @@ tagList(
                          ##############################################.
 
                tabPanel(title = "Alcohol specific deaths",
-                          value = "alcohol_specific_deaths",
+                          value = "alcohol_deaths",
                           icon = icon_no_warning_fn("lemon"),
 
                           h3("Alcohol specific deaths"),
 
                           fluidRow(
                             column(3,
-                                   selectizeInput("choose_sex_alcohol_deaths",
+                                   selectizeInput("alcohol_deaths_sex",
                                                   "1. Select sex",
                                                   choices = unique(alcohol_deaths$sex),
                                                   selected = "Persons"))
                           ),
 
-                          plot_title("Rate of Alcohol-Specific Deaths (result of intentional self harm orundetermined intent) in Scotland",
+                          plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
                                      "alcohol_deaths_plot"),
 
                           h3("Data Table"),
-                          DT::dataTableOutput("alcohol_deaths_data_table")
+                          DT::dataTableOutput("alcohol_deaths_table")
                           )
                )),
 
