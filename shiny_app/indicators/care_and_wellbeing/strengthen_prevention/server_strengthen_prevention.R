@@ -354,6 +354,30 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
 ##############################################.
+output$asthma_admissions_plot <- renderPlotly({
+
+  plot <- asthma_admissions %>%
+    filter(Sex == "All Sexes", Ages == "All Ages", geography_type == "All") %>%
+    mutate(indicator = round(as.integer(indicator), 1),
+           date = Date) %>%
+    line_chart_function(., y_title = "Total number of admissions") %>%
+    layout(yaxis = yaxis_number)
+
+})
+
+output$asthma_admissions_table <- DT::renderDataTable({
+
+  table <- asthma_admissions %>%
+    select(c(Date, lookup, Sex, Ages, indicator, Provisional)) %>%
+    rename(`Total number of stays` = "indicator") %>%
+    arrange(desc(Date)) %>%
+    datatable_style_download(.,
+                             datetype = "financial_year",
+                             data_name = "adult_living_limiting_long_term_condition",
+                             geogtype = "none")
+
+
+})
 
 
 ##############################################.

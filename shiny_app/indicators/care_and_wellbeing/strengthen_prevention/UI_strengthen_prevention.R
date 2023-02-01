@@ -387,7 +387,11 @@ tagList(
                         value = "asthma",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Admissions for asthma")
+                        h3("Admissions for asthma"),
+
+                        plotlyOutput("asthma_admissions_plot"),
+
+                        DT::dataTableOutput("asthma_admissions_table")
 
 
                ),

@@ -44,7 +44,17 @@ input_asthma_admissions %<>%
   mutate(Provisional = ifelse(str_starts(lookup, "p"),"1","0"),
          lookup = ifelse(Provisional == "1", substring(lookup,2), lookup)) %>%
   mutate(geography_type = ifelse(lookup == "Scottish Residents", "Scotland",
-                                 ifelse(str_starts(lookup, "NHS"), "Health Board", "Other"))
+                                 ifelse(str_starts(lookup, "NHS"), "Health Board",
+                                        ifelse(lookup == "All Scottish and Non-Scottish Residents", "All", "Other"))),
+         geography = lookup,
+         value = "asthma_admissions",
+         indicator = stays_Number
+         ) %>%
+  summary_format_function(date = .$Date,
+                          geog_type = .$geography_type,
+                          geog = .$geography,
+                          indicator_in = .$indicator,
+                          value_in = .$value)
 
 
 
