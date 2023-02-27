@@ -46,14 +46,15 @@ tagList(
                           column(6,
                                  actionButton("employees_living_wage_2_map_button", "Trend for Scotland"))
                         ),
-                        fluidRow(
-                          column(12,
-                                 tags$b("Select a local authority on the map to view local trend:")),
-                          column(6,
-                                 withSpinner(leafletOutput("employees_living_wage_2_map"))),
-                          column(6,
-                                 withSpinner(plotlyOutput("employees_living_wage_2_line_LA")))
-                        ),
+                        h3("Missing map and plot"),
+                        # fluidRow(
+                        #   column(12,
+                        #          tags$b("Select a local authority on the map to view local trend:")),
+                        #   column(6,
+                        #          withSpinner(leafletOutput("employees_living_wage_2_map"))),
+                        #   column(6,
+                        #          withSpinner(plotlyOutput("employees_living_wage_2_line_LA")))
+                        # ),
 
                         h3("Data table"),
 

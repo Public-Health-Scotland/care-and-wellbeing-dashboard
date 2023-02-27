@@ -56,47 +56,47 @@ observeEvent(input$fuel_afford_year_button, {
 })
 
 
-output$fuel_afford_SHCS_map = renderLeaflet({
-
-
-  fuel_SHCS_LA_per_ind_year = fuel_SHCS_LA_per_ind %>%
-    filter(date_code == input$fuel_afford_year_input)
-
-
-  fuel_afford_las_shape = pub_las_simplified
-  fuel_afford_las_shape@data = fuel_afford_las_shape@data %>%
-    left_join(fuel_SHCS_LA_per_ind_year , by = c("code" = "feature_code"))
-
-  # features of the map
-  bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
-  pal = colorBin("YlOrRd", domain = fuel_afford_las_shape$value, bins = bins)
-  indicator_name = "Fuel Poverty"
-  labels <- sprintf(
-    "<strong>%s</strong><br/> %s Household (%%): %g%%",
-    fuel_afford_las_shape@data[["local_auth"]], indicator_name, fuel_afford_las_shape@data[["value"]]
-  ) %>%
-    lapply(htmltools::HTML)
-
-
-  leaflet(fuel_afford_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-    addTiles() %>%
-    addPolygons(weight = 1, smoothFactor = 0.5,
-                fillColor = ~pal(value),
-                opacity = 0.5, fillOpacity = 0.7,
-                color = "white",
-                dashArray = "3",
-                popup = labels,
-                highlightOptions =  highlightOptions(color = "white", weight = 2,
-                                                     bringToFront = TRUE),
-                layerId = ~code) %>%
-    addLegend("bottomright", pal = pal, values = ~value,
-              title = paste0("Percent of Household (%)", "<br> in ", input$fuel_afford_year_input),
-              labFormat = labelFormat(suffix  = "%"),
-              opacity = 1
-    )
-    }
-)
+# output$fuel_afford_SHCS_map = renderLeaflet({
+#
+#
+#   fuel_SHCS_LA_per_ind_year = fuel_SHCS_LA_per_ind %>%
+#     filter(date_code == input$fuel_afford_year_input)
+#
+#
+#   fuel_afford_las_shape = pub_las_simplified
+#   fuel_afford_las_shape@data = fuel_afford_las_shape@data %>%
+#     left_join(fuel_SHCS_LA_per_ind_year , by = c("code" = "feature_code"))
+#
+#   # features of the map
+#   bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
+#   pal = colorBin("YlOrRd", domain = fuel_afford_las_shape$value, bins = bins)
+#   indicator_name = "Fuel Poverty"
+#   labels <- sprintf(
+#     "<strong>%s</strong><br/> %s Household (%%): %g%%",
+#     fuel_afford_las_shape@data[["local_auth"]], indicator_name, fuel_afford_las_shape@data[["value"]]
+#   ) %>%
+#     lapply(htmltools::HTML)
+#
+#
+#   leaflet(fuel_afford_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+#     addTiles() %>%
+#     addPolygons(weight = 1, smoothFactor = 0.5,
+#                 fillColor = ~pal(value),
+#                 opacity = 0.5, fillOpacity = 0.7,
+#                 color = "white",
+#                 dashArray = "3",
+#                 popup = labels,
+#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
+#                                                      bringToFront = TRUE),
+#                 layerId = ~code) %>%
+#     addLegend("bottomright", pal = pal, values = ~value,
+#               title = paste0("Percent of Household (%)", "<br> in ", input$fuel_afford_year_input),
+#               labFormat = labelFormat(suffix  = "%"),
+#               opacity = 1
+#     )
+#     }
+# )
 
 # update the varible rv_fuel_poverty
 observeEvent(input$fuel_afford_SHCS_map_shape_click,{
@@ -241,50 +241,50 @@ observeEvent(input$savings_net_income_map_button, {
 })
 
 
-output$savings_low_income_map = renderLeaflet({
-  las_shape_map_data = pub_las_simplified
-
-  savings_cat_year = savings_low_income_cat %>%
-    filter(year == input$savings_low_income_year_input)
-
-
-
-  las_shape_map_data@data = las_shape_map_data@data %>%
-    left_join(savings_cat_year , by = c("code" = "ca2019"))
-
-  # value for storing the selected LA; initialized with Scotland geometry
-
-
-  # features of the map
-  bins = c(0, 10, 20, 30, 40, 50)
-  pal = colorBin("YlOrRd", domain = las_shape_map_data$percentage, bins = bins)
-
-  labels <- sprintf(
-    "<strong>%s</strong>
-    <br/> %s: %g%%",
-    las_shape_map_data@data[["council"]], savings_low_income_indicator_name, las_shape_map_data@data[["percentage"]]
-  ) %>%
-    lapply(htmltools::HTML)
-
-
-  leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-    addTiles() %>%
-    addPolygons(weight = 1, smoothFactor = 0.5,
-                fillColor = ~pal(percentage),
-                opacity = 0.5, fillOpacity = 0.7,
-                color = "white",
-                dashArray = "3",
-                popup = labels,
-                highlightOptions =  highlightOptions(color = "white", weight = 2,
-                                                     bringToFront = TRUE),
-                layerId = ~code) %>%
-    addLegend("bottomright", pal = pal, values = ~percentage,
-              title = paste0(savings_low_income_indicator_name, "<br> in ", input$savings_low_income_year_input),
-              labFormat = labelFormat(suffix  = "%"),
-              opacity = 1
-    )
-})
+# output$savings_low_income_map = renderLeaflet({
+#   las_shape_map_data = pub_las_simplified
+#
+#   savings_cat_year = savings_low_income_cat %>%
+#     filter(year == input$savings_low_income_year_input)
+#
+#
+#
+#   las_shape_map_data@data = las_shape_map_data@data %>%
+#     left_join(savings_cat_year , by = c("code" = "ca2019"))
+#
+#   # value for storing the selected LA; initialized with Scotland geometry
+#
+#
+#   # features of the map
+#   bins = c(0, 10, 20, 30, 40, 50)
+#   pal = colorBin("YlOrRd", domain = las_shape_map_data$percentage, bins = bins)
+#
+#   labels <- sprintf(
+#     "<strong>%s</strong>
+#     <br/> %s: %g%%",
+#     las_shape_map_data@data[["council"]], savings_low_income_indicator_name, las_shape_map_data@data[["percentage"]]
+#   ) %>%
+#     lapply(htmltools::HTML)
+#
+#
+#   leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+#     addTiles() %>%
+#     addPolygons(weight = 1, smoothFactor = 0.5,
+#                 fillColor = ~pal(percentage),
+#                 opacity = 0.5, fillOpacity = 0.7,
+#                 color = "white",
+#                 dashArray = "3",
+#                 popup = labels,
+#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
+#                                                      bringToFront = TRUE),
+#                 layerId = ~code) %>%
+#     addLegend("bottomright", pal = pal, values = ~percentage,
+#               title = paste0(savings_low_income_indicator_name, "<br> in ", input$savings_low_income_year_input),
+#               labFormat = labelFormat(suffix  = "%"),
+#               opacity = 1
+#     )
+# })
 
 #update the varible
 observeEvent(input$savings_low_income_map_shape_click,{
