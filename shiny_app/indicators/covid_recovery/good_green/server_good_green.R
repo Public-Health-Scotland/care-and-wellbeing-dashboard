@@ -341,7 +341,7 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
 # EMPLOYMENT GAP UIs----
 ##############################################.
 
-output$disability_gap_ui = renderUI({
+# output$disability_gap_ui = renderUI({
 
 # tagList(
 #
