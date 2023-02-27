@@ -1,5 +1,5 @@
 ##########################################################
-# Covid_Recovery_Dashboard_JE
+# Covid_Recovery_Dashboard
 # Original author(s): Jennifer Evans
 # Original date: 2022-12-21
 # Written/run on RStudio server 1.1.463 and R 3.6.1
@@ -26,7 +26,7 @@ navbarPage(
                href = "https://www.publichealthscotland.scot/",
                target = "_blank"), # PHS logo links to PHS website
     style = "position: relative; top: -5px;"),
-    windowTitle = "Covid_Recovery_Dashboard_JE",# Title for browser tab
+    windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
     header = tags$head(includeCSS("www/styles.css"),  # CSS stylesheet
     tags$link(rel = "shortcut icon", href = "favicon_phs.ico") # Icon for browser tab
 ),
