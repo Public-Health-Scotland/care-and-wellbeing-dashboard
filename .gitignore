@@ -2,3 +2,37 @@
 .Rhistory
 .RData
 .Ruserdata
+
+# 'data' folder #
+shiny_app/data/
+
+# Deployment
+shiny_app/AppDeployment.R
+
+# rsconnect folder
+shiny_app/rsconnect/
+
+# admin folder
+shiny_app/admin/
+
+# Google analytics html
+#shiny_app/www/google-analytics.html
+
+# Common text files that may contain data #
+*.[cC][sS][vV]
+*.[tT][xX][tT]
+
+# Excel files #
+*.[xX][lL][sS]*
+
+# SPSS formats #
+*.[sS][aA][vV]
+*.[zZ][sS][aA][vV]
+
+# R data files #
+*.[rR][dD][aA][tT][aA]
+*.[rR][dD][sS]
+
+# MacOS folder attributes files #
+.DS_Store
+*.Rproj
