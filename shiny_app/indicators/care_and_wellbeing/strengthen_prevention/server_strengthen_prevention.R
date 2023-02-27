@@ -221,7 +221,11 @@ output$drug_deaths_data = DT::renderDataTable({
 # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
 ##############################################.
 output$alcohol_admissions_plot = renderPlotly({
-  data_alc = alcohol_admissions %>% filter(sub_group_select_group_first==input$hb_alcohol_admissions) %>%
+  data_alc = alcohol_admissions %>%
+    arrange(financial_year) %>%
+    filter(sub_group_select_group_first==input$hb_alcohol_admissions,
+           condition == "All alcohol conditions",
+           smr_type == "Combined") %>%
     rename(date = "financial_year",
            indicator = "stays_easr")
 
