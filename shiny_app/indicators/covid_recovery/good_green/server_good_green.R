@@ -368,10 +368,10 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
 #
 #     fluidRow(
 #       column(6,
-             selectizeInput("disability_employment_gap_input",
-                            label = "Select year to view on heatmap:",
-                            choices = disability_employment_gap_choices,
-                            selected = max(disability_employment_gap_choices))#),
+             # selectizeInput("disability_employment_gap_input",
+             #                label = "Select year to view on heatmap:",
+             #                choices = disability_employment_gap_choices,
+             #                selected = max(disability_employment_gap_choices))#),
 #       column(6,
 #              actionButton("disability_employment_gap_button", "Trend for Scotland"))
 #     ),
@@ -391,7 +391,7 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
 #       h3("Data table"),
 #       withSpinner(DT::dataTableOutput("disability_gap_data_table"))
 # )
-})
+# })
 
 # output$ethnicity_gap_ui = renderUI({
 #
@@ -473,26 +473,26 @@ output$zero_hours_contracts_data_table = DT::renderDataTable({
 ##############################################.
 
 ### EMPLOYABILITY - referral
-output$employability_FSS_referral_slider_ui = renderUI({
-  min_slider = min(employability_FSS_referral$year_quarter_date)
-  max_slider = max(employability_FSS_referral$year_quarter_date) +  months(3)
-
-  sliderInput("employability_FSS_referral_slider_input", "Selected quarters:",
-              min = min_slider,
-              max = max_slider,
-              value=c(min_slider, max_slider),timeFormat="%b %Y")
-})
+# output$employability_FSS_referral_slider_ui = renderUI({
+#   min_slider = min(employability_FSS_referral$year_quarter_date)
+#   max_slider = max(employability_FSS_referral$year_quarter_date) +  months(3)
+#
+#   sliderInput("employability_FSS_referral_slider_input", "Selected quarters:",
+#               min = min_slider,
+#               max = max_slider,
+#               value=c(min_slider, max_slider),timeFormat="%b %Y")
+# })
 
 
 employability_FSS_referral_reactive <- reactiveValues()
 observe({
 
-  full_date_left = input$employability_FSS_referral_slider_input[1]
-  full_date_right = input$employability_FSS_referral_slider_input[2]
-  full_date_left = if_else(is.null(full_date_left), min(employability_FSS_referral$year_quarter_date), full_date_left)
-  full_date_right = if_else(is.null(full_date_right), max(employability_FSS_referral$year_quarter_date), full_date_right)
-  full_date_left = floor_date(full_date_left, unit = "month")
-  full_date_right = floor_date(full_date_right, unit = "month")
+  full_date_left = as.character(input$employability_FSS_referral_slider_input[1])
+  full_date_right = as.character(input$employability_FSS_referral_slider_input[2])
+  full_date_left = format(as.Date(ifelse(is.null(full_date_left), min(employability_FSS_referral$year_quarter_date), full_date_left),"%Y-%m-%d"),"%Y-%m-%d")
+  full_date_right = format(as.Date(ifelse(is.null(full_date_right), max(employability_FSS_referral$year_quarter_date), full_date_right),"%Y-%m-%d"),"%Y-%m-%d")
+  full_date_left = floor_date(as.Date(full_date_left), unit = "month")
+  full_date_right = floor_date(as.Date(full_date_right), unit = "month")
 
   employability_FSS_referral_reactive$data_subset = employability_FSS_referral %>%
     filter(year_quarter_date>=full_date_left,
@@ -546,26 +546,27 @@ output$employability_FSS_referral_funnel_figure = renderPlotly({
 
 ## EMPLOYABILITY - starts
 
-output$employability_FSS_start_month_slider_ui = renderUI({
-  min_slider = min(employability_FSS_start_month$year_quarter_date)
-  max_slider = max(employability_FSS_start_month$year_quarter_date)
-
-  sliderInput("employability_FSS_start_month_input", "Select range of months:",
-              min = min_slider,
-              max = max_slider,
-              value=c(min_slider, max_slider),timeFormat="%b %Y")
-})
+# output$employability_FSS_start_month_slider_ui = renderUI({
+#   min_slider = min(employability_FSS_start_month$year_quarter_date)
+#   max_slider = max(employability_FSS_start_month$year_quarter_date)
+#
+#   sliderInput("employability_FSS_start_month_input", "Select range of months:",
+#               min = min_slider,
+#               max = max_slider,
+#               value=c(min_slider, max_slider),
+#               timeFormat="%b %Y")
+# })
 
 
 employability_FSS_start_month_reactive <- reactiveValues()
 observe({
 
-  full_date_left = input$employability_FSS_start_month_input[1]
-  full_date_right = input$employability_FSS_start_month_input[2]
-  full_date_left = if_else(is.null(full_date_left), min(employability_FSS_start_month$year_quarter_date), full_date_left)
-  full_date_right = if_else(is.null(full_date_right), max(employability_FSS_start_month$year_quarter_date), full_date_right)
-  full_date_left = floor_date(full_date_left, unit = "month")
-  full_date_right = floor_date(full_date_right, unit = "month")
+  full_date_left = as.character(input$employability_FSS_start_month_input[1])
+  full_date_right = as.character(input$employability_FSS_start_month_input[2])
+  full_date_left = format(as.Date(ifelse(is.null(full_date_left), min(employability_FSS_start_month$year_quarter_date), full_date_left), "%Y-%m-%d"),"%Y-%m-%d")
+  full_date_right = format(as.Date(ifelse(is.null(full_date_left), max(employability_FSS_start_month$year_quarter_date), full_date_right), "%Y-%m-%d"),"%Y-%m-%d")
+  full_date_left = floor_date(as.Date(full_date_left), unit = "month")
+  full_date_right = floor_date(as.Date(full_date_right), unit = "month")
   employability_FSS_start_month_reactive$data_subset = employability_FSS_start_month %>%
     filter(year_quarter_date>=full_date_left,
            year_quarter_date<=full_date_right)
