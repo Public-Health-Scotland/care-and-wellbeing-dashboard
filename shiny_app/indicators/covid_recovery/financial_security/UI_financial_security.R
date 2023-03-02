@@ -50,13 +50,25 @@ tagList(
                      withSpinner(DT::dataTableOutput("fuel_afford_data"))),
 
            ##############################################.
-           # HOUSEHOLD SPENDING----
+           # FOOD AFFORDABILITY----
            ##############################################.
-           tabPanel(title = "Household spending",
-                    value = "household_spending",
+           tabPanel(title = "Food affordability",
+                    value = "food_affordability",
+                    icon = icon_no_warning_fn("lemon"),
+
+                    h2("Food Affordability"),
+
+           ),
+
+
+           ##############################################.
+           # COST OF LIVING ----
+           ##############################################.
+           tabPanel(title = "Cost of living",
+                    value = "cost_of_living",
                     icon = icon_no_warning_fn("money-bill-trend-up"),
 
-                    h3("Household spending"),
+                    h3("Cost of living"),
 
                     #bsButton("jump_home_household_expenditure", "Go to home page"),
                     bsButton("household_spending_to_info", "Go to information tab"),
