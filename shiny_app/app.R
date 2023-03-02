@@ -205,6 +205,14 @@ server <- function(input, output, session) {
     source(file.path("indicators/care_and_wellbeing/sustainable_communities/server_sustainable_communities.R"), local = TRUE)$value
     source(file.path("indicators/care_and_wellbeing/discrimination_racism/server_discrimination_racism.R"), local = TRUE)$value
     source(file.path("indicators/care_and_wellbeing/environmental_sustainability/server_environmental_sustainability.R"), local = TRUE)$value
+
+  # Get content for info pages
+  source(file.path("indicators/covid_recovery/wellbeing/info_wellbeing.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/financial_security/info_financial_security.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/good_green/info_good_green.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/strengthen_prevention/info_strengthen_prevention.R"), local = TRUE)$value
+
+
 }
 
 # Run the application
