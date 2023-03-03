@@ -256,86 +256,86 @@ output$info_panel = renderUI({
                  )
       )
     )
-  }  else if(input$indicator_type_info == "Giving every child the best start in life") {
-
-    wellPanel(
-      h3("Giving every child the best start in life"),
-      bsCollapse(id = "info_collapse_child_start", open = "Panel 1",
-                 bsCollapsePanel(
-                   "Infant mortality",
-                   uiOutput("info_infant_mortality_pop")
-                 ),
-                 bsCollapsePanel(
-                   "Healthy birthweight babies",
-                   uiOutput("info_healthy_birthweight")
-                 ),
-                 bsCollapsePanel(
-                   "Children at risk of obesity",
-                   uiOutput("info_children_at_risk_of_obesity")
-                 )
-
-      )
-    )
-  } else if(input$indicator_type_info == "Hospital admissions") {
-
-    wellPanel(
-      h3("Hospital admissions"),
-      bsCollapse(id = "info_collapse_hospital_admissions", open = "Panel 1",
-                 bsCollapsePanel(
-                   "First ever hospital admission for heart attack",
-                   uiOutput("info_heart_attack")
-                 ),
-                 bsCollapsePanel(
-                   "Drug-related hospital admissions",
-                   uiOutput("info_drug_admissions")
-                 ),
-                 bsCollapsePanel(
-                   "Alcohol admissions",
-                   uiOutput("info_alcohol_admissions")
-                 ),
-                 bsCollapsePanel(
-                   "Asthma hospital admissions",
-                   uiOutput("info_asthma_hospital_adm")
-                 )
-      )
-    )
-  } else if(input$indicator_type_info == "Mortality") {
-
-    wellPanel(
-      h3("Mortality"),
-      bsCollapse(id = "info_collapse_mortality", open = "Panel 1",
-                 bsCollapsePanel(
-                   "All-cause mortality",
-                   uiOutput("info_all_cause_mortality")
-                 ),
-                 bsCollapsePanel(
-                   "Coronary Heart Disease (CHD) deaths",
-                   uiOutput("info_chd_deaths")
-                 ),
-                 bsCollapsePanel(
-                   "Drug-related deaths",
-                   uiOutput("info_drug_deaths")
-                 ),
-                 bsCollapsePanel(
-                   "Alcohol-specific deaths (aged 45-74)",
-                   uiOutput("info_alcohol_deaths")
-                 )
-      )
-    )
-  } else if(input$indicator_type_info == "Social carers survey") {
-
-    wellPanel(
-      h3("Mortality"),
-      bsCollapse(id = "info_collapse_social_carers_survey", open = "Panel 1",
-                 bsCollapsePanel(
-                   "Experience of social care recipients",
-                   uiOutput("info_experience_recipients")
-                 ),
-                 bsCollapsePanel(
-                   "Experience of unpaid carers",
-                   uiOutput("info_experience_of_unpaid_carers")
-                 )
-      )
-    )
+    # }  else if(input$indicator_type_info == "Giving every child the best start in life") {
+    #
+    #   wellPanel(
+    #     h3("Giving every child the best start in life"),
+    #     bsCollapse(id = "info_collapse_child_start", open = "Panel 1",
+    #                bsCollapsePanel(
+    #                  "Infant mortality",
+    #                  uiOutput("info_infant_mortality_pop")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Healthy birthweight babies",
+    #                  uiOutput("info_healthy_birthweight")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Children at risk of obesity",
+    #                  uiOutput("info_children_at_risk_of_obesity")
+    #                )
+    #
+    #     )
+    #   )
+    # } else if(input$indicator_type_info == "Hospital admissions") {
+    #
+    #   wellPanel(
+    #     h3("Hospital admissions"),
+    #     bsCollapse(id = "info_collapse_hospital_admissions", open = "Panel 1",
+    #                bsCollapsePanel(
+    #                  "First ever hospital admission for heart attack",
+    #                  uiOutput("info_heart_attack")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Drug-related hospital admissions",
+    #                  uiOutput("info_drug_admissions")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Alcohol admissions",
+    #                  uiOutput("info_alcohol_admissions")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Asthma hospital admissions",
+    #                  uiOutput("info_asthma_hospital_adm")
+    #                )
+    #     )
+    #   )
+    # } else if(input$indicator_type_info == "Mortality") {
+    #
+    #   wellPanel(
+    #     h3("Mortality"),
+    #     bsCollapse(id = "info_collapse_mortality", open = "Panel 1",
+    #                bsCollapsePanel(
+    #                  "All-cause mortality",
+    #                  uiOutput("info_all_cause_mortality")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Coronary Heart Disease (CHD) deaths",
+    #                  uiOutput("info_chd_deaths")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Drug-related deaths",
+    #                  uiOutput("info_drug_deaths")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Alcohol-specific deaths (aged 45-74)",
+    #                  uiOutput("info_alcohol_deaths")
+    #                )
+    #     )
+    #   )
+    # } else if(input$indicator_type_info == "Social carers survey") {
+    #
+    #   wellPanel(
+    #     h3("Mortality"),
+    #     bsCollapse(id = "info_collapse_social_carers_survey", open = "Panel 1",
+    #                bsCollapsePanel(
+    #                  "Experience of social care recipients",
+    #                  uiOutput("info_experience_recipients")
+    #                ),
+    #                bsCollapsePanel(
+    #                  "Experience of unpaid carers",
+    #                  uiOutput("info_experience_of_unpaid_carers")
+    #                )
+    #     )
+    #   )
   }
 })
