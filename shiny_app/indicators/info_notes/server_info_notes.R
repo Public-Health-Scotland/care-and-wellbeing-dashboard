@@ -1,14 +1,21 @@
-observe(
-  if(input$pillar_type_info == "Covid recovery"){
-    updateRadioButtons(inputId = "indicator_type_info",
-                       label = "2. Select indicator",
-                       choices = c(unique(section_lookup %>% filter(pillar == "Covid recovery") %>% .$section)))
-  } else if (input$pillar_type_info == "Care and wellbeing"){
-    updateRadioButtons(inputId = "indicator_type_info",
-                       label = "2. Select indicator",
-                       choices = c(unique(section_lookup %>% filter(pillar == "Care and wellbeing") %>% .$section)))
-  }
+
+observeEvent(input$pillar_type_info,
+             {
+
+               if(input$pillar_type_info == "Covid recovery"){
+                 updateRadioButtons(session, inputId = "indicator_type_info",
+                                    label = "2. Select indicator",
+                                    choices = c(unique(section_lookup %>% filter(pillar == "Covid recovery") %>% .$section)))
+
+               } else if (input$pillar_type_info == "Care and wellbeing"){
+                 updateRadioButtons(session, inputId = "indicator_type_info",
+                                    label = "2. Select indicator",
+                                    choices = c(unique(section_lookup %>% filter(pillar == "Care and wellbeing") %>% .$section)))
+
+               }
+             }
 )
+
 
 
 
