@@ -358,13 +358,13 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
 ##############################################.
-# observeEvent(input$asthma_choices,
+# observeEvent(input$asthma_admissions_breakdowns,
 #
-#         if(input$asthma_choices == "Age and sex breakdown"){
+#         if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
 #
-#           output$asthma_year_choices_ui <- renderUI(
+#           output$asthma_admissions_years_ui <- renderUI(
 #
-#             pickerInput("asthma_year_choices",
+#             pickerInput("asthma_admissions_years",
 #                         "Year breakdown",
 #                         choices = unique(asthma_admissions$Date))
 #             )
@@ -374,7 +374,7 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 
 output$asthma_admissions_plot <- renderPlotly({
 
-  if(input$asthma_choices == "Yearly total"){
+  if(input$asthma_admissions_breakdowns == "Yearly total"){
 
     plot <- asthma_admissions %>%
       filter(Sex == "All Sexes", Ages == "All Ages", geography_type == "All") %>%
@@ -383,7 +383,7 @@ output$asthma_admissions_plot <- renderPlotly({
       line_chart_function(., y_title = "Total number of admissions") %>%
       layout(yaxis = yaxis_number)
 
-  } else if(input$asthma_choices == "Age breakdown"){
+  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
     plot <- asthma_admissions %>%
       filter(Sex == "All Sexes", geography_type == "All") %>%
@@ -392,7 +392,7 @@ output$asthma_admissions_plot <- renderPlotly({
              date = Date) %>%
       make_line_chart_multi_lines(x= .$Date, y = .$indicator, colour = .$Ages, y_axis_title = "Total number of admissions")
 
-  } else if(input$asthma_choices == "Sex breakdown"){
+  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
     plot <- asthma_admissions %>%
       filter(Ages == "All Ages", geography_type == "All") %>%
@@ -400,7 +400,7 @@ output$asthma_admissions_plot <- renderPlotly({
              date = Date) %>%
       make_line_chart_multi_lines(x= .$Date, y = .$indicator, colour = .$Sex, y_axis_title = "Total number of admissions")
 
-  # } else if(input$asthma_choices == "Age and sex breakdown"){
+  # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
   #
   #   plot <- asthma_admissions %>%
   #     filter(Sex != "All Sexes", geography_type == "All", Date == input$asthma_year_choices) %>%

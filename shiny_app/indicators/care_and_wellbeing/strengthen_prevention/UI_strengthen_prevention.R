@@ -384,17 +384,17 @@ tagList(
                # ADMISSIONS FOR ASTHMA----
                ##############################################.
                tabPanel(title = "Admissions for asthma",
-                        value = "asthma",
+                        value = "asthma_admissions",
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Admissions for asthma"),
 
                         fluidRow(column(3,
-                                        pickerInput("asthma_choices",
+                                        pickerInput("asthma_admissions_breakdowns",
                                                     "Breakdown",
                                                     choices = c("Yearly total", "Age breakdown", "Sex breakdown")))),#, "Age and sex breakdown"))),
                                  # column(3,
-                                 #        uiOutput("asthma_year_choices_ui"))),
+                                 #        uiOutput("asthma_admissions_years_ui"))),
 
                         plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
                         # plotlyOutput("asthma_admissions_plot"),
