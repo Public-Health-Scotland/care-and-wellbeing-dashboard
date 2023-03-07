@@ -48,35 +48,35 @@
 # ALL-CAUSE MORTALITY (15-44)----
 ##############################################.
 
-output$mortality_ui = renderUI({
+observeEvent(input$all_cause_mortality_geog_type,
+             {
+               areas <- all_cause_mortality %>%
+                 filter(geography_type == input$all_cause_mortality_geog_type)
 
-  areas = all_cause_mortality %>%
-    filter(geography_type == input$geog_type_mortality)
-
-  selectizeInput("geog_name_mortality",
-                 "2. Select geography",
-                 choices = unique(areas$geography))
-
-})
+               updateSelectizeInput(session,
+                                    "all_cause_mortality_geog_name",
+                                    "2. Select geography",
+                                    choices = unique(areas$geography))
+             })
 
 
-output$mortality_plot = renderPlotly({
+output$all_cause_mortality_plot = renderPlotly({
 
   data = all_cause_mortality %>%
-    filter(geography_type == input$geog_type_mortality,
-           geography == input$geog_name_mortality,
+    filter(geography_type == input$all_cause_mortality_geog_type,
+           geography == input$all_cause_mortality_geog_name,
            indicator_age == "15 to 44") %>%
     group_by(year) %>%
     summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000,
            date = year)
 
-  if (input$rate_number_mortality == "Rate") {
+  if (input$all_cause_mortality_rate_number == "Rate") {
     data %<>%
       mutate(indicator = rate)
 
     indicator_y = "Rate of deaths per 100,000 population"
-  } else if (input$rate_number_mortality == "Number") {
+  } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
 
@@ -90,7 +90,7 @@ output$mortality_plot = renderPlotly({
 })
 
 
-output$mortality_table = DT::renderDataTable(
+output$all_cause_mortality_table = DT::renderDataTable(
 
   all_cause_mortality  %>%
     select(-pop) %>%
@@ -107,29 +107,29 @@ output$mortality_table = DT::renderDataTable(
 # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
 ##############################################.
 
-output$chd_ui = renderUI({
+observeEvent(input$chd_deaths_geog_type,
+             {
+
+               areas <- chd_deaths %>%
+                 filter(geography_type == input$chd_deaths_geog_type)
+
+               updateSelectizeInput(session,
+                                    "chd_deaths_geog_name",
+                                    "2. Select geography",
+                                    choices = unique(areas$geography))
+             })
 
 
-  areas = chd_deaths %>%
-    filter(geography_type == input$geog_type_chd)
-
-  selectizeInput("geog_name_chd",
-                 "2. Select geography",
-                 choices = unique(areas$geography))
-
-})
-
-
-output$chd_plot = renderPlotly({
+output$chd_deaths_plot = renderPlotly({
   data = chd_deaths %>%
-    filter(geography_type == input$geog_type_chd,
-           geography == input$geog_name_chd) %>%
+    filter(geography_type == input$chd_deaths_geog_type,
+           geography == input$chd_deaths_geog_name) %>%
     rename(date = year) %>%
     confidence_line_function(., "Age-sex standardised rate of deaths")
 })
 
 
-output$chd_table = DT::renderDataTable({
+output$chd_deaths_table = DT::renderDataTable({
 
   chd_deaths %>%
     select(area_name, year, period, measure, lower_confidence_interval,
@@ -177,28 +177,30 @@ output$drug_admissions_table = DT::renderDataTable({
 # DRUG RELATED DEATHS----
 ##############################################.
 
-output$drug_deaths_ui = renderUI({
+observeEvent(input$drug_deaths_geog_type,
+             {
 
-  data = drug_related_deaths %>%
-    filter(geography_type == input$geog_type_drug_deaths)
+               data <- drug_related_deaths %>%
+                 filter(geography_type == input$drug_deaths_geog_type)
 
-  selectizeInput("geog_name_drug_deaths", "2. Select a geography",
-                 choices = unique(data$geography))
-})
+               updateSelectizeInput(session,
+                                    "drug_deaths_geog_name", "2. Select a geography",
+                                    choices = unique(data$geography))
+             })
 
 output$drug_deaths_plot = renderPlotly({
 
-  if (input$rate_number_drug_deaths == "Rate") {
+  if (input$drug_deaths_rate_number == "Rate") {
     drug_related_deaths %>%
       mutate(date = year) %>%
-      filter(geography_type == input$geog_type_drug_deaths,
-             geography == input$geog_name_drug_deaths) %>%
+      filter(geography_type == input$drug_deaths_geog_type,
+             geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Age standardised rate of deaths")
-  } else if (input$rate_number_drug_deaths == "Number") {
+  } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
-      filter(geography_type == input$geog_type_drug_deaths,
-             geography == input$geog_name_drug_deaths) %>%
+      filter(geography_type == input$drug_deaths_geog_type,
+             geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Number of deaths")
   }
 })
@@ -221,9 +223,10 @@ output$drug_deaths_table = DT::renderDataTable({
 # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
 ##############################################.
 output$alcohol_admissions_plot = renderPlotly({
+
   data_alc = alcohol_admissions %>%
     arrange(financial_year) %>%
-    filter(sub_group_select_group_first==input$hb_alcohol_admissions,
+    filter(sub_group_select_group_first == input$alcohol_admissions_geog_name,
            condition == "All alcohol conditions",
            smr_type == "Combined") %>%
     rename(date = "financial_year",
@@ -262,23 +265,27 @@ output$alcohol_deaths_table <- DT::renderDataTable({
 ##############################################.
 # HEALTHY BIRTHWEIGHT----
 ##############################################.
-output$geography_healthy_birthweight = renderUI({
-  birthweight_data = birthweight %>%
-    filter(geography_type == input$geog_type_healthy_birthweight)
+observeEvent(input$healthy_birthweight_geog_type,
+             {
 
-  selectizeInput("geography_healthy_birthweight", "2. Select a geography",
-                 choices = unique(birthweight_data$geography))
-})
+               birthweight_data <- birthweight %>%
+                 filter(geography_type == input$healthy_birthweight_geog_type)
 
-output$healthy_birthweight_stacked_chart = renderPlotly({
+               updateSelectizeInput(session,
+                                    "healthy_birthweight_geog_name", "2. Select a geography",
+                                    choices = unique(birthweight_data$geography))
+             })
+
+output$healthy_birthweight_plot = renderPlotly({
+
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
-    filter(geography == input$geography_healthy_birthweight, geography_type == input$geog_type_healthy_birthweight) %>%
+    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age)
 })
 
-output$healthy_birthweight_data = DT::renderDataTable({
+output$healthy_birthweight_table = DT::renderDataTable({
 
   birthweight %>%
     mutate(proportion = indicator) %>%

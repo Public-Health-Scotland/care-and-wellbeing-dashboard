@@ -105,16 +105,18 @@ tagList(
                         h3("All-cause mortality (ages 15-44)"),
 
                         fluidRow(
-                          column(2,
-                                 selectizeInput("geog_type_mortality",
+                          column(3,
+                                 selectizeInput("all_cause_mortality_geog_type",
                                                 "1. Select geography type",
                                                 choices = c("Scotland",
                                                             "Health Board",
                                                             "Council Area"))),
-                          column(2,
-                                 uiOutput("mortality_ui")),
-                          column(8,
-                                 radioButtons("rate_number_mortality",
+                          column(3,
+                                 selectizeInput("all_cause_mortality_geog_name",
+                                                "2. Select geography",
+                                                choices = unique(all_cause_mortality %>% filter(geography_type == "Scotland") %>% .$geography))),
+                          column(3,
+                                 radioButtons("all_cause_mortality_rate_number",
                                               "3. View rate per 100,000 population or number of deaths",
                                               choices = c("Rate",
                                                           "Number")))
@@ -123,9 +125,9 @@ tagList(
 
 
                         h3("All-cause mortality, ages 15-44"),
-                        plotlyOutput("mortality_plot"),
+                        plotlyOutput("all_cause_mortality_plot"),
                         h3("Data table"),
-                        DT::dataTableOutput("mortality_table")
+                        DT::dataTableOutput("all_cause_mortality_table")
 
 
                ),
@@ -142,26 +144,28 @@ tagList(
                         h3("Coronary heart disease (CHD): deaths (age 45-74)"),
 
                         fluidRow(
-                          column(2,
-                                 selectizeInput("geog_type_chd",
+                          column(3,
+                                 selectizeInput("chd_deaths_geog_type",
                                                 "1. Select geography type",
                                                 choices = c("Scotland",
                                                             "Health Board",
                                                             "HSCP",
                                                             "Council Area",
                                                             "Locality",
-                                                            "Intermediate Zone"))
+                                                            "Intermediate Zone")),
                           ),
-                          column(10,
-                                 uiOutput("chd_ui"))
+                          column(3,
+                                 selectizeInput("chd_deaths_geog_name",
+                                                "2. Select geography",
+                                                choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography))),
                         ),
 
                         plot_title("Coronary heart disease deaths (aged <75), age-sex standardised rates per 100,000",
-                                   "chd_plot",
+                                   "chd_deaths_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
                         h3("Data table"),
-                        DT::dataTableOutput("chd_table")
+                        DT::dataTableOutput("chd_deaths_table")
 
 
 
@@ -188,7 +192,7 @@ tagList(
                         value = "drugs",
                         icon = icon_no_warning_fn("lemon"),
 
-                   tabBox( title = "", id = "drugs_tabBox", width = NULL,
+                   tabBox(title = "", id = "drugs_tabBox", width = NULL,
 
                         ##############################################.
                         # DRUG RELATED HOSPITAL ADMISSIONS ----
@@ -227,16 +231,18 @@ tagList(
 
 
                           fluidRow(
-                            column(2,
-                                   selectizeInput("geog_type_drug_deaths", "1. Select a geography type",
+                            column(3,
+                                   selectizeInput("drug_deaths_geog_type", "1. Select a geography type",
                                                   choices = c("Scotland", "Health Board", "Council Area"))),
 
-                            column(2,
+                            column(3,
 
-                                   uiOutput("drug_deaths_ui")),
+                                   selectizeInput("drug_deaths_geog_name", "2. Select a geography",
+                                                  choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography))
+                                   ),
 
-                            column(8,
-                                   radioButtons("rate_number_drug_deaths",
+                            column(3,
+                                   radioButtons("drug_deaths_rate_number",
                                                 "3. View rate per 100,000 population or number of deaths",
                                                 choices = c("Rate",
                                                             "Number")))
@@ -275,7 +281,7 @@ tagList(
                         h3("Alcohol related hospital admissions"),
 
 
-                        selectizeInput("geog_name_alcohol_admissions","Select Health Board",
+                        selectizeInput("alcohol_admissions_geog_name","Select Health Board",
                                        choices = unique(alcohol_admissions$sub_group_select_group_first)),
 
                         plotlyOutput("alcohol_admissions_plot")
@@ -321,17 +327,19 @@ tagList(
 
 
                         fluidRow(
-                          column(2,
-                                 selectizeInput("geog_type_healthy_birthweight", "1. Select a geography type",
+                          column(3,
+                                 selectizeInput("healthy_birthweight_geog_type", "1. Select a geography type",
                                                 choices = c("Scotland", "Health Board", "Council Area"))),
 
-                          column(10,
-                                 uiOutput("geography_healthy_birthweight"))),
+                          column(3,
+                                 selectizeInput("healthy_birthweight_geog_name", "2. Select a geography",
+                                                choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
+                                 )),
 
                         plot_title("Birthweight of babies based on gestational age by financial year",
-                                   "healthy_birthweight_stacked_chart"),
+                                   "healthy_birthweight_plot"),
 
-                        DT::dataTableOutput("healthy_birthweight_data")),
+                        DT::dataTableOutput("healthy_birthweight_table")),
 
 
 
@@ -374,7 +382,7 @@ tagList(
                # ADMISSIONS FOR ASTHMA----
                ##############################################.
                tabPanel(title = "Admissions for asthma",
-                        value = "asthma",
+                        value = "asthma_admissions",
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Admissions for asthma")

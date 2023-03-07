@@ -22,7 +22,7 @@ output$info_adult_self_assessed_health = renderUI({
 # ADULTS LIVING WITH LONG TERM CONDITIONS ----
 ##############################################.
 
-output$info_adult_living_limiting_long_term_condition = renderUI({
+output$info_adult_long_term_condition = renderUI({
 
   tagList(
 
@@ -30,7 +30,7 @@ output$info_adult_living_limiting_long_term_condition = renderUI({
 
     br(),
 
-    bsButton("info_to_adult_living_limiting_long_term_condition", "Go to adults living with long term condition tab")
+    bsButton("info_to_adult_long_term_condition", "Go to adults living with long term condition tab")
 
   )
 
