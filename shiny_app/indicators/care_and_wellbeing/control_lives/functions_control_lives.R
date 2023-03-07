@@ -2,7 +2,7 @@
 ##############################################.
 # CAMHS waiting times----
 ##############################################.
-camhs_waiting_times_2_plot_line = function(data, vline=TRUE) {
+make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
   p = data %>%
     plot_ly(x=~date,
             y=~proportion*100,
@@ -52,7 +52,7 @@ camhs_waiting_times_2_plot_line = function(data, vline=TRUE) {
 }
 
 
-camhs_waiting_times_2_plot_stacked_bar = function(data) {
+make_camhs_waiting_times_cw_bar_plot = function(data) {
   data %>%
     mutate(wait_time = factor(wait_time, levels = c("0 to 18 weeks",
                                                     "19 to 35 weeks",
