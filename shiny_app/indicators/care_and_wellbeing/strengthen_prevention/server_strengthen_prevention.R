@@ -358,16 +358,61 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
 ##############################################.
+# observeEvent(input$asthma_choices,
+#
+#         if(input$asthma_choices == "Age and sex breakdown"){
+#
+#           output$asthma_year_choices_ui <- renderUI(
+#
+#             pickerInput("asthma_year_choices",
+#                         "Year breakdown",
+#                         choices = unique(asthma_admissions$Date))
+#             )
+#         }
+# )
+
+
 output$asthma_admissions_plot <- renderPlotly({
 
-  plot <- asthma_admissions %>%
-    filter(Sex == "All Sexes", Ages == "All Ages", geography_type == "All") %>%
-    mutate(indicator = round(as.integer(indicator), 1),
-           date = Date) %>%
-    line_chart_function(., y_title = "Total number of admissions") %>%
-    layout(yaxis = yaxis_number)
+  if(input$asthma_choices == "Yearly total"){
+
+    plot <- asthma_admissions %>%
+      filter(Sex == "All Sexes", Ages == "All Ages", geography_type == "All") %>%
+      mutate(indicator = round(as.integer(indicator), 1),
+             date = Date) %>%
+      line_chart_function(., y_title = "Total number of admissions") %>%
+      layout(yaxis = yaxis_number)
+
+  } else if(input$asthma_choices == "Age breakdown"){
+
+    plot <- asthma_admissions %>%
+      filter(Sex == "All Sexes", geography_type == "All") %>%
+      filter(!(Ages %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+      mutate(indicator = round(as.integer(indicator), 1),
+             date = Date) %>%
+      make_line_chart_multi_lines(x= .$Date, y = .$indicator, colour = .$Ages, y_axis_title = "Total number of admissions")
+
+  } else if(input$asthma_choices == "Sex breakdown"){
+
+    plot <- asthma_admissions %>%
+      filter(Ages == "All Ages", geography_type == "All") %>%
+      mutate(indicator = round(as.integer(indicator), 1),
+             date = Date) %>%
+      make_line_chart_multi_lines(x= .$Date, y = .$indicator, colour = .$Sex, y_axis_title = "Total number of admissions")
+
+  # } else if(input$asthma_choices == "Age and sex breakdown"){
+  #
+  #   plot <- asthma_admissions %>%
+  #     filter(Sex != "All Sexes", geography_type == "All", Date == input$asthma_year_choices) %>%
+  #     filter(!(Ages %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+  #     mutate(indicator = round(as.integer(indicator), 1),
+  #            date = Date) %>%
+  #     mode_bar_plot(x = .$Ages, y=.$indicator, category_var = .$Sex)
+  }
 
 })
+
+
 
 output$asthma_admissions_table <- DT::renderDataTable({
 

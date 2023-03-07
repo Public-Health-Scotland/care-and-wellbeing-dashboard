@@ -389,7 +389,15 @@ tagList(
 
                         h3("Admissions for asthma"),
 
-                        plotlyOutput("asthma_admissions_plot"),
+                        fluidRow(column(3,
+                                        pickerInput("asthma_choices",
+                                                    "Breakdown",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown")))),#, "Age and sex breakdown"))),
+                                 # column(3,
+                                 #        uiOutput("asthma_year_choices_ui"))),
+
+                        plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
+                        # plotlyOutput("asthma_admissions_plot"),
 
                         DT::dataTableOutput("asthma_admissions_table")
 
