@@ -91,6 +91,18 @@ add_lines_and_notes <- function(p, xs, ys, fracs, notes, colors, widths=NULL){
 
 }
 
+create_palette <- function(colour) {
+
+  if (length(unique(colour)) ==1 ) {
+    palette <- phs_colours('phs-purple')
+  } else {
+    palette <- phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-green', 'phs-rust'))
+  }
+
+  return(palette)
+
+}
+
 # These functions should be able to apply to multiple datasets to easily produce a similar style chart
 
 # Confidence interval line chart
@@ -172,3 +184,30 @@ stacked_bar_function = function(data, category_var) {
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
+
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack") {
+
+
+  #Modifying standard layout
+  yaxis_plots[["title"]] <- yaxis_title
+  xaxis_plots[["title"]] <- xaxis_title
+
+
+  data %>%
+    plot_ly(x=~x,
+            y=~y,
+            color = ~category_var,
+            colors = create_palette(category_var),
+            type = 'bar',
+            # hovertemplate = create_text(x, y, xaxis_title, yaxis_title),
+            # hoverinfo = "text",
+            textposition = "none"
+            ) %>%
+    layout(barmode = mode,
+           xaxis = xaxis_plots,
+           yaxis = yaxis_plots) %>%
+  config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+
+}
+
+
