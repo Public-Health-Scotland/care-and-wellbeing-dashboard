@@ -50,6 +50,7 @@ input_asthma_admissions %<>%
          value = "asthma_admissions",
          indicator = stays_Number
          ) %>%
+  mutate(Ages = str_remove(Ages, " years")) %>%
   summary_format_function(date = .$Date,
                           geog_type = .$geography_type,
                           geog = .$geography,
