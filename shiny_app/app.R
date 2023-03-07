@@ -1,5 +1,5 @@
 ##########################################################
-# Covid_Recovery_Dashboard_JE
+# Covid_Recovery_Dashboard
 # Original author(s): Jennifer Evans
 # Original date: 2022-12-21
 # Written/run on RStudio server 1.1.463 and R 3.6.1
@@ -26,7 +26,7 @@ navbarPage(
                href = "https://www.publichealthscotland.scot/",
                target = "_blank"), # PHS logo links to PHS website
     style = "position: relative; top: -5px;"),
-    windowTitle = "Covid_Recovery_Dashboard_JE",# Title for browser tab
+    windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
     header = tags$head(includeCSS("www/styles.css"),  # CSS stylesheet
     tags$link(rel = "shortcut icon", href = "favicon_phs.ico") # Icon for browser tab
 ),
@@ -205,6 +205,14 @@ server <- function(input, output, session) {
     source(file.path("indicators/care_and_wellbeing/sustainable_communities/server_sustainable_communities.R"), local = TRUE)$value
     source(file.path("indicators/care_and_wellbeing/discrimination_racism/server_discrimination_racism.R"), local = TRUE)$value
     source(file.path("indicators/care_and_wellbeing/environmental_sustainability/server_environmental_sustainability.R"), local = TRUE)$value
+
+  # Get content for info pages
+  source(file.path("indicators/covid_recovery/wellbeing/info_wellbeing.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/financial_security/info_financial_security.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/good_green/info_good_green.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/strengthen_prevention/info_strengthen_prevention.R"), local = TRUE)$value
+
+
 }
 
 # Run the application

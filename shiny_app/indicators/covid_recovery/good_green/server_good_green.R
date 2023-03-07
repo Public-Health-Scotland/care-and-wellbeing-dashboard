@@ -78,44 +78,44 @@ observeEvent(input$employees_living_wage_map_button, {
 # })
 
 
-output$employees_living_wage_map = renderLeaflet({
-
-  employees_living_wage_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
-    filter(year == input$employees_living_wage_year_input)
-
-  employees_living_wage_las_shape@data = employees_living_wage_las_shape@data %>%
-    left_join(employees_living_wage_by_LA_ind_year , by = c("code" = "ca2019"))
-
-  # features of the map
-  bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
-  pal = colorBin("YlOrRd", domain = employees_living_wage_las_shape$measure_value, bins = bins)
-  indicator_name = tolower(employees_living_wage_option)
-  labels <- sprintf(
-    "<strong>%s</strong><br/> Employees %s (%%): %g%%",
-    employees_living_wage_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_las_shape@data[["measure_value"]]
-  ) %>%
-    lapply(htmltools::HTML)
-
-
-  leaflet(employees_living_wage_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-    addTiles() %>%
-    addPolygons(weight = 1, smoothFactor = 0.5,
-                fillColor = ~pal(measure_value),
-                opacity = 0.5, fillOpacity = 0.7,
-                color = "white",
-                dashArray = "3",
-                popup = labels,
-                highlightOptions =  highlightOptions(color = "white", weight = 2,
-                                                     bringToFront = TRUE),
-                layerId = ~code) %>%
-    addLegend("bottomright", pal = pal, values = ~measure_value,
-              title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_year_input),
-              labFormat = labelFormat(suffix  = "%"),
-              opacity = 1
-    )
-}
-)
+# output$employees_living_wage_map = renderLeaflet({
+#
+#   employees_living_wage_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
+#     filter(year == input$employees_living_wage_year_input)
+#
+#   employees_living_wage_las_shape@data = employees_living_wage_las_shape@data %>%
+#     left_join(employees_living_wage_by_LA_ind_year , by = c("code" = "ca2019"))
+#
+#   # features of the map
+#   bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
+#   pal = colorBin("YlOrRd", domain = employees_living_wage_las_shape$measure_value, bins = bins)
+#   indicator_name = tolower(employees_living_wage_option)
+#   labels <- sprintf(
+#     "<strong>%s</strong><br/> Employees %s (%%): %g%%",
+#     employees_living_wage_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_las_shape@data[["measure_value"]]
+#   ) %>%
+#     lapply(htmltools::HTML)
+#
+#
+#   leaflet(employees_living_wage_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+#     addTiles() %>%
+#     addPolygons(weight = 1, smoothFactor = 0.5,
+#                 fillColor = ~pal(measure_value),
+#                 opacity = 0.5, fillOpacity = 0.7,
+#                 color = "white",
+#                 dashArray = "3",
+#                 popup = labels,
+#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
+#                                                      bringToFront = TRUE),
+#                 layerId = ~code) %>%
+#     addLegend("bottomright", pal = pal, values = ~measure_value,
+#               title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_year_input),
+#               labFormat = labelFormat(suffix  = "%"),
+#               opacity = 1
+#     )
+# }
+# )
 
 # update the varible rv_fuel_poverty
 observeEvent(input$employees_living_wage_map_shape_click,{
@@ -224,46 +224,46 @@ disability_employment_gap_choices = disability_employment_gap_data_cat$year %>%
   unique() %>%
   sort()
 
-output$disability_gap_ui_map = renderLeaflet({
-
-  las_shape_map_data = pub_las_simplified
-
-  disability_employment_gap_data_cat_year = disability_employment_gap_data_cat %>%
-    filter(year == input$disability_employment_gap_input)
-
-
-  las_shape_map_data@data = las_shape_map_data@data %>%
-    left_join(disability_employment_gap_data_cat_year , by = c("code" = "ca2019"))
-
-  # features of the map
-  bins = c(10, 15, 20, 25, 30, 35, 40, 45, 50, 100)
-  pal = colorBin("YlOrRd", domain = las_shape_map_data$measure_value, bins = bins)
-
-  labels <- sprintf(
-    "<strong>%s</strong>
-    <br/> %s: %g%%",
-    las_shape_map_data@data[["local_authority"]], disability_employment_gap_indicator_name, las_shape_map_data@data[["measure_value"]]
-  ) %>%
-    lapply(htmltools::HTML)
-
-
-  leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-    addTiles() %>%
-    addPolygons(weight = 1, smoothFactor = 0.5,
-                fillColor = ~pal(measure_value),
-                opacity = 0.5, fillOpacity = 0.7,
-                color = "white",
-                dashArray = "3",
-                popup = labels,
-                highlightOptions =  highlightOptions(color = "white", weight = 2,
-                                                     bringToFront = TRUE),
-                layerId = ~code) %>%
-    addLegend("bottomright", pal = pal, values = ~measure_value,
-              title = paste0(disability_employment_gap_indicator_name, "<br>in ", input$disability_employment_gap_input),
-              labFormat = labelFormat(suffix  = "%"),
-              opacity = 1)
-})
+# output$disability_gap_ui_map = renderLeaflet({
+#
+#   las_shape_map_data = pub_las_simplified
+#
+#   disability_employment_gap_data_cat_year = disability_employment_gap_data_cat %>%
+#     filter(year == input$disability_employment_gap_input)
+#
+#
+#   las_shape_map_data@data = las_shape_map_data@data %>%
+#     left_join(disability_employment_gap_data_cat_year , by = c("code" = "ca2019"))
+#
+#   # features of the map
+#   bins = c(10, 15, 20, 25, 30, 35, 40, 45, 50, 100)
+#   pal = colorBin("YlOrRd", domain = las_shape_map_data$measure_value, bins = bins)
+#
+#   labels <- sprintf(
+#     "<strong>%s</strong>
+#     <br/> %s: %g%%",
+#     las_shape_map_data@data[["local_authority"]], disability_employment_gap_indicator_name, las_shape_map_data@data[["measure_value"]]
+#   ) %>%
+#     lapply(htmltools::HTML)
+#
+#
+#   leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+#     addTiles() %>%
+#     addPolygons(weight = 1, smoothFactor = 0.5,
+#                 fillColor = ~pal(measure_value),
+#                 opacity = 0.5, fillOpacity = 0.7,
+#                 color = "white",
+#                 dashArray = "3",
+#                 popup = labels,
+#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
+#                                                      bringToFront = TRUE),
+#                 layerId = ~code) %>%
+#     addLegend("bottomright", pal = pal, values = ~measure_value,
+#               title = paste0(disability_employment_gap_indicator_name, "<br>in ", input$disability_employment_gap_input),
+#               labFormat = labelFormat(suffix  = "%"),
+#               opacity = 1)
+# })
 
 
 observeEvent(input$disability_employment_gap_button, {
@@ -341,7 +341,7 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
 # EMPLOYMENT GAP UIs----
 ##############################################.
 
-output$disability_gap_ui = renderUI({
+# output$disability_gap_ui = renderUI({
 
 # tagList(
 #
@@ -368,10 +368,10 @@ output$disability_gap_ui = renderUI({
 #
 #     fluidRow(
 #       column(6,
-             selectizeInput("disability_employment_gap_input",
-                            label = "Select year to view on heatmap:",
-                            choices = disability_employment_gap_choices,
-                            selected = max(disability_employment_gap_choices))#),
+             # selectizeInput("disability_employment_gap_input",
+             #                label = "Select year to view on heatmap:",
+             #                choices = disability_employment_gap_choices,
+             #                selected = max(disability_employment_gap_choices))#),
 #       column(6,
 #              actionButton("disability_employment_gap_button", "Trend for Scotland"))
 #     ),
@@ -391,7 +391,7 @@ output$disability_gap_ui = renderUI({
 #       h3("Data table"),
 #       withSpinner(DT::dataTableOutput("disability_gap_data_table"))
 # )
-})
+# })
 
 # output$ethnicity_gap_ui = renderUI({
 #
@@ -473,26 +473,26 @@ output$zero_hours_contracts_data_table = DT::renderDataTable({
 ##############################################.
 
 ### EMPLOYABILITY - referral
-output$employability_FSS_referral_slider_ui = renderUI({
-  min_slider = min(employability_FSS_referral$year_quarter_date)
-  max_slider = max(employability_FSS_referral$year_quarter_date) +  months(3)
-
-  sliderInput("employability_FSS_referral_slider_input", "Selected quarters:",
-              min = min_slider,
-              max = max_slider,
-              value=c(min_slider, max_slider),timeFormat="%b %Y")
-})
+# output$employability_FSS_referral_slider_ui = renderUI({
+#   min_slider = min(employability_FSS_referral$year_quarter_date)
+#   max_slider = max(employability_FSS_referral$year_quarter_date) +  months(3)
+#
+#   sliderInput("employability_FSS_referral_slider_input", "Selected quarters:",
+#               min = min_slider,
+#               max = max_slider,
+#               value=c(min_slider, max_slider),timeFormat="%b %Y")
+# })
 
 
 employability_FSS_referral_reactive <- reactiveValues()
 observe({
 
-  full_date_left = input$employability_FSS_referral_slider_input[1]
-  full_date_right = input$employability_FSS_referral_slider_input[2]
-  full_date_left = if_else(is.null(full_date_left), min(employability_FSS_referral$year_quarter_date), full_date_left)
-  full_date_right = if_else(is.null(full_date_right), max(employability_FSS_referral$year_quarter_date), full_date_right)
-  full_date_left = floor_date(full_date_left, unit = "month")
-  full_date_right = floor_date(full_date_right, unit = "month")
+  full_date_left = as.character(input$employability_FSS_referral_slider_input[1])
+  full_date_right = as.character(input$employability_FSS_referral_slider_input[2])
+  full_date_left = format(as.Date(ifelse(is.null(full_date_left), min(employability_FSS_referral$year_quarter_date), full_date_left),"%Y-%m-%d"),"%Y-%m-%d")
+  full_date_right = format(as.Date(ifelse(is.null(full_date_right), max(employability_FSS_referral$year_quarter_date), full_date_right),"%Y-%m-%d"),"%Y-%m-%d")
+  full_date_left = floor_date(as.Date(full_date_left), unit = "month")
+  full_date_right = floor_date(as.Date(full_date_right), unit = "month")
 
   employability_FSS_referral_reactive$data_subset = employability_FSS_referral %>%
     filter(year_quarter_date>=full_date_left,
@@ -546,26 +546,27 @@ output$employability_FSS_referral_funnel_figure = renderPlotly({
 
 ## EMPLOYABILITY - starts
 
-output$employability_FSS_start_month_slider_ui = renderUI({
-  min_slider = min(employability_FSS_start_month$year_quarter_date)
-  max_slider = max(employability_FSS_start_month$year_quarter_date)
-
-  sliderInput("employability_FSS_start_month_input", "Select range of months:",
-              min = min_slider,
-              max = max_slider,
-              value=c(min_slider, max_slider),timeFormat="%b %Y")
-})
+# output$employability_FSS_start_month_slider_ui = renderUI({
+#   min_slider = min(employability_FSS_start_month$year_quarter_date)
+#   max_slider = max(employability_FSS_start_month$year_quarter_date)
+#
+#   sliderInput("employability_FSS_start_month_input", "Select range of months:",
+#               min = min_slider,
+#               max = max_slider,
+#               value=c(min_slider, max_slider),
+#               timeFormat="%b %Y")
+# })
 
 
 employability_FSS_start_month_reactive <- reactiveValues()
 observe({
 
-  full_date_left = input$employability_FSS_start_month_input[1]
-  full_date_right = input$employability_FSS_start_month_input[2]
-  full_date_left = if_else(is.null(full_date_left), min(employability_FSS_start_month$year_quarter_date), full_date_left)
-  full_date_right = if_else(is.null(full_date_right), max(employability_FSS_start_month$year_quarter_date), full_date_right)
-  full_date_left = floor_date(full_date_left, unit = "month")
-  full_date_right = floor_date(full_date_right, unit = "month")
+  full_date_left = as.character(input$employability_FSS_start_month_input[1])
+  full_date_right = as.character(input$employability_FSS_start_month_input[2])
+  full_date_left = format(as.Date(ifelse(is.null(full_date_left), min(employability_FSS_start_month$year_quarter_date), full_date_left), "%Y-%m-%d"),"%Y-%m-%d")
+  full_date_right = format(as.Date(ifelse(is.null(full_date_left), max(employability_FSS_start_month$year_quarter_date), full_date_right), "%Y-%m-%d"),"%Y-%m-%d")
+  full_date_left = floor_date(as.Date(full_date_left), unit = "month")
+  full_date_right = floor_date(as.Date(full_date_right), unit = "month")
   employability_FSS_start_month_reactive$data_subset = employability_FSS_start_month %>%
     filter(year_quarter_date>=full_date_left,
            year_quarter_date<=full_date_right)
