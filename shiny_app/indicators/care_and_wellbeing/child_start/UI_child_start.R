@@ -11,17 +11,15 @@ tagList(
                # CHILD SOCIAL AND PHYSICAL DEVELOPMENT----
                ##############################################.
                tabPanel(title = "Child social and physical development",
-                        value = "child_development",
+                        value = "child_development_cw",
                         icon = icon_no_warning_fn("shapes"),
 
                         h3("Child social and physical development"),
 
-                        #bsButton("jump_home_preschool", "Go to home page"),
-                        #bsButton("preschooldevelopment_to_info", "Go to information page"),
                         br(),
                         br(),
 
-                        actionButton("child_development_modal_info",
+                        actionButton("child_development_cw_modal_info",
                                      tags$b("Background information and source"),
                                      icon = icon_no_warning_fn("info-circle")),
                         br(),
@@ -32,61 +30,64 @@ tagList(
 
 
                         fluidRow(
-                          column(4,
-                                 selectizeInput("geog_type_child_development",
+                          column(3,
+                                 selectizeInput("child_development_cw_geog_type",
                                                 label = "1. Select geography type",
                                                 choices = c("Scotland", "Health Board", "Council Area"),
                                                 selected = "Scotland")),
-                          column(8,
-                                 uiOutput("geog_child_development_ui"))),
+                          column(3,
+                                 selectizeInput("child_development_cw_geog_name",
+                                                label = "2. Select geography",
+                                                choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography)
+                                                ))),
 
 
-                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                                   "child_development_chart_line",
-                                   subtitle = "This chart will display a comparison line on the chart.
-                                   For health boards, Scotland data will also be provided.
-                                   For council areas, health board data will also be provided."),
-
-
-                        h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
-                        p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
-                          "Scotland will always be displayed"),
-
-                        fluidRow(
-
-                          column(4,
-                                 selectizeInput("HB_input",
-                                                label = "Select Health Board(s) (3 Max)",
-                                                choices = unique(master_lookup$hb2019name),
-                                                multiple = TRUE,
-                                                selected = "NHS Ayrshire and Arran",
-                                                options = list(maxItems = 3,
-                                                               plugins = c('remove_button')))
-                          ),
-                          column(8,
-                                 selectizeInput("LA_input",
-                                                label = "Select Council Area(s) (3 Max)",
-                                                choices = unique(lookup_LA),
-                                                multiple = TRUE,
-                                                selected = "Aberdeen City",
-                                                options = list(maxItems = 3,
-                                                               plugins = c('remove_button')))
-                          )),
-
-
-
-
-                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                                   "child_development_chart_line2"),
-
+                        # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                        #            "child_development_plot",
+                        #            subtitle = "This chart will display a comparison line on the chart.
+                        #            For health boards, Scotland data will also be provided.
+                        #            For council areas, health board data will also be provided."),
+                        #
+                        #
+                        # h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
+                        # p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
+                        #   "Scotland will always be displayed"),
+                        #
+                        # fluidRow(
+                        #
+                        #   column(4,
+                        #          selectizeInput("HB_input",
+                        #                         label = "Select Health Board(s) (3 Max)",
+                        #                         choices = unique(master_lookup$hb2019name),
+                        #                         multiple = TRUE,
+                        #                         selected = "NHS Ayrshire and Arran",
+                        #                         options = list(maxItems = 3,
+                        #                                        plugins = c('remove_button')))
+                        #   ),
+                        #   column(8,
+                        #          selectizeInput("LA_input",
+                        #                         label = "Select Council Area(s) (3 Max)",
+                        #                         choices = unique(lookup_LA),
+                        #                         multiple = TRUE,
+                        #                         selected = "Aberdeen City",
+                        #                         options = list(maxItems = 3,
+                        #                                        plugins = c('remove_button')))
+                        #   )),
+                        #
+                        #
+                        #
+                        #
+                        # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                        #            "child_development_chart_line2"),
+                        #
 
 
                         h3("Data table"),
-                        radioButtons("child_development_radiobuttons",
+                        radioButtons("child_development_cw_radiobuttons",
                                      "Select geography type for data table",
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
-                        DT::dataTableOutput("child_development_data")
+                        DT::dataTableOutput("child_development_cw_data")
                         ),
 
          ##############################################.
@@ -140,37 +141,30 @@ tagList(
          ##############################################.
 
          tabPanel(title = "Infant mortality",
-                  value = "infant_mortality",
+                  value = "infant_mortality_cw",
                   icon = icon_no_warning_fn("hospital"),
 
                   h3("Infant mortality"),
 
-                  #bsButton("jump_home_infant_mortality", "Go to home page"),
-                  #bsButton("infantmortality_to_info", "Go to information page"),
-
-                  # br(),
-                  # br(),
-
-
                            actionButton(
-                             "infant_mortality_modal_info",
+                             "infant_mortality_cw_modal_info",
                              tags$b("Background information and source"),
                              icon = icon_no_warning_fn("info-circle")
                            ),
 
                            actionButton(
-                             "infant_mortality_modal_comment",
+                             "infant_mortality_cw_modal_comment",
                              tags$b("Summary of indicator during covid and pre-covid period"),
                              icon = icon_no_warning_fn("info-circle")
                            ),
 
 
                     plot_title("Month rate of infant deaths per 1,000 live births in Scotland",
-                               "infant_mortality_graph_2"),
+                               "infant_mortality_cw_plot"),
 
 
                     h3("Data table"),
-                    DT::dataTableOutput("infant_data_2")
+                    DT::dataTableOutput("infant_mortality_cw_table")
                   ),
 
 
@@ -187,9 +181,9 @@ tagList(
 
                   h4("Percentage of children (2-15) at risk of obesity in Scotland over time"),
 
-                  plotlyOutput("childhood_obesity_plot"),
+                  plotlyOutput("child_obesity_plot"),
 
-                  DT::dataTableOutput("childhood_obesity_table")
+                  DT::dataTableOutput("child_obesity_table")
                   )
   )
 
