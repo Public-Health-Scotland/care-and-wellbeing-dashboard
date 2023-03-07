@@ -78,44 +78,44 @@ observeEvent(input$employees_living_wage_2_map_button, {
 # })
 
 
-output$employees_living_wage_2_map = renderLeaflet({
-
-  employees_living_wage_2_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
-    filter(year == input$employees_living_wage_2_year_input)
-
-  employees_living_wage_2_las_shape@data = employees_living_wage_2_las_shape@data %>%
-    left_join(employees_living_wage_2_by_LA_ind_year , by = c("code" = "ca2019"))
-
-  # features of the map
-  bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
-  pal = colorBin("YlOrRd", domain = employees_living_wage_2_las_shape$measure_value, bins = bins)
-  indicator_name = tolower(employees_living_wage_2_option)
-  labels <- sprintf(
-    "<strong>%s</strong><br/> Employees %s (%%): %g%%",
-    employees_living_wage_2_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_2_las_shape@data[["measure_value"]]
-  ) %>%
-    lapply(htmltools::HTML)
-
-
-  leaflet(employees_living_wage_2_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-    addTiles() %>%
-    addPolygons(weight = 1, smoothFactor = 0.5,
-                fillColor = ~pal(measure_value),
-                opacity = 0.5, fillOpacity = 0.7,
-                color = "white",
-                dashArray = "3",
-                popup = labels,
-                highlightOptions =  highlightOptions(color = "white", weight = 2,
-                                                     bringToFront = TRUE),
-                layerId = ~code) %>%
-    addLegend("bottomright", pal = pal, values = ~measure_value,
-              title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_2_year_input),
-              labFormat = labelFormat(suffix  = "%"),
-              opacity = 1
-    )
-}
-)
+# output$employees_living_wage_2_map = renderLeaflet({
+#
+#   employees_living_wage_2_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
+#     filter(year == input$employees_living_wage_2_year_input)
+#
+#   employees_living_wage_2_las_shape@data = employees_living_wage_2_las_shape@data %>%
+#     left_join(employees_living_wage_2_by_LA_ind_year , by = c("code" = "ca2019"))
+#
+#   # features of the map
+#   bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
+#   pal = colorBin("YlOrRd", domain = employees_living_wage_2_las_shape$measure_value, bins = bins)
+#   indicator_name = tolower(employees_living_wage_2_option)
+#   labels <- sprintf(
+#     "<strong>%s</strong><br/> Employees %s (%%): %g%%",
+#     employees_living_wage_2_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_2_las_shape@data[["measure_value"]]
+#   ) %>%
+#     lapply(htmltools::HTML)
+#
+#
+#   leaflet(employees_living_wage_2_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+#     addTiles() %>%
+#     addPolygons(weight = 1, smoothFactor = 0.5,
+#                 fillColor = ~pal(measure_value),
+#                 opacity = 0.5, fillOpacity = 0.7,
+#                 color = "white",
+#                 dashArray = "3",
+#                 popup = labels,
+#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
+#                                                      bringToFront = TRUE),
+#                 layerId = ~code) %>%
+#     addLegend("bottomright", pal = pal, values = ~measure_value,
+#               title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_2_year_input),
+#               labFormat = labelFormat(suffix  = "%"),
+#               opacity = 1
+#     )
+# }
+# )
 
 # update the varible rv_fuel_poverty
 observeEvent(input$employees_living_wage_2_map_shape_click,{
