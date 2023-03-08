@@ -38,7 +38,7 @@ make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_col
 ##############################################.
 
 
-pay_gap_plot_line = function(data, title = NULL, second_axis = FALSE) {
+make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) {
 
   fig = data %>%
     plot_ly(x=~year,
@@ -97,7 +97,11 @@ pay_gap_plot_line = function(data, title = NULL, second_axis = FALSE) {
 }
 
 
-plot_economic_inactivity_2 <- function(data) {
+##############################################.
+# ECONOMIC INACTIVITY ----
+##############################################.
+
+make_economic_inactivity_cw_plot <- function(data) {
 
   fig = data %>%
     plot_ly(x = ~year,
