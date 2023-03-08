@@ -12,19 +12,19 @@ tagList(
                # EMPLOYEES ON THE LIVING WAGE----
                ##############################################.
                tabPanel(title = "Employees on the living wage",
-                        value = "employees_living_wage_2",
+                        value = "employees_living_wage_cw",
                         icon = icon_no_warning_fn("hand-holding-dollar"),
 
                         h2("Employees on the living wage"),
 
                         actionButton(
-                          "employees_living_wage_2_modal_info",
+                          "employees_living_wage_cw_modal_info",
                           tags$b("Background information and source"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
                         actionButton(
-                          "employees_living_wage_2_modal_comment",
+                          "employees_living_wage_cw_modal_comment",
                           tags$b("Summary of indicator during covid and pre-covid period"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
@@ -36,16 +36,22 @@ tagList(
                         p("The Living wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
                           "More details about Living Wage rates and calculation can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")),
 
-                        plot_title("Proportion of employees (18+) earning less than the real Living Wage (by sector)", "employees_living_wage_2_line"),
+                        plot_title("Proportion of employees (18+) earning less than the real Living Wage (by sector)", "employees_living_wage_cw_plot"),
 
                         h3("Proportion of employees (18+) earning less than the real Living Wage (by local authority)"),
 
                         fluidRow(
-                          column(6,
-                                 uiOutput("employees_living_wage_2_year_ui")),
-                          column(6,
-                                 actionButton("employees_living_wage_2_map_button", "Trend for Scotland"))
-                        ),
+                          column(3,
+                                 selectizeInput("employees_living_wage_2_year_input",
+                                                label = "Select year to view on heatmap:",
+                                                choices = employees_living_wage_by_LA %>%
+                                                  filter(earning == "Earning less than the living wage") %>%
+                                                  select(year, local_authority, ca2019, measure_value) %>%
+                                                  .$year %>% unique()
+                                                ),
+                          # column(3,
+                          #        actionButton("employees_living_wage_2_map_button", "Trend for Scotland"))
+                        )),
                         h3("Missing map and plot"),
                         # fluidRow(
                         #   column(12,
@@ -58,41 +64,41 @@ tagList(
 
                         h3("Data table"),
 
-                        withSpinner(DT::dataTableOutput("employees_living_wage_2_data"))),
+                        withSpinner(DT::dataTableOutput("employees_living_wage_cw_table"))),
 
                #############################################.
                #PAY GAP----
                #############################################.
                tabPanel(title = "Pay gap",
-                        value = "pay_gap",
+                        value = "gender_pay_gap_cw",
                         icon = icon_no_warning_fn("mars-and-venus"),
 
                         h2("Pay gap"),
 
                         actionButton(
-                          "pay_gap_modal_info",
+                          "gender_pay_gap_cw_modal_info",
                           tags$b("Background information and source"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
                         actionButton(
-                          "pay_gap_modal_comment",
+                          "gender_pay_gap_cw_modal_comment",
                           tags$b("Summary of indicator during covid and pre-covid period"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
                         sidebarLayout(
-                          sidebarPanel(radioButtons("pay_gap_sector_radio", label = h3("Sector"),
+                          sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
                                                     choices = list("All" = "All", "Public" = "Public", "Private" = "Private"),
                                                     selected = "All"),
-                                       radioButtons("pay_gap_work_radio", label = h3("Work pattern"),
+                                       radioButtons("gender_pay_gap_cw_work", label = h3("Work pattern"),
                                                     choices = list("All" = "All", "Full-time" = "Full-time", "Part-time" = "Part-time"),
                                                     selected = "All"),
-                                       checkboxInput("pay_gap_show_earnings_check_box",
+                                       checkboxInput("gender_pay_gap_cw_show_earnings_check_box",
                                                      "Show earnings",
                                                      value = FALSE),
                                        width = 3),
-                          mainPanel(withSpinner(plotlyOutput("pay_gap_plot_line_output")),
+                          mainPanel(withSpinner(plotlyOutput("gender_pay_gap_cw_plot")),
                                     width = 9
                           )
                         ),
@@ -111,13 +117,13 @@ tagList(
                         tabBox(
                           #title = "Data tables",
                           # The id lets us use input$tabset1 on the server to find the current tab
-                          id = "pay_gap_tabBox", height = "250px", width=12,
+                          id = "gender_pay_gap_cw_tabBox", height = "250px", width=12,
                           tabPanel("Pay gap",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("pay_gap_data"))),
+                                   withSpinner(DT::dataTableOutput("gender_pay_gap_cw_table"))),
                           tabPanel("Earnings",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("pay_gap_data_earnings")))
+                                   withSpinner(DT::dataTableOutput("gender_pay_gap_cw_earnings_table")))
                         )),
 
                ##############################################.
@@ -134,7 +140,7 @@ tagList(
                # ECONOMIC INACTIVITY----
                ##############################################.
                tabPanel(title = "Economic inactivity",
-                        value = "economic_inactivity_2",
+                        value = "economic_inactivity_cw",
                         icon = icon_no_warning_fn("people-arrows"),
 
 
@@ -142,7 +148,7 @@ tagList(
 
 
                         actionButton(
-                          "economic_inactivity_2_modal_info",
+                          "economic_inactivity_cw_modal_info",
                           tags$b("Background information and source"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
@@ -150,18 +156,18 @@ tagList(
                         p("Use the below drop-down menu to select a region of interest."),
 
 
-                        selectInput("region_economic_inactivity_2",
+                        selectInput("economic_inactivity_cw_region",
                                     label = "Select Region",
                                     choices = unique(economic_inactivity$region),
                                     selected = "Scotland"),
 
 
-                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_2_graph_line")
+                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")
                         ,
 
 
                         h3("Economic inactivity data table"),
-                        DT::dataTableOutput("economic_inactivity_2_data")
+                        DT::dataTableOutput("economic_inactivity_cw_table")
 
 
                )

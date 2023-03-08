@@ -6,64 +6,66 @@
 
 # Show geography names dependent on geography type input
 
-output$geog_child_development_ui = renderUI({
+observeEvent(input$child_development_cw_geog_type,
+             {
 
-  areas_summary = geog_lookup %>%
-    filter(geography_type == input$geog_type_child_development)
+  areas_summary <- preschool %>%
+    filter(geography_type == input$child_development_cw_geog_type)
 
-  selectizeInput("geog_name_child_development", label = "2. Select geography",
-                 choices = unique(areas_summary$geography),
-                 selected = "")
+  updateSelectizeInput(session,
+                 "child_development_cw_geog_name", label = "2. Select geography",
+                 choices = unique(areas_summary$geography))
 })
 
-output$child_development_chart_line2 = renderPlotly({
+output$child_development_cw_plot_2 = renderPlotly({
   data = preschool %>%
-    filter(geography %in% c("Scotland", input$HB_input, input$LA_input))
+    filter(geography %in% c("Scotland", input$child_development_cw_healthboard, input$child_development_cw_local_LA))
 
-  child_development_plot_line2(data)
+  make_child_development_cw_plot_2(data)
 
 })
 
 
-output$child_development_chart_line = renderPlotly({
+output$child_development_cw_plot = renderPlotly({
 
   data = geog_all_filter_table(preschool,
-                               input$geog_type_child_development,
-                               input$geog_name_child_development)
+                               input$child_development_cw_geog_type,
+                               input$child_development_cw_geog_name)
 
 
-  if(input$geog_type_child_development == "Health Board") {
+  if(input$child_development_cw_geog_type == "Health Board") {
     data_baseline = preschool %>%
       filter(geography_type=="Scotland")
 
-    p = child_development_plot_line(data, data_baseline, TRUE,
-                            input$geog_name_child_development,
+    p = make_child_development_cw_plot(data, data_baseline, TRUE,
+                            input$child_development_cw_geog_name,
                             "Scotland")
 
-  } else if (input$geog_type_child_development == "Council Area") {
-    hb = data %>%
+  } else if (input$child_development_cw_geog_type == "Council Area") {
+
+    hb <- data %>%
       slice(1) %>%
       .$hb2019name
 
     data_baseline = preschool %>%
-      filter(hb2019name == hb &
-               geography_type == "Health Board")
+      filter(geography_type == "Health Board",
+             `hb2019name` == hb)
 
-    p = child_development_plot_line(data, data_baseline, TRUE,
-                            input$geog_name_child_development,
+    p = make_child_development_cw_plot(data, data_baseline, TRUE,
+                            input$child_development_cw_geog_name,
                             hb)
   } else {
-    p = child_development_plot_line(data)
+    p = make_child_development_cw_plot(data)
   }
 
   return(p)
 
 })
 
-output$child_development_data = DT::renderDataTable({
+output$child_development_cw_data = DT::renderDataTable({
 
   child_development_out = preschool %>%
-    filter(geography_type == input$child_development_radiobuttons) %>%
+    filter(geography_type == input$child_development_cw_geog_table) %>%
     select(financial_year, geography, number_of_reviews,
            concern_any, proportion = prop_concern_any)
   datatable_style_download(child_development_out,
@@ -105,7 +107,7 @@ yaxis_inf_deaths <- list(title = "Rate per 1,000 live births",
                          titlefont = list(size=18),
                          showline = TRUE)
 
-output$infant_mortality_graph_2 = renderPlotly({
+output$infant_mortality_cw_plot = renderPlotly({
   inf_deaths %>%
     plot_ly(x=~date,
             y=~rate,
@@ -123,7 +125,7 @@ output$infant_mortality_graph_2 = renderPlotly({
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 })
 
-output$infant_data_2 = DT::renderDataTable({
+output$infant_mortality_cw_table = DT::renderDataTable({
 
   inf_deaths_out = inf_deaths %>%
     select(date, geography_name, "number_of_infant_deaths" = count,
@@ -141,7 +143,7 @@ output$infant_data_2 = DT::renderDataTable({
 # CHILDHOOD RISK OF OBESITY ----
 ##############################################.
 
-output$childhood_obesity_plot <- renderPlotly({
+output$child_obesity_plot <- renderPlotly({
 
   plot <- childhood_obesity %>%
     mutate(indicator = round(as.integer(indicator), 1)) %>%
@@ -150,7 +152,7 @@ output$childhood_obesity_plot <- renderPlotly({
 
 })
 
-output$childhood_obesity_table <- DT::renderDataTable({
+output$child_obesity_table <- DT::renderDataTable({
 
   childhood_obesity %>%
     select(c(date, indicator)) %>%
