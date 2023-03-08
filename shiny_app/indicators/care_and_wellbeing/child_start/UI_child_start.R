@@ -42,52 +42,52 @@ tagList(
                                                 ))),
 
 
-                        # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                        #            "child_development_plot",
-                        #            subtitle = "This chart will display a comparison line on the chart.
-                        #            For health boards, Scotland data will also be provided.
-                        #            For council areas, health board data will also be provided."),
-                        #
-                        #
-                        # h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
-                        # p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
-                        #   "Scotland will always be displayed"),
-                        #
-                        # fluidRow(
-                        #
-                        #   column(4,
-                        #          selectizeInput("HB_input",
-                        #                         label = "Select Health Board(s) (3 Max)",
-                        #                         choices = unique(master_lookup$hb2019name),
-                        #                         multiple = TRUE,
-                        #                         selected = "NHS Ayrshire and Arran",
-                        #                         options = list(maxItems = 3,
-                        #                                        plugins = c('remove_button')))
-                        #   ),
-                        #   column(8,
-                        #          selectizeInput("LA_input",
-                        #                         label = "Select Council Area(s) (3 Max)",
-                        #                         choices = unique(lookup_LA),
-                        #                         multiple = TRUE,
-                        #                         selected = "Aberdeen City",
-                        #                         options = list(maxItems = 3,
-                        #                                        plugins = c('remove_button')))
-                        #   )),
-                        #
-                        #
-                        #
-                        #
-                        # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                        #            "child_development_chart_line2"),
-                        #
+                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                                   "child_development_cw_plot",
+                                   subtitle = "This chart will display a comparison line on the chart.
+                                   For health boards, Scotland data will also be provided.
+                                   For council areas, health board data will also be provided."),
+
+
+                        h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
+                        p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
+                          "Scotland will always be displayed"),
+
+                        fluidRow(
+
+                          column(4,
+                                 selectizeInput("child_development_cw_healthboard",
+                                                label = "Select Health Board(s) (3 Max)",
+                                                choices = unique(master_lookup$hb2019name),
+                                                multiple = TRUE,
+                                                selected = "NHS Ayrshire and Arran",
+                                                options = list(maxItems = 3,
+                                                               plugins = c('remove_button')))
+                          ),
+                          column(8,
+                                 selectizeInput("child_development_cw_local_LA",
+                                                label = "Select Council Area(s) (3 Max)",
+                                                choices = unique(lookup_LA),
+                                                multiple = TRUE,
+                                                selected = "Aberdeen City",
+                                                options = list(maxItems = 3,
+                                                               plugins = c('remove_button')))
+                          )),
+
+
+
+
+                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                                   "child_development_cw_plot_2"),
+
 
 
                         h3("Data table"),
-                        radioButtons("child_development_cw_radiobuttons",
+                        radioButtons("child_development_cw_geog_table",
                                      "Select geography type for data table",
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
-                        DT::dataTableOutput("child_development_cw_data")
+                        DT::dataTableOutput("child_development_cw_table")
                         ),
 
          ##############################################.

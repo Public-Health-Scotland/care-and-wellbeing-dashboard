@@ -9,20 +9,19 @@
 observeEvent(input$child_development_cw_geog_type,
              {
 
-  areas_summary <- geog_lookup %>%
+  areas_summary <- preschool %>%
     filter(geography_type == input$child_development_cw_geog_type)
 
   updateSelectizeInput(session,
                  "child_development_cw_geog_name", label = "2. Select geography",
-                 choices = unique(areas_summary$geography),
-                 selected = "")
+                 choices = unique(areas_summary$geography))
 })
 
-output$child_development_cw_chart_line2 = renderPlotly({
+output$child_development_cw_plot_2 = renderPlotly({
   data = preschool %>%
-    filter(geography %in% c("Scotland", input$HB_input, input$LA_input))
+    filter(geography %in% c("Scotland", input$child_development_cw_healthboard, input$child_development_cw_local_LA))
 
-  child_development_cw_plot_line2(data)
+  make_child_development_cw_plot_2(data)
 
 })
 
@@ -38,24 +37,25 @@ output$child_development_cw_plot = renderPlotly({
     data_baseline = preschool %>%
       filter(geography_type=="Scotland")
 
-    p = child_development_cw_plot_line(data, data_baseline, TRUE,
+    p = make_child_development_cw_plot(data, data_baseline, TRUE,
                             input$child_development_cw_geog_name,
                             "Scotland")
 
   } else if (input$child_development_cw_geog_type == "Council Area") {
-    hb = data %>%
+
+    hb <- data %>%
       slice(1) %>%
       .$hb2019name
 
     data_baseline = preschool %>%
-      filter(hb2019name == hb &
-               geography_type == "Health Board")
+      filter(geography_type == "Health Board",
+             `hb2019name` == hb)
 
-    p = child_development_cw_plot_line(data, data_baseline, TRUE,
+    p = make_child_development_cw_plot(data, data_baseline, TRUE,
                             input$child_development_cw_geog_name,
                             hb)
   } else {
-    p = child_development_cw_plot_line(data)
+    p = make_child_development_cw_plot(data)
   }
 
   return(p)
@@ -65,7 +65,7 @@ output$child_development_cw_plot = renderPlotly({
 output$child_development_cw_data = DT::renderDataTable({
 
   child_development_out = preschool %>%
-    filter(geography_type == input$child_development_cw_radiobuttons) %>%
+    filter(geography_type == input$child_development_cw_geog_table) %>%
     select(financial_year, geography, number_of_reviews,
            concern_any, proportion = prop_concern_any)
   datatable_style_download(child_development_out,

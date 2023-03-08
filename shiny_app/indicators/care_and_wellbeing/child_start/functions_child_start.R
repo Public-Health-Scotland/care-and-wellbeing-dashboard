@@ -1,5 +1,5 @@
 
-child_development_plot_line = function(data, data_baseline, baseline = FALSE,
+make_child_development_cw_plot = function(data, data_baseline, baseline = FALSE,
                                geog_name = NA, baseline_name) {
   plot = data %>%
     plot_ly(x=~financial_year,
@@ -42,7 +42,7 @@ child_development_plot_line = function(data, data_baseline, baseline = FALSE,
 }
 
 
-child_development_plot_line2 = function(data) {
+make_child_development_cw_plot_2 = function(data) {
   plot = data %>%
     plot_ly(x=~financial_year,
             y=~prop_concern_any*100,
