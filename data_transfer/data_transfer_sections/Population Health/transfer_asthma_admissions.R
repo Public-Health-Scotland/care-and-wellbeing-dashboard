@@ -23,7 +23,7 @@ input_asthma_admissions <- rbind(input_asthma_admissions_1718, input_asthma_admi
 input_asthma_admissions %<>%
   select(lookup, stays_Number, stays_Rate) %>%
   mutate(lookup = str_remove(lookup, pattern = "Asthma")) %>%
-  separate(lookup, into = c("Date","lookup"), sep = 7) %>%
+  separate(lookup, into = c("date","lookup"), sep = 7) %>%
   separate(lookup, into = c("lookup", "Ages"), sep = " - ")
 
 input_asthma_admissions_male <- input_asthma_admissions %>%
@@ -43,9 +43,8 @@ input_asthma_admissions <- rbind(input_asthma_admissions_all, input_asthma_admis
 input_asthma_admissions %<>%
   mutate(Provisional = ifelse(str_starts(lookup, "p"),"1","0"),
          lookup = ifelse(Provisional == "1", substring(lookup,2), lookup)) %>%
-  mutate(geography_type = ifelse(lookup == "Scottish Residents", "Scotland",
-                                 ifelse(str_starts(lookup, "NHS"), "Health Board",
-                                        ifelse(lookup == "All Scottish and Non-Scottish Residents", "All", "Other"))),
+  mutate(geography_type = ifelse(lookup == "All Scottish and Non-Scottish Residents", "Scotland",
+                                 ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
          geography = lookup,
          value = "asthma_admissions",
          indicator = stays_Number
