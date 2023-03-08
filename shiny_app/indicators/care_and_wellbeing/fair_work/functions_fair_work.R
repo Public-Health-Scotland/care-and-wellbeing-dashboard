@@ -2,7 +2,7 @@
 # EMPLOYEES ON THE LIVING WAGE----
 ##############################################.
 
-employees_living_wage_2_plot_line = function(data, title = NULL, color_column = NULL) {
+make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_column = NULL) {
 
 
   if (is.null(color_column))
