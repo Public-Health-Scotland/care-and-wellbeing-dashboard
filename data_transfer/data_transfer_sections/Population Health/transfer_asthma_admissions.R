@@ -17,44 +17,43 @@ input_asthma_admissions_2122 <- read_excel(data_path, sheet = data_sheet_2122, c
 
 input_asthma_admissions <- rbind(input_asthma_admissions_1718, input_asthma_admissions_1819, input_asthma_admissions_1920,
                                  input_asthma_admissions_2021, input_asthma_admissions_2122) %>%
-  filter(grepl('Asthma', lookup))
+  filter(grepl('Asthma', lookup)) %>%
+  clean_names()
 
 
 input_asthma_admissions %<>%
-  select(lookup, stays_Number, stays_Rate) %>%
+  select(lookup, stays_number, stays_rate) %>%
   mutate(lookup = str_remove(lookup, pattern = "Asthma")) %>%
   separate(lookup, into = c("date","lookup"), sep = 7) %>%
-  separate(lookup, into = c("lookup", "Ages"), sep = " - ")
+  separate(lookup, into = c("lookup", "age_group"), sep = " - ")
 
 input_asthma_admissions_male <- input_asthma_admissions %>%
   filter(grepl("Male", lookup)) %>%
-  separate(lookup, into = c("lookup", "Sex"), sep = -4)
+  separate(lookup, into = c("lookup", "sex"), sep = -4)
 
 input_asthma_admissions_female <- input_asthma_admissions %>%
   filter(grepl("Female", lookup)) %>%
-  separate(lookup, into = c("lookup", "Sex"), sep = -6)
+  separate(lookup, into = c("lookup", "sex"), sep = -6)
 
 input_asthma_admissions_all <- input_asthma_admissions %>%
   filter(grepl("All Sexes", lookup)) %>%
-  separate(lookup, into = c("lookup", "Sex"), sep = -9)
+  separate(lookup, into = c("lookup", "sex"), sep = -9)
 
 input_asthma_admissions <- rbind(input_asthma_admissions_all, input_asthma_admissions_female, input_asthma_admissions_male)
 
 input_asthma_admissions %<>%
-  mutate(Provisional = ifelse(str_starts(lookup, "p"),"1","0"),
-         lookup = ifelse(Provisional == "1", substring(lookup,2), lookup)) %>%
-  mutate(geography_type = ifelse(lookup == "All Scottish and Non-Scottish Residents", "Scotland",
+  mutate(provisional = ifelse(str_starts(lookup, "p"),"1","0"),
+         lookup = ifelse(provisional == "1", substring(lookup,2), lookup)) %>%
+  mutate(geog_type = ifelse(lookup == "All Scottish and Non-Scottish Residents", "Scotland",
                                  ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
-         geography = lookup,
-         value = "asthma_admissions",
-         indicator = stays_Number
+         geography = lookup
          ) %>%
-  mutate(Ages = str_remove(Ages, " years")) %>%
-  summary_format_function(date = .$Date,
-                          geog_type = .$geography_type,
-                          geog = .$geography,
-                          indicator_in = .$indicator,
-                          value_in = .$value)
+  mutate(age_group = str_remove(age_group, " years")) %>%
+  summary_format_function(date = .$date,
+                          geog_type = .$geog_type,
+                          geog = .$lookup,
+                          indicator_in = .$stays_number,
+                          value_in = "asthma_admissions")
 
 
 
