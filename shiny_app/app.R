@@ -211,6 +211,13 @@ server <- function(input, output, session) {
   source(file.path("indicators/covid_recovery/financial_security/info_financial_security.R"), local = TRUE)$value
   source(file.path("indicators/covid_recovery/good_green/info_good_green.R"), local = TRUE)$value
   source(file.path("indicators/care_and_wellbeing/strengthen_prevention/info_strengthen_prevention.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/child_start/info_child_start.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/control_lives/info_control_lives.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/fair_work/info_fair_work.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/healthy_standard/info_healthy_standard.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/sustainable_communities/info_sustainable_communities.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/discrimination_racism/info_discrimination_racism.R"), local = TRUE)$value
+  source(file.path("indicators/care_and_wellbeing/environmental_sustainability/info_environmental_sustainability.R"), local = TRUE)$value
 
 
 }
