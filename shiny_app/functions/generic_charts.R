@@ -149,7 +149,7 @@ confidence_line_function = function(data, y_title) {
 
 
 
-line_chart_function = function(data, y_title) {
+line_chart_function = function(data, y_title, xaxis_type = xaxis_year) {
 
   yaxis_number[["title"]] = y_title
 
@@ -159,7 +159,7 @@ line_chart_function = function(data, y_title) {
               type = "scatter",
               mode = "lines",
               line = list(color = phs_colours("phs-purple"))) %>%
-    layout(xaxis = xaxis_year, yaxis = yaxis_number) %>%
+    layout(xaxis = xaxis_type, yaxis = yaxis_number) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 

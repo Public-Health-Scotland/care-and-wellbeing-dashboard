@@ -18,6 +18,8 @@ source(paste0(path_pop_health, "transfer_chd_deaths.R"))
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACKED (<75)----
 ##############################################.
 
+source(paste0(path_pop_health, "transfer_hospital_admission_heart_attack.R"))
+
 ##############################################.
 # DRUG RELATED HOSPITAL ADMISSIONS (<75)----
 ##############################################.

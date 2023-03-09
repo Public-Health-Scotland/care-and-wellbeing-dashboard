@@ -3,7 +3,7 @@
 ##############################################.
 
 ## lines overall
-output$employees_living_wage_2_line = renderPlotly({
+output$employees_living_wage_cw_plot = renderPlotly({
 
   measure_option = "proportion"
   earning_option = "Earning less than the living wage"
@@ -13,42 +13,43 @@ output$employees_living_wage_2_line = renderPlotly({
            earning == earning_option)
 
 
-  employees_living_wage_2_plot_line(plot_data, color_column = "sector")
+  make_employees_living_wage_cw_line_plot(plot_data, color_column = "sector")
 
 })
 
 
 # map
-employees_living_wage_2_option = "Earning less than the living wage"
+employees_living_wage_cw_option = "Earning less than the living wage"
 
 #add the values to the LA shapes
-employees_living_wage_2_by_LA_ind = employees_living_wage_by_LA %>%
-  filter(earning == employees_living_wage_2_option) %>%
+employees_living_wage_cw_by_LA_ind = employees_living_wage_by_LA %>%
+  filter(earning == employees_living_wage_cw_option) %>%
   select(year, local_authority, ca2019, measure_value)
 
 
 
-output$employees_living_wage_2_year_ui = renderUI({
+# output$employees_living_wage_2_year_ui = renderUI({
+#
+#   employees_living_wage_2_year_choices = employees_living_wage_cw_by_LA_ind$year %>%
+#     unique()
+#   employees_living_wage_2_year_selected = employees_living_wage_2_year_choices %>% tail(n=1)
+#
+#   selectizeInput(session,
+#                  "employees_living_wage_2_year_input",
+#                  label = "Select year to view on heatmap:",
+#                  choices = employees_living_wage_2_year_choices,
+#                  selected = employees_living_wage_2_year_selected)
+# })
 
-  employees_living_wage_2_year_choices = employees_living_wage_2_by_LA_ind$year %>%
-    unique()
-  employees_living_wage_2_year_selected = employees_living_wage_2_year_choices %>% tail(n=1)
 
-  selectizeInput("employees_living_wage_2_year_input",
-                 label = "Select year to view on heatmap:",
-                 choices = employees_living_wage_2_year_choices,
-                 selected = employees_living_wage_2_year_selected)
-})
+employees_living_wage_cw_las_shape = pub_las_simplified
 
-
-employees_living_wage_2_las_shape = pub_las_simplified
-
-# value for storing the selected LA; initialized with Scotland geometry
-rv_employees_living_wage_2 = reactiveVal("S92000003")
-
-observeEvent(input$employees_living_wage_2_map_button, {
-  rv_employees_living_wage_2("S92000003")
-})
+# # value for storing the selected LA; initialized with Scotland geometry
+# rv_employees_living_wage_cw = reactiveVal("S92000003")
+#
+# observeEvent(input$employees_living_wage_cw_map_button, {
+#   rv_employees_living_wage_2("S92000003")
+# })
 
 
 # LA_Look_up = employees_living_wage_by_LA %>%
@@ -118,29 +119,29 @@ observeEvent(input$employees_living_wage_2_map_button, {
 # )
 
 # update the varible rv_fuel_poverty
-observeEvent(input$employees_living_wage_2_map_shape_click,{
-  rv_employees_living_wage_2(input$employees_living_wage_2_map_shape_click$id)
+# observeEvent(input$employees_living_wage_2_map_shape_click,{
+#   rv_employees_living_wage_2(input$employees_living_wage_2_map_shape_click$id)
 
   # updateSelectizeInput(session, "employees_living_wage_LA_input",
   #                   #label = paste("Select input label", length(x)),
   #                   choices = input$employees_living_wage_map_shape_click$id)
-})
+# })
 
 
 # plot trend
-output$employees_living_wage_2_line_LA = renderPlotly({
+# output$employees_living_wage_2_line_LA = renderPlotly({
+#
+#   employees_living_wage_2_line_LA_data = employees_living_wage_by_LA_ind %>%
+#     filter(ca2019  == rv_employees_living_wage_2())
+#
+#
+#   title = employees_living_wage_2_line_LA_data$local_authority %>% unique()
+#   employees_living_wage_2_plot_line(employees_living_wage_2_line_LA_data, title = title)
+# })
 
-  employees_living_wage_2_line_LA_data = employees_living_wage_by_LA_ind %>%
-    filter(ca2019  == rv_employees_living_wage_2())
 
 
-  title = employees_living_wage_2_line_LA_data$local_authority %>% unique()
-  employees_living_wage_2_plot_line(employees_living_wage_2_line_LA_data, title = title)
-})
-
-
-
-output$employees_living_wage_2_data = DT::renderDataTable({
+output$employees_living_wage_cw_table = DT::renderDataTable({
 
   data_table = employees_living_wage_by_sector %>% filter(measure == "proportion")
 
@@ -156,10 +157,10 @@ output$employees_living_wage_2_data = DT::renderDataTable({
 ##############################################.
 
 
-output$pay_gap_plot_line_output = renderPlotly({
+output$gender_pay_gap_cw_plot = renderPlotly({
 
-  sector_option = input$pay_gap_sector_radio
-  work_pattern_option = input$pay_gap_work_radio
+  sector_option = input$gender_pay_gap_cw_sector
+  work_pattern_option = input$gender_pay_gap_cw_work
 
 
   pay_gap_by_sector_pattern = gender_pay_gap_by_sector %>%
@@ -173,14 +174,14 @@ output$pay_gap_plot_line_output = renderPlotly({
 
 
 
-  add_Earning = input$pay_gap_show_earnings_check_box
-  pay_gap_plot_line(plot_data, second_axis = add_Earning)
+  add_Earning = input$gender_pay_gap_cw_show_earnings_check_box
+  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning)
 
 })
 
 
 
-output$pay_gap_data = DT::renderDataTable({
+output$gender_pay_gap_cw_table = DT::renderDataTable({
 
   pay_gap_by_sector_Gap = gender_pay_gap_by_sector %>%
     filter(gender == "Pay Gap") %>%
@@ -193,7 +194,7 @@ output$pay_gap_data = DT::renderDataTable({
 })
 
 
-output$pay_gap_data_earnings = DT::renderDataTable({
+output$gender_pay_gap_cw_earnings_table = DT::renderDataTable({
 
   pay_gap_by_sector_earnings = gender_pay_gap_by_sector %>%
     filter(gender != "Pay Gap")
@@ -212,18 +213,18 @@ output$pay_gap_data_earnings = DT::renderDataTable({
 # ECONOMIC INACTIVITY ----
 ##############################################.
 
-output$economic_inactivity_2_graph_line <- renderPlotly({
-  region_filter_table(economic_inactivity, region_of_interest = input$region_economic_inactivity_2) %>%
-    plot_economic_inactivity_2(.)
+output$economic_inactivity_cw_plot <- renderPlotly({
+  region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_region) %>%
+    make_economic_inactivity_cw_plot(.)
 
 })
 
-output$economic_inactivity_2_data <- DT::renderDataTable({
+output$economic_inactivity_cw_table <- DT::renderDataTable({
   # Formatting datatable output
   economic_inactivity %>%
     rename("Number of People" = "n") %>%
     datatable_style_download(., datetype = "year",
-                             data_name = "economic_inactivity_2", geogtype = "")
+                             data_name = "economic_inactivity", geogtype = "")
 
 
 })

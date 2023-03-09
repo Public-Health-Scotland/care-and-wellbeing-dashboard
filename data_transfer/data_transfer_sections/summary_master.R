@@ -254,6 +254,10 @@ summary_unpaid_carers <- experience_unpaid_carers %>%
 #   group_by(sex, breakdown) %>%
 #   summary_fn()
 
+## hospital admission heart attacks
+summary_hospital_admission_heart_attack <- heart_attack %>%
+  summary_fn()
+
 
 ## Summary pop health ----
 summary_pop_health = do.call(rbind,
@@ -261,11 +265,11 @@ summary_pop_health = do.call(rbind,
                                   drug_stays_summary, drug_deaths_summary,
                                   summary_birthweight, summary_child_obesity,
                                   summary_adult_long_term_condition, summary_adult_self_assessed_health,
-                                  summary_unpaid_carers))
+                                  summary_unpaid_carers, summary_hospital_admission_heart_attack))
 rm(summary_all_cause_mortality, summary_chd, drug_stays_summary, drug_deaths_summary,
    summary_birthweight, summary_child_obesity,
    summary_adult_long_term_condition, summary_adult_self_assessed_health,
-   summary_unpaid_carers)
+   summary_unpaid_carers, summary_hospital_admission_heart_attack)
 
 
 ##############################################.
