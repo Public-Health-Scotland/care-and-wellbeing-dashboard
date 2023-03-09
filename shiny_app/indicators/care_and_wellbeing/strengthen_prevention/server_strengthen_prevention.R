@@ -144,6 +144,24 @@ output$chd_deaths_table = DT::renderDataTable({
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
 ##############################################.
 
+output$hospital_admission_heart_attack_plot <- renderPlotly({
+
+  p <- heart_attack %>%
+    line_chart_function(y_title = "Total")
+
+})
+
+output$hopsital_admission_heart_attack_table <- DT::renderDataTable({
+
+  heart_attack %>%
+    select(date, total_admissions, rate_per_100_000_easr, geography) %>%
+    datatable_style_download(.,
+                             datetype = "year",
+                             data_name = "heartattack",
+                             geogtype = "none")
+
+})
+
 
 ##############################################.
 # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----

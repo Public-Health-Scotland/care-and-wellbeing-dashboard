@@ -178,7 +178,13 @@ tagList(
                         value = "hospital_admission_heart_attack",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("First ever hospital admission for heart attack (under 75)")
+                        h2("First ever hospital admission for heart attack (under 75)"),
+
+                        plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
+                                   "hospital_admission_heart_attack_plot"),
+
+                        h3("Data table"),
+                        DT::dataTableOutput("hopsital_admission_heart_attack_table")
 
 
                ),
