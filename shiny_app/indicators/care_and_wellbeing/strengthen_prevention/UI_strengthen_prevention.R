@@ -391,7 +391,30 @@ tagList(
                         value = "asthma_admissions",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Admissions for asthma")
+                        h3("Admissions for asthma"),
+
+                        fluidRow(column(3,
+                                        pickerInput("asthma_admissions_breakdowns",
+                                                    "1. Select a breakdown",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_type",
+                                                    "2. Select a geography type",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_name",
+                                                    "3. Select a geography",
+                                                    choices = c("Scotland")))
+
+                                        ),#, "Age and sex breakdown"))),
+                                 # column(3,
+                                 #        uiOutput("asthma_admissions_years_ui"))),
+
+                        plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
+                        # plotlyOutput("asthma_admissions_plot"),
+
+                        DT::dataTableOutput("asthma_admissions_table")
 
 
                ),

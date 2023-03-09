@@ -383,6 +383,91 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
 ##############################################.
+# observeEvent(input$asthma_admissions_breakdowns,
+#
+#         if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
+#
+#           output$asthma_admissions_years_ui <- renderUI(
+#
+#             pickerInput("asthma_admissions_years",
+#                         "Year breakdown",
+#                         choices = unique(asthma_admissions$Date))
+#             )
+#         }
+# )
+
+observeEvent(input$asthma_admissions_geog_type,
+
+             if(input$asthma_admissions_geog_type == "Scotland"){
+
+               updatePickerInput(session,
+                                 "asthma_admissions_geog_name",
+                                 "3. Select a geography",
+                                 choices = c("Scotland"))
+             } else {
+
+               updatePickerInput(session,
+                                 "asthma_admissions_geog_name",
+                                 "3. Select a geography",
+                                 choices = asthma_admissions %>% filter(geography_type == "Health Board") %>%
+                                  .$geography %>% unique())
+
+             })
+
+
+
+output$asthma_admissions_plot <- renderPlotly({
+
+  if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+    plot <- asthma_admissions %>%
+      filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
+      mutate(indicator = round(as.integer(indicator), 1)) %>%
+      line_chart_function(., y_title = "Total number of admissions") %>%
+      layout(yaxis = yaxis_number)
+
+  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+    plot <- asthma_admissions %>%
+      filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
+      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+      mutate(indicator = round(as.integer(indicator), 1)) %>%
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, y_axis_title = "Total number of admissions")
+
+  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+    plot <- asthma_admissions %>%
+      filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
+      mutate(indicator = round(as.integer(indicator), 1)) %>%
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions")
+
+  # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
+  #
+  #   plot <- asthma_admissions %>%
+  #     filter(Sex != "All Sexes", geography_type == "All", Date == input$asthma_year_choices) %>%
+  #     filter(!(Ages %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+  #     mutate(indicator = round(as.integer(indicator), 1),
+  #            date = Date) %>%
+  #     mode_bar_plot(x = .$Ages, y=.$indicator, category_var = .$Sex)
+  }
+
+})
+
+
+
+output$asthma_admissions_table <- DT::renderDataTable({
+
+  table <- asthma_admissions %>%
+    select(c(date, sex, age_group, geography_type, geography, indicator, provisional)) %>%
+    rename(`Total number of stays` = "indicator") %>%
+    arrange(desc(date)) %>%
+    datatable_style_download(.,
+                             datetype = "financial_year",
+                             data_name = "adult_living_limiting_long_term_condition",
+                             geogtype = "none")
+
+
+})
 
 
 ##############################################.

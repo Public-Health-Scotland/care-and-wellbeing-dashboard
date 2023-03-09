@@ -45,6 +45,7 @@ source(paste0(path_pop_health, "transfer_alcohol_deaths.R"))
 ##############################################.
 # ASTHMA HOSPITAL ADMISSIONS----
 ##############################################.
+source(paste0(path_pop_health, "transfer_asthma_admissions.R"))
 
 ##############################################.
 # INFANT MORTALITY (ALL DEATHS IN THE FIRST YEAR OF LIFE)----
