@@ -256,86 +256,182 @@ output$info_panel = renderUI({
                  )
       )
     )
-    # }  else if(input$indicator_type_info == "Giving every child the best start in life") {
-    #
-    #   wellPanel(
-    #     h3("Giving every child the best start in life"),
-    #     bsCollapse(id = "info_collapse_child_start", open = "Panel 1",
-    #                bsCollapsePanel(
-    #                  "Infant mortality",
-    #                  uiOutput("info_infant_mortality_pop")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Healthy birthweight babies",
-    #                  uiOutput("info_healthy_birthweight")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Children at risk of obesity",
-    #                  uiOutput("info_children_at_risk_of_obesity")
-    #                )
-    #
-    #     )
-    #   )
-    # } else if(input$indicator_type_info == "Hospital admissions") {
-    #
-    #   wellPanel(
-    #     h3("Hospital admissions"),
-    #     bsCollapse(id = "info_collapse_hospital_admissions", open = "Panel 1",
-    #                bsCollapsePanel(
-    #                  "First ever hospital admission for heart attack",
-    #                  uiOutput("info_heart_attack")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Drug-related hospital admissions",
-    #                  uiOutput("info_drug_admissions")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Alcohol admissions",
-    #                  uiOutput("info_alcohol_admissions")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Asthma hospital admissions",
-    #                  uiOutput("info_asthma_hospital_adm")
-    #                )
-    #     )
-    #   )
-    # } else if(input$indicator_type_info == "Mortality") {
-    #
-    #   wellPanel(
-    #     h3("Mortality"),
-    #     bsCollapse(id = "info_collapse_mortality", open = "Panel 1",
-    #                bsCollapsePanel(
-    #                  "All-cause mortality",
-    #                  uiOutput("info_all_cause_mortality")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Coronary Heart Disease (CHD) deaths",
-    #                  uiOutput("info_chd_deaths")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Drug-related deaths",
-    #                  uiOutput("info_drug_deaths")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Alcohol-specific deaths (aged 45-74)",
-    #                  uiOutput("info_alcohol_deaths")
-    #                )
-    #     )
-    #   )
-    # } else if(input$indicator_type_info == "Social carers survey") {
-    #
-    #   wellPanel(
-    #     h3("Mortality"),
-    #     bsCollapse(id = "info_collapse_social_carers_survey", open = "Panel 1",
-    #                bsCollapsePanel(
-    #                  "Experience of social care recipients",
-    #                  uiOutput("info_experience_recipients")
-    #                ),
-    #                bsCollapsePanel(
-    #                  "Experience of unpaid carers",
-    #                  uiOutput("info_experience_of_unpaid_carers")
-    #                )
-    #     )
-    #   )
+  }  else if(input$indicator_type_info == "Give every child the best start in life") {
+
+    wellPanel(
+      h3("Give every child the best start in life"),
+      bsCollapse(id = "info_collapse_child_start", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Infant Mortality",
+                   uiOutput("info_infant_mortality_cw")
+                 ),
+                 bsCollapsePanel(
+                   "At risk of obesity",
+                   uiOutput("info_children_at_risk_of_obesity")
+                 ),
+                 bsCollapsePanel(
+                   "Child social and physical development",
+                   uiOutput("info_child_development_cw")
+                 ),
+                 bsCollapsePanel(
+                   "Child material deprivation",
+                   uiOutput("info_child_material_deprivation")
+                 ),
+                 bsCollapsePanel(
+                   "Child wellbeing and happiness",
+                   uiOutput("info_child_wellbeing")
+                 ),
+                 bsCollapsePanel(
+                   "Perinatal mortality rate",
+                   uiOutput("info_perinatal_mortality")
+                 ),
+                 bsCollapsePanel(
+                   "Physcial activity",
+                   uiOutput("info_physical_activity_children_cw")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Enable all children, young people and adults to maximise their capabilities and control over their lives") {
+
+    wellPanel(
+      h3("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
+      bsCollapse(id = "info_collapse_control_lives", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Children's voices",
+                   uiOutput("info_childrens_voices")
+                 ),
+                 bsCollapsePanel(
+                   "Children have positive relationships",
+                   uiOutput("info_children_relationships")
+                 ),
+                 bsCollapsePanel(
+                   "Confidence and resilience of children and young people",
+                   uiOutput("info_confidence_of_young")
+                 ),
+                 bsCollapsePanel(
+                   "Mental health/mental wellbeing",
+                   uiOutput("info_mental_health_cw")
+                 ),
+                 bsCollapsePanel(
+                   "CAHMS waiting times",
+                   uiOutput("info_camhs_waiting_times_cw")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Create fair employment and good work for all") {
+
+    wellPanel(
+      h3("Create fair employment and good work for all"),
+      bsCollapse(id = "info_collapse_fair_work", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Employees on the living wage",
+                   uiOutput("info_employees_living_wage_cw")
+                 ),
+                 bsCollapsePanel(
+                   "Pay gap",
+                   uiOutput("info_gender_pay_gap_cw")
+                 ),
+                 bsCollapsePanel(
+                   "Work related ill health",
+                   uiOutput("info_work_related_ill_health")
+                 ),
+                 bsCollapsePanel(
+                   "Economic inactivity",
+                   uiOutput("info_economic_inactivity_cw")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Ensure healthy standard of living for all") {
+
+    wellPanel(
+      h3("Ensure healthy standard of living for all"),
+      bsCollapse(id = "info_collapse_healthy_standard", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Food insecurity",
+                   uiOutput("info_food_insecurity")
+                 ),
+                 bsCollapsePanel(
+                   "Satisfaction with housing",
+                   uiOutput("info_satisfaction_with_housing")
+                 ),
+                 bsCollapsePanel(
+                   "Persistent poverty",
+                   uiOutput("info_persistent_poverty")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Create and develop healthy and sustainable places and communities") {
+
+    wellPanel(
+      h3("Create and develop healthy and sustainable places and communities"),
+      bsCollapse(id = "info_collapse_sustainable_communities", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Number of areas where health inequalities are reducing",
+                   uiOutput("info_areas_of_health_inequalities")
+                 ),
+                 bsCollapsePanel(
+                   "Perceptions of local area",
+                   uiOutput("info_perceptions_of_local_area")
+                 ),
+                 bsCollapsePanel(
+                   "Places to interact",
+                   uiOutput("info_places_to_interact")
+                 ),
+                 bsCollapsePanel(
+                   "Loneliness",
+                   uiOutput("info_loneliness")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Tackling discrimination, racism and their outcomes") {
+
+    wellPanel(
+      h3("Tackling discrimination, racism and their outcomes"),
+      bsCollapse(id = "info_collapse_discrimination_racism", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Public services treat people with dignity and respect",
+                   uiOutput("info_dignity_respect")
+                 ),
+                 bsCollapsePanel(
+                   "Gender balance in organisations",
+                   uiOutput("info_gender_balance")
+                 )
+      )
+    )
+
+  } else if(input$indicator_type_info == "Pursuing environmental sustainability and health equity together") {
+
+    wellPanel(
+      h3("Pursuing environmental sustainability and health equity together"),
+      bsCollapse(id = "info_collapse_environmental_sustainability", open = "Panel 1",
+
+                 bsCollapsePanel(
+                   "Access to green and blue space",
+                   uiOutput("info_blue_green_space")
+                 ),
+                 bsCollapsePanel(
+                   "Visits to the outdoors",
+                   uiOutput("info_visit_outdoors")
+                 ),
+                 bsCollapsePanel(
+                   "Journeys by active travel",
+                   uiOutput("info_journeys_active")
+                 )
+      )
+    )
+
   }
+
+
 })
