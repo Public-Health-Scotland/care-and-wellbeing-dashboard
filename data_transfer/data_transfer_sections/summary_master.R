@@ -258,6 +258,11 @@ summary_unpaid_carers <- experience_unpaid_carers %>%
 summary_hospital_admission_heart_attack <- heart_attack %>%
   summary_fn()
 
+## asthma admissions
+summary_asthma_admissions <- asthma_admissions %>%
+  filter(age_group == "All Ages", sex == "All Sexes") %>%
+  summary_fn()
+
 
 ## Summary pop health ----
 summary_pop_health = do.call(rbind,
@@ -265,11 +270,11 @@ summary_pop_health = do.call(rbind,
                                   drug_stays_summary, drug_deaths_summary,
                                   summary_birthweight, summary_child_obesity,
                                   summary_adult_long_term_condition, summary_adult_self_assessed_health,
-                                  summary_unpaid_carers, summary_hospital_admission_heart_attack))
+                                  summary_unpaid_carers, summary_hospital_admission_heart_attack, summary_asthma_admissions))
 rm(summary_all_cause_mortality, summary_chd, drug_stays_summary, drug_deaths_summary,
    summary_birthweight, summary_child_obesity,
    summary_adult_long_term_condition, summary_adult_self_assessed_health,
-   summary_unpaid_carers, summary_hospital_admission_heart_attack)
+   summary_unpaid_carers, summary_hospital_admission_heart_attack, summary_asthma_admissions)
 
 
 ##############################################.
