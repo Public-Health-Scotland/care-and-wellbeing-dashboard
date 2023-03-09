@@ -48,12 +48,14 @@ input_asthma_admissions %<>%
                                  ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
          geography = lookup
          ) %>%
+  mutate(geog = recode(lookup, `All Scottish and Non-Scottish Residents` = "Scotland")) %>%
   mutate(age_group = str_remove(age_group, " years")) %>%
   summary_format_function(date = .$date,
                           geog_type = .$geog_type,
-                          geog = .$lookup,
+                          geog = .$geog,
                           indicator_in = .$stays_number,
-                          value_in = "asthma_admissions")
+                          value_in = "asthma_admissions") %>%
+  select(-c(geog, geog_type))
 
 
 
