@@ -113,25 +113,6 @@ output$info_unmanageable_debt = renderUI({
 
 
 ##############################################.
-# LOCAL AUTHORITY (LA) FUNDED ADVICE ----
-##############################################.
-
-output$info_la_funded_advice = renderUI({
-
-  tagList(
-
-    h4("Local authority funded advice"),
-
-    br(),
-
-    bsButton("info_to_lafundedadvice", "Go to local authority funded advice tab")
-
-  )
-
-})
-
-
-##############################################.
 # TRANSPORT COSTS ----
 ##############################################.
 
@@ -172,7 +153,7 @@ output$info_childcareuptake = renderUI({
 # BENEFITS UPTAKE ----
 ##############################################.
 # merged with above one
-output$info_benefitsuptake = renderUI({
+output$info_benefits_uptake = renderUI({
 
   tagList(
 
@@ -180,7 +161,7 @@ output$info_benefitsuptake = renderUI({
 
     br(),
 
-    bsButton("info_to_benefituptake", "Go to benefit uptake tab")
+    bsButton("info_to_benefits_uptake", "Go to benefit uptake tab")
 
   )
 

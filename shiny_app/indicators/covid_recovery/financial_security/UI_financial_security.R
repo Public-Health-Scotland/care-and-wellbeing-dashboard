@@ -227,18 +227,6 @@ tagList(
 
                              withSpinner(DT::dataTableOutput("unmanageable_debt_data"))),
 
-           ##############################################.
-           # LOCAL AUTHORITY FUNDED ADVICE----
-           ##############################################.
-           tabPanel(title = "Local authority funded advice",
-                    value = "la_funded_advice",
-                    icon = icon_no_warning_fn("people-group"),
-
-                    h2("Local authority funded advice"),
-
-                    bsButton("lafundedadvice_to_info", "Go to information page"),
-                    br(),
-                    br()),
 
            ##############################################.
            # TRANSPORT COSTS----
@@ -289,7 +277,7 @@ tagList(
            # Benefit uptake and engagement with welfare advice ----
            ##############################################.
            tabPanel(title = "Benefit uptake and engagement with welfare advice",
-                    value = "benefit_uptake",
+                    value = "benefits_uptake",
                     icon = icon_no_warning_fn("person-shelter"),
 
                     h2("Benefit uptake and engagement with welfare advice"),
