@@ -395,8 +395,19 @@ tagList(
 
                         fluidRow(column(3,
                                         pickerInput("asthma_admissions_breakdowns",
-                                                    "Breakdown",
-                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown")))),#, "Age and sex breakdown"))),
+                                                    "1. Select a breakdown",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_type",
+                                                    "2. Select a geography type",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_name",
+                                                    "3. Select a geography",
+                                                    choices = c("Scotland")))
+
+                                        ),#, "Age and sex breakdown"))),
                                  # column(3,
                                  #        uiOutput("asthma_admissions_years_ui"))),
 
