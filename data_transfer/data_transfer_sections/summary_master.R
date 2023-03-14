@@ -29,6 +29,8 @@ for (file in data_files$value) {
 
 summary_fn = function(data, pretty_month = F, pretty_day = F) {
 
+  if(length(unique(data$pretty_date)) >= 2){
+
   data %<>%
     arrange(pretty_date) %>%
     group_by(geography_type, geography) %>%
@@ -56,6 +58,39 @@ summary_fn = function(data, pretty_month = F, pretty_day = F) {
     rename(previous = indicator, previous_date = date)
 
   out = left_join(latest, previous)
+
+  # } else if (length(unique(data$pretty_date)) == 1) {
+  #
+  #   data %<>%
+  #     # arrange(pretty_date) %>%
+  #     group_by(geography_type, geography) %>%
+  #     # do(tail(., 2)) %>%
+  #     select(value, indicator, date = pretty_date, geography, geography_type)
+  #
+  #   if(pretty_month) {
+  #     data %<>%
+  #       mutate(date = format(date, "%B %Y"))
+  #   }
+  #
+  #   if(pretty_day) {
+  #     data %<>%
+  #       mutate(date = paste0(format(date, "%d %B %Y"), " (fortnight ending)"))
+  #   }
+  #
+  #   latest = managing_financially %>%
+  #     # slice(-1) %>%
+  #     ungroup() %>%
+  #     rename(latest = indicator)
+  #
+  #   # previous = data %>%
+  #   #   slice(1) %>%
+  #   #   ungroup() %>%
+  #   #   rename(previous = indicator, previous_date = date)
+#
+#   previous = data_frame(previous = NA_character_, previous_date = NA_character_)
+#
+# out = cross_join(latest, previous)
+  }
 
   return(out)
 }
@@ -140,13 +175,20 @@ summary_savings = savings_low_income %>%
   filter(savings == "No savings", net_income == "All") %>%
   summary_fn(.)
 
+## Managing financially
+summary_managing_financially = managing_financially %>%
+  filter(answer == "Manages well") %>%
+  summary_fn()
+
 summary_financial = do.call(rbind, list(summary_elc_3to5, summary_elc_2,
                                         summary_unmanageable,
                                         summary_fuel, summary_cost_of_living,
-                                        summary_food, summary_savings))
+                                        summary_food, summary_savings,
+                                        summary_managing_financially))
 
 rm(summary_elc_3to5, summary_elc_2, summary_unmanageable,
-   summary_fuel, summary_cost_of_living, summary_food, summary_savings)
+   summary_fuel, summary_cost_of_living, summary_food, summary_savings, summary_managing_financially)
+
 ##############################################.
 # GOOD, GREEN JOBS AND FAIR WORK ----
 ##############################################.
