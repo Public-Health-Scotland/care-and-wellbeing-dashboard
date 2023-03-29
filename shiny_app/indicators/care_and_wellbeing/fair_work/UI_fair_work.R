@@ -42,25 +42,25 @@ tagList(
 
                         fluidRow(
                           column(3,
-                                 selectizeInput("employees_living_wage_2_year_input",
+                                 selectizeInput("employees_living_wage_cw_year",
                                                 label = "Select year to view on heatmap:",
                                                 choices = employees_living_wage_by_LA %>%
                                                   filter(earning == "Earning less than the living wage") %>%
                                                   select(year, local_authority, ca2019, measure_value) %>%
                                                   .$year %>% unique()
                                                 ),
-                          # column(3,
-                          #        actionButton("employees_living_wage_2_map_button", "Trend for Scotland"))
+                          column(3,
+                                 actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
                         )),
-                        h3("Missing map and plot"),
-                        # fluidRow(
-                        #   column(12,
-                        #          tags$b("Select a local authority on the map to view local trend:")),
-                        #   column(6,
-                        #          withSpinner(leafletOutput("employees_living_wage_2_map"))),
-                        #   column(6,
-                        #          withSpinner(plotlyOutput("employees_living_wage_2_line_LA")))
-                        # ),
+
+                        fluidRow(
+                          column(12,
+                                 tags$b("Select a local authority on the map to view local trend:")),
+                          column(6,
+                                 withSpinner(leafletOutput("employees_living_wage_cw_map"))),
+                          column(6,
+                                 withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
+                        ),
 
                         h3("Data table"),
 
