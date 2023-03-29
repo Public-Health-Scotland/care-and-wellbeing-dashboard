@@ -4,95 +4,92 @@ tagList(
   h4(strong("Select indicator: ")),
   navlistPanel(widths = c(2,10),
 
-               ##############################################.
-               # HEALTHY LIFE EXPECTANCY----
-               ##############################################.
 
-               tabPanel(title = "Healthy life expectancy",
-                        value = "healthy_life_expctancy",
-                        icon = icon_no_warning_fn("lemon"),
+               ##############################################.
+               # ADMISSIONS FOR ASTHMA----
+               ##############################################.
+               tabPanel(title = "Admissions for asthma",
+                        value = "asthma_admissions",
 
-                        h3("Healthy life expectancy")
+                        h3("Admissions for asthma"),
+
+                        fluidRow(column(3,
+                                        pickerInput("asthma_admissions_breakdowns",
+                                                    "1. Select a breakdown",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_type",
+                                                    "2. Select a geography type",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        pickerInput("asthma_admissions_geog_name",
+                                                    "3. Select a geography",
+                                                    choices = c("Scotland")))
+
+                        ),#, "Age and sex breakdown"))),
+                        # column(3,
+                        #        uiOutput("asthma_admissions_years_ui"))),
+
+                        plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
+                        # plotlyOutput("asthma_admissions_plot"),
+
+                        DT::dataTableOutput("asthma_admissions_table")
+
+
                ),
 
                ##############################################.
-               # MENTAL WELLBEING OF ADULTS (16+)----
+               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
-               tabPanel(title = "Mental wellbeing of adults (16+)",
-                        value = "mental_wellbeing",
-                        icon = icon_no_warning_fn("lemon"),
+               tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
+                        value = "alcohol",
 
-                        h3("Mental wellbeing of adults (16+)")
-               ),
-
-               ##############################################.
-               # HEALTHY WEIGHT ADULTS----
-               ##############################################.
-
-               tabPanel(title = "Healthy weight adults",
-                        value = "healthy_weight",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Healthy weight adults")
-               ),
-
-               ##############################################.
-               # HEALTH RISK BEHAVIOURS----
-               ##############################################.
-
-               tabPanel(title = "Health risk behaviours",
-                        value = "health_risk_behaviours",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Health risk behaviours")
-               ),
-
-               ##############################################.
-               # PHYSICAL ACTIVITY----
-               ##############################################.
-
-               tabPanel(title = "Physical activity",
-                        value = "physical_activity",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Physical activity")
-               ),
-
-               ##############################################.
-               # QUALITY OF CARE EXPERIENCE----
-               ##############################################.
-
-               tabPanel(title = "Quality of care experience",
-                        value = "quality_care",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Quality of care experience")
-               ),
+                        tabBox( title = "", id = "alcohol_tabBox", width = NULL,
 
 
-               ##############################################.
-               # WORK-RELATED ILL HEALTH----
-               ##############################################.
+                                ##############################################.
+                                # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+                                ##############################################.
 
-               tabPanel(title = "Work-related ill health",
-                        value = "work_related_health",
-                        icon = icon_no_warning_fn("lemon"),
+                                tabPanel(title = "Alcohol-related hospital admissions",
+                                         value = "alcohol_admissions",
 
-                        h3("Work-related ill health")
-               ),
+                                         h3("Alcohol related hospital admissions"),
 
-               ##############################################.
-               # PREMATURE MORTALITY----
-               ##############################################.
 
-               tabPanel(title = "Premature mortality",
-                        value = "premature_mortality
-",
-                        icon = icon_no_warning_fn("lemon"),
+                                         selectizeInput("alcohol_admissions_geog_name","Select Health Board",
+                                                        choices = unique(alcohol_admissions$sub_group_select_group_first)),
 
-                        h3("Premature mortality")
-               ),
+                                         plotlyOutput("alcohol_admissions_plot")
+                                ),
+
+
+                                ##############################################.
+                                # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
+                                ##############################################.
+
+                                tabPanel(title = "Alcohol specific deaths",
+                                         value = "alcohol_deaths",
+
+                                         h3("Alcohol specific deaths"),
+
+                                         fluidRow(
+                                           column(3,
+                                                  selectizeInput("alcohol_deaths_sex",
+                                                                 "1. Select sex",
+                                                                 choices = unique(alcohol_deaths$sex),
+                                                                 selected = "Persons"))
+                                         ),
+
+                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                                    "alcohol_deaths_plot"),
+
+                                         h3("Data Table"),
+                                         DT::dataTableOutput("alcohol_deaths_table")
+                                )
+                        )),
 
                ##############################################.
                # ALL-CAUSE MORTALITY (15-44)----
@@ -100,7 +97,6 @@ tagList(
 
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
-                        icon = icon_no_warning_fn("file-waveform"),
 
                         h3("All-cause mortality (ages 15-44)"),
 
@@ -132,14 +128,13 @@ tagList(
 
                ),
 
+
                ##############################################.
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
                tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
                         value = "chd_deaths",
-                        icon = icon_no_warning_fn("heart"),
-
 
                         h3("Coronary heart disease (CHD): deaths (age 45-74)"),
 
@@ -172,272 +167,74 @@ tagList(
                ),
 
                ##############################################.
-               # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
-               ##############################################.
-               tabPanel(title = "First ever hospital admission for heart attack (under 75)",
-                        value = "hospital_admission_heart_attack",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h2("First ever hospital admission for heart attack (under 75)"),
-
-                        plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
-                                   "hospital_admission_heart_attack_plot"),
-
-                        h3("Data table"),
-                        DT::dataTableOutput("hopsital_admission_heart_attack_table")
-
-
-               ),
-
-
-               ##############################################.
                # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
                tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
                         value = "drugs",
-                        icon = icon_no_warning_fn("lemon"),
 
-                   tabBox(title = "", id = "drugs_tabBox", width = NULL,
+                        tabBox(title = "", id = "drugs_tabBox", width = NULL,
 
-                        ##############################################.
-                        # DRUG RELATED HOSPITAL ADMISSIONS ----
-                        ##############################################.
+                               ##############################################.
+                               # DRUG RELATED HOSPITAL ADMISSIONS ----
+                               ##############################################.
 
 
-                   tabPanel(title = "Drug-related hospital admissions",
-                          value = "drug_admissions",
-                          icon = icon_no_warning_fn("lemon"),
+                               tabPanel(title = "Drug-related hospital admissions",
+                                        value = "drug_admissions",
 
-                          h3("Drug-related hospital admissions"),
+                                        h3("Drug-related hospital admissions"),
 
 
-                          selectizeInput("drug_admissions_age", "Select an age group",
-                                         choices = unique(drug_stays$age_group)),
+                                        selectizeInput("drug_admissions_age", "Select an age group",
+                                                       choices = unique(drug_stays$age_group)),
 
-                          plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
-                                     "drug_admissions_plot"),
+                                        plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
+                                                   "drug_admissions_plot"),
 
-                          h3("Data table"),
+                                        h3("Data table"),
 
-                          DT::dataTableOutput("drug_admissions_table")
-               ),
+                                        DT::dataTableOutput("drug_admissions_table")
+                               ),
 
 
-                         ##############################################.
-                         # DRUG RELATED DEATHS----
-                         ##############################################.
+                               ##############################################.
+                               # DRUG RELATED DEATHS----
+                               ##############################################.
 
-               tabPanel(title = "Drug-related deaths",
-                          value = "drug_deaths",
-                          icon = icon_no_warning_fn("lemon"),
+                               tabPanel(title = "Drug-related deaths",
+                                        value = "drug_deaths",
 
-                          h3("Drug related deaths"),
+                                        h3("Drug related deaths"),
 
+                                        fluidRow(
+                                          column(3,
+                                                 selectizeInput("drug_deaths_geog_type", "1. Select a geography type",
+                                                                choices = c("Scotland", "Health Board", "Council Area"))),
 
+                                          column(3,
 
-                          fluidRow(
-                            column(3,
-                                   selectizeInput("drug_deaths_geog_type", "1. Select a geography type",
-                                                  choices = c("Scotland", "Health Board", "Council Area"))),
+                                                 selectizeInput("drug_deaths_geog_name", "2. Select a geography",
+                                                                choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography))
+                                          ),
 
-                            column(3,
+                                          column(3,
+                                                 radioButtons("drug_deaths_rate_number",
+                                                              "3. View rate per 100,000 population or number of deaths",
+                                                              choices = c("Rate",
+                                                                          "Number")))
+                                        ),
 
-                                   selectizeInput("drug_deaths_geog_name", "2. Select a geography",
-                                                  choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography))
-                                   ),
+                                        plot_title("Drug misuse deaths by 5 year periods",
+                                                   "drug_deaths_plot",
+                                                   subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
 
-                            column(3,
-                                   radioButtons("drug_deaths_rate_number",
-                                                "3. View rate per 100,000 population or number of deaths",
-                                                choices = c("Rate",
-                                                            "Number")))
-                          ),
+                                        h3("Data table"),
+                                        DT::dataTableOutput("drug_deaths_table")
 
-                          plot_title("Drug misuse deaths by 5 year periods",
-                                     "drug_deaths_plot",
-                                     subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
 
-                          h3("Data table"),
-                          DT::dataTableOutput("drug_deaths_table")
 
-
-
-                 ))),
-
-               ##############################################.
-               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
-               ##############################################.
-
-               tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
-                        value = "alcohol",
-                        icon = icon_no_warning_fn("lemon"),
-
-                tabBox( title = "", id = "alcohol_tabBox", width = NULL,
-
-
-                        ##############################################.
-                        # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
-                        ##############################################.
-
-                 tabPanel(title = "Alcohol-related hospital admissions",
-                        value = "alcohol_admissions",
-                        icon = icon_no_warning_fn("wine-bottle"),
-
-                        h3("Alcohol related hospital admissions"),
-
-
-                        selectizeInput("alcohol_admissions_geog_name","Select Health Board",
-                                       choices = unique(alcohol_admissions$sub_group_select_group_first)),
-
-                        plotlyOutput("alcohol_admissions_plot")
-               ),
-
-
-                         ##############################################.
-                         # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
-                         ##############################################.
-
-               tabPanel(title = "Alcohol specific deaths",
-                          value = "alcohol_deaths",
-                          icon = icon_no_warning_fn("lemon"),
-
-                          h3("Alcohol specific deaths"),
-
-                          fluidRow(
-                            column(3,
-                                   selectizeInput("alcohol_deaths_sex",
-                                                  "1. Select sex",
-                                                  choices = unique(alcohol_deaths$sex),
-                                                  selected = "Persons"))
-                          ),
-
-                          plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
-                                     "alcohol_deaths_plot"),
-
-                          h3("Data Table"),
-                          DT::dataTableOutput("alcohol_deaths_table")
-                          )
-               )),
-
-
-               ##############################################.
-               # HEALTHY BIRTHWEIGHT----
-               ##############################################.
-
-               tabPanel(title = "Healthy birthweight",
-                        value = "healthy_birthweight",
-                        icon = icon_no_warning_fn("baby"),
-
-                        h3("Healthy birthweight"),
-
-
-                        fluidRow(
-                          column(3,
-                                 selectizeInput("healthy_birthweight_geog_type", "1. Select a geography type",
-                                                choices = c("Scotland", "Health Board", "Council Area"))),
-
-                          column(3,
-                                 selectizeInput("healthy_birthweight_geog_name", "2. Select a geography",
-                                                choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
-                                 )),
-
-                        plot_title("Birthweight of babies based on gestational age by financial year",
-                                   "healthy_birthweight_plot"),
-
-                        DT::dataTableOutput("healthy_birthweight_table")),
-
-
-
-
-
-               ##############################################.
-               #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
-               ##############################################.
-               tabPanel(title = "Self-assessed health of adults (age 16+)",
-                        value = "adult_self_assessed_health",
-                        icon = icon_no_warning_fn("notes-medical"),
-
-                        h3("Self-assessed health of adults (age 16+)"),
-
-                        h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
-
-                        plotlyOutput("adult_self_assessed_health_plot"),
-
-                        DT::dataTableOutput("adult_self_assessed_health_table")
-               ),
-
-
-               ##############################################.
-               #  LIMITING LONG-TERM CONDITIONS (16+)----
-               ##############################################.
-               tabPanel(title = "Limiting long-term conditions (age 16+)",
-                        value = "adult_long_term_condition",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Limiting long-term conditions (age 16+)"),
-
-                        h4("Percentage of adults with a limiting long-term condition"),
-
-                        plotlyOutput("adult_long_term_condition_plot"),
-
-                        DT::dataTableOutput("adult_long_term_condition_table")
-               ),
-
-               ##############################################.
-               # ADMISSIONS FOR ASTHMA----
-               ##############################################.
-               tabPanel(title = "Admissions for asthma",
-                        value = "asthma_admissions",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Admissions for asthma"),
-
-                        fluidRow(column(3,
-                                        pickerInput("asthma_admissions_breakdowns",
-                                                    "1. Select a breakdown",
-                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
-                                 column(3,
-                                        pickerInput("asthma_admissions_geog_type",
-                                                    "2. Select a geography type",
-                                                    choices = c("Scotland", "Health Board"),
-                                                    selected = "Scotland")),
-                                 column(3,
-                                        pickerInput("asthma_admissions_geog_name",
-                                                    "3. Select a geography",
-                                                    choices = c("Scotland")))
-
-                                        ),#, "Age and sex breakdown"))),
-                                 # column(3,
-                                 #        uiOutput("asthma_admissions_years_ui"))),
-
-                        plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
-                        # plotlyOutput("asthma_admissions_plot"),
-
-                        DT::dataTableOutput("asthma_admissions_table")
-
-
-               ),
-
-               ##############################################.
-               # SCREENING UPTAKE FOR BREAST AND BOWEL CANCER----
-               ##############################################.
-               tabPanel(title = "Screening uptake",
-                        value = "screening",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Screening uptake")
-               ),
-
-               ##############################################.
-               # VACCINATIONS UPTAKE----
-               ##############################################.
-               tabPanel(title = "Vaccinations uptake",
-                        value = "vaccinations",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Vaccinations uptake")
-               ),
+                               ))),
 
                ##############################################.
                # EXPERIENCE OF SOCIAL CARE RECIPIENTS----
@@ -446,7 +243,6 @@ tagList(
 
                tabPanel(title = "Experience of social care recipients ",
                         value = "experience_recipients",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h3("Experience of social care recipients")
 
@@ -459,7 +255,6 @@ tagList(
 
                tabPanel(title = "Experience of unpaid carers ",
                         value = "experience_of_unpaid_carers",
-                        icon = icon_no_warning_fn("hand-holding-hand"),
 
                         h3("Experience of unpaid carers"),
 
@@ -468,8 +263,180 @@ tagList(
                         plotlyOutput("experience_unpaid_carers_plot"),
 
                         DT::dataTableOutput("experience_unpaid_carers_table")
+               ),
 
 
-               )
-  ) # navlistpanel
+               ##############################################.
+               # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
+               ##############################################.
+               tabPanel(title = "First ever hospital admission for heart attack (under 75)",
+                        value = "hospital_admission_heart_attack",
+
+                        h2("First ever hospital admission for heart attack (under 75)"),
+
+                        plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
+                                   "hospital_admission_heart_attack_plot"),
+
+                        h3("Data table"),
+                        DT::dataTableOutput("hopsital_admission_heart_attack_table")
+
+
+               ),
+
+               ##############################################.
+               # HEALTH RISK BEHAVIOURS----
+               ##############################################.
+
+               tabPanel(title = "Health risk behaviours",
+                        value = "health_risk_behaviours",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Health risk behaviours")
+               ),
+
+               ##############################################.
+               # HEALTHY BIRTHWEIGHT----
+               ##############################################.
+
+               tabPanel(title = "Healthy birthweight",
+                        value = "healthy_birthweight",
+
+                        h3("Healthy birthweight"),
+
+
+                        fluidRow(
+                          column(3,
+                                 selectizeInput("healthy_birthweight_geog_type", "1. Select a geography type",
+                                                choices = c("Scotland", "Health Board", "Council Area"))),
+
+                          column(3,
+                                 selectizeInput("healthy_birthweight_geog_name", "2. Select a geography",
+                                                choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
+                          )),
+
+                        plot_title("Birthweight of babies based on gestational age by financial year",
+                                   "healthy_birthweight_plot"),
+
+                        DT::dataTableOutput("healthy_birthweight_table")),
+
+
+               ##############################################.
+               # HEALTHY LIFE EXPECTANCY----
+               ##############################################.
+
+               tabPanel(title = "Healthy life expectancy",
+                        value = "healthy_life_expctancy",
+
+                        h3("Healthy life expectancy")
+               ),
+
+               ##############################################.
+               # HEALTHY WEIGHT ADULTS----
+               ##############################################.
+
+               tabPanel(title = "Healthy weight adults",
+                        value = "healthy_weight",
+
+                        h3("Healthy weight adults")
+               ),
+
+               ##############################################.
+               #  LIMITING LONG-TERM CONDITIONS (16+)----
+               ##############################################.
+               tabPanel(title = "Limiting long-term conditions (age 16+)",
+                        value = "adult_long_term_condition",
+
+                        h3("Limiting long-term conditions (age 16+)"),
+
+                        h4("Percentage of adults with a limiting long-term condition"),
+
+                        plotlyOutput("adult_long_term_condition_plot"),
+
+                        DT::dataTableOutput("adult_long_term_condition_table")
+               ),
+
+               ##############################################.
+               # MENTAL WELLBEING OF ADULTS (16+)----
+               ##############################################.
+
+               tabPanel(title = "Mental wellbeing of adults (16+)",
+                        value = "mental_wellbeing",
+
+                        h3("Mental wellbeing of adults (16+)")
+               ),
+
+               ##############################################.
+               # PHYSICAL ACTIVITY----
+               ##############################################.
+
+               tabPanel(title = "Physical activity",
+                        value = "physical_activity",
+
+                        h3("Physical activity")
+               ),
+
+               ##############################################.
+               # PREMATURE MORTALITY----
+               ##############################################.
+
+               tabPanel(title = "Premature mortality",
+                        value = "premature_mortality",
+
+                        h3("Premature mortality")
+               ),
+
+               ##############################################.
+               # QUALITY OF CARE EXPERIENCE----
+               ##############################################.
+
+               tabPanel(title = "Quality of care experience",
+                        value = "quality_care",
+
+                        h3("Quality of care experience")
+               ),
+
+               ##############################################.
+               # SCREENING UPTAKE FOR BREAST AND BOWEL CANCER----
+               ##############################################.
+               tabPanel(title = "Screening uptake",
+                        value = "screening",
+
+                        h3("Screening uptake")
+               ),
+
+               ##############################################.
+               #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
+               ##############################################.
+               tabPanel(title = "Self-assessed health of adults (age 16+)",
+                        value = "adult_self_assessed_health",
+
+                        h3("Self-assessed health of adults (age 16+)"),
+
+                        h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
+
+                        plotlyOutput("adult_self_assessed_health_plot"),
+
+                        DT::dataTableOutput("adult_self_assessed_health_table")
+               ),
+
+               ##############################################.
+               # VACCINATIONS UPTAKE----
+               ##############################################.
+               tabPanel(title = "Vaccinations uptake",
+                        value = "vaccinations",
+
+                        h3("Vaccinations uptake")
+               ),
+
+               ##############################################.
+               # WORK-RELATED ILL HEALTH----
+               ##############################################.
+
+               tabPanel(title = "Work-related ill health",
+                        value = "work_related_health",
+
+                        h3("Work-related ill health")
+               ),
+
+) # navlistpanel
 ) # tagList
