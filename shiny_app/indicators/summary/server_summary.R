@@ -2,27 +2,30 @@
 # SUMMARY FIGURES ----
 ##############################################.
 
-output$indicator_type_ui = renderUI({
+observeEvent(input$pillar_type_summary,
+             {
+               summary_filtered = summary_final %>%
+                 filter(pillar == input$pillar_type_summary)
 
-  summary_filtered = summary_final %>%
-    filter(pillar == input$pillar_type_summary)
+               updateSelectizeInput(session, "indicator_type_summary",
+                                    #label = "2. Select indicator section",
+                                    choices = unique(summary_filtered$section))#,
+               #selected = "")
 
-  selectizeInput("indicator_type_summary",
-               label = "2. Select indicator section",
-               choices = unique(summary_filtered$section),
-               selected = "")
+             })
 
-})
-
-output$geog_summary_ui = renderUI({
+observeEvent(input$geog_type_summary,
+             {
 
   summary_filtered = summary_final %>%
     filter(geography_type == input$geog_type_summary)
 
-  selectizeInput("geog_name_summary",
-                 label = "4. Select geography",
-                 choices = unique(summary_filtered$geography),
-                 selected = "")
+  select_choice <- ifelse(input$geog_type_summary == "Scotland", "area", input$geog_type_summary)
+
+  updateSelectizeInput(session, "geog_name_summary",
+                 label = glue("4. Select {select_choice}"),
+                 choices = unique(summary_filtered$geography))#,
+                 #selected = "")
 })
 
 output$summary = DT::renderDataTable({
