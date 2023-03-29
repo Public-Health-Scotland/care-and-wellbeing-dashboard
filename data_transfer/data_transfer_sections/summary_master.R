@@ -176,18 +176,19 @@ summary_savings = savings_low_income %>%
   summary_fn(.)
 
 ## Managing financially
-summary_managing_financially = managing_financially %>%
-  filter(answer == "Manages well") %>%
-  summary_fn()
+# summary_managing_financially = managing_financially %>%
+#   filter(answer == "Manages well") %>%
+#   summary_fn()
 
 summary_financial = do.call(rbind, list(summary_elc_3to5, summary_elc_2,
                                         summary_unmanageable,
                                         summary_fuel, summary_cost_of_living,
-                                        summary_food, summary_savings,
-                                        summary_managing_financially))
+                                        summary_food, summary_savings#,
+                                        #summary_managing_financially
+                                        ))
 
 rm(summary_elc_3to5, summary_elc_2, summary_unmanageable,
-   summary_fuel, summary_cost_of_living, summary_food, summary_savings, summary_managing_financially)
+   summary_fuel, summary_cost_of_living, summary_food, summary_savings)#, summary_managing_financially)
 
 ##############################################.
 # GOOD, GREEN JOBS AND FAIR WORK ----
@@ -333,7 +334,8 @@ rm(summary_wellbeing, summary_financial, summary_jobs)
 indicator_lookup = read_excel(paste0(path_out, "/tab values.xlsx"))
 
 summary_final %<>%
-  left_join(indicator_lookup, .)
+  left_join(indicator_lookup, .) %>%
+  arrange(title)
 
 saveRDS(summary_final, paste0(path_out, "/summary_table.rds"))
 
