@@ -21,9 +21,10 @@ library(flextable)
 library(readxl)
 library(DT)
 library(htmltools)
-# library(leaflet)
+library(leaflet)
 library(lubridate)
 library(shinymanager)
+library(glue)
 
 ##############################################
 # LOAD FUNCTIONS ----
