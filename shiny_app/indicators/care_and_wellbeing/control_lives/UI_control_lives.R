@@ -7,47 +7,6 @@ tagList(
 
   navlistPanel(widths = c(2,10),
 
-
-               ##############################################.
-               # CHILDREN'S VOICES----
-               ##############################################.
-               tabPanel(title = "Children’s voices",
-                        value = "childrens_voices",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Children’s voices")
-               ),
-
-               ##############################################.
-               # CHILDREN HAVE POSITIVE RELATIONSHIPS----
-               ##############################################.
-               tabPanel(title = "Children have positive relationships",
-                        value = "children_relationships",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Children have positive relationships")
-               ),
-
-               ##############################################.
-               # CONFIDENCE AND RESILIENCE OF CHILDREN AND YOUNG PEOPLE----
-               ##############################################.
-               tabPanel(title = "Confidence and resilience of children and young people",
-                        value = "confidence_of_young",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Confidence and resilience of children and young people")
-               ),
-
-               ##############################################.
-               # MENTAL HEALTH / MENTAL WELLBEING----
-               ##############################################.
-               tabPanel(title = "Mental health / mental wellbeing ",
-                        value = "mental_health_cw",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Mental health / mental wellbeing ")
-               ),
-
                ##############################################.
                # CAMHS WAITING TIMES----
                ##############################################.
@@ -85,7 +44,51 @@ tagList(
                         h3("Data table"),
                         DT::dataTableOutput("camhs_waiting_times_cw_table")
 
+               ),
+
+               ##############################################.
+               # CHILDREN HAVE POSITIVE RELATIONSHIPS----
+               ##############################################.
+               tabPanel(title = "Children have positive relationships",
+                        value = "children_relationships",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Children have positive relationships")
+               ),
+
+               ##############################################.
+               # CHILDREN'S VOICES----
+               ##############################################.
+               tabPanel(title = "Children’s voices",
+                        value = "childrens_voices",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Children’s voices")
+               ),
+
+
+
+               ##############################################.
+               # CONFIDENCE AND RESILIENCE OF CHILDREN AND YOUNG PEOPLE----
+               ##############################################.
+               tabPanel(title = "Confidence and resilience of children and young people",
+                        value = "confidence_of_young",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Confidence and resilience of children and young people")
+               ),
+
+               ##############################################.
+               # MENTAL HEALTH / MENTAL WELLBEING----
+               ##############################################.
+               tabPanel(title = "Mental health / mental wellbeing ",
+                        value = "mental_health_cw",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Mental health / mental wellbeing ")
                )
+
+
   )
 )
 

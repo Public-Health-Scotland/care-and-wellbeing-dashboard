@@ -7,6 +7,41 @@ tagList(
 
   navlistPanel(widths = c(2,10),
 
+               ##############################################.
+               # ECONOMIC INACTIVITY----
+               ##############################################.
+               tabPanel(title = "Economic inactivity",
+                        value = "economic_inactivity_cw",
+                        icon = icon_no_warning_fn("people-arrows"),
+
+
+                        h3("Economic inactivity"),
+
+
+                        actionButton(
+                          "economic_inactivity_cw_modal_info",
+                          tags$b("Background information and source"),
+                          icon = icon_no_warning_fn("info-circle")
+                        ),
+
+                        p("Use the below drop-down menu to select a region of interest."),
+
+
+                        selectInput("economic_inactivity_cw_region",
+                                    label = "Select Region",
+                                    choices = unique(economic_inactivity$region),
+                                    selected = "Scotland"),
+
+
+                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")
+                        ,
+
+
+                        h3("Economic inactivity data table"),
+                        DT::dataTableOutput("economic_inactivity_cw_table")
+
+
+               ),
 
                ##############################################.
                # EMPLOYEES ON THE LIVING WAGE----
@@ -48,10 +83,10 @@ tagList(
                                                   filter(earning == "Earning less than the living wage") %>%
                                                   select(year, local_authority, ca2019, measure_value) %>%
                                                   .$year %>% unique()
-                                                ),
-                          column(3,
-                                 actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
-                        )),
+                                 ),
+                                 column(3,
+                                        actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
+                          )),
 
                         fluidRow(
                           column(12,
@@ -134,44 +169,6 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h2("Work related ill health")
-               ),
-
-               ##############################################.
-               # ECONOMIC INACTIVITY----
-               ##############################################.
-               tabPanel(title = "Economic inactivity",
-                        value = "economic_inactivity_cw",
-                        icon = icon_no_warning_fn("people-arrows"),
-
-
-                        h3("Economic inactivity"),
-
-
-                        actionButton(
-                          "economic_inactivity_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
-
-                        p("Use the below drop-down menu to select a region of interest."),
-
-
-                        selectInput("economic_inactivity_cw_region",
-                                    label = "Select Region",
-                                    choices = unique(economic_inactivity$region),
-                                    selected = "Scotland"),
-
-
-                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")
-                        ,
-
-
-                        h3("Economic inactivity data table"),
-                        DT::dataTableOutput("economic_inactivity_cw_table")
-
-
                )
-
-
   )
 )

@@ -5,17 +5,6 @@ tagList(
   navlistPanel(widths = c(2,10),
 
                ##############################################.
-               # PUBLIC SERVICES TREAT PEOPLE WITH DIGNITY AND RESPECT----
-               ##############################################.
-
-               tabPanel(title = "Public services treat people with dignity and respect",
-                        value = "dignity_respect",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Public services treat people with dignity and respect")
-               ),
-
-               ##############################################.
                # GENDER BALANCE IN ORGANISATIONS----
                ##############################################.
 
@@ -24,6 +13,19 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Gender balance in organisations")
+               ),
+
+               ##############################################.
+               # PUBLIC SERVICES TREAT PEOPLE WITH DIGNITY AND RESPECT----
+               ##############################################.
+
+               tabPanel(title = "Public services treat people with dignity and respect",
+                        value = "dignity_respect",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Public services treat people with dignity and respect")
                )
+
+
   )
 )

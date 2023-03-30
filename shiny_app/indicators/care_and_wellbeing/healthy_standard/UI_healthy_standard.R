@@ -19,16 +19,6 @@ tagList(
                ),
 
                ##############################################.
-               # SATISFCATION WITH HOUSING----
-               ##############################################.
-               tabPanel(title = "Satisfaction with housing",
-                        value = "satisfaction_with_housing",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Satisfaction with housing")
-               ),
-
-               ##############################################.
                # PERSISTENT POVERTY----
                ##############################################.
                tabPanel(title = "Persistent poverty",
@@ -36,6 +26,18 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Persistent poverty")
+               ),
+
+               ##############################################.
+               # SATISFCATION WITH HOUSING----
+               ##############################################.
+               tabPanel(title = "Satisfaction with housing",
+                        value = "satisfaction_with_housing",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Satisfaction with housing")
                )
+
+
   )
 )

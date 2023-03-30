@@ -8,6 +8,17 @@ tagList(
   navlistPanel(widths = c(2,10),
 
                ##############################################.
+               # CHILD MATERIAL DEPRIVATION----
+               ##############################################.
+
+               tabPanel(title = "Child material deprivation",
+                        value = "child_material_deprevation",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Child material deprivation")
+               ),
+
+               ##############################################.
                # CHILD SOCIAL AND PHYSICAL DEVELOPMENT----
                ##############################################.
                tabPanel(title = "Child social and physical development",
@@ -39,7 +50,7 @@ tagList(
                                  selectizeInput("child_development_cw_geog_name",
                                                 label = "2. Select geography",
                                                 choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography)
-                                                ))),
+                                 ))),
 
 
                         plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
@@ -88,103 +99,98 @@ tagList(
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
                         DT::dataTableOutput("child_development_cw_table")
+               ),
+
+               ##############################################.
+               # CHILD WELLBEING AND HAPPINESS----
+               ##############################################.
+
+               tabPanel(title = "Child wellbeing and happiness",
+                        value = "child_wellbeing",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Child wellbeing and happiness")
+               ),
+
+               ##############################################.
+               # CHILDREN AT RISK OF OBESITY----
+               ##############################################.
+
+               tabPanel(title = "Children at risk of obesity",
+                        value = "child_obesity",
+                        icon = icon_no_warning_fn("child-reaching"),
+
+                        h3("Children at risk of obesity"),
+
+                        h4("Percentage of children (2-15) at risk of obesity in Scotland over time"),
+
+                        plotlyOutput("child_obesity_plot"),
+
+                        DT::dataTableOutput("child_obesity_table")
+               ),
+
+               ##############################################.
+               # INFANT MORTALITY ----
+               ##############################################.
+
+               tabPanel(title = "Infant mortality",
+                        value = "infant_mortality_cw",
+                        icon = icon_no_warning_fn("hospital"),
+
+                        h3("Infant mortality"),
+
+                        actionButton(
+                          "infant_mortality_cw_modal_info",
+                          tags$b("Background information and source"),
+                          icon = icon_no_warning_fn("info-circle")
                         ),
 
-         ##############################################.
-         # CHILD WELLBEING AND HAPPINESS----
-         ##############################################.
+                        actionButton(
+                          "infant_mortality_cw_modal_comment",
+                          tags$b("Summary of indicator during covid and pre-covid period"),
+                          icon = icon_no_warning_fn("info-circle")
+                        ),
 
-         tabPanel(title = "Child wellbeing and happiness",
-                  value = "child_wellbeing",
-                  icon = icon_no_warning_fn("lemon"),
 
-                  h3("Child wellbeing and happiness")
-         ),
+                        plot_title("Month rate of infant deaths per 1,000 live births in Scotland",
+                                   "infant_mortality_cw_plot"),
 
-         ##############################################.
-         # PERINATAL MORTALITY RATE----
-         ##############################################.
 
-         tabPanel(title = "Perinatal Mortality Rate",
-                  value = "perinatal_mortality",
-                  icon = icon_no_warning_fn("lemon"),
+                        h3("Data table"),
+                        DT::dataTableOutput("infant_mortality_cw_table")
+               ),
 
-                  h3("Perinatal Mortality Rate")
-         ),
 
-         ##############################################.
-         # CHILD MATERIAL DEPRIVATION----
-         ##############################################.
+               ##############################################.
+               # PERINATAL MORTALITY RATE----
+               ##############################################.
 
-         tabPanel(title = "Child material deprivation",
-                  value = "child_material_deprevation",
-                  icon = icon_no_warning_fn("lemon"),
+               tabPanel(title = "Perinatal Mortality Rate",
+                        value = "perinatal_mortality",
+                        icon = icon_no_warning_fn("lemon"),
 
-                  h3("Child material deprivation")
-         ),
-
-         ##############################################.
-         # PHYSICAL ACTIVITY OF CHILDREN----
-         ##############################################.
-
-         tabPanel(title = "Physical Activity (of children)",
-                  value = "physical_activity_children",
-                  icon = icon_no_warning_fn("lemon"),
-
-                  h3("Physical Activity (of children)")
-         ),
+                        h3("Perinatal Mortality Rate")
+               ),
 
 
 
-         ##############################################.
-         # INFANT MORTALITY ----
-         ##############################################.
+               ##############################################.
+               # PHYSICAL ACTIVITY OF CHILDREN----
+               ##############################################.
 
-         tabPanel(title = "Infant mortality",
-                  value = "infant_mortality_cw",
-                  icon = icon_no_warning_fn("hospital"),
+               tabPanel(title = "Physical Activity (of children)",
+                        value = "physical_activity_children",
+                        icon = icon_no_warning_fn("lemon"),
 
-                  h3("Infant mortality"),
-
-                           actionButton(
-                             "infant_mortality_cw_modal_info",
-                             tags$b("Background information and source"),
-                             icon = icon_no_warning_fn("info-circle")
-                           ),
-
-                           actionButton(
-                             "infant_mortality_cw_modal_comment",
-                             tags$b("Summary of indicator during covid and pre-covid period"),
-                             icon = icon_no_warning_fn("info-circle")
-                           ),
-
-
-                    plot_title("Month rate of infant deaths per 1,000 live births in Scotland",
-                               "infant_mortality_cw_plot"),
-
-
-                    h3("Data table"),
-                    DT::dataTableOutput("infant_mortality_cw_table")
-                  ),
+                        h3("Physical Activity (of children)")
+               )
 
 
 
-         ##############################################.
-         # AT RISK OF OBESITY----
-         ##############################################.
 
-         tabPanel(title = "Children at risk of obesity",
-                  value = "child_obesity",
-                  icon = icon_no_warning_fn("child-reaching"),
 
-                  h3("Children at risk of obesity"),
 
-                  h4("Percentage of children (2-15) at risk of obesity in Scotland over time"),
 
-                  plotlyOutput("child_obesity_plot"),
-
-                  DT::dataTableOutput("child_obesity_table")
-                  )
   )
 
 )

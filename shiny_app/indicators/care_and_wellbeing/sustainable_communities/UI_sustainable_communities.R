@@ -7,6 +7,15 @@ tagList(
 
   navlistPanel(widths = c(2,10),
 
+               ##############################################.
+               # LONELINESS----
+               ##############################################.
+               tabPanel(title = "Loneliness",
+                        value = "loneliness",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Loneliness")
+               ),
 
                ##############################################.
                # NUMBER OF AREAS WHERE HEALTH INEQUALITIES ARE REDUCING----
@@ -36,26 +45,6 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Places to interact")
-               ),
-
-               ##############################################.
-               # LONELINESS----
-               ##############################################.
-               tabPanel(title = "Loneliness",
-                        value = "loneliness",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Loneliness")
-               )#,
-
-               # ##############################################.
-               # # ACCESS TO GREEN AND BLUE SPACE----
-               # ##############################################.
-               # tabPanel(title = "Access to green and blue space",
-               #          value = "blue_green_space",
-               #          icon = icon_no_warning_fn("lemon"),
-               #
-               #          h3("Access to green and blue space")
-               # )
+               )
   )
 )
