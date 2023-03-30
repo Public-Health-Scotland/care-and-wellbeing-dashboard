@@ -35,14 +35,14 @@ tagList(
                              actionButton("fuel_afford_year_button", "Trend for Scotland"))
                     ),
                     h3("Missing map and plot"),
-                    # fluidRow(
-                    #   column(12,
-                    #          tags$b("Select a local authority on the map to view local trend:")),
-                    #   column(6,
-                    #          withSpinner(leafletOutput("fuel_afford_SHCS_map"))),
-                    #   column(6,
-                    #          withSpinner(plotlyOutput("fuel_afford_line_LA")))
-                    # ),
+                    fluidRow(
+                      column(12,
+                             tags$b("Select a local authority on the map to view local trend:")),
+                      column(6,
+                             withSpinner(leafletOutput("fuel_afford_SHCS_map"))),
+                      column(6,
+                             withSpinner(plotlyOutput("fuel_afford_line_LA")))
+                    ),
 
 
                      h3("Data table"),
@@ -178,15 +178,15 @@ tagList(
                              actionButton("savings_net_income_map_button", "Trend for Scotland"))
                     ),
                     h3("Missing map and plot"),
-                    # fluidRow(
-                    #   column(12,
-                    #          tags$b("Select a local authority on the map to view local trend:")),
-                    #   column(6,
-                    #          withSpinner(leafletOutput("savings_low_income_map"))),
-                    #   column(6,
-                    #          withSpinner(plotlyOutput("savings_low_income_line_LA")))
-                    #
-                    # ),
+                    fluidRow(
+                      column(12,
+                             tags$b("Select a local authority on the map to view local trend:")),
+                      column(6,
+                             withSpinner(leafletOutput("savings_low_income_map"))),
+                      column(6,
+                             withSpinner(plotlyOutput("savings_low_income_line_LA")))
+
+                    ),
 
                              h3("Data table"),
 
