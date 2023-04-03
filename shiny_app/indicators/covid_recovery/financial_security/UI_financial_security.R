@@ -35,14 +35,14 @@ tagList(
                              actionButton("fuel_afford_year_button", "Trend for Scotland"))
                     ),
                     h3("Missing map and plot"),
-                    # fluidRow(
-                    #   column(12,
-                    #          tags$b("Select a local authority on the map to view local trend:")),
-                    #   column(6,
-                    #          withSpinner(leafletOutput("fuel_afford_SHCS_map"))),
-                    #   column(6,
-                    #          withSpinner(plotlyOutput("fuel_afford_line_LA")))
-                    # ),
+                    fluidRow(
+                      column(12,
+                             tags$b("Select a local authority on the map to view local trend:")),
+                      column(6,
+                             withSpinner(leafletOutput("fuel_afford_SHCS_map"))),
+                      column(6,
+                             withSpinner(plotlyOutput("fuel_afford_line_LA")))
+                    ),
 
 
                      h3("Data table"),
@@ -178,15 +178,15 @@ tagList(
                              actionButton("savings_net_income_map_button", "Trend for Scotland"))
                     ),
                     h3("Missing map and plot"),
-                    # fluidRow(
-                    #   column(12,
-                    #          tags$b("Select a local authority on the map to view local trend:")),
-                    #   column(6,
-                    #          withSpinner(leafletOutput("savings_low_income_map"))),
-                    #   column(6,
-                    #          withSpinner(plotlyOutput("savings_low_income_line_LA")))
-                    #
-                    # ),
+                    fluidRow(
+                      column(12,
+                             tags$b("Select a local authority on the map to view local trend:")),
+                      column(6,
+                             withSpinner(leafletOutput("savings_low_income_map"))),
+                      column(6,
+                             withSpinner(plotlyOutput("savings_low_income_line_LA")))
+
+                    ),
 
                              h3("Data table"),
 
@@ -227,18 +227,6 @@ tagList(
 
                              withSpinner(DT::dataTableOutput("unmanageable_debt_data"))),
 
-           ##############################################.
-           # LOCAL AUTHORITY FUNDED ADVICE----
-           ##############################################.
-           tabPanel(title = "Local authority funded advice",
-                    value = "la_funded_advice",
-                    icon = icon_no_warning_fn("people-group"),
-
-                    h2("Local authority funded advice"),
-
-                    bsButton("lafundedadvice_to_info", "Go to information page"),
-                    br(),
-                    br()),
 
            ##############################################.
            # TRANSPORT COSTS----
@@ -258,6 +246,8 @@ tagList(
            ##############################################.
            # CHILDCARE UPTAKE----
            ##############################################.
+
+           #### two seperate tab values used foor the summary page - but only one tab necessary
            tabPanel(title = "Early learning and childcare uptake",
                     value = "childcare_uptake",
                     icon = icon_no_warning_fn("children"),
@@ -289,7 +279,7 @@ tagList(
            # Benefit uptake and engagement with welfare advice ----
            ##############################################.
            tabPanel(title = "Benefit uptake and engagement with welfare advice",
-                    value = "benefit_uptake",
+                    value = "benefits_uptake",
                     icon = icon_no_warning_fn("person-shelter"),
 
                     h2("Benefit uptake and engagement with welfare advice"),

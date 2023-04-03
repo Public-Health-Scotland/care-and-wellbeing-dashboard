@@ -15,17 +15,6 @@ tagList(
                ),
 
                ##############################################.
-               # VISITS TO THE OUTDOORS----
-               ##############################################.
-
-               tabPanel(title = "Visits to the outdoors",
-                        value = "visit_outdoors",
-                        icon = icon_no_warning_fn("lemon"),
-
-                        h3("Visits to the outdoors")
-               ),
-
-               ##############################################.
                # JOURNEYS BY ACTIVE TRAVEL----
                ##############################################.
 
@@ -34,6 +23,18 @@ tagList(
                         icon = icon_no_warning_fn("lemon"),
 
                         h3("Journeys by active travel")
+               ),
+
+               ##############################################.
+               # VISITS TO THE OUTDOORS----
+               ##############################################.
+
+               tabPanel(title = "Visits to the outdoors",
+                        value = "visit_outdoors",
+                        icon = icon_no_warning_fn("lemon"),
+
+                        h3("Visits to the outdoors")
                )
+
   )
 )

@@ -51,79 +51,79 @@ observeEvent(input$employees_living_wage_map_button, {
 })
 
 
-# LA_Look_up = employees_living_wage_by_LA %>%
-#   select(local_authority, ca2019) %>%
-#   unique()
-#
-# LA_Look_up_list = list()
-#
-# for (i in 1:nrow(LA_Look_up))
-# {
-#   LA_Look_up_list[LA_Look_up$local_authority[i]] = LA_Look_up$ca2019[i]
-# }
-#
-#
-# output$employees_living_wage_LA_ui = renderUI({
-#
-#   #employees_living_wage_LA_selected = "Scotland"
-#   selectizeInput("employees_living_wage_LA_input",
-#                  label = "Select local authority for trend:",
-#                  choices = LA_Look_up_list, #LA_Look_up$local_authority,
-#                  selected = "S92000003")
-# })
-#
-# observe({
-#   print(input$employees_living_wage_LA_input)
-#   rv_employees_living_wage(input$employees_living_wage_LA_input)
-# })
+LA_Look_up = employees_living_wage_by_LA %>%
+  select(local_authority, ca2019) %>%
+  unique()
+
+LA_Look_up_list = list()
+
+for (i in 1:nrow(LA_Look_up))
+{
+  LA_Look_up_list[LA_Look_up$local_authority[i]] = LA_Look_up$ca2019[i]
+}
 
 
-# output$employees_living_wage_map = renderLeaflet({
-#
-#   employees_living_wage_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
-#     filter(year == input$employees_living_wage_year_input)
-#
-#   employees_living_wage_las_shape@data = employees_living_wage_las_shape@data %>%
-#     left_join(employees_living_wage_by_LA_ind_year , by = c("code" = "ca2019"))
-#
-#   # features of the map
-#   bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
-#   pal = colorBin("YlOrRd", domain = employees_living_wage_las_shape$measure_value, bins = bins)
-#   indicator_name = tolower(employees_living_wage_option)
-#   labels <- sprintf(
-#     "<strong>%s</strong><br/> Employees %s (%%): %g%%",
-#     employees_living_wage_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_las_shape@data[["measure_value"]]
-#   ) %>%
-#     lapply(htmltools::HTML)
-#
-#
-#   leaflet(employees_living_wage_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-#     addTiles() %>%
-#     addPolygons(weight = 1, smoothFactor = 0.5,
-#                 fillColor = ~pal(measure_value),
-#                 opacity = 0.5, fillOpacity = 0.7,
-#                 color = "white",
-#                 dashArray = "3",
-#                 popup = labels,
-#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
-#                                                      bringToFront = TRUE),
-#                 layerId = ~code) %>%
-#     addLegend("bottomright", pal = pal, values = ~measure_value,
-#               title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_year_input),
-#               labFormat = labelFormat(suffix  = "%"),
-#               opacity = 1
-#     )
-# }
-# )
+output$employees_living_wage_LA_ui = renderUI({
+
+  #employees_living_wage_LA_selected = "Scotland"
+  selectizeInput("employees_living_wage_LA_input",
+                 label = "Select local authority for trend:",
+                 choices = LA_Look_up_list, #LA_Look_up$local_authority,
+                 selected = "S92000003")
+})
+
+observe({
+  print(input$employees_living_wage_LA_input)
+  rv_employees_living_wage(input$employees_living_wage_LA_input)
+})
+
+
+output$employees_living_wage_map = renderLeaflet({
+
+  employees_living_wage_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
+    filter(year == input$employees_living_wage_year_input)
+
+  employees_living_wage_las_shape@data = employees_living_wage_las_shape@data %>%
+    left_join(employees_living_wage_by_LA_ind_year , by = c("code" = "ca2019"))
+
+  # features of the map
+  bins = c(0, 10, 15, 20, 25, 30, 35, 40, 100)
+  pal = colorBin("YlOrRd", domain = employees_living_wage_las_shape$measure_value, bins = bins)
+  indicator_name = tolower(employees_living_wage_option)
+  labels <- sprintf(
+    "<strong>%s</strong><br/> Employees %s (%%): %g%%",
+    employees_living_wage_las_shape@data[["local_authority"]], indicator_name, employees_living_wage_las_shape@data[["measure_value"]]
+  ) %>%
+    lapply(htmltools::HTML)
+
+
+  leaflet(employees_living_wage_las_shape, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+    addTiles() %>%
+    addPolygons(weight = 1, smoothFactor = 0.5,
+                fillColor = ~pal(measure_value),
+                opacity = 0.5, fillOpacity = 0.7,
+                color = "white",
+                dashArray = "3",
+                popup = labels,
+                highlightOptions =  highlightOptions(color = "white", weight = 2,
+                                                     bringToFront = TRUE),
+                layerId = ~code) %>%
+    addLegend("bottomright", pal = pal, values = ~measure_value,
+              title = paste0("Percent of Employees (%)", "<br> in ", input$employees_living_wage_year_input),
+              labFormat = labelFormat(suffix  = "%"),
+              opacity = 1
+    )
+}
+)
 
 # update the varible rv_fuel_poverty
 observeEvent(input$employees_living_wage_map_shape_click,{
   rv_employees_living_wage(input$employees_living_wage_map_shape_click$id)
 
-  # updateSelectizeInput(session, "employees_living_wage_LA_input",
-  #                   #label = paste("Select input label", length(x)),
-  #                   choices = input$employees_living_wage_map_shape_click$id)
+  updateSelectizeInput(session, "employees_living_wage_LA_input",
+                    #label = paste("Select input label", length(x)),
+                    choices = input$employees_living_wage_map_shape_click$id)
 })
 
 
@@ -224,46 +224,46 @@ disability_employment_gap_choices = disability_employment_gap_data_cat$year %>%
   unique() %>%
   sort()
 
-# output$disability_gap_ui_map = renderLeaflet({
-#
-#   las_shape_map_data = pub_las_simplified
-#
-#   disability_employment_gap_data_cat_year = disability_employment_gap_data_cat %>%
-#     filter(year == input$disability_employment_gap_input)
-#
-#
-#   las_shape_map_data@data = las_shape_map_data@data %>%
-#     left_join(disability_employment_gap_data_cat_year , by = c("code" = "ca2019"))
-#
-#   # features of the map
-#   bins = c(10, 15, 20, 25, 30, 35, 40, 45, 50, 100)
-#   pal = colorBin("YlOrRd", domain = las_shape_map_data$measure_value, bins = bins)
-#
-#   labels <- sprintf(
-#     "<strong>%s</strong>
-#     <br/> %s: %g%%",
-#     las_shape_map_data@data[["local_authority"]], disability_employment_gap_indicator_name, las_shape_map_data@data[["measure_value"]]
-#   ) %>%
-#     lapply(htmltools::HTML)
-#
-#
-#   leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
-#     setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
-#     addTiles() %>%
-#     addPolygons(weight = 1, smoothFactor = 0.5,
-#                 fillColor = ~pal(measure_value),
-#                 opacity = 0.5, fillOpacity = 0.7,
-#                 color = "white",
-#                 dashArray = "3",
-#                 popup = labels,
-#                 highlightOptions =  highlightOptions(color = "white", weight = 2,
-#                                                      bringToFront = TRUE),
-#                 layerId = ~code) %>%
-#     addLegend("bottomright", pal = pal, values = ~measure_value,
-#               title = paste0(disability_employment_gap_indicator_name, "<br>in ", input$disability_employment_gap_input),
-#               labFormat = labelFormat(suffix  = "%"),
-#               opacity = 1)
-# })
+output$disability_gap_ui_map = renderLeaflet({
+
+  las_shape_map_data = pub_las_simplified
+
+  disability_employment_gap_data_cat_year = disability_employment_gap_data_cat %>%
+    filter(year == input$disability_employment_gap_input)
+
+
+  las_shape_map_data@data = las_shape_map_data@data %>%
+    left_join(disability_employment_gap_data_cat_year , by = c("code" = "ca2019"))
+
+  # features of the map
+  bins = c(10, 15, 20, 25, 30, 35, 40, 45, 50, 100)
+  pal = colorBin("YlOrRd", domain = las_shape_map_data$measure_value, bins = bins)
+
+  labels <- sprintf(
+    "<strong>%s</strong>
+    <br/> %s: %g%%",
+    las_shape_map_data@data[["local_authority"]], disability_employment_gap_indicator_name, las_shape_map_data@data[["measure_value"]]
+  ) %>%
+    lapply(htmltools::HTML)
+
+
+  leaflet(las_shape_map_data, options = leafletOptions(zoomSnap = 0.25, zoomDelta=0.25)) %>%
+    setView(lng = -2, lat = 56.8, zoom = 6.25) %>%
+    addTiles() %>%
+    addPolygons(weight = 1, smoothFactor = 0.5,
+                fillColor = ~pal(measure_value),
+                opacity = 0.5, fillOpacity = 0.7,
+                color = "white",
+                dashArray = "3",
+                popup = labels,
+                highlightOptions =  highlightOptions(color = "white", weight = 2,
+                                                     bringToFront = TRUE),
+                layerId = ~code) %>%
+    addLegend("bottomright", pal = pal, values = ~measure_value,
+              title = paste0(disability_employment_gap_indicator_name, "<br>in ", input$disability_employment_gap_input),
+              labFormat = labelFormat(suffix  = "%"),
+              opacity = 1)
+})
 
 
 observeEvent(input$disability_employment_gap_button, {
@@ -292,18 +292,18 @@ output$disability_gap_bar_line_LA = renderPlotly({
 })
 
 
-# output$disability_employment_gap_line_LA = renderPlotly({
-#
-#   disability_employment_gap_line_LA_data = disability_employment_gap_data_cat %>%
-#     filter(ca2019  == rv_disability_employment_gap())
-#
-#   title = disability_employment_gap_line_LA_data$local_authority %>% unique()
-#
-#
-#   disability_employment_gap_plot_line(disability_employment_gap_line_LA_data,
-#                                       title = title,
-#                                       indicator_name = disability_employment_gap_indicator_name)
-# })
+output$disability_employment_gap_line_LA = renderPlotly({
+
+  disability_employment_gap_line_LA_data = disability_employment_gap_data_cat %>%
+    filter(ca2019  == rv_disability_employment_gap())
+
+  title = disability_employment_gap_line_LA_data$local_authority %>% unique()
+
+
+  disability_employment_gap_plot_line(disability_employment_gap_line_LA_data,
+                                      title = title,
+                                      indicator_name = disability_employment_gap_indicator_name)
+})
 
 
 output$disability_gap_data_table = DT::renderDataTable({

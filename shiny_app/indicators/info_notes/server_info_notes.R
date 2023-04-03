@@ -93,10 +93,7 @@ output$info_panel = renderUI({
                    "Unmanageable debt",
                    uiOutput("info_unmanageabledebt")
                  ),
-                 bsCollapsePanel(
-                   "Local authority funded advice",
-                   uiOutput("info_lafundedadvice")
-                 ),
+
                  bsCollapsePanel(
                    "Transport costs",
                    uiOutput("info_transportcosts")
@@ -107,7 +104,7 @@ output$info_panel = renderUI({
                  ),
                  bsCollapsePanel(
                    "Benefit uptake and engagement with welfare advice",
-                   uiOutput("info_benefitsuptake")
+                   uiOutput("info_benefits_uptake")
                  )
       )
     )
