@@ -217,7 +217,7 @@ output$info_panel = renderUI({
                  ),
                  bsCollapsePanel(
                    "Limiting long-term conditions (age 16+)",
-                   uiOutput("info_experience_of_unpaid_carers")
+                   uiOutput("info_adult_long_term_condition")
                  ),
                  bsCollapsePanel(
                    "Mental Wellbeing of adults (16+)",
@@ -241,7 +241,7 @@ output$info_panel = renderUI({
                  ),
                  bsCollapsePanel(
                    "Self-assessed health of adults (age 16+)",
-                   uiOutput("info_adults_self_assessed_health")
+                   uiOutput("info_adult_self_assessed_health")
                  ),
                  bsCollapsePanel(
                    "Vaccinations",
