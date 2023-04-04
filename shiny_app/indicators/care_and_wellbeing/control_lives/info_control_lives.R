@@ -41,6 +41,27 @@ output$info_camhs_waiting_times_cw = renderUI({
   )
 })
 
+observeEvent(input$camhs_waiting_times_cw_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("CAMHS waiting times"),
+
+                 p("Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
+                   "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
+                   "children and young people should start treatment within 18 weeks of referral to CAMHS."),
+
+                 p("For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
+                   "are providing initial telephone triage to elicit more information. Dependent on levels of ",
+                   "risk identified some will be offered a time/date to undertake a complete assessment where ",
+                   "others, where levels of risk/concern identified a face-to-face assessment will be offered."),
+
+                 tags$a(href ="https://publichealthscotland.scot/publications/show-all-releases?id=20497",
+                        "Source: CAMHS Waiting Times, Public Health Scotland"),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+
+             ))
+
 ##############################################.
 # CHILDREN'S VOICES ----
 ##############################################.

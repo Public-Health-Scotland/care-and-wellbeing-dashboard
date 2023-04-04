@@ -54,6 +54,25 @@ output$info_positive_destinations = renderUI({
 
 })
 
+observeEvent(input$positive_destinations_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("Indicator"),
+                 p("Percentage of all school leavers in positive destinations at 9 month follow up "),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
+
+observeEvent(input$positive_destinations_modal_comment,
+             showModal(
+               modalDialog(
+                 title = "Summary of indicator during covid and pre-covid period",
+                 p("From 2009/10 to 2020/21 there has been a general increase in the proportion of school leavers with positive destinations. Data in the during/post pandemic period (2020/21) continued this trend.",
+                   br(),
+                   tags$b("Note:"),"During 2019/20 there was a slight decrease in the proportion of school leavers with positive destination, but this was in the pre-pandemic period. "),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
+
 ##############################################.
 # CHILD DEVELOPMENT CR ----
 ##############################################.
@@ -85,6 +104,33 @@ output$info_child_development_cr = renderUI({
   )
 
 })
+
+observeEvent(input$preschool_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("Pre-school development"),
+
+                 p("Early child development is influenced by both biological factors (such as being born premature)",
+                   " and environmental factors (such as the parenting and opportunities for play and exploration children receive). ",
+                   "Problems with early child development are important as they are strongly associated with long-term health, educational, and wider social difficulties."),
+
+                 p("Detecting developmental problems early provides the best opportunity to support children and families to improve outcomes.",
+                   " There is good evidence that parenting support and enriched early learning opportunities can improve outcomes for children with,",
+                   " or at risk of, developmental delay. There is also increasing evidence that intensive early",
+                   " interventions for children with serious developmental problems can also improve outcomes."),
+                 p("All children in Scotland are offered the child health programme which includes a series of child health reviews,",
+                   " including an assessment of children’s development at 13-15 months, 27-30 months and 4-5 years.",
+                   " These reviews involve asking parents about their child’s progress, carefully observing the child,",
+                   " and supporting parents to complete a structured questionnaire about the child’s development. ",
+                   "At the end of the review Health Visitors record whether they have any concerns about each area of the child’s development."),
+
+                 tags$a(href ="https://publichealthscotland.scot/publications/show-all-releases?id=20569",
+                        "Source: Early Child Development, Public Health Scotland"),
+                 size = "m",
+                 easyClose = TRUE, fade=FALSE,footer = modalButton("Close (Esc)"))
+
+             ))
 
 ##############################################.
 # LISTEN TO DECISION MAKING ----
@@ -138,6 +184,27 @@ output$info_camhs_waiting_times_cr = renderUI({
   )
 })
 
+observeEvent(input$camhs_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("CAMHS waiting times"),
+
+                 p("Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
+                   "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
+                   "children and young people should start treatment within 18 weeks of referral to CAMHS."),
+
+                 p("For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
+                   "are providing initial telephone triage to elicit more information. Dependent on levels of ",
+                   "risk identified some will be offered a time/date to undertake a complete assessment where ",
+                   "others, where levels of risk/concern identified a face-to-face assessment will be offered."),
+
+                 tags$a(href ="https://publichealthscotland.scot/publications/show-all-releases?id=20497",
+                        "Source: CAMHS Waiting Times, Public Health Scotland"),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+
+             ))
+
 ##############################################.
 # PROTECTION FROM HARM ----
 ##############################################.
@@ -165,6 +232,23 @@ output$info_protection_from_harm = renderUI({
 
 })
 
+observeEvent(input$protection_from_harm_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("Indicator"),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
+
+observeEvent(input$protection_from_harm_modal_comment,
+             showModal(
+               modalDialog(
+                 title = "Summary of indicator during covid and pre-covid period",
+                 #p("The proportion of households reporting that they manage well financially increases with income, with 76% of households with an annual income exceeding £30,000 reported that they managed well financially."),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
+
+
 ##############################################.
 # INFANT MORTALITY CR ----
 ##############################################.
@@ -190,6 +274,26 @@ output$info_infant_mortality_cr = renderUI({
   )
 
 })
+
+observeEvent(input$infant_mortality_modal_info,
+             showModal(
+               modalDialog(
+                 title = "Background information and source",
+                 h4("Indicator"),
+                 p("Rate of infant deaths per 1,000 live births in Scotland."),
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
+
+observeEvent(input$infant_mortality_modal_comment,
+             showModal(
+               modalDialog(
+                 title = "Summary of indicator during covid and pre-covid period",
+                 p(tags$b("Prepandemic period (July 2017-jan 2020):"),"Infant mortality fluctuated during this period but generally remained steady (i.e., there wasn’t a clear increasing or decreasing trend).",
+                   br(),
+                   tags$b("During/post pandemic period (March 2020-March 2021):"),"Again, infant mortality fluctuated during this period, however, an upward trend was evident from January 2021 onwards."),
+
+                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
+             ))
 
 ##############################################.
 # PHYSICAL ACTIVITY CHILDREN CR----
