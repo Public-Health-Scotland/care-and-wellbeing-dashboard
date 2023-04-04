@@ -73,7 +73,7 @@ output$employees_living_wage_LA_ui = renderUI({
 })
 
 observe({
-  print(input$employees_living_wage_LA_input)
+  # print(input$employees_living_wage_LA_input)
   rv_employees_living_wage(input$employees_living_wage_LA_input)
 })
 
