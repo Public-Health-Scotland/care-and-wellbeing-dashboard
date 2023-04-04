@@ -284,11 +284,14 @@ tagList(
                         br(),
 
 
-                        actionButton(
-                          "infant_mortality_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
+                        # actionButton(
+                        #   "infant_mortality_modal_info",
+                        #   tags$b("Background information and source"),
+                        #   icon = icon_no_warning_fn("info-circle")
+                        # ),
+
+                        altTextUI("infant_mortality_modal"),
+                        plotInfoUI("infant_modal"),
 
                         actionButton(
                           "infant_mortality_modal_comment",

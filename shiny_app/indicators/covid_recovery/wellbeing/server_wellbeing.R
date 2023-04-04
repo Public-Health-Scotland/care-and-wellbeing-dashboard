@@ -70,7 +70,7 @@ output$preschool_chart_line = renderPlotly({
 
     data_baseline = preschool %>%
       filter(hb2019name == hb,
-               geography_type == "Health Board")
+             geography_type == "Health Board")
 
     p = preschool_plot_line(data, data_baseline, TRUE,
                             input$preschool_geog_name,
@@ -168,7 +168,28 @@ output$infant_data = DT::renderDataTable({
   datatable_style_download(inf_deaths_out, data_name = "infant", geogtype = "scotland")
 })
 
+altTextServer("infant_mortality_modal",
+              title = "Estimated COVID-19 infection rate",
+              content = tags$ul(tags$li("This is a plot for the infant mortality indicator.")
 
+              )
+)
+
+plotInfoServer("infant_modal",
+               title = "How to use the plot",
+               content = paste("<ul>",
+                               "<li>Move the cursor over the data points to see the data values</li>",
+                               "<li>Click the magnifying glass in the top right of the charts to enable zoom capabilities. Then zoom into the plot by holding down the cursor and dragging to select the region</li>",
+                               "<li>Click the pan button (four way arrows) in the top right of the charts to enable panning capabilites.Then move the chart around by holding down the cursor and dragging</li>",
+                               "<li>Alter the x axis range by dragging the vertical white bars on the left and right of the bottom panel</li>",
+                               "<li>Click the home button in the top right to reset the axes</li>",
+                               "<li>Single click on legend variables to remove the corresponding trace</li>",
+                               "<li>Double click on legend variables to isolate the corresponding trace</li>",
+                               "<li>Double click on the legend to restore all traces</li>",
+                               "<li>Click the camera icon in the top right to download the plot as a png file</li>",
+                               "</ul>",
+                               strong("Click again to close."))
+)
 
 ##############################################.
 # Positive desinations of school leavers----
