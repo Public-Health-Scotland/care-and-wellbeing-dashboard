@@ -25,14 +25,18 @@ output$child_poverty_data <- DT::renderDataTable({
 
 # Show geography names dependent on geography type input
 
-output$geog_preschool_ui = renderUI({
+observeEvent(input$preschool_geog_type, {
 
-  areas_summary = geog_lookup %>%
-    filter(geography_type == input$geog_type_preschool)
+  areas = preschool %>%
+    filter(geography_type == input$preschool_geog_type) %>%
+    arrange(geography)
 
-  selectizeInput("geog_name_preschool", label = "2. Select geography",
-                 choices = unique(areas_summary$geography),
-                 selected = "")
+  # select_choice <- ifelse(input$preschool_geog_type == "Scotland", "area", input$preschool_geog_type)
+
+  updateSelectizeInput(session,
+                       "preschool_geog_name",
+                       label = glue("2. Select {select_choice(input$preschool_geog_type)}"),
+                       choices = unique(areas$geography))
 })
 
 output$preschool_chart_line2 = renderPlotly({
@@ -47,29 +51,29 @@ output$preschool_chart_line2 = renderPlotly({
 output$preschool_chart_line = renderPlotly({
 
   data = geog_all_filter_table(preschool,
-                               input$geog_type_preschool,
-                               input$geog_name_preschool)
+                               input$preschool_geog_type,
+                               input$preschool_geog_name)
 
 
-  if(input$geog_type_preschool == "Health Board") {
+  if(input$preschool_geog_type == "Health Board") {
     data_baseline = preschool %>%
       filter(geography_type=="Scotland")
 
     p = preschool_plot_line(data, data_baseline, TRUE,
-                            input$geog_name_preschool,
+                            input$preschool_geog_name,
                             "Scotland")
 
-  } else if (input$geog_type_preschool == "Council Area") {
+  } else if (input$preschool_geog_type == "Council Area") {
     hb = data %>%
       slice(1) %>%
       .$hb2019name
 
     data_baseline = preschool %>%
-      filter(hb2019name == hb &
-             geography_type == "Health Board")
+      filter(hb2019name == hb,
+               geography_type == "Health Board")
 
     p = preschool_plot_line(data, data_baseline, TRUE,
-                            input$geog_name_preschool,
+                            input$preschool_geog_name,
                             hb)
   } else {
     p = preschool_plot_line(data)
@@ -169,16 +173,6 @@ output$infant_data = DT::renderDataTable({
 ##############################################.
 # Positive desinations of school leavers----
 ##############################################.
-
-output$school_leavers_category_ui = renderUI({
-  choices = positive_destinations_school_leavers$category %>% unique()
-  selected = "All Leavers"
-
-  selectizeInput("school_leavers_category_input",
-                 label = "Select pupil characteristic category:",
-                 choices = choices,
-                 selected = selected)
-})
 
 output$school_leavers_line_figure = renderPlotly({
   data = positive_destinations_school_leavers %>%
