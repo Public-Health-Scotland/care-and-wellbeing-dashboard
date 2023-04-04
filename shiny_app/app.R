@@ -17,13 +17,14 @@ source("setup.R")
 ui <- shinymanager::secure_app(
   fluidPage(
     tagList(
-      tags$html(lang="en"),
       # Specify most recent fontawesome library - change version as needed
       tags$style("@import url(https://use.fontawesome.com/releases/v6.1.2/css/all.css);"),
       navbarPage(
+        tags$html(lang="en"),
         id = "intabset", # id used for jumping between tabs
         title = div(
-          tags$a(img(src = "phs-logo.png", height = 40),
+          tags$a(img(src = "white-logo.png", height = 40,
+                     alt ="Go to Public Health Scotland (external site)"),
                  href = "https://www.publichealthscotland.scot/",
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
