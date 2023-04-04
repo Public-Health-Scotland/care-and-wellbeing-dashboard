@@ -10,6 +10,8 @@
 # LOAD SET-UP ----
 ##############################################.
 
+source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
+source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
 
 source("setup.R")
 
@@ -183,7 +185,8 @@ server <- function(input, output, session) {
   source(file.path("functions/navigation_buttons.R"), local = TRUE)$value
 
   #Modals
-  source(file.path("functions/modals.R"), local = TRUE)$value
+  source(file.path("modules/alt_text/alt_text_server.R"), local = TRUE)$value
+  source(file.path("modules/plot_info/plot_info_server.R"), local = TRUE)$value
 
 
   ####Get servers ----
