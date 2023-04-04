@@ -26,29 +26,13 @@ employees_living_wage_cw_by_LA_ind = employees_living_wage_by_LA %>%
   filter(earning == employees_living_wage_cw_option) %>%
   select(year, local_authority, ca2019, measure_value)
 
-
-#
-# output$employees_living_wage_cw_year_ui = renderUI({
-#
-#   employees_living_wage_cw_year_choices = employees_living_wage_cw_by_LA_ind$year %>%
-#     unique()
-#   employees_living_wage_2_year_selected = employees_living_wage_2_year_choices %>% tail(n=1)
-#
-#   updateSelectizeInput(session,
-#                  "employees_living_wage_cw_year",
-#                  label = "Select year to view on heatmap:",
-#                  choices = employees_living_wage_2_year_choices,
-#                  selected = employees_living_wage_2_year_selected)
-# })
-
-
 employees_living_wage_cw_las_shape = pub_las_simplified
 
 # value for storing the selected LA; initialized with Scotland geometry
 rv_employees_living_wage_cw = reactiveVal("S92000003")
 
 observeEvent(input$employees_living_wage_cw_map_button, {
-  rv_employees_living_wage_2("S92000003")
+  rv_employees_living_wage_cw("S92000003")
 })
 
 
@@ -122,7 +106,7 @@ output$employees_living_wage_cw_map = renderLeaflet({
 observeEvent(input$employees_living_wage_cw_map_shape_click,{
   rv_employees_living_wage_cw(input$employees_living_wage_cw_map_shape_click$id)
 
-updateSelectizeInput(session, "employees_living_wage_LA_input",
+updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
                   #label = paste("Select input label", length(x)),
                   choices = input$employees_living_wage_cw_map_shape_click$id)
 })
