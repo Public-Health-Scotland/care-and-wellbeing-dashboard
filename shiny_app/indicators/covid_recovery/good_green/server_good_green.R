@@ -674,16 +674,17 @@ output$economic_inactivity_data <- DT::renderDataTable({
 ##############################################.
 
 
-output$underemployment_ui = renderUI({
-
-  underemployment_choices = underemployment$local_authority %>%
-    unique()
-
-  selectizeInput("underemployment_input",
-                 label = "Select local authority",
-                 choices = underemployment_choices,
-                 selected = "Scotland")
-})
+# output$underemployment_ui = renderUI({
+#
+#   underemployment_choices = underemployment$local_authority %>%
+#     unique()
+#
+#   selectizeInput("underemployment_input",
+#                  label = "Select local authority",
+#                  choices = underemployment$local_authority %>%
+#                    unique(),
+#                  selected = "Scotland")
+# })
 
 output$underemployment_graph_line <- renderPlotly({
   data = underemployment %>%

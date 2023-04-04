@@ -344,7 +344,11 @@ tagList(
                         h4("Proportion of adults 16 years old and over who are in employment and would like to work longer hours,
                        have an additional job or find a different job with more hours"),
 
-                        uiOutput("underemployment_ui"),
+                        selectizeInput("underemployment_input",
+                                       label = "Select local authority",
+                                       choices = underemployment$local_authority %>%
+                                         unique(),
+                                       selected = "Scotland"),
 
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
