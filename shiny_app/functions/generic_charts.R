@@ -140,7 +140,8 @@ confidence_line_function = function(data, y_title) {
               name = "Age-sex standardised rates per 100,000",
               line = list(color = phsstyles::phs_colours("phs-purple")),
               showlegend = TRUE) %>%
-    layout(xaxis = xaxis_year, yaxis = yaxis_number) %>%
+    layout(xaxis = xaxis_year, yaxis = yaxis_number,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -159,7 +160,8 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year) {
               type = "scatter",
               mode = "lines",
               line = list(color = phs_colours("phs-purple"))) %>%
-    layout(xaxis = xaxis_type, yaxis = yaxis_number) %>%
+    layout(xaxis = xaxis_type, yaxis = yaxis_number,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -180,7 +182,8 @@ stacked_bar_function = function(data, category_var) {
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
-                        ticksuffix = "%")) %>%
+                        ticksuffix = "%"),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -205,7 +208,8 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
             ) %>%
     layout(barmode = mode,
            xaxis = xaxis_plots,
-           yaxis = yaxis_plots) %>%
+           yaxis = yaxis_plots,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
   config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }

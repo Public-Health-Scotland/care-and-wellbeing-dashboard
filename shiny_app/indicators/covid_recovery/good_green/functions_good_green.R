@@ -28,7 +28,8 @@ employees_living_wage_plot_line = function(data, title = NULL, color_column = NU
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Proportion (%)", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -90,7 +91,8 @@ gender_pay_gap_plot_line = function(data, title = NULL, second_axis = FALSE) {
            yaxis = list(title = "Pay Gap (Woman/Men) (%)", range = c(-100,100), ticksuffix = "%"),
            title = title,
            showlegend = TRUE,
-           legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>")
+                         )) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
   fig
@@ -143,7 +145,8 @@ disability_employment_gap_line_bar = function(data, title = NULL) {
            yaxis = list(title = "Employment Rate (%)", range = c(0,100), ticksuffix = "%"),
            showlegend = TRUE,
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -174,7 +177,8 @@ disability_employment_gap_plot_line = function(data, title = NULL, color_column 
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = indicator_name, range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                        xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -225,7 +229,8 @@ ethnicity_employment_gap_line_bar = function(data) {
     layout(xaxis = list(title = "Financial year"),
            yaxis = list(title = "Employment Rate (%)", range = c(0,100), ticksuffix = "%"),
            showlegend = TRUE,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -247,7 +252,8 @@ zero_hours_contracts_plot_line = function(data) {
             hoverinfo = "text") %>%
     layout(xaxis = list(title = "Quarter"),
            yaxis = list(title = "Percentage (%)", range = c(0,100), ticksuffix = "%"),
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -274,7 +280,8 @@ zero_hours_contracts_plot_bar = function(data) {
            yaxis = list(title = "Zero-hour Contracts (%)", range = c(0,100), ticksuffix = "%"),
            showlegend = FALSE,
            uniformtext=list(minsize=8, mode='show'),
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
   fig
@@ -301,7 +308,8 @@ plot_skills_shortage <- function(data) {
             hoverinfo = "text",
             textposition="none") %>%
     layout(yaxis = yaxis_proportion,
-           xaxis = xaxis_year) %>%
+           xaxis = xaxis_year,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -394,7 +402,8 @@ plot_funnel_layers = function(data_raw, v_y_col, v_name, v_color = NULL, V_funne
               marker = list(color = v_color),
               connector = list(line = list(color = "rgb(127, 127, 127)",  width = 1)))
   fig %<>%
-    layout(yaxis = list(categoryarray = v_name))
+    layout(yaxis = list(categoryarray = v_name),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'))
 
   fig
 }
