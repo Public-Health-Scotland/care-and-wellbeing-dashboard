@@ -39,8 +39,8 @@ child_poverty_plot = function(data) {
     layout(xaxis = xaxis_finyear,
            yaxis = yaxis_proportion,
            legend = list(bgcolor = "#E2E2E2",
-                         title = list(
-                           text = "Filter chart"),
+                         # title = list(
+                         #   text = "Filter chart"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
@@ -64,7 +64,7 @@ school_leavers_plot_line = function(data) {
     layout(xaxis = list(title = "Financial year"),
            yaxis = list(title = "School leavers (%)", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)', #title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
@@ -227,8 +227,8 @@ camhs_plot_stacked_bar = function(data) {
                         showline = FALSE,
                         ticksuffix = "%"),
            legend = list(bgcolor = "#E2E2E2",
-                         title = list(
-                           text = "Filter wait time"),
+                         # title = list(
+                         #   text = "Filter wait time"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')
            ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
