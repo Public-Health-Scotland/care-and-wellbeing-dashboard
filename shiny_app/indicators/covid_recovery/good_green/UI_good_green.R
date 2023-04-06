@@ -52,19 +52,23 @@ tagList(
 
                         fluidRow(
                           column(6,
-                                 uiOutput("employees_living_wage_year_ui")),
+                                 selectizeInput("employees_living_wage_year_input",
+                                                label = "Select year to view on heatmap:",
+                                                choices = employees_living_wage_by_LA %>%
+                                                  filter(earning == "Earning less than the living wage") %>%
+                                                  .$year %>% unique())),
                           column(6,
                                  actionButton("employees_living_wage_map_button", "Trend for Scotland"))
                         ),
-                        h3("Missing map and plot"),
-                        # fluidRow(
-                        #   column(12,
-                        #          tags$b("Select a local authority on the map to view local trend:")),
-                        #   column(6,
-                        #          withSpinner(leafletOutput("employees_living_wage_map"))),
-                        #   column(6,
-                        #          withSpinner(plotlyOutput("employees_living_wage_line_LA")))
-                        # ),
+                        # h3("Missing map and plot"),
+                        fluidRow(
+                          column(12,
+                                 tags$b("Select a local authority on the map to view local trend:")),
+                          column(6,
+                                 withSpinner(leafletOutput("employees_living_wage_map"))),
+                          column(6,
+                                 withSpinner(plotlyOutput("employees_living_wage_line_LA")))
+                        ),
 
                         h3("Data table"),
 
@@ -158,7 +162,7 @@ tagList(
 
                                    h3("Disability employment gap by local authority"),
 
-                                   bsButton("disabilityemploymentgap_to_info", "Go to information page"),
+                                   # bsButton("disabilityemploymentgap_to_info", "Go to information page"),
 
                                    br(),
                                    br(),
@@ -180,24 +184,33 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            uiOutput("disability_gap_ui")),
+                                            selectizeInput("disability_employment_gap_input",
+                                                           label = "Select year to view on heatmap:",
+                                                           choices = disability_employment_gap_data %>%
+                                                             filter(category == "Disability Employment Gap") %>%
+                                                             .$year %>%
+                                                             unique() %>%
+                                                             sort(),
+                                                           selected = max(disability_employment_gap_data %>%
+                                                                            filter(category == "Disability Employment Gap") %>%
+                                                                            .$year %>%
+                                                                            unique()))),
                                      column(6,
                                             actionButton("disability_employment_gap_button", "Trend for Scotland"))
                                    ),
 
 
-                                   h3("Missing map and plot"),
-                                   # fluidRow(
-                                   #   column(12,
-                                   #          tags$b("Select a local authority on the map to view local trend:")),
-                                   #   column(6,
-                                   #          withSpinner(leafletOutput("disability_gap_ui_map"))),
-                                   #   column(6,
-                                   #          #withSpinner(plotlyOutput("disability_employment_gap_line_LA"))
-                                   #          withSpinner(plotlyOutput("disability_gap_bar_line_LA"))
-                                   #
-                                   #   )
-                                   # ),
+                                   fluidRow(
+                                     column(12,
+                                            tags$b("Select a local authority on the map to view local trend:")),
+                                     column(6,
+                                            withSpinner(leafletOutput("disability_gap_ui_map"))),
+                                     column(6,
+                                            #withSpinner(plotlyOutput("disability_employment_gap_line_LA"))
+                                            withSpinner(plotlyOutput("disability_gap_bar_line_LA"))
+
+                                     )
+                                   ),
 
 
                                    h3("Data table"),
@@ -344,7 +357,11 @@ tagList(
                         h4("Proportion of adults 16 years old and over who are in employment and would like to work longer hours,
                        have an additional job or find a different job with more hours"),
 
-                        uiOutput("underemployment_ui"),
+                        selectizeInput("underemployment_input",
+                                       label = "Select local authority",
+                                       choices = underemployment$local_authority %>%
+                                         unique(),
+                                       selected = "Scotland"),
 
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
@@ -477,46 +494,46 @@ tagList(
                                            timeFormat="%b %Y")
                         )),
 
-               fluidRow(
-                 column(5, withSpinner(plotlyOutput("employability_FSS_referral_funnel_figure"))
-                 ),
-                 column(7, withSpinner(plotlyOutput("employability_FSS_referral_figure"))
-                 )
+                        fluidRow(
+                          column(5, withSpinner(plotlyOutput("employability_FSS_referral_funnel_figure"))
+                          ),
+                          column(7, withSpinner(plotlyOutput("employability_FSS_referral_figure"))
+                          )
+                        ),
+
+
+                        h3("Data table"),
+
+                        withSpinner(DT::dataTableOutput("employability_FSS_referral_data"))
+
+               ),
+
+               ##############################################.
+               # CONTRACTUALLY SECURE WORK----
+               ##############################################.
+               tabPanel(title = "Contractually secure work",
+                        value = "contractually_secure_work",
+                        icon = icon_no_warning_fn("person-digging"),
+
+                        h3("Contractually secure work"),
+
+                        #bsButton("jump_home_contractually_secure_work", "Go to home page")
                ),
 
 
-               h3("Data table"),
+               ##############################################.
+               # GREEN JOBS----
+               ##############################################.
+               tabPanel(title = "Green jobs",
+                        value = "green_jobs",
+                        icon = icon_no_warning_fn("recycle"),
 
-               withSpinner(DT::dataTableOutput("employability_FSS_referral_data"))
+                        h3("Green jobs"),
 
-  ),
+                        #bsButton("jump_home_green_jobs", "Go to home page"),
+                        bsButton("greenjobs_to_info", "Go to information page")
+               )
 
-  ##############################################.
-  # CONTRACTUALLY SECURE WORK----
-  ##############################################.
-  tabPanel(title = "Contractually secure work",
-           value = "contractually_secure_work",
-           icon = icon_no_warning_fn("person-digging"),
-
-           h3("Contractually secure work"),
-
-           #bsButton("jump_home_contractually_secure_work", "Go to home page")
-  ),
-
-
-  ##############################################.
-  # GREEN JOBS----
-  ##############################################.
-  tabPanel(title = "Green jobs",
-           value = "green_jobs",
-           icon = icon_no_warning_fn("recycle"),
-
-           h3("Green jobs"),
-
-           #bsButton("jump_home_green_jobs", "Go to home page"),
-           bsButton("greenjobs_to_info", "Go to information page")
   )
-
-)
 
 )

@@ -204,6 +204,16 @@ th, td {
 }
 
 
+.plotinfo-btn, .plotinfo-btn:hover, .plotinfo-btn:focus, .plotinfo-btn:active:focus, .plotinfo:active, .plotinfo:checked {
+  background-color: var(--phs-purple-10);
+  color: var(--phs-purple);
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 14px;
+  box-shadow: 0px 0px 0px 0px;
+}
+
+
 
 
 /* Title of selectize input boxes*/

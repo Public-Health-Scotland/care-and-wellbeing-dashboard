@@ -40,7 +40,8 @@ child_poverty_plot = function(data) {
            yaxis = yaxis_proportion,
            legend = list(bgcolor = "#E2E2E2",
                          title = list(
-                           text = "Filter chart"))) %>%
+                           text = "Filter chart"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -63,7 +64,8 @@ school_leavers_plot_line = function(data) {
     layout(xaxis = list(title = "Financial year"),
            yaxis = list(title = "School leavers (%)", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -90,7 +92,8 @@ preschool_plot_line = function(data, data_baseline, baseline = FALSE,
             hoverinfo = "text",
             name = geog_name) %>%
     layout(xaxis = xaxis_finyear,
-           yaxis = yaxis_proportion) %>%
+           yaxis = yaxis_proportion,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -131,7 +134,8 @@ preschool_plot_line2 = function(data) {
                           format(data$concern_any, big.mark = ",")),
             hoverinfo = "text") %>%
     layout(xaxis = xaxis_finyear,
-           yaxis = yaxis_proportion) %>%
+           yaxis = yaxis_proportion,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -158,7 +162,8 @@ camhs_plot_line = function(data, vline=TRUE) {
             hoverinfo = "text",
             name = "Proportion of patients seen in 18 weeks") %>%
     layout(xaxis = xaxis_month,
-           yaxis = yaxis_proportion) %>%
+           yaxis = yaxis_proportion,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -223,8 +228,9 @@ camhs_plot_stacked_bar = function(data) {
                         ticksuffix = "%"),
            legend = list(bgcolor = "#E2E2E2",
                          title = list(
-                           text = "Filter wait time")
-           )) %>%
+                           text = "Filter wait time"),
+                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')
+           ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -280,7 +286,8 @@ protection_from_harm_line_chart = function(data) {
                         showline = TRUE,
                         fixedrange=TRUE,
                         range = c(0,max(data$Value)),
-                        showlegend = T)) %>%
+                        showlegend = T),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 

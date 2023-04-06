@@ -59,6 +59,15 @@ pretty_decimal_numbers = function(data, columns) {
     mutate_at(columns, ~format(round_half_up(., 2)), 2)
 }
 
+
+select_choice <- function(input) {
+
+  choice <- ifelse(input == "Scotland", "area", input)
+
+  return(choice)
+
+}
+
 ####################### Filter functions #######################
 
 

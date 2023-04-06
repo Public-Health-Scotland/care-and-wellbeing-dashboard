@@ -31,23 +31,6 @@ fuel_afford_indicator = "Fuel Poor"
 fuel_SHCS_LA_per_ind = fuel_SHCS_LA %>%
   filter(fuel_poverty == fuel_afford_indicator)
 
-
-
-output$fuel_afford_year_ui = renderUI({
-
-  fuel_afford_year_choices = fuel_SHCS_LA_per_ind$date_code %>%
-    unique() %>%
-    sort()
-  fuel_afford_year_selected = fuel_afford_year_choices %>% tail(1)
-
-  selectInput("fuel_afford_year_input",
-                 label = "Select year to view on heatmap:",
-                 choices = fuel_afford_year_choices,
-                 selected = fuel_afford_year_selected)
-})
-
-
-
 # value for storing the selected LA; initialized with Scotland geometry
 rv_fuel_poverty = reactiveVal("S92000003")
 
@@ -95,7 +78,7 @@ output$fuel_afford_SHCS_map = renderLeaflet({
               labFormat = labelFormat(suffix  = "%"),
               opacity = 1
     )
-    }
+}
 )
 
 # update the varible rv_fuel_poverty
@@ -177,20 +160,8 @@ council_option = "Scotland"
 
 plot_data_filtered_council = reactive({
   savings_low_income %>%
-  filter(council == council_option)
-  })
-
-output$savings_net_income_ui = renderUI({
-
-
-
-  selectizeInput("savings_net_income_si",
-                 label = "Select Net income",
-                 choices = unique(plot_data_filtered_council()$net_income),
-                 selected = "All")
+    filter(council == council_option)
 })
-
-
 
 output$savings_stacked_bar_plot = renderPlotly({
 
@@ -203,8 +174,6 @@ output$savings_stacked_bar_plot = renderPlotly({
 
 
 
-
-
 ##map
 
 
@@ -212,23 +181,27 @@ net_income_option = "All"
 savings_option = "No savings"
 
 savings_low_income_cat = savings_low_income %>%
-    filter(savings == savings_option,
-           net_income == net_income_option
-           )
+  filter(savings == savings_option,
+         net_income == net_income_option
+  )
 
 
-output$savings_low_income_year_ui = renderUI({
-
-  savings_low_income_choices = savings_low_income_cat$year %>%
-    unique() %>%
-    sort()
-  savings_low_income_selected = savings_low_income_choices %>% tail(n=1)
-
-  selectizeInput("savings_low_income_year_input",
-                 label = "Select year to view on heatmap:",
-                 choices = savings_low_income_choices,
-                 selected = savings_low_income_selected)
-})
+# output$savings_low_income_year_ui = renderUI({
+#
+#   savings_low_income_choices = savings_low_income_cat$year %>%
+#     unique() %>%
+#     sort()
+#   savings_low_income_selected = savings_low_income_choices %>% tail(n=1)
+#
+#   selectizeInput("savings_low_income_year_input",
+#                  label = "Select year to view on heatmap:",
+#                  choices = savings_low_income %>%
+#                    filter(savings == savings_option,
+#                           net_income == net_income_option
+#                    ) %>% .$year %>%
+#                    unique() %>%
+#                    sort())
+# })
 
 
 savings_low_income_indicator_name = paste0("Househould with no savings (%)")
@@ -303,8 +276,8 @@ output$savings_low_income_line_LA = renderPlotly({
 
 
   savings_low_income_plot_line(savings_low_income_line_LA_data,
-                                      title = title,
-                                      indicator_name = savings_low_income_indicator_name)
+                               title = title,
+                               indicator_name = savings_low_income_indicator_name)
 })
 
 
@@ -329,10 +302,10 @@ output$savings_low_income_data = DT::renderDataTable({
 
 household_spending %<>%
   rbind(., cost_of_living = household_spending) %>%
-          group_by(year, geography, geography_type, pretty_date) %>%
-          summarise(scotland = sum(scotland),
-                    united_kingdom = sum(united_kingdom)) %>%
-          mutate(household_spending = "Cost of living")
+  group_by(year, geography, geography_type, pretty_date) %>%
+  summarise(scotland = sum(scotland),
+            united_kingdom = sum(united_kingdom)) %>%
+  mutate(household_spending = "Cost of living")
 
 output$household_spending_bar = renderPlotly({
   household_expenditure_barplot(household_spending)

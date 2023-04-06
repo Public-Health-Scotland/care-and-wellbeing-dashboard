@@ -18,6 +18,7 @@ output$employees_living_wage_line = renderPlotly({
 })
 
 
+
 # map
 employees_living_wage_option = "Earning less than the living wage"
 
@@ -27,25 +28,13 @@ employees_living_wage_by_LA_ind = employees_living_wage_by_LA %>%
   select(year, local_authority, ca2019, measure_value)
 
 
-
-output$employees_living_wage_year_ui = renderUI({
-
-  employees_living_wage_year_choices = employees_living_wage_by_LA_ind$year %>%
-    unique()
-  employees_living_wage_year_selected = employees_living_wage_year_choices %>% tail(n=1)
-
-  selectizeInput("employees_living_wage_year_input",
-                 label = "Select year to view on heatmap:",
-                 choices = employees_living_wage_year_choices,
-                 selected = employees_living_wage_year_selected)
-})
-
-
 employees_living_wage_las_shape = pub_las_simplified
 
 # value for storing the selected LA; initialized with Scotland geometry
 rv_employees_living_wage = reactiveVal("S92000003")
 
+
+## if the 'Trend for scotland' button is pressed
 observeEvent(input$employees_living_wage_map_button, {
   rv_employees_living_wage("S92000003")
 })
@@ -55,6 +44,7 @@ LA_Look_up = employees_living_wage_by_LA %>%
   select(local_authority, ca2019) %>%
   unique()
 
+## create a list and assign the council area code to it's respective name
 LA_Look_up_list = list()
 
 for (i in 1:nrow(LA_Look_up))
@@ -63,19 +53,19 @@ for (i in 1:nrow(LA_Look_up))
 }
 
 
-output$employees_living_wage_LA_ui = renderUI({
-
-  #employees_living_wage_LA_selected = "Scotland"
-  selectizeInput("employees_living_wage_LA_input",
-                 label = "Select local authority for trend:",
-                 choices = LA_Look_up_list, #LA_Look_up$local_authority,
-                 selected = "S92000003")
-})
-
-observe({
-  print(input$employees_living_wage_LA_input)
-  rv_employees_living_wage(input$employees_living_wage_LA_input)
-})
+# output$employees_living_wage_LA_ui = renderUI({
+#
+#   #employees_living_wage_LA_selected = "Scotland"
+#   selectizeInput("employees_living_wage_LA_input",
+#                  label = "Select local authority for trend:",
+#                  choices = LA_Look_up_list, #LA_Look_up$local_authority,
+#                  selected = "S92000003")
+# })
+#
+# observe({
+#   # print(input$employees_living_wage_LA_input)
+#   rv_employees_living_wage(input$employees_living_wage_LA_input)
+# })
 
 
 output$employees_living_wage_map = renderLeaflet({
@@ -121,22 +111,33 @@ output$employees_living_wage_map = renderLeaflet({
 observeEvent(input$employees_living_wage_map_shape_click,{
   rv_employees_living_wage(input$employees_living_wage_map_shape_click$id)
 
-  updateSelectizeInput(session, "employees_living_wage_LA_input",
-                    #label = paste("Select input label", length(x)),
-                    choices = input$employees_living_wage_map_shape_click$id)
+  updateSelectizeInput(session, "employees_living_wage_cr_LA_input",
+                       #label = paste("Select input label", length(x)),
+                       choices = input$employees_living_wage_map_shape_click$id)
 })
 
 
 # plot trend
-output$employees_living_wage_line_LA = renderPlotly({
 
-  employees_living_wage_line_LA_data = employees_living_wage_by_LA_ind %>%
-    filter(ca2019  == rv_employees_living_wage())
+  output$employees_living_wage_line_LA = renderPlotly({
+
+    employees_living_wage_line_LA_data = employees_living_wage_by_LA_ind %>%
+      filter(ca2019  == rv_employees_living_wage())
 
 
-  title = employees_living_wage_line_LA_data$local_authority %>% unique()
-  employees_living_wage_plot_line(employees_living_wage_line_LA_data, title = title)
-})
+    title = employees_living_wage_line_LA_data$local_authority %>% unique()
+    employees_living_wage_plot_line(employees_living_wage_line_LA_data, title = title)
+  })
+
+  output$employees_living_wage_cw_line_LA = renderPlotly({
+
+    employees_living_wage_cw_line_LA_data = employees_living_wage_by_LA_ind %>%
+      filter(ca2019  == rv_employees_living_wage_cw())
+
+
+    title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
+    make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title)
+  })
 
 
 
@@ -368,10 +369,10 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
 #
 #     fluidRow(
 #       column(6,
-             # selectizeInput("disability_employment_gap_input",
-             #                label = "Select year to view on heatmap:",
-             #                choices = disability_employment_gap_choices,
-             #                selected = max(disability_employment_gap_choices))#),
+# selectizeInput("disability_employment_gap_input",
+#                label = "Select year to view on heatmap:",
+#                choices = disability_employment_gap_choices,
+#                selected = max(disability_employment_gap_choices))#),
 #       column(6,
 #              actionButton("disability_employment_gap_button", "Trend for Scotland"))
 #     ),
@@ -672,18 +673,6 @@ output$economic_inactivity_data <- DT::renderDataTable({
 ##############################################.
 # UNDEREMPLOYMENT----
 ##############################################.
-
-
-output$underemployment_ui = renderUI({
-
-  underemployment_choices = underemployment$local_authority %>%
-    unique()
-
-  selectizeInput("underemployment_input",
-                 label = "Select local authority",
-                 choices = underemployment_choices,
-                 selected = "Scotland")
-})
 
 output$underemployment_graph_line <- renderPlotly({
   data = underemployment %>%

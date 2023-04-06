@@ -31,6 +31,7 @@ tagList(
                         # column(3,
                         #        uiOutput("asthma_admissions_years_ui"))),
 
+                        altTextUI("asthma_admissions_alt"),
                         plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
                         # plotlyOutput("asthma_admissions_plot"),
 

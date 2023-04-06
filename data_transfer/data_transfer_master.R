@@ -29,8 +29,9 @@ library(readxl)
 library(tidyr)
 library(magrittr)
 library(rgdal)
+library(here)
 
-path_main_script_location = dirname(rstudioapi::getActiveDocumentContext()$path)
+path_main_script_location = here("data_transfer")
 
 setwd(path_main_script_location)
 
@@ -323,14 +324,14 @@ source(paste0(path_main_script_location,
 ##############################################.
 
 source(paste0(path_main_script_location,
-              "/data_transfer_sections/Population Health/population_health_master.R"))
+              "/population_health_master.R"))
 
 ##############################################.
 # MASTER DATA - SUMMARY TABLES----
 ##############################################.
 
 source(paste0(path_main_script_location,
-              "/data_transfer_sections/summary_master.R"))
+              "/summary_master.R"))
 
 ##############################################.
 # APP DATA PREPARATION ----
