@@ -290,7 +290,6 @@ tagList(
 
                tabPanel(title = "Health risk behaviours",
                         value = "health_risk_behaviours",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h3("Health risk behaviours")
                ),
