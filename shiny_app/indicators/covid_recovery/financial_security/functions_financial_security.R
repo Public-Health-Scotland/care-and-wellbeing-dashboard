@@ -17,7 +17,7 @@ fuel_afford_plot_line = function(data, title = NULL) {
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Percentage of household", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)',# title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
@@ -77,7 +77,7 @@ managing_financially_plot_bar = function(data) {
            yaxis = list(title = "Percentage of household (%)", range = c(0,100), ticksuffix = "%"),
            showlegend = FALSE,
            uniformtext=list(minsize=8, mode='show'),
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)', #title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
@@ -118,7 +118,7 @@ savings_plot_stacked_bar = function(data) {
                         titlefont = list(size=18),
                         showline = FALSE,
                         ticksuffix = "%"),
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)', #title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')
     ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
@@ -152,7 +152,7 @@ savings_low_income_plot_line = function(data, title = NULL, color_column = NULL,
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = indicator_name, range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)', #title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
@@ -177,7 +177,7 @@ unmanageable_debt_plot_line = function(data, title = NULL) {
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Percentage of household", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
+           legend = list(bgcolor = 'rgba(0,0,0,0)', #title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"),
                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
