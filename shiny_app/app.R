@@ -32,7 +32,9 @@ ui <- shinymanager::secure_app(
           style = "position: relative; top: -5px;"),
         windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
         header = tags$head(includeCSS("www/styles.css"),  # CSS stylesheet
-                           tags$link(rel = "shortcut icon", href = "favicon_phs.ico") # Icon for browser tab
+                           tags$link(rel = "shortcut icon", href = "favicon_phs.ico"),# Icon for browser tab
+                           includeScript("www/javascript.js")
+
         ),
 
         ##############################################.
