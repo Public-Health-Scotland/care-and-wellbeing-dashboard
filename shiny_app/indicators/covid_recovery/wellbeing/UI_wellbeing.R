@@ -290,14 +290,12 @@ tagList(
                         #   icon = icon_no_warning_fn("info-circle")
                         # ),
 
-                        altTextUI("infant_mortality_modal"),
-                        plotInfoUI("infant_modal"),
-
                         actionButton(
                           "infant_mortality_modal_comment",
                           tags$b("Summary of indicator during covid and pre-covid period"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
+                        br(),
 
 
                         plot_title("Month rate of infant deaths per 1,000 live births in Scotland",

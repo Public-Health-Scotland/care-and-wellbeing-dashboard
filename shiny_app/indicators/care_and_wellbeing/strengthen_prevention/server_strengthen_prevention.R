@@ -469,6 +469,13 @@ output$asthma_admissions_table <- DT::renderDataTable({
 
 })
 
+altTextServer("asthma_admissions_alt",
+              title = "Asthma admissions plot",
+              content = tags$ul(tags$li("This is a plot for the admissions for asthma indicator.")
+
+              )
+)
+
 
 ##############################################.
 # SCREENING UPTAKE FOR BREAST AND BOWEL CANCER----
