@@ -20,8 +20,10 @@ output$child_poverty_data <- DT::renderDataTable({
 })
 
 child_poverty %>%
-  rename("Proportion Of People In Relative Poverty" = "proportion") %>%
-dataDownloadServer(id = "child_poverty", filename = "child_poverty")
+  rename("Proportion Of people in relative poverty" = "proportion") %>%
+  select(-c("pretty_date", "value", "geography", "geography_type", "indicator")) %>%
+  dataDownloadServer(id = "child_poverty", filename = "child_poverty",
+                     add_separator_cols_2dp = c(3))
 
 
 ##############################################.
