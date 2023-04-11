@@ -76,17 +76,17 @@ tagList(
                         h3("Proportion of employees (18+) earning less than the real Living Wage (by local authority)"),
 
                         fluidRow(
-                          column(3,
+                          column(6,
                                  selectizeInput("employees_living_wage_cw_year",
                                                 label = "Select year to view on heatmap:",
                                                 choices = employees_living_wage_by_LA %>%
                                                   filter(earning == "Earning less than the living wage") %>%
                                                   select(year, local_authority, ca2019, measure_value) %>%
                                                   .$year %>% unique()
-                                 ),
-                                 column(3,
+                                 )),
+                                 column(6,
                                         actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
-                          )),
+                          ),
 
                         fluidRow(
                           column(12,
