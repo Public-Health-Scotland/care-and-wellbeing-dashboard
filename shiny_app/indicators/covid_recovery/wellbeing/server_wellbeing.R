@@ -19,6 +19,11 @@ output$child_poverty_data <- DT::renderDataTable({
                            geogtype = "none")
 })
 
+child_poverty %>%
+  rename("Proportion Of People In Relative Poverty" = "proportion") %>%
+dataDownloadServer(id = "child_poverty", filename = "child_poverty")
+
+
 ##############################################.
 # Pre-school development----
 ##############################################.
@@ -167,6 +172,7 @@ output$infant_data = DT::renderDataTable({
 
   datatable_style_download(inf_deaths_out, data_name = "infant", geogtype = "scotland")
 })
+
 
 
 ##############################################.

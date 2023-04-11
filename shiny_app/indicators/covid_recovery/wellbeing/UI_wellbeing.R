@@ -41,7 +41,9 @@ tagList(
 
 
                         h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
-                        DT::dataTableOutput("child_poverty_data")
+                        DT::dataTableOutput("child_poverty_data"),
+
+                        dataDownloadUI("child_poverty")
 
 
                ),
