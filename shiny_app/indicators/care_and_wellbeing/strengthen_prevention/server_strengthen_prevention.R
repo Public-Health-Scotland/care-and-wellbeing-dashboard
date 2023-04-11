@@ -463,7 +463,7 @@ output$asthma_admissions_table <- DT::renderDataTable({
     arrange(desc(date)) %>%
     datatable_style_download(.,
                              datetype = "financial_year",
-                             data_name = "adult_living_limiting_long_term_condition",
+                             data_name = "asthma_admissions",
                              geogtype = "none")
 
 
