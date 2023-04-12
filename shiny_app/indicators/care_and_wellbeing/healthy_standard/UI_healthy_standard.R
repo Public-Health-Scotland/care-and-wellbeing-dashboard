@@ -2,6 +2,7 @@ tagList(
 
   h1("Ensure healthy standard of living for all"),
   br(),
+  bsButton("healthy_standard_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
 
 

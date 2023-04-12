@@ -2,7 +2,7 @@ tagList(
 
   h1("Wellbeing of children and young people"),
   br(),
-  #bsButton("jump_home_wellbeing", "Go to home page", class = "home-btn"),
+  actionButton("wellbeing_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
 
 

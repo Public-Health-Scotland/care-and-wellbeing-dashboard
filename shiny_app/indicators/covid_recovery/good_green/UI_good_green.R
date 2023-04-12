@@ -2,7 +2,7 @@ tagList(
 
   h1("Good, green jobs and fair work" ),
   br(),
-  #bsButton("jump_home_good_green", "Go to home page", class = "home-btn"),
+  actionButton("good_green_to_info", "Go to information page", class = "info-btn"),
 
   h4(strong("Select indicator: ")),
 

@@ -2,7 +2,7 @@ tagList(
 
   h1("Financial security for low income households"),
   br(),
-  #bsButton("jump_home_financial_security", "Go to home page", class = "home-btn"),
+  actionButton("financial_security_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
 
 

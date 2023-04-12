@@ -1,6 +1,7 @@
 tagList(
   h1("Tackling discrimination, racism and their outcomes" ),
   br(),
+  bsButton("discrimination_racism_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
   navlistPanel(widths = c(2,10),
 
