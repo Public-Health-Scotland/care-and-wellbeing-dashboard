@@ -3,6 +3,18 @@
 ##############################################.
 # This script sets up the content of the wellbeing tab
 
+# observeEvent(input$wellbeing_to_info,
+#              {updateTabsetPanel(session,
+#                                 "intabset",
+#                                 selected = "info_notes")
+#                updateRadioButtons(session,
+#                                   "pillar_type_info",
+#                                   selected = "Covid recovery")
+#                updateRadioButtons(session,
+#                                   "indicator_type_info",
+#                                   selected = "Wellbeing of children and young people")
+#              })
+
 ##############################################.
 # CHILD POVERTY----
 ##############################################.
