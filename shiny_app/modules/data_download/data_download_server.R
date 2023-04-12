@@ -23,7 +23,7 @@ dataDownloadServer <- function(data, id, filename,
 
           table_colnames = names(data) %>%
             gsub("_", " ", .) %>%
-            str_to_title(.)
+            str_to_sentence(.)
 
           # Add column formatting
 
