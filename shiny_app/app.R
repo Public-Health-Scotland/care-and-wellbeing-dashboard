@@ -155,7 +155,8 @@ ui <- shinymanager::secure_app(
 server <- function(input, output, session) {
 
   res_auth <- secure_server(
-    check_credentials = check_credentials(credentials))
+    check_credentials = check_credentials(credentials),
+    timeout = 30)
 
 
   #### Get functions ----
