@@ -85,12 +85,15 @@
  .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: white;
     background-color: var(--phs-purple);
+    width: 300px;
 
 }
 
   .nav-pills>li>a {
     border-radius: 4px;
     background-color: var(--phs-purple-30);
+    width: 300px;
+
 
 }
 
@@ -98,6 +101,8 @@
     border-radius: 4px;
     background-color: var(--phs-purple-80);
     color: white;
+    width: 300px;
+
 
 }
 
