@@ -147,7 +147,7 @@ output$chd_deaths_table = DT::renderDataTable({
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total")
+    line_chart_function(y_title = "Total number of hospital admissions")
 
 })
 
