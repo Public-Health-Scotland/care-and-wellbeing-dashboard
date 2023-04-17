@@ -6,7 +6,7 @@
 
 output$asthma_admissions_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("asthma_admissions_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -19,7 +19,7 @@ output$asthma_admissions_infobox <- renderInfoBox({
 
 output$alcohol_deaths_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("alcohol_deaths_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -32,7 +32,7 @@ output$alcohol_deaths_infobox <- renderInfoBox({
 
 output$alcohol_admissions_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("alcohol_admissions_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -45,7 +45,7 @@ output$alcohol_admissions_infobox <- renderInfoBox({
 
 output$all_cause_mortality_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("all_cause_mortality_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -58,7 +58,7 @@ output$all_cause_mortality_infobox <- renderInfoBox({
 
 output$chd_deaths_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("chd_deaths_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -71,7 +71,7 @@ output$chd_deaths_infobox <- renderInfoBox({
 
 output$drug_deaths_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("drug_deaths_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -84,7 +84,7 @@ output$drug_deaths_infobox <- renderInfoBox({
 
 output$drug_admissions_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("drug_admissions_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -97,7 +97,7 @@ output$drug_admissions_infobox <- renderInfoBox({
 
 output$experience_recipients_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("experience_recipients_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -110,7 +110,7 @@ output$experience_recipients_infobox <- renderInfoBox({
 
 output$experience_of_unpaid_carers_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("experience_of_unpaid_carers_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -123,7 +123,7 @@ output$experience_of_unpaid_carers_infobox <- renderInfoBox({
 
 output$hospital_admission_heart_attack_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("hospital_admission_heart_attack_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -136,7 +136,7 @@ output$hospital_admission_heart_attack_infobox <- renderInfoBox({
 
 output$health_risk_behaviours_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("health_risk_behaviours_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -149,7 +149,7 @@ output$health_risk_behaviours_infobox <- renderInfoBox({
 
 output$healthy_birthweight_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("healthy_birthweight_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -162,7 +162,7 @@ output$healthy_birthweight_infobox <- renderInfoBox({
 
 output$healthy_life_expectancy_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("healthy_life_expectancy_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -175,7 +175,7 @@ output$healthy_life_expectancy_infobox <- renderInfoBox({
 
 output$healthy_weight_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("healthy_weight_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -188,7 +188,7 @@ output$healthy_weight_infobox <- renderInfoBox({
 
 output$adult_long_term_condition_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("adult_long_term_condition_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -201,7 +201,7 @@ output$adult_long_term_condition_infobox <- renderInfoBox({
 
 output$mental_wellbeing_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("mental_wellbeing_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -214,7 +214,7 @@ output$mental_wellbeing_infobox <- renderInfoBox({
 
 output$physical_activity_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("physical_activity_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -227,7 +227,7 @@ output$physical_activity_infobox <- renderInfoBox({
 
 output$premature_mortality_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("premature_mortality_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -240,7 +240,7 @@ output$premature_mortality_infobox <- renderInfoBox({
 
 output$quality_care_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("quality_care_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -253,7 +253,7 @@ output$quality_care_infobox <- renderInfoBox({
 
 output$screening_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("screening_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -266,7 +266,7 @@ output$screening_infobox <- renderInfoBox({
 
 output$adults_self_assessed_health_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("adults_self_assessed_health_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -279,7 +279,7 @@ output$adults_self_assessed_health_infobox <- renderInfoBox({
 
 output$vaccinations_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("vaccinations_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -292,7 +292,7 @@ output$vaccinations_infobox <- renderInfoBox({
 
 output$work_related_health_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("work_related_health_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -309,7 +309,7 @@ output$work_related_health_infobox <- renderInfoBox({
 
 output$children_at_risk_of_obesity_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("children_at_risk_of_obesity_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -322,7 +322,7 @@ output$children_at_risk_of_obesity_infobox <- renderInfoBox({
 
 output$child_material_deprivation_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("child_material_deprivation_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -335,7 +335,7 @@ output$child_material_deprivation_infobox <- renderInfoBox({
 
 output$child_development_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("child_development_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -348,7 +348,7 @@ output$child_development_cw_infobox <- renderInfoBox({
 
 output$child_wellbeing_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("child_wellbeing_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -361,7 +361,7 @@ output$child_wellbeing_infobox <- renderInfoBox({
 
 output$infant_mortality_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("infant_mortality_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -374,7 +374,7 @@ output$infant_mortality_cw_infobox <- renderInfoBox({
 
 output$perinatal_mortality_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("perinatal_mortality_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -387,7 +387,7 @@ output$perinatal_mortality_infobox <- renderInfoBox({
 
 output$physical_activity_children_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("physical_activity_children_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -405,7 +405,7 @@ output$physical_activity_children_cw_infobox <- renderInfoBox({
 
 output$camhs_waiting_times_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("camhs_waiting_times_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -418,7 +418,7 @@ output$camhs_waiting_times_cw_infobox <- renderInfoBox({
 
 output$children_relationships_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("children_relationships_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -431,7 +431,7 @@ output$children_relationships_infobox <- renderInfoBox({
 
 output$childrens_voices_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("childrens_voices_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -444,7 +444,7 @@ output$childrens_voices_infobox <- renderInfoBox({
 
 output$confidence_of_young_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("confidence_of_young_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -457,7 +457,7 @@ output$confidence_of_young_infobox <- renderInfoBox({
 
 output$mental_health_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("mental_health_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -474,7 +474,7 @@ output$mental_health_cw_infobox <- renderInfoBox({
 
 output$economic_inactivity_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("economic_inactivity_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -487,7 +487,7 @@ output$economic_inactivity_cw_infobox <- renderInfoBox({
 
 output$employees_living_wage_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("employees_living_wage_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -500,7 +500,7 @@ output$employees_living_wage_cw_infobox <- renderInfoBox({
 
 output$gender_pay_gap_cw_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("gender_pay_gap_cw_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -513,7 +513,7 @@ output$gender_pay_gap_cw_infobox <- renderInfoBox({
 
 output$work_related_ill_health_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("work_related_ill_health_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -530,7 +530,7 @@ output$work_related_ill_health_infobox <- renderInfoBox({
 
 output$food_insecurity_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("food_insecurity_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -543,7 +543,7 @@ output$food_insecurity_infobox <- renderInfoBox({
 
 output$persistent_poverty_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("persistent_poverty_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -556,7 +556,7 @@ output$persistent_poverty_infobox <- renderInfoBox({
 
 output$satisfaction_with_housing_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("satisfaction_with_housing_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -573,7 +573,7 @@ output$satisfaction_with_housing_infobox <- renderInfoBox({
 
 output$loneliness_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("loneliness_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -586,7 +586,7 @@ output$loneliness_infobox <- renderInfoBox({
 
 output$areas_of_health_inequalities_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("areas_of_health_inequalities_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -599,7 +599,7 @@ output$areas_of_health_inequalities_infobox <- renderInfoBox({
 
 output$perceptions_of_local_area_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("perceptions_of_local_area_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -612,7 +612,7 @@ output$perceptions_of_local_area_infobox <- renderInfoBox({
 
 output$places_to_intereact_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("places_to_intereact_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -629,7 +629,7 @@ output$places_to_intereact_infobox <- renderInfoBox({
 
 output$gender_balance_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("gender_balance_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -642,7 +642,7 @@ output$gender_balance_infobox <- renderInfoBox({
 
 output$dignity_respect_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("dignity_respect_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -659,7 +659,7 @@ output$dignity_respect_infobox <- renderInfoBox({
 
 output$blue_green_space_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("blue_green_space_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -672,7 +672,7 @@ output$blue_green_space_infobox <- renderInfoBox({
 
 output$journeys_active_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("journeys_active_summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",
@@ -685,7 +685,7 @@ output$journeys_active_infobox <- renderInfoBox({
 
 output$visit_outdoors_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("visit_outdoors__summary_info",
                                    "",
                                    paste("Blah blah blah"))),
           value="Not available",

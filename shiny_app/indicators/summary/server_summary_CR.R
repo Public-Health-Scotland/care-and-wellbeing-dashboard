@@ -6,12 +6,12 @@
 
 output$listen_to_decision_making_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("listen_to_decision_making_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -19,12 +19,12 @@ output$listen_to_decision_making_infobox <- renderInfoBox({
 
 output$camhs_waiting_times_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("camhs_waiting_times_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -32,12 +32,12 @@ output$camhs_waiting_times_cr_infobox <- renderInfoBox({
 
 output$child_poverty_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("child_poverty_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -45,12 +45,12 @@ output$child_poverty_infobox <- renderInfoBox({
 
 output$infant_mortality_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("infant_mortality_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -58,12 +58,12 @@ output$infant_mortality_cr_infobox <- renderInfoBox({
 
 output$mental_health_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("mental_health_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -71,12 +71,12 @@ output$mental_health_cr_infobox <- renderInfoBox({
 
 output$physical_activity_children_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("physical_activity_children_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -84,12 +84,12 @@ output$physical_activity_children_cr_infobox <- renderInfoBox({
 
 output$positive_destinations_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("positive_destinations_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -97,12 +97,12 @@ output$positive_destinations_infobox <- renderInfoBox({
 
 output$child_development_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("child_development_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -110,12 +110,12 @@ output$child_development_cr_infobox <- renderInfoBox({
 
 output$protection_from_harm_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("protection_from_harm_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("hands-holding-child"),
           color = "purple")
 })
 
@@ -128,12 +128,12 @@ output$protection_from_harm_infobox <- renderInfoBox({
 
 output$benefits_uptake_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("benefits_uptake_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -141,12 +141,12 @@ output$benefits_uptake_infobox <- renderInfoBox({
 
 output$cost_of_living_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("cost_of_living_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -154,12 +154,12 @@ output$cost_of_living_infobox <- renderInfoBox({
 
 output$childcare_uptake_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("childcare_uptake_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -167,12 +167,12 @@ output$childcare_uptake_infobox <- renderInfoBox({
 
 output$food_affordability_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("food_affordability_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -180,12 +180,12 @@ output$food_affordability_infobox <- renderInfoBox({
 
 output$fuel_affordability_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("fuel_affordability_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -193,12 +193,12 @@ output$fuel_affordability_infobox <- renderInfoBox({
 
 output$managing_financially_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("managing_financially_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -206,12 +206,12 @@ output$managing_financially_infobox <- renderInfoBox({
 
 output$savings_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("savings_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -219,12 +219,12 @@ output$savings_infobox <- renderInfoBox({
 
 output$transport_costs_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("transport_costs_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -232,12 +232,12 @@ output$transport_costs_infobox <- renderInfoBox({
 
 output$unmanageable_debt_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("unmanageable_debt_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("money-bill-wave"),
           color = "purple")
 })
 
@@ -249,12 +249,12 @@ output$unmanageable_debt_infobox <- renderInfoBox({
 
 output$contractually_secure_work_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("contractually_secure_work_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -262,12 +262,12 @@ output$contractually_secure_work_infobox <- renderInfoBox({
 
 output$disability_employment_gap_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("disability_employment_gap_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -275,12 +275,12 @@ output$disability_employment_gap_infobox <- renderInfoBox({
 
 output$economic_inactivity_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("economic_inactivity_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -288,12 +288,12 @@ output$economic_inactivity_cr_infobox <- renderInfoBox({
 
 output$employability_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("employability_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -301,12 +301,12 @@ output$employability_infobox <- renderInfoBox({
 
 output$employees_living_wage_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("employees_living_wage_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -314,12 +314,12 @@ output$employees_living_wage_cr_infobox <- renderInfoBox({
 
 output$ethnicity_employment_gap_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("ethnicity_employment_gap_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -327,12 +327,12 @@ output$ethnicity_employment_gap_infobox <- renderInfoBox({
 
 output$gender_pay_gap_cr_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("gender_pay_gap_cr_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -340,12 +340,12 @@ output$gender_pay_gap_cr_infobox <- renderInfoBox({
 
 output$green_jobs_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("green_jobs_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -353,12 +353,12 @@ output$green_jobs_infobox <- renderInfoBox({
 
 output$skills_shortage_vacancies_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("skills_shortage_vacancies_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -366,12 +366,12 @@ output$skills_shortage_vacancies_infobox <- renderInfoBox({
 
 output$underemployment_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("underemployment_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })
 
@@ -379,11 +379,11 @@ output$underemployment_infobox <- renderInfoBox({
 
 output$zero_hours_contracts_infobox <- renderInfoBox({
   infoBox(title=h5("",
-                   summaryButtonUI("extra",
+                   summaryButtonUI("zero_hours_contracts_summary_info",
                                    "",
-                                   paste("Blah blah blah"))),
+                                   paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("briefcase"),
           color = "purple")
 })

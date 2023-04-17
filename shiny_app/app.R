@@ -102,7 +102,7 @@ ui <- shinymanager::secure_app(
 
 
                    tabPanel(title = "Strengthen the role and impact of ill health prevention",
-                            icon = icon_no_warning_fn("lemon"),
+                            icon = icon_no_warning_fn("hands-holding-child"),
                             value = "strengthen_prevention",
                             source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
 
