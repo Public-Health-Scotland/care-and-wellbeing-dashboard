@@ -24,8 +24,163 @@ tagList(
                                                          width = "100%")
                                       )
 
-                             )
+                             ),
 
+                             box(width = 12,
+                                 status = "info",
+                                 tagList(
+                                   h2("Wellbeing of children and young people"),
+                                   fluidRow(
+                                     column(4,
+                                            h4("Being listened to and involved in decision making"),
+                                            withSpinner(infoBoxOutput("listen_to_decision_making_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("CAMHS waiting times"),
+                                            withSpinner(infoBoxOutput("camhs_waiting_times_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Child Poverty"),
+                                            withSpinner(infoBoxOutput("child_poverty_infobox", width=NULL)),
+                                     )
+                                   ),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Infant mortality"),
+                                            withSpinner(infoBoxOutput("infant_mortality_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Mental health and wellbeing"),
+                                            withSpinner(infoBoxOutput("mental_health_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Physical activity"),
+                                            withSpinner(infoBoxOutput("physical_activity_children_cr_infobox", width=NULL)),
+                                     )),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Positive destinations of school leavers"),
+                                            withSpinner(infoBoxOutput("positive_destinations_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Pre-School development"),
+                                            withSpinner(infoBoxOutput("child_development_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Protection from harm"),
+                                            withSpinner(infoBoxOutput("protection_from_harm_infobox", width=NULL)),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
+
+                             box(width = 12,
+                                 status = "info",
+                                 tagList(
+                                   h2("Financial security for low income households"),
+                                   fluidRow(
+                                     column(4,
+                                            h4("Benefit uptake and engagement with welfare advice"),
+                                            withSpinner(infoBoxOutput("benefits_uptake_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Cost of living"),
+                                            withSpinner(infoBoxOutput("cost_of_living_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("ELC uptake"),
+                                            withSpinner(infoBoxOutput("childcare_uptake_infobox", width=NULL)),
+                                     )
+                                   ),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Food affordability"),
+                                            withSpinner(infoBoxOutput("food_affordability_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Fuel affordability"),
+                                            withSpinner(infoBoxOutput("fuel_affordability_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Managing financially"),
+                                            withSpinner(infoBoxOutput("managing_financially_infobox", width=NULL)),
+                                     )),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Savings"),
+                                            withSpinner(infoBoxOutput("savings_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Transport costs"),
+                                            withSpinner(infoBoxOutput("transport_costs_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Unmanageable debt"),
+                                            withSpinner(infoBoxOutput("unmanageable_debt_infobox", width=NULL)),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
+
+                             box(width = 12,
+                                 status = "info",
+                                 tagList(
+                                   h2("Good, green jobs and fair work"),
+                                   fluidRow(
+                                     column(4,
+                                            h4("Contractually secure work"),
+                                            withSpinner(infoBoxOutput("contractually_secure_work_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Disability employment gap"),
+                                            withSpinner(infoBoxOutput("disability_employment_gap_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Economic Inactivity"),
+                                            withSpinner(infoBoxOutput("economic_inactivity_cr_infobox", width=NULL)),
+                                     )
+                                   ),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Employability"),
+                                            withSpinner(infoBoxOutput("employability_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Employees living wage"),
+                                            withSpinner(infoBoxOutput("employees_living_wage_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Ethnicity employment gap"),
+                                            withSpinner(infoBoxOutput("ethnicity_employment_gap_infobox", width=NULL)),
+                                     )),
+
+                                   fluidRow(
+                                     column(4,
+                                            h4("Gender pay gap"),
+                                            withSpinner(infoBoxOutput("gender_pay_gap_cr_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Green Jobs"),
+                                            withSpinner(infoBoxOutput("green_jobs_infobox", width=NULL)),
+                                     ),
+                                     column(4,
+                                            h4("Skills shortage vacancies"),
+                                            withSpinner(infoBoxOutput("skills_shortage_vacancies_infobox", width=NULL)),
+                                     )),
+                                   fluidRow(
+                                     column(6,
+                                            h4("Underemployment"),
+                                            withSpinner(infoBoxOutput("underemployment_infobox", width=NULL)),
+                                     ),
+                                     column(6,
+                                            h4("Zero hours contracts"),
+                                            withSpinner(infoBoxOutput("zero_hours_contracts_infobox", width=NULL)),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 ))
 
                     ),
 
@@ -158,10 +313,9 @@ tagList(
                                      column(6,
                                             h4("Work-related ill health"),
                                             withSpinner(infoBoxOutput("work_related_health_infobox", width=NULL)),
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -200,10 +354,9 @@ tagList(
                                      column(6,
                                             h4("Physical activity"),
                                             withSpinner(infoBoxOutput("physical_activity_children_cw_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -233,10 +386,9 @@ tagList(
                                      column(6,
                                             h4("Mental health / mental wellbeing"),
                                             withSpinner(infoBoxOutput("mental_health_cw_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -261,10 +413,9 @@ tagList(
                                      column(6,
                                             h4("Work related ill health"),
                                             withSpinner(infoBoxOutput("work_related_ill_health_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -283,10 +434,9 @@ tagList(
                                      column(4,
                                             h4("Satisfaction with housing"),
                                             withSpinner(infoBoxOutput("satisfaction_with_housing_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -311,10 +461,9 @@ tagList(
                                      column(6,
                                             h4("Places to interact"),
                                             withSpinner(infoBoxOutput("places_to_intereact_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -329,10 +478,9 @@ tagList(
                                      column(6,
                                             h4("Public services treat people with dignity and respect"),
                                             withSpinner(infoBoxOutput("dignity_respect_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             ),
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 )),
 
                              box(width = 12,
                                  status = "info",
@@ -351,10 +499,9 @@ tagList(
                                      column(4,
                                             h4("Visits to the outdoors"),
                                             withSpinner(infoBoxOutput("visit_outdoors_infobox", width=NULL))
-                                     ))
-                                 ),
-                                 fluidRow(column(12, br()))
-                             )
+                                     )),
+                                   fluidRow(column(12, br()))
+                                 ))
 
                     )
              )
