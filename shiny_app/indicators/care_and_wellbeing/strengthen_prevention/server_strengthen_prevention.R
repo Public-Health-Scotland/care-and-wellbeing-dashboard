@@ -147,7 +147,7 @@ output$chd_deaths_table = DT::renderDataTable({
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total")
+    line_chart_function(y_title = "Total number of hospital admissions")
 
 })
 
@@ -423,8 +423,7 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions") %>%
-      layout(yaxis = yaxis_number)
+      line_chart_function(., y_title = "Total number of admissions")
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
