@@ -1,3 +1,20 @@
+
+##### Geog selectors #####
+
+observeEvent(input$geog_type_summary_CR,
+             {
+
+               geog_filtered = geog_lookup %>%
+                 filter(geography_type == input$geog_type_summary_CR)
+
+               #select_choice <- ifelse(input$geog_type_summary_CR == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "geog_name_summary_CR",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(geog_filtered$geography))#,
+               #selected = "")
+             })
+
 ################################################.
 # WELLBEING OF CHILDREN AND YOUNG PEOPLE ----
 ################################################.
