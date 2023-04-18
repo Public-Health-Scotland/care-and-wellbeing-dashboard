@@ -240,11 +240,25 @@ output$drug_deaths_table = DT::renderDataTable({
 ##############################################.
 # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
 ##############################################.
+observeEvent(input$alcohol_admissions_geog_type,
+             {
+
+               alcohol_filtered = alcohol_admissions %>%
+                 filter(geography_type == input$alcohol_admissions_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "alcohol_admissions_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(alcohol_filtered$geography))#,
+               #selected = "")
+             })
+
 output$alcohol_admissions_plot = renderPlotly({
 
   data_alc = alcohol_admissions %>%
     arrange(financial_year) %>%
-    filter(sub_group_select_group_first == input$alcohol_admissions_geog_name,
+    filter(geography == input$alcohol_admissions_geog_name,
            condition == "All alcohol conditions",
            smr_type == "Combined") %>%
     rename(date = "financial_year",
@@ -396,22 +410,19 @@ output$adult_long_term_condition_table <- DT::renderDataTable({
 #         }
 # )
 
+
 observeEvent(input$asthma_admissions_geog_type,
+             {
 
-             if(input$asthma_admissions_geog_type == "Scotland"){
+               asthma_filtered = asthma_admissions %>%
+                 filter(geography_type == input$asthma_admissions_geog_type)
 
-               updatePickerInput(session,
-                                 "asthma_admissions_geog_name",
-                                 "3. Select a geography",
-                                 choices = c("Scotland"))
-             } else {
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
 
-               updatePickerInput(session,
-                                 "asthma_admissions_geog_name",
-                                 "3. Select a geography",
-                                 choices = asthma_admissions %>% filter(geography_type == "Health Board") %>%
-                                  .$geography %>% unique())
-
+               updateSelectizeInput(session, "asthma_admissions_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(asthma_filtered$geography))#,
+               #selected = "")
              })
 
 

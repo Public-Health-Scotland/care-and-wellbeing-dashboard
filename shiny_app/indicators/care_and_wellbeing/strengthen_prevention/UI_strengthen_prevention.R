@@ -14,18 +14,20 @@ tagList(
                         h3("Admissions for asthma"),
 
                         fluidRow(column(3,
-                                        pickerInput("asthma_admissions_breakdowns",
-                                                    "1. Select a breakdown",
-                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
+                                        selectInput("asthma_admissions_breakdowns",
+                                                    "Step 1: Select a breakdown ",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
+                                                    width = "100%")),
                                  column(3,
-                                        pickerInput("asthma_admissions_geog_type",
-                                                    "2. Select a geography type",
-                                                    choices = c("Scotland", "Health Board"),
-                                                    selected = "Scotland")),
+                                         selectInput("asthma_admissions_geog_type",
+                                                    "Step 2: Select national or local geography level ",
+                                                     choices = c("Scotland", "Health Board"),
+                                                     width = "100%")),
                                  column(3,
-                                        pickerInput("asthma_admissions_geog_name",
-                                                    "3. Select a geography",
-                                                    choices = c("Scotland")))
+                                 selectInput("asthma_admissions_geog_name",
+                                             "Step 3: Select national or local geography area ",
+                                             choices = c("Scotland"),
+                                             width = "100%"))
 
                         ),#, "Age and sex breakdown"))),
                         # column(3,
@@ -59,9 +61,17 @@ tagList(
 
                                          h3("Alcohol related hospital admissions"),
 
-
-                                         selectizeInput("alcohol_admissions_geog_name","Select Health Board",
-                                                        choices = unique(alcohol_admissions$sub_group_select_group_first)),
+                                         fluidRow(
+                                           column(3,
+                                                selectInput("alcohol_admissions_geog_type",
+                                                            "Step 1: Select national or local geography level",
+                                                            choices = c("Scotland", "Health Board"),
+                                                            width = "100%")),
+                                         column(3,
+                                                selectInput("alcohol_admissions_geog_name",
+                                                            "Step 2: Select national or local geography area",
+                                                            choices = c("Scotland"),
+                                                            width = "100%"))),
 
                                          plotlyOutput("alcohol_admissions_plot")
                                 ),
