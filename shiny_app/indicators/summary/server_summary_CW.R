@@ -11,7 +11,7 @@ output$asthma_admissions_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -24,7 +24,7 @@ output$alcohol_deaths_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -37,7 +37,7 @@ output$alcohol_admissions_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -50,7 +50,7 @@ output$all_cause_mortality_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -63,7 +63,7 @@ output$chd_deaths_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -76,7 +76,7 @@ output$drug_deaths_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -89,7 +89,7 @@ output$drug_admissions_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -102,7 +102,7 @@ output$experience_recipients_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -115,7 +115,7 @@ output$experience_of_unpaid_carers_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -128,7 +128,7 @@ output$hospital_admission_heart_attack_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -141,7 +141,7 @@ output$health_risk_behaviours_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -154,7 +154,7 @@ output$healthy_birthweight_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -167,7 +167,7 @@ output$healthy_life_expectancy_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -180,7 +180,7 @@ output$healthy_weight_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -193,7 +193,7 @@ output$adult_long_term_condition_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -206,7 +206,7 @@ output$mental_wellbeing_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -219,7 +219,7 @@ output$physical_activity_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -232,7 +232,7 @@ output$premature_mortality_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -245,7 +245,7 @@ output$quality_care_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -258,7 +258,7 @@ output$screening_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -271,7 +271,7 @@ output$adults_self_assessed_health_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -284,7 +284,7 @@ output$vaccinations_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -297,7 +297,7 @@ output$work_related_health_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
 
@@ -314,7 +314,7 @@ output$children_at_risk_of_obesity_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -327,7 +327,7 @@ output$child_material_deprivation_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -340,7 +340,7 @@ output$child_development_cw_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -353,7 +353,7 @@ output$child_wellbeing_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -366,7 +366,7 @@ output$infant_mortality_cw_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -379,7 +379,7 @@ output$perinatal_mortality_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -392,7 +392,7 @@ output$physical_activity_children_cw_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -535,7 +535,7 @@ output$food_insecurity_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-pulse"),
           color = "purple")
 })
 
@@ -548,7 +548,7 @@ output$persistent_poverty_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-pulse"),
           color = "purple")
 })
 
@@ -561,7 +561,7 @@ output$satisfaction_with_housing_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("heart-pulse"),
           color = "purple")
 })
 
@@ -578,7 +578,7 @@ output$loneliness_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("tree-city"),
           color = "purple")
 })
 
@@ -591,7 +591,7 @@ output$areas_of_health_inequalities_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("tree-city"),
           color = "purple")
 })
 
@@ -604,7 +604,7 @@ output$perceptions_of_local_area_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("tree-city"),
           color = "purple")
 })
 
@@ -617,7 +617,7 @@ output$places_to_intereact_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("tree-city"),
           color = "purple")
 })
 
@@ -634,7 +634,7 @@ output$gender_balance_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("people-group"),
           color = "purple")
 })
 
@@ -647,7 +647,7 @@ output$dignity_respect_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("people-group"),
           color = "purple")
 })
 
@@ -664,7 +664,7 @@ output$blue_green_space_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("seedling"),
           color = "purple")
 })
 
@@ -677,7 +677,7 @@ output$journeys_active_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("seedling"),
           color = "purple")
 })
 
@@ -690,7 +690,7 @@ output$visit_outdoors_infobox <- renderInfoBox({
                                    paste("Blah blah blah"))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("seedling"),
           color = "purple")
 })
 
