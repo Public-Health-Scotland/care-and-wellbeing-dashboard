@@ -156,7 +156,7 @@ tagList(
                                                 choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography))),
                         ),
 
-                        plot_title("Coronary heart disease deaths (aged <75), age-sex standardised rates per 100,000",
+                        plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
                                    "chd_deaths_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
