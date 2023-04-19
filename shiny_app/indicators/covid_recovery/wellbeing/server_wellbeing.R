@@ -23,15 +23,17 @@ output$child_poverty_chart <- renderPlotly({
   child_poverty_plot(child_poverty)
 })
 
-output$child_poverty_data <- DT::renderDataTable({
-
-  datatable_style_download(child_poverty,
-                           datetype = "financial_year",
-                           data_name = "child_poverty",
-                           geogtype = "none")
-})
+# output$child_poverty_data <- DT::renderDataTable({
+#
+#   datatable_style_download(child_poverty,
+#                            datetype = "financial_year",
+#                            data_name = "child_poverty",
+#                            geogtype = "none")
+# })
 
 child_poverty %>%
+  mutate(Group = factor(Group),
+         financial_year = factor(financial_year)) %>%
   rename("Proportion Of people in relative poverty" = "proportion") %>%
   select(-c("pretty_date", "value", "geography", "geography_type", "indicator")) %>%
   dataDownloadServer(id = "child_poverty", filename = "child_poverty",
