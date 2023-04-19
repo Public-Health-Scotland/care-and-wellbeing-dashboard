@@ -55,7 +55,7 @@ observeEvent(input$all_cause_mortality_geog_type,
 
                updateSelectizeInput(session,
                                     "all_cause_mortality_geog_name",
-                                    "2. Select geography",
+                                    "Step 2. Select national or local geography area",
                                     choices = unique(areas$geography))
              })
 
@@ -115,7 +115,7 @@ observeEvent(input$chd_deaths_geog_type,
 
                updateSelectizeInput(session,
                                     "chd_deaths_geog_name",
-                                    "2. Select geography",
+                                    "Step 2. Select natioanl or local geography area",
                                     choices = unique(areas$geography))
              })
 
@@ -202,7 +202,8 @@ observeEvent(input$drug_deaths_geog_type,
                  filter(geography_type == input$drug_deaths_geog_type)
 
                updateSelectizeInput(session,
-                                    "drug_deaths_geog_name", "2. Select a geography",
+                                    "drug_deaths_geog_name",
+                                    "Step 2. Select a national or local geography area",
                                     choices = unique(data$geography))
              })
 
@@ -304,7 +305,8 @@ observeEvent(input$healthy_birthweight_geog_type,
                  filter(geography_type == input$healthy_birthweight_geog_type)
 
                updateSelectizeInput(session,
-                                    "healthy_birthweight_geog_name", "2. Select a geography",
+                                    "healthy_birthweight_geog_name",
+                                    "Step 2. Select a national or local geography area",
                                     choices = unique(birthweight_data$geography))
              })
 
