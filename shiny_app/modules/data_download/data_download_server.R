@@ -82,13 +82,20 @@ dataDownloadServer <- function(data, id, filename,
 
       date_of_download <- format(today(), "%Y%m%d")
 
+      table_colnames = names(data) %>%
+        gsub("_", " ", .) %>%
+        str_to_sentence(.)
+
+      data_output <- data %>%
+        rename_at(vars(names(data)), ~ table_colnames)
+
       output$csv <- downloadHandler(
         file = function(){
           glue("{filename}_{date_of_download}.csv")
         },
 
         content = function(file) {
-            write.csv(data, file, row.names = FALSE)
+          write.csv(data_output, file, row.names = FALSE)
           }
 
         )
@@ -99,7 +106,7 @@ dataDownloadServer <- function(data, id, filename,
         },
 
         content = function(file) {
-          write.csv(data, file, row.names = FALSE)
+          openxlsx::write.xlsx(data_output, file)
         }
 
       )
