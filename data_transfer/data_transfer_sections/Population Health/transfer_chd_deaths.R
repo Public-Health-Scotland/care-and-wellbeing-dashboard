@@ -14,7 +14,8 @@ chd %<>%
                           .$area_type,
                           .$area_name,
                           .$measure,
-                          "chd_deaths")
+                          "chd_deaths") %>%
+  arrange(year, geography)
 
 
 replace_file_fn(chd,
