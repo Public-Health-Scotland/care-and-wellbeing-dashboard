@@ -28,6 +28,8 @@ library(readr)
 library(readxl)
 library(tidyr)
 library(magrittr)
+dyn.load("/usr/gdal34/lib/libgdal.so")
+dyn.load("/usr/geos310/lib64/libgeos_c.so", local = FALSE)
 library(rgdal)
 library(here)
 
@@ -122,12 +124,12 @@ replace_file_fn(lookup_master,
 # health_board = lookup_master %>%
 #   select(geography = hb2019name) %>%
 #   unique() %>%
-#   mutate(geography_type = "Health Board")
+#   mutate(geography_type = "Health board")
 #
 # council = lookup_master %>%
 #   select(geography = ca2019name) %>%
 #   unique() %>%
-#   mutate(geography_type = "Council Area")
+#   mutate(geography_type = "Council area")
 #
 # hscp = lookup_master %>%
 #   select(geography = hscp2019name) %>%

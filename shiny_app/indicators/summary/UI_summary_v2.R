@@ -1,3 +1,4 @@
+
 tagList(
   fluidRow(width=12,
            h1("Dashboard summary"),
@@ -5,23 +6,24 @@ tagList(
 
 
            tagList(
-
              tabBox(width= NULL, type = "pills",
+#####COVID Recovery #####
                     tabPanel("Covid Recovery",
 
                              linebreaks(1),
                              fluidRow(column(6,
 
-                                             selectInput("summary_v2_choice1",
-                                                         "Step 1: ",
-                                                         choices = c("1", "2"),
+                                             selectInput("geog_type_summary_CR",
+                                                         "Step 1: Select national or local geography level ",
+                                                         choices = c("Scotland", "Health board", "Council area"),
                                                          width = "100%")),
                                       column(6,
 
-                                             selectInput("summary_v2_choice2",
-                                                         "Step 2: ",
-                                                         choices = c("1", "2"),
+                                             selectInput("geog_name_summary_CR",
+                                                         "Step 2: Select national or local geography area ",
+                                                         choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography),
                                                          width = "100%")
+
                                       )
 
                              ),
@@ -178,20 +180,20 @@ tagList(
                                  ))
 
                     ),
-
+##### Care and Wellbeing #####
                     tabPanel("Care and Wellbeing",
                              linebreaks(2),
                              fluidRow(column(6,
 
-                                             selectInput("summary_v2_choice1",
-                                                         "Step 1: ",
-                                                         choices = c("1", "2"),
+                                             selectInput("geog_type_summary_CW",
+                                                         "Step 1: Select national or local geography level ",
+                                                         choices = c("Scotland", "Health board", "Council area"),
                                                          width = "100%")),
                                       column(6,
 
-                                             selectInput("summary_v2_choice2",
-                                                         "Step 2: ",
-                                                         choices = c("1", "2"),
+                                             selectInput("geog_name_summary_CW",
+                                                         "Step 2: Select national or local geography area ",
+                                                         choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography),
                                                          width = "100%"))
 
                              ),
