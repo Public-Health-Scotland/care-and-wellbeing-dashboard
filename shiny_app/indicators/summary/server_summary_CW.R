@@ -4,13 +4,22 @@
 
 ##### Asthma admissions #####
 
+
 output$asthma_admissions_infobox <- renderInfoBox({
-  infoBox(title=h5("",
+
+  recent_asthma <- asthma_admissions %>% filter(sex == 'All Sexes', age_group == 'All Ages', geography == 'Scotland') %>%
+    arrange(date) %>% tail(1)
+
+  infoBox(title=h5(glue("{recent_asthma %>% .$date}"),
                    summaryButtonUI("asthma_admissions_summary_info",
-                                   "",
-                                   paste("Blah blah blah"))),
-          value="Not available",
-          subtitle = glue(""),
+                                   "Admissions for asthma",
+                                   glue("This is the yearly total number of admissions for asthma for the financial year (?). <br> <br>",
+                                        "This data is available at Scotland and health board level. ",
+                                        "(not true just example) Further breakdown information at intermediate zone level is available under strengthen the role and impact ",
+                                        " of ill health prevention on the care and wellbeing tab. <br> <br>",
+                                        "(eg) Further breakdown of age groups is available under ... "))),
+          value= glue("{recent_asthma %>% .$stays_number}"),
+          subtitle = glue("Yearly total"),
           icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
@@ -31,12 +40,21 @@ output$alcohol_deaths_infobox <- renderInfoBox({
 ##### Alcohol admission #####
 
 output$alcohol_admissions_infobox <- renderInfoBox({
-  infoBox(title=h5("",
+
+  recent_alcohol_admissions <- alcohol_admissions %>% arrange(desc(financial_year)) %>%
+    filter(sub_group_select_group_first == "Scotland",
+           condition == "All alcohol conditions",
+           smr_type == "Combined") %>%
+    head(1)
+
+  infoBox(title=h5(glue("{recent_alcohol_admissions %>% .$financial_year}"),
                    summaryButtonUI("alcohol_admissions_summary_info",
-                                   "",
-                                   paste("Blah blah blah"))),
-          value="Not available",
-          subtitle = glue(""),
+                                   "Alcohol-related hospital admissions",
+                                   glue("This is the European Age-sex standardised rate of alcohol-related hospital stays for people aged under 75 for the financial year ",
+                                        "{recent_alcohol_admissions %>% .$financial_year}. <br> <br>",
+                                        "This data is available at Scotland and health board level."))),
+          value=glue("{recent_alcohol_admissions %>% .$stays_easr}"),
+          subtitle = glue("Yearly total"),
           icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
@@ -44,12 +62,20 @@ output$alcohol_admissions_infobox <- renderInfoBox({
 ##### All cause mortality #####
 
 output$all_cause_mortality_infobox <- renderInfoBox({
-  infoBox(title=h5("",
+
+  recent_all_cause_mortality <- all_cause_mortality %>%
+    filter(indicator_age == "15 to 44", geography == "Scotland") %>% group_by(year) %>%
+    summarise(pop = sum(pop), deaths = sum(deaths)) %>%
+    mutate(rate = deaths/pop*100000) %>% arrange(desc(year)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_all_cause_mortality %>% .$year}"),
                    summaryButtonUI("all_cause_mortality_summary_info",
-                                   "",
-                                   paste("Blah blah blah"))),
-          value="Not available",
-          subtitle = glue(""),
+                                   "All-cause mortality (age 15 to 44)",
+                                   glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 for the year {recent_all_cause_mortality %>% .$year}.",
+                                        "The causes of death are coded in accordance with the International Statistical Classification of Diseases and Related Health Problems. <br> <br>",
+                                        "This data is available at Scotland, health board and council area level."))),
+          value=glue("{recent_all_cause_mortality %>% .$rate %>% round_half_up(2)}"),
+          subtitle = glue("Rate of deaths per 100,000"),
           icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })
@@ -57,12 +83,18 @@ output$all_cause_mortality_infobox <- renderInfoBox({
 ##### CHD deaths #####
 
 output$chd_deaths_infobox <- renderInfoBox({
-  infoBox(title=h5("",
+
+  recent_chd_deaths <- chd_deaths %>% filter(geography == "Scotland") %>% arrange(desc(period)) %>% head(1)
+
+  infoBox(title=h5(glue("2018-2020"),
                    summaryButtonUI("chd_deaths_summary_info",
-                                   "",
-                                   paste("Blah blah blah"))),
-          value="Not available",
-          subtitle = glue(""),
+                                   "Coronary Heart Disease (CHD) deaths (aged 45-74)",
+                                   glue("This is the age-sex standardised rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 for the year range 2018 to 2020.",
+                                        "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
+                                        "This data is available at Scotland, health board and council area level.  Further breakdown information at intermediate zone level, HSCP and HSC locality is ",
+                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+          value=glue("{recent_chd_deaths %>% .$measure}"),
+          subtitle = glue("Rate of deaths per 100,000"),
           icon = icon_no_warning_fn("heart-circle-check"),
           color = "purple")
 })

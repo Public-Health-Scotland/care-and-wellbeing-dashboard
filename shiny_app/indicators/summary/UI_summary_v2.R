@@ -210,7 +210,7 @@ tagList(
                                             withSpinner(infoBoxOutput("alcohol_deaths_infobox", width=NULL)),
                                      ),
                                      column(4,
-                                            h4("Alcohol-related hospital admissions"),
+                                            h4("Alcohol-related hospital admissions (under 75)"),
                                             withSpinner(infoBoxOutput("alcohol_admissions_infobox", width=NULL)),
                                      )
                                    ),
