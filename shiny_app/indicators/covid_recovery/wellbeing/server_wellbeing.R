@@ -69,7 +69,7 @@ output$preschool_chart_line = renderPlotly({
       .$hb2019name
 
     data_baseline = preschool %>%
-      filter(hb2019name == hb,
+      filter(hb2019name %in% hb,
              geography_type == "Health Board")
 
     p = preschool_plot_line(data, data_baseline, TRUE,

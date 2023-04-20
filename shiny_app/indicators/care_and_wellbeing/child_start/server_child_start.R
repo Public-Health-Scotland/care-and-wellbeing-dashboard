@@ -49,7 +49,7 @@ output$child_development_cw_plot = renderPlotly({
 
     data_baseline = preschool %>%
       filter(geography_type == "Health Board",
-             `hb2019name` == hb)
+             `hb2019name` %in% hb)
 
     p = make_child_development_cw_plot(data, data_baseline, TRUE,
                             input$child_development_cw_geog_name,
