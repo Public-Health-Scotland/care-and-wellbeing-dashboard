@@ -486,11 +486,14 @@ output$child_wellbeing_infobox <- renderInfoBox({
 ##### Infant mortality #####
 
 output$infant_mortality_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
+
+  recent_inf_deaths <- inf_deaths %>% arrange(desc(date)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_inf_deaths$date %>% format('%b %y')}"),
                    summaryButtonUI("infant_mortality_cw_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("{recent_inf_deaths$rate}"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("children"),
           color = "purple")
