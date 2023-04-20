@@ -13,7 +13,7 @@ observeEvent(input$child_development_cw_geog_type,
     filter(geography_type == input$child_development_cw_geog_type)
 
   updateSelectizeInput(session,
-                 "child_development_cw_geog_name", label = "2. Select geography",
+                 "child_development_cw_geog_name", label = "Step 2. Select national or local geography area",
                  choices = unique(areas_summary$geography))
 })
 
