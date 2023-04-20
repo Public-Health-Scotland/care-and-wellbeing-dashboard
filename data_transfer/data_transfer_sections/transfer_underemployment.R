@@ -18,7 +18,7 @@ underemployment = read_excel(paste0(path_in, "/Scotland%27s+Labour+Market+-+Peop
   mutate(geography = local_authority,
          pretty_date = year,
          geography_type = ifelse(local_authority == "Scotland", "Scotland",
-                                 local_authority),
+                                 "Council Area"),
          indicator = paste0(proportion, "%"),
          value = "underemployment")
 
