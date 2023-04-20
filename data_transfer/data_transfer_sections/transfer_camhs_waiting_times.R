@@ -41,7 +41,8 @@ camhs2 = camhs %>%
          geography = hb2019name,
          indicator = scales::percent(proportion, accuracy = .1),
          value = "camhs_waiting_times",
-         pretty_date = date)
+         pretty_date = date) %>%
+  arrange(pretty_date, geography)
 
 
 replace_file_fn(camhs2,
