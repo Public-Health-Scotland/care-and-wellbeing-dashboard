@@ -197,8 +197,22 @@ output$gender_pay_gap_cw_earnings_table = DT::renderDataTable({
 # ECONOMIC INACTIVITY ----
 ##############################################.
 
+observeEvent(input$economic_inactivity_cw_geog_type,
+             {
+
+               economic_inactivity_filtered = economic_inactivity %>%
+                 filter(geography_type == input$economic_inactivity_cw_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "economic_inactivity_cw_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(economic_inactivity_filtered$geography))#,
+               #selected = "")
+             })
+
 output$economic_inactivity_cw_plot <- renderPlotly({
-  region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_region) %>%
+  region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
     make_economic_inactivity_cw_plot(.)
 
 })
