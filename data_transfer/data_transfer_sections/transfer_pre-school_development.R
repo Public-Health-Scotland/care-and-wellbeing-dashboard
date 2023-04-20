@@ -54,7 +54,7 @@ preschool_structures %<>%
          indicator = scales::percent(prop_concern_any, accuracy = .1),
          pretty_date = financial_year,
          value = "pre_school_development") %>%
-  arrange(pretty_date, geography)
+  arrange(pretty_date, geography_type, geography)
 
 # Cleanup
 rm(preschool, preschool_HB, preschool_Scotland)
