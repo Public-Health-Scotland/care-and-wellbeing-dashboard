@@ -35,7 +35,7 @@ observeEvent(input$preschool_geog_type, {
 
   updateSelectizeInput(session,
                        "preschool_geog_name",
-                       label = glue("2. Select {select_choice(input$preschool_geog_type)}"),
+                       label = glue("Step 2: Select national or local geography area"),
                        choices = unique(areas$geography))
 })
 
@@ -99,6 +99,19 @@ output$preschool_data = DT::renderDataTable({
 # CAMHS waiting times----
 ##############################################.
 
+observeEvent(input$CAMHS_geog_type,
+             {
+
+               CAMHS_filtered = camhs_waiting_times2 %>%
+                 filter(geography_type == input$CAMHS_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "CAMHS_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(CAMHS_filtered$geography))#,
+               #selected = "")
+             })
 
 camhs_filtered_table = camhs_waiting_times2 %>%
   filter(wait_time == "0 to 18 weeks")
@@ -111,9 +124,9 @@ output$camhs_data = DT::renderDataTable({
 output$camhs_waiting_times_graph_line = renderPlotly({
 
   if (input$vlines_camhs == "On") {
-    plot = camhs_plot_line(hb_filter_table(camhs_filtered_table, input$HB_CAMHS))
+    plot = camhs_plot_line(hb_filter_table(camhs_filtered_table, input$CAMHS_geog_name))
   } else {
-    plot = camhs_plot_line(hb_filter_table(camhs_filtered_table, input$HB_CAMHS),
+    plot = camhs_plot_line(hb_filter_table(camhs_filtered_table, input$CAMHS_geog_name),
                            vline = FALSE)
   }
 
@@ -123,7 +136,7 @@ output$camhs_waiting_times_graph_line = renderPlotly({
 
 # Stacked bar chart with all wait times
 output$camhs_waiting_times_graph_stack = renderPlotly({
-  camhs_plot_stacked_bar(hb_filter_table(camhs_waiting_times2, input$HB_CAMHS))
+  camhs_plot_stacked_bar(hb_filter_table(camhs_waiting_times2, input$CAMHS_geog_name))
 
 })
 
