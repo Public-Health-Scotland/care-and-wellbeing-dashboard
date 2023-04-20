@@ -53,7 +53,8 @@ preschool_structures %<>%
   mutate(prop_concern_any = concern_any/number_of_reviews,
          indicator = scales::percent(prop_concern_any, accuracy = .1),
          pretty_date = financial_year,
-         value = "pre_school_development")
+         value = "pre_school_development") %>%
+  arrange(pretty_date, geography)
 
 # Cleanup
 rm(preschool, preschool_HB, preschool_Scotland)
