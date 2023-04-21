@@ -230,9 +230,9 @@ tagList(
 
 
                         h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
-                        DT::dataTableOutput("camhs_data_data"),
+                        DT::dataTableOutput("camhs_data"),
 
-                        dataDownloadUI("camhs_data")
+                        dataDownloadUI("camhs")
 
                ),
 
@@ -309,9 +309,9 @@ tagList(
 
 
                         h3("Data table: Infant mortality"),
-                        DT::dataTableOutput("infant_data"),
+                        DT::dataTableOutput("infant_mortality_data"),
 
-                        dataDownloadUI("infant_data")
+                        dataDownloadUI("infant_mortality")
                ),
                ##############################################.
                # Physical Activity----

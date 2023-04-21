@@ -160,7 +160,7 @@ observeEvent(input$HB_CAMHS,{
     filter(health_board == input$HB_CAMHS)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "camhs_data", filename = "camhs_data",
+                     id = "camhs", filename = "CAMHS_waiting_times",
                      add_separator_cols = c(4),
                      add_separator_cols_2dp = c(5))
 
@@ -205,7 +205,7 @@ inf_deaths %>%
          "Number of infant deaths" = "count",
          "Number of live births" = "denominator",
          "Rate per 1,000 live births" = "rate") %>%
-  dataDownloadServer(id = "infant_data", filename = "infant_data",
+  dataDownloadServer(id = "infant_mortality", filename = "infant_mortality",
                      add_separator_cols = c(2,3),
                      add_separator_cols_2dp = c(4))
 
@@ -237,7 +237,7 @@ observeEvent(input$school_leavers_category_input,{
     filter(category == input$school_leavers_category_input)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "school_leavers", filename = "school_leavers",
+                     id = "school_leavers", filename = "positive_destination_of_school_leavers",
                      add_separator_cols_2dp = c(4))
 
 })
@@ -259,7 +259,7 @@ protection_from_harm %>%
   arrange(desc(date_end)) %>%
   select(Date, Value) %>%
   rename("Number of children subject to interagency referral discussions" = "Value") %>%
-  dataDownloadServer(id = "protection_harm", filename = "protection_harm",
+  dataDownloadServer(id = "protection_harm", filename = "protection_from_harm",
                      add_separator_cols = c(2))
 
 
