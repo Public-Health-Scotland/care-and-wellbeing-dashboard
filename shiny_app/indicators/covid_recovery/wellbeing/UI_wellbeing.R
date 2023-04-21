@@ -308,8 +308,10 @@ tagList(
                                    'infant_mortality_graph'),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("infant_data")
+                        h3("Data table: Infant mortality"),
+                        DT::dataTableOutput("infant_data"),
+
+                        dataDownloadUI("infant_data")
                ),
                ##############################################.
                # Physical Activity----
