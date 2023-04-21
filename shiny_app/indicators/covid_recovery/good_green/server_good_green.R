@@ -141,15 +141,16 @@ observeEvent(input$employees_living_wage_map_shape_click,{
 
 
 
-output$employees_living_wage_data = DT::renderDataTable({
-
-  data_table = employees_living_wage_by_sector %>% filter(measure == "proportion")
-
-  datatable_style_download(data_table,
-                           datetype = "year",
-                           data_name = "employees_living_wage",
-                           geogtype = "none")
-})
+employees_living_wage_by_sector %>%
+  filter(measure == "proportion") %>%
+  arrange(sector, earning, year) %>%
+  select(sector, earning, year, measure_value) %>%
+  mutate(sector = factor(sector),
+         year = factor(year),
+         earning = factor(earning)) %>%
+  rename("Proportion of employees" = "measure_value") %>%
+  dataDownloadServer(id = "living_wage", filename = "employees_on_living_wage",
+                     add_separator_cols_1dp = c(4))
 
 
 ##############################################.

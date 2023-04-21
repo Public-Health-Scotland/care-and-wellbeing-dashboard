@@ -70,9 +70,12 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_line_LA")))
                         ),
 
-                        h3("Data table"),
+                        h3("Data table: Proportion of employees on the living wage"),
+                        DT::dataTableOutput("living_wage_data"),
 
-                        withSpinner(DT::dataTableOutput("employees_living_wage_data"))),
+                        dataDownloadUI("living_wage")),
+
+
 
                ##############################################.
                # GENDER PAY GAP----
