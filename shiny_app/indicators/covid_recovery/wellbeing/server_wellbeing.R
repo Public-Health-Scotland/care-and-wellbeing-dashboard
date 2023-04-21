@@ -250,21 +250,13 @@ output$protection_harm_line = renderPlotly({
 
 })
 
-output$protection_harm_data = DT::renderDataTable({
 
-  out_data = protection_from_harm %>%
-    mutate(Date = paste0(format(date_start, "%d %B %Y"),
-                         " to ",
-                         format(date_end, "%d %B %Y"))) %>%
-    select(Date,
-           "Number of children subject to interagency referral discussions" = Value)
-
-  datatable_style_download(out_data,
-                           datetype = "fortnight",
-                           data_name = "protection_from_harm",
-                           geogtype = "scotland")
-})
-
+protection_from_harm %>%
+  arrange(desc(date_end)) %>%
+  select(Date, Value) %>%
+  rename("Number of children subject to interagency referral discussions" = "Value") %>%
+  dataDownloadServer(id = "protection_harm", filename = "protection_harm",
+                     add_separator_cols = c(2))
 
 
 

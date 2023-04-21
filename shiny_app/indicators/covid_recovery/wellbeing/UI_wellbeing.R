@@ -267,8 +267,10 @@ tagList(
                                                      "but generally fall into the periods Easter (late March/early April), Summer (late June/early July), Autumn (October), and Christmas (December).")),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("protection_harm_data")
+                        h3("Data table: Number of children subject to interagency referral discussions"),
+                        DT::dataTableOutput("protection_harm_data"),
+
+                        dataDownloadUI("protection_harm")
 
 
                ),
