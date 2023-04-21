@@ -85,10 +85,10 @@ tagList(
 
                         withSpinner(plotlyOutput("school_leavers_line_figure")),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of school leavers in positive destinations"),
+                        DT::dataTableOutput("school_leavers_data"),
 
-                        withSpinner(DT::dataTableOutput("school_leavers_table"))
-
+                        dataDownloadUI("school_leavers")
                ),
 
 

@@ -203,9 +203,22 @@ output$school_leavers_line_figure = renderPlotly({
 })
 
 
-output$school_leavers_table = DT::renderDataTable({
+observeEvent(input$school_leavers_category_input,{
 
-  datatable_style_download(positive_destinations_school_leavers, datetype = "year", data_name = "school_leavers", geogtype = "scotland")
+  data_unfiltered <- positive_destinations_school_leavers %>%
+    arrange(category, characteristic, financial_year) %>%
+    select(category, characteristic, financial_year, percent) %>%
+    mutate(category = factor(category),
+           characteristic = factor(characteristic)) %>%
+    rename("Percentage of school leavers in positive destinations" = "percent")
+
+  data_filtered <- data_unfiltered %>%
+    filter(category == input$school_leavers_category_input)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "school_leavers", filename = "school_leavers",
+                     add_separator_cols_2dp = c(4))
+
 })
 
 
