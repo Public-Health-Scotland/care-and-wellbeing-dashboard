@@ -124,10 +124,6 @@ output$preschool_data = DT::renderDataTable({
 camhs_filtered_table = camhs_waiting_times2 %>%
   filter(wait_time == "0 to 18 weeks")
 
-output$camhs_data = DT::renderDataTable({
-  datatable_style_download(camhs_waiting_times2, data_name = "camhs")
-})
-
 # Proportion meeting target of 18 weeks line chart
 output$camhs_waiting_times_graph_line = renderPlotly({
 
@@ -148,6 +144,27 @@ output$camhs_waiting_times_graph_stack = renderPlotly({
 
 })
 
+observeEvent(input$HB_CAMHS,{
+
+  data_unfiltered <- camhs_waiting_times2 %>%
+    arrange(desc(date), hb2019name, wait_time) %>%
+    select(date, hb2019name, wait_time, number, proportion) %>%
+    mutate(date = format(date, "%B %Y")) %>%
+    mutate(wait_time = factor(wait_time),
+           hb2019name = factor(hb2019name)) %>%
+    rename("health_board" = "hb2019name",
+           "Number of patients seen" = "number",
+           "Proportion of patients seen" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(health_board == input$HB_CAMHS)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "camhs_data", filename = "camhs_data",
+                     add_separator_cols = c(4),
+                     add_separator_cols_2dp = c(5))
+
+})
 
 ##############################################.
 # Infant mortality----

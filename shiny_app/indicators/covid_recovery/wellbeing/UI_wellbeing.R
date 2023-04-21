@@ -229,8 +229,10 @@ tagList(
                                      inline = TRUE),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("camhs_data")
+                        h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
+                        DT::dataTableOutput("camhs_data_data"),
+
+                        dataDownloadUI("camhs_data")
 
                ),
 
