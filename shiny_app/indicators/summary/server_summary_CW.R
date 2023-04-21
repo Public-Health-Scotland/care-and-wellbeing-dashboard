@@ -16,7 +16,7 @@ observeEvent(input$geog_type_summary_CW,
 
 
 ################################################.
-# STRENGTHEN THE ROLE AND IMPACT OF ILL HEALTH PREVENTION ----
+# `Strengthen the role and impact of ill health prevention` ----
 ################################################.
 
 ##### Asthma admissions #####
@@ -32,10 +32,10 @@ output$asthma_admissions_infobox <- renderInfoBox({
                                    "Admissions for asthma",
                                    glue("This is the yearly total number of admissions for asthma for the financial year (?). <br> <br>",
                                         "This data is available at Scotland and health board level. ",
-                                        "(not true just example) Further breakdown information at intermediate zone level is available under strengthen the role and impact ",
-                                        " of ill health prevention on the care and wellbeing tab. <br> <br>",
+                                        "(not true just example) Further breakdown information at intermediate zone level is available under `Srengthen the role and impact ",
+                                        " of ill health prevention` on the `Care and Wellbeing` tab. <br> <br>",
                                         "(eg) Further breakdown of age groups and sex is available under strengthen the role and impact ",
-                                        " of ill health prevention on the care and wellbeing tab."))),
+                                        "of ill health prevention on the `Care and Wellbeing` tab."))),
           value= glue("{recent_asthma %>% .$stays_number}"),
           subtitle = glue("Yearly total"),
           icon = icon_no_warning_fn("user-shield"),
@@ -48,7 +48,7 @@ output$alcohol_deaths_infobox <- renderInfoBox({
   infoBox(title=h5(glue(""),
                    summaryButtonUI("alcohol_deaths_summary_info",
                                    "",
-                                   glue("TBC"))),
+                                   glue("Not available"))),
           value=glue("Not available"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
@@ -70,7 +70,8 @@ output$alcohol_admissions_infobox <- renderInfoBox({
                                    "Alcohol-related hospital admissions",
                                    glue("This is the European Age-sex standardised rate of alcohol-related hospital stays for people aged under 75 for the financial year ",
                                         "{recent_alcohol_admissions %>% .$financial_year}. <br> <br>",
-                                        "This data is available at Scotland and health board level."))),
+                                        "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
+                                        "of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_alcohol_admissions %>% .$stays_easr}"),
           subtitle = glue("Yearly total"),
           icon = icon_no_warning_fn("user-shield"),
@@ -91,7 +92,8 @@ output$all_cause_mortality_infobox <- renderInfoBox({
                                    "All-cause mortality (age 15 to 44)",
                                    glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 for the year {recent_all_cause_mortality %>% .$year}.",
                                         "The causes of death are coded in accordance with the International Statistical Classification of Diseases and Related Health Problems. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level."))),
+                                        "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
+                                        "of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_all_cause_mortality %>% .$rate %>% round_half_up(2)}"),
           subtitle = glue("Rate of deaths per 100,000"),
           icon = icon_no_warning_fn("user-shield"),
@@ -110,7 +112,7 @@ output$chd_deaths_infobox <- renderInfoBox({
                                    glue("This is the age-sex standardised rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 for the year range 2018 to 2020.",
                                         "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
                                         "This data is available at Scotland, health board and council area level. Further breakdown information at intermediate zone level, HSCP and HSC locality is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_chd_deaths %>% .$measure}"),
           subtitle = glue("Rate of deaths per 100,000"),
           icon = icon_no_warning_fn("user-shield"),
@@ -129,7 +131,7 @@ output$drug_deaths_infobox <- renderInfoBox({
                                    "Drug-related deaths",
                                    glue("This is the age-sex standardised rate of drug-related deaths per 100,000 population for the year range {recent_drug_related_deaths$year}. <br> <br>",
                                         "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths as well as confidence intervals is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_drug_related_deaths$rate}"),
           subtitle = glue("Rate of deaths per 100,000"),
           icon = icon_no_warning_fn("user-shield"),
@@ -149,7 +151,7 @@ output$drug_admissions_infobox <- renderInfoBox({
                                    glue("This is the age-sex standardised rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {recent_drug_stays$financial_year}. ",
                                         "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
                                         "This data is available at Scotland level. Further breakdown of age groups is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_drug_stays$rate}"),
           subtitle = glue("Rate of stays per 100,000"),
           icon = icon_no_warning_fn("user-shield"),
@@ -163,7 +165,7 @@ output$experience_recipients_infobox <- renderInfoBox({
                    summaryButtonUI("experience_recipients_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -181,7 +183,7 @@ output$experience_of_unpaid_carers_agree_infobox <- renderInfoBox({
                                    glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
                                         "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_experience_unpaid_carers$date}. <br> <br>",
                                         "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_experience_unpaid_carers$indicator %>% as.numeric()*100}%"),
           subtitle = glue("Percentage who strongly agreed"),
           icon = icon_no_warning_fn("user-shield"),
@@ -198,7 +200,7 @@ output$experience_of_unpaid_carers_disagree_infobox <- renderInfoBox({
                                    glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
                                         "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_experience_unpaid_carers$date}. <br> <br>",
                                         "This data is available at Scotland level. Further breakdowns of levels of appropriateness of birthweight is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_experience_unpaid_carers$indicator %>% as.numeric()*100}%"),
           subtitle = glue("Percentage who strongly disagreed"),
           icon = icon_no_warning_fn("user-shield"),
@@ -217,7 +219,7 @@ output$hospital_admission_heart_attack_infobox <- renderInfoBox({
                                    glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
                                         "amongst those aged under 75 years in the year {recent_heart_attack$date}. <br> <br>",
                                         "This data is available at Scotland, health board and council area level. Further breakdown information is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_heart_attack$total_admissions}"),
           subtitle = glue("Yearly total"),
           icon = icon_no_warning_fn("user-shield"),
@@ -231,7 +233,7 @@ output$health_risk_behaviours_infobox <- renderInfoBox({
                    summaryButtonUI("health_risk_behaviours_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -252,7 +254,7 @@ output$healthy_birthweight_infobox <- renderInfoBox({
                                         "{recent_birthweight$financial_year}. Birthweight for gestational age is an indicator used to differentiate between ",
                                         "babies who, for example, are light because they are preterm and those who are inappropriately light after adjustment for gestational age at birth. <br> <br>",
                                         "This data is available at Scotland level. Further information is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_birthweight$proportion %>% round_half_up(4)*100}%"),
           subtitle = glue("Percentage of livebirths of an approporiate birthweight"),
           icon = icon_no_warning_fn("user-shield"),
@@ -266,7 +268,7 @@ output$healthy_life_expectancy_infobox <- renderInfoBox({
                    summaryButtonUI("healthy_life_expectancy_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -279,7 +281,7 @@ output$healthy_weight_infobox <- renderInfoBox({
                    summaryButtonUI("healthy_weight_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -299,7 +301,7 @@ output$adult_long_term_condition_infobox <- renderInfoBox({
                                         "or expected to last 12 limiting months or more. A long-term condition is defined as limiting if the respondent reported ",
                                         "that it limited their activities in any way. <br> <br>",
                                         "This data is available at Scotland level. Further information is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_adult_limiting_long_term$Percent}%"),
           subtitle = glue("Percentage of adults"),
           icon = icon_no_warning_fn("user-shield"),
@@ -313,7 +315,7 @@ output$mental_wellbeing_infobox <- renderInfoBox({
                    summaryButtonUI("mental_wellbeing_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -326,7 +328,7 @@ output$physical_activity_infobox <- renderInfoBox({
                    summaryButtonUI("physical_activity_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -339,7 +341,7 @@ output$premature_mortality_infobox <- renderInfoBox({
                    summaryButtonUI("premature_mortality_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -352,7 +354,7 @@ output$quality_care_infobox <- renderInfoBox({
                    summaryButtonUI("quality_care_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -365,7 +367,7 @@ output$screening_infobox <- renderInfoBox({
                    summaryButtonUI("screening_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -384,7 +386,7 @@ output$adults_self_assessed_health_infobox <- renderInfoBox({
                                         "Scottish Health survey in {recent_adult_self_assessed_health$Year}. Participants who are aged 13 ",
                                         "(? - not 16?) and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
                                         "This data is available at Scotland level. Further information is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_adult_self_assessed_health$Percent}%"),
           subtitle = glue("Percentage of adults"),
           icon = icon_no_warning_fn("user-shield"),
@@ -398,7 +400,7 @@ output$vaccinations_infobox <- renderInfoBox({
                    summaryButtonUI("vaccinations_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -411,7 +413,7 @@ output$work_related_health_infobox <- renderInfoBox({
                    summaryButtonUI("work_related_health_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -432,10 +434,10 @@ output$children_at_risk_of_obesity_infobox <- renderInfoBox({
                                    "Children at risk of obesity",
                                    glue("This is the percentage of children aged between 2 and 15 at risk of obesity in {recent_childhood_obesity$date}. <br> <br> ",
                                         "This data is available at Scotland level. Further information is ",
-                                        "available under giving every child the best start start in life on the care and wellbeing tab."))),
+                                        "available under `Giving every child the best start in life` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_childhood_obesity$indicator %>% as.numeric() %>% round_half_up(2)}%"),
           subtitle = glue("Percentage of children"),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -446,9 +448,9 @@ output$child_material_deprivation_infobox <- renderInfoBox({
                    summaryButtonUI("child_material_deprivation_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -463,10 +465,10 @@ output$child_development_cw_infobox <- renderInfoBox({
                                    "Child social and physical development",
                                    glue("This is the percentage of children with a concern at their 27-30 month review recorded in {recent_preschool$financial_year}. ",
                                         "This data is available at Scotland, health board and council area level. Further information is ",
-                                        "available under strengthen the role and impact of ill health prevention on the care and wellbeing tab."))),
+                                        "available under `Giving every child the best start in life` on the `Care and Wellbeing` tab."))),
           value=glue("{recent_preschool$prop_concern_any %>% round_half_up(4)*100}%"),
           subtitle = glue("Percentage showing concern"),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -477,9 +479,9 @@ output$child_wellbeing_infobox <- renderInfoBox({
                    summaryButtonUI("child_wellbeing_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -491,11 +493,13 @@ output$infant_mortality_cw_infobox <- renderInfoBox({
 
   infoBox(title=h5(glue("{recent_inf_deaths$date %>% format('%b %y')}"),
                    summaryButtonUI("infant_mortality_cw_summary_info",
-                                   "",
-                                   glue("TBC"))),
-          value=glue("{recent_inf_deaths$rate}"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
+                                   "Infant mortality",
+                                   glue("This is the rate of infant deaths per 1,000 live births in {recent_inf_deaths$date %>% format('%B %Y')}. <br> <br>",
+                                        "This data is available at Scotland level. Further information is ",
+                                        "available under `Giving every child the best start in life` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_inf_deaths$rate %>% round_half_up(2)}"),
+          subtitle = glue("Rate per 1,000 livebirths"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -506,9 +510,9 @@ output$perinatal_mortality_infobox <- renderInfoBox({
                    summaryButtonUI("perinatal_mortality_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -519,9 +523,9 @@ output$physical_activity_children_cw_infobox <- renderInfoBox({
                    summaryButtonUI("physical_activity_children_cw_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
+          icon = icon_no_warning_fn("baby"),
           color = "purple")
 })
 
@@ -533,13 +537,21 @@ output$physical_activity_children_cw_infobox <- renderInfoBox({
 ##### CAHMS waiting times #####
 
 output$camhs_waiting_times_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
+
+  recent_camhs_waiting_times <-  camhs_waiting_times2 %>%
+    filter(geography == "Scotland", wait_time == "0 to 18 weeks") %>%
+    arrange(desc(date)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_camhs_waiting_times$date %>% format('%b %y')}"),
                    summaryButtonUI("camhs_waiting_times_cw_summary_info",
-                                   "",
-                                   glue("TBC"))),
-          value=glue("Not available"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+                                   "CAMHS waiting times",
+                                   glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
+                                        "to CAMHS (Children and Adolescent Mental Health Services) in {recent_camhs_waiting_times$date %>% format('%B %Y')}. <br> <br>",
+                                        "This data is available at Scotland and health board level. Further breakdown information for other wait times is ",
+                                        "available under `Enable all children, young people and adults to maximise their capabilities and control over their lives` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_camhs_waiting_times$proportion %>% round_half_up(4)*100}%"),
+          subtitle = glue("Percentage of children and young people"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -550,9 +562,9 @@ output$children_relationships_infobox <- renderInfoBox({
                    summaryButtonUI("children_relationships_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -563,9 +575,9 @@ output$childrens_voices_infobox <- renderInfoBox({
                    summaryButtonUI("childrens_voices_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -576,9 +588,9 @@ output$confidence_of_young_infobox <- renderInfoBox({
                    summaryButtonUI("confidence_of_young_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -589,9 +601,9 @@ output$mental_health_cw_infobox <- renderInfoBox({
                    summaryButtonUI("mental_health_cw_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -601,40 +613,80 @@ output$mental_health_cw_infobox <- renderInfoBox({
 
 ##### Economic inactivity #####
 
-output$economic_inactivity_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("economic_inactivity_cw_summary_info",
-                                   "",
-                                   glue("TBC"))),
-          value=glue("Not available"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+output$economic_inactivity_cw_want_infobox <- renderInfoBox({
+
+  recent_economic_activity <- economic_inactivity %>%
+    filter(geography == "Scotland", breakdown == "Wants to Work") %>%
+    arrange(desc(year)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_economic_activity$year}"),
+                   summaryButtonUI("economic_inactivity_cw_want_summary_info",
+                                   "Economic inactivity",
+                                   glue("This is the percentage of economically inactive people who want to work in {recent_economic_activity$year}. <br> <br>",
+                                        "This data is available at Scotland and council area level. Further information is available under ",
+                                        "`Create fair employment and good work for all` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_economic_activity$percent %>% round_half_up(2)}%"),
+          subtitle = glue("Percentage who want to work"),
+          icon = icon_no_warning_fn("building-user"),
+          color = "purple")
+})
+
+
+output$economic_inactivity_cw_not_want_infobox <- renderInfoBox({
+
+  recent_economic_activity <- economic_inactivity %>%
+    filter(geography == "Scotland", breakdown == "Does Not\r\nWant to Work") %>%
+    arrange(desc(year)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_economic_activity$year}"),
+                   summaryButtonUI("economic_inactivity_cw_not_want_summary_info",
+                                   "Economic inactivity",
+                                   glue("This is the percentage of economically inactive people who don`t want to work in {recent_economic_activity$year}. <br> <br>",
+                                        "This data is available at Scotland and council area level. Further information is available under ",
+                                        "`Create fair employment and good work for all` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_economic_activity$percent %>% round_half_up(2)}%"),
+          subtitle = glue("Percentage who don't want to work"),
+          icon = icon_no_warning_fn("building-user"),
           color = "purple")
 })
 
 ##### Employees on the living wage #####
 
 output$employees_living_wage_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
+
+  recent_employees_living_wage <- employees_living_wage_by_LA %>%
+    filter(geography == "Scotland", earning == "Earning less than the living wage") %>%
+    arrange(desc(year)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_employees_living_wage$year}"),
                    summaryButtonUI("employees_living_wage_cw_summary_info",
-                                   "",
-                                   glue("TBC"))),
-          value=glue("Not available"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+                                   "Employees on the living wage",
+                                   glue("This is the percentage of employees earning less than the living wage in {recent_employees_living_wage$year}. <br> <br>",
+                                        "This data is available at Scotland and council area level. Further breakdown information of employees by sector is available under ",
+                                        "`Create fair employment and good work for all` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_employees_living_wage$measure_value %>% round_half_up(2)}%"),
+          subtitle = glue("Percentage of employees earning less than the living wage"),
+          icon = icon_no_warning_fn("building-user"),
           color = "purple")
 })
 
 ##### Pay gap #####
 
 output$gender_pay_gap_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
+
+  recent_gender_pay_gap <- gender_pay_gap_by_sector %>%
+    filter(gender == "Pay Gap", work_pattern == "All", sector == "All") %>%
+    arrange(desc(year)) %>% head(1)
+
+  infoBox(title=h5(glue("{recent_gender_pay_gap$year}"),
                    summaryButtonUI("gender_pay_gap_cw_summary_info",
-                                   "",
-                                   glue("TBC"))),
-          value=glue("Not available"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+                                   "Pay gap",
+                                   glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {recent_gender_pay_gap$year}. <br> <br>",
+                                        "This data is available at Scotland level. Further breakdown information of sector, work pattern and information regarding median hourly earnings for each sex is available under ",
+                                        "`Create fair employment and good work for all` on the `Care and Wellbeing` tab."))),
+          value=glue("{recent_gender_pay_gap$measure_value}%"),
+          subtitle = glue("Percentage difference between men`s and women`s hourly earnings"),
+          icon = icon_no_warning_fn("building-user"),
           color = "purple")
 })
 
@@ -645,9 +697,9 @@ output$work_related_ill_health_infobox <- renderInfoBox({
                    summaryButtonUI("work_related_ill_health_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("carrot"),
+          icon = icon_no_warning_fn("building-user"),
           color = "purple")
 })
 
@@ -662,7 +714,7 @@ output$food_insecurity_infobox <- renderInfoBox({
                    summaryButtonUI("food_insecurity_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -675,7 +727,7 @@ output$persistent_poverty_infobox <- renderInfoBox({
                    summaryButtonUI("persistent_poverty_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -688,7 +740,7 @@ output$satisfaction_with_housing_infobox <- renderInfoBox({
                    summaryButtonUI("satisfaction_with_housing_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
@@ -705,7 +757,7 @@ output$loneliness_infobox <- renderInfoBox({
                    summaryButtonUI("loneliness_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("tree-city"),
           color = "purple")
@@ -718,7 +770,7 @@ output$areas_of_health_inequalities_infobox <- renderInfoBox({
                    summaryButtonUI("areas_of_health_inequalities_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("tree-city"),
           color = "purple")
@@ -731,7 +783,7 @@ output$perceptions_of_local_area_infobox <- renderInfoBox({
                    summaryButtonUI("perceptions_of_local_area_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("tree-city"),
           color = "purple")
@@ -744,7 +796,7 @@ output$places_to_intereact_infobox <- renderInfoBox({
                    summaryButtonUI("places_to_intereact_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("tree-city"),
           color = "purple")
@@ -761,7 +813,7 @@ output$gender_balance_infobox <- renderInfoBox({
                    summaryButtonUI("gender_balance_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("people-group"),
           color = "purple")
@@ -774,7 +826,7 @@ output$dignity_respect_infobox <- renderInfoBox({
                    summaryButtonUI("dignity_respect_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("people-group"),
           color = "purple")
@@ -791,7 +843,7 @@ output$blue_green_space_infobox <- renderInfoBox({
                    summaryButtonUI("blue_green_space_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("seedling"),
           color = "purple")
@@ -804,7 +856,7 @@ output$journeys_active_infobox <- renderInfoBox({
                    summaryButtonUI("journeys_active_summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("seedling"),
           color = "purple")
@@ -817,7 +869,7 @@ output$visit_outdoors_infobox <- renderInfoBox({
                    summaryButtonUI("visit_outdoors__summary_info",
                                    "",
                                    glue("TBC"))),
-          value=glue("Not available"),
+          value=glue("TBC"),
           subtitle = glue(""),
           icon = icon_no_warning_fn("seedling"),
           color = "purple")

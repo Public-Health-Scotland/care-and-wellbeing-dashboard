@@ -395,11 +395,15 @@ tagList(
                                    h2("Create fair employment and good work for all"),
 
                                    fluidRow(
-                                     column(6,
+                                     column(4,
                                             h4("Economic inactivity"),
-                                            withSpinner(infoBoxOutput("economic_inactivity_cw_infobox", width=NULL))
+                                            withSpinner(infoBoxOutput("economic_inactivity_cw_want_infobox", width=NULL))
                                      ),
-                                     column(6,
+                                     column(4,
+                                            h4("Economic inactivity"),
+                                            withSpinner(infoBoxOutput("economic_inactivity_cw_not_want_infobox", width=NULL))
+                                     ),
+                                     column(4,
                                             h4("Employees on the living wage"),
                                             withSpinner(infoBoxOutput("employees_living_wage_cw_infobox", width=NULL))
                                      )),
