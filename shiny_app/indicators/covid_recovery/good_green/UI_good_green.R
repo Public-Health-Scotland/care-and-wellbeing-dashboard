@@ -289,9 +289,10 @@ tagList(
 
                         withSpinner(plotlyOutput("zero_hours_contracts_line_plot")),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of people in employment on a zero-hours contract"),
 
-                        withSpinner(DT::dataTableOutput("zero_hours_contracts_data_table"))),
+                        DT::dataTableOutput("zero_hour_contracts_data"),
+                        dataDownloadUI("zero_hour_contracts")),
 
                ##############################################.
                # SKILLS SHORTAGE VACANCIES----

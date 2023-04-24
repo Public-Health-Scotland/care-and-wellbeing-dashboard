@@ -475,19 +475,13 @@ output$zero_hours_contracts_line_plot = renderPlotly({
 })
 
 
-output$zero_hours_contracts_data_table = DT::renderDataTable({
-
-  plot_data = zero_hour_contracts %>%
-    mutate(percent_of_people = round_half_up(percent_of_people,1)) %>%
-    select(-number_of_people) %>%
-    filter(!is.na(percent_of_people))
-
-
-  datatable_style_download(plot_data,
-                           datetype = "year",
-                           data_name = "zero_hour_contracts",
-                           geogtype = "none")
-})
+zero_hour_contracts %>%
+  mutate(percent_of_people = round_half_up(percent_of_people,1)) %>%
+  select(date, percent_of_people) %>%
+  rename("Quarter" = "date",
+         "Percentage of people on zero-hours contacts (%)" = "percent_of_people") %>%
+  dataDownloadServer(id = "zero_hour_contracts", filename = "zero_hour_contracts",
+                     add_separator_cols_1dp = c(2))
 
 
 
