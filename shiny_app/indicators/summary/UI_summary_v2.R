@@ -12,7 +12,7 @@ tagList(
 
            p("Clicking on the 'i' button will provide additional information about the indicator."),
 
-           p("Click the title above the box to jump to the relevant tab within the dashboard.",
+           p("Click the title above each box to jump to the relevant tab within the dashboard.",
              "(Only the first row of Care and Wellbeing is working - please provide feedback so",
              "we can make a decision on whether or not to advance on making all titles jump links)"),
            br(),
