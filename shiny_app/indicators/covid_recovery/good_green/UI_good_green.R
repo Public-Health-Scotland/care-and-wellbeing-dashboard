@@ -328,8 +328,9 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Skills shortage data table"),
-                        DT::dataTableOutput("skills_shortage_data")
+                        h3("Data table: Skills shortage"),
+                        DT::dataTableOutput("skills_shortage_data"),
+                        dataDownloadUI("skills_shortage")
                ),
 
 

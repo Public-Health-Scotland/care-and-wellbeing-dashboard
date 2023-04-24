@@ -656,12 +656,21 @@ output$skills_shortage_graph_bar <- renderPlotly({
     plot_skills_shortage(.)
 })
 
-output$skills_shortage_data <- DT::renderDataTable({
-  datatable_style_download(skills_shortage_vacancies, datetype = "year", data_name = "", geogtype = "")
+observeEvent(input$region_skills_shortage, {
+
+  data_unfiltered <- skills_shortage_vacancies %>%
+    select(year, region, vacancy_type, n_vacancies, all_establishments, percent) %>%
+    mutate(percent = 100*percent) %>%
+    rename("Number of Vacancies" = "n_vacancies",
+           "Percentage of Vacancies (%)" = "percent")
+
+    data_filtered <- data_unfiltered %>%
+      filter(region == input$region_skills_shortage)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "skills_shortage", filename = "skills_shortage",
+                       add_separator_cols = c(4,5,6))
 })
-
-
-
 
 
 ##############################################.
