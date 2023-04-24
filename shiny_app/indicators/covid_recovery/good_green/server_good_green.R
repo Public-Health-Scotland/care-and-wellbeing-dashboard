@@ -182,28 +182,49 @@ output$gender_pay_gap_plot_line_output = renderPlotly({
 
 
 
-output$gender_pay_gap_data = DT::renderDataTable({
+observeEvent(input$gender_pay_gap_sector_radio, {
 
-  gender_pay_gap_by_sector_Gap = gender_pay_gap_by_sector %>%
-    filter(gender == "Pay Gap") %>%
-    rename("Measure" = "gender")
+  observeEvent(input$gender_pay_gap_work_radio, {
 
-  datatable_style_download(gender_pay_gap_by_sector_Gap,
-                           datetype = "year",
-                           data_name = "gender_pay_gap",
-                           geogtype = "none")
+    data_unfiltered <- gender_pay_gap_by_sector %>%
+      filter(gender == "Pay Gap") %>%
+      select(year, sector, work_pattern, measure_value) %>%
+      rename("Gender Pay Gap (%)" = "measure_value")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sector == input$gender_pay_gap_sector_radio) %>%
+      filter(work_pattern == input$gender_pay_gap_work_radio)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "gender_pay_gap", filename = "gender_pay_gap")
+  })
+})
+
+observeEvent(input$gender_pay_gap_sector_radio, {
+
+  observeEvent(input$gender_pay_gap_work_radio, {
+
+    data_unfiltered <- gender_pay_gap_by_sector %>%
+      filter(gender != "Pay Gap") %>%
+      select(year, sector, work_pattern, gender, measure_value) %>%
+      rename("Median Hourly Earnings (£)" = "measure_value")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sector == input$gender_pay_gap_sector_radio) %>%
+      filter(work_pattern == input$gender_pay_gap_work_radio)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "gender_pay_gap_earnings", filename = "gender_pay_gap_earnings")
+  })
 })
 
 
-output$gender_pay_gap_data_earnings = DT::renderDataTable({
+observeEvent(input$gender_pay_gap_tabBox, {
 
-  gender_pay_gap_by_sector_earnings = gender_pay_gap_by_sector %>%
-    filter(gender != "Pay Gap")
+  output$gender_pay_gap_table_title <- renderText({ifelse(input$gender_pay_gap_tabBox == "Earnings",
+                                              "Data table: Median Hourly Earnings (£) by gender",
+                                              "Data table: Gender pay gap (%)")})
 
-  datatable_style_download(gender_pay_gap_by_sector_earnings,
-                           datetype = "earnings",
-                           data_name = "gender_pay_gap",
-                           geogtype = "none")
 })
 
 ##############################################.

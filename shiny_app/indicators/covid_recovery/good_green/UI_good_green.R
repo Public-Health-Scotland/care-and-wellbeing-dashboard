@@ -129,7 +129,7 @@ tagList(
 
 
 
-                        h3("Data tables"),
+                        h3(textOutput("gender_pay_gap_table_title")),
 
                         tabBox(
                           #title = "Data tables",
@@ -137,10 +137,13 @@ tagList(
                           id = "gender_pay_gap_tabBox", height = "250px", width=12,
                           tabPanel("Pay gap",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_data"))),
+                                   DT::dataTableOutput("gender_pay_gap_data"),
+                                   dataDownloadUI("gender_pay_gap")
+                                   ),
                           tabPanel("Earnings",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_data_earnings")))
+                                   DT::dataTableOutput("gender_pay_gap_earnings_data"),
+                                   dataDownloadUI("gender_pay_gap_earnings"))
                         )),
                ##############################################.
                # EMPLOYMENT GAP----
