@@ -2,7 +2,7 @@ tagList(
   h1("Strengthen the role and impact of ill health prevention" ),
   br(),
   h4(strong("Select indicator: ")),
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
 
                ##############################################.

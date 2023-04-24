@@ -2,12 +2,24 @@
 tagList(
   fluidRow(width=12,
            h1("Dashboard summary"),
-           linebreaks(1),
 
+           p("Select either Covid Recovery or Care and Wellbeing, and then select at which national or",
+             "local geography level and area you wish to see data for."),
+
+           p(tags$li("Each box will provide the date and value of the latest data for the corresponding indicator."),
+             tags$li("If a box states TBC, then it has not yet been confimed if the indicator will be moved onto the dashboard."),
+             tags$li("If a box states 'Not available' then the data is not available for the chosen national or local level and area.")),
+
+           p("Clicking on the 'i' button will provide additional information about the indicator."),
+
+           p("Click the title above the box to jump to the relevant tab within the dashboard.",
+             "(Only the first row of Care and Wellbeing is working - please provide feedback so",
+             "we can make a decision on whether or not to advance on making all titles jump links)"),
+           br(),
 
            tagList(
              tabBox(width= NULL, type = "pills",
-#####COVID Recovery #####
+                    #####COVID Recovery #####
                     tabPanel("Covid Recovery",
 
                              linebreaks(1),
@@ -180,7 +192,7 @@ tagList(
                                  ))
 
                     ),
-##### Care and Wellbeing #####
+                    ##### Care and Wellbeing #####
                     tabPanel("Care and Wellbeing",
                              linebreaks(2),
                              fluidRow(column(6,
@@ -204,15 +216,15 @@ tagList(
                                    h2("Strengthen the role and impact of ill health prevention"),
                                    fluidRow(
                                      column(4,
-                                            h4("Admissions for asthma"),
+                                            h4(actionLink("jump_summary_to_asthma_admissions", "Admissions for asthma")),
                                             withSpinner(infoBoxOutput("asthma_admissions_infobox", width=NULL)),
                                      ),
                                      column(4,
-                                            h4("Alcohol-related deaths"),
+                                            h4(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
                                             withSpinner(infoBoxOutput("alcohol_deaths_infobox", width=NULL)),
                                      ),
                                      column(4,
-                                            h4("Alcohol-related hospital admissions (under 75)"),
+                                            h4(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
                                             withSpinner(infoBoxOutput("alcohol_admissions_infobox", width=NULL)),
                                      )
                                    ),

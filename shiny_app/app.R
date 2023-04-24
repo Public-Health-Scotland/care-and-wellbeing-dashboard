@@ -208,6 +208,7 @@ server <- function(input, output, session) {
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value
