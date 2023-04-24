@@ -9,12 +9,16 @@ chd %<>%
          area_type = case_when(area_type == "Hsc Partnership" ~ "HSCP",
                                area_type == "Hsc Locality" ~ "Locality",
                                TRUE ~ area_type),
-         area_name = gsub("&", "and", area_name)) %>%
+         area_name = gsub("&", "and", area_name),
+         ## extracts year range from period column
+         year_range = str_extract(period, "\\d+ to \\d+"),
+         year_range = str_replace(year_range, " to ", "-")) %>%
   summary_format_function(., .$year,
                           .$area_type,
                           .$area_name,
                           .$measure,
-                          "chd_deaths")
+                          "chd_deaths") %>%
+  select(-c(period, year))
 
 
 replace_file_fn(chd,
