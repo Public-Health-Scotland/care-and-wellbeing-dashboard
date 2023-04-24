@@ -124,15 +124,16 @@ output$chd_deaths_plot = renderPlotly({
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
-    rename(date = year) %>%
-    confidence_line_function(., "Age-sex standardised rate of deaths")
+    rename(date = year_range) %>%
+    confidence_line_function(., "Age-sex standardised rate of deaths") %>%
+    layout(xaxis = list(tickangle = 30))
 })
 
 
 output$chd_deaths_table = DT::renderDataTable({
 
   chd_deaths %>%
-    select(area_name, year, period, measure, lower_confidence_interval,
+    select(area_name, year_range, measure, lower_confidence_interval,
            upper_confidence_interval, definition) %>%
     datatable_style_download(.,
                              datetype = "year",
