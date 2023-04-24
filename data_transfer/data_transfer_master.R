@@ -28,6 +28,8 @@ library(readr)
 library(readxl)
 library(tidyr)
 library(magrittr)
+dyn.load("/usr/gdal34/lib/libgdal.so")
+dyn.load("/usr/geos310/lib64/libgeos_c.so", local = FALSE)
 library(rgdal)
 library(here)
 
@@ -368,4 +370,3 @@ if(askYesNo("Are you sure you want to DELETE the old archive folder and replace 
   }
 
 }
-
