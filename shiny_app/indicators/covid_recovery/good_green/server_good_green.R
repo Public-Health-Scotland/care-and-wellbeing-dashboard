@@ -683,16 +683,22 @@ output$economic_inactivity_graph_line <- renderPlotly({
 
 })
 
-output$economic_inactivity_data <- DT::renderDataTable({
-  # Formatting datatable output
-  economic_inactivity %>%
-    rename("Number of People" = "n") %>%
-    datatable_style_download(., datetype = "year",
-                             data_name = "economic_inactivity", geogtype = "")
+observeEvent(input$region_economic_inactivity, {
 
+  data_unfiltered <- economic_inactivity %>%
+    select(year, region, breakdown, n, percent) %>%
+    rename("category" = "breakdown",
+           "Number of People" = "n",
+           "Percentage of People (%)" = "percent")
 
+  data_filtered <- data_unfiltered %>%
+    filter(region == input$region_economic_inactivity)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "economic_inactivity", filename = "economic_inactivity",
+                     add_separator_cols = c(4),
+                     add_separator_cols_1dp = c(5))
 })
-
 
 
 ##############################################.

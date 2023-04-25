@@ -413,8 +413,9 @@ tagList(
                         ,
 
 
-                        h3("Economic inactivity data table"),
-                        DT::dataTableOutput("economic_inactivity_data")
+                        h3("Data table: Economic inactivity"),
+                        DT::dataTableOutput("economic_inactivity_data"),
+                        dataDownloadUI("economic_inactivity")
 
 
                ),
