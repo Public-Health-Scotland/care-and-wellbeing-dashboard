@@ -710,16 +710,17 @@ output$underemployment_graph_line <- renderPlotly({
 
 
 
-output$underemployment_table_data = DT::renderDataTable({
+observeEvent(input$underemployment_input, {
 
-  data_table = underemployment %>%
+  data_unfiltered <- underemployment %>%
+    select(local_authority, year, proportion) %>%
     rename( "Underemployment (%)" = proportion)
 
-  datatable_style_download(data_table,
-                           datetype = "year",
-                           data_name = "underemployment",
-                           geogtype = "none")
+  data_filtered <- data_unfiltered %>%
+    filter(local_authority == input$underemployment_input)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "underemployment", filename = "underemployment",
+                     add_separator_cols_1dp = c(3))
 })
-
-
 

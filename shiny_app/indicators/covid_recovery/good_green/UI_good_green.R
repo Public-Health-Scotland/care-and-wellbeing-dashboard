@@ -374,9 +374,9 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table"),
-
-                        withSpinner(DT::dataTableOutput("underemployment_table_data"))),
+                        h3("Data table: Underemployment"),
+                        DT::dataTableOutput("underemployment_data"),
+                        dataDownloadUI("underemployment")),
 
                ##############################################.
                # ECONOMIC INACTIVITY----
