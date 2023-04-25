@@ -79,13 +79,19 @@ tagList(
                                          fluidRow(
                                            column(3,
                                                   selectizeInput("alcohol_deaths_sex",
-                                                                 "1. Select sex",
+                                                                 "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
-                                                                 selected = "Persons"))
+                                                                 selected = "All sexes"))
                                          ),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                         plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
                                                     "alcohol_deaths_plot"),
+
+                                         br(),
+                                         br(),
+
+                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                                    "alcohol_deaths_by_age_plot"),
 
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")

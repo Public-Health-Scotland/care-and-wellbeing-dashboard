@@ -259,20 +259,32 @@ output$alcohol_deaths_plot <- renderPlotly({
 
   plot <- alcohol_deaths %>%
     filter(sex == input$alcohol_deaths_sex) %>%
+    rename("lower_confidence_interval" = lower_ci,
+           "upper_confidence_interval" = upper_ci,
+           "date" = year,
+           "indicator" = rate) %>%
+    confidence_line_function(y_title = "Rate")
+
+})
+
+output$alcohol_deaths_by_age_plot <- renderPlotly({
+
+  plot <- alcohol_deaths_by_age %>%
+    filter(sex == "All sexes") %>%  #input$alcohol_deaths_sex) %>%
     mutate(indicator = round(as.integer(indicator), 1)) %>%
-    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate") %>%
+    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$age_group, y_axis_title = "Rate") %>%
     layout(yaxis = yaxis_proportion)
 
 })
 
 output$alcohol_deaths_table <- DT::renderDataTable({
 
-  alcohol_deaths %>%
-    select(c(year, breakdown, indicator, sex)) %>%
+  alcohol_deaths_by_age %>%
+    select(c(year, age_group, indicator, sex)) %>%
     mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
     rename(Year = "year",
            Sex = "sex",
-           `Age Group` = "breakdown",
+           `Age Group` = "age_group",
            Rate = "indicator") %>%
     datatable_style_download(.,
                              datetype = "year",
@@ -410,7 +422,7 @@ observeEvent(input$asthma_admissions_geog_type,
                                  "asthma_admissions_geog_name",
                                  "3. Select a geography",
                                  choices = asthma_admissions %>% filter(geography_type == "Health Board") %>%
-                                  .$geography %>% unique())
+                                   .$geography %>% unique())
 
              })
 
@@ -440,14 +452,14 @@ output$asthma_admissions_plot <- renderPlotly({
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions")
 
-  # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
-  #
-  #   plot <- asthma_admissions %>%
-  #     filter(Sex != "All Sexes", geography_type == "All", Date == input$asthma_year_choices) %>%
-  #     filter(!(Ages %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
-  #     mutate(indicator = round(as.integer(indicator), 1),
-  #            date = Date) %>%
-  #     mode_bar_plot(x = .$Ages, y=.$indicator, category_var = .$Sex)
+    # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
+    #
+    #   plot <- asthma_admissions %>%
+    #     filter(Sex != "All Sexes", geography_type == "All", Date == input$asthma_year_choices) %>%
+    #     filter(!(Ages %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+    #     mutate(indicator = round(as.integer(indicator), 1),
+    #            date = Date) %>%
+    #     mode_bar_plot(x = .$Ages, y=.$indicator, category_var = .$Sex)
   }
 
 })
