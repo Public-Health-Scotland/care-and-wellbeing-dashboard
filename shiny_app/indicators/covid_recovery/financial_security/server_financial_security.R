@@ -325,18 +325,18 @@ output$childcare_uptake_graph_line <- renderPlotly({
 })
 
 
-output$childcare_uptake_data <- DT::renderDataTable({
-  # Formatting datatable output
-  childcare_elc_uptake %>%
-    rename("Number of eligible children accessing 1140 hours of funded ELC" = "n",
-           "Total number of eligible children receiving ELC" = "total",
-           "Age group" = "breakdown") %>%
-    datatable_style_download(., datetype = "month",
-                             data_name = "childcare_uptake", geogtype = "")
-
-
-})
-
+childcare_elc_uptake %>%
+  select(date, breakdown, total, n, percent) %>%
+  arrange(date, breakdown) %>%
+  mutate(percent = round_half_up(percent*100,1),
+         date = format(date, "%B %Y")) %>%
+  rename("Month" = "date",
+         "Age Group" = "breakdown",
+         "Number Accessing 1,140 Hours of Funded ELC" = n,
+         "Total Number Receiving ELC" = total,
+         "Percentage Accessing 1,140 Hours of Funded ELC (%)" = percent) %>%
+  dataDownloadServer(id = "childcare_uptake", filename = "childcare_uptake",
+                     add_separator_cols = c(3,4))
 
 
 

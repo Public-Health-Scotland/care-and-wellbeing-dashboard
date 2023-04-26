@@ -295,9 +295,11 @@ tagList(
                                  (ELC) who are accessing 1140 hours of funded ELC", "childcare_uptake_graph_line"),
 
 
-                        h3("ELC childcare uptake data table"),
+                        h3("Data table: Percentage of 2-5-year-olds receiving funded Early Learning and Childcare
+                                 (ELC) who are accessing 1,140 hours of funded ELC"),
 
-                        DT::dataTableOutput("childcare_uptake_data")),
+                        DT::dataTableOutput("childcare_uptake_data"),
+                        dataDownloadUI("childcare_uptake")),
 
                ##############################################.
                # Benefit uptake and engagement with welfare advice ----
