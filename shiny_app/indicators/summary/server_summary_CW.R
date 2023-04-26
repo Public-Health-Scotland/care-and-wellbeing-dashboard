@@ -116,9 +116,9 @@ output$all_cause_mortality_infobox <- renderInfoBox({
 
 output$chd_deaths_infobox <- renderInfoBox({
 
-  recent_date <- max(chd_deaths$year)
+  recent_date <- max(chd_deaths$year_range)
 
-  recent_value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW, year == recent_date) %>%
+  recent_value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW, year_range == recent_date) %>%
     .$measure
 
   infoBox(title=h5(glue("2018-2020 {recent_date} is incorrect"),
