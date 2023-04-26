@@ -198,7 +198,11 @@ tagList(
 
 
                                         selectizeInput("drug_admissions_age", "Select an age group",
-                                                       choices = unique(drug_stays$age_group)),
+                                                       choices = unique(drug_stays$age_group),
+                                                       selected = "All age groups",
+                                                       multiple = TRUE,
+                                                       options = list(plugins = c('remove_button'),
+                                                                      `actions-box` = TRUE)),
 
                                         plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
                                                    "drug_admissions_plot"),
