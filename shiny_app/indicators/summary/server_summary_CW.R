@@ -94,7 +94,7 @@ output$all_cause_mortality_infobox <- renderInfoBox({
   recent_date <- max(all_cause_mortality$year)
 
   recent_value <- all_cause_mortality %>%
-    filter(indicator_age == "15 to 44", geography == "Scotland", year == recent_date) %>%
+    filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW, year == recent_date) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000) %>% .$rate %>% round_half_up(2)
 
