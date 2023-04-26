@@ -120,15 +120,11 @@ output$managing_financially_bar_plot = renderPlotly({
 
 
 ### table
-output$managing_financially_data_table = DT::renderDataTable({
-
-  datatable_style_download(managing_financially_updated,
-                           datetype = "year",
-                           data_name = "managing_financially",
-                           geogtype = "none")
-})
-
-
+managing_financially_updated %>%
+  select(Category, percent) %>%
+  rename("Percentage of Households (%)" = "percent") %>%
+  dataDownloadServer(id = "managing_financially", filename = "managing_financially",
+                     add_separator_cols_1dp = c(2))
 
 
 ##############################################.

@@ -136,9 +136,10 @@ tagList(
                         withSpinner(plotlyOutput("managing_financially_bar_plot")),
 
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households managing financially in 2020"),
+                        DT::dataTableOutput("managing_financially_data"),
 
-                        withSpinner(DT::dataTableOutput("managing_financially_data_table"))),
+                        dataDownloadUI("managing_financially")),
 
                ##############################################.
                # SAVINGS----
