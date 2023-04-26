@@ -43,12 +43,12 @@ tagList(
                         fluidRow(
                           column(3,
                                  selectizeInput("child_development_cw_geog_type",
-                                                label = "1. Select geography type",
+                                                label = "Step 1. Select national or local geography level",
                                                 choices = c("Scotland", "Health Board", "Council Area"),
                                                 selected = "Scotland")),
                           column(3,
                                  selectizeInput("child_development_cw_geog_name",
-                                                label = "2. Select geography",
+                                                label = "Step 2. Select national or local geography area",
                                                 choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography)
                                  ))),
 

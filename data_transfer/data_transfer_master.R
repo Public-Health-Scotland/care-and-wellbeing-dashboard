@@ -124,12 +124,12 @@ replace_file_fn(lookup_master,
 # health_board = lookup_master %>%
 #   select(geography = hb2019name) %>%
 #   unique() %>%
-#   mutate(geography_type = "Health Board")
+#   mutate(geography_type = "Health board")
 #
 # council = lookup_master %>%
 #   select(geography = ca2019name) %>%
 #   unique() %>%
-#   mutate(geography_type = "Council Area")
+#   mutate(geography_type = "Council area")
 #
 # hscp = lookup_master %>%
 #   select(geography = hscp2019name) %>%
