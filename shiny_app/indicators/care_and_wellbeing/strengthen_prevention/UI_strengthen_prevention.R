@@ -73,7 +73,7 @@ tagList(
                                                             choices = c("Scotland"),
                                                             width = "100%"))),
 
-                                         plotlyOutput("alcohol_admissions_plot")
+                                         withSpinner(plotlyOutput("alcohol_admissions_plot"))
                                 ),
 
 
