@@ -370,4 +370,3 @@ if(askYesNo("Are you sure you want to DELETE the old archive folder and replace 
   }
 
 }
-
