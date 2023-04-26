@@ -279,15 +279,20 @@ output$savings_low_income_line_LA = renderPlotly({
 
 
 ### table
-output$savings_low_income_data = DT::renderDataTable({
+savings_low_income_scot <- savings_low_income %>%
+  filter(council == "Scotland")
 
-  datatable_style_download(savings_low_income,
-                           datetype = "year",
-                           data_name = "savings_low_income",
-                           geogtype = "none")
-})
+savings_low_income_la <- savings_low_income %>%
+  filter(council != "Scotland" & savings == "No savings",
+         net_income == "All")
 
-
+savings_low_income_scot %>%
+  bind_rows(savings_low_income_la) %>%
+  select(year, council, net_income, savings, percentage) %>%
+  rename("Percentage of Households (%)" = "percentage",
+         "Local authority" = "council") %>%
+  dataDownloadServer(id = "savings_low_income", filename = "savings_low_income",
+                     add_separator_cols_1dp = c(5))
 
 
 ##############################################.

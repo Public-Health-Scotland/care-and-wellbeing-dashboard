@@ -210,9 +210,10 @@ tagList(
 
                         ),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households with no savings in Scotland by local authority"),
+                        DT::dataTableOutput("savings_low_income_data"),
 
-                        withSpinner(DT::dataTableOutput("savings_low_income_data"))),
+                        dataDownloadUI("savings_low_income")),
 
 
 
