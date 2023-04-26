@@ -635,8 +635,22 @@ output$employability_FSS_referral_data = DT::renderDataTable({
 # SKILLS SHORTAGE VACANCIES ----
 ##############################################.
 
+observeEvent(input$skills_shortage_geog_type,
+             {
+
+               skills_shortage_filtered = skills_shortage_vacancies %>%
+                 filter(geography == input$skills_shortage_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "skills_shortage_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(skills_shortage_filtered$geography_type))#,
+               #selected = "")
+             })
+
 output$skills_shortage_graph_bar <- renderPlotly({
-  region_filter_table(skills_shortage_vacancies, region_of_interest = input$region_skills_shortage) %>%
+  region_filter_table(skills_shortage_vacancies, region_of_interest = input$skills_shortage_geog_name) %>%
     plot_skills_shortage(.)
 })
 
@@ -652,8 +666,22 @@ output$skills_shortage_data <- DT::renderDataTable({
 # ECONOMIC INACTIVITY ----
 ##############################################.
 
+observeEvent(input$economic_inactivity_cr_geog_type,
+             {
+
+               economic_inactivity_cr_filtered = economic_inactivity %>%
+                 filter(geography_type == input$economic_inactivity_cr_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "economic_inactivity_cr_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(economic_inactivity_cr_filtered$geography))#,
+               #selected = "")
+             })
+
 output$economic_inactivity_graph_line <- renderPlotly({
-  region_filter_table(economic_inactivity, region_of_interest = input$region_economic_inactivity) %>%
+  region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cr_geog_name) %>%
     plot_economic_inactivity(.)
 
 })
@@ -674,9 +702,23 @@ output$economic_inactivity_data <- DT::renderDataTable({
 # UNDEREMPLOYMENT----
 ##############################################.
 
+observeEvent(input$underemployment_geog_type,
+             {
+
+               underemployment_filtered = underemployment %>%
+                 filter(geography_type == input$underemployment_geog_type)
+
+               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
+
+               updateSelectizeInput(session, "underemployment_geog_name",
+                                    #label = glue("4. Select {select_choice}"),
+                                    choices = unique(underemployment_filtered$geography))#,
+               #selected = "")
+             })
+
 output$underemployment_graph_line <- renderPlotly({
   data = underemployment %>%
-    filter(local_authority == input$underemployment_input)
+    filter(local_authority == input$underemployment_geog_name)
 
 
   line_plot_with_marker(data, x_col = "year", y_col = "proportion",  x_axis_title = "Year", y_axis_title = "Underemployment (%)")

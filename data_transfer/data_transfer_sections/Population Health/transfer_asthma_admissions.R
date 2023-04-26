@@ -43,7 +43,10 @@ input_asthma_admissions <- rbind(input_asthma_admissions_all, input_asthma_admis
 
 input_asthma_admissions %<>%
   mutate(provisional = ifelse(str_starts(lookup, "p"),"1","0"),
-         lookup = ifelse(provisional == "1", substring(lookup,2), lookup)) %>%
+         lookup = ifelse(provisional == "1", substring(lookup,2), lookup),
+         lookup = recode(lookup, "NHS Ayrshire & Arran" = "NHS Ayrshire and Arran",
+                         "NHS Dumfries & Galloway" = "NHS Dumfries and Galloway",
+                         "NHS Greater Glasgow & Clyde" = "NHS Greater Glasgow and Clyde")) %>%
   mutate(geog_type = ifelse(lookup == "All Scottish and Non-Scottish Residents", "Scotland",
                                  ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
          geography = lookup
