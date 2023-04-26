@@ -24,13 +24,19 @@ tagList(
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
-                        p("Use the below drop-down menu to select a region of interest."),
+                        p("Use the below drop-downs to select a region of interest."),
 
-
-                        selectInput("economic_inactivity_cw_region",
-                                    label = "Select Region",
-                                    choices = unique(economic_inactivity$region),
-                                    selected = "Scotland"),
+                        fluidRow(column(3,
+                                          selectInput("economic_inactivity_cw_geog_type",
+                                                      "Step 1: Select national of local geography level",
+                                                      choices = c("Scotland", "Council Area"),
+                                                      selected = "Scotland")),
+                                 column(3,
+                                        selectInput("economic_inactivity_cw_geog_name",
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                                 ),
 
 
                         plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")

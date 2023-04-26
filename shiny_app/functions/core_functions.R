@@ -60,6 +60,8 @@ pretty_decimal_numbers = function(data, columns) {
 }
 
 
+###### Select area for dropdown function
+
 select_choice <- function(input) {
 
   choice <- ifelse(input == "Scotland", "area", input)
