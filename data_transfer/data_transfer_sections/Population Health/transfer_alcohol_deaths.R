@@ -44,7 +44,7 @@ input_alcohol_deaths_ages <- read_excel(data_path, sheet = data_sheet_ages,
   mutate(value = "alcohol_deaths",
          geography_type = "Scotland",
          geography = "Scotland",
-         sex = recode(sex, Persons = "All sexes")) %>%
+         sex = recode(sex, Persons = "All sexes", Females = "Female", Males = "Male")) %>%
   summary_format_function(date = .$year,
                           geog_type = .$geography_type,
                           geog = .$geography,
