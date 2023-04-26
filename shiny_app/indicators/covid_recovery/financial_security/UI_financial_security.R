@@ -246,9 +246,10 @@ tagList(
 
                         plot_title("Percentage of household with unmanageable debt","unmanageable_debt_line"),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households with unmanageable debt in Scotland"),
+                        DT::dataTableOutput("unmanageable_debt_data"),
 
-                        withSpinner(DT::dataTableOutput("unmanageable_debt_data"))),
+                        dataDownloadUI("unmanageable_debt")),
 
 
                ##############################################.

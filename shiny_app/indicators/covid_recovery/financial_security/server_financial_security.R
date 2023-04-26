@@ -138,15 +138,11 @@ output$unmanageable_debt_line = renderPlotly({
 })
 
 
-output$unmanageable_debt_data = DT::renderDataTable({
-
-  datatable_style_download(unmanageable_debt,
-                           datetype = "year",
-                           data_name = "unmanageable_debt",
-                           geogtype = "none")
-})
-
-
+unmanageable_debt %>%
+  select(year, perc_with_problem_debt) %>%
+  rename("Year range" = "year",
+         "Households with Unmanageable Debt (%)" = "perc_with_problem_debt") %>%
+  dataDownloadServer(id = "unmanageable_debt", filename = "unmanageable_debt")
 
 ##############################################.
 # Savings----
