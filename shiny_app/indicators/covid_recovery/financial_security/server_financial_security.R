@@ -307,13 +307,11 @@ output$household_spending_bar = renderPlotly({
   household_expenditure_barplot(household_spending)
 })
 
-output$household_spending_data = DT::renderDataTable({
-
-  datatable_style_download(household_spending,
-                           datetype="finyear",
-                           data_name = "household_spending",
-                           geogtype = "none")
-})
+household_spending %>%
+  ungroup() %>%
+  select(year, scotland) %>%
+  rename("Household Expenditure (%)" = "scotland") %>%
+  dataDownloadServer(id = "managing_spending", filename = "managing_spending")
 
 
 ##############################################.

@@ -103,8 +103,10 @@ tagList(
                                    "household_spending_bar"),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("household_spending_data")),
+                        h3("Data table: Household expenditure as a percentage of total expenditure in Scotland"),
+                        DT::dataTableOutput("managing_spending_data"),
+
+                        dataDownloadUI("managing_spending")),
 
 
                ##############################################.
