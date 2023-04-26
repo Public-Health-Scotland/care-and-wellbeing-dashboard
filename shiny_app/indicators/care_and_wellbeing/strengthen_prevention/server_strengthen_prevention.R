@@ -263,19 +263,21 @@ output$alcohol_deaths_plot <- renderPlotly({
            "upper_confidence_interval" = upper_ci,
            "date" = year,
            "indicator" = rate) %>%
-    confidence_line_function(y_title = "Rate")
+    confidence_line_function(y_title = "Age-standardised mortality rate<br>(per 100,000)")
 
 })
 
 output$alcohol_deaths_by_age_plot <- renderPlotly({
 
   plot <- alcohol_deaths_by_age %>%
-    filter(sex == "All sexes") %>%  #input$alcohol_deaths_sex) %>%
+    filter(sex == input$alcohol_deaths_sex) %>%
     mutate(indicator = round(as.integer(indicator), 1)) %>%
-    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$age_group, y_axis_title = "Rate") %>%
-    layout(yaxis = yaxis_proportion)
+    make_line_chart_multi_lines(., x = .$year, y = .$indicator,
+                                colour = .$age_group, y_axis_title = "Deaths per 100,000 people")
 
 })
+
+
 
 output$alcohol_deaths_table <- DT::renderDataTable({
 
