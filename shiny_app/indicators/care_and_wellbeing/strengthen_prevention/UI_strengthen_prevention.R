@@ -221,9 +221,11 @@ tagList(
                                         plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
                                                    "drug_admissions_plot"),
 
-                                        h3("Data table"),
-
-                                        DT::dataTableOutput("drug_admissions_table")
+                                        br(),
+                                        h3(textOutput("drug_admissions_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("drug_admissions")
                                ),
 
 

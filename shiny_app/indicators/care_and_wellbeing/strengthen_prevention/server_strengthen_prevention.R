@@ -227,6 +227,34 @@ output$drug_admissions_table = DT::renderDataTable({
                              geogtype = "none")
 })
 
+observeEvent(input$drug_admissions_age,{
+
+    data_unfiltered <- drug_stays %>%
+      select(financial_year, age_group, rate) %>%
+      arrange(financial_year) %>%
+      mutate(financial_year = factor(financial_year)) %>%
+      rename("Drug-related hospital admissions" = "rate")
+
+    data_filtered <- data_unfiltered %>%
+      filter(age_group == input$drug_admissions_age)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "drug_admissions", filename = "drug_admissions",
+                       add_separator_cols_2dp = c(3))
+})
+
+observeEvent(input$drug_admissions_age,{
+
+  if(input$drug_admissions_age == "All age groups"){
+    age_title <- "all age groups"
+  }else{
+    age_title <- paste0("ages ", input$drug_admissions_age)
+  }
+
+  output$drug_admissions_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+                                                   age_title, ") in Scotland")})
+})
+
 
 ##############################################.
 # DRUG RELATED DEATHS----
