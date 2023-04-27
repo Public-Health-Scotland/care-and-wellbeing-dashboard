@@ -90,17 +90,36 @@ output$all_cause_mortality_plot = renderPlotly({
 })
 
 
-output$all_cause_mortality_table = DT::renderDataTable(
+observeEvent(input$all_cause_mortality_geog_name,{
 
-  all_cause_mortality  %>%
-    select(-pop) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "all_cause_mortality",
-                             geogtype = "none")
+  data_unfiltered <- all_cause_mortality %>%
+    filter(indicator_age == "15 to 44") %>%
+    group_by(year, geography_type, geography) %>%
+    summarise(pop = sum(pop), deaths = sum(deaths)) %>%
+    ungroup() %>%
+    mutate(rate = deaths/pop*100000) %>%
+    select(year, geography_type, geography, deaths, rate) %>%
+    arrange(year) %>%
+    mutate(year = factor(year)) %>%
+    rename("Number of deaths" = "deaths",
+           "Rate of deaths per 100,000 population" = "rate")
 
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$all_cause_mortality_geog_name)
 
-)
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "all_cause_mortality", filename = "all_cause_mortality",
+                     add_separator_cols = c(4),
+                     add_separator_cols_2dp = c(5))
+
+})
+
+observeEvent(input$all_cause_mortality_geog_name,{
+
+  output$all_cause_mortality_title <- renderText({glue("Data table: Total number of all-cause deaths, ages 15-44, in ",
+                                                       input$all_cause_mortality_geog_name)})
+})
+
 
 
 ##############################################.

@@ -144,8 +144,12 @@ tagList(
 
                         h3("All-cause mortality, ages 15-44"),
                         plotlyOutput("all_cause_mortality_plot"),
-                        h3("Data table"),
-                        DT::dataTableOutput("all_cause_mortality_table")
+
+                        br(),
+                        h3(textOutput("all_cause_mortality_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("all_cause_mortality")
 
 
                ),
