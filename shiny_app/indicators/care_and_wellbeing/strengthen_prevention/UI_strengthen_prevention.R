@@ -394,7 +394,10 @@ tagList(
 
                         plotlyOutput("adult_long_term_condition_plot"),
 
-                        DT::dataTableOutput("adult_long_term_condition_table")
+                        br(),
+                        h3("Data table: Percentage of adults with a limiting long-term condition in Scotland"),
+                        br(),
+                        dataDownloadUI("limiting_ltcs")
                ),
 
                ##############################################.

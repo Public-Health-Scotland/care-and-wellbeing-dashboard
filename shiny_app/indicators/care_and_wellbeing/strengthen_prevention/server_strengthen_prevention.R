@@ -481,21 +481,14 @@ output$adult_long_term_condition_plot <- renderPlotly({
 
 
 
-output$adult_long_term_condition_table <- DT::renderDataTable({
-
-  adult_living_limiting_long_term_condition %>%
-    select(c(Year, Categories, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "adult_living_limiting_long_term_condition",
-                             geogtype = "none")
-
-
-
-})
+adult_living_limiting_long_term_condition %>%
+  select(c(Year, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults with a limiting long-term condition (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "limiting_ltcs",
+                     filename = "limiting_long_term_conditions")
 
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
