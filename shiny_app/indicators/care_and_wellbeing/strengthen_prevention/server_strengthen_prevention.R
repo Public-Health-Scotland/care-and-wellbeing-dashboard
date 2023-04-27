@@ -218,15 +218,6 @@ output$drug_admissions_plot = renderPlotly({
 
 })
 
-output$drug_admissions_table = DT::renderDataTable({
-
-  drug_stays %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "drugstays",
-                             geogtype = "none")
-})
-
 observeEvent(input$drug_admissions_age,{
 
     data_unfiltered <- drug_stays %>%
@@ -289,14 +280,33 @@ output$drug_deaths_plot = renderPlotly({
   }
 })
 
-output$drug_deaths_table = DT::renderDataTable({
+observeEvent(input$drug_deaths_geog_type,{
+  observeEvent(input$drug_deaths_geog_name,{
 
-  drug_related_deaths %>%
-    select(-c(pretty_date, indicator, value)) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "drug_related_deaths",
-                             geogtype = "none")
+  data_unfiltered <- drug_related_deaths %>%
+    select(year, geography_type, geography, number, rate,
+           lower_confidence_interval, upper_confidence_interval) %>%
+    arrange(year) %>%
+    mutate(year = factor(year)) %>%
+    rename("Year range" = "year",
+           "Number of drug-related deaths" = "number",
+           "Drug-related deaths rate" = "rate")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$drug_deaths_geog_type,
+           geography == input$drug_deaths_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "drug_deaths", filename = "drug_deaths",
+                     add_separator_cols = c(4),
+                     add_separator_cols_1dp = c(5,6,7))
+  })
+})
+
+observeEvent(input$drug_deaths_geog_name,{
+
+  output$drug_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related deaths in ",
+                                               input$drug_deaths_geog_name)})
 })
 
 ##############################################.

@@ -262,8 +262,11 @@ tagList(
                                                    "drug_deaths_plot",
                                                    subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
 
-                                        h3("Data table"),
-                                        DT::dataTableOutput("drug_deaths_table")
+                                        br(),
+                                        h3(textOutput("drug_deaths_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("drug_deaths")
 
 
 
