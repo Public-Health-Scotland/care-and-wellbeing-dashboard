@@ -420,17 +420,6 @@ output$healthy_birthweight_plot = renderPlotly({
     stacked_bar_function(., .$birthweight_for_gestational_age)
 })
 
-output$healthy_birthweight_table = DT::renderDataTable({
-
-  birthweight %>%
-    mutate(proportion = indicator) %>%
-    select(-c(pretty_date, indicator, value)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "birthweight",
-                             geogtype = "none")
-})
-
 observeEvent(input$healthy_birthweight_geog_name,{
 
   data_unfiltered <- birthweight %>%

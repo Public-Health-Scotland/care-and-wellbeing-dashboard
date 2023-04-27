@@ -126,7 +126,10 @@ tagList(
 
                         plotlyOutput("child_obesity_plot"),
 
-                        DT::dataTableOutput("child_obesity_table")
+                        br(),
+                        h3("Data table: Percentage of children (2-15) at risk of obesity in Scotland"),
+                        br(),
+                        dataDownloadUI("children_at_risk_of_obesity")
                ),
 
                ##############################################.

@@ -152,20 +152,12 @@ output$child_obesity_plot <- renderPlotly({
 
 })
 
-output$child_obesity_table <- DT::renderDataTable({
-
-  childhood_obesity %>%
-    select(c(date, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator",
-           Year = "date") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "children_at_risk_of_obesity",
-                             geogtype = "none")
-
-
-
-})
+childhood_obesity %>%
+  select(c(date, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  rename("Percentage of children (%)" = "indicator",
+         Year = "date") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "children_at_risk_of_obesity",
+                     filename = "children_at_risk_of_obesity")
 
