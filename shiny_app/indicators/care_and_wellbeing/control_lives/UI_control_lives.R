@@ -50,8 +50,9 @@ tagList(
                                      inline = TRUE),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("camhs_waiting_times_cw_table")
+                        h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
+
+                        dataDownloadUI("camhs_cw")
 
                ),
 

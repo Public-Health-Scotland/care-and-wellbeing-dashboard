@@ -38,9 +38,29 @@ observeEvent(input$camhs_waiting_times_cw_geog_type,
 camhs_waiting_times_cw_filtered_table = camhs_waiting_times2 %>%
   filter(wait_time == "0 to 18 weeks")
 
-output$camhs_waiting_times_cw_table = DT::renderDataTable({
-  datatable_style_download(camhs_waiting_times2, data_name = "camhs")
+observeEvent(input$camhs_waiting_times_cw_geog_name,{
+
+  data_unfiltered <- camhs_waiting_times2 %>%
+    arrange(desc(date), hb2019name, wait_time) %>%
+    select(date, hb2019name, wait_time, number, proportion) %>%
+    mutate(date = format(date, "%B %Y")) %>%
+    mutate(wait_time = factor(wait_time),
+           hb2019name = factor(hb2019name)) %>%
+    rename("Month" = "date",
+           "health_board" = "hb2019name",
+           "Number of patients seen" = "number",
+           "Proportion of patients seen" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(health_board == input$camhs_waiting_times_cw_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "camhs_cw", filename = "CAMHS_waiting_times",
+                     add_separator_cols = c(4),
+                     add_separator_cols_2dp = c(5))
+
 })
+
 
 # Proportion meeting target of 18 weeks line chart
 output$camhs_waiting_times_cw_seen_within_plot = renderPlotly({
