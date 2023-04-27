@@ -71,7 +71,6 @@ tagList(
                         ),
 
                         h3("Data table: Proportion of employees on the living wage"),
-                        DT::dataTableOutput("living_wage_data"),
 
                         dataDownloadUI("living_wage")),
 
@@ -120,15 +119,6 @@ tagList(
                           )
                         ),
 
-                        # fluidRow(
-                        #   column(12,
-                        #          h3("Data table"),
-                        #
-                        #          withSpinner(DT::dataTableOutput("gender_pay_gap_data")))
-                        # ),
-
-
-
                         h3(textOutput("gender_pay_gap_table_title")),
 
                         tabBox(
@@ -137,12 +127,10 @@ tagList(
                           id = "gender_pay_gap_tabBox", height = "250px", width=12,
                           tabPanel("Pay gap",
                                    br(),
-                                   DT::dataTableOutput("gender_pay_gap_data"),
                                    dataDownloadUI("gender_pay_gap")
                                    ),
                           tabPanel("Earnings",
                                    br(),
-                                   DT::dataTableOutput("gender_pay_gap_earnings_data"),
                                    dataDownloadUI("gender_pay_gap_earnings"))
                         )),
                ##############################################.
@@ -291,7 +279,6 @@ tagList(
 
                         h3("Data table: Percentage of people in employment on a zero-hours contract"),
 
-                        DT::dataTableOutput("zero_hour_contracts_data"),
                         dataDownloadUI("zero_hour_contracts")),
 
                ##############################################.
@@ -329,7 +316,6 @@ tagList(
 
 
                         h3("Data table: Percentage of vacancies by vacancy type and region"),
-                        DT::dataTableOutput("skills_shortage_data"),
                         dataDownloadUI("skills_shortage")
                ),
 
@@ -375,7 +361,6 @@ tagList(
 
 
                         h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
-                        DT::dataTableOutput("underemployment_data"),
                         dataDownloadUI("underemployment")),
 
                ##############################################.
@@ -414,7 +399,6 @@ tagList(
 
 
                         h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
-                        DT::dataTableOutput("economic_inactivity_data"),
                         dataDownloadUI("economic_inactivity")
 
 

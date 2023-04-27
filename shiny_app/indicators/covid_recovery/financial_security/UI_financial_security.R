@@ -104,7 +104,6 @@ tagList(
 
 
                         h3("Data table: Household expenditure as a percentage of total expenditure in Scotland"),
-                        DT::dataTableOutput("managing_spending_data"),
 
                         dataDownloadUI("managing_spending")),
 
@@ -139,7 +138,6 @@ tagList(
 
 
                         h3("Data table: Percentage of households in Scotland managing financially in 2020"),
-                        DT::dataTableOutput("managing_financially_data"),
 
                         dataDownloadUI("managing_financially")),
 
@@ -211,7 +209,6 @@ tagList(
                         ),
 
                         h3("Data table: Percentage of households in Scotland with savings by local authority"),
-                        DT::dataTableOutput("savings_low_income_data"),
 
                         dataDownloadUI("savings_low_income")),
 
@@ -247,7 +244,6 @@ tagList(
                         plot_title("Percentage of household with unmanageable debt","unmanageable_debt_line"),
 
                         h3("Data table: Percentage of households with unmanageable debt"),
-                        DT::dataTableOutput("unmanageable_debt_data"),
 
                         dataDownloadUI("unmanageable_debt")),
 
@@ -298,7 +294,6 @@ tagList(
                         h3("Data table: Percentage of 2-5-year-olds receiving funded Early Learning and Childcare
                                  (ELC) who are accessing 1,140 hours of funded ELC"),
 
-                        DT::dataTableOutput("childcare_uptake_data"),
                         dataDownloadUI("childcare_uptake")),
 
                ##############################################.

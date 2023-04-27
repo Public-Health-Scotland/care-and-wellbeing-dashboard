@@ -41,7 +41,6 @@ tagList(
 
 
                         h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
-                        DT::dataTableOutput("child_poverty_data"),
 
                         dataDownloadUI("child_poverty")
 
@@ -86,7 +85,6 @@ tagList(
                         withSpinner(plotlyOutput("school_leavers_line_figure")),
 
                         h3("Data table: Percentage of school leavers in positive destinations"),
-                        DT::dataTableOutput("school_leavers_data"),
 
                         dataDownloadUI("school_leavers")
                ),
@@ -228,9 +226,7 @@ tagList(
                                      selected = "On",
                                      inline = TRUE),
 
-
                         h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
-                        DT::dataTableOutput("camhs_data"),
 
                         dataDownloadUI("camhs")
 
@@ -268,7 +264,6 @@ tagList(
 
 
                         h3("Data table: Number of children subject to interagency referral discussions"),
-                        DT::dataTableOutput("protection_harm_data"),
 
                         dataDownloadUI("protection_harm")
 
@@ -309,7 +304,6 @@ tagList(
 
 
                         h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
-                        DT::dataTableOutput("infant_mortality_data"),
 
                         dataDownloadUI("infant_mortality")
                ),
