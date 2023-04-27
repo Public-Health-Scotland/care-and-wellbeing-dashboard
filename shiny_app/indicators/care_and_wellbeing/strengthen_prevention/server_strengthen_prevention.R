@@ -448,21 +448,14 @@ output$adult_self_assessed_health_plot <- renderPlotly({
 
 
 
-output$adult_self_assessed_health_table <- DT::renderDataTable({
-
-  adult_self_assessed_health %>%
-    select(c(Year, Categories, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "adult_self_assessed_health",
-                             geogtype = "none")
-
-
-
-})
+adult_self_assessed_health %>%
+  select(c(Year, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults who describe their general health as good or very good (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "adult_self_assessed_health",
+                     filename = "adult_self_assessed_health")
 
 
 ##############################################.

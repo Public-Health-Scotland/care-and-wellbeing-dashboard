@@ -461,7 +461,10 @@ tagList(
 
                         plotlyOutput("adult_self_assessed_health_plot"),
 
-                        DT::dataTableOutput("adult_self_assessed_health_table")
+                        br(),
+                        h3("Data table: Percentage of adults in Scotland who describe their general health as good or very good"),
+                        br(),
+                        dataDownloadUI("adult_self_assessed_health")
                ),
 
                ##############################################.
