@@ -426,7 +426,8 @@ economic_inactivity %<>%
          geography_type = ifelse(region == "Scotland", "Scotland", "Council Area"),
          value = "economic_inactivity",
          indicator = paste0(percent, "%"),
-         pretty_date = year)
+         pretty_date = year,
+         geography = recode(geography, "Edinburgh, City of" = "City of Edinburgh"))
 
 replace_file_fn(economic_inactivity,
                 paste0(path_out, "/economic_inactivity.rds"))

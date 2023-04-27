@@ -3,7 +3,7 @@ tagList(
   br(),
   bsButton("strengthen_prevention_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
 
                ##############################################.
@@ -15,18 +15,20 @@ tagList(
                         h3("Admissions for asthma"),
 
                         fluidRow(column(3,
-                                        pickerInput("asthma_admissions_breakdowns",
-                                                    "1. Select a breakdown",
-                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"))),
+                                        selectInput("asthma_admissions_breakdowns",
+                                                    "Step 1: Select a breakdown ",
+                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
+                                                    width = "100%")),
                                  column(3,
-                                        pickerInput("asthma_admissions_geog_type",
-                                                    "2. Select a geography type",
-                                                    choices = c("Scotland", "Health Board"),
-                                                    selected = "Scotland")),
+                                         selectInput("asthma_admissions_geog_type",
+                                                    "Step 2: Select national or local geography level ",
+                                                     choices = c("Scotland", "Health Board"),
+                                                     width = "100%")),
                                  column(3,
-                                        pickerInput("asthma_admissions_geog_name",
-                                                    "3. Select a geography",
-                                                    choices = c("Scotland")))
+                                 selectInput("asthma_admissions_geog_name",
+                                             "Step 3: Select national or local geography area ",
+                                             choices = c("Scotland"),
+                                             width = "100%"))
 
                         ),#, "Age and sex breakdown"))),
                         # column(3,
@@ -60,9 +62,17 @@ tagList(
 
                                          h3("Alcohol related hospital admissions"),
 
-
-                                         selectizeInput("alcohol_admissions_geog_name","Select Health Board",
-                                                        choices = unique(alcohol_admissions$sub_group_select_group_first)),
+                                         fluidRow(
+                                           column(3,
+                                                selectInput("alcohol_admissions_geog_type",
+                                                            "Step 1: Select national or local geography level",
+                                                            choices = c("Scotland", "Health Board"),
+                                                            width = "100%")),
+                                         column(3,
+                                                selectInput("alcohol_admissions_geog_name",
+                                                            "Step 2: Select national or local geography area",
+                                                            choices = c("Scotland"),
+                                                            width = "100%"))),
 
                                          plotlyOutput("alcohol_admissions_plot")
                                 ),
@@ -80,7 +90,7 @@ tagList(
                                          fluidRow(
                                            column(3,
                                                   selectizeInput("alcohol_deaths_sex",
-                                                                 "1. Select sex",
+                                                                 "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
                                                                  selected = "Persons"))
                                          ),
@@ -105,17 +115,17 @@ tagList(
                         fluidRow(
                           column(3,
                                  selectizeInput("all_cause_mortality_geog_type",
-                                                "1. Select geography type",
+                                                "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
                                                             "Health Board",
                                                             "Council Area"))),
                           column(3,
                                  selectizeInput("all_cause_mortality_geog_name",
-                                                "2. Select geography",
+                                                "Step 2. Select national or local geography area",
                                                 choices = unique(all_cause_mortality %>% filter(geography_type == "Scotland") %>% .$geography))),
                           column(3,
                                  radioButtons("all_cause_mortality_rate_number",
-                                              "3. View rate per 100,000 population or number of deaths",
+                                              "Step 3. View rate per 100,000 population or number of deaths",
                                               choices = c("Rate",
                                                           "Number")))
 
@@ -143,7 +153,7 @@ tagList(
                         fluidRow(
                           column(3,
                                  selectizeInput("chd_deaths_geog_type",
-                                                "1. Select geography type",
+                                                "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
                                                             "Health Board",
                                                             "HSCP",
@@ -153,11 +163,11 @@ tagList(
                           ),
                           column(3,
                                  selectizeInput("chd_deaths_geog_name",
-                                                "2. Select geography",
+                                                "Step 2. Select national or local geography area",
                                                 choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography))),
                         ),
 
-                        plot_title("Coronary heart disease deaths (aged <75), age-sex standardised rates per 100,000",
+                        plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
                                    "chd_deaths_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
@@ -211,12 +221,14 @@ tagList(
 
                                         fluidRow(
                                           column(3,
-                                                 selectizeInput("drug_deaths_geog_type", "1. Select a geography type",
+                                                 selectizeInput("drug_deaths_geog_type",
+                                                                "Step 1. Select a national or local geography level",
                                                                 choices = c("Scotland", "Health Board", "Council Area"))),
 
                                           column(3,
 
-                                                 selectizeInput("drug_deaths_geog_name", "2. Select a geography",
+                                                 selectizeInput("drug_deaths_geog_name",
+                                                                "Step 2. Select a national or local geography area",
                                                                 choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography))
                                           ),
 
@@ -307,11 +319,13 @@ tagList(
 
                         fluidRow(
                           column(3,
-                                 selectizeInput("healthy_birthweight_geog_type", "1. Select a geography type",
+                                 selectizeInput("healthy_birthweight_geog_type",
+                                                "Step 1. Select a national or local geography level",
                                                 choices = c("Scotland", "Health Board", "Council Area"))),
 
                           column(3,
-                                 selectizeInput("healthy_birthweight_geog_name", "2. Select a geography",
+                                 selectizeInput("healthy_birthweight_geog_name",
+                                                "Step 2. Select a national or local geography area",
                                                 choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
                           )),
 

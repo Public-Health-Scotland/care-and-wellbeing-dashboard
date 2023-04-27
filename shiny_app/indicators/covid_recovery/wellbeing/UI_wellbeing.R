@@ -117,12 +117,12 @@ tagList(
                         fluidRow(
                           column(4,
                                  selectizeInput("preschool_geog_type",
-                                                label = "1. Select geography type",
+                                                label = "Step 1: Select national or local geography level",
                                                 choices = c("Scotland", "Health Board", "Council Area"),
                                                 selected = "Scotland")),
                           column(8,
                                  selectizeInput("preschool_geog_name",
-                                                label = "2. Select geography",
+                                                label = "Step 2: Select national or local geography area",
                                                 choices = unique(preschool %>% filter(geography == "Scotland") %>% .$geography),
                                                 selected = "Scotland")
                           )),
@@ -210,10 +210,17 @@ tagList(
                         p("Use the below drop-down menu to select a Health Board of interest.",
                           "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
 
-                        selectInput("HB_CAMHS",
-                                    label = "Select Health Board",
-                                    choices = lookup_HB,
-                                    selected = "Scotland"),
+                        fluidRow(column(3,
+                                         selectInput("CAMHS_geog_type",
+                                         label = "Step 1: Select national or local geography level",
+                                         choices = c("Scotland", "Health Board"),
+                                         selected = "Scotland")),
+                                 column(3,
+                                        selectInput("CAMHS_geog_name",
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                                 ),
 
                         plot_title("Proportion of CAMHS patients seen by wait time since referral",
                                    'camhs_waiting_times_graph_stack',

@@ -62,6 +62,17 @@ ui <- shinymanager::secure_app(
         ), # tabpanel
 
         ##############################################.
+        # SUMMARY V2 ----
+        ##############################################.
+        tabPanel(title = "Summary V2",
+                 icon = icon_no_warning_fn("lemon"),
+                 value = "summary_v2",
+
+                 source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
+
+        ), # tabpanel
+
+        ##############################################.
         # COVID RECOVERY ----
         ##############################################.
         navbarMenu("Covid Recovery", icon = icon_no_warning_fn("lemon"),
@@ -93,7 +104,7 @@ ui <- shinymanager::secure_app(
 
 
                    tabPanel(title = "Strengthen the role and impact of ill health prevention",
-                            icon = icon_no_warning_fn("lemon"),
+                            icon = icon_no_warning_fn("hands-holding-child"),
                             value = "strengthen_prevention",
                             source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
 
@@ -157,7 +168,8 @@ ui <- shinymanager::secure_app(
 server <- function(input, output, session) {
 
   res_auth <- secure_server(
-    check_credentials = check_credentials(credentials))
+    check_credentials = check_credentials(credentials),
+    timeout = 30)
 
 
   #### Get functions ----
@@ -199,6 +211,9 @@ server <- function(input, output, session) {
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value
 
   # Get content for Covid Recovery pages

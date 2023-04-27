@@ -80,7 +80,8 @@ deaths_rate_HB = deaths_hb_number %>%
 
 # Convert .. to NA and make numeric
 deaths_rate_HB %<>%
-  mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"))
+  mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
+         geography = ifelse(geography_type == "Health Board", glue("NHS {geography}"), geography))
 
 rm(deaths_hb_number, deaths_hb_LCI, deaths_hb_UCI, deaths_rate_HB_rate)
 
@@ -130,6 +131,11 @@ deaths_rate_bind = rbind(deaths_rate_CA, deaths_rate_HB)
 # Get summary variables
 deaths_rate_bind %<>%
   summary_format_function(., .$year, .$geography_type, .$geography, .$rate,
-                          "drug_deaths")
+                          "drug_deaths") %>%
+  mutate(geography = str_replace(geography, "&", "and"))
+
 # Save out final dataframe
 replace_file_fn(deaths_rate_bind, paste0(path_out, "/drug_related_deaths.rds"))
+
+rm(deaths_CA_rate, deaths_CA_LCI, deaths_CA_UCI, deaths_CA_number,
+   deaths_rate_CA, deaths_rate_HB, deaths_rate_bind)

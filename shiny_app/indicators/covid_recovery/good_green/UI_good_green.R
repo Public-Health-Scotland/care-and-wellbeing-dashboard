@@ -306,11 +306,17 @@ tagList(
                         br(),
                         p("Use the below drop-down menu to select a region of interest."),
 
-
-                        selectInput("region_skills_shortage",
-                                    label = "Select Region",
-                                    choices = unique(skills_shortage_vacancies$region),
-                                    selected = "Scotland"),
+                        fluidRow(column(3,
+                                        selectInput("skills_shortage_geog_type",
+                                                    "Step 1: Select national or local geography level",
+                                                    choices = c("Scotland", "ROA Region"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        selectInput("skills_shortage_geog_name",
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                                 ),
 
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
@@ -351,11 +357,17 @@ tagList(
                         h4("Proportion of adults 16 years old and over who are in employment and would like to work longer hours,
                        have an additional job or find a different job with more hours"),
 
-                        selectizeInput("underemployment_input",
-                                       label = "Select local authority",
-                                       choices = underemployment$local_authority %>%
-                                         unique(),
-                                       selected = "Scotland"),
+                        fluidRow(column(3,
+                                        selectInput("underemployment_geog_type",
+                                                    "Step 1: Select national or local geography level",
+                                                    choices = c("Scotland", "Council Area"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        selectInput("underemployment_geog_name",
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
 
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
@@ -388,10 +400,18 @@ tagList(
                         p("Use the below drop-down menu to select a region of interest."),
 
 
-                        selectInput("region_economic_inactivity",
-                                    label = "Select Region",
-                                    choices = unique(economic_inactivity$region),
-                                    selected = "Scotland"),
+                        fluidRow(column(3,
+                                        selectInput("economic_inactivity_cr_geog_type",
+                                                    "Step 1: Select national or local geography level",
+                                                    choices = c("Scotland", "Council Area"),
+                                                    selected = "Scotland")),
+                                 column(3,
+                                        selectInput("economic_inactivity_cr_geog_name",
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
+
 
 
                         plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_graph_line")
