@@ -468,19 +468,72 @@ output$asthma_admissions_plot <- renderPlotly({
 
 
 
-output$asthma_admissions_table <- DT::renderDataTable({
+observeEvent(input$asthma_admissions_breakdowns,{
+  observeEvent(input$asthma_admissions_geog_name,{
 
-  table <- asthma_admissions %>%
-    select(c(date, sex, age_group, geography_type, geography, indicator, provisional)) %>%
-    rename(`Total number of stays` = "indicator") %>%
+  data_unfiltered <- asthma_admissions %>%
     arrange(desc(date)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "asthma_admissions",
-                             geogtype = "none")
+    mutate(provisional = ifelse(provisional == "1", "p", ""),
+           date = factor(date),
+           sex = factor(sex),
+           age_group = factor(age_group)) %>%
+    select(c(date, geography_type, geography, sex, age_group, indicator, provisional)) %>%
+    rename(`Total number of admissions` = "indicator",
+           "Year" = "date",
+           "Is data provisional (p)?" = "provisional")
+
+  if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == "All Sexes", age_group == "All Ages",
+             geography == input$asthma_admissions_geog_name)
+
+  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == "All Sexes",
+             geography == input$asthma_admissions_geog_name) %>%
+      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
 
 
+  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(age_group == "All Ages",
+             geography == input$asthma_admissions_geog_name)
+  }
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "asthma_admissions", filename = "asthma_admissions",
+                     add_separator_cols = c(6))
+
+  })
 })
+
+observeEvent(input$asthma_admissions_breakdowns,{
+  observeEvent(input$asthma_admissions_geog_name,{
+
+    geog <- input$asthma_admissions_geog_name
+
+    if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+      breakdown <- ""
+
+    } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+      breakdown <- "by age "
+
+
+    } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+      breakdown <- "by sex "
+    }
+
+  output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
+                                                     breakdown, "in ", geog)})
+  })
+})
+
 
 altTextServer("asthma_admissions_alt",
               title = "Asthma admissions plot",

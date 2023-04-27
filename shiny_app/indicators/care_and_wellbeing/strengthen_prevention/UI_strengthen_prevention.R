@@ -38,7 +38,11 @@ tagList(
                         plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
                         # plotlyOutput("asthma_admissions_plot"),
 
-                        DT::dataTableOutput("asthma_admissions_table")
+                        br(),
+                        h3(textOutput("asthma_admissions_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("asthma_admissions")
 
 
                ),
