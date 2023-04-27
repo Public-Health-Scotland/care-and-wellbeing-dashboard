@@ -188,16 +188,15 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 
 })
 
-output$hopsital_admission_heart_attack_table <- DT::renderDataTable({
-
-  heart_attack %>%
-    select(date, total_admissions, rate_per_100_000_easr, geography) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "heartattack",
-                             geogtype = "none")
-
-})
+heart_attack %>%
+  select(date, total_admissions) %>%
+  arrange(date) %>%
+  mutate(date = factor(date)) %>%
+  rename("Year" = "date",
+         "Total number of hospital admissions" = "total_admissions") %>%
+  dataDownloadServer(id = "heart_attack_admission",
+                     filename = "first_ever_hospital_admission_heart_attack",
+                     add_separator_cols = c(2))
 
 
 ##############################################.
