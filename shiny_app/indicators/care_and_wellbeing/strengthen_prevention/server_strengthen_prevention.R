@@ -268,6 +268,33 @@ output$alcohol_admissions_plot = renderPlotly({
 
   line_chart_function(data_alc, y_title = "Alcohol related admissions trend")})
 
+observeEvent(input$alcohol_admissions_geog_name,{
+
+    data_unfiltered <- alcohol_admissions %>%
+      arrange(financial_year) %>%
+      filter(condition == "All alcohol conditions",
+             smr_type == "Combined") %>%
+      mutate(financial_year = factor(financial_year)) %>%
+      select(financial_year, geography_type, geography, stays_easr) %>%
+      rename("Number of alcohol related admissions" = "stays_easr")
+
+    data_filtered <- data_unfiltered %>%
+        filter(geography == input$alcohol_admissions_geog_name)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "alcohol_related_admissions", filename = "alcohol_related_admissions",
+                       add_separator_cols_1dp = c(4))
+
+})
+
+observeEvent(input$alcohol_admissions_geog_name,{
+
+    output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol related admissions in ",
+                                                        input$alcohol_admissions_geog_name)})
+})
+
+
+
 ##############################################.
 # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
 ##############################################.
