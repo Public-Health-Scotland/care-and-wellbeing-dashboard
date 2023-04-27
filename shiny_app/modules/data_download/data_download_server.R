@@ -67,7 +67,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                               options = list(pageLength = 10,
                                              scrollX = FALSE,
                                              scrollY = FALSE,
-                                             dom = 'Btip',
+                                             dom = 'tip',
                                              autoWidth = TRUE,
                                              # style header
                                              initComplete = htmlwidgets::JS(
