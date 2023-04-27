@@ -672,20 +672,16 @@ output$experience_unpaid_carers_plot <- renderPlotly({
 
 })
 
-output$experience_unpaid_carers_table <- DT::renderDataTable({
-
-  experience_unpaid_carers %>%
-    select(c(date, breakdown, indicator)) %>%
-    mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
-    rename(Year = "date",
-           Answer = "breakdown",
-           Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "experience_unpaid_carers",
-                             geogtype = "none")
+experience_unpaid_carers %>%
+  select(c(date, breakdown, indicator)) %>%
+  mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
+  arrange(desc(date)) %>%
+  mutate(date = factor(date),
+         breakdown = factor(breakdown)) %>%
+  rename("Financial Year" = "date",
+         Answer = "breakdown",
+         Percentage = "indicator") %>%
+  dataDownloadServer(id = "experience_unpaid_carers",
+                     filename = "experience_unpaid_carers")
 
 
-
-})

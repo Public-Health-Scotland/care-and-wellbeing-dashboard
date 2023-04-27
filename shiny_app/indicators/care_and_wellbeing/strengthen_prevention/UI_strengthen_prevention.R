@@ -298,7 +298,10 @@ tagList(
 
                         plotlyOutput("experience_unpaid_carers_plot"),
 
-                        DT::dataTableOutput("experience_unpaid_carers_table")
+                        br(),
+                        h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
+                        br(),
+                        dataDownloadUI("experience_unpaid_carers")
                ),
 
 
