@@ -157,7 +157,7 @@ output$camhs_waiting_times_graph_stack = renderPlotly({
 
 })
 
-observeEvent(input$HB_CAMHS,{
+observeEvent(input$CAMHS_geog_name,{
 
   data_unfiltered <- camhs_waiting_times2 %>%
     arrange(desc(date), hb2019name, wait_time) %>%
@@ -171,7 +171,7 @@ observeEvent(input$HB_CAMHS,{
            "Proportion of patients seen" = "proportion")
 
   data_filtered <- data_unfiltered %>%
-    filter(health_board == input$HB_CAMHS)
+    filter(health_board == input$CAMHS_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "camhs", filename = "CAMHS_waiting_times",

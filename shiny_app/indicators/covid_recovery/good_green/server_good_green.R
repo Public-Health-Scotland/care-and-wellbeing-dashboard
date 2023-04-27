@@ -670,7 +670,7 @@ output$skills_shortage_graph_bar <- renderPlotly({
     plot_skills_shortage(.)
 })
 
-observeEvent(input$region_skills_shortage, {
+observeEvent(input$skills_shortage_geog_name, {
 
   data_unfiltered <- skills_shortage_vacancies %>%
     select(year, region, vacancy_type, n_vacancies, all_establishments, percent) %>%
@@ -679,7 +679,7 @@ observeEvent(input$region_skills_shortage, {
            "Percentage of Vacancies (%)" = "percent")
 
     data_filtered <- data_unfiltered %>%
-      filter(region == input$region_skills_shortage)
+      filter(region == input$skills_shortage_geog_name)
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "skills_shortage", filename = "skills_shortage",
@@ -711,7 +711,7 @@ output$economic_inactivity_graph_line <- renderPlotly({
 
 })
 
-observeEvent(input$region_economic_inactivity, {
+observeEvent(input$economic_inactivity_cr_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
@@ -720,7 +720,7 @@ observeEvent(input$region_economic_inactivity, {
            "Percentage of People (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
-    filter(region == input$region_economic_inactivity)
+    filter(region == input$economic_inactivity_cr_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "economic_inactivity", filename = "economic_inactivity",
@@ -758,14 +758,14 @@ output$underemployment_graph_line <- renderPlotly({
 
 
 
-observeEvent(input$underemployment_input, {
+observeEvent(input$underemployment_geog_name, {
 
   data_unfiltered <- underemployment %>%
     select(local_authority, year, proportion) %>%
     rename( "Underemployment (%)" = proportion)
 
   data_filtered <- data_unfiltered %>%
-    filter(local_authority == input$underemployment_input)
+    filter(local_authority == input$underemployment_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "underemployment", filename = "underemployment",
