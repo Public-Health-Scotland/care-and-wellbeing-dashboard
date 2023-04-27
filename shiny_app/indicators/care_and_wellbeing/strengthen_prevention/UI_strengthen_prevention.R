@@ -185,8 +185,11 @@ tagList(
                                    "chd_deaths_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
-                        h3("Data table"),
-                        DT::dataTableOutput("chd_deaths_table")
+                        br(),
+                        h3(textOutput("chd_deaths_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("chd_deaths")
 
 
 

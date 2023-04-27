@@ -149,15 +149,32 @@ output$chd_deaths_plot = renderPlotly({
 })
 
 
-output$chd_deaths_table = DT::renderDataTable({
+observeEvent(input$chd_deaths_geog_type,{
+  observeEvent(input$chd_deaths_geog_name,{
 
-  chd_deaths %>%
-    select(area_name, year_range, measure, lower_confidence_interval,
-           upper_confidence_interval, definition) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "chd_deaths",
-                             geogtype = "none")
+  data_unfiltered <- chd_deaths %>%
+    select(year_range, area_type, area_name, measure,
+           lower_confidence_interval, upper_confidence_interval) %>%
+    arrange(year_range) %>%
+    mutate(year_range = factor(year_range)) %>%
+    rename("geography_type" = "area_type",
+           "geography" = "area_name",
+           "Coronary heart disease deaths (age 45-74)" = "measure")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$chd_deaths_geog_type) %>%
+    filter(geography == input$chd_deaths_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "chd_deaths", filename = "chd_deaths",
+                     add_separator_cols_2dp = c(4,5,6))
+  })
+})
+
+observeEvent(input$chd_deaths_geog_name,{
+
+  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+                                              input$chd_deaths_geog_name)})
 })
 
 ##############################################.
