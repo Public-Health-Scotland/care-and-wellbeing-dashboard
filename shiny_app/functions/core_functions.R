@@ -8,6 +8,32 @@ icon_no_warning_fn = function(icon_name) {
   icon(icon_name, verify_fa=FALSE)
 }
 
+format_entry <- function(x, dp=0, perc=F){
+  # x (numeric, char): entry
+  # dp (int): number of decimal places
+  # perc (bool): whether to add % afterwards
+
+  # First strip any existing commas and whitespace out
+  x <- gsub(",", "", x)
+  x <- gsub(" ", "", x)
+
+  # Try to convert entry to numeric, if failed return NULL
+  numx <- tryCatch(as.numeric(x),
+                   warning = function(w) NULL)
+
+  # Format entry if numeric
+  if (!is.null(numx)){
+    numx <- formatC(numx, format="f", big.mark = ",", digits=dp)
+    if (perc){
+      numx <- paste0(numx, "%")
+    }
+    return (numx)
+  } else {
+    # If entry cannot be converted to numeric, return original entry i.e. "*"
+    return(x)
+  }
+}
+
 # Generic data table
 make_table <- function(input_data_table,
                        rows_to_display = 20

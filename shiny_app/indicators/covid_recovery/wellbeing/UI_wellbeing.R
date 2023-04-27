@@ -2,7 +2,7 @@ tagList(
 
   h1("Wellbeing of children and young people"),
   br(),
-  #bsButton("jump_home_wellbeing", "Go to home page", class = "home-btn"),
+  actionButton("wellbeing_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
 
 
@@ -41,7 +41,8 @@ tagList(
 
 
                         h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
-                        DT::dataTableOutput("child_poverty_data")
+
+                        dataDownloadUI("child_poverty")
 
 
                ),
@@ -83,10 +84,9 @@ tagList(
 
                         withSpinner(plotlyOutput("school_leavers_line_figure")),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of school leavers in positive destinations"),
 
-                        withSpinner(DT::dataTableOutput("school_leavers_table"))
-
+                        dataDownloadUI("school_leavers")
                ),
 
 
@@ -233,9 +233,9 @@ tagList(
                                      selected = "On",
                                      inline = TRUE),
 
+                        h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
 
-                        h3("Data table"),
-                        DT::dataTableOutput("camhs_data")
+                        dataDownloadUI("camhs")
 
                ),
 
@@ -270,8 +270,9 @@ tagList(
                                                      "but generally fall into the periods Easter (late March/early April), Summer (late June/early July), Autumn (October), and Christmas (December).")),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("protection_harm_data")
+                        h3("Data table: Number of children subject to interagency referral discussions"),
+
+                        dataDownloadUI("protection_harm")
 
 
                ),
@@ -309,8 +310,9 @@ tagList(
                                    'infant_mortality_graph'),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("infant_data")
+                        h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
+
+                        dataDownloadUI("infant_mortality")
                ),
                ##############################################.
                # Physical Activity----

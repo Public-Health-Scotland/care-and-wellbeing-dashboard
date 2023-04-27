@@ -1,7 +1,7 @@
 tagList(
 
   h1("Giving every child the best start in life" ),
-  bsButton("child_start_to_info", "Go to 'Giving every child the best start in life' information page", class = "to_info-btn"),
+  bsButton("child_start_to_info", "Go to information page", class = "info-btn"),
   br(),
   h4(strong("Select indicator: ")),
 
