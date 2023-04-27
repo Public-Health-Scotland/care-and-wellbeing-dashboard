@@ -159,8 +159,9 @@ tagList(
                                    "infant_mortality_cw_plot"),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("infant_mortality_cw_table")
+                        h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
+
+                        dataDownloadUI("infant_mortality_cw")
                ),
 
 

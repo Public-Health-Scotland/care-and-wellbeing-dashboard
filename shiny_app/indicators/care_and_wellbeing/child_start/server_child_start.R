@@ -125,15 +125,17 @@ output$infant_mortality_cw_plot = renderPlotly({
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 })
 
-output$infant_mortality_cw_table = DT::renderDataTable({
-
-  inf_deaths_out = inf_deaths %>%
-    select(date, geography_name, "number_of_infant_deaths" = count,
-           number_of_live_births = denominator, "rate per 1,000 live births" = rate) %>%
-    datatable_style_download(.,
-                             data_name = "infant",
-                             geogtype = "scotland")
-})
+inf_deaths %>%
+  arrange(desc(date)) %>%
+  select(date, count, denominator, rate) %>%
+  mutate(date = format(date, "%B %Y")) %>%
+  rename("Month" = "date",
+         "Number of infant deaths" = "count",
+         "Number of live births" = "denominator",
+         "Rate of infant deaths per 1,000 live births" = "rate") %>%
+  dataDownloadServer(id = "infant_mortality_cw", filename = "infant_mortality",
+                     add_separator_cols = c(2,3),
+                     add_separator_cols_2dp = c(4))
 
 
 
