@@ -138,7 +138,7 @@ tagList(
                         withSpinner(plotlyOutput("managing_financially_bar_plot")),
 
 
-                        h3("Data table: Percentage of households managing financially in 2020"),
+                        h3("Data table: Percentage of households in Scotland managing financially in 2020"),
                         DT::dataTableOutput("managing_financially_data"),
 
                         dataDownloadUI("managing_financially")),
@@ -210,7 +210,7 @@ tagList(
 
                         ),
 
-                        h3("Data table: Percentage of households with no savings in Scotland by local authority"),
+                        h3("Data table: Percentage of households in Scotland with savings by local authority"),
                         DT::dataTableOutput("savings_low_income_data"),
 
                         dataDownloadUI("savings_low_income")),
@@ -246,7 +246,7 @@ tagList(
 
                         plot_title("Percentage of household with unmanageable debt","unmanageable_debt_line"),
 
-                        h3("Data table: Percentage of households with unmanageable debt in Scotland"),
+                        h3("Data table: Percentage of households with unmanageable debt"),
                         DT::dataTableOutput("unmanageable_debt_data"),
 
                         dataDownloadUI("unmanageable_debt")),

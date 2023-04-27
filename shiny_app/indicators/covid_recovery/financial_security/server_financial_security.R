@@ -285,9 +285,13 @@ savings_low_income_la <- savings_low_income %>%
 savings_low_income_scot %>%
   bind_rows(savings_low_income_la) %>%
   select(year, council, net_income, savings, percentage) %>%
+  mutate(year = factor(year),
+         council = factor(council),
+         net_income = factor(net_income),
+         savings = factor(savings)) %>%
   rename("Percentage of Households (%)" = "percentage",
          "Local authority" = "council") %>%
-  dataDownloadServer(id = "savings_low_income", filename = "savings_low_income",
+  dataDownloadServer(id = "savings_low_income", filename = "savings",
                      add_separator_cols_1dp = c(5))
 
 
@@ -311,8 +315,9 @@ output$household_spending_bar = renderPlotly({
 household_spending %>%
   ungroup() %>%
   select(year, scotland) %>%
-  rename("Household Expenditure (%)" = "scotland") %>%
-  dataDownloadServer(id = "managing_spending", filename = "managing_spending")
+  rename("Household Expenditure (%)" = "scotland",
+         "Financial year range" = "year") %>%
+  dataDownloadServer(id = "managing_spending", filename = "cost_of_living")
 
 
 ##############################################.

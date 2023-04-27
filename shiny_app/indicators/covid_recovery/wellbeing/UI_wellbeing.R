@@ -308,7 +308,7 @@ tagList(
                                    'infant_mortality_graph'),
 
 
-                        h3("Data table: Infant mortality"),
+                        h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
                         DT::dataTableOutput("infant_mortality_data"),
 
                         dataDownloadUI("infant_mortality")

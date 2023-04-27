@@ -152,7 +152,8 @@ observeEvent(input$HB_CAMHS,{
     mutate(date = format(date, "%B %Y")) %>%
     mutate(wait_time = factor(wait_time),
            hb2019name = factor(hb2019name)) %>%
-    rename("health_board" = "hb2019name",
+    rename("Month" = "date",
+           "health_board" = "hb2019name",
            "Number of patients seen" = "number",
            "Proportion of patients seen" = "proportion")
 
@@ -204,7 +205,7 @@ inf_deaths %>%
   rename("Month" = "date",
          "Number of infant deaths" = "count",
          "Number of live births" = "denominator",
-         "Rate per 1,000 live births" = "rate") %>%
+         "Rate of infant deaths per 1,000 live births" = "rate") %>%
   dataDownloadServer(id = "infant_mortality", filename = "infant_mortality",
                      add_separator_cols = c(2,3),
                      add_separator_cols_2dp = c(4))
@@ -231,7 +232,7 @@ observeEvent(input$school_leavers_category_input,{
     select(category, characteristic, financial_year, percent) %>%
     mutate(category = factor(category),
            characteristic = factor(characteristic)) %>%
-    rename("Percentage of school leavers in positive destinations" = "percent")
+    rename("Percentage of school leavers in positive destinations (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
     filter(category == input$school_leavers_category_input)
@@ -258,7 +259,9 @@ output$protection_harm_line = renderPlotly({
 protection_from_harm %>%
   arrange(desc(date_end)) %>%
   select(Date, Value) %>%
-  rename("Number of children subject to interagency referral discussions" = "Value") %>%
+  mutate(Date = gsub("-", "to", Date)) %>%
+  rename("Number of children subject to interagency referral discussions" = "Value",
+         "Date Range" = "Date") %>%
   dataDownloadServer(id = "protection_harm", filename = "protection_from_harm",
                      add_separator_cols = c(2))
 

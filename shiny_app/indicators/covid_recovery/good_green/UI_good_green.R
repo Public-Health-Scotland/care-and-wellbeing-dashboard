@@ -328,7 +328,7 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Data table: Skills shortage"),
+                        h3("Data table: Percentage of vacancies by vacancy type and region"),
                         DT::dataTableOutput("skills_shortage_data"),
                         dataDownloadUI("skills_shortage")
                ),
@@ -374,7 +374,7 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table: Underemployment"),
+                        h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
                         DT::dataTableOutput("underemployment_data"),
                         dataDownloadUI("underemployment")),
 
@@ -413,7 +413,7 @@ tagList(
                         ,
 
 
-                        h3("Data table: Economic inactivity"),
+                        h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
                         DT::dataTableOutput("economic_inactivity_data"),
                         dataDownloadUI("economic_inactivity")
 
