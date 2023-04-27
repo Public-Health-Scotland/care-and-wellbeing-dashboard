@@ -123,7 +123,7 @@ confidence_line_function = function(data, y_title) {
               type = "scatter",
               mode = "lines",
               line = list(color = 'transparent'),
-              name = "upper bound",
+              name = "Upper CI",
               showlegend = FALSE) %>%
     add_trace(x=~date, y=~lower_confidence_interval,
               type = "scatter",
@@ -131,17 +131,18 @@ confidence_line_function = function(data, y_title) {
               fill = 'tonexty',
               fillcolor = phsstyles::phs_colours("phs-purple-10"),
               line = list(color = 'transparent'),
-              name = "lower bound",
+              name = "Lower CI",
               showlegend = FALSE) %>%
     add_trace(x=~date,
               y=~indicator,
               type = "scatter",
               mode = "lines",
-              name = "Age-sex standardised rates per 100,000",
+              name = "Rate",
               line = list(color = phsstyles::phs_colours("phs-purple")),
               showlegend = TRUE) %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -220,8 +221,15 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Numb
           y = ~y,
           color = ~colour,
           type="scatter",
-          mode="lines+markers",
-          colors = palette) %>%
+          mode="lines",
+          colors = palette#,
+          # text = ~paste0(#"<b>Date</b>: ", format(Date, "%d %b %y"), "\n",
+          #                "<b>Reported cases</b>: ", format(round_half_up(~color, 1), big.mark=","), "\n"),
+          # hovertemplate = paste('<b>%{text}</b>',
+          #                       '<br>%{x}',
+          #                       '<br>%{y}',
+          #                       '<extra></extra>')
+          ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),
                         titlefont = list(size=18),
@@ -231,7 +239,8 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Numb
            xaxis = list(title = x_axis_title,
                         tickfont = list(size=14),
                         titlefont = list(size=18)),
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           hovermode = "x unified") %>%
 
     config(displaylogo = FALSE, displayModeBar = TRUE,
            modeBarButtonsToRemove = bttn_remove)
