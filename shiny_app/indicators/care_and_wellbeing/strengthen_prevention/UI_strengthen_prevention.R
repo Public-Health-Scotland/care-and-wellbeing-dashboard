@@ -359,7 +359,11 @@ tagList(
                         plot_title("Birthweight of babies based on gestational age by financial year",
                                    "healthy_birthweight_plot"),
 
-                        DT::dataTableOutput("healthy_birthweight_table")),
+                        br(),
+                        h3(textOutput("healthy_birthweight_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("healthy_birthweight")),
 
 
                ##############################################.

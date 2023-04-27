@@ -431,6 +431,32 @@ output$healthy_birthweight_table = DT::renderDataTable({
                              geogtype = "none")
 })
 
+observeEvent(input$healthy_birthweight_geog_name,{
+
+  data_unfiltered <- birthweight %>%
+    arrange(financial_year) %>%
+    mutate(percentage = round_half_up(proportion*100,1)) %>%
+    select(financial_year, geography_type, geography,
+           birthweight_for_gestational_age, percentage) %>%
+    mutate(financial_year = factor(financial_year),
+           birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
+    rename("Percentage of babies (%)" = "percentage")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$healthy_birthweight_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "healthy_birthweight", filename = "healthy_birthweight",
+                     add_separator_cols_1dp = c(5))
+
+})
+
+observeEvent(input$healthy_birthweight_geog_name,{
+
+  output$healthy_birthweight_title <- renderText({glue("Data table: Birthweight of babies based on gestational age in ",
+                                                      input$healthy_birthweight_geog_name)})
+})
+
 
 ##############################################.
 #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
