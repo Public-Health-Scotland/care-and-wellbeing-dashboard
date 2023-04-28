@@ -93,12 +93,13 @@ tagList(
 
 
 
-                        h3("Data table"),
+                        h3(textOutput("child_development_cw_table_title")),
+                        p("To view the full dataset, please use the download buttons below."),
                         radioButtons("child_development_cw_geog_table",
                                      "Select geography type for data table",
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
-                        DT::dataTableOutput("child_development_cw_table")
+                        dataDownloadUI("child_development_cw")
                ),
 
                ##############################################.
@@ -126,7 +127,10 @@ tagList(
 
                         plotlyOutput("child_obesity_plot"),
 
-                        DT::dataTableOutput("child_obesity_table")
+                        br(),
+                        h3("Data table: Percentage of children (2-15) at risk of obesity in Scotland"),
+                        br(),
+                        dataDownloadUI("children_at_risk_of_obesity")
                ),
 
                ##############################################.
@@ -156,8 +160,9 @@ tagList(
                                    "infant_mortality_cw_plot"),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("infant_mortality_cw_table")
+                        h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
+
+                        dataDownloadUI("infant_mortality_cw")
                ),
 
 

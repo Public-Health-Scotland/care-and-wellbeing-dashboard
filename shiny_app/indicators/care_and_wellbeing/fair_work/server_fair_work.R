@@ -125,15 +125,16 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
 
 
 
-output$employees_living_wage_cw_table = DT::renderDataTable({
-
-  data_table = employees_living_wage_by_sector %>% filter(measure == "proportion")
-
-  datatable_style_download(data_table,
-                           datetype = "year",
-                           data_name = "employees_living_wage_2",
-                           geogtype = "none")
-})
+employees_living_wage_by_sector %>%
+  filter(measure == "proportion") %>%
+  arrange(sector, earning, year) %>%
+  select(sector, earning, year, measure_value) %>%
+  mutate(sector = factor(sector),
+         year = factor(year),
+         earning = factor(earning)) %>%
+  rename("Proportion of employees" = "measure_value") %>%
+  dataDownloadServer(id = "living_wage_cw", filename = "employees_on_living_wage",
+                     add_separator_cols_1dp = c(4))
 
 
 ##############################################.
@@ -165,28 +166,58 @@ output$gender_pay_gap_cw_plot = renderPlotly({
 
 
 
-output$gender_pay_gap_cw_table = DT::renderDataTable({
+observeEvent(input$gender_pay_gap_cw_sector, {
 
-  pay_gap_by_sector_Gap = gender_pay_gap_by_sector %>%
-    filter(gender == "Pay Gap") %>%
-    rename("Measure" = "gender")
+  observeEvent(input$gender_pay_gap_cw_work, {
 
-  datatable_style_download(pay_gap_by_sector_Gap,
-                           datetype = "year",
-                           data_name = "pay_gap",
-                           geogtype = "none")
+    data_unfiltered <- gender_pay_gap_by_sector %>%
+      filter(gender == "Pay Gap") %>%
+      select(year, sector, work_pattern, measure_value) %>%
+      rename("Gender Pay Gap (%)" = "measure_value")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sector == input$gender_pay_gap_cw_sector) %>%
+      filter(work_pattern == input$gender_pay_gap_cw_work)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "gender_pay_gap_cw", filename = "gender_pay_gap")
+  })
+})
+
+observeEvent(input$gender_pay_gap_cw_sector, {
+
+  observeEvent(input$gender_pay_gap_cw_work, {
+
+    data_unfiltered <- gender_pay_gap_by_sector %>%
+      filter(gender != "Pay Gap") %>%
+      select(year, sector, work_pattern, gender, measure_value) %>%
+      rename("Median Hourly Earnings (£)" = "measure_value")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sector == input$gender_pay_gap_cw_sector) %>%
+      filter(work_pattern == input$gender_pay_gap_cw_work)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "gender_pay_gap_earnings_cw", filename = "gender_pay_gap_earnings")
+  })
 })
 
 
-output$gender_pay_gap_cw_earnings_table = DT::renderDataTable({
+observeEvent(input$gender_pay_gap_cw_tabBox, {
+  observeEvent(input$gender_pay_gap_cw_sector, {
+    observeEvent(input$gender_pay_gap_cw_work, {
 
-  pay_gap_by_sector_earnings = gender_pay_gap_by_sector %>%
-    filter(gender != "Pay Gap")
+  string_tab <- ifelse(input$gender_pay_gap_cw_tabBox == "Earnings",
+                    "Data table: Median Hourly Earnings (£) by gender - ",
+                    "Data table: Gender pay gap (%) - ")
+  string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+                    "all sectors, ",
+                    tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
+  string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-  datatable_style_download(pay_gap_by_sector_earnings,
-                           datetype = "earnings",
-                           data_name = "pay_gap",
-                           geogtype = "none")
+  output$gender_pay_gap_cw_table_title <- renderText({glue(string_tab, string_sector, string_work)})
+    })
+  })
 })
 
 ##############################################.
@@ -217,13 +248,30 @@ output$economic_inactivity_cw_plot <- renderPlotly({
 
 })
 
-output$economic_inactivity_cw_table <- DT::renderDataTable({
-  # Formatting datatable output
-  economic_inactivity %>%
-    rename("Number of People" = "n") %>%
-    datatable_style_download(., datetype = "year",
-                             data_name = "economic_inactivity", geogtype = "")
+observeEvent(input$economic_inactivity_cw_geog_name, {
 
+  data_unfiltered <- economic_inactivity %>%
+    select(year, region, breakdown, n, percent) %>%
+    rename("category" = "breakdown",
+           "Number of People" = "n",
+           "Percentage of People (%)" = "percent")
+
+  data_filtered <- data_unfiltered %>%
+    filter(region == input$economic_inactivity_cw_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "economic_inactivity_cw", filename = "economic_inactivity",
+                     add_separator_cols = c(4),
+                     add_separator_cols_1dp = c(5))
+})
+
+observeEvent(input$economic_inactivity_cw_geog_name, {
+
+  output$economic_inactivity_cw_table_title <- renderText({
+    glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+         input$economic_inactivity_cw_geog_name)})
 
 })
+
+
 

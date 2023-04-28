@@ -44,8 +44,9 @@ tagList(
                         ,
 
 
-                        h3("Economic inactivity data table"),
-                        DT::dataTableOutput("economic_inactivity_cw_table")
+                        h3(textOutput("economic_inactivity_cw_table_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("economic_inactivity_cw")
 
 
                ),
@@ -104,9 +105,9 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
                         ),
 
-                        h3("Data table"),
+                        h3("Data table: Proportion of employees on the living wage"),
 
-                        withSpinner(DT::dataTableOutput("employees_living_wage_cw_table"))),
+                        dataDownloadUI("living_wage_cw")),
 
                #############################################.
                #PAY GAP----
@@ -154,7 +155,8 @@ tagList(
 
 
 
-                        h3("Data tables"),
+                        h3(textOutput("gender_pay_gap_cw_table_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         tabBox(
                           #title = "Data tables",
@@ -162,10 +164,10 @@ tagList(
                           id = "gender_pay_gap_cw_tabBox", height = "250px", width=12,
                           tabPanel("Pay gap",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_cw_table"))),
+                                   dataDownloadUI("gender_pay_gap_cw")),
                           tabPanel("Earnings",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_cw_earnings_table")))
+                                   dataDownloadUI("gender_pay_gap_earnings_cw"))
                         )),
 
                ##############################################.
