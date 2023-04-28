@@ -61,6 +61,14 @@ observeEvent(input$camhs_waiting_times_cw_geog_name,{
 
 })
 
+observeEvent(input$camhs_waiting_times_cw_geog_name, {
+
+  output$camhs_cw_table_title <- renderText({
+    glue("Data table: Proportion of CAMHS patients seen by wait time since referral in ",
+         input$camhs_waiting_times_cw_geog_name)})
+
+})
+
 
 # Proportion meeting target of 18 weeks line chart
 output$camhs_waiting_times_cw_seen_within_plot = renderPlotly({
