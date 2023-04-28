@@ -159,7 +159,7 @@ observeEvent(input$chd_deaths_geog_type,{
     mutate(year_range = factor(year_range)) %>%
     rename("geography_type" = "area_type",
            "geography" = "area_name",
-           "Coronary heart disease deaths (age 45-74)" = "measure")
+           "Rate of CHD deaths per 100,000 (age 45-74)" = "measure")
 
   data_filtered <- data_unfiltered %>%
     filter(geography_type == input$chd_deaths_geog_type) %>%
@@ -223,7 +223,7 @@ observeEvent(input$drug_admissions_age,{
       select(financial_year, age_group, rate) %>%
       arrange(financial_year) %>%
       mutate(financial_year = factor(financial_year)) %>%
-      rename("Drug-related hospital admissions" = "rate")
+      rename("Drug-related hospital admissions rate" = "rate")
 
     data_filtered <- data_unfiltered %>%
       filter(age_group == input$drug_admissions_age)

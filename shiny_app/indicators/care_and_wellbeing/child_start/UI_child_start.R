@@ -93,12 +93,13 @@ tagList(
 
 
 
-                        h3("Data table"),
+                        h3(textOutput("child_development_cw_table_title")),
+                        p("To view the full dataset, please use the download buttons below."),
                         radioButtons("child_development_cw_geog_table",
                                      "Select geography type for data table",
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
-                        DT::dataTableOutput("child_development_cw_table")
+                        dataDownloadUI("child_development_cw")
                ),
 
                ##############################################.

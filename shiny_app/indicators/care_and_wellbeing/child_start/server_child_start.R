@@ -74,6 +74,37 @@ output$child_development_cw_data = DT::renderDataTable({
                            geogtype = "council_area")
 })
 
+observeEvent(input$child_development_cw_geog_table, {
+
+  data_unfiltered <- preschool %>%
+    select(financial_year, geography_type, geography, number_of_reviews,
+           concern_any, proportion = prop_concern_any) %>%
+    rename("Total number of reviews" = "number_of_reviews",
+           "Number of reviews with any concern" = "concern_any",
+           "Proportion of total reviews with any concern" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$child_development_cw_geog_table) %>%
+    mutate(financial_year = factor(financial_year),
+           geography = factor(geography))
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "child_development_cw", filename = "child_development",
+                     add_separator_cols = c(4,5),
+                     add_separator_cols_2dp = c(6))
+})
+
+observeEvent(input$child_development_cw_geog_table, {
+
+  geog_type <- ifelse(input$child_development_cw_geog_table == "Scotland",
+                      "in Scotland",
+                      paste0("by ", input$child_development_cw_geog_table))
+
+  output$child_development_cw_table_title <- renderText({
+    glue("Data table: Proportion of health visitor reviews where any ",
+         "form of developmental concern was raised ", geog_type)})
+})
+
 ##############################################.
 # CHILD WELLBEING AND HAPPINESS----
 ##############################################.
