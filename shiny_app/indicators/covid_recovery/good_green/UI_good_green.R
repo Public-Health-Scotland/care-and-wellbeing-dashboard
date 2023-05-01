@@ -207,8 +207,10 @@ tagList(
                                    ),
 
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("disability_gap_data_table"))),
+                                   br(),
+                                   h3(textOutput("disability_employment_gap_table_title")),
+                                   dataDownloadUI("disability_employment_gap")),
+
 
 
                           tabPanel("Ethnicity employment gap",

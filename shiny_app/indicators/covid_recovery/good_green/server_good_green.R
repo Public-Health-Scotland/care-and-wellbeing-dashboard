@@ -329,14 +329,57 @@ output$disability_employment_gap_line_LA = renderPlotly({
 })
 
 
-output$disability_gap_data_table = DT::renderDataTable({
-  datatable_style_download(disability_employment_gap_data,
-                           datetype = "year",
-                           data_name = "disability_employment_gap",
-                           geogtype = "none")
+disability_all <- disability_employment_gap_data %>%
+  select(year, ca2019, local_authority, category, measure_value) %>%
+  arrange(year, ca2019, local_authority, category) %>%
+  mutate(category = ifelse(category != "Disability Employment Gap",
+                           paste0(category, " employment rate (%)"),
+                           "Disability Employment Gap (%)")) %>%
+  pivot_wider(names_from = "category", values_from = "measure_value")
+
+disability_scotland <- disability_all %>%
+  filter(local_authority == "Scotland") %>%
+  mutate(year = factor(year)) %>%
+  select(-ca2019)
+
+dataDownloadServer(data = disability_scotland, data_download = disability_all,
+                   id = "disability_employment_gap", filename = "disability_employment_gap",
+                   add_separator_cols_1dp = c(3,4,5))
+
+output$disability_employment_gap_table_title <- renderText({
+  glue("Data table: Disability employment gap in Scotland")
 })
 
+observeEvent(input$disability_employment_gap_button, {
 
+  dataDownloadServer(data = disability_scotland, data_download = disability_all,
+                     id = "disability_employment_gap", filename = "disability_employment_gap",
+                     add_separator_cols_1dp = c(3,4,5))
+
+  output$disability_employment_gap_table_title <- renderText({
+    glue("Data table: Disability employment gap in Scotland")
+  })
+
+})
+
+observeEvent(input$disability_gap_ui_map_shape_click$id,{
+
+  disability_la <- disability_all %>%
+    filter(ca2019 == rv_disability_employment_gap()) %>%
+    mutate(year = factor(year)) %>%
+    select(-ca2019)
+
+  dataDownloadServer(data = disability_la, data_download = disability_all,
+                     id = "disability_employment_gap", filename = "disability_employment_gap",
+                     add_separator_cols_1dp = c(3,4,5))
+
+  la_selected <- unique(disability_la$local_authority)
+
+  output$disability_employment_gap_table_title <- renderText({
+    glue("Data table: Disability employment gap in ", la_selected)
+  })
+
+})
 
 ##############################################.
 # ETHNICITY EMPLOYMENT GAP----
