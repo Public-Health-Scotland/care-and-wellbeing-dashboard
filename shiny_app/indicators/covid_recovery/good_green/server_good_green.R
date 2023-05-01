@@ -220,11 +220,20 @@ observeEvent(input$gender_pay_gap_sector_radio, {
 
 
 observeEvent(input$gender_pay_gap_tabBox, {
+  observeEvent(input$gender_pay_gap_sector_radio, {
+    observeEvent(input$gender_pay_gap_work_radio, {
 
-  output$gender_pay_gap_table_title <- renderText({ifelse(input$gender_pay_gap_tabBox == "Earnings",
-                                              "Data table: Median Hourly Earnings (£) by gender",
-                                              "Data table: Gender pay gap (%)")})
+      string_tab <- ifelse(input$gender_pay_gap_tabBox == "Earnings",
+                           "Data table: Median Hourly Earnings (£) by gender - ",
+                           "Data table: Gender pay gap (%) - ")
+      string_sector <- ifelse(input$gender_pay_gap_sector_radio == "All",
+                              "all sectors, ",
+                              tolower(paste0(input$gender_pay_gap_sector_radio, " sector, ")))
+      string_work <- tolower(paste0(input$gender_pay_gap_work_radio, " work patterns"))
 
+      output$gender_pay_gap_table_title <- renderText({glue(string_tab, string_sector, string_work)})
+    })
+  })
 })
 
 ##############################################.
