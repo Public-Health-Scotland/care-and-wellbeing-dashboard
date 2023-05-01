@@ -84,7 +84,7 @@ tagList(
 
                         withSpinner(plotlyOutput("school_leavers_line_figure")),
 
-                        h3("Data table: Percentage of school leavers in positive destinations"),
+                        h3(textOutput("school_leavers_table_title")),
 
                         dataDownloadUI("school_leavers")
                ),
