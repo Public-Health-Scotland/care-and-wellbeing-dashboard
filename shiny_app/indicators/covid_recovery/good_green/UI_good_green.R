@@ -375,7 +375,7 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
+                        h3(textOutput("underemployment_table_title")),
                         dataDownloadUI("underemployment")),
 
                ##############################################.

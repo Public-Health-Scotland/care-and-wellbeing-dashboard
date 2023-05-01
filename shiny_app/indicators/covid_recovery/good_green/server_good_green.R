@@ -856,5 +856,10 @@ observeEvent(input$underemployment_geog_name, {
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "underemployment", filename = "underemployment",
                      add_separator_cols_1dp = c(3))
+
+  output$underemployment_table_title <- renderText({
+    glue("Data table: Percentage of adults 16 years old and over who are underemployed in ",
+         input$underemployment_geog_name)
+  })
 })
 
