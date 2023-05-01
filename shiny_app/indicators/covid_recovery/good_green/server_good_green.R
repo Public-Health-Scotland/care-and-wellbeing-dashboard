@@ -807,6 +807,11 @@ observeEvent(input$economic_inactivity_cr_geog_name, {
                      id = "economic_inactivity", filename = "economic_inactivity",
                      add_separator_cols = c(4),
                      add_separator_cols_1dp = c(5))
+
+  output$economic_inactivity_table_title <- renderText({
+    glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+         input$economic_inactivity_cr_geog_name)
+  })
 })
 
 

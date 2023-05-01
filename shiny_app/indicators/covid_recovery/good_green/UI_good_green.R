@@ -421,7 +421,7 @@ tagList(
                         ,
 
 
-                        h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
+                        h3(textOutput("economic_inactivity_table_title")),
                         dataDownloadUI("economic_inactivity")
 
 
