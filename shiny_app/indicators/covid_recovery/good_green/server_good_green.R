@@ -689,14 +689,29 @@ output$employability_FSS_start_month_funnel_figure = renderPlotly({
 
 ###
 
-output$employability_FSS_referral_data = DT::renderDataTable({
+employability_FSS_start_month %>%
+  arrange(desc(year_quarter_date)) %>%
+  select(-year_quarter, -early_leavers) %>%
+  mutate(year_quarter_date = format(year_quarter_date, "%B %Y")) %>%
+  rename("Sustained employment after 3 months" = "sustained_employment_3_month",
+         "Sustained employment after 6 months" = "sustained_employment_6_month",
+         "Sustained employment after 1 year" = "sustained_employment_1_year",
+         "Month" = "year_quarter_date") %>%
+  dataDownloadServer(id = "employability_starts",
+                     filename = "employability_starts",
+                     add_separator_cols = c(2,3,4,5,6))
 
-  datatable_style_download(employability_FSS_referral,
-                           datetype = "year",
-                           data_name = "employability_FSS_referral",
-                           geogtype = "none")
-})
 
+employability_FSS_referral %>%
+  arrange(desc(year_quarter)) %>%
+  select(year_quarter, referrals, starts_from_referrals, start_rate) %>%
+  mutate(year_quarter = factor(year_quarter),
+         start_rate = start_rate*100) %>%
+  rename("Start Rate (%)" = "start_rate",
+         "Quarter" = "year_quarter") %>%
+  dataDownloadServer(id = "employability_referrals",
+                     filename = "employability_referrals",
+                     add_separator_cols = c(2,3,4))
 
 ##############################################.
 # SKILLS SHORTAGE VACANCIES ----

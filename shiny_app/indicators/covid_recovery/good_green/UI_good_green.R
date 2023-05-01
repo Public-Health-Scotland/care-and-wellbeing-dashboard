@@ -481,6 +481,10 @@ tagList(
                           )
                         ),
 
+                        h3("Data table: Number of starts by month in Scotland"),
+
+                        dataDownloadUI("employability_starts"),
+
                         h4("Number of referrals and starts (from referrals) by quarter"),
 
                         actionButton(
@@ -518,9 +522,9 @@ tagList(
                         ),
 
 
-                        h3("Data table"),
+                        h3("Data table: Number of referrals and starts (from referrals) by quarter in Scotland"),
 
-                        withSpinner(DT::dataTableOutput("employability_FSS_referral_data"))
+                        dataDownloadUI("employability_referrals")
 
                ),
 
