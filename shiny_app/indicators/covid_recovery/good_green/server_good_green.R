@@ -171,7 +171,7 @@ observeEvent(input$employees_living_wage_map_shape_click,{
                      add_separator_cols_1dp = c(4))
 
   output$living_wage_table_title <- renderText({
-    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in Scotland")
+    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
   })
 
   observeEvent(input$employees_living_wage_map_button, {
@@ -181,7 +181,7 @@ observeEvent(input$employees_living_wage_map_shape_click,{
                        add_separator_cols_1dp = c(4))
 
     output$living_wage_table_title <- renderText({
-      glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in Scotland")
+      glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
     })
 
   })
