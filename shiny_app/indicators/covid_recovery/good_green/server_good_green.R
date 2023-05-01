@@ -402,6 +402,14 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
                            geogtype = "none")
 })
 
+ethnicity_employment_gap_chart_data %>%
+  rename("Financial Year" = "year",
+         "White employment rate (%)" = "White",
+         "Minority ethnic employment rate (%)" = "Minority Ethnic",
+         "Ethnicity Employment Gap (%)" = "Ethnicity Employment Gap") %>%
+  dataDownloadServer(id = "ethnicity_employment_gap", filename = "ethnicity_employment_gap",
+                   add_separator_cols_1dp = c(2,3,4))
+
 
 ##############################################.
 # EMPLOYMENT GAP UIs----

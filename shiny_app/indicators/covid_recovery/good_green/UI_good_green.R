@@ -243,8 +243,9 @@ tagList(
                                        "This was largely driven by employment in the working age white population falling post pandemic and the employment rate in the minority ethnic population  increasing."
                                    ),
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("ethnicity_employment_gap_chart_data")))),
+                                   br(),
+                                   h3("Data table: Ethnicity employment gap in Scotland"),
+                                   dataDownloadUI("ethnicity_employment_gap"))),
                         width = 12
                ),
 
