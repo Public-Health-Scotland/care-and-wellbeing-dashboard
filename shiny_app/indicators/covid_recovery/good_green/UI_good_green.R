@@ -324,7 +324,7 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Data table: Percentage of vacancies by vacancy type and region"),
+                        h3(textOutput("skills_shortage_table_title")),
                         dataDownloadUI("skills_shortage")
                ),
 

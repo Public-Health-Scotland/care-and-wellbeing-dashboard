@@ -748,6 +748,7 @@ output$skills_shortage_graph_bar <- renderPlotly({
 observeEvent(input$skills_shortage_geog_name, {
 
   data_unfiltered <- skills_shortage_vacancies %>%
+    arrange(year, region, vacancy_type) %>%
     select(year, region, vacancy_type, n_vacancies, all_establishments, percent) %>%
     mutate(percent = 100*percent) %>%
     rename("Number of Vacancies" = "n_vacancies",
@@ -759,6 +760,11 @@ observeEvent(input$skills_shortage_geog_name, {
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "skills_shortage", filename = "skills_shortage",
                        add_separator_cols = c(4,5,6))
+
+    output$skills_shortage_table_title <- renderText({
+      glue("Data table: Percentage of vacancies by vacancy type in ",
+           input$skills_shortage_geog_name)
+    })
 })
 
 
