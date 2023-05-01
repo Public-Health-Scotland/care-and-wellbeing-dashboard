@@ -197,6 +197,11 @@ observeEvent(input$CAMHS_geog_name,{
                      add_separator_cols = c(4),
                      add_separator_cols_2dp = c(5))
 
+  output$camhs_table_title <- renderText({
+    glue("Data table:  Proportion of CAMHS patients seen by wait time since referral in ",
+         input$CAMHS_geog_name)
+  })
+
 })
 
 ##############################################.

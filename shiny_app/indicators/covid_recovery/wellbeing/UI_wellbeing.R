@@ -234,7 +234,7 @@ tagList(
                                      selected = "On",
                                      inline = TRUE),
 
-                        h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
+                        h3(textOutput("camhs_table_title")),
 
                         dataDownloadUI("camhs")
 
