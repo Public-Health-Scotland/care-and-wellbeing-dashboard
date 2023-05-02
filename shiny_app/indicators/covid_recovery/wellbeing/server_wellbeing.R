@@ -3,6 +3,18 @@
 ##############################################.
 # This script sets up the content of the wellbeing tab
 
+# observeEvent(input$wellbeing_to_info,
+#              {updateTabsetPanel(session,
+#                                 "intabset",
+#                                 selected = "info_notes")
+#                updateRadioButtons(session,
+#                                   "pillar_type_info",
+#                                   selected = "Covid recovery")
+#                updateRadioButtons(session,
+#                                   "indicator_type_info",
+#                                   selected = "Wellbeing of children and young people")
+#              })
+
 ##############################################.
 # CHILD POVERTY----
 ##############################################.
@@ -11,13 +23,22 @@ output$child_poverty_chart <- renderPlotly({
   child_poverty_plot(child_poverty)
 })
 
-output$child_poverty_data <- DT::renderDataTable({
+# output$child_poverty_data <- DT::renderDataTable({
+#
+#   datatable_style_download(child_poverty,
+#                            datetype = "financial_year",
+#                            data_name = "child_poverty",
+#                            geogtype = "none")
+# })
 
-  datatable_style_download(child_poverty,
-                           datetype = "financial_year",
-                           data_name = "child_poverty",
-                           geogtype = "none")
-})
+child_poverty %>%
+  mutate(Group = factor(Group),
+         financial_year = factor(financial_year)) %>%
+  rename("Proportion Of people in relative poverty" = "proportion") %>%
+  select(-c("pretty_date", "value", "geography", "geography_type", "indicator")) %>%
+  dataDownloadServer(id = "child_poverty", filename = "child_poverty",
+                     add_separator_cols_2dp = c(3))
+
 
 ##############################################.
 # Pre-school development----
@@ -116,10 +137,6 @@ observeEvent(input$CAMHS_geog_type,
 camhs_filtered_table = camhs_waiting_times2 %>%
   filter(wait_time == "0 to 18 weeks")
 
-output$camhs_data = DT::renderDataTable({
-  datatable_style_download(camhs_waiting_times2, data_name = "camhs")
-})
-
 # Proportion meeting target of 18 weeks line chart
 output$camhs_waiting_times_graph_line = renderPlotly({
 
@@ -140,6 +157,28 @@ output$camhs_waiting_times_graph_stack = renderPlotly({
 
 })
 
+observeEvent(input$CAMHS_geog_name,{
+
+  data_unfiltered <- camhs_waiting_times2 %>%
+    arrange(desc(date), hb2019name, wait_time) %>%
+    select(date, hb2019name, wait_time, number, proportion) %>%
+    mutate(date = format(date, "%B %Y")) %>%
+    mutate(wait_time = factor(wait_time),
+           hb2019name = factor(hb2019name)) %>%
+    rename("Month" = "date",
+           "health_board" = "hb2019name",
+           "Number of patients seen" = "number",
+           "Proportion of patients seen" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(health_board == input$CAMHS_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "camhs", filename = "CAMHS_waiting_times",
+                     add_separator_cols = c(4),
+                     add_separator_cols_2dp = c(5))
+
+})
 
 ##############################################.
 # Infant mortality----
@@ -172,14 +211,19 @@ output$infant_mortality_graph = renderPlotly({
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 })
 
-output$infant_data = DT::renderDataTable({
+inf_deaths %>%
+  arrange(desc(date)) %>%
+  select(date, count, denominator, rate) %>%
+  mutate(date = format(date, "%B %Y")) %>%
+  rename("Month" = "date",
+         "Number of infant deaths" = "count",
+         "Number of live births" = "denominator",
+         "Rate of infant deaths per 1,000 live births" = "rate") %>%
+  dataDownloadServer(id = "infant_mortality", filename = "infant_mortality",
+                     add_separator_cols = c(2,3),
+                     add_separator_cols_2dp = c(4))
 
-  inf_deaths_out = inf_deaths %>%
-    select(date, geography_name, "number_of_infant_deaths" = count,
-           number_of_live_births = denominator, "rate per 1,000 live births" = rate)
 
-  datatable_style_download(inf_deaths_out, data_name = "infant", geogtype = "scotland")
-})
 
 
 ##############################################.
@@ -194,9 +238,22 @@ output$school_leavers_line_figure = renderPlotly({
 })
 
 
-output$school_leavers_table = DT::renderDataTable({
+observeEvent(input$school_leavers_category_input,{
 
-  datatable_style_download(positive_destinations_school_leavers, datetype = "year", data_name = "school_leavers", geogtype = "scotland")
+  data_unfiltered <- positive_destinations_school_leavers %>%
+    arrange(category, characteristic, financial_year) %>%
+    select(category, characteristic, financial_year, percent) %>%
+    mutate(category = factor(category),
+           characteristic = factor(characteristic)) %>%
+    rename("Percentage of school leavers in positive destinations (%)" = "percent")
+
+  data_filtered <- data_unfiltered %>%
+    filter(category == input$school_leavers_category_input)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "school_leavers", filename = "positive_destination_of_school_leavers",
+                     add_separator_cols_2dp = c(4))
+
 })
 
 
@@ -211,21 +268,15 @@ output$protection_harm_line = renderPlotly({
 
 })
 
-output$protection_harm_data = DT::renderDataTable({
 
-  out_data = protection_from_harm %>%
-    mutate(Date = paste0(format(date_start, "%d %B %Y"),
-                         " to ",
-                         format(date_end, "%d %B %Y"))) %>%
-    select(Date,
-           "Number of children subject to interagency referral discussions" = Value)
-
-  datatable_style_download(out_data,
-                           datetype = "fortnight",
-                           data_name = "protection_from_harm",
-                           geogtype = "scotland")
-})
-
+protection_from_harm %>%
+  arrange(desc(date_end)) %>%
+  select(Date, Value) %>%
+  mutate(Date = gsub("-", "to", Date)) %>%
+  rename("Number of children subject to interagency referral discussions" = "Value",
+         "Date Range" = "Date") %>%
+  dataDownloadServer(id = "protection_harm", filename = "protection_from_harm",
+                     add_separator_cols = c(2))
 
 
 

@@ -2,7 +2,7 @@ tagList(
 
   h1("Financial security for low income households"),
   br(),
-  #bsButton("jump_home_financial_security", "Go to home page", class = "home-btn"),
+  actionButton("financial_security_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
 
 
@@ -103,8 +103,9 @@ tagList(
                                    "household_spending_bar"),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("household_spending_data")),
+                        h3("Data table: Household expenditure as a percentage of total expenditure in Scotland"),
+
+                        dataDownloadUI("managing_spending")),
 
 
                ##############################################.
@@ -136,9 +137,9 @@ tagList(
                         withSpinner(plotlyOutput("managing_financially_bar_plot")),
 
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households in Scotland managing financially in 2020"),
 
-                        withSpinner(DT::dataTableOutput("managing_financially_data_table"))),
+                        dataDownloadUI("managing_financially")),
 
                ##############################################.
                # SAVINGS----
@@ -207,9 +208,9 @@ tagList(
 
                         ),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households in Scotland with savings by local authority"),
 
-                        withSpinner(DT::dataTableOutput("savings_low_income_data"))),
+                        dataDownloadUI("savings_low_income")),
 
 
 
@@ -242,9 +243,9 @@ tagList(
 
                         plot_title("Percentage of household with unmanageable debt","unmanageable_debt_line"),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of households with unmanageable debt"),
 
-                        withSpinner(DT::dataTableOutput("unmanageable_debt_data"))),
+                        dataDownloadUI("unmanageable_debt")),
 
 
                ##############################################.
@@ -290,9 +291,10 @@ tagList(
                                  (ELC) who are accessing 1140 hours of funded ELC", "childcare_uptake_graph_line"),
 
 
-                        h3("ELC childcare uptake data table"),
+                        h3("Data table: Percentage of 2-5-year-olds receiving funded Early Learning and Childcare
+                                 (ELC) who are accessing 1,140 hours of funded ELC"),
 
-                        DT::dataTableOutput("childcare_uptake_data")),
+                        dataDownloadUI("childcare_uptake")),
 
                ##############################################.
                # Benefit uptake and engagement with welfare advice ----

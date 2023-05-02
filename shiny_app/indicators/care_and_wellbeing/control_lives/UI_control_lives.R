@@ -2,6 +2,8 @@ tagList(
 
   h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
   br(),
+  bsButton("control_lives_to_info", "Go to information page", class = "info-btn"),
+
   h4(strong("Select indicator: ")),
 
 
@@ -48,8 +50,10 @@ tagList(
                                      inline = TRUE),
 
 
-                        h3("Data table"),
-                        DT::dataTableOutput("camhs_waiting_times_cw_table")
+                        h3(textOutput({"camhs_cw_table_title"})),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+
+                        dataDownloadUI("camhs_cw")
 
                ),
 

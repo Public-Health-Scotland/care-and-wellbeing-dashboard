@@ -1,6 +1,7 @@
 tagList(
   h1("Strengthen the role and impact of ill health prevention" ),
   br(),
+  bsButton("strengthen_prevention_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
   navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
@@ -37,7 +38,11 @@ tagList(
                         plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
                         # plotlyOutput("asthma_admissions_plot"),
 
-                        DT::dataTableOutput("asthma_admissions_table")
+                        br(),
+                        h3(textOutput("asthma_admissions_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("asthma_admissions")
 
 
                ),
@@ -73,7 +78,13 @@ tagList(
                                                             choices = c("Scotland"),
                                                             width = "100%"))),
 
-                                         plotlyOutput("alcohol_admissions_plot")
+                                         plotlyOutput("alcohol_admissions_plot"),
+
+                                         br(),
+                                         h3(textOutput("alcohol_admissions_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                         br(),
+                                         dataDownloadUI("alcohol_related_admissions")
                                 ),
 
 
@@ -133,8 +144,12 @@ tagList(
 
                         h3("All-cause mortality, ages 15-44"),
                         plotlyOutput("all_cause_mortality_plot"),
-                        h3("Data table"),
-                        DT::dataTableOutput("all_cause_mortality_table")
+
+                        br(),
+                        h3(textOutput("all_cause_mortality_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("all_cause_mortality")
 
 
                ),
@@ -170,8 +185,11 @@ tagList(
                                    "chd_deaths_plot",
                                    subtitle = "The shaded line indicates confidence intervals"),
 
-                        h3("Data table"),
-                        DT::dataTableOutput("chd_deaths_table")
+                        br(),
+                        h3(textOutput("chd_deaths_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("chd_deaths")
 
 
 
@@ -207,9 +225,11 @@ tagList(
                                         plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
                                                    "drug_admissions_plot"),
 
-                                        h3("Data table"),
-
-                                        DT::dataTableOutput("drug_admissions_table")
+                                        br(),
+                                        h3(textOutput("drug_admissions_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("drug_admissions")
                                ),
 
 
@@ -246,8 +266,11 @@ tagList(
                                                    "drug_deaths_plot",
                                                    subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
 
-                                        h3("Data table"),
-                                        DT::dataTableOutput("drug_deaths_table")
+                                        br(),
+                                        h3(textOutput("drug_deaths_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("drug_deaths")
 
 
 
@@ -279,7 +302,10 @@ tagList(
 
                         plotlyOutput("experience_unpaid_carers_plot"),
 
-                        DT::dataTableOutput("experience_unpaid_carers_table")
+                        br(),
+                        h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
+                        br(),
+                        dataDownloadUI("experience_unpaid_carers")
                ),
 
 
@@ -294,8 +320,10 @@ tagList(
                         plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
                                    "hospital_admission_heart_attack_plot"),
 
-                        h3("Data table"),
-                        DT::dataTableOutput("hopsital_admission_heart_attack_table")
+                        br(),
+                        h3("Data table: Total number of first ever hospital admissions for heart attack (under 75) in Scotland"),
+                        br(),
+                        dataDownloadUI("heart_attack_admission")
 
 
                ),
@@ -335,7 +363,11 @@ tagList(
                         plot_title("Birthweight of babies based on gestational age by financial year",
                                    "healthy_birthweight_plot"),
 
-                        DT::dataTableOutput("healthy_birthweight_table")),
+                        br(),
+                        h3(textOutput("healthy_birthweight_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("healthy_birthweight")),
 
 
                ##############################################.
@@ -370,7 +402,10 @@ tagList(
 
                         plotlyOutput("adult_long_term_condition_plot"),
 
-                        DT::dataTableOutput("adult_long_term_condition_table")
+                        br(),
+                        h3("Data table: Percentage of adults with a limiting long-term condition in Scotland"),
+                        br(),
+                        dataDownloadUI("limiting_ltcs")
                ),
 
                ##############################################.
@@ -434,7 +469,10 @@ tagList(
 
                         plotlyOutput("adult_self_assessed_health_plot"),
 
-                        DT::dataTableOutput("adult_self_assessed_health_table")
+                        br(),
+                        h3("Data table: Percentage of adults in Scotland who describe their general health as good or very good"),
+                        br(),
+                        dataDownloadUI("adult_self_assessed_health")
                ),
 
                ##############################################.
