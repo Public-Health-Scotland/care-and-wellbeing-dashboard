@@ -90,17 +90,36 @@ output$all_cause_mortality_plot = renderPlotly({
 })
 
 
-output$all_cause_mortality_table = DT::renderDataTable(
+observeEvent(input$all_cause_mortality_geog_name,{
 
-  all_cause_mortality  %>%
-    select(-pop) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "all_cause_mortality",
-                             geogtype = "none")
+  data_unfiltered <- all_cause_mortality %>%
+    filter(indicator_age == "15 to 44") %>%
+    group_by(year, geography_type, geography) %>%
+    summarise(pop = sum(pop), deaths = sum(deaths)) %>%
+    ungroup() %>%
+    mutate(rate = deaths/pop*100000) %>%
+    select(year, geography_type, geography, deaths, rate) %>%
+    arrange(year) %>%
+    mutate(year = factor(year)) %>%
+    rename("Number of deaths" = "deaths",
+           "Rate of deaths per 100,000 population" = "rate")
 
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$all_cause_mortality_geog_name)
 
-)
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "all_cause_mortality", filename = "all_cause_mortality",
+                     add_separator_cols = c(4),
+                     add_separator_cols_2dp = c(5))
+
+})
+
+observeEvent(input$all_cause_mortality_geog_name,{
+
+  output$all_cause_mortality_title <- renderText({glue("Data table: Total number of all-cause deaths, ages 15-44, in ",
+                                                       input$all_cause_mortality_geog_name)})
+})
+
 
 
 ##############################################.
@@ -124,20 +143,38 @@ output$chd_deaths_plot = renderPlotly({
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
-    rename(date = year) %>%
-    confidence_line_function(., "Age-sex standardised rate of deaths")
+    rename(date = year_range) %>%
+    confidence_line_function(., "Age-sex standardised rate of deaths") %>%
+    layout(xaxis = list(tickangle = 30))
 })
 
 
-output$chd_deaths_table = DT::renderDataTable({
+observeEvent(input$chd_deaths_geog_type,{
+  observeEvent(input$chd_deaths_geog_name,{
 
-  chd_deaths %>%
-    select(area_name, year, period, measure, lower_confidence_interval,
-           upper_confidence_interval, definition) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "chd_deaths",
-                             geogtype = "none")
+  data_unfiltered <- chd_deaths %>%
+    select(year_range, area_type, area_name, measure,
+           lower_confidence_interval, upper_confidence_interval) %>%
+    arrange(year_range) %>%
+    mutate(year_range = factor(year_range)) %>%
+    rename("geography_type" = "area_type",
+           "geography" = "area_name",
+           "Rate of CHD deaths per 100,000 (age 45-74)" = "measure")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$chd_deaths_geog_type) %>%
+    filter(geography == input$chd_deaths_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "chd_deaths", filename = "chd_deaths",
+                     add_separator_cols_2dp = c(4,5,6))
+  })
+})
+
+observeEvent(input$chd_deaths_geog_name,{
+
+  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+                                              input$chd_deaths_geog_name)})
 })
 
 ##############################################.
@@ -151,16 +188,15 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 
 })
 
-output$hopsital_admission_heart_attack_table <- DT::renderDataTable({
-
-  heart_attack %>%
-    select(date, total_admissions, rate_per_100_000_easr, geography) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "heartattack",
-                             geogtype = "none")
-
-})
+heart_attack %>%
+  select(date, total_admissions) %>%
+  arrange(date) %>%
+  mutate(date = factor(date)) %>%
+  rename("Year" = "date",
+         "Total number of hospital admissions" = "total_admissions") %>%
+  dataDownloadServer(id = "heart_attack_admission",
+                     filename = "first_ever_hospital_admission_heart_attack",
+                     add_separator_cols = c(2))
 
 
 ##############################################.
@@ -181,13 +217,32 @@ output$drug_admissions_plot = renderPlotly({
 
 })
 
-output$drug_admissions_table = DT::renderDataTable({
+observeEvent(input$drug_admissions_age,{
 
-  drug_stays %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "drugstays",
-                             geogtype = "none")
+    data_unfiltered <- drug_stays %>%
+      select(financial_year, age_group, rate) %>%
+      arrange(financial_year) %>%
+      mutate(financial_year = factor(financial_year)) %>%
+      rename("Drug-related hospital admissions rate" = "rate")
+
+    data_filtered <- data_unfiltered %>%
+      filter(age_group == input$drug_admissions_age)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "drug_admissions", filename = "drug_admissions",
+                       add_separator_cols_2dp = c(3))
+})
+
+observeEvent(input$drug_admissions_age,{
+
+  if(input$drug_admissions_age == "All age groups"){
+    age_title <- "all age groups"
+  }else{
+    age_title <- paste0("ages ", input$drug_admissions_age)
+  }
+
+  output$drug_admissions_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+                                                   age_title, ") in Scotland")})
 })
 
 
@@ -224,14 +279,33 @@ output$drug_deaths_plot = renderPlotly({
   }
 })
 
-output$drug_deaths_table = DT::renderDataTable({
+observeEvent(input$drug_deaths_geog_type,{
+  observeEvent(input$drug_deaths_geog_name,{
 
-  drug_related_deaths %>%
-    select(-c(pretty_date, indicator, value)) %>%
-    datatable_style_download(.,
-                             datetype = "year",
-                             data_name = "drug_related_deaths",
-                             geogtype = "none")
+  data_unfiltered <- drug_related_deaths %>%
+    select(year, geography_type, geography, number, rate,
+           lower_confidence_interval, upper_confidence_interval) %>%
+    arrange(year) %>%
+    mutate(year = factor(year)) %>%
+    rename("Year range" = "year",
+           "Number of drug-related deaths" = "number",
+           "Drug-related deaths rate" = "rate")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$drug_deaths_geog_type,
+           geography == input$drug_deaths_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "drug_deaths", filename = "drug_deaths",
+                     add_separator_cols = c(4),
+                     add_separator_cols_1dp = c(5,6,7))
+  })
+})
+
+observeEvent(input$drug_deaths_geog_name,{
+
+  output$drug_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related deaths in ",
+                                               input$drug_deaths_geog_name)})
 })
 
 ##############################################.
@@ -269,6 +343,33 @@ output$alcohol_admissions_plot = renderPlotly({
     layout(xaxis = list(tickangle = 45))
 
     })
+
+observeEvent(input$alcohol_admissions_geog_name,{
+
+    data_unfiltered <- alcohol_admissions %>%
+      arrange(financial_year) %>%
+      filter(condition == "All alcohol conditions",
+             smr_type == "Combined") %>%
+      mutate(financial_year = factor(financial_year)) %>%
+      select(financial_year, geography_type, geography, stays_easr) %>%
+      rename("Number of alcohol related admissions" = "stays_easr")
+
+    data_filtered <- data_unfiltered %>%
+        filter(geography == input$alcohol_admissions_geog_name)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "alcohol_related_admissions", filename = "alcohol_related_admissions",
+                       add_separator_cols_1dp = c(4))
+
+})
+
+observeEvent(input$alcohol_admissions_geog_name,{
+
+    output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol related admissions in ",
+                                                        input$alcohol_admissions_geog_name)})
+})
+
+
 
 ##############################################.
 # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
@@ -336,15 +437,30 @@ output$healthy_birthweight_plot = renderPlotly({
     stacked_bar_function(., .$birthweight_for_gestational_age)
 })
 
-output$healthy_birthweight_table = DT::renderDataTable({
+observeEvent(input$healthy_birthweight_geog_name,{
 
-  birthweight %>%
-    mutate(proportion = indicator) %>%
-    select(-c(pretty_date, indicator, value)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "birthweight",
-                             geogtype = "none")
+  data_unfiltered <- birthweight %>%
+    arrange(financial_year) %>%
+    mutate(percentage = round_half_up(proportion*100,1)) %>%
+    select(financial_year, geography_type, geography,
+           birthweight_for_gestational_age, percentage) %>%
+    mutate(financial_year = factor(financial_year),
+           birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
+    rename("Percentage of babies (%)" = "percentage")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$healthy_birthweight_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "healthy_birthweight", filename = "healthy_birthweight",
+                     add_separator_cols_1dp = c(5))
+
+})
+
+observeEvent(input$healthy_birthweight_geog_name,{
+
+  output$healthy_birthweight_title <- renderText({glue("Data table: Birthweight of babies based on gestational age in ",
+                                                      input$healthy_birthweight_geog_name)})
 })
 
 
@@ -364,21 +480,14 @@ output$adult_self_assessed_health_plot <- renderPlotly({
 
 
 
-output$adult_self_assessed_health_table <- DT::renderDataTable({
-
-  adult_self_assessed_health %>%
-    select(c(Year, Categories, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "adult_self_assessed_health",
-                             geogtype = "none")
-
-
-
-})
+adult_self_assessed_health %>%
+  select(c(Year, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults who describe their general health as good or very good (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "adult_self_assessed_health",
+                     filename = "adult_self_assessed_health")
 
 
 ##############################################.
@@ -397,21 +506,14 @@ output$adult_long_term_condition_plot <- renderPlotly({
 
 
 
-output$adult_long_term_condition_table <- DT::renderDataTable({
-
-  adult_living_limiting_long_term_condition %>%
-    select(c(Year, Categories, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "adult_living_limiting_long_term_condition",
-                             geogtype = "none")
-
-
-
-})
+adult_living_limiting_long_term_condition %>%
+  select(c(Year, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults with a limiting long-term condition (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "limiting_ltcs",
+                     filename = "limiting_long_term_conditions")
 
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
@@ -482,19 +584,72 @@ output$asthma_admissions_plot <- renderPlotly({
 
 
 
-output$asthma_admissions_table <- DT::renderDataTable({
+observeEvent(input$asthma_admissions_breakdowns,{
+  observeEvent(input$asthma_admissions_geog_name,{
 
-  table <- asthma_admissions %>%
-    select(c(date, sex, age_group, geography_type, geography, indicator, provisional)) %>%
-    rename(`Total number of stays` = "indicator") %>%
+  data_unfiltered <- asthma_admissions %>%
     arrange(desc(date)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "asthma_admissions",
-                             geogtype = "none")
+    mutate(provisional = ifelse(provisional == "1", "p", ""),
+           date = factor(date),
+           sex = factor(sex),
+           age_group = factor(age_group)) %>%
+    select(c(date, geography_type, geography, sex, age_group, indicator, provisional)) %>%
+    rename(`Total number of admissions` = "indicator",
+           "Year" = "date",
+           "Is data provisional (p)?" = "provisional")
+
+  if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == "All Sexes", age_group == "All Ages",
+             geography == input$asthma_admissions_geog_name)
+
+  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == "All Sexes",
+             geography == input$asthma_admissions_geog_name) %>%
+      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
 
 
+  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+    data_filtered <- data_unfiltered %>%
+      filter(age_group == "All Ages",
+             geography == input$asthma_admissions_geog_name)
+  }
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "asthma_admissions", filename = "asthma_admissions",
+                     add_separator_cols = c(6))
+
+  })
 })
+
+observeEvent(input$asthma_admissions_breakdowns,{
+  observeEvent(input$asthma_admissions_geog_name,{
+
+    geog <- input$asthma_admissions_geog_name
+
+    if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+      breakdown <- ""
+
+    } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+      breakdown <- "by age "
+
+
+    } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+      breakdown <- "by sex "
+    }
+
+  output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
+                                                     breakdown, "in ", geog)})
+  })
+})
+
 
 altTextServer("asthma_admissions_alt",
               title = "Asthma admissions plot",
@@ -532,20 +687,16 @@ output$experience_unpaid_carers_plot <- renderPlotly({
 
 })
 
-output$experience_unpaid_carers_table <- DT::renderDataTable({
-
-  experience_unpaid_carers %>%
-    select(c(date, breakdown, indicator)) %>%
-    mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
-    rename(Year = "date",
-           Answer = "breakdown",
-           Percentage = "indicator") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "experience_unpaid_carers",
-                             geogtype = "none")
+experience_unpaid_carers %>%
+  select(c(date, breakdown, indicator)) %>%
+  mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
+  arrange(desc(date)) %>%
+  mutate(date = factor(date),
+         breakdown = factor(breakdown)) %>%
+  rename("Financial Year" = "date",
+         Answer = "breakdown",
+         Percentage = "indicator") %>%
+  dataDownloadServer(id = "experience_unpaid_carers",
+                     filename = "experience_unpaid_carers")
 
 
-
-})

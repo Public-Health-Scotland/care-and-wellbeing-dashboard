@@ -12,6 +12,8 @@
 
 source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
 source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
+source(file.path("modules/data_download/data_download_ui.R"), local = TRUE)$value
+# source(file.path("modules/nav_buttons/nav_buttons_ui.R"), local = TRUE)$value
 
 source("setup.R")
 
@@ -201,7 +203,8 @@ server <- function(input, output, session) {
   #Modals
   source(file.path("modules/alt_text/alt_text_server.R"), local = TRUE)$value
   source(file.path("modules/plot_info/plot_info_server.R"), local = TRUE)$value
-
+  source(file.path("modules/data_download/data_download_server.R"), local = TRUE)$value
+  # source(file.path("modules/nav_buttons/nav_buttons_server.R"), local = TRUE)$value
 
   ####Get servers ----
 

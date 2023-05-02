@@ -74,6 +74,37 @@ output$child_development_cw_data = DT::renderDataTable({
                            geogtype = "council_area")
 })
 
+observeEvent(input$child_development_cw_geog_table, {
+
+  data_unfiltered <- preschool %>%
+    select(financial_year, geography_type, geography, number_of_reviews,
+           concern_any, proportion = prop_concern_any) %>%
+    rename("Total number of reviews" = "number_of_reviews",
+           "Number of reviews with any concern" = "concern_any",
+           "Proportion of total reviews with any concern" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography_type == input$child_development_cw_geog_table) %>%
+    mutate(financial_year = factor(financial_year),
+           geography = factor(geography))
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "child_development_cw", filename = "child_development",
+                     add_separator_cols = c(4,5),
+                     add_separator_cols_2dp = c(6))
+})
+
+observeEvent(input$child_development_cw_geog_table, {
+
+  geog_type <- ifelse(input$child_development_cw_geog_table == "Scotland",
+                      "in Scotland",
+                      paste0("by ", input$child_development_cw_geog_table))
+
+  output$child_development_cw_table_title <- renderText({
+    glue("Data table: Proportion of health visitor reviews where any ",
+         "form of developmental concern was raised ", geog_type)})
+})
+
 ##############################################.
 # CHILD WELLBEING AND HAPPINESS----
 ##############################################.
@@ -125,15 +156,17 @@ output$infant_mortality_cw_plot = renderPlotly({
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 })
 
-output$infant_mortality_cw_table = DT::renderDataTable({
-
-  inf_deaths_out = inf_deaths %>%
-    select(date, geography_name, "number_of_infant_deaths" = count,
-           number_of_live_births = denominator, "rate per 1,000 live births" = rate) %>%
-    datatable_style_download(.,
-                             data_name = "infant",
-                             geogtype = "scotland")
-})
+inf_deaths %>%
+  arrange(desc(date)) %>%
+  select(date, count, denominator, rate) %>%
+  mutate(date = format(date, "%B %Y")) %>%
+  rename("Month" = "date",
+         "Number of infant deaths" = "count",
+         "Number of live births" = "denominator",
+         "Rate of infant deaths per 1,000 live births" = "rate") %>%
+  dataDownloadServer(id = "infant_mortality_cw", filename = "infant_mortality",
+                     add_separator_cols = c(2,3),
+                     add_separator_cols_2dp = c(4))
 
 
 
@@ -152,20 +185,12 @@ output$child_obesity_plot <- renderPlotly({
 
 })
 
-output$child_obesity_table <- DT::renderDataTable({
-
-  childhood_obesity %>%
-    select(c(date, indicator)) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    rename(Percentage = "indicator",
-           Year = "date") %>%
-    arrange(desc(Year)) %>%
-    datatable_style_download(.,
-                             datetype = "financial_year",
-                             data_name = "children_at_risk_of_obesity",
-                             geogtype = "none")
-
-
-
-})
+childhood_obesity %>%
+  select(c(date, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  rename("Percentage of children (%)" = "indicator",
+         Year = "date") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "children_at_risk_of_obesity",
+                     filename = "children_at_risk_of_obesity")
 

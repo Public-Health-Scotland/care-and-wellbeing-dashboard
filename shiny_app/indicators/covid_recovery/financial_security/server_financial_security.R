@@ -120,15 +120,11 @@ output$managing_financially_bar_plot = renderPlotly({
 
 
 ### table
-output$managing_financially_data_table = DT::renderDataTable({
-
-  datatable_style_download(managing_financially_updated,
-                           datetype = "year",
-                           data_name = "managing_financially",
-                           geogtype = "none")
-})
-
-
+managing_financially_updated %>%
+  select(Category, percent) %>%
+  rename("Percentage of Households (%)" = "percent") %>%
+  dataDownloadServer(id = "managing_financially", filename = "managing_financially",
+                     add_separator_cols_1dp = c(2))
 
 
 ##############################################.
@@ -142,15 +138,11 @@ output$unmanageable_debt_line = renderPlotly({
 })
 
 
-output$unmanageable_debt_data = DT::renderDataTable({
-
-  datatable_style_download(unmanageable_debt,
-                           datetype = "year",
-                           data_name = "unmanageable_debt",
-                           geogtype = "none")
-})
-
-
+unmanageable_debt %>%
+  select(year, perc_with_problem_debt) %>%
+  rename("Year range" = "year",
+         "Households with Unmanageable Debt (%)" = "perc_with_problem_debt") %>%
+  dataDownloadServer(id = "unmanageable_debt", filename = "unmanageable_debt")
 
 ##############################################.
 # Savings----
@@ -283,15 +275,24 @@ output$savings_low_income_line_LA = renderPlotly({
 
 
 ### table
-output$savings_low_income_data = DT::renderDataTable({
+savings_low_income_scot <- savings_low_income %>%
+  filter(council == "Scotland")
 
-  datatable_style_download(savings_low_income,
-                           datetype = "year",
-                           data_name = "savings_low_income",
-                           geogtype = "none")
-})
+savings_low_income_la <- savings_low_income %>%
+  filter(council != "Scotland" & savings == "No savings",
+         net_income == "All")
 
-
+savings_low_income_scot %>%
+  bind_rows(savings_low_income_la) %>%
+  select(year, council, net_income, savings, percentage) %>%
+  mutate(year = factor(year),
+         council = factor(council),
+         net_income = factor(net_income),
+         savings = factor(savings)) %>%
+  rename("Percentage of Households (%)" = "percentage",
+         "Local authority" = "council") %>%
+  dataDownloadServer(id = "savings_low_income", filename = "savings",
+                     add_separator_cols_1dp = c(5))
 
 
 ##############################################.
@@ -311,13 +312,12 @@ output$household_spending_bar = renderPlotly({
   household_expenditure_barplot(household_spending)
 })
 
-output$household_spending_data = DT::renderDataTable({
-
-  datatable_style_download(household_spending,
-                           datetype="finyear",
-                           data_name = "household_spending",
-                           geogtype = "none")
-})
+household_spending %>%
+  ungroup() %>%
+  select(year, scotland) %>%
+  rename("Household Expenditure (%)" = "scotland",
+         "Financial year range" = "year") %>%
+  dataDownloadServer(id = "managing_spending", filename = "cost_of_living")
 
 
 ##############################################.
@@ -330,18 +330,18 @@ output$childcare_uptake_graph_line <- renderPlotly({
 })
 
 
-output$childcare_uptake_data <- DT::renderDataTable({
-  # Formatting datatable output
-  childcare_elc_uptake %>%
-    rename("Number of eligible children accessing 1140 hours of funded ELC" = "n",
-           "Total number of eligible children receiving ELC" = "total",
-           "Age group" = "breakdown") %>%
-    datatable_style_download(., datetype = "month",
-                             data_name = "childcare_uptake", geogtype = "")
-
-
-})
-
+childcare_elc_uptake %>%
+  select(date, breakdown, total, n, percent) %>%
+  arrange(date, breakdown) %>%
+  mutate(percent = round_half_up(percent*100,1),
+         date = format(date, "%B %Y")) %>%
+  rename("Month" = "date",
+         "Age Group" = "breakdown",
+         "Number Accessing 1,140 Hours of Funded ELC" = n,
+         "Total Number Receiving ELC" = total,
+         "Percentage Accessing 1,140 Hours of Funded ELC (%)" = percent) %>%
+  dataDownloadServer(id = "childcare_uptake", filename = "childcare_uptake",
+                     add_separator_cols = c(3,4))
 
 
 

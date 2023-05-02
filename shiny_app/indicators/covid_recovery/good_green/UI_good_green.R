@@ -2,7 +2,7 @@ tagList(
 
   h1("Good, green jobs and fair work" ),
   br(),
-  #bsButton("jump_home_good_green", "Go to home page", class = "home-btn"),
+  actionButton("good_green_to_info", "Go to information page", class = "info-btn"),
 
   h4(strong("Select indicator: ")),
 
@@ -70,9 +70,11 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_line_LA")))
                         ),
 
-                        h3("Data table"),
+                        h3("Data table: Proportion of employees on the living wage"),
 
-                        withSpinner(DT::dataTableOutput("employees_living_wage_data"))),
+                        dataDownloadUI("living_wage")),
+
+
 
                ##############################################.
                # GENDER PAY GAP----
@@ -117,16 +119,7 @@ tagList(
                           )
                         ),
 
-                        # fluidRow(
-                        #   column(12,
-                        #          h3("Data table"),
-                        #
-                        #          withSpinner(DT::dataTableOutput("gender_pay_gap_data")))
-                        # ),
-
-
-
-                        h3("Data tables"),
+                        h3(textOutput("gender_pay_gap_table_title")),
 
                         tabBox(
                           #title = "Data tables",
@@ -134,10 +127,11 @@ tagList(
                           id = "gender_pay_gap_tabBox", height = "250px", width=12,
                           tabPanel("Pay gap",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_data"))),
+                                   dataDownloadUI("gender_pay_gap")
+                                   ),
                           tabPanel("Earnings",
                                    br(),
-                                   withSpinner(DT::dataTableOutput("gender_pay_gap_data_earnings")))
+                                   dataDownloadUI("gender_pay_gap_earnings"))
                         )),
                ##############################################.
                # EMPLOYMENT GAP----
@@ -283,9 +277,9 @@ tagList(
 
                         withSpinner(plotlyOutput("zero_hours_contracts_line_plot")),
 
-                        h3("Data table"),
+                        h3("Data table: Percentage of people in employment on a zero-hours contract"),
 
-                        withSpinner(DT::dataTableOutput("zero_hours_contracts_data_table"))),
+                        dataDownloadUI("zero_hour_contracts")),
 
                ##############################################.
                # SKILLS SHORTAGE VACANCIES----
@@ -327,8 +321,8 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Skills shortage data table"),
-                        DT::dataTableOutput("skills_shortage_data")
+                        h3("Data table: Percentage of vacancies by vacancy type and region"),
+                        dataDownloadUI("skills_shortage")
                ),
 
 
@@ -378,9 +372,8 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table"),
-
-                        withSpinner(DT::dataTableOutput("underemployment_table_data"))),
+                        h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
+                        dataDownloadUI("underemployment")),
 
                ##############################################.
                # ECONOMIC INACTIVITY----
@@ -425,8 +418,8 @@ tagList(
                         ,
 
 
-                        h3("Economic inactivity data table"),
-                        DT::dataTableOutput("economic_inactivity_data")
+                        h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
+                        dataDownloadUI("economic_inactivity")
 
 
                ),
