@@ -123,23 +123,32 @@ confidence_line_function = function(data, y_title) {
               type = "scatter",
               mode = "lines",
               line = list(color = 'transparent'),
-              name = "Upper CI",
-              showlegend = FALSE) %>%
+              name = "Upper confidence interval",
+              showlegend = FALSE,
+              hovertemplate = ~glue("{upper_confidence_interval %>% round_half_up(2)}"),
+              hoverinfo = "text",
+              textposition = "none") %>%
     add_trace(x=~date, y=~lower_confidence_interval,
               type = "scatter",
               mode = "lines",
               fill = 'tonexty',
               fillcolor = phsstyles::phs_colours("phs-purple-10"),
               line = list(color = 'transparent'),
-              name = "Lower CI",
-              showlegend = FALSE) %>%
+              name = "Lower confidence interval",
+              showlegend = FALSE,
+              hovertemplate = ~glue("{lower_confidence_interval %>% round_half_up(2)}"),
+              hoverinfo = "text",
+              textposition = "none") %>%
     add_trace(x=~date,
               y=~indicator,
               type = "scatter",
               mode = "lines",
               name = "Rate",
               line = list(color = phsstyles::phs_colours("phs-purple")),
-              showlegend = TRUE) %>%
+              showlegend = TRUE,
+              hovertemplate = ~glue("{indicator %>% round_half_up(2)}"),
+              hoverinfo = "text",
+              textposition = "none") %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
            hovermode = "x unified") %>%
@@ -170,11 +179,11 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year) {
 stacked_bar_function = function(data, category_var) {
 
   data %>%
-  plot_ly(x=~date,
-          y=~proportion*100,
-          color = ~category_var,
-          colors = phs_colours(c('phs-purple', 'phs-magenta', 'phs-blue', 'phs-green')),
-          type = 'bar') %>%
+    plot_ly(x=~date,
+            y=~proportion*100,
+            color = ~category_var,
+            colors = phs_colours(c('phs-purple', 'phs-magenta', 'phs-blue', 'phs-green')),
+            type = 'bar') %>%
     layout(barmode = "stack",
            xaxis = xaxis_finyear,
            yaxis = list(title = "Proportion",
@@ -206,30 +215,30 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
             # hovertemplate = create_text(x, y, xaxis_title, yaxis_title),
             # hoverinfo = "text",
             textposition = "none"
-            ) %>%
+    ) %>%
     layout(barmode = mode,
            xaxis = xaxis_plots,
            yaxis = yaxis_plots,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
-  config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
 
 
-make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Number", x_axis_title = "Year") {
+make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Number", x_axis_title = "Year",
+                                        label = "") {
   plot_ly(x = ~x,
           y = ~y,
           color = ~colour,
           type="scatter",
           mode="lines",
-          colors = palette#,
-          # text = ~paste0(#"<b>Date</b>: ", format(Date, "%d %b %y"), "\n",
-          #                "<b>Reported cases</b>: ", format(round_half_up(~color, 1), big.mark=","), "\n"),
-          # hovertemplate = paste('<b>%{text}</b>',
-          #                       '<br>%{x}',
-          #                       '<br>%{y}',
-          #                       '<extra></extra>')
-          ) %>%
+          colors = palette,
+          text = "rate",
+          name = glue("{colour}{label}"),
+          hovertemplate = ~glue("{y %>% round_half_up(2)}"),
+          hoverinfo = "text",
+          textposition = "none"
+  ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),
                         titlefont = list(size=18),

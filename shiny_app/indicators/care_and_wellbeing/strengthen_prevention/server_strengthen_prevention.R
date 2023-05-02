@@ -216,7 +216,7 @@ output$drug_admissions_plot = renderPlotly({
   make_line_chart_multi_lines(x = .$date, y = .$indicator,
                               colour = .$age_group,
                               y_axis_title = "Age-sex standardised rate of stays<br>(per 100,000)",
-                              x_axis_title = "Financial year") %>%
+                              x_axis_title = "Financial year", label = " rate") %>%
     layout(xaxis = list(tickangle = 45))
 
 })
@@ -554,7 +554,8 @@ output$asthma_admissions_plot <- renderPlotly({
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
       filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, y_axis_title = "Total number of admissions")
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
+                                  y_axis_title = "Total number of admissions")
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
