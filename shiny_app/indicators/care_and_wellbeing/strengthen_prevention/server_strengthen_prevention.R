@@ -384,7 +384,8 @@ output$alcohol_deaths_plot <- renderPlotly({
   plot <- alcohol_deaths %>%
     filter(sex == input$alcohol_deaths_sex) %>%
     mutate(indicator = round(as.integer(indicator), 1)) %>%
-    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate") %>%
+    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate",
+                                label = " rate") %>%
     layout(yaxis = yaxis_proportion)
 
 })
