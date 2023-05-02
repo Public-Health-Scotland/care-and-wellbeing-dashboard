@@ -70,7 +70,8 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_line_LA")))
                         ),
 
-                        h3("Data table: Proportion of employees on the living wage"),
+                        br(),
+                        h3(textOutput("living_wage_table_title")),
 
                         dataDownloadUI("living_wage")),
 
@@ -207,8 +208,10 @@ tagList(
                                    ),
 
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("disability_gap_data_table"))),
+                                   br(),
+                                   h3(textOutput("disability_employment_gap_table_title")),
+                                   dataDownloadUI("disability_employment_gap")),
+
 
 
                           tabPanel("Ethnicity employment gap",
@@ -241,8 +244,9 @@ tagList(
                                        "This was largely driven by employment in the working age white population falling post pandemic and the employment rate in the minority ethnic population  increasing."
                                    ),
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("ethnicity_employment_gap_chart_data")))),
+                                   br(),
+                                   h3("Data table: Ethnicity employment gap in Scotland"),
+                                   dataDownloadUI("ethnicity_employment_gap"))),
                         width = 12
                ),
 
@@ -321,7 +325,7 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Data table: Percentage of vacancies by vacancy type and region"),
+                        h3(textOutput("skills_shortage_table_title")),
                         dataDownloadUI("skills_shortage")
                ),
 
@@ -372,7 +376,7 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
+                        h3(textOutput("underemployment_table_title")),
                         dataDownloadUI("underemployment")),
 
                ##############################################.
@@ -418,7 +422,7 @@ tagList(
                         ,
 
 
-                        h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
+                        h3(textOutput("economic_inactivity_table_title")),
                         dataDownloadUI("economic_inactivity")
 
 
@@ -478,6 +482,10 @@ tagList(
                           )
                         ),
 
+                        h3("Data table: Number of starts by month in Scotland"),
+
+                        dataDownloadUI("employability_starts"),
+
                         h4("Number of referrals and starts (from referrals) by quarter"),
 
                         actionButton(
@@ -515,9 +523,9 @@ tagList(
                         ),
 
 
-                        h3("Data table"),
+                        h3("Data table: Number of referrals and starts (from referrals) by quarter in Scotland"),
 
-                        withSpinner(DT::dataTableOutput("employability_FSS_referral_data"))
+                        dataDownloadUI("employability_referrals")
 
                ),
 
