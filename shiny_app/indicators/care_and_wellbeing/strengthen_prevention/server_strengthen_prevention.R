@@ -84,7 +84,8 @@ output$all_cause_mortality_plot = renderPlotly({
   }
 
 
-  line_chart_function(data, indicator_y)
+  line_chart_function(data, indicator_y,
+                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate", "Number"))
 
 
 })
@@ -465,7 +466,7 @@ output$adult_self_assessed_health_plot <- renderPlotly({
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage")%>%
+    line_chart_function(., y_title = "Percentage", label = "Percentage")%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -491,7 +492,7 @@ output$adult_long_term_condition_plot <- renderPlotly({
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage")%>%
+    line_chart_function(., y_title = "Percentage", label = "Percentage")%>%
     layout(yaxis = yaxis_proportion)
 
 })
