@@ -1,5 +1,8 @@
 ## Generic Chart Functions ----
 
+#plot title style
+title_style <- list(size =24, color = "#4B006E", family = "Arial")
+
 # Insert a chart and its title
 plot_title <- function(title_plot, plot_output, subtitle = "") {
   tagList(h3(title_plot),
@@ -113,7 +116,7 @@ create_palette <- function(colour) {
 
 #### Charts ----
 
-confidence_line_function = function(data, y_title) {
+confidence_line_function = function(data, y_title, title = "") {
 
   yaxis_number[["title"]] = y_title
 
@@ -151,8 +154,9 @@ confidence_line_function = function(data, y_title) {
               textposition = "none") %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
-           hovermode = "x unified"
-           ) %>%
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -161,7 +165,8 @@ confidence_line_function = function(data, y_title) {
 
 
 
-line_chart_function = function(data, y_title, xaxis_type = xaxis_year, label = "Number") {
+
+line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "", label = "Number") {
 
   yaxis_number[["title"]] = y_title
 
@@ -174,13 +179,15 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year, label = "
               name = glue("{label}"),
               hovertemplate = ~glue("{round_half_up(indicator, 2)}{ifelse(label == 'Percentage','%','')}")) %>%
     layout(xaxis = xaxis_type, yaxis = yaxis_number,
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
            hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
 
-stacked_bar_function = function(data, category_var) {
+stacked_bar_function = function(data, category_var, title = "") {
 
   data %>%
     plot_ly(x=~date,
@@ -201,12 +208,14 @@ stacked_bar_function = function(data, category_var) {
                         showline = FALSE,
                         ticksuffix = "%"),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text =str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
            hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack") {
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack", title = "") {
 
 
   #Modifying standard layout
@@ -227,15 +236,17 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
     layout(barmode = mode,
            xaxis = xaxis_plots,
            yaxis = yaxis_plots,
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h',
-                         hovermode = "x unified")) %>%
-    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
-
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
+  config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
 
-make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Number", x_axis_title = "Year",
-                                        label = "") {
+
+make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
+                                        label = "", title = "") {
   plot_ly(x = ~x,
           y = ~y,
           color = ~colour,
@@ -256,10 +267,12 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Numb
                         tickfont = list(size=14),
                         titlefont = list(size=18)),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
            hovermode = "x unified") %>%
-
     config(displaylogo = FALSE, displayModeBar = TRUE,
            modeBarButtonsToRemove = bttn_remove)
+
 
 }
 

@@ -15,7 +15,7 @@ tagList(
                         value = "loneliness",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Loneliness")
+                        h2("Loneliness")
                ),
 
                ##############################################.
@@ -25,7 +25,7 @@ tagList(
                         value = "ares_of_health_inequalities",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Number of areas where health inequalities are reducing")
+                        h2("Number of areas where health inequalities are reducing")
                ),
 
                ##############################################.
@@ -35,7 +35,7 @@ tagList(
                         value = "perceptions_of_local_area",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Perceptions of local area")
+                        h2("Perceptions of local area")
                ),
 
                ##############################################.
@@ -45,7 +45,7 @@ tagList(
                         value = "places_to_intereact",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Places to interact")
+                        h2("Places to interact")
                )
   )
 )

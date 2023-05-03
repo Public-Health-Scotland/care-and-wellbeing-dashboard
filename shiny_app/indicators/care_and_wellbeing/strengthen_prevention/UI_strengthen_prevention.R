@@ -12,19 +12,19 @@ tagList(
                tabPanel(title = "Admissions for asthma",
                         value = "asthma_admissions",
 
-                        h3("Admissions for asthma"),
+                       h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
 
-                        fluidRow(column(3,
+                        fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
                                                     "Step 1: Select a breakdown ",
                                                     choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
                                                     width = "100%")),
-                                 column(3,
+                                 column(4,
                                          selectInput("asthma_admissions_geog_type",
                                                     "Step 2: Select national or local geography level ",
                                                      choices = c("Scotland", "Health Board"),
                                                      width = "100%")),
-                                 column(3,
+                                 column(4,
                                  selectInput("asthma_admissions_geog_name",
                                              "Step 3: Select national or local geography area ",
                                              choices = c("Scotland"),
@@ -35,8 +35,8 @@ tagList(
                         #        uiOutput("asthma_admissions_years_ui"))),
 
                         altTextUI("asthma_admissions_alt"),
-                        plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
-                        # plotlyOutput("asthma_admissions_plot"),
+                        #plot_title("Total number of admissions for asthma", "asthma_admissions_plot"),
+                        withSpinner(plotlyOutput("asthma_admissions_plot")),
 
                         br(),
                         h3(textOutput("asthma_admissions_title")),
@@ -64,7 +64,7 @@ tagList(
                                 tabPanel(title = "Alcohol-related hospital admissions",
                                          value = "alcohol_admissions",
 
-                                         h3("Alcohol related hospital admissions"),
+                                         h2("Alcohol related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
 
                                          fluidRow(
                                            column(3,
@@ -95,7 +95,7 @@ tagList(
                                 tabPanel(title = "Alcohol specific deaths",
                                          value = "alcohol_deaths",
 
-                                         h3("Alcohol specific deaths"),
+                                         h2("Alcohol specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
 
                                          fluidRow(
                                            column(3,
@@ -120,7 +120,7 @@ tagList(
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
 
-                        h3("All-cause mortality (ages 15-44)"),
+                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality", content = "Paste background info and source for all cause mortality here")),
 
                         fluidRow(
                           column(3,
@@ -162,7 +162,7 @@ tagList(
                tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
                         value = "chd_deaths",
 
-                        h3("Coronary heart disease (CHD): deaths (age 45-74)"),
+                        h2("Coronary heart disease (CHD): deaths (age 45-74)", iButtonUI("chd_deaths", content = "Paste background info and source for chd deaths here")),
 
                         fluidRow(
                           column(3,
@@ -181,9 +181,10 @@ tagList(
                                                 choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography))),
                         ),
 
-                        plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
-                                   "chd_deaths_plot",
-                                   subtitle = "The shaded line indicates confidence intervals"),
+                        #plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
+                        #           "chd_deaths_plot",
+                         #          subtitle = "The shaded line indicates confidence intervals"),
+                        withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
                         h3(textOutput("chd_deaths_title")),
@@ -212,7 +213,7 @@ tagList(
                                tabPanel(title = "Drug-related hospital admissions",
                                         value = "drug_admissions",
 
-                                        h3("Drug-related hospital admissions"),
+                                        h2("Drug-related hospital admissions", iButtonUI("drug_admissions", content = "Paste background info and source for drug admissions here")),
 
 
                                         selectizeInput("drug_admissions_age", "Select an age group",
@@ -240,7 +241,7 @@ tagList(
                                tabPanel(title = "Drug-related deaths",
                                         value = "drug_deaths",
 
-                                        h3("Drug related deaths"),
+                                        h2("Drug related deaths", iButtonUI("drug_deaths", content = "Paste background info and source for drug deaths here")),
 
                                         fluidRow(
                                           column(3,
@@ -284,7 +285,7 @@ tagList(
                tabPanel(title = "Experience of social care recipients ",
                         value = "experience_recipients",
 
-                        h3("Experience of social care recipients")
+                        h2("Experience of social care recipients")
 
                ),
 
@@ -296,7 +297,7 @@ tagList(
                tabPanel(title = "Experience of unpaid carers ",
                         value = "experience_of_unpaid_carers",
 
-                        h3("Experience of unpaid carers"),
+                        h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers", content = "Paste background info and source for experience of unpaid carers here")),
 
                         h4("Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"),
 
@@ -315,7 +316,7 @@ tagList(
                tabPanel(title = "First ever hospital admission for heart attack (under 75)",
                         value = "hospital_admission_heart_attack",
 
-                        h2("First ever hospital admission for heart attack (under 75)"),
+                        h2("First ever hospital admission for heart attack (under 75)", iButtonUI("heart_attack_admission", content = "Paste background info and source for heart attack here")),
 
                         plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
                                    "hospital_admission_heart_attack_plot"),
@@ -335,7 +336,7 @@ tagList(
                tabPanel(title = "Health risk behaviours",
                         value = "health_risk_behaviours",
 
-                        h3("Health risk behaviours")
+                        h2("Health risk behaviours")
                ),
 
                ##############################################.
@@ -345,7 +346,7 @@ tagList(
                tabPanel(title = "Healthy birthweight",
                         value = "healthy_birthweight",
 
-                        h3("Healthy birthweight"),
+                        h2("Healthy birthweight", iButtonUI("healthy_birthweight", content = "Paste background info and source for healthy birthweight here")),
 
 
                         fluidRow(
@@ -377,7 +378,7 @@ tagList(
                tabPanel(title = "Healthy life expectancy",
                         value = "healthy_life_expctancy",
 
-                        h3("Healthy life expectancy")
+                        h2("Healthy life expectancy")
                ),
 
                ##############################################.
@@ -387,7 +388,7 @@ tagList(
                tabPanel(title = "Healthy weight adults",
                         value = "healthy_weight",
 
-                        h3("Healthy weight adults")
+                        h2("Healthy weight adults")
                ),
 
                ##############################################.
@@ -396,7 +397,7 @@ tagList(
                tabPanel(title = "Limiting long-term conditions (age 16+)",
                         value = "adult_long_term_condition",
 
-                        h3("Limiting long-term conditions (age 16+)"),
+                        h2("Limiting long-term conditions (age 16+)", iButtonUI("limiting_ltcs", content = "Paste background info and source for adult ltc here")),
 
                         h4("Percentage of adults with a limiting long-term condition"),
 
@@ -415,7 +416,7 @@ tagList(
                tabPanel(title = "Mental wellbeing of adults (16+)",
                         value = "mental_wellbeing",
 
-                        h3("Mental wellbeing of adults (16+)")
+                        h2("Mental wellbeing of adults (16+)")
                ),
 
                ##############################################.
@@ -425,7 +426,7 @@ tagList(
                tabPanel(title = "Physical activity",
                         value = "physical_activity",
 
-                        h3("Physical activity")
+                        h2("Physical activity")
                ),
 
                ##############################################.
@@ -435,7 +436,7 @@ tagList(
                tabPanel(title = "Premature mortality",
                         value = "premature_mortality",
 
-                        h3("Premature mortality")
+                        h2("Premature mortality")
                ),
 
                ##############################################.
@@ -445,7 +446,7 @@ tagList(
                tabPanel(title = "Quality of care experience",
                         value = "quality_care",
 
-                        h3("Quality of care experience")
+                        h2("Quality of care experience")
                ),
 
                ##############################################.
@@ -454,7 +455,7 @@ tagList(
                tabPanel(title = "Screening uptake",
                         value = "screening",
 
-                        h3("Screening uptake")
+                        h2("Screening uptake")
                ),
 
                ##############################################.
@@ -463,7 +464,7 @@ tagList(
                tabPanel(title = "Self-assessed health of adults (age 16+)",
                         value = "adult_self_assessed_health",
 
-                        h3("Self-assessed health of adults (age 16+)"),
+                        h2("Self-assessed health of adults (age 16+)", iButtonUI("adult_self_assessed_health", content = "Paste background info and source for self assessed health of adults here")),
 
                         h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
 
@@ -481,7 +482,7 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        h3("Vaccinations uptake")
+                        h2("Vaccinations uptake")
                ),
 
                ##############################################.
@@ -491,7 +492,7 @@ tagList(
                tabPanel(title = "Work-related ill health",
                         value = "work_related_health",
 
-                        h3("Work-related ill health")
+                        h2("Work-related ill health")
                ),
 
 ) # navlistpanel

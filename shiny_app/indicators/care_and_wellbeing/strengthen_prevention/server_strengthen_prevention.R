@@ -141,11 +141,13 @@ observeEvent(input$chd_deaths_geog_type,
 
 
 output$chd_deaths_plot = renderPlotly({
+  title <- glue("Trend in age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+                            input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., "Age-sex standardised rate of deaths") %>%
+    confidence_line_function(., "Age-sex standardised rate of deaths", title = title) %>%
     layout(xaxis = list(tickangle = 30))
 })
 
@@ -543,12 +545,32 @@ observeEvent(input$asthma_admissions_geog_type,
 
 output$asthma_admissions_plot <- renderPlotly({
 
+  geog <- input$asthma_admissions_geog_name
+
+  if(input$asthma_admissions_breakdowns == "Yearly total"){
+
+    breakdown <- ""
+
+  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+
+    breakdown <- "by age "
+
+
+  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+
+    breakdown <- "by sex "
+  }
+
+  title <- glue("Trend of total number of asthma admissions ",
+                            breakdown, "in \n ", geog)
+
   if(input$asthma_admissions_breakdowns == "Yearly total"){
 
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions", label = "Number of admissions")
+      line_chart_function(., y_title = "Total number of admissions", title = glue("{title}"), label = "Number of admissions")
+
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
@@ -556,15 +578,15 @@ output$asthma_admissions_plot <- renderPlotly({
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
       filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
-                                  y_axis_title = "Total number of admissions")
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, y_axis_title = "Total number of admissions", title = title)
+
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
     plot <- asthma_admissions %>%
       filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions")
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions", title = title)
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
     #
