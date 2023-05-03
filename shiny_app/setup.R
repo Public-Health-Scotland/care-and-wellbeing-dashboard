@@ -39,9 +39,9 @@ source(file.path("functions/generic_charts.R"), local = TRUE)$value
 ## Plotting ----
 # Style of x and y axis
 xaxis_plots <- list(title = FALSE, tickfont = list(size=14), titlefont = list(size=14),
-                    showline = TRUE, fixedrange=TRUE)
+                    showline = TRUE)
 
-yaxis_plots <- list(title = FALSE, rangemode="tozero", fixedrange=TRUE, size = 4,
+yaxis_plots <- list(title = FALSE, rangemode="tozero", size = 4,
                     tickfont = list(size=14), titlefont = list(size=14))
 
 # Buttons to remove from plotly plots
@@ -131,28 +131,23 @@ xaxis_month <- list(title = "Month",
                     tickformat = "%b<br>%Y",
                     tickfont = list(size=14),
                     titlefont = list(size=18),
-                    showline = TRUE,
-                    fixedrange=TRUE)
+                    showline = TRUE)
 
 # X axis for financial year
 xaxis_finyear = list(title = "Financial year",
                      tickfont = list(size=14),
                      titlefont = list(size=18),
-                     showline = TRUE,
-                     fixedrange=TRUE)
+                     showline = TRUE)
 
 
 # X axis for year
 xaxis_year = list(title = "Year",
                   tickfont = list(size=14),
                   titlefont = list(size=18),
-                  showline = TRUE,
-                  fixedrange=TRUE)
+                  showline = TRUE)
 
 # Y axis style for % format
-yaxis_proportion = list(title = "Proportion",
-                        rangemode="tozero",
-                        fixedrange=TRUE,
+yaxis_proportion = list(rangemode="tozero",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
@@ -161,7 +156,6 @@ yaxis_proportion = list(title = "Proportion",
 
 yaxis_number = list(title = FALSE,
                     rangemode="tozero",
-                    fixedrange=TRUE,
                     tickfont = list(size=14),
                     titlefont = list(size=18),
                     showline = FALSE)
