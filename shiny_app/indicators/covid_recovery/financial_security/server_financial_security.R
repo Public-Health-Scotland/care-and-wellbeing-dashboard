@@ -2,15 +2,55 @@
 # Fuel Affordability----
 ##############################################.
 
-output$fuel_afford_data = DT::renderDataTable({
+observeEvent(input$fuel_affordibility_radiobuttons, {
 
-  datatable_style_download(fuel_number,
-                           datetype = "year",
-                           data_name = "fuel_number",
-                           geogtype = "none")
+  if(input$fuel_affordibility_radiobuttons == "Scotland"){
+
+    fuel_SHCS_num %>%
+      filter(measurement == "Percent") %>%
+      arrange(date_code, fuel_poverty) %>%
+      select(date_code, fuel_poverty, value) %>%
+      mutate(date_code = factor(date_code),
+             fuel_poverty = factor(fuel_poverty)) %>%
+      rename("Year" = "date_code",
+             "Category" = "fuel_poverty",
+             "Percentage of households (%)" = "value") %>%
+      dataDownloadServer(id = "fuel_affordibility", filename = "fuel_affordibility_scotland",
+                         add_separator_cols_1dp = c(3))
+
+  } else{
+
+    fuel_SHCS_LA %>%
+      arrange(date_code, ca2019name, fuel_poverty) %>%
+      filter(measurement == "Percent",
+             fuel_poverty == "Fuel Poor") %>%
+      select(date_code, ca2019name, fuel_poverty, value) %>%
+      mutate(date_code = factor(date_code),
+             ca2019name = factor(ca2019name),
+             fuel_poverty = factor(fuel_poverty)) %>%
+      rename("Year range" = "date_code",
+             "Local authority" = "ca2019name",
+             "Category" = "fuel_poverty",
+             "Percentage of households (%)" = "value") %>%
+      dataDownloadServer(id = "fuel_affordibility", filename = "fuel_affordibility_local_authority",
+                         add_separator_cols_1dp = c(4))
+
+  }
 })
 
+observeEvent(input$fuel_affordibility_radiobuttons, {
 
+  if(input$fuel_affordibility_radiobuttons == "Scotland"){
+
+    output$fuel_affordibility_table_title <- renderText({
+      "Data table: Percentage of households with fuel poverty in Scotland"
+      })
+  } else{
+    output$fuel_affordibility_table_title <- renderText({
+      "Data table: Percentage of households with fuel poverty by local authority"
+    })
+  }
+})
 
 
 output$fuel_afford_line = renderPlotly({

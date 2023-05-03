@@ -141,17 +141,70 @@ observeEvent(input$employees_living_wage_map_shape_click,{
 
 
 
-employees_living_wage_by_sector %>%
-  filter(measure == "proportion") %>%
-  arrange(sector, earning, year) %>%
-  select(sector, earning, year, measure_value) %>%
-  mutate(sector = factor(sector),
-         year = factor(year),
-         earning = factor(earning)) %>%
-  rename("Proportion of employees" = "measure_value") %>%
-  dataDownloadServer(id = "living_wage", filename = "employees_on_living_wage",
+  living_wage_sector <- employees_living_wage_by_sector %>%
+    filter(measure == "proportion") %>%
+    mutate(local_authority = "Scotland",
+           ca2019 = "S92000003") %>%
+    select(year, ca2019, local_authority, sector, earning, measure_value) %>%
+    rename("Proportion of employees" = "measure_value")
+
+  living_wage_la <- employees_living_wage_by_LA %>%
+    filter(local_authority != "Scotland") %>%
+    filter(measure == "proportion") %>%
+    mutate(sector = "All") %>%
+    select(year, ca2019, local_authority, sector, earning, measure_value) %>%
+    rename("Proportion of employees" = "measure_value")
+
+  living_wage_all <- bind_rows(living_wage_sector, living_wage_la) %>%
+    arrange(year, sector, earning) %>%
+    filter(earning == "Earning less than the living wage") %>%
+    select(-earning)
+
+  living_wage_scotland <- living_wage_all %>%
+    filter(local_authority == "Scotland") %>%
+    mutate(year = factor(year),
+           sector = factor(sector)) %>%
+    select(-ca2019)
+
+  dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
+                     id = "living_wage", filename = "living_wage",
                      add_separator_cols_1dp = c(4))
 
+  output$living_wage_table_title <- renderText({
+    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+  })
+
+  observeEvent(input$employees_living_wage_map_button, {
+
+    dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
+                       id = "living_wage", filename = "living_wage",
+                       add_separator_cols_1dp = c(4))
+
+    output$living_wage_table_title <- renderText({
+      glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+    })
+
+  })
+
+  observeEvent(input$employees_living_wage_map_shape_click$id,{
+
+    living_wage_la <- living_wage_all %>%
+      filter(ca2019 == rv_employees_living_wage()) %>%
+      mutate(year = factor(year),
+             sector = factor(sector)) %>%
+      select(-ca2019)
+
+    dataDownloadServer(data = living_wage_la, data_download = living_wage_all,
+                       id = "living_wage", filename = "living_wage",
+                       add_separator_cols_1dp = c(4))
+
+    la_selected <- unique(living_wage_la$local_authority)
+
+    output$living_wage_table_title <- renderText({
+      glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in ", la_selected)
+    })
+
+  })
 
 ##############################################.
 # GENDER PAY GAP----
@@ -220,11 +273,20 @@ observeEvent(input$gender_pay_gap_sector_radio, {
 
 
 observeEvent(input$gender_pay_gap_tabBox, {
+  observeEvent(input$gender_pay_gap_sector_radio, {
+    observeEvent(input$gender_pay_gap_work_radio, {
 
-  output$gender_pay_gap_table_title <- renderText({ifelse(input$gender_pay_gap_tabBox == "Earnings",
-                                              "Data table: Median Hourly Earnings (£) by gender",
-                                              "Data table: Gender pay gap (%)")})
+      string_tab <- ifelse(input$gender_pay_gap_tabBox == "Earnings",
+                           "Data table: Median Hourly Earnings (£) by gender - ",
+                           "Data table: Gender pay gap (%) - ")
+      string_sector <- ifelse(input$gender_pay_gap_sector_radio == "All",
+                              "all sectors, ",
+                              tolower(paste0(input$gender_pay_gap_sector_radio, " sector, ")))
+      string_work <- tolower(paste0(input$gender_pay_gap_work_radio, " work patterns"))
 
+      output$gender_pay_gap_table_title <- renderText({glue(string_tab, string_sector, string_work)})
+    })
+  })
 })
 
 ##############################################.
@@ -329,14 +391,57 @@ output$disability_employment_gap_line_LA = renderPlotly({
 })
 
 
-output$disability_gap_data_table = DT::renderDataTable({
-  datatable_style_download(disability_employment_gap_data,
-                           datetype = "year",
-                           data_name = "disability_employment_gap",
-                           geogtype = "none")
+disability_all <- disability_employment_gap_data %>%
+  select(year, ca2019, local_authority, category, measure_value) %>%
+  arrange(year, ca2019, local_authority, category) %>%
+  mutate(category = ifelse(category != "Disability Employment Gap",
+                           paste0(category, " employment rate (%)"),
+                           "Disability Employment Gap (%)")) %>%
+  pivot_wider(names_from = "category", values_from = "measure_value")
+
+disability_scotland <- disability_all %>%
+  filter(local_authority == "Scotland") %>%
+  mutate(year = factor(year)) %>%
+  select(-ca2019)
+
+dataDownloadServer(data = disability_scotland, data_download = disability_all,
+                   id = "disability_employment_gap", filename = "disability_employment_gap",
+                   add_separator_cols_1dp = c(3,4,5))
+
+output$disability_employment_gap_table_title <- renderText({
+  glue("Data table: Disability employment gap in Scotland")
 })
 
+observeEvent(input$disability_employment_gap_button, {
 
+  dataDownloadServer(data = disability_scotland, data_download = disability_all,
+                     id = "disability_employment_gap", filename = "disability_employment_gap",
+                     add_separator_cols_1dp = c(3,4,5))
+
+  output$disability_employment_gap_table_title <- renderText({
+    glue("Data table: Disability employment gap in Scotland")
+  })
+
+})
+
+observeEvent(input$disability_gap_ui_map_shape_click$id,{
+
+  disability_la <- disability_all %>%
+    filter(ca2019 == rv_disability_employment_gap()) %>%
+    mutate(year = factor(year)) %>%
+    select(-ca2019)
+
+  dataDownloadServer(data = disability_la, data_download = disability_all,
+                     id = "disability_employment_gap", filename = "disability_employment_gap",
+                     add_separator_cols_1dp = c(3,4,5))
+
+  la_selected <- unique(disability_la$local_authority)
+
+  output$disability_employment_gap_table_title <- renderText({
+    glue("Data table: Disability employment gap in ", la_selected)
+  })
+
+})
 
 ##############################################.
 # ETHNICITY EMPLOYMENT GAP----
@@ -358,6 +463,14 @@ output$ethnicity_employment_gap_chart_data = DT::renderDataTable({
                            data_name = "ethnicity_employment_gap_chart",
                            geogtype = "none")
 })
+
+ethnicity_employment_gap_chart_data %>%
+  rename("Financial Year" = "year",
+         "White employment rate (%)" = "White",
+         "Minority ethnic employment rate (%)" = "Minority Ethnic",
+         "Ethnicity Employment Gap (%)" = "Ethnicity Employment Gap") %>%
+  dataDownloadServer(id = "ethnicity_employment_gap", filename = "ethnicity_employment_gap",
+                   add_separator_cols_1dp = c(2,3,4))
 
 
 ##############################################.
@@ -638,14 +751,29 @@ output$employability_FSS_start_month_funnel_figure = renderPlotly({
 
 ###
 
-output$employability_FSS_referral_data = DT::renderDataTable({
+employability_FSS_start_month %>%
+  arrange(desc(year_quarter_date)) %>%
+  select(-year_quarter, -early_leavers) %>%
+  mutate(year_quarter_date = format(year_quarter_date, "%B %Y")) %>%
+  rename("Sustained employment after 3 months" = "sustained_employment_3_month",
+         "Sustained employment after 6 months" = "sustained_employment_6_month",
+         "Sustained employment after 1 year" = "sustained_employment_1_year",
+         "Month" = "year_quarter_date") %>%
+  dataDownloadServer(id = "employability_starts",
+                     filename = "employability_starts",
+                     add_separator_cols = c(2,3,4,5,6))
 
-  datatable_style_download(employability_FSS_referral,
-                           datetype = "year",
-                           data_name = "employability_FSS_referral",
-                           geogtype = "none")
-})
 
+employability_FSS_referral %>%
+  arrange(desc(year_quarter)) %>%
+  select(year_quarter, referrals, starts_from_referrals, start_rate) %>%
+  mutate(year_quarter = factor(year_quarter),
+         start_rate = start_rate*100) %>%
+  rename("Start Rate (%)" = "start_rate",
+         "Quarter" = "year_quarter") %>%
+  dataDownloadServer(id = "employability_referrals",
+                     filename = "employability_referrals",
+                     add_separator_cols = c(2,3,4))
 
 ##############################################.
 # SKILLS SHORTAGE VACANCIES ----
@@ -673,6 +801,7 @@ output$skills_shortage_graph_bar <- renderPlotly({
 observeEvent(input$skills_shortage_geog_name, {
 
   data_unfiltered <- skills_shortage_vacancies %>%
+    arrange(year, region, vacancy_type) %>%
     select(year, region, vacancy_type, n_vacancies, all_establishments, percent) %>%
     mutate(percent = 100*percent) %>%
     rename("Number of Vacancies" = "n_vacancies",
@@ -684,6 +813,11 @@ observeEvent(input$skills_shortage_geog_name, {
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "skills_shortage", filename = "skills_shortage",
                        add_separator_cols = c(4,5,6))
+
+    output$skills_shortage_table_title <- renderText({
+      glue("Data table: Percentage of vacancies by vacancy type in ",
+           input$skills_shortage_geog_name)
+    })
 })
 
 
@@ -726,6 +860,11 @@ observeEvent(input$economic_inactivity_cr_geog_name, {
                      id = "economic_inactivity", filename = "economic_inactivity",
                      add_separator_cols = c(4),
                      add_separator_cols_1dp = c(5))
+
+  output$economic_inactivity_table_title <- renderText({
+    glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+         input$economic_inactivity_cr_geog_name)
+  })
 })
 
 
@@ -770,5 +909,10 @@ observeEvent(input$underemployment_geog_name, {
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "underemployment", filename = "underemployment",
                      add_separator_cols_1dp = c(3))
+
+  output$underemployment_table_title <- renderText({
+    glue("Data table: Percentage of adults 16 years old and over who are underemployed in ",
+         input$underemployment_geog_name)
+  })
 })
 
