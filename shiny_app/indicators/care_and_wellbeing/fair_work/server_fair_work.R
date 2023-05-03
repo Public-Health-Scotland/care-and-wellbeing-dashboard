@@ -125,16 +125,71 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
 
 
 
-employees_living_wage_by_sector %>%
+living_wage_sector <- employees_living_wage_by_sector %>%
   filter(measure == "proportion") %>%
-  arrange(sector, earning, year) %>%
-  select(sector, earning, year, measure_value) %>%
-  mutate(sector = factor(sector),
-         year = factor(year),
-         earning = factor(earning)) %>%
-  rename("Proportion of employees" = "measure_value") %>%
-  dataDownloadServer(id = "living_wage_cw", filename = "employees_on_living_wage",
+  mutate(local_authority = "Scotland",
+         ca2019 = "S92000003") %>%
+  select(year, ca2019, local_authority, sector, earning, measure_value) %>%
+  rename("Proportion of employees" = "measure_value")
+
+living_wage_la <- employees_living_wage_by_LA %>%
+  filter(local_authority != "Scotland") %>%
+  filter(measure == "proportion") %>%
+  mutate(sector = "All") %>%
+  select(year, ca2019, local_authority, sector, earning, measure_value) %>%
+  rename("Proportion of employees" = "measure_value")
+
+living_wage_all <- bind_rows(living_wage_sector, living_wage_la) %>%
+  arrange(year, sector, earning) %>%
+  filter(earning == "Earning less than the living wage") %>%
+  select(-earning)
+
+living_wage_scotland <- living_wage_all %>%
+  filter(local_authority == "Scotland") %>%
+  mutate(year = factor(year),
+         sector = factor(sector)) %>%
+  select(-ca2019)
+
+dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
+                   id = "living_wage_cw", filename = "living_wage",
+                   add_separator_cols_1dp = c(4))
+
+output$living_wage_cw_table_title <- renderText({
+  glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+})
+
+observeEvent(input$employees_living_wage_cw_map_button, {
+
+  dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
+                     id = "living_wage_cw", filename = "living_wage",
                      add_separator_cols_1dp = c(4))
+
+  output$living_wage_cw_table_title <- renderText({
+    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+  })
+
+})
+
+observeEvent(input$employees_living_wage_cw_map_shape_click,{
+
+  living_wage_la <- living_wage_all %>%
+    filter(ca2019 == rv_employees_living_wage_cw()) %>%
+    mutate(year = factor(year),
+           sector = factor(sector)) %>%
+    select(-ca2019)
+
+  dataDownloadServer(data = living_wage_la, data_download = living_wage_all,
+                     id = "living_wage_cw", filename = "living_wage",
+                     add_separator_cols_1dp = c(4))
+
+  la_selected <- unique(living_wage_la$local_authority)
+
+  output$living_wage_cw_table_title <- renderText({
+    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in ", la_selected)
+  })
+
+})
+
 
 
 ##############################################.

@@ -87,7 +87,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
         str_to_sentence(.)
 
       data_output <- data_download %>%
-        rename_at(vars(names(data)), ~ table_colnames)
+        rename_at(vars(names(data_download)), ~ table_colnames)
 
       output$csv <- downloadHandler(
         file = function(){
