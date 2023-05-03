@@ -5,7 +5,8 @@
 drug_stays = read_csv(paste0(path_in_pop, "/Drug Standardised hospitals stays age_sex_trend_data.csv")) %>%
   clean_names() %>%
   mutate(geography_type = "Scotland",
-         geography = "Scotland")
+         geography = "Scotland",
+         sex = recode(sex, `Both sexes` = "All sexes"))
 
 
 drug_stays_summary = drug_stays %>%
