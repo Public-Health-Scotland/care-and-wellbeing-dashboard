@@ -171,7 +171,7 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year, label = "
               mode = "lines",
               line = list(color = phs_colours("phs-purple")),
               name = glue("{label}"),
-              hovertemplate = ~glue("{round_half_up(indicator, 2)}")) %>%
+              hovertemplate = ~glue("{round_half_up(indicator, 2)}{ifelse(label == 'Percentage','%','')}")) %>%
     layout(xaxis = xaxis_type, yaxis = yaxis_number,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
            hovermode = "x unified") %>%
