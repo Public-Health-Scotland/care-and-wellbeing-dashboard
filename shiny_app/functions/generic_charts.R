@@ -1,5 +1,8 @@
 ## Generic Chart Functions ----
 
+#plot title style
+title_style <- list(size =24, color = "#4B006E", family = "Arial")
+
 # Insert a chart and its title
 plot_title <- function(title_plot, plot_output, subtitle = "") {
   tagList(h3(title_plot),
@@ -113,7 +116,7 @@ create_palette <- function(colour) {
 
 #### Charts ----
 
-confidence_line_function = function(data, y_title) {
+confidence_line_function = function(data, y_title, title = "") {
 
   yaxis_number[["title"]] = y_title
 
@@ -141,7 +144,9 @@ confidence_line_function = function(data, y_title) {
               line = list(color = phsstyles::phs_colours("phs-purple")),
               showlegend = TRUE) %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -150,7 +155,7 @@ confidence_line_function = function(data, y_title) {
 
 
 
-line_chart_function = function(data, y_title, xaxis_type = xaxis_year) {
+line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "") {
 
   yaxis_number[["title"]] = y_title
 
@@ -161,12 +166,14 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year) {
               mode = "lines",
               line = list(color = phs_colours("phs-purple"))) %>%
     layout(xaxis = xaxis_type, yaxis = yaxis_number,
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
 
-stacked_bar_function = function(data, category_var) {
+stacked_bar_function = function(data, category_var, title = "") {
 
   data %>%
   plot_ly(x=~date,
@@ -183,12 +190,14 @@ stacked_bar_function = function(data, category_var) {
                         titlefont = list(size=18),
                         showline = FALSE,
                         ticksuffix = "%"),
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text =str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack") {
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack", title = "") {
 
 
   #Modifying standard layout
@@ -209,13 +218,15 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
     layout(barmode = mode,
            xaxis = xaxis_plots,
            yaxis = yaxis_plots,
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40)) %>%
   config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
 
 
-make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title) {
+make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, title = "") {
   plot_ly(x = ~x,
           y = ~y,
           color = ~colour,
@@ -231,7 +242,9 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title) {
            xaxis = list(title = "Year",
                         tickfont = list(size=14),
                         titlefont = list(size=18)),
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'))
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40))
 
 }
 
