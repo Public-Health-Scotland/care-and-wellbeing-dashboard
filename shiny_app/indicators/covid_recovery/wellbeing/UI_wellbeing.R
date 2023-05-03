@@ -84,7 +84,7 @@ tagList(
 
                         withSpinner(plotlyOutput("school_leavers_line_figure")),
 
-                        h3("Data table: Percentage of school leavers in positive destinations"),
+                        h3(textOutput("school_leavers_table_title")),
 
                         dataDownloadUI("school_leavers")
                ),
@@ -168,12 +168,13 @@ tagList(
 
 
 
-                        h3("Data table"),
+                        h3(textOutput("preschool_table_title")),
+                        p("To view the full dataset, please use the download buttons below."),
                         radioButtons("preschool_radiobuttons",
                                      "Select geography type for data table",
                                      choices = unique(preschool$geography_type),
                                      inline = TRUE),
-                        DT::dataTableOutput("preschool_data")
+                        dataDownloadUI("preschool_development")
                ),
 
                ##############################################.
@@ -233,7 +234,7 @@ tagList(
                                      selected = "On",
                                      inline = TRUE),
 
-                        h3("Data table: Proportion of CAMHS patients seen by wait time since referral"),
+                        h3(textOutput("camhs_table_title")),
 
                         dataDownloadUI("camhs")
 

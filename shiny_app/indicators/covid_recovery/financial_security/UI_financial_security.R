@@ -52,9 +52,13 @@ tagList(
                         ),
 
 
-                        h3("Data table"),
-
-                        withSpinner(DT::dataTableOutput("fuel_afford_data"))),
+                        br(),
+                        h3(textOutput("fuel_affordibility_table_title")),
+                        radioButtons("fuel_affordibility_radiobuttons",
+                                     "Select geography type for data table",
+                                     choices = c("Scotland", "Local authority"),
+                                     inline = TRUE),
+                        dataDownloadUI("fuel_affordibility")),
 
                ##############################################.
                # FOOD AFFORDABILITY----

@@ -105,7 +105,8 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
                         ),
 
-                        h3("Data table: Proportion of employees on the living wage"),
+                        br(),
+                        h3(textOutput("living_wage_cw_table_title")),
 
                         dataDownloadUI("living_wage_cw")),
 

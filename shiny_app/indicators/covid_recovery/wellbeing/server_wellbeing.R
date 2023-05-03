@@ -104,16 +104,35 @@ output$preschool_chart_line = renderPlotly({
 
 })
 
-output$preschool_data = DT::renderDataTable({
+observeEvent(input$preschool_radiobuttons, {
 
-  preschool_out = preschool %>%
+  data_unfiltered <- preschool %>%
+    select(financial_year, geography_type, geography, number_of_reviews,
+           concern_any, proportion = prop_concern_any) %>%
+    rename("Total number of reviews" = "number_of_reviews",
+           "Number of reviews with any concern" = "concern_any",
+           "Proportion of total reviews with any concern" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
     filter(geography_type == input$preschool_radiobuttons) %>%
-    select(financial_year, geography, number_of_reviews,
-           concern_any, proportion = prop_concern_any)
-  datatable_style_download(preschool_out,
-                           datetype = "financial_year",
-                           data_name = "preschool",
-                           geogtype = "council_area")
+    mutate(financial_year = factor(financial_year),
+           geography = factor(geography))
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "preschool_development", filename = "preschool_development",
+                     add_separator_cols = c(4,5),
+                     add_separator_cols_2dp = c(6))
+})
+
+observeEvent(input$preschool_radiobuttons, {
+
+  geog_type <- ifelse(input$preschool_radiobuttons == "Scotland",
+                      "in Scotland",
+                      paste0("by ", input$preschool_radiobuttons))
+
+  output$preschool_table_title <- renderText({
+    glue("Data table: Proportion of health visitor reviews where any ",
+         "form of developmental concern was raised ", geog_type)})
 })
 
 ##############################################.
@@ -178,6 +197,11 @@ observeEvent(input$CAMHS_geog_name,{
                      add_separator_cols = c(4),
                      add_separator_cols_2dp = c(5))
 
+  output$camhs_table_title <- renderText({
+    glue("Data table:  Proportion of CAMHS patients seen by wait time since referral in ",
+         input$CAMHS_geog_name)
+  })
+
 })
 
 ##############################################.
@@ -241,20 +265,36 @@ output$school_leavers_line_figure = renderPlotly({
 observeEvent(input$school_leavers_category_input,{
 
   data_unfiltered <- positive_destinations_school_leavers %>%
-    arrange(category, characteristic, financial_year) %>%
-    select(category, characteristic, financial_year, percent) %>%
-    mutate(category = factor(category),
-           characteristic = factor(characteristic)) %>%
+    arrange(desc(financial_year), category, characteristic) %>%
+    select(financial_year, category, characteristic, percent) %>%
     rename("Percentage of school leavers in positive destinations (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
-    filter(category == input$school_leavers_category_input)
+    filter(category == input$school_leavers_category_input) %>%
+    mutate(category = factor(category),
+           characteristic = factor(characteristic),
+           financial_year = factor(financial_year))
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "school_leavers", filename = "positive_destination_of_school_leavers",
                      add_separator_cols_2dp = c(4))
 
+  output$school_leavers_table_title <- renderText({
+    ifelse(input$school_leavers_category_input == "All Leavers",
+           glue("Data table: Percentage of all school leavers in positive destinations"),
+           ifelse(input$school_leavers_category_input == "Sex",
+                  glue("Data table: Percentage of school leavers in positive destinations by sex"),
+                  ifelse(input$school_leavers_category_input == "Ethnicity",
+                         glue("Data table: Percentage of school leavers in positive destinations by ethnicity"),
+                         ifelse(input$school_leavers_category_input == "Urban/Rural",
+                                glue("Data table: Percentage of school leavers in positive destinations by urban/rural category"),
+                                ifelse(input$school_leavers_category_input == "Additional Support Needs",
+                                       glue("Data table: Percentage of school leavers in positive destinations by additional support needs category"),
+                                       NA)))))
+  })
+
 })
+
 
 
 ##############################################.
