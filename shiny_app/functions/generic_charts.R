@@ -126,7 +126,7 @@ confidence_line_function = function(data, y_title) {
               name = "Upper confidence interval",
               showlegend = FALSE,
               hovertemplate = ~glue("{upper_confidence_interval %>% round_half_up(2)}"),
-              hoverinfo = "text",
+              hoverinfo = "none",
               textposition = "none") %>%
     add_trace(x=~date, y=~lower_confidence_interval,
               type = "scatter",
@@ -137,7 +137,7 @@ confidence_line_function = function(data, y_title) {
               name = "Lower confidence interval",
               showlegend = FALSE,
               hovertemplate = ~glue("{lower_confidence_interval %>% round_half_up(2)}"),
-              hoverinfo = "text",
+              hoverinfo = "none",
               textposition = "none") %>%
     add_trace(x=~date,
               y=~indicator,
@@ -151,7 +151,8 @@ confidence_line_function = function(data, y_title) {
               textposition = "none") %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
-           hovermode = "x unified") %>%
+           hovermode = "x unified"
+           ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
@@ -221,8 +222,6 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
             type = 'bar',
             # name = glue("{category_var}{label}"),
             hovertemplate = ~glue("{y %>% round_half_up(2)}"),
-            # hovertemplate = create_text(x, y, xaxis_title, yaxis_title),
-            # hoverinfo = "text",
             textposition = "none"
     ) %>%
     layout(barmode = mode,
@@ -245,9 +244,7 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title = "Numb
           colors = palette,
           text = "rate",
           name = glue("{colour}{label}"),
-          hovertemplate = ~glue("{y %>% round_half_up(2)}"),
-          hoverinfo = "text",
-          textposition = "none"
+          hovertemplate = ~glue("{y %>% round_half_up(2)}")
   ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),
