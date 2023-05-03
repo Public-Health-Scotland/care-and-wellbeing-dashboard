@@ -15,7 +15,7 @@ tagList(
                         value = "child_material_deprevation",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Child material deprivation")
+                        h2("Child material deprivation")
                ),
 
                ##############################################.
@@ -25,7 +25,7 @@ tagList(
                         value = "child_development_cw",
                         icon = icon_no_warning_fn("shapes"),
 
-                        h3("Child social and physical development"),
+                        h2("Child social and physical development", iButtonUI("child_development_cw", content = "Paste background info and source for child social and physical development here")),
 
                         br(),
                         br(),
@@ -110,7 +110,7 @@ tagList(
                         value = "child_wellbeing",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Child wellbeing and happiness")
+                        h2("Child wellbeing and happiness")
                ),
 
                ##############################################.
@@ -121,7 +121,7 @@ tagList(
                         value = "child_obesity",
                         icon = icon_no_warning_fn("child-reaching"),
 
-                        h3("Children at risk of obesity"),
+                        h2("Children at risk of obesity", iButtonUI("child_obesity", content = "Paste background info and source for children at risk of obesity here")),
 
                         h4("Percentage of children (2-15) at risk of obesity in Scotland over time"),
 
@@ -141,7 +141,7 @@ tagList(
                         value = "infant_mortality_cw",
                         icon = icon_no_warning_fn("hospital"),
 
-                        h3("Infant mortality"),
+                        h2("Infant mortality", iButtonUI("infant_mortality_cw", content = "Paste background info and source for infant mortality here")),
 
                         actionButton(
                           "infant_mortality_cw_modal_info",
@@ -174,7 +174,7 @@ tagList(
                         value = "perinatal_mortality",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Perinatal Mortality Rate")
+                        h2("Perinatal Mortality Rate")
                ),
 
 
@@ -187,7 +187,7 @@ tagList(
                         value = "physical_activity_children",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Physical Activity (of children)")
+                        h2("Physical Activity (of children)")
                )
 
 

@@ -16,7 +16,7 @@ tagList(
                         value = "fuel_affordability",
                         icon = icon_no_warning_fn("gas-pump"),
 
-                        h2("Fuel Affordability"),
+                        h2("Fuel Affordability", iButtonUI("fuel_affordability", content = "Paste background info and source for fuel affordability here")),
 
                         #bsButton("jump_home_fuel_affordability", "Go to home page"),
                         bsButton("fuelaffordability_to_info", "Go to information page"),
@@ -75,7 +75,7 @@ tagList(
                         value = "cost_of_living",
                         icon = icon_no_warning_fn("money-bill-trend-up"),
 
-                        h3("Cost of living"),
+                        h2("Cost of living", iButtonUI("cost_of_living", content = "Paste background info and source for cost of living here")),
 
                         #bsButton("jump_home_household_expenditure", "Go to home page"),
                         bsButton("household_spending_to_info", "Go to information tab"),
@@ -115,7 +115,7 @@ tagList(
                         value = "managing_financially",
                         icon = icon_no_warning_fn("sterling-sign"),
 
-                        h3("Managing financially"),
+                        h2("Managing financially", iButtonUI("managing_financially", content = "Paste background info and source for managing financially here")),
 
                         #bsButton("jump_home_managing_financially", "Go to home page"),
                         bsButton("managingfinancially_to_info", "Go to information page"),
@@ -148,7 +148,7 @@ tagList(
                         value = "savings",
                         icon = icon_no_warning_fn("piggy-bank"),
 
-                        h2("Savings"),
+                        h2("Savings", iButtonUI("savings", content = "Paste background info and source for savings here")),
 
                         #bsButton("jump_home_savings", "Go to home page"),
                         bsButton("savings_to_info", "Go to information page"),
@@ -221,7 +221,7 @@ tagList(
                         value = "unmanageable_debt",
                         icon = icon_no_warning_fn("scale-unbalanced"),
 
-                        h2("Unmanageable debt"),
+                        h2("Unmanageable debt", iButtonUI("unmanageable_debt", content = "Paste background info and source for unmanageable debt here")),
 
                         #bsButton("jump_home_unmanageable_debt", "Go to home page"),
                         bsButton("unmanageabledebt_to_info", "Go to information page"),
@@ -272,7 +272,7 @@ tagList(
                         value = "childcare_uptake",
                         icon = icon_no_warning_fn("children"),
 
-                        h2("ELC childcare uptake"),
+                        h2("ELC childcare uptake", iButtonUI("childcare_uptake", content = "Paste background info and source for childcare uptake here")),
 
                         #bsButton("jump_home_childcare_uptake", "Go to home page"),
                         bsButton("childcareuptake_to_info", "Go to information page"),
