@@ -85,7 +85,7 @@ output$all_cause_mortality_plot = renderPlotly({
 
 
   line_chart_function(data, indicator_y,
-                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate", "Number"))
+                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of deaths", "Number of deaths"))
 
 
 })
@@ -185,7 +185,7 @@ observeEvent(input$chd_deaths_geog_name,{
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total number of hospital admissions")
+    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions")
 
 })
 
@@ -548,7 +548,7 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions")
+      line_chart_function(., y_title = "Total number of admissions", label = "Number of admissions")
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
