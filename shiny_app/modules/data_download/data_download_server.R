@@ -72,8 +72,8 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                                              # style header
                                              initComplete = htmlwidgets::JS(
                                                "function(settings, json) {",
-                                               "$(this.api().table().header()).css({'background-color': '#C5C3DA', 'color': '#3F3685'});",
-                                               "$(this.api().table().row().index()).css({'background-color': '#C5C3DA', 'color': '#3F3685'});",
+                                               "$(this.api().table().header()).css({'background-color': '#4B006E', 'color': '#FFFFFF'});",
+                                               "$(this.api().table().row().index()).css({'background-color': '#4B006E', 'color': '#FFFFFF'});",
                                                "}")))
 
           return(dt)

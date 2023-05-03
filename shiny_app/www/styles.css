@@ -8,6 +8,10 @@
       --phs-purple-50: #9F9BC2;
       --phs-purple-80: #655E9D;
       --phs-purple-30: #C5C3DA;
+      --phs-purple-S: #4B006E;
+      --phs-purple-M: #E6CCFF;
+      --phs-purple-W: #EEDEFD;
+      --vlight-purple: #F4EDFA;
 
       --phs-blue: #0078D4;
       --phs-blue-80: #3393DD;
@@ -44,7 +48,7 @@
 
 /* Setting header colour */
   h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-    color: var(--phs-purple);
+    color: var(--phs-purple-S);
   }
 /* Body styles */
   body {
@@ -60,22 +64,22 @@
     padding: 5px; box-shadow: none; }
 
 /* Navigation bar following PHS colour scheme */
-  .navbar-default {color: var(--white); background-color: var(--phs-purple); }
-.navbar-default .navbar-brand, .navbar-default:hover .navbar-brand:hover, .navbar-brand {color: var(--phs-purple); background-color: var(--white)}
+  .navbar-default {color: var(--white); background-color: var(--phs-purple-S); }
+.navbar-default .navbar-brand, .navbar-default:hover .navbar-brand:hover, .navbar-brand {color: var(--phs-purple-S); background-color: var(--white)}
 .navbar-default .navbar-nav > li > a {color: var(--white);}
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
-  color: var(--white);
-  background-color: var(--phs-purple-80);
+  color: var(--phs-purple-S);
+  background-color: var(--phs-purple-W);
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: white;
-    background-color: var(--phs-purple-80);
+    color: var(--phs-purple-S);
+    background-color: var(--phs-purple-W);
 }
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:focus{
-  color: var(--white);
-  background-color: var(--phs-purple-80);
+  color: var(--phs-purple-S);
+  background-color: var(--phs-purple-M);
 
 }
 
@@ -84,19 +88,20 @@
 
  .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: white;
-    background-color: var(--phs-purple);
+    background-color: var(--phs-purple-S);
 }
 
   .nav-pills>li>a {
     border-radius: 4px;
-    background-color: var(--phs-purple-30);
+    color: var(--phs-purple-S);
+    background-color: var(--phs-purple-W);
 
 }
 
     .nav-pills>li>a:hover {
     border-radius: 4px;
-    background-color: var(--phs-purple-80);
-    color: white;
+    background-color: var(--phs-purple-M);
+    color: var(--phs-purple-S);
 
 }
 
@@ -112,9 +117,9 @@
 .externallink:hover {color: var(--phs-teal-50);}
 
 /* Border tables - th, td puts within the table as well */
-  .border-table{border:1px solid var(--phs-purple);}
+  .border-table{border:1px solid var(--phs-purple-S);}
 th, td {
-  border: 1px solid var(--phs-purple-30);
+  border: 1px solid var(--phs-liberty-10);
   padding-right: 1px;
 }
 .container-fluid {
@@ -126,21 +131,21 @@ th, td {
 
 /* Button styles */
   .btn {
-    background-color: var(--phs-purple-50);
-    color: black; background-image:none;
-    border: 2px solid var(--phs-purple);
+    background-color: var(--phs-purple-W);
+    color: var(--phs-purple-S); background-image:none;
+    border: 2px solid var(--phs-purple-S);
     border-radius: 10px;
   }
-.btn:hover{background-color:var(--phs-purple-80); color: white; border: 2px solid var(--phs-purple);
+.btn:hover{background-color:var(--phs-purple-M); color: var(--phs-purple-S); border: 2px solid var(--phs-purple-S);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 8px 20px 0 rgba(0,0,0,0.19);
 }
-.btn:focus{background-color:var(--phs-purple-80); color: white; border: 2px solid var(--phs-purple-30);
+.btn:focus{background-color:var(--phs-purple-S); color: white; border: 2px solid var(--phs-purple-M);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 8px 20px 0 rgba(0,0,0,0.19);}
-.btn:active{background-color:var(--phs-purple); color: white; border: 2px solid var(--phs-purple-30);
+.btn:active{background-color:var(--phs-purple-S); color: white; border: 2px solid var(--phs-purple-M);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 8px 20px 0 rgba(0,0,0,0.19);}
-  .btn:active:focus{background-color:var(--phs-purple); color: white; border: 2px solid var(--phs-purple-30);
+  .btn:active:focus{background-color:var(--phs-purple-S); color: white; border: 2px solid var(--phs-purple-M);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 10px 8px 0 rgba(0,0,0,0.19); outline: none;}
-.btn:checked{background-color:var(--phs-purple); color: white; border: 2px solid var(--phs-purple-30);
+.btn:checked{background-color:var(--phs-purple-S); color: white; border: 2px solid var(--phs-purple-M);
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 8px 20px 0 rgba(0,0,0,0.19);}
 
 
@@ -161,9 +166,9 @@ th, td {
 
 /* Changes the background colours of the buttons to match PHS colours, and adds rounded corners */
 .btn-home {
-  color:black;
+  color:var(--phs-purple-S);
   font-weight: bold;
-  background-color:var(--phs-purple-50);
+  background-color:var(--phs-purple-W);
   border-color:white;
   border-radius:10px;
   padding:5px;
@@ -175,7 +180,7 @@ th, td {
 .btn-home:hover, .btn-home.active:focus, .btn-home.active:hover {
   color:white;
   font-weight: bold;
-  background-color:var(--phs-purple);
+  background-color:var(--phs-purple-S);
   border-color:white;
   box-shadow:none;
 }
@@ -186,7 +191,7 @@ th, td {
 .btn-home.active, .btn-home:active, .open>.dropdown-toggle.btn-home {
   color:white;
   font-weight: bold;
-  background-color:var(--phs-purple);
+  background-color:var(--phs-purple-S);
   border-color:white;
   box-shadow:none;
 }
@@ -198,15 +203,15 @@ th, td {
 .btn-home:hover:focus:active {
   color:white;
   font-weight: bold;
-  background-color:var(--phs-purple);
+  background-color:var(--phs-purple-S);
   border-color:white;
   box-shadow:none;
 }
 
 
 .plotinfo-btn, .plotinfo-btn:hover, .plotinfo-btn:focus, .plotinfo-btn:active:focus, .plotinfo:active, .plotinfo:checked {
-  background-color: var(--phs-purple-10);
-  color: var(--phs-purple);
+  background-color: var(--phs-purple-W);
+  color: var(--phs-purple-S);
   border-radius: 3px;
   padding: 5px;
   font-size: 14px;
@@ -214,8 +219,8 @@ th, td {
 }
 
 .summary-btn, .summary-btn:hover, .summary-btn:focus, .summary-btn:active:focus, .sumamry-btn:active, .summary-btn:checked {
-  background-color: var(--phs-blue-10);
-  color: var(--navy);
+  background-color: var(--phs-purple-W);
+  color: var(--phs-purple-S);
   font-weight: bold;
   padding: 1px 5px;
   font-size: 16px;
@@ -240,8 +245,8 @@ th, td {
 
 /* boxes for summary page*/
 .box-info {
-   background-color: var(--phs-blue-10);
-   box-shadow: 0 8px 8px var(--phs-blue-30)
+   background-color: var(--vlight-purple);
+   box-shadow: 0 8px 8px var(--phs-purple-M)
 }
 
 /*
@@ -328,7 +333,7 @@ a > .info-box {
 }
 
 .info-box-icon.bg-green { background-color:var(--phs-green); color: white;  }
-.info-box-icon.bg-purple { background-color:var(--phs-purple); color: white; }
+.info-box-icon.bg-purple { background-color:var(--phs-purple-S); color: white; }
 .info-box-icon.bg-blue { background-color:var(--phs-blue); color: white; }
 .info-box-icon.bg-fuchsia { background-color:var(--phs-magenta); color:white; }
 .info-box-icon.bg-olive { background-color:var(--phs-graphite);color: white;  }
@@ -342,7 +347,7 @@ a > .info-box {
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: bold;
-    color: var(--phs-purple);
+    color: var(--phs-purple-S);
   }
 
 
@@ -350,14 +355,14 @@ a > .info-box {
 .shiny-input-container:not(.shiny-input-container-inline) {
 
     max-width: 100%;
-    background-color: var(--phs-purple-50);
+    background-color: var(--phs-purple-W);
     border-radius: 4px;
 }
 
 
 /* Links */
   a {
-    color: var(--phs-purple);
+    color: var(--phs-purple-S);
     text-decoration: none;
   }
 
@@ -365,7 +370,7 @@ a > .info-box {
   .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
     color: var(--white);
     text-decoration: none;
-    background-color: var(--phs-purple-50);
+    background-color: var(--phs-purple-S);
     outline: 0;
   }
 
@@ -373,8 +378,8 @@ a > .info-box {
 
   .pagination > li > a
 {
-  background-color: var(--phs-liberty-10);
-  color: var(--phs-purple);
+  background-color: var(--phs-purple-W);
+  color: var(--phs-purple-S);
   transition: background-color .3s;
 }
 
@@ -383,30 +388,30 @@ a > .info-box {
 .pagination > li > span:focus,
 .pagination > li > span:hover
 {
-  color:var(--phs-purple);
-  background-color: var(--phs-teal-50);
-  border-color: var(--phs-teal-80);
+  color:var(--phs-purple-S);
+  background-color: var(--phs-purple-W);
+  border-color: var(--phs-purple-M);
   border-radius: 5px;
 }
 
 .pagination > .active > a
 {
   color: var(--phs-purple);
-  background-color: var(--phs-teal-50) !Important;
-  border: solid 1px var(--phs-teal-50) !Important;
+  background-color: var(--phs-purple-M) !Important;
+  border: solid 1px var(--phs-purple-M) !Important;
 }
 
 .pagination > .active > a:hover
 {
-  background-color: var(--phs-teal-50) !Important;
-  border: solid 1px var(--phs-teal-50);
+  background-color: var(--phs-purple-M) !Important;
+  border: solid 1px var(--phs-purple-M);
 }
 
 /* data table */
 
   .table > .tbody > tr.active th,
 .table > .tbody > tr.active td{
-  background-color: var(--phs-purple);
+  background-color: var(--phs-purple-S);
   color: var(--white);
 }
 

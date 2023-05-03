@@ -12,7 +12,7 @@ tagList(
                         value = "blue_green_space",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Access to green and blue space")
+                        h2("Access to green and blue space")
                ),
 
                ##############################################.
@@ -23,7 +23,7 @@ tagList(
                         value = "journeys_active",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Journeys by active travel")
+                        h2("Journeys by active travel")
                ),
 
                ##############################################.
@@ -34,7 +34,7 @@ tagList(
                         value = "visit_outdoors",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Visits to the outdoors")
+                        h2("Visits to the outdoors")
                )
 
   )

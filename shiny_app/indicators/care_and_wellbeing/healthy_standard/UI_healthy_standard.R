@@ -16,7 +16,7 @@ tagList(
                         value = "food_insecurity",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Food insecurity")
+                        h2("Food insecurity")
                ),
 
                ##############################################.
@@ -26,7 +26,7 @@ tagList(
                         value = "persistent_poverty",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Persistent poverty")
+                        h2("Persistent poverty")
                ),
 
                ##############################################.
@@ -36,7 +36,7 @@ tagList(
                         value = "satisfaction_with_housing",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Satisfaction with housing")
+                        h2("Satisfaction with housing")
                )
 
 

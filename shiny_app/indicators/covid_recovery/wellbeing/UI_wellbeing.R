@@ -16,7 +16,7 @@ tagList(
                         value = "child_poverty",
                         icon = icon_no_warning_fn("house-chimney-user"),
 
-                        h3("Child poverty"),
+                        h2("Child poverty", iButtonUI("child_poverty", content = "Paste background info and source for child poverty here")),
 
                         p("This indicator shows the rate of children in relative poverty after housing costs. ",
                           " Relative poverty means being below 60% of the UK median income."),
@@ -54,7 +54,7 @@ tagList(
                         value = "positive_destinations",
                         icon = icon_no_warning_fn("school"),
 
-                        h3("Positive destinations of school leavers"),
+                        h2("Positive destinations of school leavers", iButtonUI("positive_destinations", content = "Paste background info and source for positive destinations of school leavers here")),
 
                         #bsButton("jump_home_positive_destinations", "Go to home page"),
                         bsButton("positivedestinations_to_info", "Go to information page"),
@@ -97,7 +97,7 @@ tagList(
                         value = "pre_school_development",
                         icon = icon_no_warning_fn("shapes"),
 
-                        h3("Pre-school development"),
+                        h2("Pre-school development", iButtonUI("pre_school_development", content = "Paste background info and source for pre-school development here")),
 
                         #bsButton("jump_home_preschool", "Go to home page"),
                         bsButton("preschooldevelopment_to_info", "Go to information page"),
@@ -184,7 +184,7 @@ tagList(
                         value = "listen_to_decision_making",
                         icon = icon_no_warning_fn("comment"),
 
-                        h3("Being listened to and involved in decision making"),
+                        h2("Being listened to and involved in decision making"),
 
                         #bsButton("jump_home_listen_to_decision_making", "Go to home page"),
                         bsButton("listento_to_info", "Go to information page")),
@@ -196,7 +196,7 @@ tagList(
                         value = "camhs_waiting_times",
                         icon = icon_no_warning_fn("clipboard-check"),
 
-                        h3("CAMHS waiting times"),
+                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times", content = "Paste background info and source for CAMHS waiting times here")),
 
                         #bsButton("jump_home_camhs_waiting_times", "Go to home page"),
                         bsButton("camhs_to_info", "Go to information tab"),
@@ -247,7 +247,7 @@ tagList(
                         value = "protection_from_harm",
                         icon = icon_no_warning_fn("hands-holding-child"),
 
-                        h3("Protection from harm"),
+                        h2("Protection from harm", iButtonUI("protection_from_harm", content = "Paste background info and source for protection from harm here")),
 
                         #bsButton("jump_home_protection_from_harm", "Go to home page"),
                         bsButton("protectionharm_to_info", "Go to information tab"),
@@ -285,7 +285,7 @@ tagList(
                         value = "infant_mortality",
                         icon = icon_no_warning_fn("hospital"),
 
-                        h2("Infant mortality"),
+                        h2("Infant mortality", iButtonUI("infant_mortality", content = "Paste background info and source for infant mortality here")),
 
                         #bsButton("jump_home_infant_mortality", "Go to home page"),
                         bsButton("infantmortality_to_info", "Go to information page"),
@@ -323,7 +323,7 @@ tagList(
                         value = "physical_activity",
                         icon = icon_no_warning_fn("person-walking"),
 
-                        h3("Physical Activity"),
+                        h2("Physical Activity"),
 
                         #bsButton("jump_home_physical_activity", "Go to home page"),
                         bsButton("physicalactivity_to_info", "Go to information page")
@@ -336,7 +336,7 @@ tagList(
                         value = "mental_health_wellbeing",
                         icon = icon_no_warning_fn("user-nurse"),
 
-                        h3("Mental health and wellbeing"),
+                        h2("Mental health and wellbeing"),
 
                         #bsButton("jump_home_mental_health_wellbeing", "Go to home page"),
                         bsButton("mentalhealthwellbeing_to_info", "Go to information page")
