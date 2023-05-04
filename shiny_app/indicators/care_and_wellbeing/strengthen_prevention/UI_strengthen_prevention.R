@@ -111,7 +111,7 @@ tagList(
                                          br(),
                                          br(),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
                                                     "alcohol_deaths_by_age_plot"),
 
                                          h3("Data Table"),
