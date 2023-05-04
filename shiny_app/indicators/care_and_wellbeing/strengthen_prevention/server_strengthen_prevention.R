@@ -135,7 +135,7 @@ observeEvent(input$chd_deaths_geog_type,
 
                updateSelectizeInput(session,
                                     "chd_deaths_geog_name",
-                                    "Step 2. Select natioanl or local geography area",
+                                    "Step 2. Select national or local geography area",
                                     choices = unique(areas$geography))
              })
 
@@ -147,7 +147,7 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., "Age-sex standardised rate of deaths", title = title) %>%
+    confidence_line_function(., y_title = "Rate per 100,000", title = title) %>%
     layout(xaxis = list(tickangle = 30))
 })
 
