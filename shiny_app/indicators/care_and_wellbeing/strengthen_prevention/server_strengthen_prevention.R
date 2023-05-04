@@ -180,6 +180,13 @@ observeEvent(input$chd_deaths_geog_name,{
                                               input$chd_deaths_geog_name)})
 })
 
+altTextServer("chd_deaths_alt",
+              title = "Coronary heart disease deaths plot",
+              content = tags$ul(tags$li("This is a plot for the trend age-sex standardised rates per 100,000 of CHD deaths.")
+
+              )
+)
+
 ##############################################.
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
 ##############################################.

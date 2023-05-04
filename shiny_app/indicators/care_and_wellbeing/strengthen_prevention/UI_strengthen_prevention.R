@@ -184,6 +184,7 @@ tagList(
                         #plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
                         #           "chd_deaths_plot",
                          #          subtitle = "The shaded line indicates confidence intervals"),
+                        altTextUI("chd_deaths_alt"),
                         withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
