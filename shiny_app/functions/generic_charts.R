@@ -116,9 +116,10 @@ create_palette <- function(colour) {
 
 #### Charts ----
 
-confidence_line_function = function(data, y_title, title = "") {
+confidence_line_function = function(data, y_title, x_title = "Time period", title = "") {
 
   yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
 
   plot_ly(data = data) %>%
     add_trace(x=~date,
