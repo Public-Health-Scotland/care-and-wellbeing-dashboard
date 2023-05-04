@@ -135,7 +135,7 @@ confidence_line_function = function(data, y_title, title = "") {
               type = "scatter",
               mode = "lines",
               fill = 'tonexty',
-              fillcolor = phsstyles::phs_colours("phs-purple-10"),
+              fillcolor = phsstyles::phs_colours("phs-liberty-30"),
               line = list(color = 'transparent'),
               name = "Lower confidence interval",
               showlegend = FALSE,
