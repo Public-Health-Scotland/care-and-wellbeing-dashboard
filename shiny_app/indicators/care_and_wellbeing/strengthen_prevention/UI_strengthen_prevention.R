@@ -54,7 +54,7 @@ tagList(
                tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
                         value = "alcohol",
 
-                        tabBox( title = "", id = "alcohol_tabBox", width = NULL,
+                        tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
 
 
                                 ##############################################.
@@ -78,10 +78,10 @@ tagList(
                                                             choices = c("Scotland"),
                                                             width = "100%"))),
 
-                                         plotlyOutput("alcohol_admissions_plot"),
+                                         withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
-                                         h3(textOutput("alcohol_admissions_title")),
+                                         #h3(textOutput("alcohol_admissions_title")),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("alcohol_related_admissions")
@@ -142,8 +142,8 @@ tagList(
                         ),
 
 
-                        h3("All-cause mortality, ages 15-44"),
-                        plotlyOutput("all_cause_mortality_plot"),
+                        #h3("All-cause mortality, ages 15-44"),
+                        withSpinner(plotlyOutput("all_cause_mortality_plot")),
 
                         br(),
                         h3(textOutput("all_cause_mortality_title")),
@@ -203,7 +203,7 @@ tagList(
                tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
                         value = "drugs",
 
-                        tabBox(title = "", id = "drugs_tabBox", width = NULL,
+                        tabBox(title = "", id = "drugs_tabBox", type = "pills", width = NULL,
 
                                ##############################################.
                                # DRUG RELATED HOSPITAL ADMISSIONS ----
@@ -223,8 +223,9 @@ tagList(
                                                        options = list(plugins = c('remove_button'),
                                                                       `actions-box` = TRUE)),
 
-                                        plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
-                                                   "drug_admissions_plot"),
+                                        #plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
+                                        #           "drug_admissions_plot"),
+                                        withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
                                         h3(textOutput("drug_admissions_title")),
@@ -263,9 +264,10 @@ tagList(
                                                                           "Number")))
                                         ),
 
-                                        plot_title("Drug misuse deaths by 5 year periods",
-                                                   "drug_deaths_plot",
-                                                   subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+                                        #plot_title("Drug misuse deaths by 5 year periods",
+                                        #           "drug_deaths_plot",
+                                         #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+                                        withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
                                         h3(textOutput("drug_deaths_title")),
@@ -299,9 +301,9 @@ tagList(
 
                         h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers", content = "Paste background info and source for experience of unpaid carers here")),
 
-                        h4("Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"),
+                        #h4("Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"),
 
-                        plotlyOutput("experience_unpaid_carers_plot"),
+                        withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
                         br(),
                         h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
@@ -318,8 +320,9 @@ tagList(
 
                         h2("First ever hospital admission for heart attack (under 75)", iButtonUI("heart_attack_admission", content = "Paste background info and source for heart attack here")),
 
-                        plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
-                                   "hospital_admission_heart_attack_plot"),
+                        #plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
+                        #           "hospital_admission_heart_attack_plot"),
+                        withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
 
                         br(),
                         h3("Data table: Total number of first ever hospital admissions for heart attack (under 75) in Scotland"),
@@ -361,8 +364,9 @@ tagList(
                                                 choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
                           )),
 
-                        plot_title("Birthweight of babies based on gestational age by financial year",
-                                   "healthy_birthweight_plot"),
+                        #plot_title("Birthweight of babies based on gestational age by financial year",
+                        #           "healthy_birthweight_plot"),
+                        withSpinner(plotlyOutput("healthy_birthweight_plot")),
 
                         br(),
                         h3(textOutput("healthy_birthweight_title")),
@@ -399,9 +403,9 @@ tagList(
 
                         h2("Limiting long-term conditions (age 16+)", iButtonUI("limiting_ltcs", content = "Paste background info and source for adult ltc here")),
 
-                        h4("Percentage of adults with a limiting long-term condition"),
+                        #h4("Percentage of adults with a limiting long-term condition"),
 
-                        plotlyOutput("adult_long_term_condition_plot"),
+                        withSpinner(plotlyOutput("adult_long_term_condition_plot")),
 
                         br(),
                         h3("Data table: Percentage of adults with a limiting long-term condition in Scotland"),
@@ -466,9 +470,9 @@ tagList(
 
                         h2("Self-assessed health of adults (age 16+)", iButtonUI("adult_self_assessed_health", content = "Paste background info and source for self assessed health of adults here")),
 
-                        h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
+                        #h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
 
-                        plotlyOutput("adult_self_assessed_health_plot"),
+                        withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
 
                         br(),
                         h3("Data table: Percentage of adults in Scotland who describe their general health as good or very good"),
