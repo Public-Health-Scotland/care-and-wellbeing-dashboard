@@ -43,7 +43,7 @@ ui <- shinymanager::secure_app(
         # HOME ----
         ##############################################.
         tabPanel(title = "Home",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("house"),
                  value = "home",
 
                  source(file.path("indicators/home/UI_home.R"), local = TRUE)$value
@@ -54,7 +54,7 @@ ui <- shinymanager::secure_app(
         # SUMMARY ----
         ##############################################.
         tabPanel(title = "Summary",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("lemon"),
                  value = "summary",
 
                  source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
@@ -65,7 +65,7 @@ ui <- shinymanager::secure_app(
         # SUMMARY V2 ----
         ##############################################.
         tabPanel(title = "Summary V2",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("clipboard"),
                  value = "summary_v2",
 
                  source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
@@ -75,7 +75,7 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # COVID RECOVERY ----
         ##############################################.
-        navbarMenu("Covid Recovery", icon = icon_no_warning_fn("lemon"),
+        navbarMenu("Covid Recovery", #icon = icon_no_warning_fn("arrows-spin"),
 
 
                    tabPanel(title = "Wellbeing of children and young people",
@@ -100,7 +100,7 @@ ui <- shinymanager::secure_app(
         # CARE AND WELLBEING ----
         ##############################################.
 
-        navbarMenu(title = "Care and Wellbeing", icon = icon_no_warning_fn("lemon"),
+        navbarMenu(title = "Care and Wellbeing", #icon = icon_no_warning_fn("spa"),
 
 
                    tabPanel(title = "Strengthen the role and impact of ill health prevention",
@@ -151,7 +151,7 @@ ui <- shinymanager::secure_app(
         # INFORMATION AND NOTES ----
         ##############################################.
         tabPanel(title = "Information and Notes",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("lemon"),
                  value = "info_notes",
 
                  source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
