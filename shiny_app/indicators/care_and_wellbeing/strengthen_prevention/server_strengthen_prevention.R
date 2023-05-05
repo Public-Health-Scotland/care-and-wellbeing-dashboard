@@ -218,9 +218,11 @@ heart_attack %>%
 
 output$drug_admissions_plot = renderPlotly({
 
-  if(input$drug_admissions_age == "All age groups"){
-    age_title <- "all age groups"
-  }else{
+  if(length(input$drug_admissions_age) != 1){
+    age_title <- "by age"
+  } else if (input$drug_admissions_age == "All age groups") {
+  age_title <- "all age groups"
+  } else {
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
@@ -258,9 +260,11 @@ observeEvent(input$drug_admissions_age,{
 
 observeEvent(input$drug_admissions_age,{
 
-  if(input$drug_admissions_age == "All age groups"){
+  if(length(input$drug_admissions_age) != 1){
+    age_title <- "by age"
+  } else if (input$drug_admissions_age == "All age groups") {
     age_title <- "all age groups"
-  }else{
+  } else {
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
