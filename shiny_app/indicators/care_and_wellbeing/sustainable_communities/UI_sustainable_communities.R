@@ -13,7 +13,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Loneliness",
                         value = "loneliness",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Loneliness")
                ),
@@ -23,7 +22,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Number of areas where health inequalities are reducing",
                         value = "ares_of_health_inequalities",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Number of areas where health inequalities are reducing")
                ),
@@ -33,7 +31,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Perceptions of local area",
                         value = "perceptions_of_local_area",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Perceptions of local area")
                ),
@@ -43,7 +40,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Places to interact",
                         value = "places_to_intereact",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Places to interact")
                )
