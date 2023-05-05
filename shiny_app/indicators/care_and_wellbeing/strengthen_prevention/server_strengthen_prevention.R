@@ -244,7 +244,7 @@ output$drug_admissions_plot = renderPlotly({
   make_line_chart_multi_lines(x = .$date, y = .$indicator,
                               colour = .$age_group,
                               title = title,
-                              y_axis_title = "Age-sex standardised rate of stays<br>(per 100,000)",
+                              y_axis_title = "Rate per 100,000",
                               x_axis_title = "Financial year", label = " rate") %>%
     layout(xaxis = list(tickangle = 45))
 
@@ -320,7 +320,7 @@ output$drug_deaths_plot = renderPlotly({
       mutate(date = year) %>%
       filter(geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Age-standardised death rate<br>(per 100,000)", title = title) %>%
+      confidence_line_function(., "Rate per 100,000", title = title) %>%
       layout(xaxis = list(tickangle = 45))
 
   } else if (input$drug_deaths_rate_number == "Number") {
