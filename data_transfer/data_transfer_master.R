@@ -32,6 +32,7 @@ dyn.load("/usr/gdal34/lib/libgdal.so")
 dyn.load("/usr/geos310/lib64/libgeos_c.so", local = FALSE)
 library(rgdal)
 library(here)
+library(purrr)
 
 path_main_script_location = here("data_transfer")
 

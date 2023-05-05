@@ -376,7 +376,10 @@ output$alcohol_admissions_plot = renderPlotly({
     rename(date = "financial_year",
            indicator = "stays_easr")
 
-  line_chart_function(data_alc, title = title, y_title = "Alcohol related admissions trend")})
+  line_chart_function(data_alc, y_title = "European age-sex standardised rate<br>(per 100,000)") %>%
+    layout(xaxis = list(tickangle = 45))
+
+    })
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
@@ -412,21 +415,35 @@ output$alcohol_deaths_plot <- renderPlotly({
 
   plot <- alcohol_deaths %>%
     filter(sex == input$alcohol_deaths_sex) %>%
-    mutate(indicator = round(as.integer(indicator), 1)) %>%
-    make_line_chart_multi_lines(., x = .$year, y = .$indicator, colour = .$breakdown, y_axis_title = "Rate",
-                                label = " rate") %>%
-    layout(yaxis = yaxis_proportion)
+    rename("lower_confidence_interval" = lower_ci,
+           "upper_confidence_interval" = upper_ci,
+           "date" = year,
+           "indicator" = rate) %>%
+    confidence_line_function(y_title = "Age-standardised mortality rate<br>(per 100,000)")
+
 
 })
 
+output$alcohol_deaths_by_age_plot <- renderPlotly({
+
+  plot <- alcohol_deaths_by_age %>%
+    filter(sex == input$alcohol_deaths_sex) %>%
+    mutate(indicator = round(as.integer(indicator), 1)) %>%
+    make_line_chart_multi_lines(., x = .$year, y = .$indicator,
+                                colour = .$age_group, y_axis_title = "Deaths per 100,000 people")
+
+})
+
+
+
 output$alcohol_deaths_table <- DT::renderDataTable({
 
-  alcohol_deaths %>%
-    select(c(year, breakdown, indicator, sex)) %>%
+  alcohol_deaths_by_age %>%
+    select(c(year, age_group, indicator, sex)) %>%
     mutate(indicator = round(as.numeric(indicator)*100, 1)) %>%
     rename(Year = "year",
            Sex = "sex",
-           `Age Group` = "breakdown",
+           `Age Group` = "age_group",
            Rate = "indicator") %>%
     datatable_style_download(.,
                              datetype = "year",
@@ -566,10 +583,8 @@ observeEvent(input$asthma_admissions_geog_type,
                asthma_filtered = asthma_admissions %>%
                  filter(geography_type == input$asthma_admissions_geog_type)
 
-               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
 
                updateSelectizeInput(session, "asthma_admissions_geog_name",
-                                    #label = glue("4. Select {select_choice}"),
                                     choices = unique(asthma_filtered$geography))#,
                #selected = "")
              })
