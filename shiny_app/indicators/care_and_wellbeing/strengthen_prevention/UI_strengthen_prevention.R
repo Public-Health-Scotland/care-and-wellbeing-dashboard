@@ -229,7 +229,7 @@ tagList(
                                                        options = list(plugins = c('remove_button'),
                                                                       `actions-box` = TRUE)),
 
-                                        altTextUI("drug_admission_alt")
+                                        altTextUI("drug_admission_alt"),
                                         withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
@@ -269,7 +269,7 @@ tagList(
                                                                           "Number")))
                                         ),
 
-                                        altTextUI("drug_deaths_alt")
+                                        altTextUI("drug_deaths_alt"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
