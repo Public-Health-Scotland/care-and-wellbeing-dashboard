@@ -245,8 +245,10 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
 
 
 
+
 make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
                                         label = "", title = "") {
+
   plot_ly(x = ~x,
           y = ~y,
           color = ~colour,

@@ -78,7 +78,7 @@ tagList(
                                                             choices = c("Scotland"),
                                                             width = "100%"))),
 
-                                         plotlyOutput("alcohol_admissions_plot"),
+                                         withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
                                          h3(textOutput("alcohol_admissions_title")),
@@ -102,11 +102,17 @@ tagList(
                                                   selectizeInput("alcohol_deaths_sex",
                                                                  "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
-                                                                 selected = "Persons"))
+                                                                 selected = "All sexes"))
                                          ),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm orundetermined intent) in Scotland",
+                                         plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
                                                     "alcohol_deaths_plot"),
+
+                                         br(),
+                                         br(),
+
+                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
+                                                    "alcohol_deaths_by_age_plot"),
 
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")
