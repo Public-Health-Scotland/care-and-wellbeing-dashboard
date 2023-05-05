@@ -187,6 +187,20 @@ altTextServer("chd_deaths_alt",
               )
 )
 
+chd_deaths_modal_ci <- modalDialog(
+  h3("What is a confidence interval?"),
+  p("A confidence interval gives an indication of the degree of uncertainty of an estimate,",
+  "showing the precision of a sample estimate. The 95% confidence intervals are calculated so",
+  "that if we repeated the study many times, 95% of the time the true unknown value would lie",
+  "between the lower and upper confidence limits. A wider interval indicates more uncertainty",
+  "in the estimate. Overlapping confidence intervals indicate that there may not be a true difference between two estimates."),
+  size = "l",
+  easyClose = TRUE, fade=TRUE, footer = modalButton("Close")
+)
+
+### Modal links
+observeEvent(input$chd_deaths_btn_modal_ci, { showModal(chd_deaths_modal_ci) })
+
 ##############################################.
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
 ##############################################.
