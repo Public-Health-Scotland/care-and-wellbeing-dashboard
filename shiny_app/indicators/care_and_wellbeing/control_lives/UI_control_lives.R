@@ -12,11 +12,11 @@ tagList(
                ##############################################.
                # CAMHS WAITING TIMES----
                ##############################################.
-               tabPanel(title = "CAHMS waiting times",
+               tabPanel(title = "CAMHS waiting times",
                         value = "camhs_waiting_times_cw",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h2("CAHMS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
+                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
 
                         actionButton("camhs_waiting_times_cw_modal_info",
                                      tags$b("Background information and source"),
