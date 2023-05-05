@@ -13,7 +13,7 @@ tagList(
                         value = "gender_balance",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Gender balance in organisations")
+                        h2("Gender balance in organisations")
                ),
 
                ##############################################.
@@ -24,7 +24,7 @@ tagList(
                         value = "dignity_respect",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Public services treat people with dignity and respect")
+                        h2("Public services treat people with dignity and respect")
                )
 
 

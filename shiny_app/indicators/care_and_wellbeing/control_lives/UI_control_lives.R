@@ -16,7 +16,7 @@ tagList(
                         value = "camhs_waiting_times_cw",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("CAHMS waiting times"),
+                        h2("CAHMS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
 
                         actionButton("camhs_waiting_times_cw_modal_info",
                                      tags$b("Background information and source"),
@@ -64,7 +64,7 @@ tagList(
                         value = "children_relationships",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Children have positive relationships")
+                        h2("Children have positive relationships")
                ),
 
                ##############################################.
@@ -74,7 +74,7 @@ tagList(
                         value = "childrens_voices",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Children’s voices")
+                        h2("Children’s voices")
                ),
 
 
@@ -86,7 +86,7 @@ tagList(
                         value = "confidence_of_young",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Confidence and resilience of children and young people")
+                        h2("Confidence and resilience of children and young people")
                ),
 
                ##############################################.
@@ -96,7 +96,7 @@ tagList(
                         value = "mental_health_cw",
                         icon = icon_no_warning_fn("lemon"),
 
-                        h3("Mental health / mental wellbeing ")
+                        h2("Mental health / mental wellbeing ")
                )
 
 

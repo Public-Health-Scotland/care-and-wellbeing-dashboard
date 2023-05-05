@@ -18,7 +18,7 @@ tagList(
                         value = "employees_living_wage",
                         icon = icon_no_warning_fn("hand-holding-dollar"),
 
-                        h2("Employees earning below the living wage"),
+                        h2("Employees earning below the living wage", iButtonUI("employees_living_wage", content = "Paste background info and source for employees on the living wage here")),
 
 
                         #bsButton("jump_home_employees_living_wage", "Go to home page"),
@@ -70,7 +70,8 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_line_LA")))
                         ),
 
-                        h3("Data table: Proportion of employees on the living wage"),
+                        br(),
+                        h3(textOutput("living_wage_table_title")),
 
                         dataDownloadUI("living_wage")),
 
@@ -83,7 +84,7 @@ tagList(
                         value = "gender_pay_gap",
                         icon = icon_no_warning_fn("mars-and-venus"),
 
-                        h2("Gender pay gap"),
+                        h2("Gender pay gap", iButtonUI("gender_pay_gap", content = "Paste background info and source for gender pay gap here")),
 
                         #bsButton("jump_home_gender_pay_gap", "Go to home page"),
                         bsButton("genderpaygap_to_info", "Go to information page"),
@@ -141,7 +142,7 @@ tagList(
                         value = "employment_gap",
                         icon = icon_no_warning_fn("people-arrows"),
 
-                        h2("Employment gap"),
+                        h2("Employment gap", iButtonUI("employment_gap", content = "Paste background info and source for employment gap here")),
 
                         #bsButton("jump_home_ethnicity_employment_gap", "Go to home page"),
 
@@ -207,8 +208,10 @@ tagList(
                                    ),
 
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("disability_gap_data_table"))),
+                                   br(),
+                                   h3(textOutput("disability_employment_gap_table_title")),
+                                   dataDownloadUI("disability_employment_gap")),
+
 
 
                           tabPanel("Ethnicity employment gap",
@@ -241,8 +244,9 @@ tagList(
                                        "This was largely driven by employment in the working age white population falling post pandemic and the employment rate in the minority ethnic population  increasing."
                                    ),
 
-                                   h3("Data table"),
-                                   withSpinner(DT::dataTableOutput("ethnicity_employment_gap_chart_data")))),
+                                   br(),
+                                   h3("Data table: Ethnicity employment gap in Scotland"),
+                                   dataDownloadUI("ethnicity_employment_gap"))),
                         width = 12
                ),
 
@@ -253,7 +257,7 @@ tagList(
                         value = "zero_hours_contracts",
                         icon = icon_no_warning_fn("0"),
 
-                        h3("Zero-hours contracts"),
+                        h2("Zero-hours contracts", iButtonUI("zero_hours_contracts", content = "Paste background info and source for zero hours contracts here")),
 
                         #bsButton("jump_home_zero_hours_contracts", "Go to home page"),
                         bsButton("zerohourscontract_to_info", "Go to information page"),
@@ -288,7 +292,7 @@ tagList(
                         value = "skills_shortage_vacancies",
                         icon = icon_no_warning_fn("person"),
 
-                        h3("Skills shortage vacancies"),
+                        h2("Skills shortage vacancies", iButtonUI("skills_shortage_vacancies", content = "Paste background info and source for skills shortage vacancies here")),
 
                         #bsButton("jump_home_skills_shortage_vacancies", "Go to home page"),
                         bsButton("childcare_uptake_to_info", "Go to information page"),
@@ -321,7 +325,7 @@ tagList(
                         plot_title(title_plot = "Percentage of skill shortage vacancies vs. all vacancies", "skills_shortage_graph_bar"),
 
 
-                        h3("Data table: Percentage of vacancies by vacancy type and region"),
+                        h3(textOutput("skills_shortage_table_title")),
                         dataDownloadUI("skills_shortage")
                ),
 
@@ -334,7 +338,7 @@ tagList(
                         value = "underemployment",
                         icon = icon_no_warning_fn("down-long"),
 
-                        h3("Underemployment"),
+                        h2("Underemployment", iButtonUI("underemployment", content = "Paste background info and source for underemployment here")),
 
                         #bsButton("jump_home_underemployment", "Go to home page"),
                         bsButton("underemployment_to_info", "Go to information page"),
@@ -372,7 +376,7 @@ tagList(
                         withSpinner(plotlyOutput("underemployment_graph_line")),
 
 
-                        h3("Data table: Percentage of adults 16 years old and over who are underemployed by local authority"),
+                        h3(textOutput("underemployment_table_title")),
                         dataDownloadUI("underemployment")),
 
                ##############################################.
@@ -383,7 +387,7 @@ tagList(
                         icon = icon_no_warning_fn("people-arrows"),
 
 
-                        h3("Economic inactivity"),
+                        h2("Economic inactivity", iButtonUI("economic_inactivity_cr", content = "Paste background info and source for economic inactivity here")),
 
                         #bsButton("jump_home_economic_inactivity", "Go to home page"),
                         bsButton("economic_inactivity_to_info", "Go to information page"),
@@ -418,7 +422,7 @@ tagList(
                         ,
 
 
-                        h3("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work"),
+                        h3(textOutput("economic_inactivity_table_title")),
                         dataDownloadUI("economic_inactivity")
 
 
@@ -432,7 +436,7 @@ tagList(
                         value = "employability",
                         icon = icon_no_warning_fn("handshake"),
 
-                        h3("Employability"),
+                        h2("Employability", iButtonUI("employability", content = "Paste background info and source for employability here")),
 
                         #bsButton("jump_home_employability", "Go to home page"),
                         bsButton("employability_to_info", "Go to information page"),
@@ -478,6 +482,10 @@ tagList(
                           )
                         ),
 
+                        h3("Data table: Number of starts by month in Scotland"),
+
+                        dataDownloadUI("employability_starts"),
+
                         h4("Number of referrals and starts (from referrals) by quarter"),
 
                         actionButton(
@@ -515,9 +523,9 @@ tagList(
                         ),
 
 
-                        h3("Data table"),
+                        h3("Data table: Number of referrals and starts (from referrals) by quarter in Scotland"),
 
-                        withSpinner(DT::dataTableOutput("employability_FSS_referral_data"))
+                        dataDownloadUI("employability_referrals")
 
                ),
 
@@ -528,7 +536,7 @@ tagList(
                         value = "contractually_secure_work",
                         icon = icon_no_warning_fn("person-digging"),
 
-                        h3("Contractually secure work"),
+                        h2("Contractually secure work"),
 
                         #bsButton("jump_home_contractually_secure_work", "Go to home page")
                ),
@@ -541,7 +549,7 @@ tagList(
                         value = "green_jobs",
                         icon = icon_no_warning_fn("recycle"),
 
-                        h3("Green jobs"),
+                        h2("Green jobs"),
 
                         #bsButton("jump_home_green_jobs", "Go to home page"),
                         bsButton("greenjobs_to_info", "Go to information page")

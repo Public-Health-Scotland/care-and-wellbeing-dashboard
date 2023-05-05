@@ -55,8 +55,8 @@ make_table <- function(input_data_table,
                                      # style header
                                      initComplete = htmlwidgets::JS(
                                        "function(settings, json) {",
-                                       "$(this.api().table().header()).css({'background-color': '#C5C3DA', 'color': '#3F3685'});",
-                                       "$(this.api().table().row().index()).css({'background-color': '#C5C3DA', 'color': '#3F3685'});",
+                                       "$(this.api().table().header()).css({'background-color': '#4B006E', 'color': '#EEDEFD'});",
+                                       "$(this.api().table().row().index()).css({'background-color': '#4B006E', 'color': '#EEDEFD'});",
                                        "}")))
 
 
@@ -235,8 +235,8 @@ datatable_style_download = function(data,
                     buttons = c('csv', 'excel'),
                     initComplete = JS(
                       "function(settings, json) {",
-                      "$(this.api().table().header()).css({'background-color': '#C5C3DA',
-                      'color': '#3F3685'});",
+                      "$(this.api().table().header()).css({'background-color': '#4B006E',
+                      'color': '#EEDEFD'});",
                       "}"
                     )
                   ),

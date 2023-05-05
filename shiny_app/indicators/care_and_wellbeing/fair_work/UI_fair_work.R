@@ -16,7 +16,7 @@ tagList(
                         icon = icon_no_warning_fn("people-arrows"),
 
 
-                        h3("Economic inactivity"),
+                        h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = "Paste background info and source for economic inactivity here")),
 
 
                         actionButton(
@@ -58,7 +58,7 @@ tagList(
                         value = "employees_living_wage_cw",
                         icon = icon_no_warning_fn("hand-holding-dollar"),
 
-                        h2("Employees on the living wage"),
+                        h2("Employees on the living wage", iButtonUI("employees_living_wage_cw", content = "Paste background info and source for employees on the living wage here")),
 
                         actionButton(
                           "employees_living_wage_cw_modal_info",
@@ -105,7 +105,8 @@ tagList(
                                  withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
                         ),
 
-                        h3("Data table: Proportion of employees on the living wage"),
+                        br(),
+                        h3(textOutput("living_wage_cw_table_title")),
 
                         dataDownloadUI("living_wage_cw")),
 
@@ -116,7 +117,7 @@ tagList(
                         value = "gender_pay_gap_cw",
                         icon = icon_no_warning_fn("mars-and-venus"),
 
-                        h2("Pay gap"),
+                        h2("Pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
 
                         actionButton(
                           "gender_pay_gap_cw_modal_info",
