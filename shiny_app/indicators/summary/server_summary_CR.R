@@ -150,7 +150,7 @@ output$benefits_uptake_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -163,7 +163,7 @@ output$cost_of_living_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -176,7 +176,7 @@ output$childcare_uptake_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -189,7 +189,7 @@ output$food_affordability_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -202,7 +202,7 @@ output$fuel_affordability_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -215,7 +215,7 @@ output$managing_financially_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -228,7 +228,7 @@ output$savings_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -241,7 +241,7 @@ output$transport_costs_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
@@ -254,7 +254,7 @@ output$unmanageable_debt_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("money-bill-wave"),
+          icon = icon_no_warning_fn("sterling-sign"),
           color = "purple")
 })
 
