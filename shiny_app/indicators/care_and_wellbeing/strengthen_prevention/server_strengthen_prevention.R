@@ -216,6 +216,14 @@ heart_attack %>%
 # DRUG RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 
+
+altTextServer("drug_admissions_alt",
+              title = "Drug admissions plot",
+              content = tags$ul(tags$li("This is a plot for the drug-related hospital admissions indicator.")
+
+              )
+)
+
 output$drug_admissions_plot = renderPlotly({
 
   if(length(input$drug_admissions_age) != 1){
@@ -241,6 +249,8 @@ output$drug_admissions_plot = renderPlotly({
     layout(xaxis = list(tickangle = 45))
 
 })
+
+
 
 observeEvent(input$drug_admissions_age,{
 
@@ -273,6 +283,8 @@ observeEvent(input$drug_admissions_age,{
 })
 
 
+
+
 ##############################################.
 # DRUG RELATED DEATHS----
 ##############################################.
@@ -288,6 +300,15 @@ observeEvent(input$drug_deaths_geog_type,
                                     "Step 2. Select a national or local geography area",
                                     choices = unique(data$geography))
              })
+
+
+altTextServer("drug_deaths_alt",
+              title = "Drug-related deaths plot",
+              content = tags$ul(tags$li("This is a plot for the drug-related deaths indicator."),
+                                tags$li("Rates based on fewer than 10 deaths not shown")
+
+              )
+)
 
 output$drug_deaths_plot = renderPlotly({
 

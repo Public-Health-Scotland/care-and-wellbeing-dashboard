@@ -229,8 +229,7 @@ tagList(
                                                        options = list(plugins = c('remove_button'),
                                                                       `actions-box` = TRUE)),
 
-                                        #plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
-                                        #           "drug_admissions_plot"),
+                                        altTextUI("drug_admission_alt")
                                         withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
@@ -270,9 +269,7 @@ tagList(
                                                                           "Number")))
                                         ),
 
-                                        #plot_title("Drug misuse deaths by 5 year periods",
-                                        #           "drug_deaths_plot",
-                                         #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+                                        altTextUI("drug_deaths_alt")
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
