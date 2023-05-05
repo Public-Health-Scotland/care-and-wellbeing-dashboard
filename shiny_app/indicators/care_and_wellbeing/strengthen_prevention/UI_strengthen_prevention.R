@@ -81,7 +81,7 @@ tagList(
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
-                                         #h3(textOutput("alcohol_admissions_title")),
+                                         h3(textOutput("alcohol_admissions_title")),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("alcohol_related_admissions")
