@@ -490,7 +490,7 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
 output$adult_self_assessed_health_plot <- renderPlotly({
 
-  title<- "Percentage of adults in Scotland who describe their general health as good or very good"
+  title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"
 
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
@@ -506,7 +506,7 @@ adult_self_assessed_health %>%
   select(c(Year, indicator)) %>%
   mutate(indicator = round(as.integer(indicator), 1)) %>%
   mutate(Year = factor(Year)) %>%
-  rename("Percentage of adults who describe their general health as good or very good (%)" = "indicator") %>%
+  rename("Percentage of adults who describe their general health as 'good' or 'very good' (%)" = "indicator") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "adult_self_assessed_health",
                      filename = "adult_self_assessed_health")
