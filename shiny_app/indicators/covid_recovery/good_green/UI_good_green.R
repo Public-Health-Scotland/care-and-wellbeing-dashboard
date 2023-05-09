@@ -150,6 +150,7 @@ tagList(
                           title = "",
                           # The id lets us use input$tabset1 on the server to find the current tab
                           id = "employment_gap_tabbox", width = 12, #height = "250px",
+                          type = "pills",
                           tabPanel("Disability employment gap",
 
                                    h3("Disability employment gap by local authority"),

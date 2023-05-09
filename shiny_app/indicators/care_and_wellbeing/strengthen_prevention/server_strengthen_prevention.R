@@ -62,6 +62,9 @@ observeEvent(input$all_cause_mortality_geog_type,
 
 output$all_cause_mortality_plot = renderPlotly({
 
+  title <- glue("All-cause mortality, ages 15-44, in ",
+                            input$all_cause_mortality_geog_name)
+
   data = all_cause_mortality %>%
     filter(geography_type == input$all_cause_mortality_geog_type,
            geography == input$all_cause_mortality_geog_name,
@@ -85,6 +88,7 @@ output$all_cause_mortality_plot = renderPlotly({
 
 
   line_chart_function(data, indicator_y,
+                      title = title,
                       label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of deaths", "Number of deaths"))
 
 
@@ -186,8 +190,10 @@ observeEvent(input$chd_deaths_geog_name,{
 
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
+  title <- "Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland"
+
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions")
+    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title)
 
 })
 
@@ -212,12 +218,24 @@ heart_attack %>%
 
 output$drug_admissions_plot = renderPlotly({
 
+  if(length(input$drug_admissions_age) != 1){
+    age_title <- "by age"
+  } else if (input$drug_admissions_age == "All age groups") {
+  age_title <- "all age groups"
+  } else {
+    age_title <- paste0("ages ", input$drug_admissions_age)
+  }
+
+  title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+                            age_title, ") in Scotland")
+
   data = drug_stays %>%
     filter(age_group %in% input$drug_admissions_age) %>%
     mutate(indicator = rate, date = financial_year) %>%
 
   make_line_chart_multi_lines(x = .$date, y = .$indicator,
                               colour = .$age_group,
+                              title = title,
                               y_axis_title = "Age-sex standardised rate of stays<br>(per 100,000)",
                               x_axis_title = "Financial year", label = " rate") %>%
     layout(xaxis = list(tickangle = 45))
@@ -242,9 +260,11 @@ observeEvent(input$drug_admissions_age,{
 
 observeEvent(input$drug_admissions_age,{
 
-  if(input$drug_admissions_age == "All age groups"){
+  if(length(input$drug_admissions_age) != 1){
+    age_title <- "by age"
+  } else if (input$drug_admissions_age == "All age groups") {
     age_title <- "all age groups"
-  }else{
+  } else {
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
@@ -271,12 +291,15 @@ observeEvent(input$drug_deaths_geog_type,
 
 output$drug_deaths_plot = renderPlotly({
 
+  title <- glue("Drug misuse deaths by 5-year periods in ",
+                            input$drug_deaths_geog_name)
+
   if (input$drug_deaths_rate_number == "Rate") {
     drug_related_deaths %>%
       mutate(date = year) %>%
       filter(geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Age-standardised death rate<br>(per 100,000)") %>%
+      confidence_line_function(., "Age-standardised death rate<br>(per 100,000)", title = title) %>%
       layout(xaxis = list(tickangle = 45))
 
   } else if (input$drug_deaths_rate_number == "Number") {
@@ -284,7 +307,7 @@ output$drug_deaths_plot = renderPlotly({
       mutate(date = year, indicator = number) %>%
       filter(geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      line_chart_function(., "Total number of deaths") %>%
+      line_chart_function(., "Total number of deaths", title = title) %>%
       layout(xaxis = list(tickangle = 45))
 
   }
@@ -341,6 +364,9 @@ observeEvent(input$alcohol_admissions_geog_type,
              })
 
 output$alcohol_admissions_plot = renderPlotly({
+
+  title <- glue("Trend in total number of alcohol related admissions in ",
+                            input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
     arrange(financial_year) %>%
@@ -442,11 +468,14 @@ observeEvent(input$healthy_birthweight_geog_type,
 
 output$healthy_birthweight_plot = renderPlotly({
 
+  title <- glue("Birthweight of babies based on gestational age in ",
+                            input$healthy_birthweight_geog_name)
+
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
-    stacked_bar_function(., .$birthweight_for_gestational_age)
+    stacked_bar_function(., .$birthweight_for_gestational_age, title = title)
 })
 
 observeEvent(input$healthy_birthweight_geog_name,{
@@ -482,10 +511,12 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
 output$adult_self_assessed_health_plot <- renderPlotly({
 
+  title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"
+
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage")%>%
+    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -496,7 +527,7 @@ adult_self_assessed_health %>%
   select(c(Year, indicator)) %>%
   mutate(indicator = round(as.integer(indicator), 1)) %>%
   mutate(Year = factor(Year)) %>%
-  rename("Percentage of adults who describe their general health as good or very good (%)" = "indicator") %>%
+  rename("Percentage of adults who describe their general health as 'good' or 'very good' (%)" = "indicator") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "adult_self_assessed_health",
                      filename = "adult_self_assessed_health")
@@ -508,10 +539,12 @@ adult_self_assessed_health %>%
 
 output$adult_long_term_condition_plot <- renderPlotly({
 
+  title <- "Percentage of adults with a limiting long-term condition in Scotland"
+
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage")%>%
+    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -713,9 +746,11 @@ altTextServer("asthma_admissions_alt",
 
 output$experience_unpaid_carers_plot <- renderPlotly({
 
+  title <- "Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"
+
   experience_unpaid_carers %>%
     mutate(proportion = as.numeric(indicator)) %>%
-    stacked_bar_function(., category_var = .$breakdown)
+    stacked_bar_function(., category_var = .$breakdown, title = title)
 
 
 })
