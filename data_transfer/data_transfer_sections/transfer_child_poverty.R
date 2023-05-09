@@ -4,8 +4,9 @@
 # Read in the data
 
 
-poverty <- read_excel(paste0(path_in, "/data2022_1yr.xlsx"),
-                      sheet = "1", skip = 5, n_max = 4) %>%
+poverty <- read_excel(paste0(path_in, "/data2023_1yr.xlsx"),
+                      sheet = "1", skip = 4, n_max = 4) %>%
+  select(-"2020/21") %>%
   pivot_longer(cols = 2:ncol(.),
                names_to = "financial_year",
                values_to = "proportion") %>%

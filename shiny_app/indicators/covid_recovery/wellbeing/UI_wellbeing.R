@@ -14,33 +14,35 @@ tagList(
                ##############################################.
                tabPanel(title = "Child poverty",
                         value = "child_poverty",
-                        icon = icon_no_warning_fn("house-chimney-user"),
+                     #   icon = icon_no_warning_fn("house-chimney-user"),
 
-                        h2("Child poverty", iButtonUI("child_poverty", content = "Paste background info and source for child poverty here")),
+                        h2("Child poverty", iButtonUI("child_poverty",
+                        content = paste("This indicator shows the proportion of",
+                        "children living in relative poverty after housing costs",
+                        "using data from the Family Resources Survey and Households",
+                        "Below Average Income dataset. Relative poverty is defined",
+                        "as being below 60% of the UK median income. Single year",
+                        "estimate data were downloaded from the Poverty and",
+                        "Income Inequality in Scotland 2019-22 publication. Data",
+                        "gathered in the 2020-2021 time-period have been omitted",
+                        "as these were not considered to reflect a representative",
+                        "sample for Scotland due to severe disruptions encountered",
+                        "during the first year of the coronavirus (COVID-19) pandemic."))),
 
-                        p("This indicator shows the rate of children in relative poverty after housing costs. ",
-                          " Relative poverty means being below 60% of the UK median income."),
-                        tags$b("The latest estimate for 2020/21 is unreliable. ",
-                               "This is due to a small sample size during the pandemic. ",
-                               "Therefore the sample size is not representative of Scotland."),
-                        p("Source: Scottish Family Resources Survey"),
+                        # p("This indicator shows the rate of children in relative poverty after housing costs. ",
+                        #   " Relative poverty means being below 60% of the UK median income."),
+                        # tags$b("The latest estimate for 2020/21 is unreliable. ",
+                        #        "This is due to a small sample size during the pandemic. ",
+                        #        "Therefore the sample size is not representative of Scotland."),
+                        # p("Source: Scottish Family Resources Survey"),
 
 
                         #bsButton("jump_home_child_poverty", "Go to home page"),
-                        bsButton("childpoverty_to_info", "Go to information page"),
+                       # bsButton("childpoverty_to_info", "Go to information page"),
+                        withSpinner(plotlyOutput("child_poverty_chart")),
 
 
-
-
-
-                        plot_title("Proportion of people who are in relative poverty
-                                 (below 60% of UK median income after housing costs), Scotland",
-                                   "child_poverty_chart",
-                                   subtitle = "Click on the legend to filter the chart"),
-
-
-
-                        h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
+                        h3("Data table: Percentage of people in Scotland who are in relative poverty after housing costs"),
 
                         dataDownloadUI("child_poverty")
 
