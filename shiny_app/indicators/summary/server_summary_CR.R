@@ -28,7 +28,7 @@ output$listen_to_decision_making_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -41,7 +41,7 @@ output$camhs_waiting_times_cr_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -54,7 +54,7 @@ output$child_poverty_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -67,7 +67,7 @@ output$infant_mortality_cr_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -80,7 +80,7 @@ output$mental_health_cr_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -93,7 +93,7 @@ output$physical_activity_children_cr_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -106,7 +106,7 @@ output$positive_destinations_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -119,7 +119,7 @@ output$child_development_cr_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
@@ -132,7 +132,7 @@ output$protection_from_harm_infobox <- renderInfoBox({
                                    paste(""))),
           value="Not available",
           subtitle = glue(""),
-          icon = icon_no_warning_fn("hands-holding-child"),
+          icon = icon_no_warning_fn("children"),
           color = "purple")
 })
 
