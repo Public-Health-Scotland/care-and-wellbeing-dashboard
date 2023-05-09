@@ -294,6 +294,7 @@ tagList(
 
 
                                         altTextUI("drug_deaths_alt"),
+                                        ciDefinitionUI("drug_deaths_ci"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
