@@ -194,7 +194,9 @@ altTextServer("chd_deaths_alt",
                                 tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
                                         "area represents the upper confidence interval."),
                                 tags$li("Since the data began there has been a general downwards trend."),
-                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to.")
+                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                "geography level and area for plotting. The default is Scotland.")
 
               )
 )
