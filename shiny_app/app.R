@@ -24,7 +24,8 @@ ui <- shinymanager::secure_app(
       # Specify most recent fontawesome library - change version as needed
       tags$style("@import url(https://use.fontawesome.com/releases/v6.1.2/css/all.css);"),
       navbarPage(
-        tags$html(lang="en"),
+        # position = "fixed-top",
+        # collapsible = "true",
         id = "intabset", # id used for jumping between tabs
         title = div(
           tags$a(img(src = "phs-logo.png", height = 40,
@@ -33,11 +34,7 @@ ui <- shinymanager::secure_app(
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
         windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
-        header = tags$head(includeCSS("www/styles.css"),  # CSS stylesheet
-                           tags$link(rel = "shortcut icon", href = "favicon_phs.ico"),# Icon for browser tab
-                           includeScript("www/javascript.js")
-
-        ),
+        header = source(file.path("header.R"), local=TRUE)$value,
 
         ##############################################.
         # HOME ----
@@ -246,6 +243,9 @@ server <- function(input, output, session) {
 
 
 }
+
+#sets language right at the top of source (required this way for screen readers)
+attr(ui, "lang") = "en"
 
 # Run the application
 shinyApp(ui=ui, server=server)

@@ -12,7 +12,7 @@ tagList(
                tabPanel(title = "Admissions for asthma",
                         value = "asthma_admissions",
 
-                       h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
+                        h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
@@ -20,15 +20,15 @@ tagList(
                                                     choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
                                                     width = "100%")),
                                  column(4,
-                                         selectInput("asthma_admissions_geog_type",
+                                        selectInput("asthma_admissions_geog_type",
                                                     "Step 2: Select national or local geography level ",
-                                                     choices = c("Scotland", "Health Board"),
-                                                     width = "100%")),
+                                                    choices = c("Scotland", "Health Board"),
+                                                    width = "100%")),
                                  column(4,
-                                 selectInput("asthma_admissions_geog_name",
-                                             "Step 3: Select national or local geography area ",
-                                             choices = c("Scotland"),
-                                             width = "100%"))
+                                        selectInput("asthma_admissions_geog_name",
+                                                    "Step 3: Select national or local geography area ",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
 
                         ),#, "Age and sex breakdown"))),
                         # column(3,
@@ -68,15 +68,15 @@ tagList(
 
                                          fluidRow(
                                            column(3,
-                                                selectInput("alcohol_admissions_geog_type",
-                                                            "Step 1: Select national or local geography level",
-                                                            choices = c("Scotland", "Health Board"),
-                                                            width = "100%")),
-                                         column(3,
-                                                selectInput("alcohol_admissions_geog_name",
-                                                            "Step 2: Select national or local geography area",
-                                                            choices = c("Scotland"),
-                                                            width = "100%"))),
+                                                  selectInput("alcohol_admissions_geog_type",
+                                                              "Step 1: Select national or local geography level",
+                                                              choices = c("Scotland", "Health Board"),
+                                                              width = "100%")),
+                                           column(3,
+                                                  selectInput("alcohol_admissions_geog_name",
+                                                              "Step 2: Select national or local geography area",
+                                                              choices = c("Scotland"),
+                                                              width = "100%"))),
 
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
@@ -168,10 +168,22 @@ tagList(
                tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
                         value = "chd_deaths",
 
-                        h2("Coronary heart disease (CHD): deaths (age 45-74)", iButtonUI("chd_deaths", content = "Paste background info and source for chd deaths here")),
+                        h2("Coronary heart disease (CHD): deaths (age 45-74)",
+                           iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
+                                                                   "heart disease (CHD). Heart disease is a broad term for a variety of",
+                                                                   "conditions that affect the structure and function of the heart.",
+                                                                   "The most common type of heart disease is coronary heart disease (CHD)",
+                                                                   "where the blood vessels carrying oxygen-rich blood (coronary arteries)",
+                                                                   "to the heart muscle become narrowed or blocked. If insufficient blood",
+                                                                   "reaches the heart muscle the result can be damage to the heart muscle",
+                                                                   "which is known as a heart attack.",
+                                                                   "<br> <br>",
+                                                                   "Public Health Scotland publishes a range of heart disease-related information.",
+                                                                   "You can find all our information on the heart disease section of the",
+                                                                   "<a href=https://beta.isdscotland.org/topics/heart-disease-and-stroke/> Data and Intelligence website. </a>"))),
 
                         fluidRow(
-                          column(3,
+                          column(4,
                                  selectizeInput("chd_deaths_geog_type",
                                                 "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
@@ -179,17 +191,18 @@ tagList(
                                                             "HSCP",
                                                             "Council Area",
                                                             "Locality",
-                                                            "Intermediate Zone")),
+                                                            "Intermediate Zone"),
+                                                width = '100%'),
                           ),
-                          column(3,
+                          column(4,
                                  selectizeInput("chd_deaths_geog_name",
                                                 "Step 2. Select national or local geography area",
-                                                choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography))),
+                                                choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography),
+                                                width = '100%')),
                         ),
 
-                        #plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
-                        #           "chd_deaths_plot",
-                         #          subtitle = "The shaded line indicates confidence intervals"),
+                        altTextUI("chd_deaths_alt"),
+                        ciDefinitionUI("chd_deaths_ci"),
                         withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
@@ -272,7 +285,7 @@ tagList(
 
                                         #plot_title("Drug misuse deaths by 5 year periods",
                                         #           "drug_deaths_plot",
-                                         #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+                                        #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
@@ -505,5 +518,5 @@ tagList(
                         h2("Work-related ill health")
                ),
 
-) # navlistpanel
+  ) # navlistpanel
 ) # tagList
