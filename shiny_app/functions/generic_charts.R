@@ -200,7 +200,7 @@ stacked_bar_function = function(data, category_var, title = "") {
     ) %>%
     layout(barmode = "stack",
            xaxis = xaxis_finyear,
-           yaxis = list(title = "Proportion",
+           yaxis = list(title = "Percentage",
                         rangemode="tozero",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
