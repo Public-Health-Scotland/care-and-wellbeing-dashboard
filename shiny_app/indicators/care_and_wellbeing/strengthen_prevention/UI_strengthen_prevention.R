@@ -12,7 +12,7 @@ tagList(
                tabPanel(title = "Admissions for asthma",
                         value = "asthma_admissions",
 
-                       h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
+                        h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
@@ -20,15 +20,15 @@ tagList(
                                                     choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
                                                     width = "100%")),
                                  column(4,
-                                         selectInput("asthma_admissions_geog_type",
+                                        selectInput("asthma_admissions_geog_type",
                                                     "Step 2: Select national or local geography level ",
-                                                     choices = c("Scotland", "Health Board"),
-                                                     width = "100%")),
+                                                    choices = c("Scotland", "Health Board"),
+                                                    width = "100%")),
                                  column(4,
-                                 selectInput("asthma_admissions_geog_name",
-                                             "Step 3: Select national or local geography area ",
-                                             choices = c("Scotland"),
-                                             width = "100%"))
+                                        selectInput("asthma_admissions_geog_name",
+                                                    "Step 3: Select national or local geography area ",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
 
                         ),#, "Age and sex breakdown"))),
                         # column(3,
@@ -68,15 +68,15 @@ tagList(
 
                                          fluidRow(
                                            column(3,
-                                                selectInput("alcohol_admissions_geog_type",
-                                                            "Step 1: Select national or local geography level",
-                                                            choices = c("Scotland", "Health Board"),
-                                                            width = "100%")),
-                                         column(3,
-                                                selectInput("alcohol_admissions_geog_name",
-                                                            "Step 2: Select national or local geography area",
-                                                            choices = c("Scotland"),
-                                                            width = "100%"))),
+                                                  selectInput("alcohol_admissions_geog_type",
+                                                              "Step 1: Select national or local geography level",
+                                                              choices = c("Scotland", "Health Board"),
+                                                              width = "100%")),
+                                           column(3,
+                                                  selectInput("alcohol_admissions_geog_name",
+                                                              "Step 2: Select national or local geography area",
+                                                              choices = c("Scotland"),
+                                                              width = "100%"))),
 
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
@@ -189,7 +189,7 @@ tagList(
 
                         #plot_title("Coronary heart disease deaths (age 45-74), age-sex standardised rates per 100,000",
                         #           "chd_deaths_plot",
-                         #          subtitle = "The shaded line indicates confidence intervals"),
+                        #          subtitle = "The shaded line indicates confidence intervals"),
                         withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
@@ -272,7 +272,7 @@ tagList(
 
                                         #plot_title("Drug misuse deaths by 5 year periods",
                                         #           "drug_deaths_plot",
-                                         #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+                                        #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
@@ -305,10 +305,16 @@ tagList(
                tabPanel(title = "Experience of unpaid carers ",
                         value = "experience_of_unpaid_carers",
 
-                        h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers", content = "Paste background info and source for experience of unpaid carers here")),
+                        h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers",
+                                                                    content = paste("The Health and Care Experience Survey (successor to the GP",
+                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
+                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
+                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
+                                                                    "<li> caring responsibilities and related support </li>",
+                                                                    "The survey has been run every two years since 2009 and can be found here:",
+                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
-                        #h4("Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"),
-
+                        altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
                         br(),
@@ -505,5 +511,5 @@ tagList(
                         h2("Work-related ill health")
                ),
 
-) # navlistpanel
+  ) # navlistpanel
 ) # tagList
