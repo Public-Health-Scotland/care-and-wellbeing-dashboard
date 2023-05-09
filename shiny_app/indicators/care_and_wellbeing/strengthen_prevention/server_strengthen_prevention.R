@@ -186,24 +186,18 @@ observeEvent(input$chd_deaths_geog_name,{
 
 altTextServer("chd_deaths_alt",
               title = "Coronary heart disease deaths plot",
-              content = tags$ul(tags$li("This is a plot for the trend age-sex standardised rates per 100,000 of CHD deaths.")
+              content = tags$ul(tags$li("This is a plot for the trend in age-sex standardised rates per 100,000 of coronary heart disease deaths."),
+                                tags$li("The x axis is the 3 year range, starting from 2002-2004."),
+                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
+                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
+                                "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("Since the data began there has been a general downwards trend."),
+                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to.")
 
               )
 )
-
-chd_deaths_modal_ci <- modalDialog(
-  h3("What is a confidence interval?"),
-  p("A confidence interval gives an indication of the degree of uncertainty of an estimate,",
-  "showing the precision of a sample estimate. The 95% confidence intervals are calculated so",
-  "that if we repeated the study many times, 95% of the time the true unknown value would lie",
-  "between the lower and upper confidence limits. A wider interval indicates more uncertainty",
-  "in the estimate. Overlapping confidence intervals indicate that there may not be a true difference between two estimates."),
-  size = "l",
-  easyClose = TRUE, fade=TRUE, footer = modalButton("Close")
-)
-
-### Modal links
-observeEvent(input$chd_deaths_btn_modal_ci, { showModal(chd_deaths_modal_ci) })
 
 ##############################################.
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
