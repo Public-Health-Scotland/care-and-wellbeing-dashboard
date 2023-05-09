@@ -56,6 +56,7 @@ iButtonUI <- function(id, content = "", placement = "right") {
   summaryButtonUI(ns("background"),
                   title = "Background information and source",
                   content = paste(content,
+                                  "<br> <br>",
                                   strong("Click again to close.")),
                   placement = placement,
                   class = "plotinfo-btn"
