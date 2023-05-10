@@ -194,7 +194,6 @@ altTextServer("chd_deaths_alt",
                                 tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
                                         "area represents the upper confidence interval."),
                                 tags$li("Since the data began there has been a general downwards trend."),
-                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                 "geography level and area for plotting. The default is Scotland.")
 
@@ -634,16 +633,17 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions", title = glue("{title}"), label = "Number of admissions")
+      line_chart_function(., y_title = "Total number of admissions", x_title = "Financial year", title = glue("{title}"), label = "Number of admissions")
 
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
-      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
+      arrange(age_group) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, x_axis_title = "Financial year", y_axis_title = "Total number of admissions", title = title)
 
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
@@ -651,7 +651,7 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, x_axis_title = "Financial year", y_axis_title = "Total number of admissions", title = title)
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
     #
@@ -736,7 +736,17 @@ observeEvent(input$asthma_admissions_breakdowns,{
 
 altTextServer("asthma_admissions_alt",
               title = "Asthma admissions plot",
-              content = tags$ul(tags$li("This is a plot for the admissions for asthma indicator.")
+              content = tags$ul(tags$li("This is a plot for the number of admissions for asthma."),
+                                tags$li("The x axis shows the financial year."),
+                                tags$li("The y axis shows the total number of admissions."),
+                                tags$li("Data is based on date of discharge."),
+                                tags$li("For the plot visualising the yearly total, the purple line shows the total number of admissions for each financial year."),
+                                tags$li("For the plot visualising the age breakdown, the lines correspond to each age group consisting of 5 year age bands up to 90 years,",
+                                "after which data is grouped for 90+."),
+                                tags$li("For the plot visualising sex breakdown, the purple line corresponds to `All sexes`, the blue line corresponds to `Females`",
+                                        "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
 
               )
 )
