@@ -8,7 +8,7 @@
 
 ##############################################.
 # LOAD SET-UP ----
-##############################################.
+##############################################
 
 source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
 source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
