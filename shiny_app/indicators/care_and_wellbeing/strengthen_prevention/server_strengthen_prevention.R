@@ -236,7 +236,7 @@ heart_attack %>%
 altTextServer("drug_admissions_alt",
               title = "Drug admissions plot",
               content = tags$ul(tags$li("This is a plot for the age-sex standardised rate of drug-related",
-                                        "hospital admissions per 100,000."),
+                                        "hospital admissions per 100,000 population."),
                                 tags$li("The x axis is the financial year starting from 1996/97."),
                                 tags$li("The y axis is the rate per 100,000 population."),
                                 tags$li("The drop down above the chart allows you to choose which age groups you wish",
@@ -255,7 +255,7 @@ output$drug_admissions_plot = renderPlotly({
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+  title <- glue("Trend in age-sex standardised rates per 100,000 of drug-related hospital admissions (",
                 age_title, ") in Scotland")
 
   data = drug_stays %>%
@@ -266,7 +266,7 @@ output$drug_admissions_plot = renderPlotly({
                                 colour = .$age_group,
                                 title = title,
                                 y_axis_title = "Rate per 100,000",
-                                x_axis_title = "Financial year", label = " rate") %>%
+                                x_axis_title = "Financial year") %>%
     layout(xaxis = list(tickangle = 45))
 
 })
@@ -322,52 +322,28 @@ observeEvent(input$drug_deaths_geog_type,
                                     choices = unique(data$geography))
              })
 
+altTextServer("drug_deaths_alt",
+              title = "Drug-related deaths plot",
+              content = tags$ul(tags$b("If in the above choice labelled `Step 3`, `Rate` has been chosen, then the plot description is as follows: "),
+                                tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+                                tags$li("Rates based on fewer than 10 deaths not shown."),
+                                tags$li("The x axis are the 5 year ranges."),
+                                tags$li("The y axis is the age standardised rate per 100,000."),
+                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
+                                        "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland."),
+                                br(),
+                                tags$b("If in the above choice labelled `Step 3`, `Number` has been chosen, then the plot description is as follows: "),
+                                tags$li("This is a plot for the number of drug-related deaths."),
+                                tags$li("The x axis are the 5 year ranges."),
+                                tags$li("The y axis is the total number of deaths."),
+                                tags$li("The solid purple line indicates the trend in number of deaths."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")))
 
-#
-# observeEvent(input$drug_deaths_rate_number,{
-#   drug_content <- ifelse(input$drug_deaths_rate_number == "Rate",
-#                          tags$ul(tags$li("This is a plot for the drug-related deaths rate per 100,000."),
-#                                  tags$li("Rates based on fewer than 10 deaths not shown."),
-#                                  tags$li("The x axis are the 5 year ranges."),
-#                                  tags$li("The y axis is the age standardised rate per 100,000."),
-#                                  tags$li("The solid purple line is the specified rate and the lighter purple area around",
-#                                          "the line indicates the confidence interval."),
-#                                  tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
-#                                          "area represents the upper confidence interval."),
-#                                  tags$li("There are two drop downs above the chart which allow you to select a national or local",
-#                                          "geography level and area for plotting. The default is Scotland.")
-#                          ),
-#                          tags$ul(tags$li("This is a plot for the number of drug-related deaths."),
-#                                  tags$li("The x axis are the 5 year ranges."),
-#                                  tags$li("The y axis is the total number of deaths."),
-#                                  tags$li("The solid purple line indicates the trend in number of deaths."),
-#                                  tags$li("There are two drop downs above the chart which allow you to select a national or local",
-#                                          "geography level and area for plotting. The default is Scotland.")))
-#
-#
-# })
-#
-# altTextServer("drug_deaths_alt",
-#               title = "Drug-related deaths plot",
-#               content = drug_content
-#
-#
-# )
-#   } else if (input$drug_deaths_rate_number == "Number"){
-#     altTextServer("drug_deaths_alt",
-#                   title = "Drug-related deaths plot",
-#                   content = tags$ul(tags$li("This is a plot for the number of drug-related deaths."),
-#                                     tags$li("The x axis are the 5 year ranges."),
-#                                     tags$li("The y axis is the total number of deaths."),
-#                                     tags$li("The solid purple line indicates the trend in number of deaths."),
-#                                     tags$li("There are two drop downs above the chart which allow you to select a national or local",
-#                                             "geography level and area for plotting. The default is Scotland.")
-#
-#                   )
-#     )
-#   }
-#
-# })
 
 output$drug_deaths_plot = renderPlotly({
 
