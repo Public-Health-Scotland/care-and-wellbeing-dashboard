@@ -14,10 +14,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Child poverty",
                         value = "child_poverty",
-<<<<<<< HEAD
-                     #   icon = icon_no_warning_fn("house-chimney-user"),
-=======
->>>>>>> origin
 
                         h2("Child poverty", iButtonUI("child_poverty",
                         content = paste("This indicator shows the proportion of",
