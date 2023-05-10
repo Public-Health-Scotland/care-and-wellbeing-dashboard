@@ -357,7 +357,7 @@ output$drug_deaths_plot = renderPlotly({
   if (input$drug_deaths_rate_number == "Rate") {
     drug_related_deaths %>%
       mutate(date = year) %>%
-      filter(geography_type == input$drug_deaths_geog_type,
+      filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Rate per 100,000", title = title_rate) %>%
       layout(xaxis = list(tickangle = 45))
@@ -365,7 +365,7 @@ output$drug_deaths_plot = renderPlotly({
   } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
-      filter(geography_type == input$drug_deaths_geog_type,
+      filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Total number of deaths", title = title_number) %>%
       layout(xaxis = list(tickangle = 45,
@@ -374,7 +374,7 @@ output$drug_deaths_plot = renderPlotly({
   }
 })
 
-observeEvent(input$drug_deaths_geog_type,{
+#observeEvent(input$drug_deaths_geog_type,{
   observeEvent(input$drug_deaths_geog_name,{
 
     data_unfiltered <- drug_related_deaths %>%
@@ -387,7 +387,7 @@ observeEvent(input$drug_deaths_geog_type,{
              "Drug-related deaths rate" = "rate")
 
     data_filtered <- data_unfiltered %>%
-      filter(geography_type == input$drug_deaths_geog_type,
+      filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name)
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
@@ -395,7 +395,7 @@ observeEvent(input$drug_deaths_geog_type,{
                        add_separator_cols = c(4),
                        add_separator_cols_1dp = c(5,6,7))
   })
-})
+#})
 
 observeEvent(input$drug_deaths_geog_name,{
 
