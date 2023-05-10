@@ -236,8 +236,10 @@ tagList(
                                         h2("Drug-related hospital admissions", iButtonUI("drug_admissions",
                                                                                          content = paste("This indicator uses data from Public Health Scotland drug related hospital",
                                                                                          "statistics publication relating to general acute and psychiatric hospital stays with",
-                                                                                         "a diagnosis of drug misuse. These data are presented at a national level and broken",
-                                                                                         "down by demographic characteristics/local geographies. More information can be found",
+                                                                                         "a diagnosis of drug misuse."<
+                                                                                         #"These data are presented at a national level and broken",
+                                                                                         #"down by demographic characteristics/local geographies.",
+                                                                                         "More information can be found",
                                                                                          "<a href = https://www.publichealthscotland.scot/publications/show-all-releases?id=32315 target=_blank> here (external link). </a>"))),
 
 
