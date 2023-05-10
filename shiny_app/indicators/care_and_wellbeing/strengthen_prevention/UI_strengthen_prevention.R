@@ -126,29 +126,39 @@ tagList(
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
 
-                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality", content = "Paste background info and source for all cause mortality here")),
+                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality",
+                                                                         content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
+                                                                                         "You can find more information about this",
+                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
+                                                                                         "Information about the background of the statistics can be found on the NRS site:",
+                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information, target = _blank> Vital Events – General Background Information </a>",
+                                                                                         "and",
+                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information, target = _blank> Deaths – Background Information. </a>"))),
 
                         fluidRow(
-                          column(3,
+                          column(4,
                                  selectizeInput("all_cause_mortality_geog_type",
                                                 "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
                                                             "Health Board",
-                                                            "Council Area"))),
-                          column(3,
+                                                            "Council Area"),
+                                                width = "100%")),
+                          column(4,
                                  selectizeInput("all_cause_mortality_geog_name",
                                                 "Step 2. Select national or local geography area",
-                                                choices = unique(all_cause_mortality %>% filter(geography_type == "Scotland") %>% .$geography))),
-                          column(3,
+                                                choices = unique(all_cause_mortality %>% filter(geography_type == "Scotland") %>% .$geography),
+                                                width = "100%")),
+                          column(4,
                                  radioButtons("all_cause_mortality_rate_number",
                                               "Step 3. View rate per 100,000 population or number of deaths",
                                               choices = c("Rate",
-                                                          "Number")))
+                                                          "Number"),
+                                              width = "100%"))
 
                         ),
 
 
-                        #h3("All-cause mortality, ages 15-44"),
+                        altTextUI("all_cause_mortality_alt"),
                         withSpinner(plotlyOutput("all_cause_mortality_plot")),
 
                         br(),

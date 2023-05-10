@@ -60,9 +60,24 @@ observeEvent(input$all_cause_mortality_geog_type,
              })
 
 
+altTextServer("all_cause_mortality_alt",
+              title = "All-cause mortality plot",
+              content = tags$ul(tags$li("This is a plot for the trend in all-cause mortality for people between the ages of 15-44."),
+                                tags$li("The x axis is the year, starting from 1997."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Rate` is chosen, then the y axis is the rate per 100,000 population.",
+                                        "The purple line indicates the trend in rate of all-cause mortality."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Number` is chosen, then the y axis is the total number of deaths.",
+                                        "The purple line indicates the trend in number of all-cause mortality."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
+
+
 output$all_cause_mortality_plot = renderPlotly({
 
-  title <- glue("All-cause mortality, ages 15-44, in ",
+  title <- glue("Trend in all-cause mortality for ages 15-44 in ",
                             input$all_cause_mortality_geog_name)
 
   data = all_cause_mortality %>%
@@ -78,7 +93,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate of deaths per 100,000 population"
+    indicator_y = "Rate per 100,000"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -121,7 +136,7 @@ observeEvent(input$all_cause_mortality_geog_name,{
 
 observeEvent(input$all_cause_mortality_geog_name,{
 
-  output$all_cause_mortality_title <- renderText({glue("Data table: Total number of all-cause deaths, ages 15-44, in ",
+  output$all_cause_mortality_title <- renderText({glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
                                                        input$all_cause_mortality_geog_name)})
 })
 
