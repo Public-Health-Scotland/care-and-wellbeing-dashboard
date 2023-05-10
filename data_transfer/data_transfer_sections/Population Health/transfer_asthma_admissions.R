@@ -52,7 +52,11 @@ input_asthma_admissions %<>%
          geography = lookup
          ) %>%
   mutate(geog = recode(lookup, `All Scottish and Non-Scottish Residents` = "Scotland")) %>%
-  mutate(age_group = str_remove(age_group, " years")) %>%
+  mutate(age_group = str_remove(age_group, " years"),
+         age_group = factor(age_group, levels = c( "0-4", "5-9", "10-14", "15-19", "<18", "20-24", "25-29", "30-34",
+                                                   "35-39", "40-44",  "45-49", "50-54", "55-59", "60-64", "65+",
+                                                   "65-69", "70-74", "75+", "75-79", "80-84", "85+",  "85-89", "90+", "All Ages"))) %>%
+  arrange(age_group) %>%
   summary_format_function(date = .$date,
                           geog_type = .$geog_type,
                           geog = .$geog,
