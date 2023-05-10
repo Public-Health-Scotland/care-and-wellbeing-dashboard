@@ -12,11 +12,10 @@ tagList(
                ##############################################.
                # CAMHS WAITING TIMES----
                ##############################################.
-               tabPanel(title = "CAHMS waiting times",
+               tabPanel(title = "CAMHS waiting times",
                         value = "camhs_waiting_times_cw",
-                        icon = icon_no_warning_fn("lemon"),
 
-                        h2("CAHMS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
+                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
 
                         actionButton("camhs_waiting_times_cw_modal_info",
                                      tags$b("Background information and source"),
@@ -62,7 +61,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Children have positive relationships",
                         value = "children_relationships",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Children have positive relationships")
                ),
@@ -72,7 +70,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Children’s voices",
                         value = "childrens_voices",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Children’s voices")
                ),
@@ -84,7 +81,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Confidence and resilience of children and young people",
                         value = "confidence_of_young",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Confidence and resilience of children and young people")
                ),
@@ -94,7 +90,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Mental health / mental wellbeing ",
                         value = "mental_health_cw",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Mental health / mental wellbeing ")
                )

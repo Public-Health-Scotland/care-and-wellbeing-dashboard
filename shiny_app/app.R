@@ -24,7 +24,8 @@ ui <- shinymanager::secure_app(
       # Specify most recent fontawesome library - change version as needed
       tags$style("@import url(https://use.fontawesome.com/releases/v6.1.2/css/all.css);"),
       navbarPage(
-        tags$html(lang="en"),
+        # position = "fixed-top",
+        # collapsible = "true",
         id = "intabset", # id used for jumping between tabs
         title = div(
           tags$a(img(src = "phs-logo.png", height = 40,
@@ -33,17 +34,13 @@ ui <- shinymanager::secure_app(
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
         windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
-        header = tags$head(includeCSS("www/styles.css"),  # CSS stylesheet
-                           tags$link(rel = "shortcut icon", href = "favicon_phs.ico"),# Icon for browser tab
-                           includeScript("www/javascript.js")
-
-        ),
+        header = source(file.path("header.R"), local=TRUE)$value,
 
         ##############################################.
         # HOME ----
         ##############################################.
         tabPanel(title = "Home",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("house"),
                  value = "home",
 
                  source(file.path("indicators/home/UI_home.R"), local = TRUE)$value
@@ -54,7 +51,7 @@ ui <- shinymanager::secure_app(
         # SUMMARY ----
         ##############################################.
         tabPanel(title = "Summary",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("lemon"),
                  value = "summary",
 
                  source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
@@ -65,7 +62,7 @@ ui <- shinymanager::secure_app(
         # SUMMARY V2 ----
         ##############################################.
         tabPanel(title = "Summary V2",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("clipboard"),
                  value = "summary_v2",
 
                  source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
@@ -75,21 +72,18 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # COVID RECOVERY ----
         ##############################################.
-        navbarMenu("Covid Recovery", icon = icon_no_warning_fn("lemon"),
+        navbarMenu("Covid Recovery", #icon = icon_no_warning_fn("arrows-spin"),
 
 
                    tabPanel(title = "Wellbeing of children and young people",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "wellbeing",
                             source(file.path("indicators/covid_recovery/wellbeing/UI_wellbeing.R"), local = TRUE)$value),
 
                    tabPanel(title = "Financial security for low income households",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "financial_security",
                             source(file.path("indicators/covid_recovery/financial_security/UI_financial_security.R"), local = TRUE)$value),
 
                    tabPanel(title = "Good, green jobs and fair work",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "good_green",
                             source(file.path("indicators/covid_recovery/good_green/UI_good_green.R"), local = TRUE)$value)
 
@@ -100,47 +94,39 @@ ui <- shinymanager::secure_app(
         # CARE AND WELLBEING ----
         ##############################################.
 
-        navbarMenu(title = "Care and Wellbeing", icon = icon_no_warning_fn("lemon"),
+        navbarMenu(title = "Care and Wellbeing", #icon = icon_no_warning_fn("spa"),
 
 
                    tabPanel(title = "Strengthen the role and impact of ill health prevention",
-                            icon = icon_no_warning_fn("hands-holding-child"),
                             value = "strengthen_prevention",
                             source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
 
 
                    tabPanel(title = "Give every child the best start in life",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "child_start",
                             source(file.path("indicators/care_and_wellbeing/child_start/UI_child_start.R"), local = TRUE)$value),
 
                    tabPanel(title = "Enable all children, young people and adults to maximise their capabilities and control their lives",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "control_lives",
                             source(file.path("indicators/care_and_wellbeing/control_lives/UI_control_lives.R"), local = TRUE)$value),
 
                    tabPanel(title = "Create fair employment and good work for all",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "fair_work",
                             source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
                    tabPanel(title = "Ensure healthy standard of living for all",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 
                    tabPanel(title = "Create and develop healthy and sustainable places and communities",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "sustainable_communities",
                             source(file.path("indicators/care_and_wellbeing/sustainable_communities/UI_sustainable_communities.R"), local = TRUE)$value),
 
                    tabPanel(title = "Tackling discrimination, racism and their outcomes",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "discrimination_racism",
                             source(file.path("indicators/care_and_wellbeing/discrimination_racism/UI_discrimination_racism.R"), local = TRUE)$value),
 
                    tabPanel(title = "Pursuing environmental sustainability and health equity together",
-                            icon = icon_no_warning_fn("lemon"),
                             value = "environmental_sustainability",
                             source(file.path("indicators/care_and_wellbeing/environmental_sustainability/UI_environmental_sustainability.R"), local = TRUE)$value)
 
@@ -151,7 +137,7 @@ ui <- shinymanager::secure_app(
         # INFORMATION AND NOTES ----
         ##############################################.
         tabPanel(title = "Information and Notes",
-                 icon = icon_no_warning_fn("lemon"),
+                 #icon = icon_no_warning_fn("lemon"),
                  value = "info_notes",
 
                  source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
@@ -246,6 +232,9 @@ server <- function(input, output, session) {
 
 
 }
+
+#sets language right at the top of source (required this way for screen readers)
+attr(ui, "lang") = "en"
 
 # Run the application
 shinyApp(ui=ui, server=server)

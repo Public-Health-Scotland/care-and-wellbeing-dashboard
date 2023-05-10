@@ -16,7 +16,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Employees on the living wage",
                         value = "employees_living_wage",
-                        icon = icon_no_warning_fn("hand-holding-dollar"),
 
                         h2("Employees earning below the living wage", iButtonUI("employees_living_wage", content = "Paste background info and source for employees on the living wage here")),
 
@@ -82,7 +81,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Gender pay gap",
                         value = "gender_pay_gap",
-                        icon = icon_no_warning_fn("mars-and-venus"),
 
                         h2("Gender pay gap", iButtonUI("gender_pay_gap", content = "Paste background info and source for gender pay gap here")),
 
@@ -140,7 +138,6 @@ tagList(
 
                tabPanel(title = "Employment gap",
                         value = "employment_gap",
-                        icon = icon_no_warning_fn("people-arrows"),
 
                         h2("Employment gap", iButtonUI("employment_gap", content = "Paste background info and source for employment gap here")),
 
@@ -153,6 +150,7 @@ tagList(
                           title = "",
                           # The id lets us use input$tabset1 on the server to find the current tab
                           id = "employment_gap_tabbox", width = 12, #height = "250px",
+                          type = "pills",
                           tabPanel("Disability employment gap",
 
                                    h3("Disability employment gap by local authority"),
@@ -255,7 +253,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Zero-hours contracts",
                         value = "zero_hours_contracts",
-                        icon = icon_no_warning_fn("0"),
 
                         h2("Zero-hours contracts", iButtonUI("zero_hours_contracts", content = "Paste background info and source for zero hours contracts here")),
 
@@ -290,7 +287,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Skills shortage vacancies",
                         value = "skills_shortage_vacancies",
-                        icon = icon_no_warning_fn("person"),
 
                         h2("Skills shortage vacancies", iButtonUI("skills_shortage_vacancies", content = "Paste background info and source for skills shortage vacancies here")),
 
@@ -336,7 +332,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Underemployment",
                         value = "underemployment",
-                        icon = icon_no_warning_fn("down-long"),
 
                         h2("Underemployment", iButtonUI("underemployment", content = "Paste background info and source for underemployment here")),
 
@@ -384,7 +379,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Economic inactivity",
                         value = "economic_inactivity",
-                        icon = icon_no_warning_fn("people-arrows"),
 
 
                         h2("Economic inactivity", iButtonUI("economic_inactivity_cr", content = "Paste background info and source for economic inactivity here")),
@@ -434,7 +428,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Employability",
                         value = "employability",
-                        icon = icon_no_warning_fn("handshake"),
 
                         h2("Employability", iButtonUI("employability", content = "Paste background info and source for employability here")),
 
@@ -534,7 +527,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Contractually secure work",
                         value = "contractually_secure_work",
-                        icon = icon_no_warning_fn("person-digging"),
 
                         h2("Contractually secure work"),
 
@@ -547,7 +539,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Green jobs",
                         value = "green_jobs",
-                        icon = icon_no_warning_fn("recycle"),
 
                         h2("Green jobs"),
 

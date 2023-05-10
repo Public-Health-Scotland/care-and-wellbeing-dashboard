@@ -14,7 +14,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Fuel affordability",
                         value = "fuel_affordability",
-                        icon = icon_no_warning_fn("gas-pump"),
 
                         h2("Fuel Affordability", iButtonUI("fuel_affordability", content = "Paste background info and source for fuel affordability here")),
 
@@ -65,7 +64,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Food affordability",
                         value = "food_affordability",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Food Affordability"),
 
@@ -77,7 +75,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Cost of living",
                         value = "cost_of_living",
-                        icon = icon_no_warning_fn("money-bill-trend-up"),
 
                         h2("Cost of living", iButtonUI("cost_of_living", content = "Paste background info and source for cost of living here")),
 
@@ -117,7 +114,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Managing financially",
                         value = "managing_financially",
-                        icon = icon_no_warning_fn("sterling-sign"),
 
                         h2("Managing financially", iButtonUI("managing_financially", content = "Paste background info and source for managing financially here")),
 
@@ -150,7 +146,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Savings",
                         value = "savings",
-                        icon = icon_no_warning_fn("piggy-bank"),
 
                         h2("Savings", iButtonUI("savings", content = "Paste background info and source for savings here")),
 
@@ -223,7 +218,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Unmanageable debt",
                         value = "unmanageable_debt",
-                        icon = icon_no_warning_fn("scale-unbalanced"),
 
                         h2("Unmanageable debt", iButtonUI("unmanageable_debt", content = "Paste background info and source for unmanageable debt here")),
 
@@ -257,7 +251,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Transport costs",
                         value = "transport_costs",
-                        icon = icon_no_warning_fn("bus"),
 
                         h2("Transport costs"),
 
@@ -274,7 +267,6 @@ tagList(
                #### two seperate tab values used foor the summary page - but only one tab necessary
                tabPanel(title = "Early learning and childcare uptake",
                         value = "childcare_uptake",
-                        icon = icon_no_warning_fn("children"),
 
                         h2("ELC childcare uptake", iButtonUI("childcare_uptake", content = "Paste background info and source for childcare uptake here")),
 
@@ -305,7 +297,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Benefit uptake and engagement with welfare advice",
                         value = "benefits_uptake",
-                        icon = icon_no_warning_fn("person-shelter"),
 
                         h2("Benefit uptake and engagement with welfare advice"),
 

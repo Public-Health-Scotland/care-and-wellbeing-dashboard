@@ -1,5 +1,4 @@
 tabPanel(title = "Summary",
-         icon = icon_no_warning_fn("table"),
          value = "summary",
 
          h2("Summary Tables"),
