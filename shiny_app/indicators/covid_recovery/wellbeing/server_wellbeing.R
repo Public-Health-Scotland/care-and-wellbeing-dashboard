@@ -23,7 +23,7 @@ output$child_poverty_chart <- renderPlotly({
   plot<-child_poverty %>%
     make_line_chart_multi_lines(.$financial_year,.$proportion*100,
                                  colour =.$Group, y_axis_title = "Percentage (%)",
-                                  x_axis_title= "Financial Year",
+                                 x_axis_title= "Time period",
                                   title="Trend in percentage of people in Scotland who are in relative poverty",
                                   hover_end="%") %>%
     layout(yaxis= list(ticksuffix="%",range = c(10,40)))})
