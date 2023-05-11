@@ -26,7 +26,9 @@ output$child_poverty_chart <- renderPlotly({
                                  x_axis_title= "Time period",
                                   title="Trend in percentage of people in Scotland who are in relative poverty",
                                   hover_end="%") %>%
-    layout(yaxis= list(ticksuffix="%",range = c(10,40)))})
+    layout(yaxis= list(ticksuffix="%",range = c(10,40)),
+           xaxis = list(tickangle = 45),
+           legend = list(y = -0.4))})
 
 
 
