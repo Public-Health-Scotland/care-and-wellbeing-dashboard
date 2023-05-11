@@ -347,10 +347,11 @@ tagList(
                tabPanel(title = "First ever hospital admission for heart attack (under 75)",
                         value = "hospital_admission_heart_attack",
 
-                        h2("First ever hospital admission for heart attack (under 75)", iButtonUI("heart_attack_admission", content = "Paste background info and source for heart attack here")),
+                        h2("First ever hospital admission for heart attack (under 75)",
+                           iButtonUI("heart_attack_admission",
+                                     content = paste(""))),
 
-                        #plot_title("Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland",
-                        #           "hospital_admission_heart_attack_plot"),
+                        altTextUI("hospital_admission_heart_attack_alt"),
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
 
                         br(),

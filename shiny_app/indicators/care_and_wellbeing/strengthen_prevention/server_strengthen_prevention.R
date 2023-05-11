@@ -240,6 +240,16 @@ heart_attack %>%
                      add_separator_cols = c(2))
 
 
+altTextServer("hospital_admission_heart_attack_alt",
+              title = "First ever hospital admissions for heart attack plot",
+              content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
+                                tags$li("The x axis is year, starting in 1997"),
+                                tags$li("The y axis total number."),
+                                tags$li("The solid purple line shows the trend in number of hospital admissions.")
+              )
+)
+
+
 ##############################################.
 # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
 ##############################################.
