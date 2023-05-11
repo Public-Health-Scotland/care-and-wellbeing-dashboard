@@ -376,7 +376,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("CAHMS waiting times"),
+                                            h4("CAMHS waiting times"),
                                             withSpinner(infoBoxOutput("camhs_waiting_times_cw_infobox", width=NULL))
                                      ),
                                      column(4,
