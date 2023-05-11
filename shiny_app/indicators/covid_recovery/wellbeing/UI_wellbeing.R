@@ -32,6 +32,7 @@ tagList(
                        "each only contain data from two financial years.",
                        "<b>This means that data is more volatile",
                        "and sudden changes need to be interpreted with caution</b>."))),
+                       altTextUI("child_poverty_alt"),
 
                       withSpinner(plotlyOutput("child_poverty_chart")),
 
