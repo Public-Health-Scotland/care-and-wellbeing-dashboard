@@ -193,7 +193,7 @@ stacked_bar_function = function(data, category_var, title = "") {
     plot_ly(x=~date,
             y=~proportion*100,
             color = ~category_var,
-            colors = phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30', 'phs-blue-10')),
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
             # name = glue("{category_var}{label}"),
             hovertemplate = ~glue("{round_half_up(proportion*100, 2)}%")
