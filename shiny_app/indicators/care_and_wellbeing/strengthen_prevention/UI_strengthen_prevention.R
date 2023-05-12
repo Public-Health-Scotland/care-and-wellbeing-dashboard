@@ -379,23 +379,42 @@ tagList(
                tabPanel(title = "Healthy birthweight",
                         value = "healthy_birthweight",
 
-                        h2("Healthy birthweight", iButtonUI("healthy_birthweight", content = "Paste background info and source for healthy birthweight here")),
+                        h2("Healthy birthweight", iButtonUI("healthy_birthweight",
+                                                            content = paste("This indicator uses data from the Public Health Scotland Births",
+                                                                            "in Scotland publication related to pregnancy, childbirth and early",
+                                                                            "care of babies in Scotland. The health of a pregnant woman and her",
+                                                                            "baby are closely linked and are influenced by a number of different",
+                                                                            "factors during pregnancy, childbirth and the early period after birth.",
+                                                                            "These data are presented at a national level and broken down by local",
+                                                                            "geographies. More information can be found ",
+                                                                            "<a href = https://publichealthscotland.scot/publications/births-in-scotland/births-in-scotland-year-ending-31-march-2022/ target = _blank > here. </a>",
+                                                                            "<br> <br> ",
+                                                                            "Data on the appropriateness of birthweights for gestational age at birth,",
+                                                                            "for live singleton births only. It is important to be able to",
+                                                                            "differentiate between babies who are light because they are preterm",
+                                                                            "and those who are inappropriately light after adjustment for gestational",
+                                                                            "age at birth. <br> <br> Babies are identified as appropriate weight for gestational",
+                                                                            "age with a birthweight between the 10th and 90th percentiles. Babies",
+                                                                            "identified as small or large for gestational age are those whose birthweight",
+                                                                            "is under the 10th or over the 90th percentile respectively."))),
 
 
                         fluidRow(
-                          column(3,
+                          column(4,
                                  selectizeInput("healthy_birthweight_geog_type",
                                                 "Step 1. Select a national or local geography level",
-                                                choices = c("Scotland", "Health Board", "Council Area"))),
+                                                choices = c("Scotland", "Health Board", "Council Area"),
+                                                width = "100%")),
 
-                          column(3,
+                          column(4,
                                  selectizeInput("healthy_birthweight_geog_name",
                                                 "Step 2. Select a national or local geography area",
-                                                choices = unique(birthweight %>% filter(geography_type == "Scotland") %>% .$geography))
+                                                choices = unique(birthweight %>% filter(geography_type == "Scotland") %>%
+                                                                   .$geography),
+                                                width = "100%")
                           )),
 
-                        #plot_title("Birthweight of babies based on gestational age by financial year",
-                        #           "healthy_birthweight_plot"),
+                        altTextUI("healthy_birthweight_alt"),
                         withSpinner(plotlyOutput("healthy_birthweight_plot")),
 
                         br(),

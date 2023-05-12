@@ -508,6 +508,19 @@ observeEvent(input$healthy_birthweight_geog_type,
                                     choices = unique(birthweight_data$geography))
              })
 
+
+altTextServer("healthy_birthweight_alt",
+              title = "Healthy birthweight plot",
+              content = tags$ul(tags$li("This is a stacked bar plot showing the babies in each birthweight category based on gestational age"),
+                                tags$li("The x axis is the financial year, starting from 1997/98."),
+                                tags$li("The y axis is the percentage."),
+                                tags$li("The legend shows 4 categories: `Not applicable`, `Large`, `Appropriate` ",
+                                        " and `Small`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+              )
+)
+
 output$healthy_birthweight_plot = renderPlotly({
 
   title <- glue("Birthweight of babies based on gestational age in ",
@@ -517,7 +530,8 @@ output$healthy_birthweight_plot = renderPlotly({
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
-    stacked_bar_function(., .$birthweight_for_gestational_age, title = title)
+    stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
+    layout(legend = list(y = -0.4))
 })
 
 observeEvent(input$healthy_birthweight_geog_name,{
