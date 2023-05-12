@@ -152,7 +152,8 @@ output$chd_deaths_plot = renderPlotly({
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
     confidence_line_function(., y_title = "Rate per 100,000", title = title) %>%
-    layout(xaxis = list(tickangle = 30))
+    layout(xaxis = list(tickangle = 30),
+           legend = list(y = -0.4))
 })
 
 
@@ -267,7 +268,8 @@ output$drug_admissions_plot = renderPlotly({
                                 title = title,
                                 y_axis_title = "Rate per 100,000",
                                 x_axis_title = "Financial year") %>%
-    layout(xaxis = list(tickangle = 45))
+    layout(xaxis = list(tickangle = 30),
+           legend = list(y = -0.4))
 
 })
 
@@ -360,15 +362,15 @@ output$drug_deaths_plot = renderPlotly({
       filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Rate per 100,000", title = title_rate) %>%
-      layout(xaxis = list(tickangle = 45))
-
+      layout(xaxis = list(tickangle = 30),
+             legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Total number of deaths", title = title_number) %>%
-      layout(xaxis = list(tickangle = 45,
+      layout(xaxis = list(tickangle = 30,
                           title = "Year range"))
 
   }
