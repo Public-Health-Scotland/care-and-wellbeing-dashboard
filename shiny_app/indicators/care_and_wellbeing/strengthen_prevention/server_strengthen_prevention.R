@@ -633,7 +633,9 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions", x_title = "Financial year", title = glue("{title}"), label = "Number of admissions")
+      line_chart_function(., y_title = "Total number of admissions",
+                          x_title = "Financial year", title = title,
+                          label = "Number of admissions")
 
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
@@ -643,7 +645,9 @@ output$asthma_admissions_plot <- renderPlotly({
       filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
       arrange(age_group) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, x_axis_title = "Financial year", y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
+                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+                                  title = title)
 
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
@@ -651,7 +655,9 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, x_axis_title = "Financial year", y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
+                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+                                  title = title)
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
     #
