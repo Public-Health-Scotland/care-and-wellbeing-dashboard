@@ -20,8 +20,17 @@
 ##############################################.
 
 output$child_poverty_chart <- renderPlotly({
-  child_poverty_plot(child_poverty)
-})
+  plot<-child_poverty %>%
+    make_line_chart_multi_lines(.$financial_year,.$proportion*100,
+                                 colour =.$Group, y_axis_title = "Percentage (%)",
+                                 x_axis_title= "Time period",
+                                  title="Trend in percentage of people in Scotland who are in relative poverty",
+                                  hover_end="%") %>%
+    layout(yaxis= list(ticksuffix="%",range = c(10,40)),
+           xaxis = list(tickangle = 45),
+           legend = list(y = -0.4))})
+
+
 
 # output$child_poverty_data <- DT::renderDataTable({
 #
@@ -34,10 +43,24 @@ output$child_poverty_chart <- renderPlotly({
 child_poverty %>%
   mutate(Group = factor(Group),
          financial_year = factor(financial_year)) %>%
-  rename("Proportion Of people in relative poverty" = "proportion") %>%
+  rename("Proportion of people in relative poverty" = "proportion") %>%
   select(-c("pretty_date", "value", "geography", "geography_type", "indicator")) %>%
   dataDownloadServer(id = "child_poverty", filename = "child_poverty",
                      add_separator_cols_2dp = c(3))
+
+altTextServer("child_poverty_alt",
+              title = "Relative Poverty",
+              content = tags$ul(tags$li("This is a plot of the trend in the proportion of Scotland’s population living in relative poverty."),
+                               tags$li("Relative poverty is defined as being below 60% of the UK median income"),
+                               tags$li("The x axis is the 3 year range, starting from 1994-1997."),
+                                tags$li("The y axis is the proportion of the population expressed as a percentage."),
+                                tags$li("The dark purple line is the proportion of All People ",
+                                        "and the light grey is the proportion of Children."),
+                                tags$li("The proportions of both All People and Children in relative poverty was in decline until 2009-2012."),
+                                tags$li("Since then there has been a slight increase in the proportion of All People and Children in relative poverty.")
+
+              )
+)
 
 
 ##############################################.

@@ -14,7 +14,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Food insecurity",
                         value = "food_insecurity",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Food insecurity")
                ),
@@ -24,7 +23,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Persistent poverty",
                         value = "persistent_poverty",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Persistent poverty")
                ),
@@ -34,7 +32,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Satisfaction with housing",
                         value = "satisfaction_with_housing",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Satisfaction with housing")
                )

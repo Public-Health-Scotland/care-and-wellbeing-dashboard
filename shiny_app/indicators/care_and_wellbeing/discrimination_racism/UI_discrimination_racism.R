@@ -11,7 +11,6 @@ tagList(
 
                tabPanel(title = "Gender balance in organisations",
                         value = "gender_balance",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Gender balance in organisations")
                ),
@@ -22,7 +21,6 @@ tagList(
 
                tabPanel(title = "Public services treat people with dignity and respect",
                         value = "dignity_respect",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Public services treat people with dignity and respect")
                )

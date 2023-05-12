@@ -212,7 +212,7 @@ th, td {
 .plotinfo-btn, .plotinfo-btn:hover, .plotinfo-btn:focus, .plotinfo-btn:active:focus, .plotinfo:active, .plotinfo:checked {
   background-color: var(--phs-purple-W);
   color: var(--phs-purple-S);
-  border-radius: 3px;
+  border-radius: 10px;
   padding: 5px;
   font-size: 14px;
   box-shadow: 0px 0px 0px 0px;

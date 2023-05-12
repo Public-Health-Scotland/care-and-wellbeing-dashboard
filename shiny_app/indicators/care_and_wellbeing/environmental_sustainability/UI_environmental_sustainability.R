@@ -10,7 +10,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Access to green and blue space",
                         value = "blue_green_space",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Access to green and blue space")
                ),
@@ -21,7 +20,6 @@ tagList(
 
                tabPanel(title = "Journeys by active travel",
                         value = "journeys_active",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Journeys by active travel")
                ),
@@ -32,7 +30,6 @@ tagList(
 
                tabPanel(title = "Visits to the outdoors",
                         value = "visit_outdoors",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Visits to the outdoors")
                )

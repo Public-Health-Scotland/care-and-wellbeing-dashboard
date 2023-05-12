@@ -116,9 +116,10 @@ create_palette <- function(colour) {
 
 #### Charts ----
 
-confidence_line_function = function(data, y_title, title = "") {
+confidence_line_function = function(data, y_title, x_title = "Year range", title = "") {
 
   yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
 
   plot_ly(data = data) %>%
     add_trace(x=~date,
@@ -135,7 +136,7 @@ confidence_line_function = function(data, y_title, title = "") {
               type = "scatter",
               mode = "lines",
               fill = 'tonexty',
-              fillcolor = phsstyles::phs_colours("phs-purple-10"),
+              fillcolor = phsstyles::phs_colours("phs-liberty-30"),
               line = list(color = 'transparent'),
               name = "Lower confidence interval",
               showlegend = FALSE,
@@ -246,7 +247,7 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
 
 
 make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
-                                        label = "", title = "") {
+                                        label = "", title = "", hover_end="") {
 
   plot_ly(x = ~x,
           y = ~y,
@@ -256,7 +257,7 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis
           colors = palette,
           text = "rate",
           name = glue("{colour}{label}"),
-          hovertemplate = ~glue("{y %>% round_half_up(2)}")
+          hovertemplate = ~glue("{y %>% round_half_up(2)}{hover_end}")
   ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),

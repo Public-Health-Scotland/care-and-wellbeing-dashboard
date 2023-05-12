@@ -792,7 +792,7 @@ output$food_insecurity_infobox <- renderInfoBox({
                                    glue("TBC"))),
           value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
+          icon = icon_no_warning_fn("apple-whole"),
           color = "purple")
 })
 
@@ -805,7 +805,7 @@ output$persistent_poverty_infobox <- renderInfoBox({
                                    glue("TBC"))),
           value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
+          icon = icon_no_warning_fn("apple-whole"),
           color = "purple")
 })
 
@@ -818,7 +818,7 @@ output$satisfaction_with_housing_infobox <- renderInfoBox({
                                    glue("TBC"))),
           value=glue("TBC"),
           subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
+          icon = icon_no_warning_fn("apple-whole"),
           color = "purple")
 })
 

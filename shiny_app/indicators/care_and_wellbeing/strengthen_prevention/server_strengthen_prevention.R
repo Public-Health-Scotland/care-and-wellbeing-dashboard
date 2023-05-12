@@ -139,7 +139,7 @@ observeEvent(input$chd_deaths_geog_type,
 
                updateSelectizeInput(session,
                                     "chd_deaths_geog_name",
-                                    "Step 2. Select natioanl or local geography area",
+                                    "Step 2. Select national or local geography area",
                                     choices = unique(areas$geography))
              })
 
@@ -151,7 +151,7 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., "Age-sex standardised rate of deaths", title = title) %>%
+    confidence_line_function(., y_title = "Rate per 100,000", title = title) %>%
     layout(xaxis = list(tickangle = 30))
 })
 
@@ -183,6 +183,23 @@ observeEvent(input$chd_deaths_geog_name,{
   output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
                                               input$chd_deaths_geog_name)})
 })
+
+altTextServer("chd_deaths_alt",
+              title = "Coronary heart disease deaths plot",
+              content = tags$ul(tags$li("This is a plot for the trend in age-sex standardised rates per 100,000 of coronary heart disease deaths."),
+                                tags$li("The x axis is the 3 year range, starting from 2002-2004."),
+                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
+                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
+                                "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("Since the data began there has been a general downwards trend."),
+                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
 
 ##############################################.
 # FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACK (<75)----
