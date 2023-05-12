@@ -251,14 +251,15 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
 make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
                                         label = "", title = "") {
 
-  plot_ly(x = ~x,
+  plot_ly(data = data,
+          x = ~x,
           y = ~y,
           color = ~colour,
           type="scatter",
           mode="lines",
           colors = palette,
-          text = "rate",
-          name = glue("{colour}{label}"),
+          # text = "rate",
+          # name = glue("{colour}{label}"), ## unordering factors - levels didn't match legend
           hovertemplate = ~glue("{y %>% round_half_up(2)}")
   ) %>%
     layout(yaxis = list(title = y_axis_title,
