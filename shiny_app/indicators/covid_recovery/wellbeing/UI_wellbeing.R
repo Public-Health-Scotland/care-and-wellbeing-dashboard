@@ -14,33 +14,30 @@ tagList(
                ##############################################.
                tabPanel(title = "Child poverty",
                         value = "child_poverty",
-                        icon = icon_no_warning_fn("house-chimney-user"),
 
-                        h2("Child poverty", iButtonUI("child_poverty", content = "Paste background info and source for child poverty here")),
+                        h2("Child poverty", iButtonUI("child_poverty",
+                        content = paste("This indicator shows the proportion of",
+                       "the population living in relative poverty after",
+                       "housing costs. Relative poverty is defined as being below 60%",
+                       "of the UK median income. The graph shows  three-year rolling",
+                       "(overlapping) averages obtained from the ",
+                       "<a href=https://data.gov.scot/poverty/> Poverty and Income Inequality in Scotland 2019-22</a>",
+                       "publication which derived its statistics from the",
+                       "<a https://www.gov.uk/government/collections/family-resources-survey--2/> Family Resources Survey and Households Below Average Income</a>.",
 
-                        p("This indicator shows the rate of children in relative poverty after housing costs. ",
-                          " Relative poverty means being below 60% of the UK median income."),
-                        tags$b("The latest estimate for 2020/21 is unreliable. ",
-                               "This is due to a small sample size during the pandemic. ",
-                               "Therefore the sample size is not representative of Scotland."),
-                        p("Source: Scottish Family Resources Survey"),
+                       "<br> <br>",
+                       "Survey data gathered in the 2020-2021 time-period have been omitted as it",
+                       "did not reflect a representative sample.",
+                       "Therefore the three-year periods 2018-21 and 2019-22",
+                       "each only contain data from two financial years.",
+                       "<b>This means that data is more volatile",
+                       "and sudden changes need to be interpreted with caution</b>."))),
+                       altTextUI("child_poverty_alt"),
 
-
-                        #bsButton("jump_home_child_poverty", "Go to home page"),
-                        bsButton("childpoverty_to_info", "Go to information page"),
-
-
-
-
-
-                        plot_title("Proportion of people who are in relative poverty
-                                 (below 60% of UK median income after housing costs), Scotland",
-                                   "child_poverty_chart",
-                                   subtitle = "Click on the legend to filter the chart"),
+                      withSpinner(plotlyOutput("child_poverty_chart")),
 
 
-
-                        h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
+                        h3("Data table: Percentage of people in Scotland who are in relative poverty after housing costs"),
 
                         dataDownloadUI("child_poverty")
 
@@ -52,7 +49,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Positive desinations of school leavers",
                         value = "positive_destinations",
-                        icon = icon_no_warning_fn("school"),
 
                         h2("Positive destinations of school leavers", iButtonUI("positive_destinations", content = "Paste background info and source for positive destinations of school leavers here")),
 
@@ -95,7 +91,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Pre-school development",
                         value = "pre_school_development",
-                        icon = icon_no_warning_fn("shapes"),
 
                         h2("Pre-school development", iButtonUI("pre_school_development", content = "Paste background info and source for pre-school development here")),
 
@@ -182,7 +177,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Being listened to and involved in decision making",
                         value = "listen_to_decision_making",
-                        icon = icon_no_warning_fn("comment"),
 
                         h2("Being listened to and involved in decision making"),
 
@@ -194,7 +188,6 @@ tagList(
                ##############################################.
                tabPanel(title = "CAMHS waiting times",
                         value = "camhs_waiting_times",
-                        icon = icon_no_warning_fn("clipboard-check"),
 
                         h2("CAMHS waiting times", iButtonUI("camhs_waiting_times", content = "Paste background info and source for CAMHS waiting times here")),
 
@@ -245,7 +238,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Protection from harm",
                         value = "protection_from_harm",
-                        icon = icon_no_warning_fn("hands-holding-child"),
 
                         h2("Protection from harm", iButtonUI("protection_from_harm", content = "Paste background info and source for protection from harm here")),
 
@@ -283,7 +275,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Infant mortality",
                         value = "infant_mortality",
-                        icon = icon_no_warning_fn("hospital"),
 
                         h2("Infant mortality", iButtonUI("infant_mortality", content = "Paste background info and source for infant mortality here")),
 
@@ -321,7 +312,6 @@ tagList(
 
                tabPanel(title = "Physical activity",
                         value = "physical_activity",
-                        icon = icon_no_warning_fn("person-walking"),
 
                         h2("Physical Activity"),
 
@@ -334,7 +324,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Mental health and wellbeing",
                         value = "mental_health_wellbeing",
-                        icon = icon_no_warning_fn("user-nurse"),
 
                         h2("Mental health and wellbeing"),
 

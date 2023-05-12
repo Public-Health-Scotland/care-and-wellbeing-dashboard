@@ -13,7 +13,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Economic inactivity",
                         value = "economic_inactivity_cw",
-                        icon = icon_no_warning_fn("people-arrows"),
 
 
                         h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = "Paste background info and source for economic inactivity here")),
@@ -56,7 +55,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Employees on the living wage",
                         value = "employees_living_wage_cw",
-                        icon = icon_no_warning_fn("hand-holding-dollar"),
 
                         h2("Employees on the living wage", iButtonUI("employees_living_wage_cw", content = "Paste background info and source for employees on the living wage here")),
 
@@ -115,7 +113,6 @@ tagList(
                #############################################.
                tabPanel(title = "Pay gap",
                         value = "gender_pay_gap_cw",
-                        icon = icon_no_warning_fn("mars-and-venus"),
 
                         h2("Pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
 
@@ -176,7 +173,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Work related ill health",
                         value = "work_related_ill_health",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Work related ill health")
                )

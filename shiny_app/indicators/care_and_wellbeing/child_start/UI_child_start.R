@@ -13,7 +13,6 @@ tagList(
 
                tabPanel(title = "Child material deprivation",
                         value = "child_material_deprevation",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Child material deprivation")
                ),
@@ -23,7 +22,6 @@ tagList(
                ##############################################.
                tabPanel(title = "Child social and physical development",
                         value = "child_development_cw",
-                        icon = icon_no_warning_fn("shapes"),
 
                         h2("Child social and physical development", iButtonUI("child_development_cw", content = "Paste background info and source for child social and physical development here")),
 
@@ -108,7 +106,6 @@ tagList(
 
                tabPanel(title = "Child wellbeing and happiness",
                         value = "child_wellbeing",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Child wellbeing and happiness")
                ),
@@ -119,7 +116,6 @@ tagList(
 
                tabPanel(title = "Children at risk of obesity",
                         value = "child_obesity",
-                        icon = icon_no_warning_fn("child-reaching"),
 
                         h2("Children at risk of obesity", iButtonUI("child_obesity", content = "Paste background info and source for children at risk of obesity here")),
 
@@ -139,7 +135,6 @@ tagList(
 
                tabPanel(title = "Infant mortality",
                         value = "infant_mortality_cw",
-                        icon = icon_no_warning_fn("hospital"),
 
                         h2("Infant mortality", iButtonUI("infant_mortality_cw", content = "Paste background info and source for infant mortality here")),
 
@@ -172,7 +167,6 @@ tagList(
 
                tabPanel(title = "Perinatal Mortality Rate",
                         value = "perinatal_mortality",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Perinatal Mortality Rate")
                ),
@@ -185,7 +179,6 @@ tagList(
 
                tabPanel(title = "Physical Activity (of children)",
                         value = "physical_activity_children",
-                        icon = icon_no_warning_fn("lemon"),
 
                         h2("Physical Activity (of children)")
                )
