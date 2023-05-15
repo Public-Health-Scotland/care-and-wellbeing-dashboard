@@ -179,8 +179,9 @@ line_chart_function = function(data, y_title, x_title = "Year", title = "", labe
               mode = "lines",
               line = list(color = phs_colours("phs-purple")),
               name = glue("{label}"),
-              hovertemplate = ~glue("{round_half_up(indicator, 2)}{ifelse(label == 'Percentage','%','')}")) %>%
-    layout(xaxis = xaxis_year, yaxis = yaxis_number,
+              hovertemplate = ~glue("{format(round_half_up(indicator, 2), big.mark=',')}{ifelse(label == 'Percentage','%','')}")) %>%
+    layout(xaxis = xaxis_type, yaxis = yaxis_number,
+
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
@@ -260,7 +261,8 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis
           colors = palette,
           # text = "rate",
           # name = glue("{colour}{label}"), ## unordering factors - levels didn't match legend
-          hovertemplate = ~glue("{y %>% round_half_up(2)}")
+          hovertemplate = ~glue("{format(round_half_up(y, 2), big.mark=',')}{hover_end}")
+
   ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),
