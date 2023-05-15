@@ -10,7 +10,13 @@ tagList(
                tabPanel(title = "Admissions for asthma",
                         value = "asthma_admissions",
 
-                        h2("Admissions for asthma", iButtonUI("asthma_admissions", content = "Paste background info and source for asthma here")),
+                        h2("Admissions for asthma", iButtonUI("asthma_admissions",
+                                                              content = paste("The Scottish Morbidity Record (SMR) database is the",
+                                                              "national inpatient and day case database in Scotland. These statistics",
+                                                              "are derived from data collected on discharges from non-obstetric and",
+                                                              "non-psychiatric hospitals (SMR01).",
+                                                              "For more information, please visit the",
+                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
