@@ -167,9 +167,10 @@ confidence_line_function = function(data, y_title, x_title = "Year range", title
 
 
 
-line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "", label = "Number") {
+line_chart_function = function(data, y_title, x_title = "Year", title = "", label = "Number") {
 
   yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
 
   plot_ly(data = data) %>%
     add_trace(x=~date,
@@ -179,7 +180,7 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "
               line = list(color = phs_colours("phs-purple")),
               name = glue("{label}"),
               hovertemplate = ~glue("{round_half_up(indicator, 2)}{ifelse(label == 'Percentage','%','')}")) %>%
-    layout(xaxis = xaxis_type, yaxis = yaxis_number,
+    layout(xaxis = xaxis_year, yaxis = yaxis_number,
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
@@ -249,15 +250,16 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
 make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
                                         label = "", title = "", hover_end="") {
 
-  plot_ly(x = ~x,
+  plot_ly(data = data,
+          x = ~x,
           y = ~y,
           color = ~colour,
           type="scatter",
           mode="lines",
           colors = palette,
-          text = "rate",
-          name = glue("{colour}{label}"),
-          hovertemplate = ~glue("{y %>% round_half_up(2)}{hover_end}")
+          # text = "rate",
+          # name = glue("{colour}{label}"), ## unordering factors - levels didn't match legend
+          hovertemplate = ~glue("{y %>% round_half_up(2)}")
   ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),
