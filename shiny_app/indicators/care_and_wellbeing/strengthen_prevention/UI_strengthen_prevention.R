@@ -129,9 +129,9 @@ tagList(
                                                                                          "You can find more information about this",
                                                                                          "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
                                                                                          "Information about the background of the statistics can be found on the NRS site:",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information, target = _blank> Vital Events – General Background Information </a>",
+                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
                                                                                          "and",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information, target = _blank> Deaths – Background Information. </a>"))),
+                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
 
                         fluidRow(
                           column(4,
@@ -188,7 +188,7 @@ tagList(
                                                                    "<br> <br>",
                                                                    "Public Health Scotland publishes a range of heart disease-related information.",
                                                                    "You can find all our information on the heart disease section of the",
-                                                                   "<a href=https://beta.isdscotland.org/topics/heart-disease-and-stroke/> Data and Intelligence website. </a>"))),
+                                                                   "<a href=https://beta.isdscotland.org/topics/heart-disease-and-stroke/ target = _blank> Data and Intelligence website. </a>"))),
 
                         fluidRow(
                           column(4,
