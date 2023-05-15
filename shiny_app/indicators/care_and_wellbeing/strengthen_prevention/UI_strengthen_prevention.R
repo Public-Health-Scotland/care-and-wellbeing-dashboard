@@ -247,18 +247,26 @@ tagList(
                                tabPanel(title = "Drug-related hospital admissions",
                                         value = "drug_admissions",
 
-                                        h2("Drug-related hospital admissions", iButtonUI("drug_admissions", content = "Paste background info and source for drug admissions here")),
+                                        h2("Drug-related hospital admissions", iButtonUI("drug_admissions",
+                                                                                         content = paste("This indicator uses data from Public Health Scotland drug related hospital",
+                                                                                                         "statistics publication relating to general acute and psychiatric hospital stays with",
+                                                                                                         "a diagnosis of drug misuse.",
+                                                                                                         #"These data are presented at a national level and broken",
+                                                                                                         #"down by demographic characteristics/local geographies.",
+                                                                                                         "More information can be found",
+                                                                                                         "<a href = https://www.publichealthscotland.scot/publications/show-all-releases?id=32315 target=_blank> here (external link). </a>"))),
 
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("drug_admissions_age", "Select age group(s)",
+                                                                choices = unique(drug_stays$age_group),
+                                                                selected = "All age groups",
+                                                                multiple = TRUE,
+                                                                width = "100%",
+                                                                options = list(plugins = c('remove_button'),
+                                                                               `actions-box` = TRUE)))),
 
-                                        selectizeInput("drug_admissions_age", "Select an age group",
-                                                       choices = unique(drug_stays$age_group),
-                                                       selected = "All age groups",
-                                                       multiple = TRUE,
-                                                       options = list(plugins = c('remove_button'),
-                                                                      `actions-box` = TRUE)),
-
-                                        #plot_title("Age-sex standardised rate of drug-related hospital admissions, Scotland",
-                                        #           "drug_admissions_plot"),
+                                        altTextUI("drug_admissions_alt"),
                                         withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
@@ -276,31 +284,41 @@ tagList(
                                tabPanel(title = "Drug-related deaths",
                                         value = "drug_deaths",
 
-                                        h2("Drug related deaths", iButtonUI("drug_deaths", content = "Paste background info and source for drug deaths here")),
+                                        h2("Drug-related deaths", iButtonUI("drug_deaths",
+                                                                            content = paste("Statistics of drug-related deaths in 2021 and earlier years,",
+                                                                                            "broken down by age, sex, substances implicated in the death, underlying",
+                                                                                            "cause of death, and NHS Board and Council areas can be found",
+                                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/drug-related-deaths-in-scotland target = _blank> here (external link). </a>"))),
 
                                         fluidRow(
-                                          column(3,
+                                          column(4,
                                                  selectizeInput("drug_deaths_geog_type",
                                                                 "Step 1. Select a national or local geography level",
-                                                                choices = c("Scotland", "Health Board", "Council Area"))),
+                                                                choices = c("Scotland", "Health Board", "Council Area"),
+                                                                width = "100%"
+                                                 )),
 
-                                          column(3,
+                                          column(4,
 
                                                  selectizeInput("drug_deaths_geog_name",
                                                                 "Step 2. Select a national or local geography area",
-                                                                choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography))
+                                                                choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography),
+                                                                width = "100%"
+                                                 )
                                           ),
 
-                                          column(3,
+                                          column(4,
                                                  radioButtons("drug_deaths_rate_number",
                                                               "3. View rate per 100,000 population or number of deaths",
                                                               choices = c("Rate",
-                                                                          "Number")))
+                                                                          "Number"),
+                                                              width = "100%"
+                                                 ))
                                         ),
 
-                                        #plot_title("Drug misuse deaths by 5 year periods",
-                                        #           "drug_deaths_plot",
-                                        #          subtitle = "Please note, rates based on fewer than 10 deaths are not shown"),
+
+                                        altTextUI("drug_deaths_alt"),
+                                        ciDefinitionUI("drug_deaths_ci"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
