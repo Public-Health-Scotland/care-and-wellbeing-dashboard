@@ -215,6 +215,7 @@ tagList(
                                                 width = '100%')),
                         ),
 
+
                         altTextUI("chd_deaths_alt"),
                         ciDefinitionUI("chd_deaths_ci"),
                         withSpinner(plotlyOutput("chd_deaths_plot")),
@@ -332,10 +333,16 @@ tagList(
                tabPanel(title = "Experience of unpaid carers ",
                         value = "experience_of_unpaid_carers",
 
-                        h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers", content = "Paste background info and source for experience of unpaid carers here")),
+                        h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers",
+                                                                    content = paste("The Health and Care Experience Survey (successor to the GP",
+                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
+                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
+                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
+                                                                    "<li> caring responsibilities and related support </li>",
+                                                                    "The survey has been run every two years since 2009 and can be found here:",
+                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
-                        #h4("Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"),
-
+                        altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
                         br(),

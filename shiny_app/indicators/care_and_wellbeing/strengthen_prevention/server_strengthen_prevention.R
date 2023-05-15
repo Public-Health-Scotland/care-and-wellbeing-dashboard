@@ -837,6 +837,20 @@ altTextServer("asthma_admissions_alt",
 # EXPERIENCE OF UNPAID CARERS----
 ##############################################.
 
+altTextServer("experience_of_unpaid_carers_alt",
+              title = "Experience of unpaid carers plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of unpaid carers who agree with the sentence",
+                                        "`I feel supported to continue caring`."),
+                                tags$li("It is a stacked bar plot where each bar refers to the financial year and each bar is seperated into",
+                                        "sections which represent the percentage of responses for each particcular answer."),
+                                tags$li("The legend shows 5 categories: `Strongly agree`, `Agree`, `Neither agree nor disagree`, ",
+                                        "`Disagree` and `Strongly disagree`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("The x axis is the financial year the survey was conducted in."),
+                                tags$li("The y axis is the percentage of responses for each answer.")
+              ))
+
+
+
 output$experience_unpaid_carers_plot <- renderPlotly({
 
   title <- "Percentage of unpaid carers who agree with the sentence “I feel supported to continue caring“"
