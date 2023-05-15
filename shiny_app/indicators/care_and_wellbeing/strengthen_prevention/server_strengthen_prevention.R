@@ -565,6 +565,16 @@ observeEvent(input$healthy_birthweight_geog_name,{
 #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
 ##############################################.
 
+altTextServer("adult_self_assessed_health_alt",
+              title = "Self-assessed health of adults plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults who describe their health in general as 'good' or 'very good'."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
+
 output$adult_self_assessed_health_plot <- renderPlotly({
 
   title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"
@@ -572,7 +582,7 @@ output$adult_self_assessed_health_plot <- renderPlotly({
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })

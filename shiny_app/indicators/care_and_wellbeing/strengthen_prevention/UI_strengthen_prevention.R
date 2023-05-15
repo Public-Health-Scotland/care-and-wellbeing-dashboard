@@ -522,13 +522,19 @@ tagList(
                ##############################################.
                #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
                ##############################################.
-               tabPanel(title = "Self-assessed health of adults (age 16+)",
+               tabPanel(title = "Self-assessed health of adults",
                         value = "adult_self_assessed_health",
 
-                        h2("Self-assessed health of adults (age 16+)", iButtonUI("adult_self_assessed_health", content = "Paste background info and source for self assessed health of adults here")),
+                        h2("Self-assessed health of adults",
+                           iButtonUI("adult_self_assessed_health",
+                                     content = paste("This indicator uses data from the Scottish Health Survey. Participants",
+                                                     "who are aged 13 and over are asked to rate their health in general with",
+                                                     "answer options ranging from 'very good' to 'very bad'. The data for",
+                                                     "those participants who described their general health as good or very good",
+                                                     "are presented at a national level. More information can be found",
+                                                     "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>"))),
 
-                        #h4("Percentage of adults who describe their general health as good or very good in Scotland over time"),
-
+                        altTextUI("adult_self_assessed_health_alt"),
                         withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
 
                         br(),
