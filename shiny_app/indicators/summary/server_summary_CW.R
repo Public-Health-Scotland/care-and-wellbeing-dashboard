@@ -28,11 +28,16 @@ observeEvent(input$geog_type_summary_CW,
 output$asthma_admissions_infobox <- renderInfoBox({
 
   recent_date <- asthma_admissions$date %>% max()
+  previous_date <- max(asthma_admissions %>% filter(date != recent_date) %>% .$date)
 
-  recent_value <- asthma_admissions %>% filter(date == recent_date, sex == "All Sexes", age_group == "All Ages", geography == input$geog_name_summary_CW, ) %>%
-    .$stays_number
+  value <- asthma_admissions %>% filter(sex == "All Sexes", age_group == "All Ages", geography == "Scotland") #input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
+  recent_value <- value %>% filter(date == recent_date) %>% .$stays_number
+  previous_value <- value %>% filter(date == previous_date) %>% .$stays_number
+
+  change <- glue("{round_half_up((recent_value-previous_value)*100/previous_value,2)}%")
+
+  infoBox(title=h5(glue("Yearly total"),
                    summaryButtonUI("asthma_admissions_summary_info",
                                    "Admissions for asthma",
                                    glue("This is the yearly total number of admissions for asthma for the financial year {recent_date}. <br> <br>",
@@ -40,11 +45,54 @@ output$asthma_admissions_infobox <- renderInfoBox({
                                         "Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
                                         "of ill health prevention` on the `Care and Wellbeing` tab.",
                                         "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Yearly total"),
+          value=glue("{recent_date}: {ifelse(length(recent_value)[1] == 0,'Not available', recent_value)} (+{change})"),
+          subtitle = glue("{previous_date}: {ifelse(length(previous_value)[1] == 0,'Not available', previous_value)}"),
           icon = icon_no_warning_fn("user-shield"),
           color = "purple")
 })
+
+
+output$asthma_admissions_test <- renderUI(
+  tagList(
+    # p(strong(glue("{recent_date}: {ifelse(length(recent_value)[1] == 0,'Not available', recent_value)} (+{round_half_up(change,2)}%)"))),
+    # p(glue( "{previous_date}: {ifelse(length(previous_value)[1] == 0,'Not available', previous_value)}")),
+    div(class = "recent_value",
+        glue("{recent_date}: {ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}")),
+    div(class = "previous_value",
+        glue("{previous_date}: {ifelse(length(previous_value)[1] == 0,'Not available', previous_value)}")),
+    div(class = "change",
+        glue("Percentage change: +{round_half_up(change,2)}%")),
+
+  )
+
+)
+
+# ##### Asthma admissions #####
+#
+#
+# output$asthma_admissions_infobox <- renderInfoBox({
+#
+#   recent_date <- asthma_admissions$date %>% max()
+#
+#   recent_value <- asthma_admissions %>% filter(date == recent_date, sex == "All Sexes", age_group == "All Ages", geography == input$geog_name_summary_CW, ) %>%
+#     .$stays_number
+#
+#   infoBox(title=h5(glue("{recent_date}"),
+#                    summaryButtonUI("asthma_admissions_summary_info",
+#                                    "Admissions for asthma",
+#                                    glue("This is the yearly total number of admissions for asthma for the financial year {recent_date}. <br> <br>",
+#                                         "This data is available at Scotland and health board level. ",
+#                                         "(not true just example) Further breakdown information at intermediate zone level is available under `Srengthen the role and impact ",
+#                                         " of ill health prevention` on the `Care and Wellbeing` tab. <br> <br>",
+#                                         "(eg) Further breakdown of age groups and sex is available under strengthen the role and impact ",
+#                                         "of ill health prevention on the `Care and Wellbeing` tab.",
+#                                         "<br> <br> {strong('Click again to close.')}"))),
+#           value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
+#           subtitle = glue("Yearly total"),
+#           icon = icon_no_warning_fn("user-shield"),
+#           color = "purple")
+# })
+
 
 ##### Alcohol deaths #####
 
@@ -90,6 +138,7 @@ output$alcohol_admissions_infobox <- renderInfoBox({
 output$all_cause_mortality_infobox <- renderInfoBox({
 
   recent_date <- max(all_cause_mortality$year)
+  previous_date <- max(all_cause_mortality %>% filter(year != recent_date) %>% .$year)
 
   recent_value <- all_cause_mortality %>%
     filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW, year == recent_date) %>%
