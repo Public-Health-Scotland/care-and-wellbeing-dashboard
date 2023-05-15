@@ -746,13 +746,14 @@ altTextServer("asthma_admissions_alt",
                                 tags$li("The x axis shows the financial year."),
                                 tags$li("The y axis shows the total number of admissions."),
                                 tags$li("Data is based on date of discharge."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland."),
                                 tags$li("For the plot visualising the yearly total, the purple line shows the total number of admissions for each financial year."),
                                 tags$li("For the plot visualising the age breakdown, the lines correspond to each age group consisting of 5 year age bands up to 90 years,",
                                 "after which data is grouped for 90+."),
                                 tags$li("For the plot visualising sex breakdown, the purple line corresponds to `All sexes`, the blue line corresponds to `Females`",
-                                        "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex."),
-                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                        "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex.")
+
 
               )
 )
