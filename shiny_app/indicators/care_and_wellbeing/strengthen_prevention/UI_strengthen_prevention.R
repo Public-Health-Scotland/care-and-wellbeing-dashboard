@@ -450,10 +450,18 @@ tagList(
                tabPanel(title = "Limiting long-term conditions (age 16+)",
                         value = "adult_long_term_condition",
 
-                        h2("Limiting long-term conditions (age 16+)", iButtonUI("limiting_ltcs", content = "Paste background info and source for adult ltc here")),
+                        h2("Limiting long-term conditions (age 16+)",
+                           iButtonUI("limiting_ltcs",
+                                     content = paste("This indicator uses data from the Scottish Health Survey.",
+                                                     "Participants are asked if they are living with a limiting long-term",
+                                                     "condition. The data are presented at national level. More information",
+                                                     "can be found",
+                                                     "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>",
+                                                     "<br> <br> A long-term condition is defined as a physical or mental condition & health condition or illness lasting,",
+                                                     "or expected to last 12 limiting months or more. A long-term condition is defined as limiting",
+                                                     "if the respondent reported that it limited their activities in any way."))),
 
-                        #h4("Percentage of adults with a limiting long-term condition"),
-
+                        altTextUI("adult_long_term_condition_alt"),
                         withSpinner(plotlyOutput("adult_long_term_condition_plot")),
 
                         br(),

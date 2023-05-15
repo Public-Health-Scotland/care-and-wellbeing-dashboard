@@ -593,6 +593,16 @@ adult_self_assessed_health %>%
 #  LIMITING LONG-TERM CONDITIONS (16+)----
 ##############################################.
 
+altTextServer("adult_long_term_condition_alt",
+              title = "Adults living with limiting long-term conditions plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
+
 output$adult_long_term_condition_plot <- renderPlotly({
 
   title <- "Percentage of adults with a limiting long-term condition in Scotland"
@@ -600,7 +610,7 @@ output$adult_long_term_condition_plot <- renderPlotly({
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
