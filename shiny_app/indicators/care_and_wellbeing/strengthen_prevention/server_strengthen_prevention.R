@@ -352,7 +352,7 @@ output$drug_deaths_plot = renderPlotly({
   title_rate <- glue("Trend in age standardised rates per 100,000 of drug-related deaths in ",
                      input$drug_deaths_geog_name)
 
-  title_number <- glue("Trend in number of drug-related deaths by 5-year ranges in ",
+  title_number <- glue("Trend in number of drug-related deaths in ",
                        input$drug_deaths_geog_name)
 
 
