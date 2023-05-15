@@ -60,9 +60,24 @@ observeEvent(input$all_cause_mortality_geog_type,
              })
 
 
+altTextServer("all_cause_mortality_alt",
+              title = "All-cause mortality plot",
+              content = tags$ul(tags$li("This is a plot for the trend in all-cause mortality for people between the ages of 15-44."),
+                                tags$li("The x axis is the year, starting from 1997."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Rate` is chosen, then the y axis is the rate per 100,000 population.",
+                                        "The purple line indicates the trend in rate of all-cause mortality."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Number` is chosen, then the y axis is the total number of deaths.",
+                                        "The purple line indicates the trend in number of all-cause mortality."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
+
+
 output$all_cause_mortality_plot = renderPlotly({
 
-  title <- glue("All-cause mortality, ages 15-44, in ",
+  title <- glue("Trend in all-cause mortality for ages 15-44 in ",
                             input$all_cause_mortality_geog_name)
 
   data = all_cause_mortality %>%
@@ -78,7 +93,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate of deaths per 100,000 population"
+    indicator_y = "Rate per 100,000"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -121,7 +136,7 @@ observeEvent(input$all_cause_mortality_geog_name,{
 
 observeEvent(input$all_cause_mortality_geog_name,{
 
-  output$all_cause_mortality_title <- renderText({glue("Data table: Total number of all-cause deaths, ages 15-44, in ",
+  output$all_cause_mortality_title <- renderText({glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
                                                        input$all_cause_mortality_geog_name)})
 })
 
@@ -222,6 +237,16 @@ heart_attack %>%
   dataDownloadServer(id = "heart_attack_admission",
                      filename = "first_ever_hospital_admission_heart_attack",
                      add_separator_cols = c(2))
+
+
+altTextServer("hospital_admission_heart_attack_alt",
+              title = "First ever hospital admissions for heart attack plot",
+              content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
+                                tags$li("The x axis is year, starting in 1997"),
+                                tags$li("The y axis total number."),
+                                tags$li("The solid purple line shows the trend in number of hospital admissions.")
+              )
+)
 
 
 ##############################################.
@@ -482,6 +507,19 @@ observeEvent(input$healthy_birthweight_geog_type,
                                     choices = unique(birthweight_data$geography))
              })
 
+
+altTextServer("healthy_birthweight_alt",
+              title = "Healthy birthweight plot",
+              content = tags$ul(tags$li("This is a stacked bar plot showing the babies in each birthweight category based on gestational age"),
+                                tags$li("The x axis is the financial year, starting from 1997/98."),
+                                tags$li("The y axis is the percentage."),
+                                tags$li("The legend shows 4 categories: `Not applicable`, `Large`, `Appropriate` ",
+                                        " and `Small`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+              )
+)
+
 output$healthy_birthweight_plot = renderPlotly({
 
   title <- glue("Birthweight of babies based on gestational age in ",
@@ -491,7 +529,8 @@ output$healthy_birthweight_plot = renderPlotly({
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
-    stacked_bar_function(., .$birthweight_for_gestational_age, title = title)
+    stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
+    layout(legend = list(y = -0.4))
 })
 
 observeEvent(input$healthy_birthweight_geog_name,{
@@ -525,6 +564,16 @@ observeEvent(input$healthy_birthweight_geog_name,{
 #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
 ##############################################.
 
+altTextServer("adult_self_assessed_health_alt",
+              title = "Self-assessed health of adults plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults who describe their health in general as 'good' or 'very good'."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
+
 output$adult_self_assessed_health_plot <- renderPlotly({
 
   title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"
@@ -532,7 +581,7 @@ output$adult_self_assessed_health_plot <- renderPlotly({
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -553,6 +602,16 @@ adult_self_assessed_health %>%
 #  LIMITING LONG-TERM CONDITIONS (16+)----
 ##############################################.
 
+altTextServer("adult_long_term_condition_alt",
+              title = "Adults living with limiting long-term conditions plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
+
 output$adult_long_term_condition_plot <- renderPlotly({
 
   title <- "Percentage of adults with a limiting long-term condition in Scotland"
@@ -560,7 +619,7 @@ output$adult_long_term_condition_plot <- renderPlotly({
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })

@@ -5,12 +5,13 @@
 data_path <-paste0(path_in_pop, "SHeS and HACE data for dashboard.xlsx")
 data_sheet <- "Adult self-assessed health"
 
-input_adult_self_assessed_health <- read_excel(data_path, sheet=data_sheet) %>% 
+input_adult_self_assessed_health <- read_excel(data_path, sheet=data_sheet) %>%
   filter(Indicator == "Self-assessed general health" & Sex == "All" & Categories == "Very good/Good") %>%
-  summary_format_function(date = .$Year, 
-                          geog_type = .$Geographylevel, 
-                          geog = .$Geographylevel, 
-                          indicator_in = .$Percent, 
+  mutate(Year = as.character(Year)) %>%
+  summary_format_function(date = .$Year,
+                          geog_type = .$Geographylevel,
+                          geog = .$Geographylevel,
+                          indicator_in = .$Percent,
                           value_in = "adults_self_assessed_health")
 
 
