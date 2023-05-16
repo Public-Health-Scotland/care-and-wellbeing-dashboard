@@ -184,8 +184,7 @@ line_chart_function = function(data, y_title, x_title = "Year", title = "", labe
               line = list(color = phs_colours("phs-purple")),
               name = glue("{label}"),
               hovertemplate = ~glue("{format(round_half_up(indicator, 2), big.mark=',')}{ifelse(label == 'Percentage','%','')}")) %>%
-    layout(xaxis = xaxis_type, yaxis = yaxis_number,
-
+    layout(xaxis = xaxis_year, yaxis = yaxis_number,
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
