@@ -122,27 +122,30 @@ confidence_line_function = function(data, y_title, x_title = "Year range", title
   xaxis_year[["title"]] = x_title
 
   plot_ly(data = data) %>%
-    add_trace(x=~date,
-              y=~upper_confidence_interval,
+
+    add_trace(x=~date, y=~lower_confidence_interval,
               type = "scatter",
               mode = "lines",
               line = list(color = 'transparent'),
-              name = "Upper confidence interval",
-              showlegend = FALSE,
-              hovertemplate = ~glue("{upper_confidence_interval %>% round_half_up(2)}"),
+              name = "Lower confidence interval",
+              showlegend = TRUE,
+              hovertemplate = ~glue("{lower_confidence_interval %>% round_half_up(2)}"),
               hoverinfo = "none",
-              textposition = "none") %>%
-    add_trace(x=~date, y=~lower_confidence_interval,
+              textposition = "none",
+              legendgroup = "z_confidence_interval") %>%
+    add_trace(x=~date,
+              y=~upper_confidence_interval,
               type = "scatter",
               mode = "lines",
               fill = 'tonexty',
               fillcolor = phsstyles::phs_colours("phs-liberty-30"),
               line = list(color = 'transparent'),
-              name = "Lower confidence interval",
-              showlegend = FALSE,
-              hovertemplate = ~glue("{lower_confidence_interval %>% round_half_up(2)}"),
+              name = "Upper confidence interval",
+              showlegend = TRUE,
+              hovertemplate = ~glue("{upper_confidence_interval %>% round_half_up(2)}"),
               hoverinfo = "none",
-              textposition = "none") %>%
+              textposition = "none",
+              legendgroup = "z_confidence_interval") %>%
     add_trace(x=~date,
               y=~indicator,
               type = "scatter",
@@ -152,7 +155,8 @@ confidence_line_function = function(data, y_title, x_title = "Year range", title
               showlegend = TRUE,
               hovertemplate = ~glue("{indicator %>% round_half_up(2)}"),
               hoverinfo = "text",
-              textposition = "none") %>%
+              textposition = "none",
+              legendgroup = "rate") %>%
     layout(xaxis = xaxis_year, yaxis = yaxis_number,
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
            title = list(text = str_wrap(title, width = 60), font = title_style),
@@ -167,9 +171,10 @@ confidence_line_function = function(data, y_title, x_title = "Year range", title
 
 
 
-line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "", label = "Number") {
+line_chart_function = function(data, y_title, x_title = "Year", title = "", label = "Number") {
 
   yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
 
   plot_ly(data = data) %>%
     add_trace(x=~date,
@@ -178,8 +183,8 @@ line_chart_function = function(data, y_title, xaxis_type = xaxis_year, title = "
               mode = "lines",
               line = list(color = phs_colours("phs-purple")),
               name = glue("{label}"),
-              hovertemplate = ~glue("{round_half_up(indicator, 2)}{ifelse(label == 'Percentage','%','')}")) %>%
-    layout(xaxis = xaxis_type, yaxis = yaxis_number,
+              hovertemplate = ~glue("{format(round_half_up(indicator, 2), big.mark=',')}{ifelse(label == 'Percentage','%','')}")) %>%
+    layout(xaxis = xaxis_year, yaxis = yaxis_number,
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
@@ -194,16 +199,15 @@ stacked_bar_function = function(data, category_var, title = "") {
     plot_ly(x=~date,
             y=~proportion*100,
             color = ~category_var,
-            colors = phs_colours(c('phs-purple', 'phs-magenta', 'phs-blue', 'phs-green')),
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
             # name = glue("{category_var}{label}"),
             hovertemplate = ~glue("{round_half_up(proportion*100, 2)}%")
     ) %>%
     layout(barmode = "stack",
            xaxis = xaxis_finyear,
-           yaxis = list(title = "Proportion",
+           yaxis = list(title = "Percentage",
                         rangemode="tozero",
-                        fixedrange=TRUE,
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
@@ -248,17 +252,19 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
 
 
 make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
-                                        label = "", title = "") {
+                                        label = "", title = "", hover_end="") {
 
-  plot_ly(x = ~x,
+  plot_ly(data = data,
+          x = ~x,
           y = ~y,
           color = ~colour,
           type="scatter",
           mode="lines",
           colors = palette,
-          text = "rate",
-          name = glue("{colour}{label}"),
-          hovertemplate = ~glue("{y %>% round_half_up(2)}")
+          # text = "rate",
+          # name = glue("{colour}{label}"), ## unordering factors - levels didn't match legend
+          hovertemplate = ~glue("{format(round_half_up(y, 2), big.mark=',')}{hover_end}")
+
   ) %>%
     layout(yaxis = list(title = y_axis_title,
                         tickfont = list(size=14),

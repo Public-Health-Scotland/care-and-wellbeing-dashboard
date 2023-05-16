@@ -15,31 +15,29 @@ tagList(
                tabPanel(title = "Child poverty",
                         value = "child_poverty",
 
-                        h2("Child poverty", iButtonUI("child_poverty", content = "Paste background info and source for child poverty here")),
+                        h2("Child poverty", iButtonUI("child_poverty",
+                        content = paste("This indicator shows the proportion of",
+                       "the population living in relative poverty after",
+                       "housing costs. Relative poverty is defined as being below 60%",
+                       "of the UK median income. The graph shows  three-year rolling",
+                       "(overlapping) averages obtained from the ",
+                       "<a href=https://data.gov.scot/poverty/> Poverty and Income Inequality in Scotland 2019-22</a>",
+                       "publication which derived its statistics from the",
+                       "<a https://www.gov.uk/government/collections/family-resources-survey--2/> Family Resources Survey and Households Below Average Income</a>.",
 
-                        p("This indicator shows the rate of children in relative poverty after housing costs. ",
-                          " Relative poverty means being below 60% of the UK median income."),
-                        tags$b("The latest estimate for 2020/21 is unreliable. ",
-                               "This is due to a small sample size during the pandemic. ",
-                               "Therefore the sample size is not representative of Scotland."),
-                        p("Source: Scottish Family Resources Survey"),
+                       "<br> <br>",
+                       "Survey data gathered in the 2020-2021 time-period have been omitted as it",
+                       "did not reflect a representative sample.",
+                       "Therefore the three-year periods 2018-21 and 2019-22",
+                       "each only contain data from two financial years.",
+                       "<b>This means that data is more volatile",
+                       "and sudden changes need to be interpreted with caution</b>."))),
+                       altTextUI("child_poverty_alt"),
 
-
-                        #bsButton("jump_home_child_poverty", "Go to home page"),
-                        bsButton("childpoverty_to_info", "Go to information page"),
-
-
-
-
-
-                        plot_title("Proportion of people who are in relative poverty
-                                 (below 60% of UK median income after housing costs), Scotland",
-                                   "child_poverty_chart",
-                                   subtitle = "Click on the legend to filter the chart"),
-
+                      withSpinner(plotlyOutput("child_poverty_chart")),
 
 
-                        h3("Data table: Proportion of people who are in relative poverty after housing costs in Scotland"),
+                        h3("Data table: Percentage of people in Scotland who are in relative poverty after housing costs"),
 
                         dataDownloadUI("child_poverty")
 
