@@ -14,12 +14,17 @@ tagList(
                tabPanel(title = "CAMHS waiting times",
                         value = "camhs_waiting_times_cw",
 
-                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
+                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw",
+                                                            content = paste("<p>Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
+                                                                            "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
+                                                                            "children and young people should start treatment within 18 weeks of referral to CAMHS.</p>",
 
-                        actionButton("camhs_waiting_times_cw_modal_info",
-                                     tags$b("Background information and source"),
-                                     icon = icon_no_warning_fn("info-circle")),
+                                                                            "<p>For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
+                                                                            "are providing initial telephone triage to elicit more information. Dependent on levels of ",
+                                                                            "risk identified some will be offered a time/date to undertake a complete assessment where ",
+                                                                            "others, where levels of risk/concern identified a face-to-face assessment will be offered.</p>",
 
+                                                                            "<a href=https://publichealthscotland.scot/publications/show-all-releases?id=20497> Source: CAMHS Waiting Times, Public Health Scotland </a>"))),
 
                         p("Use the below drop-down menu to select a Health Board of interest.",
                           "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
