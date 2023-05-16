@@ -2,7 +2,6 @@ tagList(
 
   h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
   br(),
-  bsButton("control_lives_to_info", "Go to information page", class = "info-btn"),
 
   h4(strong("Select indicator: ")),
 
