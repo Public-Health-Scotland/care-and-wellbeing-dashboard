@@ -26,15 +26,15 @@ tagList(
 
                                                                             "<a href=https://publichealthscotland.scot/publications/show-all-releases?id=20497> Source: CAMHS Waiting Times, Public Health Scotland </a>"))),
 
-                        p("Use the below drop-down menu to select a Health Board of interest.",
-                          "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
+                        # p("Use the below drop-down menu to select a Health Board of interest.",
+                        #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
 
-                        fluidRow(column(3,
+                        fluidRow(column(4,
                                          selectInput("camhs_waiting_times_cw_geog_type",
                                          "Step 1: Select national or local geography level",
                                          choices = c("Scotland", "Health Board"),
                                          selected = "Scotland")),
-                                 column(3,
+                                 column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
                                           "Step 2: Select national or local geography area",
                                           choices = c("Scotland"),
