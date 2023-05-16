@@ -2,48 +2,50 @@
 # CHILD POVERTY FUNCTIONS----
 ##############################################.
 
-child_poverty_plot = function(data) {
-  data %<>%
-    pivot_wider(names_from = Group, values_from = proportion) %>%
-    clean_names()
-
-  data %>%
-    plot_ly(x=~financial_year,
-            y=~children*100,
-            type="scatter",
-            mode="lines+markers",
-            line = list(color=palette[1]),
-            marker = list(color=palette[1]),
-            name = "Children",
-            text = paste0(data$financial_year, "<br>",
-                          "Proportion of children: ",
-                          scales::percent(data$children, accuracy = .1),
-                          "<br>",
-                          "Proportion of all ages: ",
-                          scales::percent(data$all_people, accuracy = .1)),
-            hoverinfo = 'text') %>%
-    add_trace(x=~financial_year,
-              y=~all_people*100,
-              type="scatter",
-              mode="lines+markers",
-              line = list(color=palette[2]),
-              marker = list(color=palette[2]),
-              name = "All Ages",
-              text = paste0(data$financial_year, "<br>",
-                            "Proportion of children: ",
-                            scales::percent(data$children, accuracy = .1),
-                            "<br>",
-                            "Proportion of all ages: ",
-                            scales::percent(data$all_people, accuracy = .1)),
-              hoverinfo = 'text') %>%
-    layout(xaxis = xaxis_finyear,
-           yaxis = yaxis_proportion,
-           legend = list(bgcolor = "#E2E2E2",
-                         # title = list(
-                         #   text = "Filter chart"),
-                         xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
-    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
-}
+# child_poverty_plot = function(data) {
+#   data %<>%
+#     pivot_wider(names_from = Group, values_from = proportion) %>%
+#     clean_names()
+#
+#   data %>%
+#     plot_ly(x=~financial_year,
+#             y=~children*100,
+#             type="scatter",
+#             mode="lines",
+#             line = list(color = phs_colours("phs-purple")),
+#             #marker = list(color=palette[1]),
+#             name = "Children",
+#             text = paste0(data$financial_year, "<br>",
+#                           "Proportion of children: ",
+#                           scales::percent(data$children, accuracy = .1),
+#                           "<br>",
+#                           "Proportion of all ages: ",
+#                           scales::percent(data$all_people, accuracy = .1)),
+#             hoverinfo = 'text') %>%
+#     add_trace(x=~financial_year,
+#               y=~all_people*100,
+#               type="scatter",
+#               mode="lines",
+#               line = list(color = phs_colours("phs-magenta")),
+#               #marker = list(color=palette[2]),
+#               name = "All Ages",
+#               text = paste0(data$financial_year, "<br>",
+#                             "Proportion of children: ",
+#                             scales::percent(data$children, accuracy = .1),
+#                             "<br>",
+#                             "Proportion of all ages: ",
+#                             scales::percent(data$all_people, accuracy = .1)),
+#               hoverinfo = 'text') %>%
+#     layout(xaxis = list(title = "Time Period"),
+#            yaxis =list(title ="Proportion (%)", range = c(0,40)),
+#                     #   yaxis_proportion,
+#                     #   fixedrange=TRUE),
+#            legend = list(bgcolor = "#E2E2E2",
+#                          # title = list(
+#                          #   text = "Filter chart"),
+#                          xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+#     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+# }
 
 
 ##############################################.

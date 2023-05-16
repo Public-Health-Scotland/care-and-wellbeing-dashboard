@@ -60,10 +60,26 @@ observeEvent(input$all_cause_mortality_geog_type,
              })
 
 
+altTextServer("all_cause_mortality_alt",
+              title = "All-cause mortality plot",
+              content = tags$ul(tags$li("This is a plot for the trend in all-cause mortality for people between the ages of 15-44."),
+                                tags$li("The x axis is the year, starting from 1997."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Rate` is chosen, then the y axis is the rate per 100,000 population.",
+                                        "The purple line indicates the trend in rate of all-cause mortality."),
+                                tags$li("If in the choice above the plot labelled `Step 3`, `Number` is chosen, then the y axis is the total number of deaths.",
+                                        "The purple line indicates the trend in number of all-cause mortality."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
+
+
 output$all_cause_mortality_plot = renderPlotly({
 
-  title <- glue("All-cause mortality, ages 15-44, in ",
+  title <- glue("Trend in all-cause mortality for ages 15-44 in ",
                             input$all_cause_mortality_geog_name)
+
 
   data = all_cause_mortality %>%
     filter(geography_type == input$all_cause_mortality_geog_type,
@@ -78,7 +94,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate of deaths per 100,000 population"
+    indicator_y = "Rate per 100,000"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -121,7 +137,7 @@ observeEvent(input$all_cause_mortality_geog_name,{
 
 observeEvent(input$all_cause_mortality_geog_name,{
 
-  output$all_cause_mortality_title <- renderText({glue("Data table: Total number of all-cause deaths, ages 15-44, in ",
+  output$all_cause_mortality_title <- renderText({glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
                                                        input$all_cause_mortality_geog_name)})
 })
 
@@ -146,35 +162,36 @@ observeEvent(input$chd_deaths_geog_type,
 
 output$chd_deaths_plot = renderPlotly({
   title <- glue("Trend in age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
-                            input$chd_deaths_geog_name)
+                input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
     confidence_line_function(., y_title = "Rate per 100,000", title = title) %>%
-    layout(xaxis = list(tickangle = 30))
+    layout(xaxis = list(tickangle = 30),
+           legend = list(y = -0.4))
 })
 
 
 observeEvent(input$chd_deaths_geog_type,{
   observeEvent(input$chd_deaths_geog_name,{
 
-  data_unfiltered <- chd_deaths %>%
-    select(year_range, area_type, area_name, measure,
-           lower_confidence_interval, upper_confidence_interval) %>%
-    arrange(year_range) %>%
-    mutate(year_range = factor(year_range)) %>%
-    rename("geography_type" = "area_type",
-           "geography" = "area_name",
-           "Rate of CHD deaths per 100,000 (age 45-74)" = "measure")
+    data_unfiltered <- chd_deaths %>%
+      select(year_range, area_type, area_name, measure,
+             lower_confidence_interval, upper_confidence_interval) %>%
+      arrange(year_range) %>%
+      mutate(year_range = factor(year_range)) %>%
+      rename("geography_type" = "area_type",
+             "geography" = "area_name",
+             "Rate of CHD deaths per 100,000 (age 45-74)" = "measure")
 
-  data_filtered <- data_unfiltered %>%
-    filter(geography_type == input$chd_deaths_geog_type) %>%
-    filter(geography == input$chd_deaths_geog_name)
+    data_filtered <- data_unfiltered %>%
+      filter(geography_type == input$chd_deaths_geog_type) %>%
+      filter(geography == input$chd_deaths_geog_name)
 
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "chd_deaths", filename = "chd_deaths",
-                     add_separator_cols_2dp = c(4,5,6))
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "chd_deaths", filename = "chd_deaths",
+                       add_separator_cols_2dp = c(4,5,6))
   })
 })
 
@@ -190,13 +207,12 @@ altTextServer("chd_deaths_alt",
                                 tags$li("The x axis is the 3 year range, starting from 2002-2004."),
                                 tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
                                 tags$li("The solid purple line is the specified rate and the lighter purple area around",
-                                "the line indicates the confidence interval."),
+                                        "the line indicates the confidence interval."),
                                 tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
                                         "area represents the upper confidence interval."),
                                 tags$li("Since the data began there has been a general downwards trend."),
-                                tags$li("The dropdowns labelled `Step 1` and `Step 2` will determine the location that the data refers to."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                "geography level and area for plotting. The default is Scotland.")
+                                        "geography level and area for plotting. The default is Scotland.")
 
               )
 )
@@ -225,6 +241,16 @@ heart_attack %>%
                      add_separator_cols = c(2))
 
 
+altTextServer("hospital_admission_heart_attack_alt",
+              title = "First ever hospital admissions for heart attack plot",
+              content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
+                                tags$li("The x axis is year, starting in 1997"),
+                                tags$li("The y axis total number."),
+                                tags$li("The solid purple line shows the trend in number of hospital admissions.")
+              )
+)
+
+
 ##############################################.
 # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
 ##############################################.
@@ -233,46 +259,62 @@ heart_attack %>%
 # DRUG RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 
+
+altTextServer("drug_admissions_alt",
+              title = "Drug admissions plot",
+              content = tags$ul(tags$li("This is a plot for the age-sex standardised rate of drug-related",
+                                        "hospital admissions per 100,000 population."),
+                                tags$li("The x axis is the financial year starting from 1996/97."),
+                                tags$li("The y axis is the rate per 100,000 population."),
+                                tags$li("The drop down above the chart allows you to choose which age groups you wish",
+                                        "to visualise on the plot. The default is `All age groups`."),
+                                tags$li("The line(s) refer to the rate per 100,000 for each selected age group.")
+              )
+)
+
 output$drug_admissions_plot = renderPlotly({
 
   if(length(input$drug_admissions_age) != 1){
     age_title <- "by age"
   } else if (input$drug_admissions_age == "All age groups") {
-  age_title <- "all age groups"
+    age_title <- "all age groups"
   } else {
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
-                            age_title, ") in Scotland")
+  title <- glue("Trend in age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+                age_title, ") in Scotland")
 
   data = drug_stays %>%
     filter(age_group %in% input$drug_admissions_age) %>%
     mutate(indicator = rate, date = financial_year) %>%
 
-  make_line_chart_multi_lines(x = .$date, y = .$indicator,
-                              colour = .$age_group,
-                              title = title,
-                              y_axis_title = "Age-sex standardised rate of stays<br>(per 100,000)",
-                              x_axis_title = "Financial year", label = " rate") %>%
-    layout(xaxis = list(tickangle = 45))
+    make_line_chart_multi_lines(x = .$date, y = .$indicator,
+                                colour = .$age_group,
+                                title = title,
+                                y_axis_title = "Rate per 100,000",
+                                x_axis_title = "Financial year") %>%
+    layout(xaxis = list(tickangle = 30),
+           legend = list(y = -0.4))
 
 })
 
+
+
 observeEvent(input$drug_admissions_age,{
 
-    data_unfiltered <- drug_stays %>%
-      select(financial_year, age_group, rate) %>%
-      arrange(financial_year) %>%
-      mutate(financial_year = factor(financial_year)) %>%
-      rename("Drug-related hospital admissions rate" = "rate")
+  data_unfiltered <- drug_stays %>%
+    select(financial_year, age_group, rate) %>%
+    arrange(financial_year) %>%
+    mutate(financial_year = factor(financial_year)) %>%
+    rename("Drug-related hospital admissions rate" = "rate")
 
-    data_filtered <- data_unfiltered %>%
-      filter(age_group == input$drug_admissions_age)
+  data_filtered <- data_unfiltered %>%
+    filter(age_group %in% input$drug_admissions_age)
 
-    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "drug_admissions", filename = "drug_admissions",
-                       add_separator_cols_2dp = c(3))
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "drug_admissions", filename = "drug_admissions",
+                     add_separator_cols_2dp = c(3))
 })
 
 observeEvent(input$drug_admissions_age,{
@@ -288,6 +330,8 @@ observeEvent(input$drug_admissions_age,{
   output$drug_admissions_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
                                                    age_title, ") in Scotland")})
 })
+
+
 
 
 ##############################################.
@@ -306,56 +350,84 @@ observeEvent(input$drug_deaths_geog_type,
                                     choices = unique(data$geography))
              })
 
+altTextServer("drug_deaths_alt",
+              title = "Drug-related deaths plot",
+              content = tags$ul(tags$b("If in the above choice labelled `Step 3`, `Rate` has been chosen, then the plot description is as follows: "),
+                                tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+                                tags$li("Rates based on fewer than 10 deaths not shown."),
+                                tags$li("The x axis are the 5 year ranges."),
+                                tags$li("The y axis is the age standardised rate per 100,000."),
+                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
+                                        "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland."),
+                                br(),
+                                tags$b("If in the above choice labelled `Step 3`, `Number` has been chosen, then the plot description is as follows: "),
+                                tags$li("This is a plot for the number of drug-related deaths."),
+                                tags$li("The x axis are the 5 year ranges."),
+                                tags$li("The y axis is the total number of deaths."),
+                                tags$li("The solid purple line indicates the trend in number of deaths."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")))
+
+
 output$drug_deaths_plot = renderPlotly({
 
-  title <- glue("Drug misuse deaths by 5-year periods in ",
-                            input$drug_deaths_geog_name)
+  title_rate <- glue("Trend in age standardised rates per 100,000 of drug-related deaths in ",
+                     input$drug_deaths_geog_name)
+
+  title_number <- glue("Trend in number of drug-related deaths in ",
+                       input$drug_deaths_geog_name)
+
 
   if (input$drug_deaths_rate_number == "Rate") {
     drug_related_deaths %>%
       mutate(date = year) %>%
-      filter(geography_type == input$drug_deaths_geog_type,
+      filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Age-standardised death rate<br>(per 100,000)", title = title) %>%
-      layout(xaxis = list(tickangle = 45))
-
+      confidence_line_function(., "Rate per 100,000", title = title_rate) %>%
+      layout(xaxis = list(tickangle = 30),
+             legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
-      filter(geography_type == input$drug_deaths_geog_type,
+      filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      line_chart_function(., "Total number of deaths", title = title) %>%
-      layout(xaxis = list(tickangle = 45))
+      line_chart_function(., "Total number of deaths", title = title_number) %>%
+      layout(xaxis = list(tickangle = 30,
+                          title = "Year range"))
 
   }
 })
 
-observeEvent(input$drug_deaths_geog_type,{
+#observeEvent(input$drug_deaths_geog_type,{
   observeEvent(input$drug_deaths_geog_name,{
 
-  data_unfiltered <- drug_related_deaths %>%
-    select(year, geography_type, geography, number, rate,
-           lower_confidence_interval, upper_confidence_interval) %>%
-    arrange(year) %>%
-    mutate(year = factor(year)) %>%
-    rename("Year range" = "year",
-           "Number of drug-related deaths" = "number",
-           "Drug-related deaths rate" = "rate")
+    data_unfiltered <- drug_related_deaths %>%
+      select(year, geography_type, geography, number, rate,
+             lower_confidence_interval, upper_confidence_interval) %>%
+      arrange(year) %>%
+      mutate(year = factor(year)) %>%
+      rename("Year range" = "year",
+             "Number of drug-related deaths" = "number",
+             "Drug-related deaths rate" = "rate")
 
-  data_filtered <- data_unfiltered %>%
-    filter(geography_type == input$drug_deaths_geog_type,
-           geography == input$drug_deaths_geog_name)
+    data_filtered <- data_unfiltered %>%
+      filter(#geography_type == input$drug_deaths_geog_type,
+             geography == input$drug_deaths_geog_name)
 
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "drug_deaths", filename = "drug_deaths",
-                     add_separator_cols = c(4),
-                     add_separator_cols_1dp = c(5,6,7))
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "drug_deaths", filename = "drug_deaths",
+                       add_separator_cols = c(4),
+                       add_separator_cols_1dp = c(5,6,7))
   })
-})
+#})
 
 observeEvent(input$drug_deaths_geog_name,{
 
-  output$drug_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related deaths in ",
+  output$drug_deaths_title <- renderText({glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths in ",
                                                input$drug_deaths_geog_name)})
 })
 
@@ -383,7 +455,7 @@ observeEvent(input$alcohol_admissions_geog_type,
 output$alcohol_admissions_plot = renderPlotly({
 
   title <- glue("Trend in total number of alcohol related admissions in ",
-                            input$alcohol_admissions_geog_name)
+                input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
     arrange(financial_year) %>%
@@ -396,31 +468,31 @@ output$alcohol_admissions_plot = renderPlotly({
   line_chart_function(data_alc, y_title = "European age-sex standardised rate<br>(per 100,000)") %>%
     layout(xaxis = list(tickangle = 45))
 
-    })
+})
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
-    data_unfiltered <- alcohol_admissions %>%
-      arrange(financial_year) %>%
-      filter(condition == "All alcohol conditions",
-             smr_type == "Combined") %>%
-      mutate(financial_year = factor(financial_year)) %>%
-      select(financial_year, geography_type, geography, stays_easr) %>%
-      rename("Number of alcohol related admissions" = "stays_easr")
+  data_unfiltered <- alcohol_admissions %>%
+    arrange(financial_year) %>%
+    filter(condition == "All alcohol conditions",
+           smr_type == "Combined") %>%
+    mutate(financial_year = factor(financial_year)) %>%
+    select(financial_year, geography_type, geography, stays_easr) %>%
+    rename("Number of alcohol related admissions" = "stays_easr")
 
-    data_filtered <- data_unfiltered %>%
-        filter(geography == input$alcohol_admissions_geog_name)
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$alcohol_admissions_geog_name)
 
-    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "alcohol_related_admissions", filename = "alcohol_related_admissions",
-                       add_separator_cols_1dp = c(4))
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "alcohol_related_admissions", filename = "alcohol_related_admissions",
+                     add_separator_cols_1dp = c(4))
 
 })
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
-    output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol related admissions in ",
-                                                        input$alcohol_admissions_geog_name)})
+  output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol related admissions in ",
+                                                      input$alcohol_admissions_geog_name)})
 })
 
 
@@ -483,16 +555,30 @@ observeEvent(input$healthy_birthweight_geog_type,
                                     choices = unique(birthweight_data$geography))
              })
 
+
+altTextServer("healthy_birthweight_alt",
+              title = "Healthy birthweight plot",
+              content = tags$ul(tags$li("This is a stacked bar plot showing the babies in each birthweight category based on gestational age"),
+                                tags$li("The x axis is the financial year, starting from 1997/98."),
+                                tags$li("The y axis is the percentage."),
+                                tags$li("The legend shows 4 categories: `Not applicable`, `Large`, `Appropriate` ",
+                                        " and `Small`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+              )
+)
+
 output$healthy_birthweight_plot = renderPlotly({
 
   title <- glue("Birthweight of babies based on gestational age in ",
-                            input$healthy_birthweight_geog_name)
+                input$healthy_birthweight_geog_name)
 
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
-    stacked_bar_function(., .$birthweight_for_gestational_age, title = title)
+    stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
+    layout(legend = list(y = -0.4))
 })
 
 observeEvent(input$healthy_birthweight_geog_name,{
@@ -518,13 +604,23 @@ observeEvent(input$healthy_birthweight_geog_name,{
 observeEvent(input$healthy_birthweight_geog_name,{
 
   output$healthy_birthweight_title <- renderText({glue("Data table: Birthweight of babies based on gestational age in ",
-                                                      input$healthy_birthweight_geog_name)})
+                                                       input$healthy_birthweight_geog_name)})
 })
 
 
 ##############################################.
 #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
 ##############################################.
+
+altTextServer("adult_self_assessed_health_alt",
+              title = "Self-assessed health of adults plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults who describe their health in general as 'good' or 'very good'."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
 
 output$adult_self_assessed_health_plot <- renderPlotly({
 
@@ -533,7 +629,7 @@ output$adult_self_assessed_health_plot <- renderPlotly({
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -554,6 +650,16 @@ adult_self_assessed_health %>%
 #  LIMITING LONG-TERM CONDITIONS (16+)----
 ##############################################.
 
+altTextServer("adult_long_term_condition_alt",
+              title = "Adults living with limiting long-term conditions plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("The solid purple line is the percentage of adults for each year.")
+
+              )
+)
+
 output$adult_long_term_condition_plot <- renderPlotly({
 
   title <- "Percentage of adults with a limiting long-term condition in Scotland"
@@ -561,7 +667,7 @@ output$adult_long_term_condition_plot <- renderPlotly({
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage", label = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
     layout(yaxis = yaxis_proportion)
 
 })
@@ -627,23 +733,28 @@ output$asthma_admissions_plot <- renderPlotly({
   }
 
   title <- glue("Trend of total number of asthma admissions ",
-                            breakdown, "in \n ", geog)
+                breakdown, "in \n ", geog)
 
   if(input$asthma_admissions_breakdowns == "Yearly total"){
 
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions", title = glue("{title}"), label = "Number of admissions")
+      line_chart_function(., y_title = "Total number of admissions",
+                          x_title = "Financial year", title = title,
+                          label = "Number of admissions")
 
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
-      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18"))) %>%
+      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
+      arrange(age_group) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group, y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
+                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+                                  title = title)
 
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
@@ -651,7 +762,9 @@ output$asthma_admissions_plot <- renderPlotly({
     plot <- asthma_admissions %>%
       filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex, y_axis_title = "Total number of admissions", title = title)
+      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
+                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+                                  title = title)
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
     #
@@ -670,41 +783,41 @@ output$asthma_admissions_plot <- renderPlotly({
 observeEvent(input$asthma_admissions_breakdowns,{
   observeEvent(input$asthma_admissions_geog_name,{
 
-  data_unfiltered <- asthma_admissions %>%
-    arrange(desc(date)) %>%
-    mutate(provisional = ifelse(provisional == "1", "p", ""),
-           date = factor(date),
-           sex = factor(sex),
-           age_group = factor(age_group)) %>%
-    select(c(date, geography_type, geography, sex, age_group, indicator, provisional)) %>%
-    rename(`Total number of admissions` = "indicator",
-           "Year" = "date",
-           "Is data provisional (p)?" = "provisional")
+    data_unfiltered <- asthma_admissions %>%
+      arrange(desc(date)) %>%
+      mutate(provisional = ifelse(provisional == "1", "p", ""),
+             date = factor(date),
+             sex = factor(sex),
+             age_group = factor(age_group)) %>%
+      select(c(date, geography_type, geography, sex, age_group, indicator, provisional)) %>%
+      rename(`Total number of admissions` = "indicator",
+             "Year" = "date",
+             "Is data provisional (p)?" = "provisional")
 
-  if(input$asthma_admissions_breakdowns == "Yearly total"){
+    if(input$asthma_admissions_breakdowns == "Yearly total"){
 
-    data_filtered <- data_unfiltered %>%
-      filter(sex == "All Sexes", age_group == "All Ages",
-             geography == input$asthma_admissions_geog_name)
+      data_filtered <- data_unfiltered %>%
+        filter(sex == "All Sexes", age_group == "All Ages",
+               geography == input$asthma_admissions_geog_name)
 
-  } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+    } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
-    data_filtered <- data_unfiltered %>%
-      filter(sex == "All Sexes",
-             geography == input$asthma_admissions_geog_name) %>%
-      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
+      data_filtered <- data_unfiltered %>%
+        filter(sex == "All Sexes",
+               geography == input$asthma_admissions_geog_name) %>%
+        filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
 
 
-  } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+    } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
-    data_filtered <- data_unfiltered %>%
-      filter(age_group == "All Ages",
-             geography == input$asthma_admissions_geog_name)
-  }
+      data_filtered <- data_unfiltered %>%
+        filter(age_group == "All Ages",
+               geography == input$asthma_admissions_geog_name)
+    }
 
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "asthma_admissions", filename = "asthma_admissions",
-                     add_separator_cols = c(6))
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "asthma_admissions", filename = "asthma_admissions",
+                       add_separator_cols = c(6))
 
   })
 })
@@ -728,15 +841,26 @@ observeEvent(input$asthma_admissions_breakdowns,{
       breakdown <- "by sex "
     }
 
-  output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
-                                                     breakdown, "in ", geog)})
+    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
+                                                       breakdown, "in ", geog)})
   })
 })
 
 
 altTextServer("asthma_admissions_alt",
               title = "Asthma admissions plot",
-              content = tags$ul(tags$li("This is a plot for the admissions for asthma indicator.")
+              content = tags$ul(tags$li("This is a plot for the number of admissions for asthma."),
+                                tags$li("The x axis shows the financial year."),
+                                tags$li("The y axis shows the total number of admissions."),
+                                tags$li("Data is based on date of discharge."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("For the plot visualising the yearly total, the purple line shows the total number of admissions for each financial year."),
+                                tags$li("For the plot visualising the age breakdown, the lines correspond to each age group consisting of 5 year age bands up to 90 years,",
+                                "after which data is grouped for 90+."),
+                                tags$li("For the plot visualising sex breakdown, the purple line corresponds to `All sexes`, the blue line corresponds to `Females`",
+                                        "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex.")
+
 
               )
 )
@@ -760,6 +884,20 @@ altTextServer("asthma_admissions_alt",
 ##############################################.
 # EXPERIENCE OF UNPAID CARERS----
 ##############################################.
+
+altTextServer("experience_of_unpaid_carers_alt",
+              title = "Experience of unpaid carers plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of unpaid carers who agree with the sentence",
+                                        "`I feel supported to continue caring`."),
+                                tags$li("It is a stacked bar plot where each bar refers to the financial year and each bar is seperated into",
+                                        "sections which represent the percentage of responses for each particcular answer."),
+                                tags$li("The legend shows 5 categories: `Strongly agree`, `Agree`, `Neither agree nor disagree`, ",
+                                        "`Disagree` and `Strongly disagree`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("The x axis is the financial year the survey was conducted in."),
+                                tags$li("The y axis is the percentage of responses for each answer.")
+              ))
+
+
 
 output$experience_unpaid_carers_plot <- renderPlotly({
 
