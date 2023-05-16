@@ -6,10 +6,10 @@ summaryBoxUI <- function(id, title, button_title, button_content) {
 
   box(id = ns(id),
       status = "primary",
-      title = h4(glue("{title}"),
+      title = div(class = "summary-box-title", glue("{title}")),
                  summaryButtonUI(ns("summary_info"),
                                  button_title,
-                                 button_content)),
+                                 button_content),
       width = "100%",
       uiOutput(ns("summary_values"))
   )

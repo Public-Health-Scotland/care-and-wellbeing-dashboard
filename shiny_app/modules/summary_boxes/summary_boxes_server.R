@@ -26,8 +26,7 @@ summaryBoxServer <- function(id, recent_date,
 
           div(class = "value-change",
               glue("Percentage change: ",
-                   "{ifelse(change < 0,'','+')}{round_half_up(change,2)}%")),
-          br()
+                   "{ifelse(change < 0,'','+')}{round_half_up(change,2)}%"))
 
 
         )

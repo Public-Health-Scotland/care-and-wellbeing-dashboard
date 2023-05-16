@@ -345,10 +345,13 @@ a > .info-box {
 .value-change {
     font-size: 18px;
     color: var(--phs-purple-S);
+    margin-left: 10px;
+    padding-bottom: 10px;
 }
 
 .previous-value {
     font-size: 25px;
+    margin-left: 10px;
     /* color: var(--phs-purple-S); */
 }
 
@@ -357,14 +360,23 @@ a > .info-box {
     font-size: 25px;
     /* color: var(--phs-purple-S); */
     font-weight: bold;
+    margin-left: 10px;
+
 }
 
 .box-primary {
     background-color: #ffffff;
     border-radius: 5px 5px 5px 5px;
-    box-shadow: 0 8px 8px var(--phs-blue-30);
+    box-shadow: 0 8px 8px var(--phs-purple-M);
 }
 
+.summary-box-title {
+    font-size: 18px;
+    color: var(--phs-purple-S);
+    margin-left: 10px;
+    padding-top: 10px;
+
+}
 
 
 /* Title of selectize input boxes*/
