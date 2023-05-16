@@ -340,6 +340,32 @@ a > .info-box {
 .info-box-icon.bg-teal { background-color:var(--phs-teal);  color: white; }
 .info-box-icon.bg-red { background-color:var(--phs-rust);  color: white; }
 
+/* summary page box syles */
+
+.value-change {
+    font-size: 18px;
+    color: var(--phs-purple-S);
+}
+
+.previous-value {
+    font-size: 25px;
+    /* color: var(--phs-purple-S); */
+}
+
+
+.recent-value {
+    font-size: 25px;
+    /* color: var(--phs-purple-S); */
+    font-weight: bold;
+}
+
+.box-primary {
+    background-color: #ffffff;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 8px 8px var(--phs-blue-30);
+}
+
+
 
 /* Title of selectize input boxes*/
   label {
