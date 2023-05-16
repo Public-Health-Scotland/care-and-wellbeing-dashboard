@@ -216,34 +216,36 @@ tagList(
                                  tagList(
                                    h2("Strengthen the role and impact of ill health prevention"),
                                    fluidRow(
-                                     # column(4,
-                                     #        h4(actionLink("jump_summary_to_asthma_admissions", "Admissions for asthma")),
-                                     #        withSpinner(infoBoxOutput("asthma_admissions_infobox", width=NULL)),
-                                     # ),
                                      column(4,
                                             h3(actionLink("jump_summary_to_asthma_admissions", "Admissions for asthma")),
-                                            box(
-                                              title = h4(glue("Yearly total"),
-                                                         summaryButtonUI("asthma_admissions_summary_info",
-                                                                         "Admissions for asthma",
-                                                                         glue("This is the yearly total number of admissions for asthma for the financial year {recent_date}. <br> <br>",
-                                                                              "This data is available at Scotland and health board level. ",
-                                                                              "Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
-                                                                              "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                              "<br> <br> {strong('Click again to close.')}"))),
-                                              width = "100%",
-                                              background = "purple",
-                                              uiOutput("asthma_admissions_test")
-                                            )
+                                            summaryBoxUI("asthma_admissions", title = "Yearly total",
+                                                         button_title = "Admissions for asthma",
+                                                         button_content = glue("This is the yearly total number of admissions for asthma for the financial year 2. <br> <br>",
+                                                                               "This data is available at Scotland and health board level. ",
+                                                                               "Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
+                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
+
 
                                      column(4,
                                             h4(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
                                             withSpinner(infoBoxOutput("alcohol_deaths_infobox", width=NULL)),
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
-                                            withSpinner(infoBoxOutput("alcohol_admissions_infobox", width=NULL)),
+                                            h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
+                                            box(status = "primary",
+                                                title = h4(glue("Yearly total"),
+                                                           summaryButtonUI("alcohol_admissions_summary_info",
+                                                                           "Alcohol-related hospital admissions",
+                                                                           glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
+                                                                                "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
+                                                                                "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                                "<br> <br> {strong('Click again to close.')}"))),
+                                                width = "100%",
+                                                background = "purple",
+                                                uiOutput("alcohol_admissions_test")
+                                            )
                                      )
                                    ),
 
