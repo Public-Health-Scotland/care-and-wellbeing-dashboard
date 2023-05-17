@@ -1,6 +1,6 @@
 
 
-summaryBoxUI <- function(id, title, button_title, button_content) {
+summaryBoxUI <- function(id, title = "", button_title = "", button_content = "To be developed") {
 
   ns <- NS(id)
 
