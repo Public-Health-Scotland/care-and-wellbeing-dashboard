@@ -86,7 +86,13 @@ output$camhs_waiting_times_cw_seen_within_plot = renderPlotly({
 
 # Stacked bar chart with all wait times
 output$camhs_waiting_times_cw_seen_since_plot = renderPlotly({
-  make_camhs_waiting_times_cw_bar_plot(hb_filter_table(camhs_waiting_times2, input$camhs_waiting_times_cw_geog_name))
+
+  title <- glue("Percentage of CAMHS patients seen by wait time since referral in ", input$camhs_waiting_times_cw_geog_name)
+
+  camhs_waiting_times2 %>%
+    filter(geography == input$camhs_waiting_times_cw_geog_name) %>%
+    make_camhs_waiting_times_cw_bar_plot(title = title)
 
 })
+
 

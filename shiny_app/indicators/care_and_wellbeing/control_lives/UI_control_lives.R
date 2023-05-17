@@ -41,9 +41,8 @@ tagList(
                                           width = "100%"))
                                  ),
 
-                        plot_title("Proportion of CAMHS patients seen by wait time since referral",
-                                   'camhs_waiting_times_cw_seen_since_plot',
-                                   subtitle = "Click on the legend to filter the chart"),
+                        withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),
+
                         plot_title("Proportion of patients seen within 18 weeks of referral",
                                    "camhs_waiting_times_cw_seen_within_plot"),
                         radioButtons(inputId = "camhs_waiting_times_cw_vlines",

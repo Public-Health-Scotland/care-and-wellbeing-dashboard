@@ -52,7 +52,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
 }
 
 
-make_camhs_waiting_times_cw_bar_plot = function(data) {
+make_camhs_waiting_times_cw_bar_plot = function(data, title) {
   data %>%
     mutate(wait_time = factor(wait_time, levels = c("0 to 18 weeks",
                                                     "19 to 35 weeks",
@@ -71,21 +71,24 @@ make_camhs_waiting_times_cw_bar_plot = function(data) {
                           scales::percent(data$proportion, accuracy = .1),"<br>",
                           "Number of patients seen: ",
                           format(data$number, big.mark = ",")),
+            hovertemplate = ~glue("{round_half_up(proportion*100, 2)}%"),
             hoverinfo = "text") %>%
     layout(barmode = "stack",
            bargap = 0,
            xaxis = xaxis_month,
-           yaxis = list(title = "Proportion",
+           yaxis = list(title = "Percentage",
                         rangemode="tozero",
                         fixedrange=TRUE,
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
                         ticksuffix = "%"),
-           legend = list(bgcolor = "#E2E2E2",
-                         title = list(
-                           text = "Filter wait time")
-           )) %>%
+           legend = list(xanchor = "center", x = 0.5,
+                         y = -0.3, orientation = 'h'),
+           title = list(text =str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified"
+           ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
