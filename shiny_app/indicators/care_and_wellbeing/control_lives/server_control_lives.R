@@ -28,12 +28,27 @@ altTextServer("camhs_waiting_times_cw_seen_since_alt",
                                 tags$li("It is a stacked bar plot where each bar refers to the month treatment started and each bar is seperated into",
                                         "sections which represent the percentage of patients seen by wait time since referral."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local geography level and area",
-                                        "for plotting. The default is Scotland. Please note that for some healthboards there are no data in some months",
+                                        "for plotting. The default is Scotland. Please note that for some Health Boards there are no data in some months",
                                         "and will appear as a gap on the graph."),
                                 tags$li("The legend shows 4 categories: `Over 52 weeks`, `36 to 52 weeks`, `19 to 35 weeks`, ",
                                         "and `0 to 18 weeks`. These are represented on the bar plot in the same order from top to bottom."),
                                 tags$li("The x axis is the month treatment started."),
                                 tags$li("The y axis is the percentage of patients seen by wait time since referral.")
+              ))
+
+altTextServer("camhs_waiting_times_cw_seen_within_alt",
+              title = "Percentage of CAMHS patients seen within 18 weeks of referral plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of CAMHS patients seen seen within 18 weeks of referral."),
+                                tags$li("The x axis is the month treatment started."),
+                                tags$li("The y axis is the percentage of CAMHS patients seen within 18 weeks of referral."),
+                                tags$li("The solid purple line is the percentage of CAMHS patients seen within 18 weeks of referral",
+                                        "and the dashed red line is the Scottish Government target."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local geography level and area",
+                                        "for plotting. The default is Scotland. Please note that for some Health Boards there are no data in some months",
+                                        "and will appear as a gap on the graph."),
+                                tags$li("There is a toggle above the chart which allows you to select whether to view the timeline of lockdowns on the chart.",
+                                        "If 'On' is selected, three dotted vertical lines will display when the 1st, 2nd and 3rd lockdowns occured.")
+
               ))
 
 observeEvent(input$camhs_waiting_times_cw_geog_type,
@@ -88,11 +103,14 @@ observeEvent(input$camhs_waiting_times_cw_geog_name, {
 # Proportion meeting target of 18 weeks line chart
 output$camhs_waiting_times_cw_seen_within_plot = renderPlotly({
 
+  title <- glue("Percentage of CAMHS patients seen within 18 weeks of referral in ", input$camhs_waiting_times_cw_geog_name)
+
   if (input$camhs_waiting_times_cw_vlines == "On") {
-    plot = make_camhs_waiting_times_cw_line_plot(hb_filter_table(camhs_waiting_times_cw_filtered_table, input$camhs_waiting_times_cw_geog_name))
+    plot = make_camhs_waiting_times_cw_line_plot(hb_filter_table(camhs_waiting_times_cw_filtered_table, input$camhs_waiting_times_cw_geog_name),
+                                                 title = title)
   } else {
     plot = make_camhs_waiting_times_cw_line_plot(hb_filter_table(camhs_waiting_times_cw_filtered_table, input$camhs_waiting_times_cw_geog_name),
-                           vline = FALSE)
+                                                 title = title, vline = FALSE)
   }
 
 

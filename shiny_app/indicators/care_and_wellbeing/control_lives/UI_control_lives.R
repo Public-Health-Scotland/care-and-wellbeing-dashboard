@@ -44,15 +44,16 @@ tagList(
                         altTextUI("camhs_waiting_times_cw_seen_since_alt"),
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),
 
-                        plot_title("Proportion of patients seen within 18 weeks of referral",
-                                   "camhs_waiting_times_cw_seen_within_plot"),
+                        br(),
+                        altTextUI("camhs_waiting_times_cw_seen_within_alt"),
                         radioButtons(inputId = "camhs_waiting_times_cw_vlines",
                                      label = "Toggle lockdown timeline",
                                      choices = c("On", "Off"),
                                      selected = "On",
                                      inline = TRUE),
+                        withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_within_plot")),
 
-
+                        br(),
                         h3(textOutput({"camhs_cw_table_title"})),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
