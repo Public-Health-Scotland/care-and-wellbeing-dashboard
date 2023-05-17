@@ -86,7 +86,7 @@ make_camhs_waiting_times_cw_bar_plot = function(data, title) {
                           scales::percent(data$proportion, accuracy = .1),"<br>",
                           "Number of patients seen: ",
                           format(data$number, big.mark = ",")),
-            hovertemplate = ~glue("{round_half_up(proportion*100, 2)}%"),
+            hovertemplate = ~glue("{round_half_up(proportion*100, 1)}%"),
             hoverinfo = "text") %>%
     layout(barmode = "stack",
            bargap = 0,
@@ -99,7 +99,8 @@ make_camhs_waiting_times_cw_bar_plot = function(data, title) {
                         showline = FALSE,
                         ticksuffix = "%"),
            legend = list(xanchor = "center", x = 0.5,
-                         y = -0.3, orientation = 'h'),
+                         y = -0.3, orientation = 'h',
+                         traceorder = "normal"),
            title = list(text =str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            hovermode = "x unified"

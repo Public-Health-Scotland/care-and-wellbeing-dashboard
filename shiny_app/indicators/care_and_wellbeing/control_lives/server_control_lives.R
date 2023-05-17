@@ -30,8 +30,8 @@ altTextServer("camhs_waiting_times_cw_seen_since_alt",
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local geography level and area",
                                         "for plotting. The default is Scotland. Please note that for some Health Boards there are no data in some months",
                                         "and will appear as a gap on the graph."),
-                                tags$li("The legend shows 4 categories: `Over 52 weeks`, `36 to 52 weeks`, `19 to 35 weeks`, ",
-                                        "and `0 to 18 weeks`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("The legend shows 4 categories: `0 to 18 weeks`, `19 to 35 weeks`, `36 to 52 weeks`",
+                                        "and `Over 52 weeks`. These are represented on the bar plot in the same order from bottom to top."),
                                 tags$li("The x axis is the month treatment started."),
                                 tags$li("The y axis is the percentage of patients seen by wait time since referral.")
               ))
