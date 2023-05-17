@@ -75,11 +75,12 @@ observeEvent(input$camhs_waiting_times_cw_geog_name,{
     select(date, hb2019name, wait_time, number, proportion) %>%
     mutate(date = format(date, "%B %Y")) %>%
     mutate(wait_time = factor(wait_time),
+           proportion = proportion*100,
            hb2019name = factor(hb2019name)) %>%
     rename("Month" = "date",
            "health_board" = "hb2019name",
            "Number of patients seen" = "number",
-           "Proportion of patients seen" = "proportion")
+           "Percentage of patients seen (%)" = "proportion")
 
   data_filtered <- data_unfiltered %>%
     filter(health_board == input$camhs_waiting_times_cw_geog_name)
@@ -87,14 +88,14 @@ observeEvent(input$camhs_waiting_times_cw_geog_name,{
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "camhs_cw", filename = "CAMHS_waiting_times",
                      add_separator_cols = c(4),
-                     add_separator_cols_2dp = c(5))
+                     add_separator_cols_1dp = c(5))
 
 })
 
 observeEvent(input$camhs_waiting_times_cw_geog_name, {
 
   output$camhs_cw_table_title <- renderText({
-    glue("Data table: Proportion of CAMHS patients seen by wait time since referral in ",
+    glue("Data table: Percentage of CAMHS patients seen by wait time since referral in ",
          input$camhs_waiting_times_cw_geog_name)})
 
 })
