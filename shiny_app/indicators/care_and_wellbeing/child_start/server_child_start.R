@@ -180,7 +180,7 @@ output$infant_mortality_cw_plot = renderPlotly({
            xaxis = xaxis_month,
            hovermode = "x unified",
            margin = list(t = 90, b = 40),
-           title = list(text = str_wrap("Month rate of infant deaths per 1,000 live births in Scotland", width = 60), font = title_style)) %>%
+           title = list(text = str_wrap("Monthly rate of infant deaths per 1,000 live births in Scotland", width = 60), font = title_style)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 })
 
@@ -221,7 +221,7 @@ output$child_obesity_plot <- renderPlotly({
 
   plot <- childhood_obesity %>%
     mutate(indicator = round_half_up(as.numeric(indicator), 1)) %>%
-    line_chart_function(., y_title = "Percentage", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", title = title)%>%
     layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
 
 })
