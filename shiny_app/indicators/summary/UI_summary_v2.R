@@ -246,15 +246,33 @@ tagList(
                                    fluidRow(
                                      column(4,
                                             h4("All-cause mortality (age 15-44)"),
-                                            withSpinner(infoBoxOutput("all_cause_mortality_infobox", width=NULL)),
+                                            summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
+                                                         button_title =  "All-cause mortality (age 15 to 44)",
+                                                         button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
+                                                                               "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
+                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
                                             h4("Coronary heart disease (CHD): deaths (age 45-74)"),
-                                            withSpinner(infoBoxOutput("chd_deaths_infobox", width=NULL)),
+                                            summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
+                                                         button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
+                                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range 2018 to 2020.",
+                                                                               "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
                                             h4("Drug-related deaths"),
-                                            withSpinner(infoBoxOutput("drug_deaths_infobox", width=NULL)),
+                                            summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
+                                                         button_title =  "Drug-related deaths",
+                                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
+
                                      )),
 
                                    fluidRow(

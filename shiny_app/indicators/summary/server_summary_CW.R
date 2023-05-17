@@ -41,7 +41,8 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   change = change)
+                   # change = change
+                   )
 })
 
 
@@ -73,79 +74,93 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   change = change)
+                   # change = change
+                   )
 
 })
 
 ##### All cause mortality #####
 
-output$all_cause_mortality_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(all_cause_mortality$year)
   previous_date <- max(all_cause_mortality %>% filter(year != recent_date) %>% .$year)
 
-  recent_value <- all_cause_mortality %>%
-    filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW, year == recent_date) %>%
+  value <- all_cause_mortality %>%
+    filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW
+           ) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
-    mutate(rate = deaths/pop*100000) %>% .$rate %>% round_half_up(2)
+    mutate(rate = deaths/pop*100000)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("all_cause_mortality_summary_info",
-                                   "All-cause mortality (age 15 to 44)",
-                                   glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {recent_date}.",
-                                        "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
-                                        "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+  # change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
+
+
+
+  summaryBoxServer("all_cause_mortality",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   # change = change
+                   )
 })
 
 ##### CHD deaths #####
 
-output$chd_deaths_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(chd_deaths$year_range)
+  previous_date <- max(chd_deaths %>% filter(year_range != recent_date) %>% .$year_range)
 
-  recent_value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW, year_range == recent_date) %>%
-    .$measure
+  value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("chd_deaths_summary_info",
-                                   "Coronary Heart Disease (CHD) deaths (aged 45-74)",
-                                   glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range 2018 to 2020.",
-                                        "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year_range == recent_date) %>% .$measure
+  previous_value <- value %>% filter(year_range == previous_date) %>% .$measure
+
+  summaryBoxServer("chd_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   # change = change
+  )
 })
 
 ##### Drug deaths #####
 
-output$drug_deaths_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(drug_related_deaths$year)
+  previous_date <- max(drug_related_deaths %>% filter(year != recent_date) %>% .$year)
 
-  recent_value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW, year == recent_date) %>%
-    .$rate
+  value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("drug_deaths_summary_info",
-                                   "Drug-related deaths",
-                                   glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+
+  # infoBox(title=h5(glue("{recent_date}"),
+  #                  summaryButtonUI("drug_deaths_summary_info",
+  #                                  "Drug-related deaths",
+  #                                  glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
+  #                                       "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
+  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+  #                                       "<br> <br> {strong('Click again to close.')}"))),
+  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
+  #         subtitle = glue("Rate of deaths per 100,000"),
+  #         icon = icon_no_warning_fn("user-shield"),
+  #         color = "purple")
+
+  summaryBoxServer("drug_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   # change = change
+  )
 })
 
 ##### Drug admission #####
