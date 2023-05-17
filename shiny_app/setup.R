@@ -154,6 +154,7 @@ xaxis_survey_year = list(title = "Survey Year",
 
 # Y axis style for % format
 yaxis_proportion = list(rangemode="tozero",
+                        title = "Percentage (%)",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
