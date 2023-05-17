@@ -21,6 +21,21 @@
 ##############################################.
 # CAMHS WAITING TIMES----
 ##############################################.
+
+altTextServer("camhs_waiting_times_cw_seen_since_alt",
+              title = "Percentage of CAMHS patients seen by wait time since referral plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of CAMHS patients seen by wait time since referral."),
+                                tags$li("It is a stacked bar plot where each bar refers to the month treatment started and each bar is seperated into",
+                                        "sections which represent the percentage of patients seen by wait time since referral."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local geography level and area",
+                                        "for plotting. The default is Scotland. Please note that for some healthboards there are no data in some months",
+                                        "and will appear as a gap on the graph."),
+                                tags$li("The legend shows 4 categories: `Over 52 weeks`, `36 to 52 weeks`, `19 to 35 weeks`, ",
+                                        "and `0 to 18 weeks`. These are represented on the bar plot in the same order from top to bottom."),
+                                tags$li("The x axis is the month treatment started."),
+                                tags$li("The y axis is the percentage of patients seen by wait time since referral.")
+              ))
+
 observeEvent(input$camhs_waiting_times_cw_geog_type,
              {
 

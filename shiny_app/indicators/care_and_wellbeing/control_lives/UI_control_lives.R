@@ -41,6 +41,7 @@ tagList(
                                           width = "100%"))
                                  ),
 
+                        altTextUI("camhs_waiting_times_cw_seen_since_alt"),
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),
 
                         plot_title("Proportion of patients seen within 18 weeks of referral",
