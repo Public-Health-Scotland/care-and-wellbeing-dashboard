@@ -226,7 +226,8 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value
+                   previous_value = previous_value,
+                   value_dp = 0
   )
 })
 
