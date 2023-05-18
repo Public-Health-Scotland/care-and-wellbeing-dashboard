@@ -5,6 +5,7 @@
 make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE, title) {
 
   yaxis_proportion[["title"]] = "Percentage"
+  yaxis_proportion[["range"]] = c(0,105)
 
   p = data %>%
     plot_ly(x=~date,
@@ -55,7 +56,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE, title) {
 
     p %<>%
       add_lines_and_notes(xs=xs,
-                          ys=c(0.1, 0.2, 0.3),
+                          ys=c(1.2, 1.2, 1.2),
                           fracs = fracs,
                           notes = c("1st<br>Lockdown", "2nd<br>Lockdown", "3rd<br>Lockdown"),
                           colors = (c(phs_colours("phs-teal"), phs_colours("phs-purple"),
