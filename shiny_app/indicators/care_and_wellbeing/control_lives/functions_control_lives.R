@@ -87,7 +87,8 @@ make_camhs_waiting_times_cw_bar_plot = function(data, title) {
                           "Number of patients seen: ",
                           format(data$number, big.mark = ",")),
             hovertemplate = ~glue("{round_half_up(proportion*100, 1)}%"),
-            hoverinfo = "text") %>%
+            hoverinfo = "text",
+            textposition = "none") %>%
     layout(barmode = "stack",
            bargap = 0,
            xaxis = xaxis_month,
