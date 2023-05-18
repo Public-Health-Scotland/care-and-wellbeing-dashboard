@@ -77,7 +77,7 @@ make_camhs_waiting_times_cw_bar_plot = function(data, title) {
             y=~proportion*100,
             color = ~wait_time,
             type = 'bar',
-            colors = palette_camhs,
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50'))),
             marker = list(line = list(width=1,
                                       color = 'rgb(0,0,0)')),
             text = paste0(format(data$date, "%B %Y"), "<br>",
