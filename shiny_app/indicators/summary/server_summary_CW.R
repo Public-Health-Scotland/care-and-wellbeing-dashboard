@@ -34,14 +34,12 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(date == recent_date) %>% .$stays_number
   previous_value <- value %>% filter(date == previous_date) %>% .$stays_number
 
-  change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
-
   summaryBoxServer("asthma_admissions",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   # change = change
+                   value_dp = 0
                    )
 })
 
@@ -67,14 +65,12 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(financial_year == recent_date) %>% .$stays_easr
   previous_value <- value %>% filter(financial_year == previous_date) %>% .$stays_easr
 
-  change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
-
   summaryBoxServer("alcohol_admissions",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   # change = change
+                   value_dp = 0
                    )
 
 })
@@ -95,16 +91,11 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(year == recent_date) %>% .$rate
   previous_value <- value %>% filter(year == previous_date) %>% .$rate
 
-  # change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
-
-
-
   summaryBoxServer("all_cause_mortality",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
-                   # change = change
+                   previous_value = previous_value
                    )
 })
 
@@ -124,8 +115,7 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
-                   # change = change
+                   previous_value = previous_value
   )
 })
 
@@ -141,49 +131,32 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(year == recent_date) %>% .$rate
   previous_value <- value %>% filter(year == previous_date) %>% .$rate
 
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("drug_deaths_summary_info",
-  #                                  "Drug-related deaths",
-  #                                  glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
-  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-  #         subtitle = glue("Rate of deaths per 100,000"),
-  #         icon = icon_no_warning_fn("user-shield"),
-  #         color = "purple")
-
   summaryBoxServer("drug_deaths",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
-                   # change = change
+                   previous_value = previous_value
   )
 })
 
 ##### Drug admission #####
 
-output$drug_admissions_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(drug_stays$financial_year)
+  previous_date <- max(drug_stays %>% filter(financial_year != recent_date) %>% .$financial_year)
 
-  recent_value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups", financial_year == recent_date) %>%
-    .$rate
+  value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("drug_admissions_summary_info",
-                                   "Drug-related hospital admissions",
-                                   glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {recent_date}. ",
-                                        "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown of age groups is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of stays per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(financial_year == recent_date) %>% .$rate
+  previous_value <-  value %>% filter(financial_year == previous_date) %>% .$rate
+
+  summaryBoxServer("drug_admissions",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Experience of social care recipients #####
@@ -194,69 +167,67 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Experience of unpaid carers #####
 
-output$experience_of_unpaid_carers_agree_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(experience_unpaid_carers$date)
+  previous_date <- max(experience_unpaid_carers %>% filter(date != recent_date) %>% .$date)
 
-  recent_value <- experience_unpaid_carers %>% filter(breakdown == "Strongly agree", geography == input$geog_name_summary_CW,  date == recent_date) %>%
-    .$indicator %>% as.numeric()*100
+  value <- experience_unpaid_carers %>% filter(geography == input$geog_name_summary_CW) %>% mutate(indicator = as.numeric(indicator)*100)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("experience_of_unpaid_carers_agree_summary_info",
-                                   "Experience of unpaid carers",
-                                   glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
-                                        "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value = ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-          subtitle = glue("Percentage who strongly agreed"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
-})
+  recent_value_agree <- value %>% filter(breakdown == "Strongly agree", date == recent_date) %>% .$indicator
+  previous_value_agree <- value %>% filter(breakdown == "Strongly agree", date == previous_date) %>% .$indicator
 
-output$experience_of_unpaid_carers_disagree_infobox <- renderInfoBox({
+  recent_value_disagree <- value %>% filter(breakdown == "Strongly disagree", date == recent_date) %>% .$indicator
+  previous_value_disagree <- value %>% filter(breakdown == "Strongly disagree", date == previous_date) %>% .$indicator
 
-  recent_date <- max(experience_unpaid_carers$date)
+  summaryBoxServer("experience_of_unpaid_carers_agree",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_agree,
+                   previous_value = previous_value_agree
+  )
 
-  recent_value <- experience_unpaid_carers %>% filter(breakdown == "Strongly disagree", geography == input$geog_name_summary_CW, date == recent_date) %>%
-    .$indicator %>% as.numeric()*100
+  summaryBoxServer("experience_of_unpaid_carers_disagree",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_disagree,
+                   previous_value = previous_value_disagree
+  )
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("experience_of_unpaid_carers_disagree_summary_info",
-                                   "Experience of unpaid carers",
-                                   glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
-                                        "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value= ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-          subtitle = glue("Percentage who strongly disagreed"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
 })
 
 ##### Hospital admissions for heart attack #####
 
-output$hospital_admission_heart_attack_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(heart_attack$date)
+  previous_date <- max(heart_attack %>% filter(date != recent_date) %>% .$date)
 
-  recent_value <- heart_attack %>% filter(date == recent_date, geography == input$geog_name_summary_CW) %>%
-    .$total_admissions
+  value <- heart_attack %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("hospital_admission_heart_attack_summary_info",
-                                   "First ever admission for heart attack",
-                                   glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
-                                        "amongst those aged under 75 years in the year {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown information is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Yearly total"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(date == recent_date) %>% .$total_admissions
+  previous_value <- value %>% filter(date == previous_date) %>% .$total_admissions
+
+
+  # infoBox(title=h5(glue("{recent_date}"),
+  #                  summaryButtonUI("hospital_admission_heart_attack_summary_info",
+  #                                  "First ever admission for heart attack",
+  #                                  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
+  #                                       "amongst those aged under 75 years in the year {recent_date}. <br> <br>",
+  #                                       "This data is available at Scotland level. Further breakdown information is ",
+  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+  #                                       "<br> <br> {strong('Click again to close.')}"))),
+  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
+  #         subtitle = glue("Yearly total"),
+  #         icon = icon_no_warning_fn("user-shield"),
+  #         color = "purple")
+
+  summaryBoxServer("hospital_admission_heart_attack",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Health risk behaviours #####

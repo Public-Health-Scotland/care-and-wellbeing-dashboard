@@ -224,334 +224,360 @@ tagList(
                                                                                "This data is available at Scotland and health board level. ",
                                                                                "Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
                                                                                "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
+                                                                               "<br> <br> Click again to close."))
                                      ),
 
 
-                                     column(4,
-                                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
-                                            summaryBoxUI("alcohol_deaths"),
-                                     ),
-                                     column(4,
-                                            h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
-                                            summaryBoxUI("alcohol_admissions", title = "Yearly total",
-                                                         button_title = "Alcohol-related hospital admissions",
-                                                         button_content = glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
-                                                                               "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
-                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
-                                     )
+                                     # column(4,
+                                     #        h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
+                                     #        summaryBoxUI("alcohol_deaths"),
+                                     # ),
+                                     # column(4,
+                                     #        h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
+                                     #        summaryBoxUI("alcohol_admissions", title = "Yearly total",
+                                     #                     button_title = "Alcohol-related hospital admissions",
+                                     #                     button_content = glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
+                                     #                                           "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
+                                     #                                           "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                     #                                           "<br> <br> {strong('Click again to close.')}"))
+                                     # )
                                    ),
 
-                                   fluidRow(
-                                     column(4,
-                                            h4("All-cause mortality (age 15-44)"),
-                                            summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
-                                                         button_title =  "All-cause mortality (age 15 to 44)",
-                                                         button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
-                                                                               "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
-                                                                               "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
-                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
-                                     ),
-                                     column(4,
-                                            h4("Coronary heart disease (CHD): deaths (age 45-74)"),
-                                            summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
-                                                         button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
-                                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range 2018 to 2020.",
-                                                                               "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
-                                                                               "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
-                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
-                                     ),
-                                     column(4,
-                                            h4("Drug-related deaths"),
-                                            summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
-                                                         button_title =  "Drug-related deaths",
-                                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
-                                                                               "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
-                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
+                                   # fluidRow(
+                                   #   column(4,
+                                   #          h4("All-cause mortality (age 15-44)"),
+                                   #          summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
+                                   #                       button_title =  "All-cause mortality (age 15 to 44)",
+                                   #                       button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
+                                   #                                             "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
+                                   #                                             "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
+                                   #                                             "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #   ),
+                                   #   column(4,
+                                   #          h4("Coronary heart disease (CHD): deaths (age 45-74)"),
+                                   #          summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
+                                   #                       button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
+                                   #                       button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range {max(chd_deaths$year_range)}.",
+                                   #                                             "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
+                                   #                                             "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
+                                   #                                             "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #   ),
+                                   #   column(4,
+                                   #          h4("Drug-related deaths"),
+                                   #          summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
+                                   #                       button_title =  "Drug-related deaths",
+                                   #                       button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {max(drug_related_deaths$year)}. <br> <br>",
+                                   #                                             "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
+                                   #                                             "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #
+                                   #   )),
 
-                                     )),
+                                   # fluidRow(
+                                   #   column(4,
+                                   #          h4("Drug-related hospital admissions"),
+                                   #          summaryBoxUI("drug_admissions", title = "Rate of stays per 100,000",
+                                   #                       button_title =  "Drug-related hospital admissions",
+                                   #                       button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_stays$financial_year)}. ",
+                                   #                                             "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
+                                   #                                             "This data is available at Scotland level. Further breakdown of age groups is ",
+                                   #                                             "available under `Strengthen the role and impact on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #   ),
+                                   #
+                                   #   column(4,
+                                   #          h4("Experience of unpaid carers"),
+                                   #          summaryBoxUI("experience_of_unpaid_carers_agree", title = "Percentage who strongly agreed",
+                                   #                       button_title =  "Experience of unpaid carers",
+                                   #                       button_content = glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
+                                   #                                             "“I feel supported to continue caring“ for the Health and Care Experience Survey {max(experience_unpaid_carers$date)}. <br> <br>",
+                                   #                                             "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
+                                   #                                             "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #   ),
+                                   #
+                                   #   column(4,
+                                   #          h4("Experience of unpaid carers"),
+                                   #          summaryBoxUI("experience_of_unpaid_carers_disagree", title = "Percentage who strongly disagreed",
+                                   #                       button_title =  "Experience of unpaid carers",
+                                   #                       button_content = glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
+                                   #                                             "“I feel supported to continue caring“ for the Health and Care Experience Survey {max(experience_unpaid_carers$date)}. <br> <br>",
+                                   #                                             "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
+                                   #                                             "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                   #                                             "<br> <br> {strong('Click again to close.')}"))
+                                   #   )),
 
-                                   fluidRow(
-                                     column(4,
-                                            h4("Drug-related hospital admissions"),
-                                            withSpinner(infoBoxOutput("drug_admissions_infobox", width=NULL)),
-                                     ),
+                                 #   fluidRow(
+                                 #     # column(4,
+                                 #     #        h4("First ever hospital admission for heart attack (under 75)"),
+                                 #     #
+                                 #     #        summaryBoxUI("hospital_admission_heart_attack", title = "Yearly total",
+                                 #     #                     button_title =  "First ever hospital admission for heart attack  (under 75)",
+                                 #     #                     button_content =  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
+                                 #     #                                            "amongst those aged under 75 years in the year {max(heart_attack$date)}. <br> <br>",
+                                 #     #                                            "This data is available at Scotland level. Further breakdown information is ",
+                                 #     #                                            "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                 #     #                                            "<br> <br> {strong('Click again to close.')}"))
+                                 #     #        ),
+                                 #            column(4,
+                                 #                   h4("Healthy birthweight"),
+                                 #                   withSpinner(infoBoxOutput("healthy_birthweight_infobox", width=NULL)),
+                                 #            ),
+                                 #            column(4,
+                                 #                   h4("Limiting long-term conditions (age 16+)"),
+                                 #                   withSpinner(infoBoxOutput("adult_long_term_condition_infobox", width=NULL)),
+                                 #            )),
+                                 #     fluidRow(
+                                 #       column(4,
+                                 #              h4("Self-assessed health of adults (age 16+)"),
+                                 #              withSpinner(infoBoxOutput("adults_self_assessed_health_infobox", width=NULL)),
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Experience of social care recipients"),
+                                 #              summaryBoxUI("experience_recipients")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Health risk behaviours"),
+                                 #              summaryBoxUI("health_risk_behaviours")
+                                 #       )),
+                                 #
+                                 #     fluidRow(
+                                 #       column(4,
+                                 #              h4("Healthy life expectancy"),
+                                 #              summaryBoxUI("healthy_life_expectancy")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Healthy weight adults"),
+                                 #              summaryBoxUI("healthy_weight")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Mental wellbeing of adults (16+)"),
+                                 #              summaryBoxUI("mental_wellbeing")
+                                 #       )),
+                                 #     fluidRow(
+                                 #       column(4,
+                                 #              h4("Physical activity"),
+                                 #              summaryBoxUI("physical_activity")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Premature mortality"),
+                                 #              summaryBoxUI("premature_mortality")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Quality of care experience"),
+                                 #              summaryBoxUI("quality_care")
+                                 #       )),
+                                 #     fluidRow(
+                                 #       column(4,
+                                 #              h4("Screening- uptake for breast and bowel cancer"),
+                                 #              summaryBoxUI("screening")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Vaccinations – uptake "),
+                                 #              summaryBoxUI("vaccinations")
+                                 #       ),
+                                 #       column(4,
+                                 #              h4("Work-related ill health"),
+                                 #              summaryBoxUI("work_related_health")
+                                 #       )),
+                                 #     fluidRow(column(12, br()))
+                                 #   )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Give every child the best start in life"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(4,
+                                 #                h4("At risk of obesity"),
+                                 #                withSpinner(infoBoxOutput("children_at_risk_of_obesity_infobox", width=NULL))
+                                 #         ),
+                                 #
+                                 #         column(4,
+                                 #                h4("Child social and physical development"),
+                                 #                withSpinner(infoBoxOutput("child_development_cw_infobox", width=NULL))
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Infant mortality"),
+                                 #                withSpinner(infoBoxOutput("infant_mortality_cw_infobox", width=NULL))
+                                 #         )),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Child material deprivation"),
+                                 #                summaryBoxUI("child_material_deprivation")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Child wellbeing and happiness"),
+                                 #                summaryBoxUI("child_wellbeing")
+                                 #         )),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Perinatal mortality rate"),
+                                 #                summaryBoxUI("perinatal_mortality")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Physical activity"),
+                                 #                summaryBoxUI("physical_activity_children_cw")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(4,
+                                 #                h4("CAMHS waiting times"),
+                                 #                withSpinner(infoBoxOutput("camhs_waiting_times_cw_infobox", width=NULL))
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Children have positive relationships"),
+                                 #                summaryBoxUI("children_relationships")
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Children’s voices"),
+                                 #                summaryBoxUI("childrens_voices")
+                                 #         )),
+                                 #
+                                 #       fluidRow(
+                                 #
+                                 #         column(6,
+                                 #                h4("Confidence and resilience of children and young people"),
+                                 #                summaryBoxUI("confidence_of_young")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Mental health / mental wellbeing"),
+                                 #                summaryBoxUI("mental_health_cw")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Create fair employment and good work for all"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(4,
+                                 #                h4("Economic inactivity"),
+                                 #                withSpinner(infoBoxOutput("economic_inactivity_cw_want_infobox", width=NULL))
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Economic inactivity"),
+                                 #                withSpinner(infoBoxOutput("economic_inactivity_cw_not_want_infobox", width=NULL))
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Employees on the living wage"),
+                                 #                withSpinner(infoBoxOutput("employees_living_wage_cw_infobox", width=NULL))
+                                 #         )),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Pay gap"),
+                                 #                withSpinner(infoBoxOutput("gender_pay_gap_cw_infobox", width=NULL))
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Work related ill health"),
+                                 #                summaryBoxUI("work_related_ill_health")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Ensure healthy standard of living for all"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(4,
+                                 #                h4("Food insecurity money or other resources"),
+                                 #                summaryBoxUI("food_insecurity")
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Persistent poverty"),
+                                 #                summaryBoxUI("persistent_poverty")
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Satisfaction with housing"),
+                                 #                summaryBoxUI("satisfaction_with_housing")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Create and develop healthy and sustainable places and communities"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Loneliness"),
+                                 #                summaryBoxUI("loneliness")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Number of areas where health inequalities are reducing"),
+                                 #                summaryBoxUI("areas_of_health_inequalities")
+                                 #         )),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Perceptions of local area"),
+                                 #                summaryBoxUI("perceptions_of_local_area")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Places to interact"),
+                                 #                summaryBoxUI("places_to_intereact")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Tackling discrimination, racism and their outcomes"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(6,
+                                 #                h4("Gender balance in organisations"),
+                                 #                summaryBoxUI("gender_balance")
+                                 #         ),
+                                 #         column(6,
+                                 #                h4("Public services treat people with dignity and respect"),
+                                 #                summaryBoxUI("dignity_respect")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                 #     )),
+                                 #
+                                 # box(width = 12,
+                                 #     status = "info",
+                                 #     tagList(
+                                 #       h2("Pursuing environmental sustainability and health equity together"),
+                                 #
+                                 #       fluidRow(
+                                 #         column(4,
+                                 #                h4("Access to green and blue space"),
+                                 #                summaryBoxUI("blue_green_space")
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Journeys by active travel"),
+                                 #                summaryBoxUI("journeys_active")
+                                 #         ),
+                                 #         column(4,
+                                 #                h4("Visits to the outdoors"),
+                                 #                summaryBoxUI("visit_outdoors")
+                                 #         )),
+                                 #       fluidRow(column(12, br()))
+                                     ))
 
-                                     column(4,
-                                            h4("Experience of unpaid carers"),
-                                            withSpinner(infoBoxOutput("experience_of_unpaid_carers_agree_infobox", width=NULL)),
-                                     ),
-                                     column(4,
-                                            h4("Experience of unpaid carers"),
-                                            withSpinner(infoBoxOutput("experience_of_unpaid_carers_disagree_infobox", width=NULL)),
-                                     )),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("First ever hospital admission for heart attack (under 75)"),
-                                            withSpinner(infoBoxOutput("hospital_admission_heart_attack_infobox", width=NULL)),
-                                     ),
-                                     column(4,
-                                            h4("Healthy birthweight"),
-                                            withSpinner(infoBoxOutput("healthy_birthweight_infobox", width=NULL)),
-                                     ),
-                                     column(4,
-                                            h4("Limiting long-term conditions (age 16+)"),
-                                            withSpinner(infoBoxOutput("adult_long_term_condition_infobox", width=NULL)),
-                                     )),
-                                   fluidRow(
-                                     column(4,
-                                            h4("Self-assessed health of adults (age 16+)"),
-                                            withSpinner(infoBoxOutput("adults_self_assessed_health_infobox", width=NULL)),
-                                     ),
-                                     column(4,
-                                            h4("Experience of social care recipients"),
-                                            summaryBoxUI("experience_recipients")
-                                     ),
-                                     column(4,
-                                            h4("Health risk behaviours"),
-                                            summaryBoxUI("health_risk_behaviours")
-                                     )),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("Healthy life expectancy"),
-                                            summaryBoxUI("healthy_life_expectancy")
-                                     ),
-                                     column(4,
-                                            h4("Healthy weight adults"),
-                                            summaryBoxUI("healthy_weight")
-                                     ),
-                                     column(4,
-                                            h4("Mental wellbeing of adults (16+)"),
-                                            summaryBoxUI("mental_wellbeing")
-                                     )),
-                                   fluidRow(
-                                     column(4,
-                                            h4("Physical activity"),
-                                            summaryBoxUI("physical_activity")
-                                     ),
-                                     column(4,
-                                            h4("Premature mortality"),
-                                            summaryBoxUI("premature_mortality")
-                                     ),
-                                     column(4,
-                                            h4("Quality of care experience"),
-                                            summaryBoxUI("quality_care")
-                                     )),
-                                   fluidRow(
-                                     column(4,
-                                            h4("Screening- uptake for breast and bowel cancer"),
-                                            summaryBoxUI("screening")
-                                     ),
-                                     column(4,
-                                            h4("Vaccinations – uptake "),
-                                            summaryBoxUI("vaccinations")
-                                     ),
-                                     column(4,
-                                            h4("Work-related ill health"),
-                                            summaryBoxUI("work_related_health")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Give every child the best start in life"),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("At risk of obesity"),
-                                            withSpinner(infoBoxOutput("children_at_risk_of_obesity_infobox", width=NULL))
-                                     ),
-
-                                     column(4,
-                                            h4("Child social and physical development"),
-                                            withSpinner(infoBoxOutput("child_development_cw_infobox", width=NULL))
-                                     ),
-                                     column(4,
-                                            h4("Infant mortality"),
-                                            withSpinner(infoBoxOutput("infant_mortality_cw_infobox", width=NULL))
-                                     )),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Child material deprivation"),
-                                            summaryBoxUI("child_material_deprivation")
-                                     ),
-                                     column(6,
-                                            h4("Child wellbeing and happiness"),
-                                            summaryBoxUI("child_wellbeing")
-                                     )),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Perinatal mortality rate"),
-                                            summaryBoxUI("perinatal_mortality")
-                                     ),
-                                     column(6,
-                                            h4("Physical activity"),
-                                            summaryBoxUI("physical_activity_children_cw")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("CAMHS waiting times"),
-                                            withSpinner(infoBoxOutput("camhs_waiting_times_cw_infobox", width=NULL))
-                                     ),
-                                     column(4,
-                                            h4("Children have positive relationships"),
-                                            summaryBoxUI("children_relationships")
-                                     ),
-                                     column(4,
-                                            h4("Children’s voices"),
-                                            summaryBoxUI("childrens_voices")
-                                     )),
-
-                                   fluidRow(
-
-                                     column(6,
-                                            h4("Confidence and resilience of children and young people"),
-                                            summaryBoxUI("confidence_of_young")
-                                     ),
-                                     column(6,
-                                            h4("Mental health / mental wellbeing"),
-                                            summaryBoxUI("mental_health_cw")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Create fair employment and good work for all"),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("Economic inactivity"),
-                                            withSpinner(infoBoxOutput("economic_inactivity_cw_want_infobox", width=NULL))
-                                     ),
-                                     column(4,
-                                            h4("Economic inactivity"),
-                                            withSpinner(infoBoxOutput("economic_inactivity_cw_not_want_infobox", width=NULL))
-                                     ),
-                                     column(4,
-                                            h4("Employees on the living wage"),
-                                            withSpinner(infoBoxOutput("employees_living_wage_cw_infobox", width=NULL))
-                                     )),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Pay gap"),
-                                            withSpinner(infoBoxOutput("gender_pay_gap_cw_infobox", width=NULL))
-                                     ),
-                                     column(6,
-                                            h4("Work related ill health"),
-                                            summaryBoxUI("work_related_ill_health")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Ensure healthy standard of living for all"),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("Food insecurity money or other resources"),
-                                            summaryBoxUI("food_insecurity")
-                                     ),
-                                     column(4,
-                                            h4("Persistent poverty"),
-                                            summaryBoxUI("persistent_poverty")
-                                     ),
-                                     column(4,
-                                            h4("Satisfaction with housing"),
-                                            summaryBoxUI("satisfaction_with_housing")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Create and develop healthy and sustainable places and communities"),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Loneliness"),
-                                            summaryBoxUI("loneliness")
-                                     ),
-                                     column(6,
-                                            h4("Number of areas where health inequalities are reducing"),
-                                            summaryBoxUI("areas_of_health_inequalities")
-                                     )),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Perceptions of local area"),
-                                            summaryBoxUI("perceptions_of_local_area")
-                                     ),
-                                     column(6,
-                                            h4("Places to interact"),
-                                            summaryBoxUI("places_to_intereact")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Tackling discrimination, racism and their outcomes"),
-
-                                   fluidRow(
-                                     column(6,
-                                            h4("Gender balance in organisations"),
-                                            summaryBoxUI("gender_balance")
-                                     ),
-                                     column(6,
-                                            h4("Public services treat people with dignity and respect"),
-                                            summaryBoxUI("dignity_respect")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 )),
-
-                             box(width = 12,
-                                 status = "info",
-                                 tagList(
-                                   h2("Pursuing environmental sustainability and health equity together"),
-
-                                   fluidRow(
-                                     column(4,
-                                            h4("Access to green and blue space"),
-                                            summaryBoxUI("blue_green_space")
-                                     ),
-                                     column(4,
-                                            h4("Journeys by active travel"),
-                                            summaryBoxUI("journeys_active")
-                                     ),
-                                     column(4,
-                                            h4("Visits to the outdoors"),
-                                            summaryBoxUI("visit_outdoors")
-                                     )),
-                                   fluidRow(column(12, br()))
-                                 ))
-
+                             )
                     )
-             )
-           ))
+             ))
 
-)
+  )
