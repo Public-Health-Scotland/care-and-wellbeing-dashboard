@@ -12,7 +12,7 @@ summaryBoxUI <- function(id, title = "", button_title = "", button_content = "To
                         button_title,
                         button_content),
         width = "100%",
-        withSpinner(uiOutput(ns("summary_values")))
+        uiOutput(ns("summary_values"))
     ),
     br()
   )
