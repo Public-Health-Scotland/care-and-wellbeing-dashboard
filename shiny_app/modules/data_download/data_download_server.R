@@ -6,7 +6,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                                add_separator_cols_1dp = NULL, # with , separator and 1dp
                                add_separator_cols_2dp = NULL, # with , separator and 2dp,
                                add_percentage_cols = NULL, # with % symbol and 2dp
-                               maxrows = 14, # max rows displayed on page
+                               maxrows = 10, # max rows displayed on page
                                order_by_firstcol = NULL, # asc, desc or NULL
                                filter_cols = NULL, # columns to have filters for
                                highlight_column = NULL) { # Column to highlight specific entries based off
@@ -64,7 +64,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                               rownames = FALSE,
                               filter="top",
                               colnames = table_colnames,
-                              options = list(pageLength = 10,
+                              options = list(pageLength = maxrows,
                                              scrollX = FALSE,
                                              scrollY = FALSE,
                                              dom = 'tip',
