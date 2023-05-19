@@ -84,4 +84,49 @@ ciDefinitionUI <- function(id) {
 
 }
 
+simd5DefinitionUI <- function(id) {
+  ns <- NS(id)
+
+  summaryButtonUI(ns("simd_defintion"),
+                  title = "What is the Scottish Index of Multiple Deprivation (SIMD)?",
+                  content = paste("People have been allocated to different levels of deprivation based on the small area (data zone) in which they live and the",
+                                  "<a href=https://simd.scot/#/simd2020/BTTTFTT/9/-4.0000/55.9000/ target=_blank> Scottish Index of Multiple Deprivation (SIMD) (external website) </a>",
+                                  "core for that area. SIMD scores are based on data for 38 indicators covering seven topic areas:",
+                                  "income, employment, health, education, skills and training, housing, geographic access, and crime.",
+                                  "<br> <br> The SIMD identifies deprived areas, not deprived individuals. <br> <br>",
+                                  "In this tab we have presented results for people living in different SIMD ‘quintiles’. To produce quintiles,",
+                                  "data zones are ranked by their SIMD score then the areas each containing a fifth (20%) of the overall population",
+                                  "of Scotland are identified. People living in the most and least deprived areas that each contain a fifth of the",
+                                  "population are assigned to SIMD quintile 1 and 5 respectively."
+                                  ),
+                  placement = "bottom",
+                  label = "What is SIMD?",
+                  icon = "circle-question",
+                  class = "plotinfo-btn"
+  )
+
+
+}
+
+simd10DefinitionUI <- function(id) {
+  ns <- NS(id)
+
+  summaryButtonUI(ns("simd_defintion"),
+                  title = "What is the Scottish Index of Multiple Deprivation (SIMD)?",
+                  content = paste("People have been allocated to different levels of deprivation based on the small area (data zone) in which they live and the",
+                                  "<a href=https://simd.scot/#/simd2020/BTTTFTT/9/-4.0000/55.9000/ target=_blank> Scottish Index of Multiple Deprivation (SIMD) (external website) </a>",
+                                  "core for that area. SIMD scores are based on data for 38 indicators covering seven topic areas:",
+                                  "income, employment, health, education, skills and training, housing, geographic access, and crime.",
+                                  "<br> <br> The SIMD identifies deprived areas, not deprived individuals. <br> <br>",
+                                  "In this tab we have presented results for people living in different SIMD ‘deciles’. Socioeconomic data are derived",
+                                  "from the Scottish Index of Multiple Deprivation (SIMD) 2020 v2, and are presented as deciles,",
+                                  "with decile 1 indicating the population living in the most deprived areas and decile 10 the least deprived areas."),
+                  placement = "bottom",
+                  label = "What is SIMD?",
+                  icon = "circle-question",
+                  class = "plotinfo-btn"
+  )
+
+
+}
 
