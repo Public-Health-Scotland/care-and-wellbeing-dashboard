@@ -161,13 +161,13 @@ observeEvent(input$chd_deaths_geog_type,
 
 
 output$chd_deaths_plot = renderPlotly({
-  title <- glue("Trend in age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+  title <- glue("Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
                 input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Rate per 100,000", title = title) %>%
+    confidence_line_function(., y_title = "Rates of death <br> per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
@@ -387,7 +387,7 @@ output$drug_deaths_plot = renderPlotly({
       mutate(date = year) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Rate per 100,000", title = title_rate) %>%
+      confidence_line_function(., "Rates of deaths <br> per 100,000 population", title = title_rate) %>%
       layout(xaxis = list(tickangle = 30),
              legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
