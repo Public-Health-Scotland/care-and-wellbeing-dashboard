@@ -582,11 +582,13 @@ tagList(
 
                         tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
+
+                               ######### COVID-19 ##########
                                tabPanel(title = "COVID-19 vaccinations",
                                         value = "covid_vaccinations",
 
                                         h2("COVID-19 vaccinations uptake",
-                                           iButtonUI("vaccinations",
+                                           iButtonUI("vaccinations_covid",
                                                      content = paste("Add stuff"))),
 
                                         fluidRow(column(4,
@@ -616,12 +618,12 @@ tagList(
                                         dataDownloadUI("vaccinations_covid")
                                ),
 
-
+                               ######## FLU #############
                                tabPanel(title = "Flu vaccinations",
                                         value = "flu_vaccinations",
 
                                         h2("Flu vaccinations uptake",
-                                           iButtonUI("vaccinations",
+                                           iButtonUI("vaccinations_FLU",
                                                      content = paste("Add stuff"))),
 
                                         fluidRow(column(4,
