@@ -9,8 +9,8 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                                maxrows = 10, # max rows displayed on page
                                order_by_firstcol = NULL, # asc, desc or NULL
                                filter_cols = NULL, # columns to have filters for
-                               highlight_column = NULL) { # Column to highlight specific entries based off
-
+                               highlight_column = NULL, # Column to highlight specific entries based off
+                               cap_colname = NULL) { # columns with names that need to be uppercase (e.g. SIMD)
 
   moduleServer(
     id,
@@ -25,6 +25,10 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
             gsub("_", " ", .) %>%
             str_to_sentence(.)
 
+          for (i in cap_colname){
+            table_colnames[i] %<>% toupper(.)
+          }
+
           # Add column formatting
 
           for (i in add_separator_cols){
@@ -37,6 +41,10 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
 
           for (i in add_separator_cols_2dp){
             data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=2)
+          }
+
+          for (i in add_percentage_cols){
+            data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=1, perc=T)
           }
 
           for (i in add_percentage_cols){
@@ -96,9 +104,9 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
 
         content = function(file) {
           write.csv(data_output, file, row.names = FALSE)
-          }
+        }
 
-        )
+      )
 
       output$excel <- downloadHandler(
         file = function(){

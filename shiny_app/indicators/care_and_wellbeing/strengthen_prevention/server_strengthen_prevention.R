@@ -939,7 +939,8 @@ observeEvent(input$vaccinations_covid_geog_name,{
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_covid", filename = "vaccinations_covid",
                      add_separator_cols = c(4,5),
-                     add_percentage_cols = c(6))
+                     add_percentage_cols = c(6),
+                     cap_colname = c(3))
 })
 
 
@@ -1006,7 +1007,8 @@ observeEvent(input$vaccinations_flu_geog_name,{
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_flu", filename = "vaccinations_flu",
                      add_separator_cols = c(4,5),
-                     add_percentage_cols = c(6))
+                     add_percentage_cols = c(6),
+                     cap_colname = c(3))
 })
 
 ##############################################.
