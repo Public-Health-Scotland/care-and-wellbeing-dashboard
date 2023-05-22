@@ -2,6 +2,105 @@
 # HEALTHY LIFE EXPECTANCY----
 ##############################################.
 
+altTextServer("healthy_life_expectancy_trend_alt",
+              title = "Healthy life expectancy by year range plot",
+              content = tags$ul(tags$li("This is a plot for the trend in healthy life expectancy in Scotland."),
+                                tags$li("The x axis is the 3 year range, starting from 2009-2011."),
+                                tags$li("There are two drop downs above the chart which allow you to select sex",
+                                        "and whether the healthy life expectancy is at birth or at age 65."),
+                                tags$li("The solid purple line is the specified sex and stage of life and the lighter purple area around",
+                                        "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("Since the data began there has been a general downwards trend in male healthy life expectancy for both",
+                                        "at birth and at age 65"),
+                                tags$li("Since the data began there has been a general downwards trend in female healthy life expectancy at birth,",
+                                        "but a general upwards trend in female healthy life expectancy at age 65.")
+
+
+              )
+)
+
+output$healthy_life_expectancy_trend_plot = renderPlotly({
+  title <- glue(input$healthy_life_expectancy_sex,
+                " healthy life expectancy ",
+                str_to_lower(input$healthy_life_expectancy_life_stage),
+                " in Scotland"
+                )
+  data = healthy_life_expectancy %>%
+    filter(geography == "Scotland",
+           sex == input$healthy_life_expectancy_sex,
+           stage_of_life == input$healthy_life_expectancy_life_stage) %>%
+    rename(date = time_period) %>%
+    confidence_line_function_hle(., y_title = "Healthy life expectancy", title = title) %>%
+    layout(xaxis = list(tickangle = 30),
+           yaxis = yaxis_number_normal,
+           legend = list(y = -0.4))
+})
+
+altTextServer("healthy_life_expectancy_council_area_alt",
+              title = "Healthy life expectancy by council area plot",
+              content = tags$ul(tags$li("This is a plot for healthy life expectancy for the time period of 2019-2021 by council area."),
+                                tags$li("The x axis is the council area."),
+                                tags$li("There are two drop downs above the chart which allow you to select sex",
+                                        "and whether the healthy life expectancy is at birth or at age 65."),
+                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex and stage of life",
+                                        "and the vertical lines from each dot indicates the confidence interval."),
+                                tags$li("Orkney Islands had the highest healthy life expectancy at birth for both males and females."),
+                                tags$li("North Lanarkshire had the lowest healthy life expectancy at birth for males and",
+                                        "North Ayrshire had the lowest healthy life expectancy at birth for females.")
+
+              )
+)
+
+output$healthy_life_expectancy_council_area_plot = renderPlotly({
+  title <- glue(input$healthy_life_expectancy_sex,
+                " healthy life expectancy ",
+                str_to_lower(input$healthy_life_expectancy_life_stage),
+                " in council areas 2019-2021"
+  )
+  data = healthy_life_expectancy %>%
+    filter(sex == input$healthy_life_expectancy_sex,
+           stage_of_life == input$healthy_life_expectancy_life_stage) %>%
+    mutate(ErrorBarHeight = upper_confidence_interval - lower_confidence_interval,
+           ErrorBarLowerHeight = indicator - lower_confidence_interval) %>%
+    rename(date = time_period) %>%
+    confidence_scatter_function_hle(., y_title = "Healthy life expectancy", title = title) %>%
+    layout(xaxis = list(tickangle = 90),
+           yaxis = yaxis_number_normal,
+           legend = list(y = -1.3))
+})
+
+observeEvent(input$healthy_life_expectancy_sex,{
+  observeEvent(input$healthy_life_expectancy_life_stage,{
+
+    data_unfiltered <- healthy_life_expectancy %>%
+      select(time_period, geography_type, geography, sex, stage_of_life, indicator,
+             lower_confidence_interval, upper_confidence_interval) %>%
+      arrange(time_period) %>%
+      mutate(time_period = factor(time_period)) %>%
+      rename("year_range" = "time_period",
+             "healthy_life_expectancy" = "indicator")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == input$healthy_life_expectancy_sex) %>%
+      filter(stage_of_life == input$healthy_life_expectancy_life_stage)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "healthy_life_expectancy", filename = "healthy_life_expectancy",
+                       add_separator_cols_2dp = c(6,7,8))
+  })
+})
+
+observeEvent(input$healthy_life_expectancy_sex,{
+  observeEvent(input$healthy_life_expectancy_life_stage,{
+
+  output$healthy_life_expectancy_title <- renderText({glue("Data table:",
+                                                           input$healthy_life_expectancy_sex,
+                                                           " healthy life expectancy ",
+                                                           str_to_lower(input$healthy_life_expectancy_life_stage))})
+  })
+})
 
 ##############################################.
 # MENTAL WELLBEING OF ADULTS (16+)----
