@@ -5,7 +5,6 @@ summaryBoxServer <- function(id,
                              previous_date = numeric(0),
                              recent_value = "To be developed",
                              previous_value = numeric(0),
-                             #change = numeric(0),
                              percentage_symbol = "", # If a percentage symbol is needed update to "%"
                              value_dp = 2
 ) {
@@ -13,10 +12,6 @@ summaryBoxServer <- function(id,
   moduleServer(
     id,
     function(input, output, session) {
-
-      # change <- ifelse(length(recent_value)[1] == 0, numeric(0),
-      #                  ifelse(recent_value == "To be developed", numeric(0),
-      #                         round_half_up((recent_value-previous_value)*100/previous_value)))
 
       change <- numeric(0)
 
