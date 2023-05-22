@@ -894,7 +894,8 @@ altTextServer("vaccinations_covid_alt",
                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least depreived and 10 is most deprived."),
                                 tags$li("he y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("The data for \\'Not Known\\' SIMD has been removed.")
 
               )
 )
@@ -963,7 +964,8 @@ altTextServer("vaccinations_flu_alt",
                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least depreived and 10 is most deprived."),
                                 tags$li("he y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("The data for \\'Not Known\\' SIMD has been removed.")
 
               )
 )
