@@ -1,7 +1,7 @@
 
 tagList(
   fluidRow(width=12,
-           h1("Dashboard summary"),
+           h1("At a glance"),
 
            p("Select either Covid Recovery or Care and Wellbeing, and then select at which national or",
              "local geography level and area you wish to see data for."),
@@ -220,68 +220,106 @@ tagList(
                                             h3(actionLink("jump_summary_to_asthma_admissions", "Admissions for asthma")),
                                             summaryBoxUI("asthma_admissions", title = "Yearly total",
                                                          button_title = "Admissions for asthma",
-                                                         button_content = glue("This is the yearly total number of admissions for asthma for the financial year 2. <br> <br>",
+                                                         button_content = glue("This is the yearly total number of admissions for asthma for the financial year {max(asthma_admissions$date)}. <br> <br>",
                                                                                "This data is available at Scotland and health board level. ",
                                                                                "Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
                                                                                "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                               "<br> <br> {strong('Click again to close.')}"))
+                                                                               "<br> <br> Click again to close."))
                                      ),
 
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
-                                            withSpinner(infoBoxOutput("alcohol_deaths_infobox", width=NULL)),
+                                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
+                                            summaryBoxUI("alcohol_deaths"),
                                      ),
                                      column(4,
                                             h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions (under 75)")),
-                                            box(status = "primary",
-                                                title = h4(glue("Yearly total"),
-                                                           summaryButtonUI("alcohol_admissions_summary_info",
-                                                                           "Alcohol-related hospital admissions",
-                                                                           glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
-                                                                                "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
-                                                                                "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                                "<br> <br> {strong('Click again to close.')}"))),
-                                                width = "100%",
-                                                background = "purple",
-                                                uiOutput("alcohol_admissions_test")
-                                            )
+                                            summaryBoxUI("alcohol_admissions", title = "Yearly total",
+                                                         button_title = "Alcohol-related hospital admissions",
+                                                         button_content = glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
+                                                                               "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
+                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      )
                                    ),
 
                                    fluidRow(
                                      column(4,
                                             h4("All-cause mortality (age 15-44)"),
-                                            withSpinner(infoBoxOutput("all_cause_mortality_infobox", width=NULL)),
+                                            summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
+                                                         button_title =  "All-cause mortality (age 15 to 44)",
+                                                         button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
+                                                                               "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
+                                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
                                             h4("Coronary heart disease (CHD): deaths (age 45-74)"),
-                                            withSpinner(infoBoxOutput("chd_deaths_infobox", width=NULL)),
+                                            summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
+                                                         button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
+                                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range {max(chd_deaths$year_range)}.",
+                                                                               "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
                                             h4("Drug-related deaths"),
-                                            withSpinner(infoBoxOutput("drug_deaths_infobox", width=NULL)),
+                                            summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
+                                                         button_title =  "Drug-related deaths",
+                                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {max(drug_related_deaths$year)}. <br> <br>",
+                                                                               "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
+
                                      )),
 
                                    fluidRow(
                                      column(4,
                                             h4("Drug-related hospital admissions"),
-                                            withSpinner(infoBoxOutput("drug_admissions_infobox", width=NULL)),
+                                            summaryBoxUI("drug_admissions", title = "Rate of stays per 100,000",
+                                                         button_title =  "Drug-related hospital admissions",
+                                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_stays$financial_year)}. ",
+                                                                               "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
+                                                                               "This data is available at Scotland level. Further breakdown of age groups is ",
+                                                                               "available under `Strengthen the role and impact on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
 
                                      column(4,
                                             h4("Experience of unpaid carers"),
-                                            withSpinner(infoBoxOutput("experience_of_unpaid_carers_agree_infobox", width=NULL)),
+                                            summaryBoxUI("experience_of_unpaid_carers_agree", title = "Percentage who strongly agreed",
+                                                         button_title =  "Experience of unpaid carers",
+                                                         button_content = glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
+                                                                               "“I feel supported to continue caring“ for the Health and Care Experience Survey {max(experience_unpaid_carers$date)}. <br> <br>",
+                                                                               "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      ),
+
                                      column(4,
                                             h4("Experience of unpaid carers"),
-                                            withSpinner(infoBoxOutput("experience_of_unpaid_carers_disagree_infobox", width=NULL)),
+                                            summaryBoxUI("experience_of_unpaid_carers_disagree", title = "Percentage who strongly disagreed",
+                                                         button_title =  "Experience of unpaid carers",
+                                                         button_content = glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
+                                                                               "“I feel supported to continue caring“ for the Health and Care Experience Survey {max(experience_unpaid_carers$date)}. <br> <br>",
+                                                                               "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
+                                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                               "<br> <br> {strong('Click again to close.')}"))
                                      )),
 
                                    fluidRow(
                                      column(4,
                                             h4("First ever hospital admission for heart attack (under 75)"),
-                                            withSpinner(infoBoxOutput("hospital_admission_heart_attack_infobox", width=NULL)),
+
+                                            summaryBoxUI("hospital_admission_heart_attack", title = "Yearly total",
+                                                         button_title =  "First ever hospital admission for heart attack  (under 75)",
+                                                         button_content =  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
+                                                                                "amongst those aged under 75 years in the year {max(heart_attack$date)}. <br> <br>",
+                                                                                "This data is available at Scotland level. Further breakdown information is ",
+                                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                                "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
                                             h4("Healthy birthweight"),
@@ -298,51 +336,51 @@ tagList(
                                      ),
                                      column(4,
                                             h4("Experience of social care recipients"),
-                                            withSpinner(infoBoxOutput("experience_recipients_infobox", width=NULL)),
+                                            summaryBoxUI("experience_recipients")
                                      ),
                                      column(4,
                                             h4("Health risk behaviours"),
-                                            withSpinner(infoBoxOutput("health_risk_behaviours_infobox", width=NULL)),
+                                            summaryBoxUI("health_risk_behaviours")
                                      )),
 
                                    fluidRow(
                                      column(4,
                                             h4("Healthy life expectancy"),
-                                            withSpinner(infoBoxOutput("healthy_life_expectancy_infobox", width=NULL)),
+                                            summaryBoxUI("healthy_life_expectancy")
                                      ),
                                      column(4,
                                             h4("Healthy weight adults"),
-                                            withSpinner(infoBoxOutput("healthy_weight_infobox", width=NULL)),
+                                            summaryBoxUI("healthy_weight")
                                      ),
                                      column(4,
                                             h4("Mental wellbeing of adults (16+)"),
-                                            withSpinner(infoBoxOutput("mental_wellbeing_infobox", width=NULL)),
+                                            summaryBoxUI("mental_wellbeing")
                                      )),
                                    fluidRow(
                                      column(4,
                                             h4("Physical activity"),
-                                            withSpinner(infoBoxOutput("physical_activity_infobox", width=NULL)),
+                                            summaryBoxUI("physical_activity")
                                      ),
                                      column(4,
                                             h4("Premature mortality"),
-                                            withSpinner(infoBoxOutput("premature_mortality_infobox", width=NULL)),
+                                            summaryBoxUI("premature_mortality")
                                      ),
                                      column(4,
                                             h4("Quality of care experience"),
-                                            withSpinner(infoBoxOutput("quality_care_infobox", width=NULL)),
+                                            summaryBoxUI("quality_care")
                                      )),
                                    fluidRow(
                                      column(4,
                                             h4("Screening- uptake for breast and bowel cancer"),
-                                            withSpinner(infoBoxOutput("screening_infobox", width=NULL)),
+                                            summaryBoxUI("screening")
                                      ),
                                      column(4,
                                             h4("Vaccinations – uptake "),
-                                            withSpinner(infoBoxOutput("vaccinations_infobox", width=NULL)),
+                                            summaryBoxUI("vaccinations")
                                      ),
                                      column(4,
                                             h4("Work-related ill health"),
-                                            withSpinner(infoBoxOutput("work_related_health_infobox", width=NULL)),
+                                            summaryBoxUI("work_related_health")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -370,21 +408,21 @@ tagList(
                                    fluidRow(
                                      column(6,
                                             h4("Child material deprivation"),
-                                            withSpinner(infoBoxOutput("child_material_deprivation_infobox", width=NULL))
+                                            summaryBoxUI("child_material_deprivation")
                                      ),
                                      column(6,
                                             h4("Child wellbeing and happiness"),
-                                            withSpinner(infoBoxOutput("child_wellbeing_infobox", width=NULL))
+                                            summaryBoxUI("child_wellbeing")
                                      )),
 
                                    fluidRow(
                                      column(6,
                                             h4("Perinatal mortality rate"),
-                                            withSpinner(infoBoxOutput("perinatal_mortality_infobox", width=NULL))
+                                            summaryBoxUI("perinatal_mortality")
                                      ),
                                      column(6,
                                             h4("Physical activity"),
-                                            withSpinner(infoBoxOutput("physical_activity_children_cw_infobox", width=NULL))
+                                            summaryBoxUI("physical_activity_children_cw")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -401,22 +439,22 @@ tagList(
                                      ),
                                      column(4,
                                             h4("Children have positive relationships"),
-                                            withSpinner(infoBoxOutput("children_relationships_infobox", width=NULL))
+                                            summaryBoxUI("children_relationships")
                                      ),
                                      column(4,
                                             h4("Children’s voices"),
-                                            withSpinner(infoBoxOutput("childrens_voices_infobox", width=NULL))
+                                            summaryBoxUI("childrens_voices")
                                      )),
 
                                    fluidRow(
 
                                      column(6,
                                             h4("Confidence and resilience of children and young people"),
-                                            withSpinner(infoBoxOutput("confidence_of_young_infobox", width=NULL))
+                                            summaryBoxUI("confidence_of_young")
                                      ),
                                      column(6,
                                             h4("Mental health / mental wellbeing"),
-                                            withSpinner(infoBoxOutput("mental_health_cw_infobox", width=NULL))
+                                            summaryBoxUI("mental_health_cw")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -447,7 +485,7 @@ tagList(
                                      ),
                                      column(6,
                                             h4("Work related ill health"),
-                                            withSpinner(infoBoxOutput("work_related_ill_health_infobox", width=NULL))
+                                            summaryBoxUI("work_related_ill_health")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -460,15 +498,15 @@ tagList(
                                    fluidRow(
                                      column(4,
                                             h4("Food insecurity money or other resources"),
-                                            withSpinner(infoBoxOutput("food_insecurity_infobox", width=NULL))
+                                            summaryBoxUI("food_insecurity")
                                      ),
                                      column(4,
                                             h4("Persistent poverty"),
-                                            withSpinner(infoBoxOutput("persistent_poverty_infobox", width=NULL))
+                                            summaryBoxUI("persistent_poverty")
                                      ),
                                      column(4,
                                             h4("Satisfaction with housing"),
-                                            withSpinner(infoBoxOutput("satisfaction_with_housing_infobox", width=NULL))
+                                            summaryBoxUI("satisfaction_with_housing")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -481,21 +519,21 @@ tagList(
                                    fluidRow(
                                      column(6,
                                             h4("Loneliness"),
-                                            withSpinner(infoBoxOutput("loneliness_infobox", width=NULL))
+                                            summaryBoxUI("loneliness")
                                      ),
                                      column(6,
                                             h4("Number of areas where health inequalities are reducing"),
-                                            withSpinner(infoBoxOutput("areas_of_health_inequalities_infobox", width=NULL))
+                                            summaryBoxUI("areas_of_health_inequalities")
                                      )),
 
                                    fluidRow(
                                      column(6,
                                             h4("Perceptions of local area"),
-                                            withSpinner(infoBoxOutput("perceptions_of_local_area_infobox", width=NULL))
+                                            summaryBoxUI("perceptions_of_local_area")
                                      ),
                                      column(6,
                                             h4("Places to interact"),
-                                            withSpinner(infoBoxOutput("places_to_intereact_infobox", width=NULL))
+                                            summaryBoxUI("places_to_intereact")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -508,11 +546,11 @@ tagList(
                                    fluidRow(
                                      column(6,
                                             h4("Gender balance in organisations"),
-                                            withSpinner(infoBoxOutput("gender_balance_infobox", width=NULL))
+                                            summaryBoxUI("gender_balance")
                                      ),
                                      column(6,
                                             h4("Public services treat people with dignity and respect"),
-                                            withSpinner(infoBoxOutput("dignity_respect_infobox", width=NULL))
+                                            summaryBoxUI("dignity_respect")
                                      )),
                                    fluidRow(column(12, br()))
                                  )),
@@ -525,15 +563,15 @@ tagList(
                                    fluidRow(
                                      column(4,
                                             h4("Access to green and blue space"),
-                                            withSpinner(infoBoxOutput("blue_green_space_infobox", width=NULL))
+                                            summaryBoxUI("blue_green_space")
                                      ),
                                      column(4,
                                             h4("Journeys by active travel"),
-                                            withSpinner(infoBoxOutput("journeys_active_infobox", width=NULL))
+                                            summaryBoxUI("journeys_active")
                                      ),
                                      column(4,
                                             h4("Visits to the outdoors"),
-                                            withSpinner(infoBoxOutput("visit_outdoors_infobox", width=NULL))
+                                            summaryBoxUI("visit_outdoors")
                                      )),
                                    fluidRow(column(12, br()))
                                  ))

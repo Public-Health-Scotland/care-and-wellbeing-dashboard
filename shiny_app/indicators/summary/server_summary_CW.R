@@ -34,55 +34,23 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(date == recent_date) %>% .$stays_number
   previous_value <- value %>% filter(date == previous_date) %>% .$stays_number
 
-  change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
-
   summaryBoxServer("asthma_admissions",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   change = change)
+                   value_dp = 0
+                   )
 })
 
 
 ##### Alcohol deaths #####
 
-output$alcohol_deaths_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("alcohol_deaths_summary_info",
-                                   "",
-                                   glue("Not available"))),
-          value=glue("Not available"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("alcohol_deaths")
 })
 
 ##### Alcohol admission #####
-
-# output$alcohol_admissions_infobox <- renderInfoBox({
-#
-#   recent_date <- alcohol_admissions$financial_year %>% max()
-#
-#   recent_value <- alcohol_admissions %>%
-#     filter(geography == input$geog_name_summary_CW,
-#            condition == "All alcohol conditions",
-#            smr_type == "Combined",
-#            financial_year == recent_date) %>% .$stays_easr
-#
-#
-#   infoBox(title=h5(glue("{recent_date}"),
-#                    summaryButtonUI("alcohol_admissions_summary_info",
-#                                    "Alcohol-related hospital admissions",
-#                                    glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for people aged under 75 years for the financial year {recent_date}. <br> <br>",
-#                                         "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
-#                                         "of ill health prevention` on the `Care and Wellbeing` tab.",
-#                                         "<br> <br> {strong('Click again to close.')}"))),
-#           value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-#           subtitle = glue("Yearly total"),
-#           icon = icon_no_warning_fn("user-shield"),
-#           color = "purple")
-# })
 
 observeEvent(input$geog_name_summary_CW,{
 
@@ -97,213 +65,179 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(financial_year == recent_date) %>% .$stays_easr
   previous_value <- value %>% filter(financial_year == previous_date) %>% .$stays_easr
 
-  change <- round_half_up((recent_value-previous_value)*100/previous_value,2)
-
-  output$alcohol_admissions_test <- renderUI(
-
-    tagList(
-      div(class = "recent-value",
-          glue("{recent_date}: ",
-               "{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}")),
-
-      div(class = "previous-value",
-          glue("{previous_date}: ",
-               "{ifelse(length(previous_value)[1] == 0,'Not available', previous_value)}")),
-
-      div(class = "value-change",
-          glue("Percentage change: {round_half_up(change,2)}%")),
-
-    )
-
-  )
+  summaryBoxServer("alcohol_admissions",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   value_dp = 0
+                   )
 
 })
 
 ##### All cause mortality #####
 
-output$all_cause_mortality_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(all_cause_mortality$year)
   previous_date <- max(all_cause_mortality %>% filter(year != recent_date) %>% .$year)
 
-  recent_value <- all_cause_mortality %>%
-    filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW, year == recent_date) %>%
+  value <- all_cause_mortality %>%
+    filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW
+           ) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
-    mutate(rate = deaths/pop*100000) %>% .$rate %>% round_half_up(2)
+    mutate(rate = deaths/pop*100000)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("all_cause_mortality_summary_info",
-                                   "All-cause mortality (age 15 to 44)",
-                                   glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {recent_date}.",
-                                        "The causes of death are coded in accordance with the International Classification of Diseases (ICD-10) and Related Health Problems. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further information is available under `Strengthen the role and impact ",
-                                        "of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+  summaryBoxServer("all_cause_mortality",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+                   )
 })
 
 ##### CHD deaths #####
 
-output$chd_deaths_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(chd_deaths$year_range)
+  previous_date <- max(chd_deaths %>% filter(year_range != recent_date) %>% .$year_range)
 
-  recent_value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW, year_range == recent_date) %>%
-    .$measure
+  value <- chd_deaths %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("chd_deaths_summary_info",
-                                   "Coronary Heart Disease (CHD) deaths (aged 45-74)",
-                                   glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range 2018 to 2020.",
-                                        "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year_range == recent_date) %>% .$measure
+  previous_value <- value %>% filter(year_range == previous_date) %>% .$measure
+
+  summaryBoxServer("chd_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Drug deaths #####
 
-output$drug_deaths_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(drug_related_deaths$year)
+  previous_date <- max(drug_related_deaths %>% filter(year != recent_date) %>% .$year)
 
-  recent_value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW, year == recent_date) %>%
-    .$rate
+  value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("drug_deaths_summary_info",
-                                   "Drug-related deaths",
-                                   glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {recent_date}. <br> <br>",
-                                        "This data is available at Scotland, health board and council area level. Further breakdown of number of deaths is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of deaths per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+  summaryBoxServer("drug_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Drug admission #####
 
-output$drug_admissions_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(drug_stays$financial_year)
+  previous_date <- max(drug_stays %>% filter(financial_year != recent_date) %>% .$financial_year)
 
-  recent_value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups", financial_year == recent_date) %>%
-    .$rate
+  value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("drug_admissions_summary_info",
-                                   "Drug-related hospital admissions",
-                                   glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {recent_date}. ",
-                                        "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown of age groups is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Rate of stays per 100,000"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(financial_year == recent_date) %>% .$rate
+  previous_value <-  value %>% filter(financial_year == previous_date) %>% .$rate
+
+  summaryBoxServer("drug_admissions",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Experience of social care recipients #####
 
-output$experience_recipients_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("experience_recipients_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("experience_recipients")
 })
 
 ##### Experience of unpaid carers #####
 
-output$experience_of_unpaid_carers_agree_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(experience_unpaid_carers$date)
+  previous_date <- max(experience_unpaid_carers %>% filter(date != recent_date) %>% .$date)
 
-  recent_value <- experience_unpaid_carers %>% filter(breakdown == "Strongly agree", geography == input$geog_name_summary_CW,  date == recent_date) %>%
-    .$indicator %>% as.numeric()*100
+  value <- experience_unpaid_carers %>% filter(geography == input$geog_name_summary_CW) %>% mutate(indicator = as.numeric(indicator)*100)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("experience_of_unpaid_carers_agree_summary_info",
-                                   "Experience of unpaid carers",
-                                   glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
-                                        "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value = ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-          subtitle = glue("Percentage who strongly agreed"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
-})
+  recent_value_agree <- value %>% filter(breakdown == "Strongly agree", date == recent_date) %>% .$indicator
+  previous_value_agree <- value %>% filter(breakdown == "Strongly agree", date == previous_date) %>% .$indicator
 
-output$experience_of_unpaid_carers_disagree_infobox <- renderInfoBox({
+  recent_value_disagree <- value %>% filter(breakdown == "Strongly disagree", date == recent_date) %>% .$indicator
+  previous_value_disagree <- value %>% filter(breakdown == "Strongly disagree", date == previous_date) %>% .$indicator
 
-  recent_date <- max(experience_unpaid_carers$date)
+  summaryBoxServer("experience_of_unpaid_carers_agree",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_agree,
+                   previous_value = previous_value_agree,
+                   percentage_symbol = "%"
+  )
 
-  recent_value <- experience_unpaid_carers %>% filter(breakdown == "Strongly disagree", geography == input$geog_name_summary_CW, date == recent_date) %>%
-    .$indicator %>% as.numeric()*100
+  summaryBoxServer("experience_of_unpaid_carers_disagree",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_disagree,
+                   previous_value = previous_value_disagree,
+                   percentage_symbol = "%"
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("experience_of_unpaid_carers_disagree_summary_info",
-                                   "Experience of unpaid carers",
-                                   glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
-                                        "“I feel supported to continue caring“ for the Health and Care Experience Survey {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown for other levels of agreement with the statement is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value= ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-          subtitle = glue("Percentage who strongly disagreed"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  )
+
 })
 
 ##### Hospital admissions for heart attack #####
 
-output$hospital_admission_heart_attack_infobox <- renderInfoBox({
+observeEvent(input$geog_name_summary_CW,{
 
   recent_date <- max(heart_attack$date)
+  previous_date <- max(heart_attack %>% filter(date != recent_date) %>% .$date)
 
-  recent_value <- heart_attack %>% filter(date == recent_date, geography == input$geog_name_summary_CW) %>%
-    .$total_admissions
+  value <- heart_attack %>% filter(geography == input$geog_name_summary_CW)
 
-  infoBox(title=h5(glue("{recent_date}"),
-                   summaryButtonUI("hospital_admission_heart_attack_summary_info",
-                                   "First ever admission for heart attack",
-                                   glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
-                                        "amongst those aged under 75 years in the year {recent_date}. <br> <br>",
-                                        "This data is available at Scotland level. Further breakdown information is ",
-                                        "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                        "<br> <br> {strong('Click again to close.')}"))),
-          value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-          subtitle = glue("Yearly total"),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+  recent_value <- value %>% filter(date == recent_date) %>% .$total_admissions
+  previous_value <- value %>% filter(date == previous_date) %>% .$total_admissions
+
+
+  # infoBox(title=h5(glue("{recent_date}"),
+  #                  summaryButtonUI("hospital_admission_heart_attack_summary_info",
+  #                                  "First ever admission for heart attack",
+  #                                  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
+  #                                       "amongst those aged under 75 years in the year {recent_date}. <br> <br>",
+  #                                       "This data is available at Scotland level. Further breakdown information is ",
+  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+  #                                       "<br> <br> {strong('Click again to close.')}"))),
+  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
+  #         subtitle = glue("Yearly total"),
+  #         icon = icon_no_warning_fn("user-shield"),
+  #         color = "purple")
+
+  summaryBoxServer("hospital_admission_heart_attack",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   value_dp = 0
+  )
 })
 
 ##### Health risk behaviours #####
 
-output$health_risk_behaviours_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("health_risk_behaviours_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("health_risk_behaviours")
 })
 
 ##### Healthy birthweight #####
@@ -334,28 +268,15 @@ output$healthy_birthweight_infobox <- renderInfoBox({
 
 ##### Healthy life expectancy #####
 
-output$healthy_life_expectancy_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("healthy_life_expectancy_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("healthy_life_expectancy")
 })
 
 ##### Healthy weight adults #####
 
-output$healthy_weight_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("healthy_weight_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("healthy_weight")
 })
 
 ##### Limiting long term conditions #####
@@ -386,67 +307,32 @@ output$adult_long_term_condition_infobox <- renderInfoBox({
 
 ##### Mental wellbeing of adults #####
 
-output$mental_wellbeing_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("mental_wellbeing_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("mental_wellbeing")
 })
 
 ##### Physical activity #####
 
-output$physical_activity_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("physical_activity_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("physical_activity")
 })
 
 ##### Premature mortality #####
 
-output$premature_mortality_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("premature_mortality_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("premature_mortality")
 })
 
 ##### Quality of care experience #####
 
-output$quality_care_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("quality_care_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("quality_care")
 })
 
 ##### Screening #####
 
-output$screening_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("screening_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("screening")
 })
 
 ##### Self-assessed health of adults #####
@@ -475,28 +361,14 @@ output$adults_self_assessed_health_infobox <- renderInfoBox({
 
 ##### Vaccinations #####
 
-output$vaccinations_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("vaccinations_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("vaccinations")
 })
 
 ##### Work-related ill health #####
 
-output$work_related_health_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("work_related_health_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("user-shield"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("work_related_health")
 })
 
 ################################################.
@@ -527,15 +399,8 @@ output$children_at_risk_of_obesity_infobox <- renderInfoBox({
 
 ##### Child material deprivation #####
 
-output$child_material_deprivation_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("child_material_deprivation_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("baby"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("child_material_deprivation")
 })
 
 ##### Child social and physical development #####
@@ -562,16 +427,10 @@ output$child_development_cw_infobox <- renderInfoBox({
 
 ##### Child wellbeing and happiness #####
 
-output$child_wellbeing_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("child_wellbeing_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("baby"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("child_wellbeing")
 })
+
 
 ##### Infant mortality #####
 
@@ -597,30 +456,15 @@ output$infant_mortality_cw_infobox <- renderInfoBox({
 
 ##### Perinatal mortality rate #####
 
-output$perinatal_mortality_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("perinatal_mortality_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("baby"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("perinatal_mortality")
 })
 
 ##### Physical activity #####
 
-output$physical_activity_children_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("physical_activity_children_cw_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("baby"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("physical_activity_children_cw")
 })
-
 
 ################################################.
 # ENABLE ALL CHILDREN, YOUNG PEOPLE AND ADULTS TO MAXIMISE THEIR CAPABILITES AND CONTROL OVER THEIR LIVES ----
@@ -653,55 +497,29 @@ output$camhs_waiting_times_cw_infobox <- renderInfoBox({
 
 ##### Children have positive relationships #####
 
-output$children_relationships_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("children_relationships_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("children_relationships")
 })
+
 
 ##### Children’s voices #####
 
-output$childrens_voices_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("childrens_voices_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("childrens_voices")
 })
 
 ##### Confidence and resilience of children and young people #####
 
-output$confidence_of_young_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("confidence_of_young_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("confidence_of_young")
 })
 
 ##### Mental health / mental wellbeing #####
 
-output$mental_health_cw_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("mental_health_cw_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("children"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("mental_health_cw")
 })
+
 
 ################################################.
 # CREATE FAIR EMPLOYMENT AND GOOD WORK FOR ALL ----
@@ -801,15 +619,8 @@ output$gender_pay_gap_cw_infobox <- renderInfoBox({
 
 ##### Work related ill health #####
 
-output$work_related_ill_health_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("work_related_ill_health_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("building-user"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("work_related_ill_health")
 })
 
 ################################################.
@@ -818,41 +629,20 @@ output$work_related_ill_health_infobox <- renderInfoBox({
 
 ##### Food insecurity money or other resources #####
 
-output$food_insecurity_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("food_insecurity_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("apple-whole"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("food_insecurity")
 })
 
 ##### Persistent poverty #####
 
-output$persistent_poverty_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("persistent_poverty_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("apple-whole"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("persistent_poverty")
 })
 
 ##### Satisfaction with housing #####
 
-output$satisfaction_with_housing_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("satisfaction_with_housing_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("apple-whole"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("satisfaction_with_housing")
 })
 
 ################################################.
@@ -861,84 +651,40 @@ output$satisfaction_with_housing_infobox <- renderInfoBox({
 
 ##### Loneliness #####
 
-output$loneliness_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("loneliness_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("tree-city"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("loneliness")
 })
 
 ##### Number of areas where health inequalities are reducing #####
 
-output$areas_of_health_inequalities_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("areas_of_health_inequalities_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("tree-city"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("areas_of_health_inequalities")
 })
 
 ##### Perceptions of local area #####
 
-output$perceptions_of_local_area_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("perceptions_of_local_area_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("tree-city"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("perceptions_of_local_area")
 })
 
 ##### Places to interact #####
 
-output$places_to_intereact_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("places_to_intereact_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("tree-city"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("places_to_intereact")
 })
 
 ################################################.
 # TACKLING DISCRIMINATION, RACISM AND THEIR OUTCOMES ----
 ################################################.
 
-##### Gender balance in organisations #####
-
-output$gender_balance_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("gender_balance_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("people-group"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("gender_balance")
 })
 
 ##### Public services treat people with dignity and respect #####
 
-output$dignity_respect_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("dignity_respect_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("people-group"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("dignity_respect")
 })
 
 ################################################.
@@ -947,40 +693,21 @@ output$dignity_respect_infobox <- renderInfoBox({
 
 ##### Access to green and blue space #####
 
-output$blue_green_space_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("blue_green_space_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("seedling"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("blue_green_space")
 })
 
 ##### Journeys by active travel #####
 
-output$journeys_active_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("journeys_active_summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("seedling"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("journeys_active")
 })
 
-##### Visits to the outdoors #####render
+##### Visits to the outdoors #####
 
-output$visit_outdoors_infobox <- renderInfoBox({
-  infoBox(title=h5(glue(""),
-                   summaryButtonUI("visit_outdoors__summary_info",
-                                   "",
-                                   glue("To be developed"))),
-          value=glue("To be developed"),
-          subtitle = glue(""),
-          icon = icon_no_warning_fn("seedling"),
-          color = "purple")
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("visit_outdoors")
 })
+
+
 
