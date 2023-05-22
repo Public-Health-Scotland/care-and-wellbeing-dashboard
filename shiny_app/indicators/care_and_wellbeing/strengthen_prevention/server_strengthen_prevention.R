@@ -167,7 +167,7 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Rates of death <br> per 100,000 population", title = title) %>%
+    confidence_line_function(., y_title = "Rate of death <br> per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
@@ -387,7 +387,7 @@ output$drug_deaths_plot = renderPlotly({
       mutate(date = year) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Rates of deaths <br> per 100,000 population", title = title_rate) %>%
+      confidence_line_function(., "Rate of deaths <br> per 100,000 population", title = title_rate) %>%
       layout(xaxis = list(tickangle = 30),
              legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
