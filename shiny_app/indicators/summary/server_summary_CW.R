@@ -184,14 +184,17 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_agree,
-                   previous_value = previous_value_agree
+                   previous_value = previous_value_agree,
+                   percentage_symbol = "%"
   )
 
   summaryBoxServer("experience_of_unpaid_carers_disagree",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_disagree,
-                   previous_value = previous_value_disagree
+                   previous_value = previous_value_disagree,
+                   percentage_symbol = "%"
+
   )
 
 })
