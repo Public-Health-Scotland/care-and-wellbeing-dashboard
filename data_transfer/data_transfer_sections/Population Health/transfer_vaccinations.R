@@ -24,9 +24,9 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
   filter(!(SIMD == "Not Known")) %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
                                  ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-         SIMD = as.numeric(SIMD))
-         # SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
-         #                                "6", "7", "8", "9", "10")))
+         # SIMD = as.numeric(SIMD))
+         SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
+                                        "6", "7", "8", "9", "10")))
 
 
 # input_flu_vacc <- read_excel(data_path_flu, sheet = "SIMD - HB", skip=4) %>%
