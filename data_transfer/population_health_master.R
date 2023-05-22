@@ -58,6 +58,12 @@ source(paste0(path_pop_health, "transfer_asthma_admissions.R"))
 source(paste0(path_pop_health, "/transfer_healthy_birthweight.R"))
 
 ##############################################.
+# HEALTHY LIFE EXPECTANCY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_healthy_life_expectancy.R"))
+
+##############################################.
 # CHILDREN (2-15) AT RISK OF OBESITY----
 ##############################################.
 
