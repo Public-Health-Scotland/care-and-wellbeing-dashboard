@@ -86,7 +86,7 @@ make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) 
 
   fig = fig %>%
     layout(xaxis = list(title = "Year"),
-           yaxis = list(title = "Pay Gap (Woman/Men) (%)", range = c(-100,100), ticksuffix = "%"),
+           yaxis = list(title = "Pay Gap (Women/Men) (%)", range = c(-100,100), ticksuffix = "%"),
            title = title,
            showlegend = TRUE,
            legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
