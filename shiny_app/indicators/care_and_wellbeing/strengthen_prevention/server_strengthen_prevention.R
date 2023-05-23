@@ -105,8 +105,8 @@ output$all_cause_mortality_plot = renderPlotly({
 
   line_chart_function(data, indicator_y,
                       title = title,
-                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths"))
-
+                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths")) %>%
+  layout(yaxis=list(tickformat=","))
 
 })
 
@@ -226,7 +226,8 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
   title <- "Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland"
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title)
+    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title) %>%
+    layout(yaxis=list(tickformat=","))
 
 })
 
