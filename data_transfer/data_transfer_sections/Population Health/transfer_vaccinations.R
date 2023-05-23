@@ -24,39 +24,8 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
   filter(!(SIMD == "Not Known")) %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
                                  ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-         # SIMD = as.numeric(SIMD))
          SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
                                         "6", "7", "8", "9", "10")))
-
-
-# input_flu_vacc <- read_excel(data_path_flu, sheet = "SIMD - HB", skip=4) %>%
-#   select(1:6,8:9) %>%
-#   clean_names() %>%
-#   rename(November = `x44866`,
-#          SIMD = "simd_2020_decile_1_most_deprived_10_least_deprived",
-#          geography = "health_board_name") %>%
-#   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
-#                                  ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-#          value = "Flu vaccinations",
-#          SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
-#                                         "6", "7", "8", "9", "10", "Not Known")))
-#
-#
-# input_covid_vacc <- read_excel(data_path_covid, sheet = "SIMD - HB", skip=4) %>%
-#   select(1:6,8:9) %>%
-#   clean_names() %>%
-#   filter(!is.na(uptake_percent)) %>%
-#   rename(November = `x44866`,
-#          SIMD = "simd_2020_decile_1_most_deprived_10_least_deprived",
-#          geography = "health_board_name") %>%
-#   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
-#                                  ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-#          value = "COVID-19 vaccinations",
-#          SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
-#                                         "6", "7", "8", "9", "10", "Not Known")))
-
-# vacc <- full_join(input_covid_vacc, input_flu_vacc)
-
 
 
 ####### save out
@@ -64,6 +33,16 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
 vaccinations_flu <- vaccinations %>% filter(value == "Flu vaccinations uptake")
 vaccinations_covid <- vaccinations %>% filter(value == "COVID-19 vaccinations uptake")
 
+replace_file_fn(vaccinations_flu,
+                paste0(path_out, "/vaccinations_flu.rds"))
+
+replace_file_fn(vaccinations_covid,
+                paste0(path_out, "/vaccinations_covid.rds"))
+
+rm(data_path_flu,data_path_covid,
+   input_flu_vacc,input_covid_vacc,
+   vaccinations,
+   vaccinations_flu,vaccinations_covid)
 
 
 
