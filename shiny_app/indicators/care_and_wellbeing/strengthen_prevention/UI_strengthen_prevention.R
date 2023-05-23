@@ -179,10 +179,10 @@ tagList(
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
-               tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
+               tabPanel(title = "Coronary heart disease (CHD) deaths (under 75)",
                         value = "chd_deaths",
 
-                        h2("Coronary heart disease (CHD): deaths (age 45-74)",
+                        h2("Coronary heart disease (CHD) deaths (under 75)",
                            iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
                                                                    "heart disease (CHD). Heart disease is a broad term for a variety of",
                                                                    "conditions that affect the structure and function of the heart.",

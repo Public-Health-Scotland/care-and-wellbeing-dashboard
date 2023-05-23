@@ -161,7 +161,7 @@ observeEvent(input$chd_deaths_geog_type,
 
 
 output$chd_deaths_plot = renderPlotly({
-  title <- glue("Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+  title <- glue("Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
                 input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
@@ -197,13 +197,13 @@ observeEvent(input$chd_deaths_geog_type,{
 
 observeEvent(input$chd_deaths_geog_name,{
 
-  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (age 45-74) in ",
+  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
                                               input$chd_deaths_geog_name)})
 })
 
 altTextServer("chd_deaths_alt",
               title = "Coronary heart disease deaths plot",
-              content = tags$ul(tags$li("This is a plot for the trend in age-sex standardised rates per 100,000 of coronary heart disease deaths."),
+              content = tags$ul(tags$li("This is a plot for the trend in age-sex standardised rates per 100,000 of coronary heart disease deaths in under 75 year olds."),
                                 tags$li("The x axis is the 3 year range, starting from 2002-2004."),
                                 tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
                                 tags$li("The solid purple line is the specified rate and the lighter purple area around",
