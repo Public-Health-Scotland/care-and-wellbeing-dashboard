@@ -23,9 +23,22 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
          geography = "health_board_name") %>%
   filter(!(SIMD == "Not Known")) %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
-                                 ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-         SIMD = factor(SIMD, levels = c("1 - Most deprived", "2", "3", "4", "5",
-                                        "6", "7", "8", "9", "10 - Least deprived")))
+                                 ifelse(geography == "Not Known", "Not Known" ,"Health Board")))
+
+add_ons <- vaccinations %>%
+  select(health_board_code, geography, geography_type, value, SIMD, uptake_percent) %>%
+  pivot_wider(names_from = "SIMD", values_from = "uptake_percent", values_fill = 0) %>%
+  pivot_longer(cols = c("1", "2", "3", "4", "5",
+                        "6", "7", "8", "9", "10"), values_to = "uptake_percent", names_to = "SIMD")
+
+vaccinations <- full_join(vaccinations, add_ons) %>%
+  mutate(SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
+                                        "6", "7", "8", "9", "10"),
+                       labels = c("1 - Most deprived", "2", "3", "4", "5",
+                                  "6", "7", "8", "9", "10 - Least deprived"))) %>%
+  arrange(geography, SIMD)
+
+
 
 ####### save out
 
