@@ -24,9 +24,8 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
   filter(!(SIMD == "Not Known")) %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
                                  ifelse(geography == "Not Known", "Not Known" ,"Health Board")),
-         SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
-                                        "6", "7", "8", "9", "10")))
-
+         SIMD = factor(SIMD, levels = c("1 - Most deprived", "2", "3", "4", "5",
+                                        "6", "7", "8", "9", "10 - Least deprived")))
 
 ####### save out
 
