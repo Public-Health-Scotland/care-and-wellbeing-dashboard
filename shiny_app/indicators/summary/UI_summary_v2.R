@@ -245,7 +245,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("All-cause mortality (age 15-44)"),
+                                            h4(actionLink("jump_summary_to_all_cause_mortality", "All-cause mortality (age 15-44)")),
                                             summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
                                                          button_title =  "All-cause mortality (age 15 to 44)",
                                                          button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
@@ -255,7 +255,7 @@ tagList(
                                                                                "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
-                                            h4("Coronary heart disease (CHD): deaths (age 45-74)"),
+                                            h4(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths (age 45-74)")),
                                             summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
                                                          button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
                                                          button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range {max(chd_deaths$year_range)}.",
@@ -265,7 +265,7 @@ tagList(
                                                                                "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
-                                            h4("Drug-related deaths"),
+                                            h4(actionLink("jump_summary_to_drug_deaths", "Drug-related deaths")),
                                             summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
                                                          button_title =  "Drug-related deaths",
                                                          button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {max(drug_related_deaths$year)}. <br> <br>",
@@ -277,7 +277,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("Drug-related hospital admissions"),
+                                            h4(actionLink("jump_summary_to_drug_admissions","Drug-related hospital admissions")),
                                             summaryBoxUI("drug_admissions", title = "Rate of stays per 100,000",
                                                          button_title =  "Drug-related hospital admissions",
                                                          button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_stays$financial_year)}. ",
@@ -288,7 +288,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Experience of unpaid carers"),
+                                            h4(actionLink("jump_summary_to_experience_of_unpaid_carers_agree", "Experience of unpaid carers")),
                                             summaryBoxUI("experience_of_unpaid_carers_agree", title = "Percentage who strongly agreed",
                                                          button_title =  "Experience of unpaid carers",
                                                          button_content = glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
@@ -299,7 +299,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Experience of unpaid carers"),
+                                            h4(actionLink("jump_summary_to_experience_of_unpaid_carers_disagree", "Experience of unpaid carers")),
                                             summaryBoxUI("experience_of_unpaid_carers_disagree", title = "Percentage who strongly disagreed",
                                                          button_title =  "Experience of unpaid carers",
                                                          button_content = glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
@@ -311,8 +311,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("First ever hospital admission for heart attack (under 75)"),
-
+                                            h4(actionLink("jump_summary_to_hospital_admission_heart_attack", "First ever hospital admission for heart attack (under 75)")),
                                             summaryBoxUI("hospital_admission_heart_attack", title = "Yearly total",
                                                          button_title =  "First ever hospital admission for heart attack  (under 75)",
                                                          button_content =  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
@@ -323,7 +322,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Healthy birthweight"),
+                                            h4(actionLink("jump_summary_to_healthy_birthweight", "Healthy birthweight")),
                                             summaryBoxUI("healthy_birthweight", title = "Percentage of livebirths of an approporiate birthweight",
                                                          button_title =  "Healthy birthweight",
                                                          button_content =  glue("This is the percentage of babies with an appropriate birthweight based on gestational age in the financial year ",
@@ -335,7 +334,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Limiting long-term conditions (age 16+)"),
+                                            h4(actionLink("jump_summary_to_adult_long_term_condition", "Limiting long-term conditions (age 16+)")),
                                             summaryBoxUI("adult_long_term_condition", title = "Percentage of adults",
                                                          button_title =  "Limiting long-term conditions (age 16+)",
                                                          button_content =  glue("This is the percentage of adults aged 16 years and above who live with a limiting long-term condition in the year {max(adult_living_limiting_long_term_condition$Year)}. <br> <br>",
@@ -349,7 +348,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("Self-assessed health of adults (age 16+)"),
+                                            h4(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults (age 16+)")),
                                             summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
                                                          button_title =  "Self-assessed health of adults (age 16+)",
                                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
@@ -361,51 +360,51 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Experience of social care recipients"),
+                                            h4(actionLink("jump_summary_to_experience_recipients", "Experience of social care recipients")),
                                             summaryBoxUI("experience_recipients")
                                      ),
                                      column(4,
-                                            h4("Health risk behaviours"),
+                                            h4(actionLink("jump_summary_to_health_risk_behaviours", "Health risk behaviours")),
                                             summaryBoxUI("health_risk_behaviours")
                                      )),
 
                                    fluidRow(
                                      column(4,
-                                            h4("Healthy life expectancy"),
+                                            h4(actionLink("jump_summary_to_healthy_life_expectancy", "Healthy life expectancy")),
                                             summaryBoxUI("healthy_life_expectancy")
                                      ),
                                      column(4,
-                                            h4("Healthy weight adults"),
+                                            h4(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                                             summaryBoxUI("healthy_weight")
                                      ),
                                      column(4,
-                                            h4("Mental wellbeing of adults (16+)"),
+                                            h4(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
                                             summaryBoxUI("mental_wellbeing")
                                      )),
                                    fluidRow(
                                      column(4,
-                                            h4("Physical activity"),
+                                            h4(actionLink("jump_summary_to_physical_activity", "Physical activity")),
                                             summaryBoxUI("physical_activity")
                                      ),
                                      column(4,
-                                            h4("Premature mortality"),
+                                            h4(actionLink("jump_summary_to_premature_mortality", "Premature mortality")),
                                             summaryBoxUI("premature_mortality")
                                      ),
                                      column(4,
-                                            h4("Quality of care experience"),
+                                            h4(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
                                             summaryBoxUI("quality_care")
                                      )),
                                    fluidRow(
                                      column(4,
-                                            h4("Screening- uptake for breast and bowel cancer"),
+                                            h4(actionLink("jump_summary_to_screening", "Screening - uptake for breast and bowel cancer")),
                                             summaryBoxUI("screening")
                                      ),
                                      column(4,
-                                            h4("Vaccinations – uptake "),
+                                            h4(actionLink("jump_summary_to_vaccinations", "Vaccinations – uptake ")),
                                             summaryBoxUI("vaccinations")
                                      ),
                                      column(4,
-                                            h4("Work-related ill health"),
+                                            h4(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
                                             summaryBoxUI("work_related_health")
                                      )),
                                    fluidRow(column(12, br()))
@@ -418,7 +417,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("At risk of obesity"),
+                                            h4(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
                                             summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
                                                          button_title =  "At risk of obesity",
                                                          button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
@@ -428,7 +427,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Child social and physical development"),
+                                            h4(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
                                             summaryBoxUI("child_development_cw", title = "Percentage showing concern",
                                                          button_title =  "Child social and physical development",
                                                          button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
@@ -438,7 +437,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Infant mortality"),
+                                            h4(actionLink("jump_summary_to_infant_mortality_cw", "Infant mortality")),
                                             summaryBoxUI("infant_mortality_cw", title = "Rate per 1,000 livebirths",
                                                          button_title =  "Infant mortality",
                                                          button_content =  glue("This is the rate of infant deaths per 1,000 live births in {max(inf_deaths$date) %>% format('%B %Y')}. <br> <br>",
@@ -449,21 +448,21 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h4("Child material deprivation"),
+                                            h4(actionLink("jump_summary_to_child_material_deprivation", "Child material deprivation")),
                                             summaryBoxUI("child_material_deprivation")
                                      ),
                                      column(6,
-                                            h4("Child wellbeing and happiness"),
+                                            h4(actionLink("jump_summary_to_child_wellbeing", "Child wellbeing and happiness")),
                                             summaryBoxUI("child_wellbeing")
                                      )),
 
                                    fluidRow(
                                      column(6,
-                                            h4("Perinatal mortality rate"),
+                                            h4(actionLink("jump_summary_to_perinatal_mortality", "Perinatal mortality rate")),
                                             summaryBoxUI("perinatal_mortality")
                                      ),
                                      column(6,
-                                            h4("Physical activity"),
+                                            h4(actionLink("jump_summary_to_physical_activity_children_cw", "Physical activity")),
                                             summaryBoxUI("physical_activity_children_cw")
                                      )),
                                    fluidRow(column(12, br()))

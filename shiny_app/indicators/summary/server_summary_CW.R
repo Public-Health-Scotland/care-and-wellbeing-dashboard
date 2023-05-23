@@ -211,20 +211,6 @@ observeEvent(input$geog_name_summary_CW,{
   recent_value <- value %>% filter(date == recent_date) %>% .$total_admissions
   previous_value <- value %>% filter(date == previous_date) %>% .$total_admissions
 
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("hospital_admission_heart_attack_summary_info",
-  #                                  "First ever admission for heart attack",
-  #                                  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
-  #                                       "amongst those aged under 75 years in the year {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland level. Further breakdown information is ",
-  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-  #         subtitle = glue("Yearly total"),
-  #         icon = icon_no_warning_fn("user-shield"),
-  #         color = "purple")
-
   summaryBoxServer("hospital_admission_heart_attack",
                    recent_date = recent_date,
                    previous_date = previous_date,
@@ -255,20 +241,6 @@ observeEvent(input$geog_name_summary_CW,{
     filter(geography == input$geog_name_summary_CW, birthweight_for_gestational_age == "Appropriate",
            financial_year == previous_date) %>%
     .$proportion %>% round_half_up(4)*100
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("healthy_birthweight_summary_info",
-  #                                  "Healthy birthweight",
-  #                                  glue("This is the percentage of babies with an appropriate birthweight based on gestational age in the financial year ",
-  #                                       "{recent_date}. Birthweight for gestational age is an indicator used to differentiate between ",
-  #                                       "babies who, for example, are light because they are preterm and those who are inappropriately light after adjustment for gestational age at birth. <br> <br>",
-  #                                       "This data is available at Scotland, health board and council area level. Further information is ",
-  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value= ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of livebirths of an approporiate birthweight"),
-  #         icon = icon_no_warning_fn("user-shield"),
-  #         color = "purple")
 
   summaryBoxServer("healthy_birthweight",
                    recent_date = recent_date,
@@ -304,21 +276,6 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <- adult_living_limiting_long_term_condition %>%
     filter(Year == previous_date, geography == input$geog_name_summary_CW) %>%
     .$Percent
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("adult_long_term_condition_summary_info",
-  #                                  "Limiting long-term conditions",
-  #                                  glue("This is the percentage of adults aged 16 years and above who live with a limiting long-term condition in the year {recent_date}. <br> <br>",
-  #                                       "A limiting long-term condition is defined as a physical or mental condition & health condition or illness lasting, ",
-  #                                       "or expected to last 12 limiting months or more. <br> <br> A long-term condition is defined as limiting if the respondent reported ",
-  #                                       "that it limited their activities in any way. <br> <br>",
-  #                                       "This data is available at Scotland level. Further information is ",
-  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of adults"),
-  #         icon = icon_no_warning_fn("user-shield"),
-  #         color = "purple")
 
   summaryBoxServer("adult_long_term_condition",
                    recent_date = recent_date,
@@ -371,20 +328,6 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <- adult_self_assessed_health %>% filter(Year == previous_date, geography == input$geog_name_summary_CW) %>%
     .$Percent
 
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("adults_self_assessed_health_summary_info",
-  #                                  "Self-assessed health of adults",
-  #                                  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
-  #                                       "Scottish Health survey in {recent_date}. Participants who are aged 13 years",
-  #                                       "(? - not 16?) and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
-  #                                       "This data is available at Scotland level. Further information is ",
-  #                                       "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of adults"),
-  #         icon = icon_no_warning_fn("user-shield"),
-  #         color = "purple")
-
   summaryBoxServer("adults_self_assessed_health",
                    recent_date = recent_date,
                    previous_date = previous_date,
@@ -422,18 +365,6 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <-  childhood_obesity %>% filter(date == previous_date, geography == input$geog_name_summary_CW) %>%
     .$indicator %>% as.numeric() %>% round_half_up(2)
 
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("children_at_risk_of_obesity_summary_info",
-  #                                  "Children at risk of obesity",
-  #                                  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {recent_date}. <br> <br> ",
-  #                                       "This data is available at Scotland level. Further information is ",
-  #                                       "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of children"),
-  #         icon = icon_no_warning_fn("baby"),
-  #         color = "purple")
-
   summaryBoxServer("children_at_risk_of_obesity",
                    recent_date = recent_date,
                    previous_date = previous_date,
@@ -460,18 +391,6 @@ observeEvent(input$geog_name_summary_CW,{
     .$prop_concern_any %>% round_half_up(4)*100
   previous_value <- preschool %>% filter(geography == input$geog_name_summary_CW, financial_year == previous_date) %>%
     .$prop_concern_any %>% round_half_up(4)*100
-
-#   infoBox(title=h5(glue("{recent_date}"),
-#                    summaryButtonUI("child_development_cw_summary_info",
-#                                    "Child social and physical development",
-#                                    glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {recent_date}. <br> <br> ",
-#                                         "This data is available at Scotland, health board and council area level. Further information is ",
-#                                         "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-#                                         "<br> <br> {strong('Click again to close.')}"))),
-#           value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-#           subtitle = glue("Percentage showing concern"),
-#           icon = icon_no_warning_fn("baby"),
-#           color = "purple")
 
   summaryBoxServer("child_development_cw",
                    recent_date = recent_date,
@@ -501,21 +420,9 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <- inf_deaths %>% filter(date == previous_date, geography == input$geog_name_summary_CW) %>%
     .$rate %>% round_half_up(2)
 
-  # infoBox(title=h5(glue("{recent_date %>% format('%B %Y')}"),
-  #                  summaryButtonUI("infant_mortality_cw_summary_info",
-  #                                  "Infant mortality",
-  #                                  glue("This is the rate of infant deaths per 1,000 live births in {recent_date %>% format('%B %Y')}. <br> <br>",
-  #                                       "This data is available at Scotland level. Further information is ",
-  #                                       "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=glue("{ifelse(length(recent_value)[1] == 0,'Not available', recent_value)}"),
-  #         subtitle = glue("Rate per 1,000 livebirths"),
-  #         icon = icon_no_warning_fn("baby"),
-  #         color = "purple")
-
   summaryBoxServer("infant_mortality_cw",
-                   recent_date = recent_date,
-                   previous_date = previous_date,
+                   recent_date = recent_date %>% format('%b %Y'),
+                   previous_date = previous_date %>% format('%b %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value
   )
@@ -553,22 +460,9 @@ observeEvent(input$geog_name_summary_CW,{
            date == previous_date) %>%
     .$proportion %>% round_half_up(4)*100
 
-  # infoBox(title=h5(glue("{recent_date %>% format('%B %Y')}"),
-  #                  summaryButtonUI("camhs_waiting_times_cw_summary_info",
-  #                                  "CAMHS waiting times",
-  #                                  glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
-  #                                       "to CAMHS (Children and Adolescent Mental Health Services) in {recent_date %>% format('%B %Y')}. <br> <br>",
-  #                                       "This data is available at Scotland and health board level. Further breakdown information for other wait times is ",
-  #                                       "available under `Enable all children, young people and adults to maximise their capabilities and control over their lives` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of children and young people"),
-  #         icon = icon_no_warning_fn("children"),
-  #         color = "purple")
-
   summaryBoxServer("camhs_waiting_times_cw",
-                   recent_date = recent_date,
-                   previous_date = previous_date,
+                   recent_date = recent_date %>% format('%b %Y'),
+                   previous_date = previous_date %>% format('%b %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value,
                    percentage_symbol = "%")
@@ -619,18 +513,6 @@ observeEvent(input$geog_name_summary_CW,{
     filter(geography == input$geog_name_summary_CW, breakdown == "Wants to Work", year == previous_date) %>%
     .$percent %>% round_half_up(2)
 
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("economic_inactivity_cw_want_summary_info",
-  #                                  "Economic inactivity",
-  #                                  glue("This is the percentage of economically inactive people who want to work in {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland and council area level. Further information is available under ",
-  #                                       "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage who want to work"),
-  #         icon = icon_no_warning_fn("building-user"),
-  #         color = "purple")
-
   summaryBoxServer("economic_inactivity_cw_want",
                    recent_date = recent_date,
                    previous_date = previous_date,
@@ -651,18 +533,6 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <- economic_inactivity %>%
     filter(geography == input$geog_name_summary_CW, breakdown == "Does Not\r\nWant to Work", year == previous_date) %>%
     .$percent %>% round_half_up(2)
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("economic_inactivity_cw_not_want_summary_info",
-  #                                  "Economic inactivity",
-  #                                  glue("This is the percentage of economically inactive people who don`t want to work in {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland and council area level. Further information is available under ",
-  #                                       "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage who don't want to work"),
-  #         icon = icon_no_warning_fn("building-user"),
-  #         color = "purple")
 
   summaryBoxServer("economic_inactivity_cw_not_want",
                    recent_date = recent_date,
@@ -685,18 +555,6 @@ observeEvent(input$geog_name_summary_CW,{
   previous_value <- employees_living_wage_by_LA %>%
     filter(geography == "East Renfrewshire", earning == "Earning less than the living wage", year == previous_date) %>%
     .$measure_value %>% round_half_up(2)
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("employees_living_wage_cw_summary_info",
-  #                                  "Employees on the living wage",
-  #                                  glue("This is the percentage of employees earning less than the living wage in {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland and council area level. Further breakdown information of employees by sector is available under ",
-  #                                       "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse((length(recent_value)[1] == 0),'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage of employees earning less than the living wage"),
-  #         icon = icon_no_warning_fn("building-user"),
-  #         color = "purple")
 
   summaryBoxServer("employees_living_wage_cw",
                    recent_date = recent_date,
@@ -721,18 +579,6 @@ observeEvent(input$geog_name_summary_CW,{
     filter(gender == "Pay Gap", work_pattern == "All", sector == "All",
            year == previous_date, geography == input$geog_name_summary_CW) %>%
     .$measure_value
-
-  # infoBox(title=h5(glue("{recent_date}"),
-  #                  summaryButtonUI("gender_pay_gap_cw_summary_info",
-  #                                  "Pay gap",
-  #                                  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {recent_date}. <br> <br>",
-  #                                       "This data is available at Scotland level. Further breakdown information of sector, work pattern and information regarding median hourly earnings for each sex is available under ",
-  #                                       "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-  #                                       "<br> <br> {strong('Click again to close.')}"))),
-  #         value=ifelse(length(recent_value)[1] == 0,'Not available', glue("{recent_value}%")),
-  #         subtitle = glue("Percentage difference between men`s and women`s hourly earnings"),
-  #         icon = icon_no_warning_fn("building-user"),
-  #         color = "purple")
 
   summaryBoxServer("gender_pay_gap_cw",
                    recent_date = recent_date,
