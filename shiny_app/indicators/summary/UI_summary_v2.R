@@ -327,7 +327,7 @@ tagList(
                                             summaryBoxUI("healthy_birthweight", title = "Percentage of livebirths of an approporiate birthweight",
                                                          button_title =  "Healthy birthweight",
                                                          button_content =  glue("This is the percentage of babies with an appropriate birthweight based on gestational age in the financial year ",
-                                                                                "{recent_date}. Birthweight for gestational age is an indicator used to differentiate between ",
+                                                                                "{max(birthweight$financial_year)}. Birthweight for gestational age is an indicator used to differentiate between ",
                                                                                 "babies who, for example, are light because they are preterm and those who are inappropriately light after adjustment for gestational age at birth. <br> <br>",
                                                                                 "This data is available at Scotland, health board and council area level. Further information is ",
                                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
@@ -338,7 +338,7 @@ tagList(
                                             h4("Limiting long-term conditions (age 16+)"),
                                             summaryBoxUI("adult_long_term_condition", title = "Percentage of adults",
                                                          button_title =  "Limiting long-term conditions (age 16+)",
-                                                         button_content =  glue("This is the percentage of adults aged 16 years and above who live with a limiting long-term condition in the year {recent_date}. <br> <br>",
+                                                         button_content =  glue("This is the percentage of adults aged 16 years and above who live with a limiting long-term condition in the year {max(adult_living_limiting_long_term_condition$Year)}. <br> <br>",
                                                                                 "A limiting long-term condition is defined as a physical or mental condition & health condition or illness lasting, ",
                                                                                 "or expected to last 12 limiting months or more. <br> <br> A long-term condition is defined as limiting if the respondent reported ",
                                                                                 "that it limited their activities in any way. <br> <br>",
@@ -353,7 +353,7 @@ tagList(
                                             summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
                                                          button_title =  "Self-assessed health of adults (age 16+)",
                                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
-                                                                                "Scottish Health survey in {recent_date}. Participants who are aged 13 years",
+                                                                                "Scottish Health survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years",
                                                                                 "(? - not 16?) and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
                                                                                 "This data is available at Scotland level. Further information is ",
                                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
@@ -421,7 +421,7 @@ tagList(
                                             h4("At risk of obesity"),
                                             summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
                                                          button_title =  "At risk of obesity",
-                                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {recent_date}. <br> <br> ",
+                                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
                                                                                 "This data is available at Scotland level. Further information is ",
                                                                                 "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -431,7 +431,7 @@ tagList(
                                             h4("Child social and physical development"),
                                             summaryBoxUI("child_development_cw", title = "Percentage showing concern",
                                                          button_title =  "Child social and physical development",
-                                                         button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {recent_date}. <br> <br> ",
+                                                         button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
                                                                                 "This data is available at Scotland, health board and council area level. Further information is ",
                                                                                 "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -441,7 +441,7 @@ tagList(
                                             h4("Infant mortality"),
                                             summaryBoxUI("infant_mortality_cw", title = "Rate per 1,000 livebirths",
                                                          button_title =  "Infant mortality",
-                                                         button_content =  glue("This is the rate of infant deaths per 1,000 live births in {recent_date %>% format('%B %Y')}. <br> <br>",
+                                                         button_content =  glue("This is the rate of infant deaths per 1,000 live births in {max(inf_deaths$date) %>% format('%B %Y')}. <br> <br>",
                                                                                 "This data is available at Scotland level. Further information is ",
                                                                                 "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -480,7 +480,7 @@ tagList(
                                             summaryBoxUI("camhs_waiting_times_cw", title = "Percentage of children and young people",
                                                          button_title =  "CAMHS waiting times",
                                                          button_content =  glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
-                                                                                "to CAMHS (Children and Adolescent Mental Health Services) in {recent_date %>% format('%B %Y')}. <br> <br>",
+                                                                                "to CAMHS (Children and Adolescent Mental Health Services) in {max(camhs_waiting_times2$date) %>% format('%B %Y')}. <br> <br>",
                                                                                 "This data is available at Scotland and health board level. Further breakdown information for other wait times is ",
                                                                                 "available under `Enable all children, young people and adults to maximise their capabilities and control over their lives` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -517,7 +517,7 @@ tagList(
                                             h4("Economic inactivity"),
                                             summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
                                                          button_title =  "Economic inactivity",
-                                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {recent_date}. <br> <br>",
+                                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
                                                                                 "This data is available at Scotland and council area level. Further information is available under ",
                                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -527,7 +527,7 @@ tagList(
                                             h4("Economic inactivity"),
                                             summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
                                                          button_title =  "Economic inactivity",
-                                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {recent_date}. <br> <br>",
+                                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
                                                                                 "This data is available at Scotland and council area level. Further information is available under ",
                                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -537,7 +537,7 @@ tagList(
                                             h4("Employees on the living wage"),
                                             summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
                                                          button_title =  "Employees on the living wage",
-                                                         button_content =  glue("This is the percentage of employees earning less than the living wage in {recent_date}. <br> <br>",
+                                                         button_content =  glue("This is the percentage of employees earning less than the living wage in {max(employees_living_wage_by_LA$year)}. <br> <br>",
                                                                                 "This data is available at Scotland and council area level. Further breakdown information of employees by sector is available under ",
                                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
@@ -548,7 +548,7 @@ tagList(
                                             h4("Pay gap"),
                                             summaryBoxUI("gender_pay_gap_cw", title = "Percentage difference between men`s and women`s hourly earnings",
                                                          button_title =  "Pay gap",
-                                                         button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {recent_date}. <br> <br>",
+                                                         button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {max(gender_pay_gap_by_sector$year)}. <br> <br>",
                                                                                 "This data is available at Scotland level. Further breakdown information of sector, work pattern and information regarding median hourly earnings for each sex is available under ",
                                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                                 "<br> <br> {strong('Click again to close.')}"))
