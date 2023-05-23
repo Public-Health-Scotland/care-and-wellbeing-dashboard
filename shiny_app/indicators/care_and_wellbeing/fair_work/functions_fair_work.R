@@ -45,11 +45,11 @@ make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) 
             y=~`Pay Gap`,
             type="scatter",
             mode="lines+markers",
-            name = "Pay Gap \n(Woman/Men) (%)",
+            name = "Pay Gap \n(Women/Men) (%)",
             #color = color_column_option,
             #colors = palette,
             text = paste0("Year: ", data$year, "<br>",
-                          "Pay Gap (Woman/Men) (%): ", data$`Pay Gap`,"% <br>"),
+                          "Pay Gap (Women/Men) (%): ", data$`Pay Gap`,"% <br>"),
             hoverinfo = "text")
 
   if(second_axis)
@@ -65,7 +65,7 @@ make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) 
                                           "Men Median Hourly Earnings (£): ", data$Men," <br>"),
                             hoverinfo = "text")
     fig = fig %>% add_trace(x=~year,
-                            y=~Woman,
+                            y=~Women,
                             yaxis = "y2",
                             type="scatter",
                             mode="lines+markers",
@@ -86,7 +86,7 @@ make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) 
 
   fig = fig %>%
     layout(xaxis = list(title = "Year"),
-           yaxis = list(title = "Pay Gap (Woman/Men) (%)", range = c(-100,100), ticksuffix = "%"),
+           yaxis = list(title = "Pay Gap (Women/Men) (%)", range = c(-100,100), ticksuffix = "%"),
            title = title,
            showlegend = TRUE,
            legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
