@@ -292,7 +292,7 @@ output$drug_admissions_plot = renderPlotly({
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$age_group,
                                 title = title,
-                                y_axis_title = "Rate per 100,000",
+                                y_axis_title = "Age-sex standardised<br> rate per 100,000 population",
                                 x_axis_title = "Financial year") %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
@@ -465,7 +465,7 @@ output$alcohol_admissions_plot = renderPlotly({
     rename(date = "financial_year",
            indicator = "stays_easr")
 
-  line_chart_function(data_alc, y_title = "European age-sex standardised rate<br>(per 100,000)") %>%
+  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population") %>%
     layout(xaxis = list(tickangle = 45))
 
 })
