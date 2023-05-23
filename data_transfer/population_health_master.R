@@ -84,6 +84,8 @@ source(paste0(path_pop_health, "/transfer_adult_long_term_condition.R"))
 # VACCINATIONS----
 ##############################################.
 
+source(paste0(path_pop_health, "/transfer_vaccinations.R"))
+
 ##############################################.
 # EXPERIENCE OF SOCIAL CARE RECIPIENTS----
 ##############################################.
