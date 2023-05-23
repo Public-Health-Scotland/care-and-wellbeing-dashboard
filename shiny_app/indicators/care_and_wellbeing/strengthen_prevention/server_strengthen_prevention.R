@@ -743,7 +743,9 @@ output$asthma_admissions_plot <- renderPlotly({
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       line_chart_function(., y_title = "Total number of admissions",
                           x_title = "Financial year", title = title,
-                          label = "Number of admissions")
+                          label = "Number of admissions")%>%
+      layout(yaxis=list(tickformat=","))
+
 
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
@@ -755,7 +757,9 @@ output$asthma_admissions_plot <- renderPlotly({
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
                                   x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
-                                  title = title)
+                                  title = title)%>%
+      layout(yaxis=list(tickformat=","))
+
 
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
@@ -765,7 +769,9 @@ output$asthma_admissions_plot <- renderPlotly({
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
                                   x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
-                                  title = title)
+                                  title = title)%>%
+      layout(yaxis=list(tickformat=","))
+
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
     #
