@@ -959,8 +959,8 @@ observeEvent(input$vaccinations_flu_geog_type,
              })
 
 altTextServer("vaccinations_flu_alt",
-              title = "Flu vaccinations uptake plot",
-              content = tags$ul(tags$li("This is a bar plot for the breakdown of vaccination uptake by SIMD as at 29 January 2023."),
+              title = "Influenza vaccinations uptake plot",
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccination uptake by SIMD as at 29 January 2023."),
                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least depreived and 10 is most deprived."),
                                 tags$li("he y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
@@ -981,7 +981,7 @@ output$vaccinations_flu_plot <- renderPlotly({
                   yaxis_title = "Percentage (%)",
                   category_var = .$value,
                   hover_end = "%",
-                  title = glue("Percentage (%) uptake of flu vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, ",
+                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, ",
                                "as at 29 January 2023")) %>%
     layout(yaxis = list(ticksuffix = "%"))
 
@@ -990,7 +990,7 @@ output$vaccinations_flu_plot <- renderPlotly({
 
 observeEvent(input$vaccinations_flu_geog_name,{
 
-  output$vaccinations_flu_title <- renderText({glue("Data table: Percentage (%) uptake of flu vaccinations in",
+  output$vaccinations_flu_title <- renderText({glue("Data table: Percentage (%) uptake of influenza vaccinations in",
                                                     "eligible population by SIMD in {input$vaccinations_flu_geog_name}")})
 })
 

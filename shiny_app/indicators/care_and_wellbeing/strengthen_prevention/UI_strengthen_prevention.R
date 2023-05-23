@@ -589,7 +589,19 @@ tagList(
 
                                         h2("COVID-19 vaccinations uptake",
                                            iButtonUI("vaccinations_covid",
-                                                     content = paste("Add stuff"))),
+                                                     content = paste("COVID-19 is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from COVID-19, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offereed free by the",
+                                                                     "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > phs website."))),
+
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_covid_geog_type",
@@ -619,12 +631,23 @@ tagList(
                                ),
 
                                ######## FLU #############
-                               tabPanel(title = "Flu vaccinations",
+                               tabPanel(title = "Influenza vaccinations",
                                         value = "flu_vaccinations",
 
-                                        h2("Flu vaccinations uptake",
+                                        h2("Influenza vaccinations uptake",
                                            iButtonUI("vaccinations_FLU",
-                                                     content = paste("Add stuff"))),
+                                                     content = paste("Influenza is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from influenza, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offereed free by the",
+                                                                     "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > phs website."))),
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",
