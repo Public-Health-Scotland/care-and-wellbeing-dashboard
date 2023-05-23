@@ -167,7 +167,11 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
+<<<<<<< HEAD
     confidence_line_function(., y_title = "Rate of death <br> per 100,000 population", title = title) %>%
+=======
+    confidence_line_function(., y_title = "Rates of death <br> per 100,000 population", title = title) %>%
+>>>>>>> eafd27f3d7b403476bfa4254164c49dc22930959
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
