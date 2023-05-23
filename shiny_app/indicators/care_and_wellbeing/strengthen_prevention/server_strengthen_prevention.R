@@ -94,7 +94,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate per 100,000"
+    indicator_y = "Rate of death <br>per 100,000 population"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -105,7 +105,7 @@ output$all_cause_mortality_plot = renderPlotly({
 
   line_chart_function(data, indicator_y,
                       title = title,
-                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of deaths", "Number of deaths"))
+                      label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths"))
 
 
 })
