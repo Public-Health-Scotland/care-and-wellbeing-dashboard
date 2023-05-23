@@ -183,7 +183,7 @@ observeEvent(input$chd_deaths_geog_type,{
       mutate(year_range = factor(year_range)) %>%
       rename("geography_type" = "area_type",
              "geography" = "area_name",
-             "Rate of CHD deaths per 100,000 (age 45-74)" = "measure")
+             "Rate of death per 100,000 population" = "measure") #Rate of CHD deaths per 100,000 (age 45-74)
 
     data_filtered <- data_unfiltered %>%
       filter(geography_type == input$chd_deaths_geog_type) %>%
