@@ -77,7 +77,7 @@ altTextServer("all_cause_mortality_alt",
 
 output$all_cause_mortality_plot = renderPlotly({
 
-  title <- glue("Trend in all-cause mortality for ages 15-44 in ",
+  title <- glue("All-cause mortality for ages 15-44 in ",
                             input$all_cause_mortality_geog_name)
 
 
@@ -282,7 +282,7 @@ output$drug_admissions_plot = renderPlotly({
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  title <- glue("Trend in age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+  title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
                 age_title, ") in Scotland")
 
   data = drug_stays %>%
@@ -375,10 +375,10 @@ altTextServer("drug_deaths_alt",
 
 output$drug_deaths_plot = renderPlotly({
 
-  title_rate <- glue("Trend in age standardised rates per 100,000 of drug-related deaths in ",
+  title_rate <- glue("Age standardised rates per 100,000 of drug-related deaths in ",
                      input$drug_deaths_geog_name)
 
-  title_number <- glue("Trend in number of drug-related deaths in ",
+  title_number <- glue("Number of drug-related deaths in ",
                        input$drug_deaths_geog_name)
 
 
@@ -454,7 +454,7 @@ observeEvent(input$alcohol_admissions_geog_type,
 
 output$alcohol_admissions_plot = renderPlotly({
 
-  title <- glue("Trend in total number of alcohol related admissions in ",
+  title <- glue("Total number of alcohol related admissions in ",
                 input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
@@ -732,7 +732,7 @@ output$asthma_admissions_plot <- renderPlotly({
     breakdown <- "by sex "
   }
 
-  title <- glue("Trend of total number of asthma admissions ",
+  title <- glue("Total number of asthma admissions ",
                 breakdown, "in \n ", geog)
 
   if(input$asthma_admissions_breakdowns == "Yearly total"){
