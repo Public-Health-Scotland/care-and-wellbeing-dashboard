@@ -974,8 +974,7 @@ output$screening_breast_board_plot <- renderPlotly({
 
   screening_breast_board %>%
     mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$year_range,
-                  xaxis_title = "Health Board", yaxis_title = "Percentage (%)",
-                  mode = "group",
+                  xaxis_title = "Health Board",
                   title = "Percentage uptake of breast screening by Health Board and three year rolling average") %>%
     layout(xaxis = list(tickangle = -90,
                         tickmode = "array",
@@ -996,6 +995,18 @@ observeEvent(input$screening_breast_geog_type,
                updateSelectizeInput(session, "screening_breast_geog_name",
                                     choices = unique(screening_breast_filtered$geography))
              })
+
+
+output$screening_breast_simd_plot <- renderPlotly({
+
+  screening_breast_simd %>%
+    filter(geography == input$screening_breast_geog_name) %>%
+    mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = "geography",
+                                          xaxis_title = "SIMD",
+                                          title = glue("Percentage uptake of breast screening by SIMD category between 2019/20",
+                                                       " and 2021/22 in {input$screening_breast_geog_name}"))
+
+})
 
 
 ######### BOWEL ##########

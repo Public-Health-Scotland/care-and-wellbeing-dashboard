@@ -603,7 +603,7 @@ tagList(
                                         iButtonUI("screening_breast",
                                                   content = paste("Paste here."))),
 
-                                        altTextUI("screening_breast_alt"),
+                                        altTextUI("screening_breast_board_alt"),
                                         withSpinner(plotlyOutput("screening_breast_board_plot")),
 
                                         fluidRow(
@@ -620,6 +620,9 @@ tagList(
                                                                                    .$geography),
                                                                 width = "100%")
                                           )),
+
+                                        altTextUI("screening_breast_simd_alt"),
+                                        withSpinner(plotlyOutput("screening_breast_simd_plot"))
 
                                ),
 

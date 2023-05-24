@@ -220,7 +220,7 @@ stacked_bar_function = function(data, category_var, title = "") {
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var, mode = "stack", title = "") {
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage (%)", category_var, mode = "group", title = "") {
 
 
   #Modifying standard layout
@@ -234,7 +234,7 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
             color = ~category_var,
             colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
-            # name = glue("{category_var}{label}"),
+            name = y_axis_title,
             hovertemplate = ~glue("{y %>% round_half_up(2)}"),
             textposition = "none"
     ) %>%
