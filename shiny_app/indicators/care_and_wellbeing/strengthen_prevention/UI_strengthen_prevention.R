@@ -12,11 +12,11 @@ tagList(
 
                         h2("Admissions for asthma", iButtonUI("asthma_admissions",
                                                               content = paste("The Scottish Morbidity Record (SMR) database is the",
-                                                              "national inpatient and day case database in Scotland. These statistics",
-                                                              "are derived from data collected on discharges from non-obstetric and",
-                                                              "non-psychiatric hospitals (SMR01).",
-                                                              "For more information, please visit the",
-                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
+                                                                              "national inpatient and day case database in Scotland. These statistics",
+                                                                              "are derived from data collected on discharges from non-obstetric and",
+                                                                              "non-psychiatric hospitals (SMR01).",
+                                                                              "For more information, please visit the",
+                                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
@@ -353,12 +353,12 @@ tagList(
 
                         h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers",
                                                                     content = paste("The Health and Care Experience Survey (successor to the GP",
-                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
-                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
-                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
-                                                                    "<li> caring responsibilities and related support </li>",
-                                                                    "The survey has been run every two years since 2009 and can be found here:",
-                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
+                                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
+                                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
+                                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
+                                                                                    "<li> caring responsibilities and related support </li>",
+                                                                                    "The survey has been run every two years since 2009 and can be found here:",
+                                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
                         altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
@@ -462,20 +462,20 @@ tagList(
 
                         h2("Healthy life expectancy",
                            iButtonUI("healthy_life_expectancy",
-                                                              content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
-                                                                              "or ‘good’ general health, based on how individuals perceive their state of health at the time",
-                                                                              "of completing the annual population survey (APS)",
-                                                                              "<br> <br>",
-                                                                              "Some of the smaller council areas and health boards have very wide confidence intervals.",
-                                                                              "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
-                                                                              "<br> <br>",
-                                                                              "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
-                                                                              "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
-                                                                              "of health the population is in, as well as their years of life expectancy.",
-                                                                              "<br> <br>",
-                                                                              "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
-                                                                              "For more information, please visit the",
-                                                                              "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
+                                     content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
+                                                     "or ‘good’ general health, based on how individuals perceive their state of health at the time",
+                                                     "of completing the annual population survey (APS)",
+                                                     "<br> <br>",
+                                                     "Some of the smaller council areas and health boards have very wide confidence intervals.",
+                                                     "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
+                                                     "<br> <br>",
+                                                     "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
+                                                     "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
+                                                     "of health the population is in, as well as their years of life expectancy.",
+                                                     "<br> <br>",
+                                                     "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
+                                                     "For more information, please visit the",
+                                                     "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
                         fluidRow(
                           column(4,
                                  selectizeInput("healthy_life_expectancy_sex",
@@ -488,21 +488,21 @@ tagList(
                                                 choices = c("At birth", "At age 65"),
                                                 width = "100%"))
 
-               ),
+                        ),
 
-               altTextUI("healthy_life_expectancy_trend_alt"),
-               ciDefinitionUI("healthy_life_expectancy_trend_ci"),
-               withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
+                        altTextUI("healthy_life_expectancy_trend_alt"),
+                        ciDefinitionUI("healthy_life_expectancy_trend_ci"),
+                        withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
 
-               altTextUI("healthy_life_expectancy_council_area_alt"),
-               ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
-               withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
+                        altTextUI("healthy_life_expectancy_council_area_alt"),
+                        ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
+                        withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
 
-               br(),
-               h3(textOutput("healthy_life_expectancy_title")),
-               p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-               br(),
-               dataDownloadUI("healthy_life_expectancy")
+                        br(),
+                        h3(textOutput("healthy_life_expectancy_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("healthy_life_expectancy")
 
                ),
 
@@ -588,8 +588,51 @@ tagList(
                tabPanel(title = "Screening uptake",
                         value = "screening",
 
-                        h2("Screening uptake")
-               ),
+                        tabBox(title = "", id = "screening_tabBox", type = "pills", width = NULL,
+
+                               ##############################################.
+                               # BREAST ----
+                               ##############################################.
+
+
+                               tabPanel(title = "Breast cancer",
+                                        value = "screening_breast",
+
+                                        h2("Screening uptake for breast cancer",
+
+                                        iButtonUI("screening_breast",
+                                                  content = paste("Paste here."))),
+
+                                        altTextUI("screening_breast_alt"),
+                                        withSpinner(plotlyOutput("screening_breast_board_plot")),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_type",
+                                                                "Step 1. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_name",
+                                                                "Step 2. Select a national or local geography area",
+                                                                choices = unique(screening_breast_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                               ),
+
+                               ##############################################.
+                               # BOWEL ----
+                               ##############################################.
+
+                               tabPanel(title = "Bowel cancer",
+                                        value = "screening_bowel",
+
+                                        h2("Screening uptake for bowel cancer")
+                               )
+                        )),
 
                ##############################################.
                #  SELF-ASSESSED HEALTH OF ADULTS (16+)----

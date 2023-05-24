@@ -26,7 +26,7 @@ output$healthy_life_expectancy_trend_plot = renderPlotly({
                 " healthy life expectancy ",
                 str_to_lower(input$healthy_life_expectancy_life_stage),
                 " in Scotland"
-                )
+  )
   data = healthy_life_expectancy %>%
     filter(geography == "Scotland",
            sex == input$healthy_life_expectancy_sex,
@@ -95,10 +95,10 @@ observeEvent(input$healthy_life_expectancy_sex,{
 observeEvent(input$healthy_life_expectancy_sex,{
   observeEvent(input$healthy_life_expectancy_life_stage,{
 
-  output$healthy_life_expectancy_title <- renderText({glue("Data table:",
-                                                           input$healthy_life_expectancy_sex,
-                                                           " healthy life expectancy ",
-                                                           str_to_lower(input$healthy_life_expectancy_life_stage))})
+    output$healthy_life_expectancy_title <- renderText({glue("Data table:",
+                                                             input$healthy_life_expectancy_sex,
+                                                             " healthy life expectancy ",
+                                                             str_to_lower(input$healthy_life_expectancy_life_stage))})
   })
 })
 
@@ -177,7 +177,7 @@ altTextServer("all_cause_mortality_alt",
 output$all_cause_mortality_plot = renderPlotly({
 
   title <- glue("Trend in all-cause mortality for ages 15-44 in ",
-                            input$all_cause_mortality_geog_name)
+                input$all_cause_mortality_geog_name)
 
 
   data = all_cause_mortality %>%
@@ -485,7 +485,7 @@ output$drug_deaths_plot = renderPlotly({
     drug_related_deaths %>%
       mutate(date = year) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
-             geography == input$drug_deaths_geog_name) %>%
+        geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Rate per 100,000", title = title_rate) %>%
       layout(xaxis = list(tickangle = 30),
              legend = list(y = -0.4))
@@ -493,7 +493,7 @@ output$drug_deaths_plot = renderPlotly({
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
-             geography == input$drug_deaths_geog_name) %>%
+        geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Total number of deaths", title = title_number) %>%
       layout(xaxis = list(tickangle = 30,
                           title = "Year range"))
@@ -502,26 +502,26 @@ output$drug_deaths_plot = renderPlotly({
 })
 
 #observeEvent(input$drug_deaths_geog_type,{
-  observeEvent(input$drug_deaths_geog_name,{
+observeEvent(input$drug_deaths_geog_name,{
 
-    data_unfiltered <- drug_related_deaths %>%
-      select(year, geography_type, geography, number, rate,
-             lower_confidence_interval, upper_confidence_interval) %>%
-      arrange(year) %>%
-      mutate(year = factor(year)) %>%
-      rename("Year range" = "year",
-             "Number of drug-related deaths" = "number",
-             "Drug-related deaths rate" = "rate")
+  data_unfiltered <- drug_related_deaths %>%
+    select(year, geography_type, geography, number, rate,
+           lower_confidence_interval, upper_confidence_interval) %>%
+    arrange(year) %>%
+    mutate(year = factor(year)) %>%
+    rename("Year range" = "year",
+           "Number of drug-related deaths" = "number",
+           "Drug-related deaths rate" = "rate")
 
-    data_filtered <- data_unfiltered %>%
-      filter(#geography_type == input$drug_deaths_geog_type,
-             geography == input$drug_deaths_geog_name)
+  data_filtered <- data_unfiltered %>%
+    filter(#geography_type == input$drug_deaths_geog_type,
+      geography == input$drug_deaths_geog_name)
 
-    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "drug_deaths", filename = "drug_deaths",
-                       add_separator_cols = c(4),
-                       add_separator_cols_1dp = c(5,6,7))
-  })
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "drug_deaths", filename = "drug_deaths",
+                     add_separator_cols = c(4),
+                     add_separator_cols_1dp = c(5,6,7))
+})
 #})
 
 observeEvent(input$drug_deaths_geog_name,{
@@ -956,7 +956,7 @@ altTextServer("asthma_admissions_alt",
                                         "geography level and area for plotting. The default is Scotland."),
                                 tags$li("For the plot visualising the yearly total, the purple line shows the total number of admissions for each financial year."),
                                 tags$li("For the plot visualising the age breakdown, the lines correspond to each age group consisting of 5 year age bands up to 90 years,",
-                                "after which data is grouped for 90+."),
+                                        "after which data is grouped for 90+."),
                                 tags$li("For the plot visualising sex breakdown, the purple line corresponds to `All sexes`, the blue line corresponds to `Females`",
                                         "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex.")
 
@@ -969,6 +969,36 @@ altTextServer("asthma_admissions_alt",
 # SCREENING UPTAKE FOR BREAST AND BOWEL CANCER----
 ##############################################.
 
+######### BREAST ############
+output$screening_breast_board_plot <- renderPlotly({
+
+  screening_breast_board %>%
+    mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$year_range,
+                  xaxis_title = "Health Board", yaxis_title = "Percentage (%)",
+                  mode = "group",
+                  title = "Percentage uptake of breast screening by Health Board and three year rolling average") %>%
+    layout(xaxis = list(tickangle = -90,
+                        tickmode = "array",
+                        ticktext = str_wrap(screening_breast_board$geography, 15),
+                        tickvals = screening_breast_board$geography),
+           legend = list(x=0.5, y = -0.95))
+
+
+})
+
+observeEvent(input$screening_breast_geog_type,
+             {
+
+               screening_breast_filtered = screening_breast_simd %>%
+                 filter(geography_type == input$screening_breast_geog_type)
+
+
+               updateSelectizeInput(session, "screening_breast_geog_name",
+                                    choices = unique(screening_breast_filtered$geography))
+             })
+
+
+######### BOWEL ##########
 
 ##############################################.
 # VACCINATIONS UPTAKE----
