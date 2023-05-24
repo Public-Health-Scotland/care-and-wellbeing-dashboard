@@ -458,7 +458,7 @@ tagList(
                ##############################################.
 
                tabPanel(title = "Healthy life expectancy",
-                        value = "healthy_life_expctancy",
+                        value = "healthy_life_expectancy",
 
                         h2("Healthy life expectancy")
                ),

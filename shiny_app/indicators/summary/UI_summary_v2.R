@@ -46,41 +46,41 @@ tagList(
                     #                h2("Wellbeing of children and young people"),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("CAMHS waiting times"),
+                    #                         h3("CAMHS waiting times"),
                     #                         withSpinner(infoBoxOutput("camhs_waiting_times_cr_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Child Poverty"),
+                    #                         h3("Child Poverty"),
                     #                         withSpinner(infoBoxOutput("child_poverty_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Infant mortality"),
+                    #                         h3("Infant mortality"),
                     #                         withSpinner(infoBoxOutput("infant_mortality_cr_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Positive destinations of school leavers"),
+                    #                         h3("Positive destinations of school leavers"),
                     #                         withSpinner(infoBoxOutput("positive_destinations_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Pre-School development"),
+                    #                         h3("Pre-School development"),
                     #                         withSpinner(infoBoxOutput("child_development_cr_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Protection from harm"),
+                    #                         h3("Protection from harm"),
                     #                         withSpinner(infoBoxOutput("protection_from_harm_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Being listened to and involved in decision making"),
+                    #                         h3("Being listened to and involved in decision making"),
                     #                         withSpinner(infoBoxOutput("listen_to_decision_making_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Mental health and wellbeing"),
+                    #                         h3("Mental health and wellbeing"),
                     #                         withSpinner(infoBoxOutput("mental_health_cr_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Physical activity"),
+                    #                         h3("Physical activity"),
                     #                         withSpinner(infoBoxOutput("physical_activity_children_cr_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(column(12, br()))
@@ -92,42 +92,42 @@ tagList(
                     #                h2("Financial security for low income households"),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Cost of living"),
+                    #                         h3("Cost of living"),
                     #                         withSpinner(infoBoxOutput("cost_of_living_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("ELC uptake"),
+                    #                         h3("ELC uptake"),
                     #                         withSpinner(infoBoxOutput("childcare_uptake_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Fuel affordability"),
+                    #                         h3("Fuel affordability"),
                     #                         withSpinner(infoBoxOutput("fuel_affordability_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Managing financially"),
+                    #                         h3("Managing financially"),
                     #                         withSpinner(infoBoxOutput("managing_financially_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Savings"),
+                    #                         h3("Savings"),
                     #                         withSpinner(infoBoxOutput("savings_infobox", width=NULL)),
                     #                  ),
                     #
                     #                  column(4,
-                    #                         h4("Unmanageable debt"),
+                    #                         h3("Unmanageable debt"),
                     #                         withSpinner(infoBoxOutput("unmanageable_debt_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Benefit uptake and engagement with welfare advice"),
+                    #                         h3("Benefit uptake and engagement with welfare advice"),
                     #                         withSpinner(infoBoxOutput("benefits_uptake_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Food affordability"),
+                    #                         h3("Food affordability"),
                     #                         withSpinner(infoBoxOutput("food_affordability_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Transport costs"),
+                    #                         h3("Transport costs"),
                     #                         withSpinner(infoBoxOutput("transport_costs_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(column(12, br()))
@@ -140,52 +140,52 @@ tagList(
                     #                fluidRow(
                     #
                     #                  column(4,
-                    #                         h4("Disability employment gap"),
+                    #                         h3("Disability employment gap"),
                     #                         withSpinner(infoBoxOutput("disability_employment_gap_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Economic Inactivity"),
+                    #                         h3("Economic Inactivity"),
                     #                         withSpinner(infoBoxOutput("economic_inactivity_cr_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Employability"),
+                    #                         h3("Employability"),
                     #                         withSpinner(infoBoxOutput("employability_infobox", width=NULL)),
                     #                  )),
                     #
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Employees on the living wage"),
+                    #                         h3("Employees on the living wage"),
                     #                         withSpinner(infoBoxOutput("employees_living_wage_cr_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Ethnicity employment gap"),
+                    #                         h3("Ethnicity employment gap"),
                     #                         withSpinner(infoBoxOutput("ethnicity_employment_gap_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Gender pay gap"),
+                    #                         h3("Gender pay gap"),
                     #                         withSpinner(infoBoxOutput("gender_pay_gap_cr_infobox", width=NULL)),
                     #                  )),
                     #
                     #                fluidRow(
                     #                  column(4,
-                    #                         h4("Skills shortage vacancies"),
+                    #                         h3("Skills shortage vacancies"),
                     #                         withSpinner(infoBoxOutput("skills_shortage_vacancies_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Underemployment"),
+                    #                         h3("Underemployment"),
                     #                         withSpinner(infoBoxOutput("underemployment_infobox", width=NULL)),
                     #                  ),
                     #                  column(4,
-                    #                         h4("Zero hours contracts"),
+                    #                         h3("Zero hours contracts"),
                     #                         withSpinner(infoBoxOutput("zero_hours_contracts_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(
                     #                  column(6,
-                    #                         h4("Contractually secure work"),
+                    #                         h3("Contractually secure work"),
                     #                         withSpinner(infoBoxOutput("contractually_secure_work_infobox", width=NULL)),
                     #                  ),
                     #                  column(6,
-                    #                         h4("Green Jobs"),
+                    #                         h3("Green Jobs"),
                     #                         withSpinner(infoBoxOutput("green_jobs_infobox", width=NULL)),
                     #                  )),
                     #                fluidRow(column(12, br()))
@@ -245,7 +245,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_all_cause_mortality", "All-cause mortality (age 15-44)")),
+                                            h3(actionLink("jump_summary_to_all_cause_mortality", "All-cause mortality (age 15-44)")),
                                             summaryBoxUI("all_cause_mortality", title = "Rate of deaths per 100,000",
                                                          button_title =  "All-cause mortality (age 15 to 44)",
                                                          button_content = glue("This is the rate of deaths per 100,000 population for people aged between 15 and 44 years for the year {max(all_cause_mortality$year)}.",
@@ -255,7 +255,7 @@ tagList(
                                                                                "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths (age 45-74)")),
+                                            h3(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths (age 45-74)")),
                                             summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
                                                          button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
                                                          button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range {max(chd_deaths$year_range)}.",
@@ -265,7 +265,7 @@ tagList(
                                                                                "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_drug_deaths", "Drug-related deaths")),
+                                            h3(actionLink("jump_summary_to_drug_deaths", "Drug-related deaths")),
                                             summaryBoxUI("drug_deaths", title = "Rate of deaths per 100,000",
                                                          button_title =  "Drug-related deaths",
                                                          button_content = glue("This is the Age-sex Standardised Rate of drug-related deaths per 100,000 population for the year range {max(drug_related_deaths$year)}. <br> <br>",
@@ -277,7 +277,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_drug_admissions","Drug-related hospital admissions")),
+                                            h3(actionLink("jump_summary_to_drug_admissions","Drug-related hospital admissions")),
                                             summaryBoxUI("drug_admissions", title = "Rate of stays per 100,000",
                                                          button_title =  "Drug-related hospital admissions",
                                                          button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_stays$financial_year)}. ",
@@ -288,7 +288,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_experience_of_unpaid_carers_agree", "Experience of unpaid carers")),
+                                            h3(actionLink("jump_summary_to_experience_of_unpaid_carers_agree", "Experience of unpaid carers")),
                                             summaryBoxUI("experience_of_unpaid_carers_agree", title = "Percentage who strongly agreed",
                                                          button_title =  "Experience of unpaid carers",
                                                          button_content = glue("This is the percentage of unpaid carers who strongly agreed with the statement ",
@@ -299,7 +299,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_experience_of_unpaid_carers_disagree", "Experience of unpaid carers")),
+                                            h3(actionLink("jump_summary_to_experience_of_unpaid_carers_disagree", "Experience of unpaid carers")),
                                             summaryBoxUI("experience_of_unpaid_carers_disagree", title = "Percentage who strongly disagreed",
                                                          button_title =  "Experience of unpaid carers",
                                                          button_content = glue("This is the percentage of unpaid carers who strongly disagreed with the statement ",
@@ -311,7 +311,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_hospital_admission_heart_attack", "First ever hospital admission for heart attack (under 75)")),
+                                            h3(actionLink("jump_summary_to_hospital_admission_heart_attack", "First ever hospital admission for heart attack (under 75)")),
                                             summaryBoxUI("hospital_admission_heart_attack", title = "Yearly total",
                                                          button_title =  "First ever hospital admission for heart attack  (under 75)",
                                                          button_content =  glue("This is the total number of first ever hospital admissions for acute myocardial infarction (heart attack) ",
@@ -322,7 +322,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_healthy_birthweight", "Healthy birthweight")),
+                                            h3(actionLink("jump_summary_to_healthy_birthweight", "Healthy birthweight")),
                                             summaryBoxUI("healthy_birthweight", title = "Percentage of livebirths of an approporiate birthweight",
                                                          button_title =  "Healthy birthweight",
                                                          button_content =  glue("This is the percentage of babies with an appropriate birthweight based on gestational age in the financial year ",
@@ -334,7 +334,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_adult_long_term_condition", "Limiting long-term conditions (age 16+)")),
+                                            h3(actionLink("jump_summary_to_adult_long_term_condition", "Limiting long-term conditions (age 16+)")),
                                             summaryBoxUI("adult_long_term_condition", title = "Percentage of adults",
                                                          button_title =  "Limiting long-term conditions (age 16+)",
                                                          button_content =  glue("This is the percentage of adults aged 16 years and above who live with a limiting long-term condition in the year {max(adult_living_limiting_long_term_condition$Year)}. <br> <br>",
@@ -348,7 +348,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults (age 16+)")),
+                                            h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults (age 16+)")),
                                             summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
                                                          button_title =  "Self-assessed health of adults (age 16+)",
                                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
@@ -360,51 +360,51 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_experience_recipients", "Experience of social care recipients")),
+                                            h3(actionLink("jump_summary_to_experience_recipients", "Experience of social care recipients")),
                                             summaryBoxUI("experience_recipients")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_health_risk_behaviours", "Health risk behaviours")),
+                                            h3(actionLink("jump_summary_to_health_risk_behaviours", "Health risk behaviours")),
                                             summaryBoxUI("health_risk_behaviours")
                                      )),
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_healthy_life_expectancy", "Healthy life expectancy")),
+                                            h3(actionLink("jump_summary_to_healthy_life_expectancy", "Healthy life expectancy")),
                                             summaryBoxUI("healthy_life_expectancy")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
+                                            h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                                             summaryBoxUI("healthy_weight")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
+                                            h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
                                             summaryBoxUI("mental_wellbeing")
                                      )),
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_physical_activity", "Physical activity")),
+                                            h3(actionLink("jump_summary_to_physical_activity", "Physical activity")),
                                             summaryBoxUI("physical_activity")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_premature_mortality", "Premature mortality")),
+                                            h3(actionLink("jump_summary_to_premature_mortality", "Premature mortality")),
                                             summaryBoxUI("premature_mortality")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
+                                            h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
                                             summaryBoxUI("quality_care")
                                      )),
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_screening", "Screening - uptake for breast and bowel cancer")),
+                                            h3(actionLink("jump_summary_to_screening", "Screening - uptake for breast and bowel cancer")),
                                             summaryBoxUI("screening")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_vaccinations", "Vaccinations – uptake ")),
+                                            h3(actionLink("jump_summary_to_vaccinations", "Vaccinations – uptake ")),
                                             summaryBoxUI("vaccinations")
                                      ),
                                      column(4,
-                                            h4(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
+                                            h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
                                             summaryBoxUI("work_related_health")
                                      )),
                                    fluidRow(column(12, br()))
@@ -417,7 +417,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
+                                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
                                             summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
                                                          button_title =  "At risk of obesity",
                                                          button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
@@ -427,7 +427,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
+                                            h3(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
                                             summaryBoxUI("child_development_cw", title = "Percentage showing concern",
                                                          button_title =  "Child social and physical development",
                                                          button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
@@ -437,7 +437,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4(actionLink("jump_summary_to_infant_mortality_cw", "Infant mortality")),
+                                            h3(actionLink("jump_summary_to_infant_mortality_cw", "Infant mortality")),
                                             summaryBoxUI("infant_mortality_cw", title = "Rate per 1,000 livebirths",
                                                          button_title =  "Infant mortality",
                                                          button_content =  glue("This is the rate of infant deaths per 1,000 live births in {max(inf_deaths$date) %>% format('%B %Y')}. <br> <br>",
@@ -448,21 +448,21 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h4(actionLink("jump_summary_to_child_material_deprivation", "Child material deprivation")),
+                                            h3(actionLink("jump_summary_to_child_material_deprivation", "Child material deprivation")),
                                             summaryBoxUI("child_material_deprivation")
                                      ),
                                      column(6,
-                                            h4(actionLink("jump_summary_to_child_wellbeing", "Child wellbeing and happiness")),
+                                            h3(actionLink("jump_summary_to_child_wellbeing", "Child wellbeing and happiness")),
                                             summaryBoxUI("child_wellbeing")
                                      )),
 
                                    fluidRow(
                                      column(6,
-                                            h4(actionLink("jump_summary_to_perinatal_mortality", "Perinatal mortality rate")),
+                                            h3(actionLink("jump_summary_to_perinatal_mortality", "Perinatal mortality rate")),
                                             summaryBoxUI("perinatal_mortality")
                                      ),
                                      column(6,
-                                            h4(actionLink("jump_summary_to_physical_activity_children_cw", "Physical activity")),
+                                            h3(actionLink("jump_summary_to_physical_activity_children_cw", "Physical activity")),
                                             summaryBoxUI("physical_activity_children_cw")
                                      )),
                                    fluidRow(column(12, br()))
@@ -475,7 +475,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("CAMHS waiting times"),
+                                            h3(actionLink("jump_summary_to_camhs_waiting_times_cw", "CAMHS waiting times")),
                                             summaryBoxUI("camhs_waiting_times_cw", title = "Percentage of children and young people",
                                                          button_title =  "CAMHS waiting times",
                                                          button_content =  glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
@@ -485,22 +485,22 @@ tagList(
                                                                                 "<br> <br> {strong('Click again to close.')}"))
                                      ),
                                      column(4,
-                                            h4("Children have positive relationships"),
+                                            h3(actionLink("jump_summary_to_children_relationships", "Children have positive relationships")),
                                             summaryBoxUI("children_relationships")
                                      ),
                                      column(4,
-                                            h4("Children’s voices"),
+                                            h3(actionLink("jump_summary_to_childrens_voices", "Children’s voices")),
                                             summaryBoxUI("childrens_voices")
                                      )),
 
                                    fluidRow(
 
                                      column(6,
-                                            h4("Confidence and resilience of children and young people"),
+                                            h3(actionLink("jump_summary_to_confidence_of_young", "Confidence and resilience of children and young people")),
                                             summaryBoxUI("confidence_of_young")
                                      ),
                                      column(6,
-                                            h4("Mental health / mental wellbeing"),
+                                            h3(actionLink("jump_summary_to_mental_health_cw", "Mental health / mental wellbeing")),
                                             summaryBoxUI("mental_health_cw")
                                      )),
                                    fluidRow(column(12, br()))
@@ -513,7 +513,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("Economic inactivity"),
+                                            h3("Economic inactivity"),
                                             summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
                                                          button_title =  "Economic inactivity",
                                                          button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
@@ -523,7 +523,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Economic inactivity"),
+                                            h3("Economic inactivity"),
                                             summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
                                                          button_title =  "Economic inactivity",
                                                          button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
@@ -533,7 +533,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h4("Employees on the living wage"),
+                                            h3("Employees on the living wage"),
                                             summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
                                                          button_title =  "Employees on the living wage",
                                                          button_content =  glue("This is the percentage of employees earning less than the living wage in {max(employees_living_wage_by_LA$year)}. <br> <br>",
@@ -544,7 +544,7 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h4("Pay gap"),
+                                            h3("Pay gap"),
                                             summaryBoxUI("gender_pay_gap_cw", title = "Percentage difference between men`s and women`s hourly earnings",
                                                          button_title =  "Pay gap",
                                                          button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {max(gender_pay_gap_by_sector$year)}. <br> <br>",
@@ -554,7 +554,7 @@ tagList(
                                      ),
 
                                      column(6,
-                                            h4("Work related ill health"),
+                                            h3("Work related ill health"),
                                             summaryBoxUI("work_related_ill_health")
                                      )),
 
@@ -568,15 +568,15 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("Food insecurity money or other resources"),
+                                            h3("Food insecurity money or other resources"),
                                             summaryBoxUI("food_insecurity")
                                      ),
                                      column(4,
-                                            h4("Persistent poverty"),
+                                            h3("Persistent poverty"),
                                             summaryBoxUI("persistent_poverty")
                                      ),
                                      column(4,
-                                            h4("Satisfaction with housing"),
+                                            h3("Satisfaction with housing"),
                                             summaryBoxUI("satisfaction_with_housing")
                                      )),
                                    fluidRow(column(12, br()))
@@ -589,21 +589,21 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h4("Loneliness"),
+                                            h3("Loneliness"),
                                             summaryBoxUI("loneliness")
                                      ),
                                      column(6,
-                                            h4("Number of areas where health inequalities are reducing"),
+                                            h3("Number of areas where health inequalities are reducing"),
                                             summaryBoxUI("areas_of_health_inequalities")
                                      )),
 
                                    fluidRow(
                                      column(6,
-                                            h4("Perceptions of local area"),
+                                            h3("Perceptions of local area"),
                                             summaryBoxUI("perceptions_of_local_area")
                                      ),
                                      column(6,
-                                            h4("Places to interact"),
+                                            h3("Places to interact"),
                                             summaryBoxUI("places_to_intereact")
                                      )),
                                    fluidRow(column(12, br()))
@@ -616,11 +616,11 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h4("Gender balance in organisations"),
+                                            h3("Gender balance in organisations"),
                                             summaryBoxUI("gender_balance")
                                      ),
                                      column(6,
-                                            h4("Public services treat people with dignity and respect"),
+                                            h3("Public services treat people with dignity and respect"),
                                             summaryBoxUI("dignity_respect")
                                      )),
                                    fluidRow(column(12, br()))
@@ -633,15 +633,15 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h4("Access to green and blue space"),
+                                            h3("Access to green and blue space"),
                                             summaryBoxUI("blue_green_space")
                                      ),
                                      column(4,
-                                            h4("Journeys by active travel"),
+                                            h3("Journeys by active travel"),
                                             summaryBoxUI("journeys_active")
                                      ),
                                      column(4,
-                                            h4("Visits to the outdoors"),
+                                            h3("Visits to the outdoors"),
                                             summaryBoxUI("visit_outdoors")
                                      )),
                                    fluidRow(column(12, br()))

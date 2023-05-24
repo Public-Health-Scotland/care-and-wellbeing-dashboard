@@ -12,7 +12,7 @@ tagList(
                ##############################################.
 
                tabPanel(title = "Child material deprivation",
-                        value = "child_material_deprevation",
+                        value = "child_material_deprivation",
 
                         h2("Child material deprivation")
                ),
