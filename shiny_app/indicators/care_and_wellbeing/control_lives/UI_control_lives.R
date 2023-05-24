@@ -2,7 +2,6 @@ tagList(
 
   h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
   br(),
-  bsButton("control_lives_to_info", "Go to information page", class = "info-btn"),
 
   h4(strong("Select indicator: ")),
 
@@ -15,40 +14,48 @@ tagList(
                tabPanel(title = "CAMHS waiting times",
                         value = "camhs_waiting_times_cw",
 
-                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw", content = "Paste background info and source for camhs waiting times here")),
+                        h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw",
+                                                            content = paste("<p>Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
+                                                                            "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
+                                                                            "children and young people should start treatment within 18 weeks of referral to CAMHS.</p>",
 
-                        actionButton("camhs_waiting_times_cw_modal_info",
-                                     tags$b("Background information and source"),
-                                     icon = icon_no_warning_fn("info-circle")),
+                                                                            "<p>For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
+                                                                            "are providing initial telephone triage to elicit more information. Dependent on levels of ",
+                                                                            "risk identified some will be offered a time/date to undertake a complete assessment where ",
+                                                                            "others, where levels of risk/concern identified a face-to-face assessment will be offered.</p>",
 
+                                                                            "<a href=https://publichealthscotland.scot/publications/show-all-releases?id=20497> Source: CAMHS Waiting Times, Public Health Scotland </a>"))),
 
-                        p("Use the below drop-down menu to select a Health Board of interest.",
-                          "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
+                        # p("Use the below drop-down menu to select a Health Board of interest.",
+                        #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
 
-                        fluidRow(column(3,
+                        fluidRow(column(4,
                                          selectInput("camhs_waiting_times_cw_geog_type",
                                          "Step 1: Select national or local geography level",
                                          choices = c("Scotland", "Health Board"),
-                                         selected = "Scotland")),
-                                 column(3,
+                                         selected = "Scotland",
+                                         width = "100%")),
+
+                                 column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
                                           "Step 2: Select national or local geography area",
                                           choices = c("Scotland"),
                                           width = "100%"))
                                  ),
 
-                        plot_title("Proportion of CAMHS patients seen by wait time since referral",
-                                   'camhs_waiting_times_cw_seen_since_plot',
-                                   subtitle = "Click on the legend to filter the chart"),
-                        plot_title("Proportion of patients seen within 18 weeks of referral",
-                                   "camhs_waiting_times_cw_seen_within_plot"),
+                        altTextUI("camhs_waiting_times_cw_seen_since_alt"),
+                        withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),
+
+                        br(),
+                        altTextUI("camhs_waiting_times_cw_seen_within_alt"),
                         radioButtons(inputId = "camhs_waiting_times_cw_vlines",
                                      label = "Toggle lockdown timeline",
                                      choices = c("On", "Off"),
                                      selected = "On",
                                      inline = TRUE),
+                        withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_within_plot")),
 
-
+                        br(),
                         h3(textOutput({"camhs_cw_table_title"})),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
