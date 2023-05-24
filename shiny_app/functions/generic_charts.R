@@ -232,7 +232,7 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
     plot_ly(x=~x,
             y=~y,
             color = ~category_var,
-            colors = create_palette(category_var),
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
             # name = glue("{category_var}{label}"),
             hovertemplate = ~glue("{y %>% round_half_up(2)}"),
