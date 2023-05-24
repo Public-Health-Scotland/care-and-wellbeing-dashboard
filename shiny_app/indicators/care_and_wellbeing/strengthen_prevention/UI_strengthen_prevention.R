@@ -600,11 +600,12 @@ tagList(
 
                                         h2("Screening uptake for breast cancer",
 
-                                        iButtonUI("screening_breast",
-                                                  content = paste("Paste here."))),
+                                           iButtonUI("screening_breast",
+                                                     content = paste("Paste here."))),
 
                                         altTextUI("screening_breast_board_alt"),
                                         withSpinner(plotlyOutput("screening_breast_board_plot")),
+                                        br(),
 
                                         fluidRow(
                                           column(4,
@@ -622,7 +623,23 @@ tagList(
                                           )),
 
                                         altTextUI("screening_breast_simd_alt"),
-                                        withSpinner(plotlyOutput("screening_breast_simd_plot"))
+                                        # simd5Defintion("screening_breast_simd")
+                                        withSpinner(plotlyOutput("screening_breast_simd_plot")),
+
+                                        h3(textOutput("screening_breast_table_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+
+                                        tabBox(
+                                          id = "screening_breast_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_simd"))
+                                        )
+
+
 
                                ),
 
