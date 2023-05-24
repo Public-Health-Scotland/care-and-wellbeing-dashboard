@@ -371,3 +371,14 @@ observeEvent(input$jump_summary_to_physical_activity_children_cw, {
                      selected = "physical_activity_children_cw")
 })
 
+
+observeEvent(input$jump_summary_to_camhs_waiting_times_cw, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "control_lives")
+  updateNavlistPanel(session = session,
+                     inputId = "control_lives_panel",
+                     selected = "camhs_waiting_times_cw")
+})
+
