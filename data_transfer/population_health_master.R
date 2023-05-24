@@ -96,3 +96,9 @@ source(paste0(path_pop_health, "/transfer_adult_long_term_condition.R"))
 source(paste0(path_pop_health, "/transfer_experience_unpaid_carers.R"))
 
 
+##############################################.
+# PREMATURE MORTALITY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_premature_mortality.R"))
+
