@@ -148,7 +148,7 @@ observeEvent(input$jump_summary_to_adults_self_assessed_health, {
                     selected = "strengthen_prevention")
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
-                     selected = "adults_self_assessed_health")
+                     selected = "adult_self_assessed_health")
 })
 
 
@@ -381,4 +381,242 @@ observeEvent(input$jump_summary_to_camhs_waiting_times_cw, {
                      inputId = "control_lives_panel",
                      selected = "camhs_waiting_times_cw")
 })
+
+
+observeEvent(input$jump_summary_to_children_relationships, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "control_lives")
+  updateNavlistPanel(session = session,
+                     inputId = "control_lives_panel",
+                     selected = "children_relationships")
+})
+
+
+observeEvent(input$jump_summary_to_childrens_voices, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "control_lives")
+  updateNavlistPanel(session = session,
+                     inputId = "control_lives_panel",
+                     selected = "childrens_voices")
+})
+
+
+observeEvent(input$jump_summary_to_confidence_of_young, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "control_lives")
+  updateNavlistPanel(session = session,
+                     inputId = "control_lives_panel",
+                     selected = "confidence_of_young")
+})
+
+
+
+observeEvent(input$jump_summary_to_mental_health_cw, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "control_lives")
+  updateNavlistPanel(session = session,
+                     inputId = "control_lives_panel",
+                     selected = "mental_health_cw")
+})
+
+
+
+observeEvent(input$jump_summary_to_economic_inactivity_cw_want, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "fair_work")
+  updateNavlistPanel(session = session,
+                     inputId = "fair_work_panel",
+                     selected = "economic_inactivity_cw")
+})
+
+
+observeEvent(input$jump_summary_to_economic_inactivity_cw_not_want, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "fair_work")
+  updateNavlistPanel(session = session,
+                     inputId = "fair_work_panel",
+                     selected = "economic_inactivity_cw")
+})
+
+
+observeEvent(input$jump_summary_to_employees_living_wage_cw, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "fair_work")
+  updateNavlistPanel(session = session,
+                     inputId = "fair_work_panel",
+                     selected = "employees_living_wage_cw")
+})
+
+
+observeEvent(input$jump_summary_to_gender_pay_gap_cw, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "fair_work")
+  updateNavlistPanel(session = session,
+                     inputId = "fair_work_panel",
+                     selected = "gender_pay_gap_cw")
+})
+
+
+observeEvent(input$jump_summary_to_work_related_ill_health, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "fair_work")
+  updateNavlistPanel(session = session,
+                     inputId = "fair_work_panel",
+                     selected = "work_related_ill_health")
+})
+
+
+observeEvent(input$jump_summary_to_food_insecurity, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "healthy_standard")
+  updateNavlistPanel(session = session,
+                     inputId = "healthy_standard_panel",
+                     selected = "food_insecurity")
+})
+
+
+observeEvent(input$jump_summary_to_persistent_poverty, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "healthy_standard")
+  updateNavlistPanel(session = session,
+                     inputId = "healthy_standard_panel",
+                     selected = "persistent_poverty")
+})
+
+
+observeEvent(input$jump_summary_to_satisfaction_with_housing, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "healthy_standard")
+  updateNavlistPanel(session = session,
+                     inputId = "healthy_standard_panel",
+                     selected = "satisfaction_with_housing")
+})
+
+
+observeEvent(input$jump_summary_to_loneliness, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "sustainable_communities")
+  updateNavlistPanel(session = session,
+                     inputId = "sustainable_communities_panel",
+                     selected = "loneliness")
+})
+
+
+observeEvent(input$jump_summary_to_areas_of_health_inequalities, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "sustainable_communities")
+  updateNavlistPanel(session = session,
+                     inputId = "sustainable_communities_panel",
+                     selected = "areas_of_health_inequalities")
+})
+
+
+observeEvent(input$jump_summary_to_perceptions_of_local_area, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "sustainable_communities")
+  updateNavlistPanel(session = session,
+                     inputId = "sustainable_communities_panel",
+                     selected = "perceptions_of_local_area")
+})
+
+
+observeEvent(input$jump_summary_to_places_to_intereact, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "sustainable_communities")
+  updateNavlistPanel(session = session,
+                     inputId = "sustainable_communities_panel",
+                     selected = "places_to_intereact")
+})
+
+
+observeEvent(input$jump_summary_to_gender_balance, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "discrimination_racism")
+  updateNavlistPanel(session = session,
+                     inputId = "discrimination_racism_panel",
+                     selected = "gender_balance")
+})
+
+
+observeEvent(input$jump_summary_to_dignity_respect, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "discrimination_racism")
+  updateNavlistPanel(session = session,
+                     inputId = "discrimination_racism_panel",
+                     selected = "dignity_respect")
+})
+
+
+observeEvent(input$jump_summary_to_blue_green_space, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "environmental_sustainability")
+  updateNavlistPanel(session = session,
+                     inputId = "environmental_sustainability_panel",
+                     selected = "blue_green_space")
+})
+
+
+observeEvent(input$jump_summary_to_journeys_active, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "environmental_sustainability")
+  updateNavlistPanel(session = session,
+                     inputId = "environmental_sustainability_panel",
+                     selected = "journeys_active")
+})
+
+
+observeEvent(input$jump_summary_to_visit_outdoors, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "environmental_sustainability")
+  updateNavlistPanel(session = session,
+                     inputId = "environmental_sustainability_panel",
+                     selected = "visit_outdoors")
+})
+
+
+
+
+
 

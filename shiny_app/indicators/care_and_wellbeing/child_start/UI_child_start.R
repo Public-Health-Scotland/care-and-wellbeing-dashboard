@@ -1,10 +1,7 @@
 tagList(
 
   h1("Giving every child the best start in life" ),
-  bsButton("child_start_to_info", "Go to information page", class = "info-btn"),
-  #bsButton("child_start_to_info", "Go to information page", class = "info-btn"),
   br(),
-  h4(strong("Select indicator: ")),
 
   navlistPanel(widths = c(2,10), id = "child_start_panel",
 

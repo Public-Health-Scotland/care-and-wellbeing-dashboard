@@ -2,11 +2,7 @@ tagList(
 
   h1("Create fair employment and good work for all"),
   br(),
-  bsButton("fair_work_to_info", "Go to information page", class = "info-btn"),
-  h4(strong("Select indicator: ")),
-
-
-  navlistPanel(widths = c(2,10),
+navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                ##############################################.
                # ECONOMIC INACTIVITY----

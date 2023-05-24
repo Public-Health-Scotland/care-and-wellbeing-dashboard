@@ -2,11 +2,8 @@ tagList(
 
   h1("Ensure healthy standard of living for all"),
   br(),
-  bsButton("healthy_standard_to_info", "Go to information page", class = "info-btn"),
-  h4(strong("Select indicator: ")),
 
-
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "healthy_standard_panel",
 
 
                ##############################################.

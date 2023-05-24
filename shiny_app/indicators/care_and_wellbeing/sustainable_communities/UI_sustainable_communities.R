@@ -2,11 +2,8 @@ tagList(
 
   h1("Create and develop healthy and sustainable places and communities"),
   br(),
-  bsButton("sustainable_communities_to_info", "Go to information page", class = "info-btn"),
-  h4(strong("Select indicator: ")),
 
-
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "sustainable_communities_panel",
 
                ##############################################.
                # LONELINESS----

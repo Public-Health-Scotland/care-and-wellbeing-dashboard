@@ -513,7 +513,7 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h3("Economic inactivity"),
+                                            h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
                                             summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
                                                          button_title =  "Economic inactivity",
                                                          button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
@@ -523,7 +523,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h3("Economic inactivity"),
+                                            h3(actionLink("jump_summary_to_economic_inactivity_cw_not_want", "Economic inactivity")),
                                             summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
                                                          button_title =  "Economic inactivity",
                                                          button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
@@ -533,7 +533,7 @@ tagList(
                                      ),
 
                                      column(4,
-                                            h3("Employees on the living wage"),
+                                            h3(actionLink("jump_summary_to_employees_living_wage_cw", "Employees on the living wage")),
                                             summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
                                                          button_title =  "Employees on the living wage",
                                                          button_content =  glue("This is the percentage of employees earning less than the living wage in {max(employees_living_wage_by_LA$year)}. <br> <br>",
@@ -544,7 +544,7 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h3("Pay gap"),
+                                            h3(actionLink("jump_summary_to_gender_pay_gap_cw", "Pay gap")),
                                             summaryBoxUI("gender_pay_gap_cw", title = "Percentage difference between men`s and women`s hourly earnings",
                                                          button_title =  "Pay gap",
                                                          button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {max(gender_pay_gap_by_sector$year)}. <br> <br>",
@@ -554,7 +554,7 @@ tagList(
                                      ),
 
                                      column(6,
-                                            h3("Work related ill health"),
+                                            h3(actionLink("jump_summary_to_work_related_ill_health", "Work related ill health")),
                                             summaryBoxUI("work_related_ill_health")
                                      )),
 
@@ -568,15 +568,15 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h3("Food insecurity money or other resources"),
+                                            h3(actionLink("jump_summary_to_food_insecurity", "Food insecurity money or other resources")),
                                             summaryBoxUI("food_insecurity")
                                      ),
                                      column(4,
-                                            h3("Persistent poverty"),
+                                            h3(actionLink("jump_summary_to_persistent_poverty", "Persistent poverty")),
                                             summaryBoxUI("persistent_poverty")
                                      ),
                                      column(4,
-                                            h3("Satisfaction with housing"),
+                                            h3(actionLink("jump_summary_to_satisfaction_with_housing", "Satisfaction with housing")),
                                             summaryBoxUI("satisfaction_with_housing")
                                      )),
                                    fluidRow(column(12, br()))
@@ -589,21 +589,21 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h3("Loneliness"),
+                                            h3(actionLink("jump_summary_to_loneliness", "Loneliness")),
                                             summaryBoxUI("loneliness")
                                      ),
                                      column(6,
-                                            h3("Number of areas where health inequalities are reducing"),
+                                            h3(actionLink("jump_summary_to_areas_of_health_inequalities", "Number of areas where health inequalities are reducing")),
                                             summaryBoxUI("areas_of_health_inequalities")
                                      )),
 
                                    fluidRow(
                                      column(6,
-                                            h3("Perceptions of local area"),
+                                            h3(actionLink("jump_summary_to_perceptions_of_local_area", "Perceptions of local area")),
                                             summaryBoxUI("perceptions_of_local_area")
                                      ),
                                      column(6,
-                                            h3("Places to interact"),
+                                            h3(actionLink("jump_summary_to_places_to_intereact", "Places to interact")),
                                             summaryBoxUI("places_to_intereact")
                                      )),
                                    fluidRow(column(12, br()))
@@ -616,11 +616,11 @@ tagList(
 
                                    fluidRow(
                                      column(6,
-                                            h3("Gender balance in organisations"),
+                                            h3(actionLink("jump_summary_to_gender_balance", "Gender balance in organisations")),
                                             summaryBoxUI("gender_balance")
                                      ),
                                      column(6,
-                                            h3("Public services treat people with dignity and respect"),
+                                            h3(actionLink("jump_summary_to_dignity_respect", "Public services treat people with dignity and respect")),
                                             summaryBoxUI("dignity_respect")
                                      )),
                                    fluidRow(column(12, br()))
@@ -633,15 +633,15 @@ tagList(
 
                                    fluidRow(
                                      column(4,
-                                            h3("Access to green and blue space"),
+                                            h3(actionLink("jump_summary_to_blue_green_space", "Access to green and blue space")),
                                             summaryBoxUI("blue_green_space")
                                      ),
                                      column(4,
-                                            h3("Journeys by active travel"),
+                                            h3(actionLink("jump_summary_to_journeys_active", "Journeys by active travel")),
                                             summaryBoxUI("journeys_active")
                                      ),
                                      column(4,
-                                            h3("Visits to the outdoors"),
+                                            h3(actionLink("jump_summary_to_visit_outdoors", "Visits to the outdoors")),
                                             summaryBoxUI("visit_outdoors")
                                      )),
                                    fluidRow(column(12, br()))
