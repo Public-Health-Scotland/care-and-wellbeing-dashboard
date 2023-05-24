@@ -600,7 +600,7 @@ tagList(
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
                                                                      "booster during seasonal vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > phs website."))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website."))),
 
 
                                         fluidRow(column(4,
@@ -647,7 +647,7 @@ tagList(
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
                                                                      "booster during seasonal vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > phs website."))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website."))),
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",

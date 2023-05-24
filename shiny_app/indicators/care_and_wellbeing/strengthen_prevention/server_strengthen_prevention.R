@@ -929,6 +929,7 @@ observeEvent(input$vaccinations_covid_geog_name,{
 observeEvent(input$vaccinations_covid_geog_name,{
 
   data_unfiltered <- vaccinations_covid %>%
+    filter(!is.na(vaccinated)) %>%
     select(geography_type, geography, SIMD, eligible_winter_2022_population,
            vaccinated, uptake_percent) %>%
     rename(`uptake_percentage_(%)` = uptake_percent,
@@ -998,6 +999,7 @@ observeEvent(input$vaccinations_flu_geog_name,{
 observeEvent(input$vaccinations_flu_geog_name,{
 
   data_unfiltered <- vaccinations_flu %>%
+    filter(!is.na(vaccinated)) %>%
     select(geography_type, geography, SIMD, eligible_winter_2022_population,
            vaccinated, uptake_percent) %>%
     rename(`uptake_percentage_(%)` = uptake_percent,
