@@ -17,7 +17,7 @@ names(hb_rate)[2] <- "cause"
 hb_rate <- hb_rate %>%
   filter(cause == "All causes of death") %>%
   pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "Health_Board",
+               names_to = "geography_name",
                values_to = "Rate") %>%
   mutate(Rate = round_half_up(as.numeric(Rate), 1))
 
@@ -30,7 +30,7 @@ names(hb_rate_lcl)[2] <- "cause"
 hb_rate_lcl <- hb_rate_lcl %>%
   filter(cause == "All causes of death") %>%
   pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "Health_Board",
+               names_to = "geography_name",
                values_to = "Rate_LCL") %>%
   mutate(Rate_LCL = round_half_up(as.numeric(Rate_LCL), 1))
 
@@ -43,7 +43,7 @@ names(hb_rate_ucl)[2] <- "cause"
 hb_rate_ucl <- hb_rate_ucl %>%
   filter(cause == "All causes of death") %>%
   pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "Health_Board",
+               names_to = "geography_name",
                values_to = "Rate_UCL") %>%
   mutate(Rate_UCL = round_half_up(as.numeric(Rate_UCL), 1))
 
@@ -52,7 +52,9 @@ hb_rate <- hb_rate %>%
   left_join(hb_rate_lcl) %>%
   left_join(hb_rate_ucl) %>%
   select(-cause) %>%
-  filter(Year >= 2008)
+  filter(Year >= 2008) %>%
+  mutate(geography_type = ifelse(geography_name == "Scotland",
+                                 "Scotland", "Health Board"))
 
 rm(hb_rate_full, hb_rate_lcl, hb_rate_ucl)
 
