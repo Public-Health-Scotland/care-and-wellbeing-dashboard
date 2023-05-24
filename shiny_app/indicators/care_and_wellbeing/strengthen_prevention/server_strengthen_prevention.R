@@ -66,7 +66,7 @@ output$healthy_life_expectancy_council_area_plot = renderPlotly({
            ErrorBarLowerHeight = indicator - lower_confidence_interval) %>%
     rename(date = time_period) %>%
     confidence_scatter_function_hle(., y_title = "Healthy life expectancy", title = title) %>%
-    layout(xaxis = list(tickangle = 90),
+    layout(xaxis = list(tickangle = -90),
            yaxis = yaxis_number_normal,
            legend = list(y = -1.3))
 })

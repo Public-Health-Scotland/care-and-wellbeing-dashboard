@@ -67,7 +67,8 @@ confidence_scatter_function_hle = function(data, y_title, x_title = "Year range"
                               width = 0.5,
                               color = phsstyles::phs_colours("phs-purple")),
               marker = list(color = phsstyles::phs_colours("phs-purple"),
-                            size = 5)) %>%
+                            size = 5),
+              hovertemplate = ~glue("{indicator %>% round_half_up(2)}")) %>%
     add_segments(data=data, inherit = FALSE, text = NULL, hoverinfo = "text",
                  x = min(data$geography), xend = max(data$geography), y = (data %>% filter(geography == "Scotland",
                                                                                            date == "2019-21") %>%
@@ -77,13 +78,16 @@ confidence_scatter_function_hle = function(data, y_title, x_title = "Year range"
                          .$indicator),
                  type = "line",
                  name = "Scotland",
-                 line = list(color = "#C73918",width=1,dash = "dash")) %>%
+                 line = list(color = "#C73918",width=1,dash = "dash"),
+                 hovertemplate = ~glue("{data %>% filter(geography == 'Scotland',
+                                       date == '2019-21') %>%
+                                       .$indicator %>% round_half_up(2)}")) %>%
 
-  layout(xaxis = xaxis_council_area, yaxis = yaxis_number,
-         legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
-         title = list(text = str_wrap(title, width = 60), font = title_style),
-         margin = list(t = 90, b = 40),
-         hovermode = "x unified") %>%
+    layout(xaxis = xaxis_council_area, yaxis = yaxis_number,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
