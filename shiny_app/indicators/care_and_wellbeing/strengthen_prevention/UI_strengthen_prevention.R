@@ -549,7 +549,30 @@ tagList(
                tabPanel(title = "Mental wellbeing of adults (16+)",
                         value = "mental_wellbeing",
 
-                        h2("Mental wellbeing of adults (16+)")
+                        h2("Mental wellbeing of adults (16+)",
+                        iButtonUI("mental_wellbeing",
+                                  content = paste("Paste mental wellbeing info"))),
+
+                        altTextUI("mental_wellbeing_alt"),
+                        wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
+                        withSpinner(plotlyOutput("mental_wellbeing_trend_plot")),
+
+                        altTextUI("mental_wellbeing_simd_alt"),
+                        wemwbsDefinitionUI("mental_wellbeing_simd_wemwbs"),
+                        simdQuintileDefinitionUI("mental_wellbeing_simd"),
+                        withSpinner(plotlyOutput("mental_wellbeing_simd_plot")),
+
+                        h3("Data table: Mental wellbeing (WEMWBS) in Scotland"),
+
+                        tabBox(
+                          id = "mental_wellbeing_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("mental_wellbeing")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("mental_wellbeing_simd"))
+                        )
                ),
 
                ##############################################.
