@@ -527,20 +527,20 @@ observeEvent(input$alcohol_admissions_geog_name,{
 #
 #
 
-observeEvent(input$alcohol_deaths_sex_type,
-             {
-               alcohol_death_sex_filter <- alcohol_deaths %>%
-                 filter(sex_type == input$alcohol_deaths_sex_type)
+# observeEvent(input$alcohol_deaths_sex_type,
+#              {
+#                alcohol_death_sex_filter <- alcohol_deaths %>%
+#                  filter(sex_type == input$alcohol_deaths_sex_type)
+#
+#                updateSelectizeInput(session,
+#                                     "alcohol_deaths_sex_name",
+#                                     choices = unique(alcohol_deaths$sex))
+#              })
 
-               updateSelectizeInput(session,
-                                    "alcohol_deaths_sex_name",
-                                    choices = unique(alcohol_deaths$sex))
-             })
-
-
+# death sex plot
 output$alcohol_deaths_sex_plot = renderPlotly({
-  title <- glue("Age-sex standardised death rates per 100,000 in",
-                input$alcohol_deaths_sex_name)
+  title <- glue("Age-sex standardised death rates per 100,000 in ",
+                str_to_lower(input$alcohol_deaths_sex))
    data = alcohol_deaths %>%
     filter(sex == input$alcohol_deaths_sex) %>%
     rename("lower_confidence_interval" = lower_ci,
@@ -551,7 +551,7 @@ output$alcohol_deaths_sex_plot = renderPlotly({
                              title=title)
 })
 
-
+# age background plot
 output$alcohol_deaths_age_plot = renderPlotly({
   title <- glue("Age-sex standardised death rates per 100,000 ",
                 "by age group")
