@@ -421,8 +421,8 @@ observeEvent(input$geog_name_summary_CW,{
     .$rate %>% round_half_up(2)
 
   summaryBoxServer("infant_mortality_cw",
-                   recent_date = recent_date %>% format('%b %Y'),
-                   previous_date = previous_date %>% format('%b %Y'),
+                   recent_date = recent_date %>% format('%B %Y'),
+                   previous_date = previous_date %>% format('%B %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value
   )
@@ -461,8 +461,8 @@ observeEvent(input$geog_name_summary_CW,{
     .$proportion %>% round_half_up(4)*100
 
   summaryBoxServer("camhs_waiting_times_cw",
-                   recent_date = recent_date %>% format('%b %Y'),
-                   previous_date = previous_date %>% format('%b %Y'),
+                   recent_date = recent_date %>% format('%B %Y'),
+                   previous_date = previous_date %>% format('%B %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value,
                    percentage_symbol = "%")
