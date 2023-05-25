@@ -78,10 +78,10 @@ tagList(
                                                                "<br> <br> {strong('Click again to close.')}"))
                      ),
                      column(4,
-                            h3(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths (age 45-74)")),
+                            h3(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths (<75)")),
                             summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
-                                         button_title =  "Coronary Heart Disease (CHD) deaths (aged 45-74)",
-                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged between 45 and 75 years for the year range {max(chd_deaths$year_range)}.",
+                                         button_title =  "Coronary Heart Disease (CHD) deaths (<75)",
+                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for people aged under 75 years for the year range {max(chd_deaths$year_range)}.",
                                                                "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
                                                                "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
@@ -171,7 +171,7 @@ tagList(
 
                    fluidRow(
                      column(4,
-                            h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults (age 16+)")),
+                            h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults")),
                             summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
                                          button_title =  "Self-assessed health of adults",
                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
