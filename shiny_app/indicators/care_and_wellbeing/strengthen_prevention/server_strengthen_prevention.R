@@ -42,6 +42,38 @@
 # PREMATURE MORTALITY----
 ##############################################.
 
+observeEvent(input$premature_mortality_geog_type,
+             {
+
+               premature_mortality_filtered = premature_mortality_all_cause_hb %>%
+                 filter(geography_type == input$premature_mortality_geog_type)
+
+
+               updateSelectizeInput(session, "premature_mortality_geog_name",
+                                    choices = unique(premature_mortality_filtered$geography))#,
+               #selected = "")
+             })
+
+altTextServer("premature_mortality_hb_alt",
+              title = "Premature mortality by Health Board plot",
+              content = tags$ul(tags$li("Content to be added.")
+              )
+)
+
+output$premature_mortality_hb_plot <- renderPlotly({
+
+  geog <- input$premature_mortality_hb_geog_name
+
+  title <- glue("Age-standardised death rate per 100,000 population \n of persons under 75 ",
+                "in \n ", geog)
+
+  plot <- premature_mortality_all_cause_hb %>%
+      filter(geography == input$premature_mortality_geog_name) %>%
+    confidence_line_function(., y_title = "Rate per 100,000",
+                             x_title = "Year", title = title) %>%
+    layout(legend = list(y = -0.4))
+
+})
 
 
 ##############################################.

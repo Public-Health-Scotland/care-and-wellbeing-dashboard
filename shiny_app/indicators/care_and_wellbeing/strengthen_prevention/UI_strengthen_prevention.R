@@ -526,7 +526,24 @@ tagList(
                tabPanel(title = "Premature mortality",
                         value = "premature_mortality",
 
-                        h2("Premature mortality")
+                        h2("Premature mortality", iButtonUI("premature_mortality",
+                                                            content = paste("To complete"))),
+
+                        fluidRow(column(4,
+                                        selectInput("premature_mortality_geog_type",
+                                                    "Step 1: Select national or local geography level ",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    width = "100%")),
+                                 column(4,
+                                        selectInput("premature_mortality_geog_name",
+                                                    "Step 2: Select national or local geography area ",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
+
+                        altTextUI("premature_mortality_hb_alt"),
+                        withSpinner(plotlyOutput("premature_mortality_hb_plot"))#,
+
                ),
 
                ##############################################.
