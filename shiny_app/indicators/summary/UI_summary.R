@@ -192,15 +192,36 @@ tagList(
                      )),
 
                    fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_healthy_life_expectancy", "Healthy life expectancy")),
-                            summaryBoxUI("healthy_life_expectancy")
+                     column(3,
+                            h3(actionLink("jump_summary_to_healthy_life_expectancy_male", "Healthy life expectancy")),
+                            summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy for males",
+                                         button_title = "Healthy life expectancy",
+                                         button_content = glue("This is the healthy life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
+                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
-                     column(4,
+                     column(3,
+                            h3(actionLink("jump_summary_to_healthy_life_expectancy_female", "Healthy life expectancy")),
+                            summaryBoxUI("healthy_life_expectancy_female", title = "Healthy life expectancy for females",
+                                         button_title = "Healthy life expectancy",
+                                         button_content = glue("This is the healthy life expectancy of females at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
+                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(3,
                             h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                             summaryBoxUI("healthy_weight")
                      ),
-                     column(4,
+                     column(3,
                             h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
                             summaryBoxUI("mental_wellbeing")
                      )),
