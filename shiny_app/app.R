@@ -50,20 +50,20 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # SUMMARY ----
         ##############################################.
-        tabPanel(title = "Summary",
-                 #icon = icon_no_warning_fn("lemon"),
-                 value = "summary",
-
-                 source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
-
-        ), # tabpanel
+        # tabPanel(title = "Summary",
+        #          #icon = icon_no_warning_fn("lemon"),
+        #          value = "summary",
+        #
+        #          source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
+        #
+        # ), # tabpanel
 
         ##############################################.
         # SUMMARY V2 ----
         ##############################################.
-        tabPanel(title = "Summary V2",
+        tabPanel(title = "At a glance",
                  #icon = icon_no_warning_fn("clipboard"),
-                 value = "summary_v2",
+                 value = "summary",
 
                  source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
 
@@ -196,7 +196,7 @@ server <- function(input, output, session) {
 
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
-  source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
+  # source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
