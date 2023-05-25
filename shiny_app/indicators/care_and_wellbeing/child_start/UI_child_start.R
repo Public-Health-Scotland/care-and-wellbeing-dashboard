@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Giving every child the best start in life" ),
+  h1("Give Every Child the Best Start In Life" ),
   br(),
   navlistPanel(widths = c(2,10),
 
@@ -8,10 +8,12 @@ tagList(
                # CHILD MATERIAL DEPRIVATION----
                ##############################################.
 
-               tabPanel(title = "Child material deprivation",
+               tabPanel(title = "Child material deprivation (to be developed)",
                         value = "child_material_deprevation",
 
-                        h2("Child material deprivation")
+                        h2("Child material deprivation"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -95,10 +97,12 @@ tagList(
                # CHILD WELLBEING AND HAPPINESS----
                ##############################################.
 
-               tabPanel(title = "Child wellbeing and happiness",
+               tabPanel(title = "Child wellbeing and happiness (to be developed)",
                         value = "child_wellbeing",
 
-                        h2("Child wellbeing and happiness")
+                        h2("Child wellbeing and happiness"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -155,10 +159,12 @@ tagList(
                # PERINATAL MORTALITY RATE----
                ##############################################.
 
-               tabPanel(title = "Perinatal Mortality Rate",
+               tabPanel(title = "Perinatal mortality rate (to be developed)",
                         value = "perinatal_mortality",
 
-                        h2("Perinatal Mortality Rate")
+                        h2("Perinatal Mortality Rate"),
+
+                        p("Content to be developed")
                ),
 
 
@@ -167,10 +173,12 @@ tagList(
                # PHYSICAL ACTIVITY OF CHILDREN----
                ##############################################.
 
-               tabPanel(title = "Physical Activity (of children)",
+               tabPanel(title = "Physical activity of children (to be developed)",
                         value = "physical_activity_children",
 
-                        h2("Physical Activity (of children)")
+                        h2("Physical Activity (of children)"),
+
+                        p("Content to be developed")
                )
 
 

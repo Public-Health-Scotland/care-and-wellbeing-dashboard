@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Create fair employment and good work for all"),
+  h1("Create Fair Employment and Good Work For All"),
   br(),
   bsButton("fair_work_to_info", "Go to information page", class = "info-btn"),
   h4(strong("Select indicator: ")),
@@ -171,10 +171,12 @@ tagList(
                ##############################################.
                # WORK RELATED ILL HEALTH----
                ##############################################.
-               tabPanel(title = "Work related ill health",
+               tabPanel(title = "Work-related ill health (to be developed)",
                         value = "work_related_ill_health",
 
-                        h2("Work related ill health")
+                        h2("Work related ill health"),
+
+                        p("Content to be developed")
                )
   )
 )

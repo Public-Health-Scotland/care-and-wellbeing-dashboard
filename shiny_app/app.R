@@ -114,19 +114,19 @@ ui <- shinymanager::secure_app(
                             value = "fair_work",
                             source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Ensure healthy standard of living for all",
+                   tabPanel(title = "Ensure healthy standard of living for all (to be developed)",
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Create and develop healthy and sustainable places and communities",
+                   tabPanel(title = "Create and develop healthy and sustainable places and communities (to be developed)",
                             value = "sustainable_communities",
                             source(file.path("indicators/care_and_wellbeing/sustainable_communities/UI_sustainable_communities.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Tackling discrimination, racism and their outcomes",
+                   tabPanel(title = "Tackling discrimination, racism and their outcomes (to be developed)",
                             value = "discrimination_racism",
                             source(file.path("indicators/care_and_wellbeing/discrimination_racism/UI_discrimination_racism.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Pursuing environmental sustainability and health equity together",
+                   tabPanel(title = "Pursuing environmental sustainability and health equity together (to be developed)",
                             value = "environmental_sustainability",
                             source(file.path("indicators/care_and_wellbeing/environmental_sustainability/UI_environmental_sustainability.R"), local = TRUE)$value)
 
