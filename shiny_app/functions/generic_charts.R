@@ -235,7 +235,7 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Perce
             color = ~category_var,
             colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
-            name = yaxis_title,
+            # name = yaxis_title,
             hovertemplate = ~glue("{y %>% round_half_up(2)}{hover_end}"),
             textposition = "none"
     ) %>%

@@ -975,7 +975,7 @@ output$screening_breast_board_plot <- renderPlotly({
   screening_breast_board %>%
     mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$year_range,
                   xaxis_title = "Health Board",
-                  title = "Percentage uptake of breast screening by Health Board and three year rolling average",
+                  title = "Percentage uptake of breast screening by health board and three year rolling average",
                   hover_end = "%") %>%
     layout(xaxis = list(tickangle = -90,
                         tickmode = "array",
@@ -1002,24 +1002,52 @@ output$screening_breast_simd_plot <- renderPlotly({
 
   screening_breast_simd %>%
     filter(geography == input$screening_breast_geog_name) %>%
-    mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = "geography",
+    mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$geography,
                                           xaxis_title = "SIMD",
-                                          title = glue("Percentage uptake of breast screening by SIMD category between 2019/20",
-                                                       " and 2021/22 in {input$screening_breast_geog_name}"),
+                                          title = glue("Percentage uptake of breast screening by SIMD category in the year range",
+                                                       "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"),
                   hover_end = "%")
 
 })
 
+# output$screening_breast_table_title <- renderText({glue("Data table: Percentage uptake of breast screening by SIMD")})
 
-# board
-data_unfiltered <- screening_breast_board %>%
-  select(geography_type, geography, year_range, percentage_uptake)
+observeEvent(input$screening_breast_tabBox, {
+  observeEvent(input$screening_breast_geog_name, {
+    # observeEvent(input$gender_pay_gap_cw_work, {
 
-dataDownloadServer(data = data_unfiltered, data_download = data_unfiltered,
-                   id = "screening_breast_board", filename = "breast_screening_uptake_by_board",
-                   add_percentage_cols = c(4))
+      title <- ifelse(input$screening_breast_tabBox == "Health Board",
+                           "Data table: Percentage uptake of breast screening by heath board and three year rolling average",
+                           glue("Data table: Percentage uptake of breast screening by SIMD category in the year range ",
+                           "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"))
+      # string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+      #                         "all sectors, ",
+      #                         tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
+      # string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-# observeEvent(input)
+      output$screening_breast_table_title <- renderText({title})
+    # })
+  })
+})
+
+# })
+
+observeEvent(input$screening_breast_geog_name,{
+
+  data_unfiltered <- screening_breast_board
+
+  dataDownloadServer(data = data_unfiltered, data_download = data_unfiltered,
+                     id = "screening_breast_board", filename = "breast_screening_uptake_by_board",
+                     add_percentage_cols = c(4))
+
+  data_filtered <- screening_breast_simd %>%
+    filter(geography == input$screening_breast_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = screening_breast_simd,
+                     id = "screening_breast_simd", filename = "breast_screening_uptake_by_simd",
+                     add_percentage_cols = c(4))
+
+})
 
 ######### BOWEL ##########
 

@@ -20,7 +20,9 @@ breast_by_board <- input_breast_board %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
          geography = str_replace(geography, "&", "and"),
          geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
-  pivot_longer(cols = starts_with("2"), names_to = "year_range", values_to = "percentage_uptake")
+  pivot_longer(cols = starts_with("2"), names_to = "year_range", values_to = "percentage_uptake") %>%
+  select(geography_type, geography, year_range, percentage_uptake)
+
 
 screening_breast_board <- breast_by_board
 
@@ -31,7 +33,8 @@ input_breast_simd <- read_excel(breast_simd_path, range = "A6:S12") %>%
   pivot_longer(cols = 2:16, names_to = "geography", values_to = "percentage_uptake") %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
          geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
-  arrange(geography, SIMD)
+  arrange(geography, SIMD) %>%
+  select(geography_type, geography, SIMD, percentage_uptake)
 
 
 screening_breast_simd <- input_breast_simd

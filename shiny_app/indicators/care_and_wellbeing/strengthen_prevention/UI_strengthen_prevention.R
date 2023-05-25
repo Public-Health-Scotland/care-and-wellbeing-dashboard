@@ -627,7 +627,8 @@ tagList(
                                         withSpinner(plotlyOutput("screening_breast_simd_plot")),
 
                                         h3(textOutput("screening_breast_table_title")),
-                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        p("The data table for the SIMD breakdown is based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
 
                                         tabBox(
                                           id = "screening_breast_tabBox", height = "250px", width=12,
