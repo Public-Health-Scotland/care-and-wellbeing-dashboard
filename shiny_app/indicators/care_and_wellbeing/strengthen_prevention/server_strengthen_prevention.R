@@ -62,16 +62,38 @@ altTextServer("premature_mortality_hb_alt",
 
 output$premature_mortality_hb_plot <- renderPlotly({
 
-  geog <- input$premature_mortality_hb_geog_name
+  geog <- input$premature_mortality_geog_name
 
   title <- glue("Age-standardised death rate per 100,000 population \n of persons under 75 ",
-                "in \n ", geog)
+                "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
       filter(geography == input$premature_mortality_geog_name) %>%
-    confidence_line_function(., y_title = "Rate per 100,000",
-                             x_title = "Year", title = title) %>%
+      confidence_line_function(., y_title = "Rate per 100,000",
+                               x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4))
+
+})
+
+observeEvent(input$premature_mortality_geog_name,{
+
+  output$premature_mortality_hb_title <- renderText({glue("Data table: Age-standardised death rate per 100,000 population of persons under 75 ",
+                                                          "in ", input$premature_mortality_geog_name)})
+
+    data_unfiltered <- premature_mortality_all_cause_hb %>%
+      arrange(desc(date)) %>%
+      mutate(date = factor(date)) %>%
+      select(c(date, geography_type, geography, indicator,
+               lower_confidence_interval, upper_confidence_interval)) %>%
+      rename(`Age-standardised death rate per 100,000 population of persons under 75` = "indicator",
+             "Year" = "date")
+
+    data_filtered <- data_unfiltered %>%
+        filter(geography == input$premature_mortality_geog_name)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
+                       add_separator_cols_1dp = c(4,5,6))
 
 })
 

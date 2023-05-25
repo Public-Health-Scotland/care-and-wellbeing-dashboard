@@ -542,7 +542,13 @@ tagList(
                         ),
 
                         altTextUI("premature_mortality_hb_alt"),
-                        withSpinner(plotlyOutput("premature_mortality_hb_plot"))#,
+                        withSpinner(plotlyOutput("premature_mortality_hb_plot")),
+
+                        br(),
+                        h3(textOutput("premature_mortality_hb_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
+                        dataDownloadUI("premature_mortality_hb")
 
                ),
 
