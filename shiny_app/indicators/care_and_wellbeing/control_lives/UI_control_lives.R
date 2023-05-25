@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
+  h1("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives"),
   br(),
 
   navlistPanel(widths = c(2,10), id = "control_lives_panel",
@@ -63,19 +63,23 @@ tagList(
                ##############################################.
                # CHILDREN HAVE POSITIVE RELATIONSHIPS----
                ##############################################.
-               tabPanel(title = "Children have positive relationships",
+               tabPanel(title = "Children have positive relationships (to be developed)",
                         value = "children_relationships",
 
-                        h2("Children have positive relationships")
+                        h2("Children have positive relationships"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
                # CHILDREN'S VOICES----
                ##############################################.
-               tabPanel(title = "Children’s voices",
+               tabPanel(title = "Children’s voices (to be developed)",
                         value = "childrens_voices",
 
-                        h2("Children’s voices")
+                        h2("Children’s voices"),
+
+                        p("Content to be developed")
                ),
 
 
@@ -83,19 +87,23 @@ tagList(
                ##############################################.
                # CONFIDENCE AND RESILIENCE OF CHILDREN AND YOUNG PEOPLE----
                ##############################################.
-               tabPanel(title = "Confidence and resilience of children and young people",
+               tabPanel(title = "Confidence and resilience of children and young people (to be developed)",
                         value = "confidence_of_young",
 
-                        h2("Confidence and resilience of children and young people")
+                        h2("Confidence and resilience of children and young people"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
                # MENTAL HEALTH / MENTAL WELLBEING----
                ##############################################.
-               tabPanel(title = "Mental health / mental wellbeing ",
+               tabPanel(title = "Mental health / mental wellbeing (to be developed)",
                         value = "mental_health_cw",
 
-                        h2("Mental health / mental wellbeing ")
+                        h2("Mental health / mental wellbeing "),
+
+                        p("Content to be developed")
                )
 
 

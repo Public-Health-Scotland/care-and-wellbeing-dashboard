@@ -1,5 +1,5 @@
 tagList(
-  h1("Strengthen the role and impact of ill health prevention" ),
+  h1("Strengthen the Role and Impact of Ill Health Prevention" ),
   br(),
   navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
@@ -336,10 +336,12 @@ tagList(
                ##############################################.
 
 
-               tabPanel(title = "Experience of social care recipients ",
+               tabPanel(title = "Experience of social care recipients (to be developed) ",
                         value = "experience_recipients",
 
-                        h2("Experience of social care recipients")
+                        h2("Experience of social care recipients"),
+
+                        p("Content to be developed")
 
                ),
 
@@ -395,10 +397,12 @@ tagList(
                # HEALTH RISK BEHAVIOURS----
                ##############################################.
 
-               tabPanel(title = "Health risk behaviours",
+               tabPanel(title = "Health risk behaviours (to be developed)",
                         value = "health_risk_behaviours",
 
-                        h2("Health risk behaviours")
+                        h2("Health risk behaviours"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -510,10 +514,12 @@ tagList(
                # HEALTHY WEIGHT ADULTS----
                ##############################################.
 
-               tabPanel(title = "Healthy weight adults",
+               tabPanel(title = "Healthy weight adults (to be developed)",
                         value = "healthy_weight",
 
-                        h2("Healthy weight adults")
+                        h2("Healthy weight adults"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -556,10 +562,12 @@ tagList(
                # PHYSICAL ACTIVITY----
                ##############################################.
 
-               tabPanel(title = "Physical activity",
+               tabPanel(title = "Physical activity (to be developed)",
                         value = "physical_activity",
 
-                        h2("Physical activity")
+                        h2("Physical activity"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -576,10 +584,12 @@ tagList(
                # QUALITY OF CARE EXPERIENCE----
                ##############################################.
 
-               tabPanel(title = "Quality of care experience",
+               tabPanel(title = "Quality of care experience (to be developed)",
                         value = "quality_care",
 
-                        h2("Quality of care experience")
+                        h2("Quality of care experience"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -628,10 +638,12 @@ tagList(
                # WORK-RELATED ILL HEALTH----
                ##############################################.
 
-               tabPanel(title = "Work-related ill health",
+               tabPanel(title = "Work-related ill health (to be developed)",
                         value = "work_related_health",
 
-                        h2("Work-related ill health")
+                        h2("Work-related ill health"),
+
+                        p("Content to be developed")
                ),
 
   ) # navlistpanel
