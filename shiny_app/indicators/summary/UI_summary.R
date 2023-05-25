@@ -173,10 +173,10 @@ tagList(
                      column(4,
                             h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults (age 16+)")),
                             summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
-                                         button_title =  "Self-assessed health of adults (age 16+)",
+                                         button_title =  "Self-assessed health of adults",
                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
-                                                                "Scottish Health survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years",
-                                                                "(? - not 16?) and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
+                                                                "Scottish Health survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years ",
+                                                                "and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
                                                                 "This data is available at Scotland level. Further information is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
