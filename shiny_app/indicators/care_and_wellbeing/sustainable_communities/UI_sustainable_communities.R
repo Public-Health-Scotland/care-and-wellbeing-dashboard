@@ -18,7 +18,7 @@ tagList(
                # NUMBER OF AREAS WHERE HEALTH INEQUALITIES ARE REDUCING----
                ##############################################.
                tabPanel(title = "Number of areas where health inequalities are reducing",
-                        value = "ares_of_health_inequalities",
+                        value = "areas_of_health_inequalities",
 
                         h2("Number of areas where health inequalities are reducing")
                ),

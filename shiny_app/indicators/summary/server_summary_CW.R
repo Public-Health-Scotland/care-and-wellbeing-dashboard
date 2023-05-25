@@ -550,10 +550,10 @@ observeEvent(input$geog_name_summary_CW,{
   previous_date <- max(employees_living_wage_by_LA %>% filter(year != recent_date) %>% .$year)
 
   recent_value <- employees_living_wage_by_LA %>%
-    filter(geography == "East Renfrewshire", earning == "Earning less than the living wage", year == recent_date) %>%
+    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == recent_date) %>%
     .$measure_value %>% round_half_up(2)
   previous_value <- employees_living_wage_by_LA %>%
-    filter(geography == "East Renfrewshire", earning == "Earning less than the living wage", year == previous_date) %>%
+    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == previous_date) %>%
     .$measure_value %>% round_half_up(2)
 
   summaryBoxServer("employees_living_wage_cw",

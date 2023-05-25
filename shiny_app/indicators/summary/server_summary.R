@@ -302,7 +302,7 @@ observeEvent(input$jump_summary_to_children_at_risk_of_obesity, {
                     selected = "child_start")
   updateNavlistPanel(session = session,
                      inputId = "child_start_panel",
-                     selected = "children_at_risk_of_obesity")
+                     selected = "child_obesity")
 })
 
 
@@ -368,7 +368,7 @@ observeEvent(input$jump_summary_to_physical_activity_children_cw, {
                     selected = "child_start")
   updateNavlistPanel(session = session,
                      inputId = "child_start_panel",
-                     selected = "physical_activity_children_cw")
+                     selected = "physical_activity_children")
 })
 
 
