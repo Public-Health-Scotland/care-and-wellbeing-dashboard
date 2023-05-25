@@ -135,8 +135,10 @@ tagList(
 
                         h2("Infant mortality",
                            iButtonUI("infant_mortality_cw", content = paste("This indicator uses the",
-                                                                      "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths </a>",
-                                                                      "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages."))),
+                                                                      "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths. </a></a>",
+                                                                      "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages. ",
+                                                                      "<br> <br>",
+                                                                      "A live birth is where the baby was born breathing or showing other signs of life."))),
 
                         altTextUI("infant_mortality_cw_alt"),
                         withSpinner(plotlyOutput("infant_mortality_cw_plot")),
