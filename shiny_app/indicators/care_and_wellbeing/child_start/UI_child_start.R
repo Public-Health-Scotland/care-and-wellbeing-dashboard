@@ -5,6 +5,7 @@ tagList(
 
   navlistPanel(widths = c(2,10), id = "child_start_panel",
 
+
                ##############################################.
                # CHILD MATERIAL DEPRIVATION----
                ##############################################.
@@ -21,42 +22,35 @@ tagList(
                tabPanel(title = "Child social and physical development",
                         value = "child_development_cw",
 
-                        h2("Child social and physical development", iButtonUI("child_development_cw", content = "Paste background info and source for child social and physical development here")),
-
-                        br(),
-                        br(),
-
-                        actionButton("child_development_cw_modal_info",
-                                     tags$b("Background information and source"),
-                                     icon = icon_no_warning_fn("info-circle")),
-                        br(),
-                        br(),
-
-                        h4("Use the drop downs to select a geography area (Scotland, Health Board or Council Area)",
-                           " and a specific geography of interest to filter the visualisation"),
-
-
-                        fluidRow(
-                          column(3,
-                                 selectizeInput("child_development_cw_geog_type",
-                                                label = "Step 1. Select national or local geography level",
-                                                choices = c("Scotland", "Health Board", "Council Area"),
-                                                selected = "Scotland")),
-                          column(3,
-                                 selectizeInput("child_development_cw_geog_name",
-                                                label = "Step 2. Select national or local geography area",
-                                                choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography)
-                                 ))),
-
-
-                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                                   "child_development_cw_plot",
-                                   subtitle = "This chart will display a comparison line on the chart.
-                                   For health boards, Scotland data will also be provided.
-                                   For council areas, health board data will also be provided."),
+                        h2("Child social and physical development",
+                           iButtonUI("child_development_cw", content = paste("A review for children aged 27-30 months was introduced in Scotland in April 2013.",
+                                                                             "Publications of statistics from Health Visitors’ assessment of children’s development",
+                                                                             "at these reviews have been published since 2013. The latest publication can be found here:",
+                                                                             "<a href=https://publichealthscotland.scot/publications/early-child-development/early-child-development-statistics-scotland-2020-to-2021/ target=_blank> Early child development statistics - Scotland 2020 to 2021 - Early child development - Publications - Public Health Scotland </a>",
+                                                                             "<br> <br>",
+                                                                             "Health Visitors assess children’s development during child health reviews by:",
+                                                                             "<br> <br>",
+                                                                             "<li> Asking parents/carers about any concerns they have regarding their child’s development </li>",
+                                                                             "<li> Asking about the child’s developmental abilities and attainment of relevant milestones </li>",
+                                                                             "<li> Careful observation of the child </li>",
+                                                                             "<li> Asking parents to complete a questionnaire about their child’s development </li>",
+                                                                             "<br> <br>",
+                                                                             "Since April 2017, Health Visitors have been asked to assess the following eight domains of children’s",
+                                                                             "development during 27-30 month reviews:",
+                                                                             "<br> <br>",
+                                                                             "<li> Speech, language and communication </li>",
+                                                                             "<li> Gross motor </li>",
+                                                                             "<li> Fine motor </li>",
+                                                                             "<li> Problem solving </li>",
+                                                                             "<li> Personal/social </li>",
+                                                                             "<li> Emotional/behavioural </li>",
+                                                                             "<li> Vision </li>",
+                                                                             "<li> Hearing </li>",
+                                                                             "<br> <br>",
+                                                                             "Between April 2013 and March 2017, Health Visitors used a slightly different list of domains, and information",
+                                                                             "was not collected on the Problem solving domain."))),
 
 
-                        h3("This is a sample of a different sort of geography input chart, with a bit more flexibility"),
                         p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
                           "Scotland will always be displayed"),
 
@@ -68,24 +62,25 @@ tagList(
                                                 choices = unique(master_lookup$hb2019name),
                                                 multiple = TRUE,
                                                 selected = "NHS Ayrshire and Arran",
+                                                width = "100%",
                                                 options = list(maxItems = 3,
                                                                plugins = c('remove_button')))
                           ),
-                          column(8,
+                          column(4,
                                  selectizeInput("child_development_cw_local_LA",
                                                 label = "Select Council Area(s) (3 Max)",
                                                 choices = unique(lookup_LA),
                                                 multiple = TRUE,
                                                 selected = "Aberdeen City",
+                                                width = "100%",
                                                 options = list(maxItems = 3,
                                                                plugins = c('remove_button')))
                           )),
 
 
 
-
-                        plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
-                                   "child_development_cw_plot_2"),
+                        altTextUI("child_development_cw_alt"),
+                        withSpinner(plotlyOutput("child_development_cw_plot_2")),
 
 
 
@@ -115,14 +110,20 @@ tagList(
                tabPanel(title = "Children at risk of obesity",
                         value = "child_obesity",
 
-                        h2("Children at risk of obesity", iButtonUI("child_obesity", content = "Paste background info and source for children at risk of obesity here")),
+                        h2("Children at risk of obesity",
+                           iButtonUI("child_obesity", content = paste("Obesity is defined by the World Health Organisation as a disease characterised by excess adiposity.",
+                                                                      "It is a chronic, relapsing disease resulting from complex interactions between a range of factors, including those that occur",
+                                                                      "at a biological, commercial, social and political level.",
+                                                                      "<br> <br>",
+                                                                      "Obesity is classified as having a Body Mass Index (BMI) of 30 kg/m2 or more.",
+                                                                      "Children at risk of obesity are those with a BMI at or above 95th percentile"))),
 
-                        h4("Percentage of children (2-15) at risk of obesity in Scotland over time"),
-
-                        plotlyOutput("child_obesity_plot"),
+                        altTextUI("child_obesity_alt"),
+                        withSpinner(plotlyOutput("child_obesity_plot")),
 
                         br(),
                         h3("Data table: Percentage of children (2-15) at risk of obesity in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("children_at_risk_of_obesity")
                ),
@@ -134,26 +135,17 @@ tagList(
                tabPanel(title = "Infant mortality",
                         value = "infant_mortality_cw",
 
-                        h2("Infant mortality", iButtonUI("infant_mortality_cw", content = "Paste background info and source for infant mortality here")),
+                        h2("Infant mortality",
+                           iButtonUI("infant_mortality_cw", content = paste("This indicator uses the",
+                                                                            "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths </a>",
+                                                                            "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages."))),
 
-                        actionButton(
-                          "infant_mortality_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
-
-                        actionButton(
-                          "infant_mortality_cw_modal_comment",
-                          tags$b("Summary of indicator during covid and pre-covid period"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
-
-
-                        plot_title("Month rate of infant deaths per 1,000 live births in Scotland",
-                                   "infant_mortality_cw_plot"),
+                        altTextUI("infant_mortality_cw_alt"),
+                        withSpinner(plotlyOutput("infant_mortality_cw_plot")),
 
 
                         h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("infant_mortality_cw")
                ),
