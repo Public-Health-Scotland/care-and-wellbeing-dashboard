@@ -220,7 +220,7 @@ stacked_bar_function = function(data, category_var, title = "") {
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage (%)", category_var, mode = "group", title = "",
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage", category_var, mode = "group", title = "",
                           hover_end = "") {
 
 

@@ -1058,7 +1058,7 @@ output$screening_bowel_board_plot <- renderPlotly({
     filter(Sex != "All persons") %>%
     mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "Health Board",
-                  title = "Percentage uptake of bowel screening by health board and three year rolling average",
+                  title = "Percentage uptake of bowel screening by health board and sex",
                   hover_end = "%") %>%
     layout(xaxis = list(tickangle = -90,
                         tickmode = "array",
@@ -1088,12 +1088,45 @@ output$screening_bowel_simd_plot <- renderPlotly({
            Sex != "All persons") %>%
     mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "SIMD",
-                  title = glue("Percentage uptake of bowel screening by SIMD category in the year range ",
-                               "{max(screening_bowel_board$year_range)} in {input$screening_bowel_geog_name}"),
+                  title = glue("Percentage uptake of bowel screening by SIMD category and sex in {input$screening_bowel_geog_name}"),
                   hover_end = "%")
 
 })
 
+observeEvent(input$screening_bowel_tabBox, {
+  observeEvent(input$screening_bowel_geog_name, {
+
+    title <- ifelse(input$screening_bowel_tabBox == "Health Board",
+                    "Data table: Percentage uptake of bowel screening by heath board and sex",
+                    glue("Data table: Percentage uptake of bowel screening by SIMD category and sex",
+                         "in {input$screening_bowel_geog_name}"))
+
+    output$screening_bowel_table_title <- renderText({title})
+  })
+})
+
+
+observeEvent(input$screening_bowel_geog_name,{
+
+  data_unfiltered_board <- screening_bowel_board %>%
+    filter(Sex != "All persons")
+
+
+  dataDownloadServer(data = data_unfiltered_board, data_download = data_unfiltered_board,
+                     id = "screening_bowel_board", filename = "bowel_screening_uptake_by_board",
+                     add_percentage_cols = c(4))
+
+  data_unfiltered_simd <- screening_bowel_simd %>%
+    filter(Sex != "All persons") %>% arrange(geography, SIMD)
+
+  data_filtered_simd <- data_unfiltered_simd %>%
+    filter(geography == input$screening_bowel_geog_name)
+
+  dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
+                     id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
+                     add_percentage_cols = c(5))
+
+})
 
 ##############################################.
 # VACCINATIONS UPTAKE----

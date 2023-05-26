@@ -651,10 +651,9 @@ tagList(
                                tabPanel(title = "Bowel cancer",
                                         value = "screening_bowel",
 
-                                        h2("Screening uptake for bowel cancer"),
-
-                                        iButtonUI("screening_bowel",
-                                                  content = paste("Paste here.")),
+                                        h2("Screening uptake for bowel cancer",
+                                           iButtonUI("screening_bowel",
+                                                     content = paste("1st May 2020 - 31st April 2022."))),
 
                                         altTextUI("screening_bowel_board_alt"),
                                         withSpinner(plotlyOutput("screening_bowel_board_plot")),
@@ -676,53 +675,67 @@ tagList(
                                           )),
 
                                         altTextUI("screening_bowel_simd_alt"),
-                                        # simd5Defintion("screening_bowel_simd")
-                                        withSpinner(plotlyOutput("screening_bowel_simd_plot")))
-                        )
-               ),
+                                        # simd5Defintion("screening_bowel_simd"),
+                                        withSpinner(plotlyOutput("screening_bowel_simd_plot")),
 
-               ##############################################.
-               #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
-               ##############################################.
-               tabPanel(title = "Self-assessed health of adults",
-                        value = "adult_self_assessed_health",
+                                        h3(textOutput("screening_bowel_table_title")),
+                                        p("The data table for the SIMD breakdown is based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
 
-                        h2("Self-assessed health of adults",
-                           iButtonUI("adult_self_assessed_health",
-                                     content = paste("This indicator uses data from the Scottish Health Survey. Participants",
-                                                     "who are aged 13 and over are asked to rate their health in general with",
-                                                     "answer options ranging from 'very good' to 'very bad'. The data for",
-                                                     "those participants who described their general health as good or very good",
-                                                     "are presented at a national level. More information can be found",
-                                                     "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>"))),
+                                        tabBox(
+                                          id = "screening_bowel_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_simd"))
+                                        )
+                               )
+                        )),
 
-                        altTextUI("adult_self_assessed_health_alt"),
-                        withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
+                        ##############################################.
+                        #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
+                        ##############################################.
+                        tabPanel(title = "Self-assessed health of adults",
+                                 value = "adult_self_assessed_health",
 
-                        br(),
-                        h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
-                        br(),
-                        dataDownloadUI("adult_self_assessed_health")
-               ),
+                                 h2("Self-assessed health of adults",
+                                    iButtonUI("adult_self_assessed_health",
+                                              content = paste("This indicator uses data from the Scottish Health Survey. Participants",
+                                                              "who are aged 13 and over are asked to rate their health in general with",
+                                                              "answer options ranging from 'very good' to 'very bad'. The data for",
+                                                              "those participants who described their general health as good or very good",
+                                                              "are presented at a national level. More information can be found",
+                                                              "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>"))),
 
-               ##############################################.
-               # VACCINATIONS UPTAKE----
-               ##############################################.
-               tabPanel(title = "Vaccinations uptake",
-                        value = "vaccinations",
+                                 altTextUI("adult_self_assessed_health_alt"),
+                                 withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
 
-                        h2("Vaccinations uptake")
-               ),
+                                 br(),
+                                 h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
+                                 br(),
+                                 dataDownloadUI("adult_self_assessed_health")
+                        ),
 
-               ##############################################.
-               # WORK-RELATED ILL HEALTH----
-               ##############################################.
+                        ##############################################.
+                        # VACCINATIONS UPTAKE----
+                        ##############################################.
+                        tabPanel(title = "Vaccinations uptake",
+                                 value = "vaccinations",
 
-               tabPanel(title = "Work-related ill health",
-                        value = "work_related_health",
+                                 h2("Vaccinations uptake")
+                        ),
 
-                        h2("Work-related ill health")
-               ),
+                        ##############################################.
+                        # WORK-RELATED ILL HEALTH----
+                        ##############################################.
 
-  ) # navlistpanel
-) # tagList
+                        tabPanel(title = "Work-related ill health",
+                                 value = "work_related_health",
+
+                                 h2("Work-related ill health")
+                        ),
+
+               ) # navlistpanel
+  ) # tagList
