@@ -42,5 +42,47 @@ screening_breast_simd <- input_breast_simd
 
 
 ##########################
-# input_breast_simd <- read_excel(breast_simd_path, sheet = "KPI_2", range = "A16:Q39")
+
+####### BOWEL ############
+
+bowel_path <- paste0(path_in_pop, "bowel_screening_uptake.xlsx")
+
+input_bowel_board <- read_excel(bowel_path, sheet = "KPI_1", range = "B16:Q20") %>%
+  rename("Sex" = `...1`) %>%
+  filter(!is.na(Sex)) %>%
+  pivot_longer(cols = 2:16, names_to = "geography", values_to = "percentage_uptake") %>%
+  mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
+         geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
+  arrange(geography, Sex) %>%
+  select(geography_type, geography, Sex, percentage_uptake)
+
+
+##########################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
