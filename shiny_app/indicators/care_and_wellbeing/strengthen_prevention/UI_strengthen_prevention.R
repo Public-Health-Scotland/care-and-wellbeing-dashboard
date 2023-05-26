@@ -108,20 +108,28 @@ tagList(
                                                                  choices = unique(alcohol_deaths$sex),
                                                                  selected = "All sexes"))
                                          ),
-
-                                         plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                                    "alcohol_deaths_plot"),
-
+                                         withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
                                          br(),
+                                         p("Alternative plot, death by age group."),
+                                         br(),
+                                         withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                                    "alcohol_deaths_by_age_plot"),
 
+                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
+                                         #                             "alcohol_deaths_plot"),
+                                         #
+                                         #                  br(),
+                                         #                  br(),
+                                         #
+                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
+                                         #                             "alcohol_deaths_by_age_plot"),
+                                         #
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")
                                 )
                         )),
+
 
                ##############################################.
                # ALL-CAUSE MORTALITY (15-44)----
@@ -179,10 +187,10 @@ tagList(
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
-               tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
+               tabPanel(title = "Coronary heart disease (CHD) deaths (under 75)",
                         value = "chd_deaths",
 
-                        h2("Coronary heart disease (CHD): deaths (age 45-74)",
+                        h2("Coronary heart disease (CHD) deaths (under 75)",
                            iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
                                                                    "heart disease (CHD). Heart disease is a broad term for a variety of",
                                                                    "conditions that affect the structure and function of the heart.",
