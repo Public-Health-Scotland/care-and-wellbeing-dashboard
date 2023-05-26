@@ -1,5 +1,5 @@
 ##########################################################
-# Covid_Recovery_Dashboard
+# Care & Wellbeing Portfolio
 # Original author(s): Jennifer Evans
 # Original date: 2022-12-21
 # Written/run on RStudio server 1.1.463 and R 3.6.1
@@ -34,7 +34,7 @@ ui <- shinymanager::secure_app(
                  href = "https://www.publichealthscotland.scot/",
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
-        windowTitle = "Covid_Recovery_Dashboard",# Title for browser tab
+        windowTitle = "Care & Wellbeing Portfolio",# Title for browser tab
         header = source(file.path("header.R"), local=TRUE)$value,
 
         ##############################################.
@@ -51,20 +51,20 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # SUMMARY ----
         ##############################################.
-        tabPanel(title = "Summary",
-                 #icon = icon_no_warning_fn("lemon"),
-                 value = "summary",
-
-                 source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
-
-        ), # tabpanel
+        # tabPanel(title = "Summary",
+        #          #icon = icon_no_warning_fn("lemon"),
+        #          value = "summary",
+        #
+        #          source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
+        #
+        # ), # tabpanel
 
         ##############################################.
         # SUMMARY V2 ----
         ##############################################.
-        tabPanel(title = "Summary V2",
+        tabPanel(title = "At a glance",
                  #icon = icon_no_warning_fn("clipboard"),
-                 value = "summary_v2",
+                 value = "summary",
 
                  source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
 
@@ -73,23 +73,23 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # COVID RECOVERY ----
         ##############################################.
-        navbarMenu("Covid Recovery", #icon = icon_no_warning_fn("arrows-spin"),
-
-
-                   tabPanel(title = "Wellbeing of children and young people",
-                            value = "wellbeing",
-                            source(file.path("indicators/covid_recovery/wellbeing/UI_wellbeing.R"), local = TRUE)$value),
-
-                   tabPanel(title = "Financial security for low income households",
-                            value = "financial_security",
-                            source(file.path("indicators/covid_recovery/financial_security/UI_financial_security.R"), local = TRUE)$value),
-
-                   tabPanel(title = "Good, green jobs and fair work",
-                            value = "good_green",
-                            source(file.path("indicators/covid_recovery/good_green/UI_good_green.R"), local = TRUE)$value)
-
-
-        ), # navbarMenu
+        # navbarMenu("Covid Recovery", #icon = icon_no_warning_fn("arrows-spin"),
+        #
+        #
+        #            tabPanel(title = "Wellbeing of children and young people",
+        #                     value = "wellbeing",
+        #                     source(file.path("indicators/covid_recovery/wellbeing/UI_wellbeing.R"), local = TRUE)$value),
+        #
+        #            tabPanel(title = "Financial security for low income households",
+        #                     value = "financial_security",
+        #                     source(file.path("indicators/covid_recovery/financial_security/UI_financial_security.R"), local = TRUE)$value),
+        #
+        #            tabPanel(title = "Good, green jobs and fair work",
+        #                     value = "good_green",
+        #                     source(file.path("indicators/covid_recovery/good_green/UI_good_green.R"), local = TRUE)$value)
+        #
+        #
+        # ), # navbarMenu
 
         ##############################################.
         # CARE AND WELLBEING ----
@@ -115,19 +115,19 @@ ui <- shinymanager::secure_app(
                             value = "fair_work",
                             source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Ensure healthy standard of living for all",
+                   tabPanel(title = "Ensure healthy standard of living for all (to be developed)",
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Create and develop healthy and sustainable places and communities",
+                   tabPanel(title = "Create and develop healthy and sustainable places and communities (to be developed)",
                             value = "sustainable_communities",
                             source(file.path("indicators/care_and_wellbeing/sustainable_communities/UI_sustainable_communities.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Tackling discrimination, racism and their outcomes",
+                   tabPanel(title = "Tackling discrimination, racism and their outcomes (to be developed)",
                             value = "discrimination_racism",
                             source(file.path("indicators/care_and_wellbeing/discrimination_racism/UI_discrimination_racism.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Pursuing environmental sustainability and health equity together",
+                   tabPanel(title = "Pursuing environmental sustainability and health equity together (to be developed)",
                             value = "environmental_sustainability",
                             source(file.path("indicators/care_and_wellbeing/environmental_sustainability/UI_environmental_sustainability.R"), local = TRUE)$value)
 
@@ -164,9 +164,9 @@ server <- function(input, output, session) {
   # source(file.path("functions/generic_charts.R"), local = TRUE)$value
 
   #Covid recovery functions
-  source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
-  source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
-  source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
 
   #Care and wellbeing functions
   source(file.path("indicators/care_and_wellbeing/strengthen_prevention/functions_strengthen_prevention.R"), local = TRUE)$value
@@ -197,16 +197,16 @@ server <- function(input, output, session) {
 
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
-  source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
+  # source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value
 
   # Get content for Covid Recovery pages
-  source(file.path("indicators/covid_recovery/wellbeing/server_wellbeing.R"), local = TRUE)$value
-  source(file.path("indicators/covid_recovery/financial_security/server_financial_security.R"), local = TRUE)$value
-  source(file.path("indicators/covid_recovery/good_green/server_good_green.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/wellbeing/server_wellbeing.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/financial_security/server_financial_security.R"), local = TRUE)$value
+  # source(file.path("indicators/covid_recovery/good_green/server_good_green.R"), local = TRUE)$value
 
   # Get content for Care and Wellbeing pages
   source(file.path("indicators/care_and_wellbeing/strengthen_prevention/server_strengthen_prevention.R"), local = TRUE)$value

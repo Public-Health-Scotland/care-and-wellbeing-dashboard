@@ -1,5 +1,5 @@
 tagList(
-  h1("Strengthen the role and impact of ill health prevention" ),
+  h1("Strengthen the Role and Impact of Ill Health Prevention" ),
   br(),
   navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
@@ -108,20 +108,28 @@ tagList(
                                                                  choices = unique(alcohol_deaths$sex),
                                                                  selected = "All sexes"))
                                          ),
-
-                                         plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                                    "alcohol_deaths_plot"),
-
+                                         withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
                                          br(),
+                                         p("Alternative plot, death by age group."),
+                                         br(),
+                                         withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                                    "alcohol_deaths_by_age_plot"),
 
+                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
+                                         #                             "alcohol_deaths_plot"),
+                                         #
+                                         #                  br(),
+                                         #                  br(),
+                                         #
+                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
+                                         #                             "alcohol_deaths_by_age_plot"),
+                                         #
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")
                                 )
                         )),
+
 
                ##############################################.
                # ALL-CAUSE MORTALITY (15-44)----
@@ -179,10 +187,10 @@ tagList(
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
-               tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
+               tabPanel(title = "Coronary heart disease (CHD) deaths (under 75)",
                         value = "chd_deaths",
 
-                        h2("Coronary heart disease (CHD): deaths (age 45-74)",
+                        h2("Coronary heart disease (CHD) deaths (under 75)",
                            iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
                                                                    "heart disease (CHD). Heart disease is a broad term for a variety of",
                                                                    "conditions that affect the structure and function of the heart.",
@@ -336,10 +344,12 @@ tagList(
                ##############################################.
 
 
-               tabPanel(title = "Experience of social care recipients ",
+               tabPanel(title = "Experience of social care recipients (to be developed) ",
                         value = "experience_recipients",
 
-                        h2("Experience of social care recipients")
+                        h2("Experience of social care recipients"),
+
+                        p("Content to be developed")
 
                ),
 
@@ -395,10 +405,12 @@ tagList(
                # HEALTH RISK BEHAVIOURS----
                ##############################################.
 
-               tabPanel(title = "Health risk behaviours",
+               tabPanel(title = "Health risk behaviours (to be developed)",
                         value = "health_risk_behaviours",
 
-                        h2("Health risk behaviours")
+                        h2("Health risk behaviours"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -460,17 +472,62 @@ tagList(
                tabPanel(title = "Healthy life expectancy",
                         value = "healthy_life_expctancy",
 
-                        h2("Healthy life expectancy")
+                        h2("Healthy life expectancy",
+                           iButtonUI("healthy_life_expectancy",
+                                                              content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
+                                                                              "or ‘good’ general health, based on how individuals perceive their state of health at the time",
+                                                                              "of completing the annual population survey (APS)",
+                                                                              "<br> <br>",
+                                                                              "Some of the smaller council areas and health boards have very wide confidence intervals.",
+                                                                              "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
+                                                                              "<br> <br>",
+                                                                              "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
+                                                                              "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
+                                                                              "of health the population is in, as well as their years of life expectancy.",
+                                                                              "<br> <br>",
+                                                                              "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
+                                                                              "For more information, please visit the",
+                                                                              "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
+                        fluidRow(
+                          column(4,
+                                 selectizeInput("healthy_life_expectancy_sex",
+                                                "Step 1. Select sex",
+                                                choices = c("Male", "Female"),
+                                                width = "100%")),
+                          column(4,
+                                 selectizeInput("healthy_life_expectancy_life_stage",
+                                                "Step 2. Select stage of life",
+                                                choices = c("At birth", "At age 65"),
+                                                width = "100%"))
+
+               ),
+
+               altTextUI("healthy_life_expectancy_trend_alt"),
+               ciDefinitionUI("healthy_life_expectancy_trend_ci"),
+               withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
+
+               altTextUI("healthy_life_expectancy_council_area_alt"),
+               ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
+               withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
+
+               br(),
+               h3(textOutput("healthy_life_expectancy_title")),
+               p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+               br(),
+               dataDownloadUI("healthy_life_expectancy")
+
                ),
 
                ##############################################.
                # HEALTHY WEIGHT ADULTS----
                ##############################################.
 
-               tabPanel(title = "Healthy weight adults",
+               tabPanel(title = "Healthy weight adults (to be developed)",
                         value = "healthy_weight",
 
-                        h2("Healthy weight adults")
+                        h2("Healthy weight adults"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -513,10 +570,12 @@ tagList(
                # PHYSICAL ACTIVITY----
                ##############################################.
 
-               tabPanel(title = "Physical activity",
+               tabPanel(title = "Physical activity (to be developed)",
                         value = "physical_activity",
 
-                        h2("Physical activity")
+                        h2("Physical activity"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -533,10 +592,12 @@ tagList(
                # QUALITY OF CARE EXPERIENCE----
                ##############################################.
 
-               tabPanel(title = "Quality of care experience",
+               tabPanel(title = "Quality of care experience (to be developed)",
                         value = "quality_care",
 
-                        h2("Quality of care experience")
+                        h2("Quality of care experience"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -681,10 +742,12 @@ tagList(
                # WORK-RELATED ILL HEALTH----
                ##############################################.
 
-               tabPanel(title = "Work-related ill health",
+               tabPanel(title = "Work-related ill health (to be developed)",
                         value = "work_related_health",
 
-                        h2("Work-related ill health")
+                        h2("Work-related ill health"),
+
+                        p("Content to be developed")
                ),
 
   ) # navlistpanel

@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Giving every child the best start in life" ),
+  h1("Give Every Child the Best Start In Life" ),
   br(),
   navlistPanel(widths = c(2,10),
 
@@ -8,10 +8,12 @@ tagList(
                # CHILD MATERIAL DEPRIVATION----
                ##############################################.
 
-               tabPanel(title = "Child material deprivation",
+               tabPanel(title = "Child material deprivation (to be developed)",
                         value = "child_material_deprevation",
 
-                        h2("Child material deprivation")
+                        h2("Child material deprivation"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -95,10 +97,12 @@ tagList(
                # CHILD WELLBEING AND HAPPINESS----
                ##############################################.
 
-               tabPanel(title = "Child wellbeing and happiness",
+               tabPanel(title = "Child wellbeing and happiness (to be developed)",
                         value = "child_wellbeing",
 
-                        h2("Child wellbeing and happiness")
+                        h2("Child wellbeing and happiness"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -135,8 +139,10 @@ tagList(
 
                         h2("Infant mortality",
                            iButtonUI("infant_mortality_cw", content = paste("This indicator uses the",
-                                                                      "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths </a>",
-                                                                      "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages."))),
+                                                                      "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths. </a></a>",
+                                                                      "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages. ",
+                                                                      "<br> <br>",
+                                                                      "A live birth is where the baby was born breathing or showing other signs of life."))),
 
                         altTextUI("infant_mortality_cw_alt"),
                         withSpinner(plotlyOutput("infant_mortality_cw_plot")),
@@ -153,10 +159,12 @@ tagList(
                # PERINATAL MORTALITY RATE----
                ##############################################.
 
-               tabPanel(title = "Perinatal Mortality Rate",
+               tabPanel(title = "Perinatal mortality rate (to be developed)",
                         value = "perinatal_mortality",
 
-                        h2("Perinatal Mortality Rate")
+                        h2("Perinatal Mortality Rate"),
+
+                        p("Content to be developed")
                ),
 
 
@@ -165,10 +173,12 @@ tagList(
                # PHYSICAL ACTIVITY OF CHILDREN----
                ##############################################.
 
-               tabPanel(title = "Physical Activity (of children)",
+               tabPanel(title = "Physical activity of children (to be developed)",
                         value = "physical_activity_children",
 
-                        h2("Physical Activity (of children)")
+                        h2("Physical Activity (of children)"),
+
+                        p("Content to be developed")
                )
 
 
