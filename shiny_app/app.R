@@ -163,9 +163,9 @@ server <- function(input, output, session) {
   # source(file.path("functions/generic_charts.R"), local = TRUE)$value
 
   #Covid recovery functions
-  # source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
-  # source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
-  # source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
 
   #Care and wellbeing functions
   source(file.path("indicators/care_and_wellbeing/strengthen_prevention/functions_strengthen_prevention.R"), local = TRUE)$value

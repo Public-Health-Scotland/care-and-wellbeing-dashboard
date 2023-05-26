@@ -57,6 +57,22 @@ input_bowel_board <- read_excel(bowel_path, sheet = "KPI_1", range = "B16:Q20") 
   select(geography_type, geography, Sex, percentage_uptake)
 
 
+input_bowel_simd <- read_excel(bowel_path, sheet = "KPI_2", range = "A16:Q39") %>%
+  rename("Sex" = `...1`,
+         "SIMD" = `...2`) %>%
+  slice(-1) %>%
+  mutate(Sex = zoo::na.locf(Sex),
+         SIMD = recode(SIMD, "1 most deprived" = "1 (Most deprived)",
+                       "5 least deprived" = "5 (Least deprived)")) %>%
+  filter(!is.na(SIMD)) %>%
+  pivot_longer(cols = 3:17, names_to = "geography", values_to = "percentage_uptake") %>%
+  mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
+         geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
+  arrange(geography, SIMD) %>%
+  select(geography_type, geography, Sex, SIMD, percentage_uptake)
+
+screening_bowel_board <- input_bowel_board
+screening_bowel_simd <- input_bowel_simd
 ##########################
 
 

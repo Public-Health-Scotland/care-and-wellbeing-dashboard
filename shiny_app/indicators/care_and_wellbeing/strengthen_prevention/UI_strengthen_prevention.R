@@ -651,9 +651,35 @@ tagList(
                                tabPanel(title = "Bowel cancer",
                                         value = "screening_bowel",
 
-                                        h2("Screening uptake for bowel cancer")
-                               )
-                        )),
+                                        h2("Screening uptake for bowel cancer"),
+
+                                        iButtonUI("screening_bowel",
+                                                  content = paste("Paste here.")),
+
+                                        altTextUI("screening_bowel_board_alt"),
+                                        withSpinner(plotlyOutput("screening_bowel_board_plot")),
+                                        br(),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_type",
+                                                                "Step 1. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_name",
+                                                                "Step 2. Select a national or local geography area",
+                                                                choices = unique(screening_bowel_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                                        altTextUI("screening_bowel_simd_alt"),
+                                        # simd5Defintion("screening_bowel_simd")
+                                        withSpinner(plotlyOutput("screening_bowel_simd_plot")))
+                        )
+               ),
 
                ##############################################.
                #  SELF-ASSESSED HEALTH OF ADULTS (16+)----

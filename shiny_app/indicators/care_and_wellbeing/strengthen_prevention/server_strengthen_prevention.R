@@ -1003,9 +1003,9 @@ output$screening_breast_simd_plot <- renderPlotly({
   screening_breast_simd %>%
     filter(geography == input$screening_breast_geog_name) %>%
     mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$geography,
-                                          xaxis_title = "SIMD",
-                                          title = glue("Percentage uptake of breast screening by SIMD category in the year range ",
-                                                       "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"),
+                  xaxis_title = "SIMD",
+                  title = glue("Percentage uptake of breast screening by SIMD category in the year range ",
+                               "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"),
                   hover_end = "%")
 
 })
@@ -1016,16 +1016,16 @@ observeEvent(input$screening_breast_tabBox, {
   observeEvent(input$screening_breast_geog_name, {
     # observeEvent(input$gender_pay_gap_cw_work, {
 
-      title <- ifelse(input$screening_breast_tabBox == "Health Board",
-                           "Data table: Percentage uptake of breast screening by heath board and three year rolling average",
-                           glue("Data table: Percentage uptake of breast screening by SIMD category in the year range ",
-                           "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"))
-      # string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
-      #                         "all sectors, ",
-      #                         tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
-      # string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
+    title <- ifelse(input$screening_breast_tabBox == "Health Board",
+                    "Data table: Percentage uptake of breast screening by heath board and three year rolling average",
+                    glue("Data table: Percentage uptake of breast screening by SIMD category in the year range ",
+                         "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"))
+    # string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+    #                         "all sectors, ",
+    #                         tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
+    # string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-      output$screening_breast_table_title <- renderText({title})
+    output$screening_breast_table_title <- renderText({title})
     # })
   })
 })
@@ -1050,6 +1050,50 @@ observeEvent(input$screening_breast_geog_name,{
 })
 
 ######### BOWEL ##########
+
+
+output$screening_bowel_board_plot <- renderPlotly({
+
+  screening_bowel_board %>%
+    filter(Sex != "All persons") %>%
+    mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$Sex,
+                  xaxis_title = "Health Board",
+                  title = "Percentage uptake of bowel screening by health board and three year rolling average",
+                  hover_end = "%") %>%
+    layout(xaxis = list(tickangle = -90,
+                        tickmode = "array",
+                        ticktext = str_wrap(screening_bowel_board$geography, 15),
+                        tickvals = screening_bowel_board$geography),
+           legend = list(x=0.5, y = -0.95))
+
+
+})
+
+
+observeEvent(input$screening_bowel_geog_type,
+             {
+
+               screening_bowel_filtered = screening_bowel_simd %>%
+                 filter(geography_type == input$screening_bowel_geog_type)
+
+
+               updateSelectizeInput(session, "screening_bowel_geog_name",
+                                    choices = unique(screening_bowel_filtered$geography))
+             })
+
+output$screening_bowel_simd_plot <- renderPlotly({
+
+  screening_bowel_simd %>%
+    filter(geography == input$screening_bowel_geog_name,
+           Sex != "All persons") %>%
+    mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$Sex,
+                  xaxis_title = "SIMD",
+                  title = glue("Percentage uptake of bowel screening by SIMD category in the year range ",
+                               "{max(screening_bowel_board$year_range)} in {input$screening_bowel_geog_name}"),
+                  hover_end = "%")
+
+})
+
 
 ##############################################.
 # VACCINATIONS UPTAKE----
