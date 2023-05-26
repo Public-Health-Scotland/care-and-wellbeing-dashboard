@@ -15,7 +15,7 @@ adult_mental_welbeing_simd <- read_csv(paste0(path_in_pop, "Mental wellbeing SHe
                         `2nd` = "2",
                         `3rd` = "3",
                         `4th` = "4",
-                        `5th-Least deprived` = "5 - Lest deprived")) %>%
+                        `5th-Least deprived` = "5 - Least deprived")) %>%
   select(year, geographylevel, simd, mean) %>%
   rename(geography = geographylevel, indicator = mean)
 
