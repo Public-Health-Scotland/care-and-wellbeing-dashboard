@@ -65,7 +65,7 @@ for (i in 1:nrow(LA_Look_up))
 
 output$employees_living_wage_cw_map = renderLeaflet({
 
-  employees_living_wage_cw_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
+  employees_living_wage_cw_by_LA_ind_year = employees_living_wage_cw_by_LA_ind %>%
     filter(year == input$employees_living_wage_cw_year)
 
   employees_living_wage_cw_las_shape@data = employees_living_wage_cw_las_shape@data %>%
@@ -115,7 +115,7 @@ updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
 # plot trend
 output$employees_living_wage_cw_line_LA = renderPlotly({
 
-  employees_living_wage_cw_line_LA_data = employees_living_wage_by_LA_ind %>%
+  employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
     filter(ca2019  == rv_employees_living_wage_cw())
 
 
