@@ -167,7 +167,7 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Rate of death <br> per 100,000 population", title = title) %>%
+    confidence_line_function(., y_title = "Age-sex standardised <br> rates per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
@@ -376,7 +376,7 @@ altTextServer("drug_deaths_alt",
 
 output$drug_deaths_plot = renderPlotly({
 
-  title_rate <- glue("Age standardised rates per 100,000 of drug-related deaths in ",
+  title_rate <- glue("Age-standardised rates per 100,000 of drug-related deaths in ",
                      input$drug_deaths_geog_name)
 
   title_number <- glue("Number of drug-related deaths in ",
@@ -388,7 +388,7 @@ output$drug_deaths_plot = renderPlotly({
       mutate(date = year) %>%
       filter(#geography_type == input$drug_deaths_geog_type,
              geography == input$drug_deaths_geog_name) %>%
-      confidence_line_function(., "Rate of deaths <br> per 100,000 population", title = title_rate) %>%
+      confidence_line_function(., "Age-standardised rate of deaths <br> per 100,000 population", title = title_rate) %>%
       layout(xaxis = list(tickangle = 30),
              legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
@@ -467,7 +467,7 @@ output$alcohol_admissions_plot = renderPlotly({
     rename(date = "financial_year",
            indicator = "stays_easr")
 
-  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population") %>%
+  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 45))
 
 })
@@ -547,7 +547,7 @@ output$alcohol_deaths_sex_plot = renderPlotly({
            "upper_confidence_interval" = upper_ci,
            "date" = year,
            "indicator" = rate) %>%
-    confidence_line_function(y_title = "Age-standardised rate of death <br> per 100,000 population",
+    confidence_line_function(y_title = "Age-sex standardised rate of death <br> per 100,000 population",
                              title=title)
 })
 
@@ -556,10 +556,11 @@ output$alcohol_deaths_age_plot = renderPlotly({
   title <- glue("Age-sex standardised death rates per 100,000 ",
                 "by age group")
   data = alcohol_deaths_by_age %>%
+        filter(sex == input$alcohol_deaths_sex) %>%
     mutate(indicator = round(as.integer(indicator), 2)) %>%
     make_line_chart_multi_lines(., x = .$year, y = .$indicator,
                                 colour = .$age_group,
-                                y_axis_title = "Rate of death <br> per 100,000 population",
+                                y_axis_title = "Age-sex standardised rate of death <br> per 100,000 population",
                                 title=title)
 })
 
@@ -583,7 +584,7 @@ observeEvent(input$alcohol_deaths_sex_type,{
       filter(alcohol_deaths_sex_type == input$chd_deaths_geog_type)
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "chd_deaths", filename = "chd_deaths",
+                       id = "alcohol_deaths", filename = "alcohol_deaths",
                        add_separator_cols_2dp = c(4,5,6))
   })
 })
