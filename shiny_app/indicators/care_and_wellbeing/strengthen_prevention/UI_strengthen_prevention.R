@@ -563,7 +563,38 @@ tagList(
                tabPanel(title = "Mental wellbeing of adults (16+)",
                         value = "mental_wellbeing",
 
-                        h2("Mental wellbeing of adults (16+)")
+                        h2("Mental wellbeing of adults (16+)",
+                        iButtonUI("mental_wellbeing",
+                                  content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
+                                                  "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
+                                                  "contribution to their community. Positive mental health encourages better quality of life overall,",
+                                                  "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
+                                                  "<br> <br>",
+                                                  "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
+                                                  "<br> <br>",
+                                                  "Further breakdowns can be found on the",
+                                                  "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site).</a>"))),
+
+                        altTextUI("mental_wellbeing_alt"),
+                        wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
+                        withSpinner(plotlyOutput("mental_wellbeing_trend_plot")),
+
+                        altTextUI("mental_wellbeing_simd_alt"),
+                        wemwbsDefinitionUI("mental_wellbeing_simd_wemwbs"),
+                        simdQuintileDefinitionUI("mental_wellbeing_simd"),
+                        withSpinner(plotlyOutput("mental_wellbeing_simd_plot")),
+
+                        h3("Data table: Mental wellbeing (WEMWBS) in Scotland"),
+
+                        tabBox(
+                          id = "mental_wellbeing_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("mental_wellbeing")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("mental_wellbeing_simd"))
+                        )
                ),
 
                ##############################################.

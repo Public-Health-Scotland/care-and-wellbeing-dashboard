@@ -91,3 +91,31 @@ confidence_scatter_function_hle = function(data, y_title, x_title = "Year range"
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
+
+
+make_mental_wellbeing_plot <- function(data, y_title, x_title = "Year", title = "") {
+
+  yaxis_number_normal[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
+
+  fig = data %>%
+    plot_ly(x = ~year,
+            y = ~indicator,
+            color = ~sex,
+            type="scatter",
+            mode="lines+markers",
+            colors = palette,
+            text = paste0("Year: ", data$year, "<br>",
+                          "Proportion (%): ",
+                          data$percent, "%",
+                          "<br>",
+                          "Number of Vacancies: ",
+                          format(data$n, big.mark = ",")),
+            hoverinfo = "text",
+            textposition="none") %>%
+    layout(yaxis = yaxis_number_normal,
+           xaxis = xaxis_year) %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+
+
+}

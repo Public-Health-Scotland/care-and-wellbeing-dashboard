@@ -105,7 +105,67 @@ observeEvent(input$healthy_life_expectancy_sex,{
 ##############################################.
 # MENTAL WELLBEING OF ADULTS (16+)----
 ##############################################.
+altTextServer("mental_wellbeing_alt",
+              title = "Adult mental wellbeing by sex plot",
+              content = tags$ul(tags$li("This is a plot for the trend in mean Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS) score for people aged 16+ in Scotland by sex."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the mean WEMWBS score."),
+                                tags$li("The solid purple line is all sexes, the blue line is females and the grey line is males"),
+                                tags$li("In 2021, the WEMWBS mean score for adults was 48.6, the lowest figure in the time series"),
+                                tags$li("Before 2021 the mean scores had ranged between 49.4 and 50.0")
 
+
+              )
+)
+
+output$mental_wellbeing_trend_plot = renderPlotly({
+  title <- glue("Mental wellbeing (WEMWBS score) by sex in Scotland"
+  )
+  data = adult_mental_welbeing %>%
+    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$sex, y_axis_title = "Mean WEMWBS score", title = title)
+
+  })
+
+altTextServer("mental_wellbeing_simd_alt",
+              title = "Adult mental wellbeing by SIMD plot",
+              content = tags$ul(tags$li("This is a plot for the trend in mean Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS) score",
+                                        "for people aged 16+ in Scotland by SIMD deprivation category."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the mean WEMWBS score."),
+                                tags$li("SIMD is a relative measure of deprivation across small areas in Scotland.",
+                                        "There are equal numbers of data zones in each of the five categories.",
+                                        "SIMD 1 contains the 20% most deprived zones and SIMD 5 contains the 20% least deprived zones."),
+                                tags$li("The plot contains a trace for each of the SIMD categories."),
+                                tags$li("In 2021 those living in the most deprived areas had lower average mental wellbeing scores (46.8)",
+                                        "compared to those living in the least deprived areas (50.5).")
+
+              )
+)
+
+output$mental_wellbeing_simd_plot = renderPlotly({
+  title <- glue("Mental wellbeing (WEMWBS score) by SIMD in Scotland"
+  )
+  data = adult_mental_welbeing_simd %>%
+    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$simd, y_axis_title = "Mean WEMWBS score", title = title)
+
+})
+
+adult_mental_welbeing %>%
+  select(c(year, sex, indicator)) %>%
+  rename("Mean WEMWBS score" = "indicator",
+         Year = "year") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "mental_wellbeing",
+                     filename = "mental_wellbeing")
+
+adult_mental_welbeing_simd %>%
+  select(c(year, simd, indicator)) %>%
+  rename("Mean WEMWBS score" = "indicator",
+         Year = "year",
+         SIMD = "simd") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "mental_wellbeing_simd",
+                     filename = "mental_wellbeing_simd")
 
 ##############################################.
 # HEALTHY WEIGHT ADULTS----
