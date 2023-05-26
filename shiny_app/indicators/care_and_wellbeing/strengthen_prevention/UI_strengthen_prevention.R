@@ -553,7 +553,7 @@ tagList(
                         iButtonUI("mental_wellbeing",
                                   content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
                                                   "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
-                                                  "contribution to their community.[1] Positive mental health encourages better quality of life overall,",
+                                                  "contribution to their community. Positive mental health encourages better quality of life overall,",
                                                   "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
                                                   "<br> <br>",
                                                   "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
