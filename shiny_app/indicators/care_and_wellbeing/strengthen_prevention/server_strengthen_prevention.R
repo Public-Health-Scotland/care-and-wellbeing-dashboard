@@ -891,11 +891,10 @@ observeEvent(input$vaccinations_covid_geog_type,
 altTextServer("vaccinations_covid_alt",
               title = "Covid vaccinations uptake plot",
               content = tags$ul(tags$li("This is a bar plot for the breakdown of vaccination uptake by SIMD as at 29 January 2023."),
-                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least depreived and 10 is most deprived."),
-                                tags$li("he y axis is the percentage uptake of vaccinations."),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+                                tags$li("The y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland."),
-                                tags$li("The data for \\'Not Known\\' SIMD has been removed.")
+                                        "geography level and area for plotting. The default is Scotland.")
 
               )
 )
@@ -921,7 +920,7 @@ output$vaccinations_covid_plot <- renderPlotly({
 
 observeEvent(input$vaccinations_covid_geog_name,{
 
-  output$vaccinations_covid_title <- renderText({glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in",
+  output$vaccinations_covid_title <- renderText({glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
                                                       "eligible population by SIMD in {input$vaccinations_covid_geog_name}")})
 })
 
@@ -962,11 +961,10 @@ observeEvent(input$vaccinations_flu_geog_type,
 altTextServer("vaccinations_flu_alt",
               title = "Influenza vaccinations uptake plot",
               content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccination uptake by SIMD as at 29 January 2023."),
-                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least depreived and 10 is most deprived."),
-                                tags$li("he y axis is the percentage uptake of vaccinations."),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+                                tags$li("The y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland."),
-                                tags$li("The data for \\'Not Known\\' SIMD has been removed.")
+                                        "geography level and area for plotting. The default is Scotland.")
 
               )
 )
@@ -991,7 +989,7 @@ output$vaccinations_flu_plot <- renderPlotly({
 
 observeEvent(input$vaccinations_flu_geog_name,{
 
-  output$vaccinations_flu_title <- renderText({glue("Data table: Percentage (%) uptake of influenza vaccinations in",
+  output$vaccinations_flu_title <- renderText({glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
                                                     "eligible population by SIMD in {input$vaccinations_flu_geog_name}")})
 })
 
