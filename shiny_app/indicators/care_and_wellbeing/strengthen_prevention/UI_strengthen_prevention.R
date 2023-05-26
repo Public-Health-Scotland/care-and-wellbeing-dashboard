@@ -561,7 +561,7 @@ tagList(
                         ciDefinitionUI("premature_mortality_simd_ci"),
                         withSpinner(plotlyOutput("premature_mortality_simd_plot")),
 
-                        h3("Data table: Under 75 age-standardised death rates per 100,000 population by SIMD quintile in Scotland"),
+                        h3("Data table: Under 75 age-standardised all-cause mortality rates per 100,000 population by SIMD quintile in Scotland"),
                         p("To view the full dataset, please use the download buttons below."),
                         dataDownloadUI("premature_mortality_simd")
 

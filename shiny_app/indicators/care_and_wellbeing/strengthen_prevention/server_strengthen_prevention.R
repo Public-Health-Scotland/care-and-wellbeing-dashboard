@@ -56,10 +56,10 @@ observeEvent(input$premature_mortality_geog_type,
 
 altTextServer("premature_mortality_hb_alt",
               title = "Premature mortality plot",
-              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause death rates for people under 75."),
+              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause mortality rates for people under 75."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the age-standardised rate per 100,000 population."),
-                                tags$li("The purple line indicates the trend in age-standardised all-cause death rates and",
+                                tags$li("The purple line indicates the trend in age-standardised all-cause mortality rates and",
                                         "the lighter purple area around the line indicates the confidence interval."),
                                 tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
                                         "area represents the upper confidence interval."),
@@ -71,10 +71,10 @@ altTextServer("premature_mortality_hb_alt",
 
 altTextServer("premature_mortality_simd_alt",
               title = "Premature mortality by SIMD quintile plot",
-              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause death rates for people under 75 by SIMD quintile in Scotland."),
+              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause mortality rates for people under 75 by SIMD quintile in Scotland."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the age-standardised rate per 100,000 population."),
-                                tags$li("The lines refer to the trend in age-standardised all-cause death rates for each SIMD quintile.")
+                                tags$li("The lines refer to the trend in age-standardised all-cause mortality rates for each SIMD quintile.")
               )
 )
 
@@ -82,7 +82,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
   geog <- input$premature_mortality_geog_name
 
-  title <- glue("Under 75 age-standardised death rates per 100,000 population \n ",
+  title <- glue("Under 75 age-standardised all-cause mortality rates per 100,000 population \n ",
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
@@ -95,7 +95,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("Under 75 age-standardised death rates per 100,000 population \n ",
+  title <- glue("Under 75 age-standardised all-cause mortality rates per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
@@ -111,7 +111,7 @@ output$premature_mortality_simd_plot <- renderPlotly({
 
 observeEvent(input$premature_mortality_geog_name,{
 
-  output$premature_mortality_hb_title <- renderText({glue("Data table: Under 75 age-standardised death rates per 100,000 population ",
+  output$premature_mortality_hb_title <- renderText({glue("Data table: Under 75 age-standardised all-cause mortality rates per 100,000 population ",
                                                           "in ", input$premature_mortality_geog_name)})
 
     data_unfiltered <- premature_mortality_all_cause_hb %>%
@@ -119,7 +119,7 @@ observeEvent(input$premature_mortality_geog_name,{
       mutate(date = factor(date)) %>%
       select(c(date, geography_type, geography, indicator,
                lower_confidence_interval, upper_confidence_interval)) %>%
-      rename(`Under 75 age-standardised death rate per 100,000 population` = "indicator",
+      rename(`Under 75 age-standardised all-cause mortality rate per 100,000 population` = "indicator",
              "Year" = "date")
 
     data_filtered <- data_unfiltered %>%
@@ -138,7 +138,7 @@ premature_mortality_all_cause_simd %>%
          simd = factor(simd)) %>%
   select(c(date, simd, indicator,
            lower_confidence_interval, upper_confidence_interval)) %>%
-  rename(`Under 75 age-standardised death rate per 100,000 population` = "indicator",
+  rename(`Under 75 age-standardised all-cause mortality rate per 100,000 population` = "indicator",
          "Year" = "date",
          `SIMD Quintile` = simd) %>%
   dataDownloadServer(id = "premature_mortality_simd", filename = "all_cause_premature_mortality_by_SIMD",
