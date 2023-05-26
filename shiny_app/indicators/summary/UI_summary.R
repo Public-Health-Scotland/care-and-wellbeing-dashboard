@@ -81,7 +81,7 @@ tagList(
                             h3(actionLink("jump_summary_to_chd_deaths", "Coronary heart disease (CHD): deaths")),
                             summaryBoxUI("chd_deaths", title = "Rate of deaths per 100,000",
                                          button_title =  "Coronary Heart Disease (CHD) deaths",
-                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disese deaths per 100,000 population for the year range {max(chd_deaths$year_range)}.",
+                                         button_content = glue("This is the Age-sex Standardised Rate of coronary heart disease deaths per 100,000 population for the year range {max(chd_deaths$year_range)}.",
                                                                "This refers to diseases of the coronary arteries that supply the heart. This includes acute myocardial infarction, angina and most cases of heart failure. <br> <br>",
                                                                "This data is available at Scotland, health board and council area level. Further breakdown information at HSCP, locality and intermediate zone level is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
