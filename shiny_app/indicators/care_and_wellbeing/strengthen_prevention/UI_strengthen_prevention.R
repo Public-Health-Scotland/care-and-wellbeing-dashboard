@@ -527,7 +527,13 @@ tagList(
                         value = "premature_mortality",
 
                         h2("Premature mortality", iButtonUI("premature_mortality",
-                                                            content = paste("To complete"))),
+                                                            content = paste("The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
+                                                                            "Further information on the available Deaths data is available on the NRS website:",
+                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> Vital Events - Deaths </a>",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age-Standardised mortality rate is a weighted sum of age-specific mortality rates and is used here to indicate the overall mortality rate for Scotland.",
+                                                                            "In effect, it is the mortality rate that would have been found if the population of Scotland had the same age-composition (proportion of total population in each five year age class) as the hypothetical 2013 European Standard Population.  The rates are calculated by applying the age-specific rates for Scotland to the European Standard Population and expressed per 100,000 persons per year."))),
 
                         fluidRow(column(4,
                                         selectInput("premature_mortality_geog_type",
