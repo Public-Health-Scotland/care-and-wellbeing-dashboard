@@ -21,6 +21,7 @@ breast_by_board <- input_breast_board %>%
          geography = str_replace(geography, "&", "and"),
          geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
   pivot_longer(cols = starts_with("2"), names_to = "year_range", values_to = "percentage_uptake") %>%
+  mutate(year_range = str_replace(year_range, "/", "-")) %>%
   select(geography_type, geography, year_range, percentage_uptake)
 
 
