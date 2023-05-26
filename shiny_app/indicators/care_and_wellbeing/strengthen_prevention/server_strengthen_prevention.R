@@ -1004,7 +1004,7 @@ output$screening_breast_simd_plot <- renderPlotly({
     filter(geography == input$screening_breast_geog_name) %>%
     mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$geography,
                                           xaxis_title = "SIMD",
-                                          title = glue("Percentage uptake of breast screening by SIMD category in the year range",
+                                          title = glue("Percentage uptake of breast screening by SIMD category in the year range ",
                                                        "{max(screening_breast_board$year_range)} in {input$screening_breast_geog_name}"),
                   hover_end = "%")
 
