@@ -55,14 +55,26 @@ observeEvent(input$premature_mortality_geog_type,
              })
 
 altTextServer("premature_mortality_hb_alt",
-              title = "Premature mortality by Health Board plot",
-              content = tags$ul(tags$li("Content to be added.")
+              title = "Premature mortality plot",
+              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause death rates for people under 75."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the age-standardised rate per 100,000 population."),
+                                tags$li("The purple line indicates the trend in age-standardised all-cause death rates and",
+                                        "the lighter purple area around the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
               )
 )
 
 altTextServer("premature_mortality_simd_alt",
               title = "Premature mortality by SIMD quintile plot",
-              content = tags$ul(tags$li("Content to be added.")
+              content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause death rates for people under 75 by SIMD quintile in Scotland."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the age-standardised rate per 100,000 population."),
+                                tags$li("The lines refer to the trend in age-standardised all-cause death rates for each SIMD quintile.")
               )
 )
 
