@@ -2,7 +2,11 @@
 ##############################################.
 # CAMHS waiting times----
 ##############################################.
-make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
+make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE, title) {
+
+  yaxis_proportion[["title"]] = "Percentage"
+  yaxis_proportion[["range"]] = c(0,105)
+
   p = data %>%
     plot_ly(x=~date,
             y=~proportion*100,
@@ -11,15 +15,27 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
             line = list(color=palette[1]),
             marker = list(color=palette[1]),
             text = paste0(format(data$date, "%B %Y"), "<br>",
-                          "Proportion of patients seen within 18 weeks: ",
+                          "Percentage of patients seen within 18 weeks: ",
                           scales::percent(data$proportion, accuracy = .1),
                           "<br>",
                           "Number of patients seen within 18 weeks: ",
                           format(data$number, big.mark = ",")),
             hoverinfo = "text",
-            name = "Proportion of patients seen in 18 weeks") %>%
-    layout(xaxis = xaxis_month,
-           yaxis = yaxis_proportion) %>%
+            name = "Percentage of patients seen in 18 weeks") %>%
+    layout(xaxis = list(title = "Month",
+                        type = 'date',
+                        tickformat = "%b<br>%Y",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        range =
+                          c(as.numeric(as.POSIXct("2012-07-01", format="%Y-%m-%d"))*1000,
+                            as.numeric(as.POSIXct("2021-12-31", format="%Y-%m-%d"))*1000),
+                        showline = TRUE),
+           yaxis = yaxis_proportion,
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified",
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -40,7 +56,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
 
     p %<>%
       add_lines_and_notes(xs=xs,
-                          ys=c(0.1, 0.2, 0.3),
+                          ys=c(1.2, 1.2, 1.2),
                           fracs = fracs,
                           notes = c("1st<br>Lockdown", "2nd<br>Lockdown", "3rd<br>Lockdown"),
                           colors = (c(phs_colours("phs-teal"), phs_colours("phs-purple"),
@@ -52,7 +68,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE) {
 }
 
 
-make_camhs_waiting_times_cw_bar_plot = function(data) {
+make_camhs_waiting_times_cw_bar_plot = function(data, title) {
   data %>%
     mutate(wait_time = factor(wait_time, levels = c("0 to 18 weeks",
                                                     "19 to 35 weeks",
@@ -62,7 +78,7 @@ make_camhs_waiting_times_cw_bar_plot = function(data) {
             y=~proportion*100,
             color = ~wait_time,
             type = 'bar',
-            colors = palette_camhs,
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50'))),
             marker = list(line = list(width=1,
                                       color = 'rgb(0,0,0)')),
             text = paste0(format(data$date, "%B %Y"), "<br>",
@@ -71,21 +87,26 @@ make_camhs_waiting_times_cw_bar_plot = function(data) {
                           scales::percent(data$proportion, accuracy = .1),"<br>",
                           "Number of patients seen: ",
                           format(data$number, big.mark = ",")),
-            hoverinfo = "text") %>%
+            hovertemplate = ~glue("{round_half_up(proportion*100, 1)}%"),
+            hoverinfo = "text",
+            textposition = "none") %>%
     layout(barmode = "stack",
            bargap = 0,
            xaxis = xaxis_month,
-           yaxis = list(title = "Proportion",
+           yaxis = list(title = "Percentage",
                         rangemode="tozero",
                         fixedrange=TRUE,
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
                         ticksuffix = "%"),
-           legend = list(bgcolor = "#E2E2E2",
-                         title = list(
-                           text = "Filter wait time")
-           )) %>%
+           legend = list(xanchor = "center", x = 0.5,
+                         y = -0.3, orientation = 'h',
+                         traceorder = "normal"),
+           title = list(text =str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified"
+           ) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 

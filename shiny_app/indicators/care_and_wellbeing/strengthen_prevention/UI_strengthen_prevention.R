@@ -1,5 +1,5 @@
 tagList(
-  h1("Strengthen the role and impact of ill health prevention" ),
+  h1("Strengthen the Role and Impact of Ill Health Prevention" ),
   br(),
   navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
@@ -12,11 +12,11 @@ tagList(
 
                         h2("Admissions for asthma", iButtonUI("asthma_admissions",
                                                               content = paste("The Scottish Morbidity Record (SMR) database is the",
-                                                              "national inpatient and day case database in Scotland. These statistics",
-                                                              "are derived from data collected on discharges from non-obstetric and",
-                                                              "non-psychiatric hospitals (SMR01).",
-                                                              "For more information, please visit the",
-                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
+                                                                              "national inpatient and day case database in Scotland. These statistics",
+                                                                              "are derived from data collected on discharges from non-obstetric and",
+                                                                              "non-psychiatric hospitals (SMR01).",
+                                                                              "For more information, please visit the",
+                                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
@@ -108,20 +108,28 @@ tagList(
                                                                  choices = unique(alcohol_deaths$sex),
                                                                  selected = "All sexes"))
                                          ),
-
-                                         plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                                    "alcohol_deaths_plot"),
-
+                                         withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
                                          br(),
+                                         p("Alternative plot, death by age group."),
+                                         br(),
+                                         withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
-                                         plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                                    "alcohol_deaths_by_age_plot"),
 
+                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
+                                         #                             "alcohol_deaths_plot"),
+                                         #
+                                         #                  br(),
+                                         #                  br(),
+                                         #
+                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
+                                         #                             "alcohol_deaths_by_age_plot"),
+                                         #
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")
                                 )
                         )),
+
 
                ##############################################.
                # ALL-CAUSE MORTALITY (15-44)----
@@ -179,10 +187,10 @@ tagList(
                # CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
                ##############################################.
 
-               tabPanel(title = "Coronary heart disease (CHD): deaths (age 45-74)",
+               tabPanel(title = "Coronary heart disease (CHD) deaths (under 75)",
                         value = "chd_deaths",
 
-                        h2("Coronary heart disease (CHD): deaths (age 45-74)",
+                        h2("Coronary heart disease (CHD) deaths (under 75)",
                            iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
                                                                    "heart disease (CHD). Heart disease is a broad term for a variety of",
                                                                    "conditions that affect the structure and function of the heart.",
@@ -336,10 +344,12 @@ tagList(
                ##############################################.
 
 
-               tabPanel(title = "Experience of social care recipients ",
+               tabPanel(title = "Experience of social care recipients (to be developed) ",
                         value = "experience_recipients",
 
-                        h2("Experience of social care recipients")
+                        h2("Experience of social care recipients"),
+
+                        p("Content to be developed")
 
                ),
 
@@ -353,12 +363,12 @@ tagList(
 
                         h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers",
                                                                     content = paste("The Health and Care Experience Survey (successor to the GP",
-                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
-                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
-                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
-                                                                    "<li> caring responsibilities and related support </li>",
-                                                                    "The survey has been run every two years since 2009 and can be found here:",
-                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
+                                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
+                                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
+                                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
+                                                                                    "<li> caring responsibilities and related support </li>",
+                                                                                    "The survey has been run every two years since 2009 and can be found here:",
+                                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
                         altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
@@ -395,10 +405,12 @@ tagList(
                # HEALTH RISK BEHAVIOURS----
                ##############################################.
 
-               tabPanel(title = "Health risk behaviours",
+               tabPanel(title = "Health risk behaviours (to be developed)",
                         value = "health_risk_behaviours",
 
-                        h2("Health risk behaviours")
+                        h2("Health risk behaviours"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -458,7 +470,7 @@ tagList(
                ##############################################.
 
                tabPanel(title = "Healthy life expectancy",
-                        value = "healthy_life_expctancy",
+                        value = "healthy_life_expectancy",
 
                         h2("Healthy life expectancy",
                            iButtonUI("healthy_life_expectancy",
@@ -510,10 +522,12 @@ tagList(
                # HEALTHY WEIGHT ADULTS----
                ##############################################.
 
-               tabPanel(title = "Healthy weight adults",
+               tabPanel(title = "Healthy weight adults (to be developed)",
                         value = "healthy_weight",
 
-                        h2("Healthy weight adults")
+                        h2("Healthy weight adults"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -587,10 +601,12 @@ tagList(
                # PHYSICAL ACTIVITY----
                ##############################################.
 
-               tabPanel(title = "Physical activity",
+               tabPanel(title = "Physical activity (to be developed)",
                         value = "physical_activity",
 
-                        h2("Physical activity")
+                        h2("Physical activity"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -607,10 +623,12 @@ tagList(
                # QUALITY OF CARE EXPERIENCE----
                ##############################################.
 
-               tabPanel(title = "Quality of care experience",
+               tabPanel(title = "Quality of care experience (to be developed)",
                         value = "quality_care",
 
-                        h2("Quality of care experience")
+                        h2("Quality of care experience"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
@@ -652,17 +670,115 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        h2("Vaccinations uptake")
+                        # h2("Vaccinations uptake")
+
+                        tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
+
+
+                               ######### COVID-19 ##########
+                               tabPanel(title = "COVID-19 vaccinations",
+                                        value = "covid_vaccinations",
+
+                                        h2("COVID-19 vaccinations uptake",
+                                           iButtonUI("vaccinations_covid",
+                                                     content = paste("COVID-19 is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from COVID-19, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+
+
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_covid_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_covid_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
+
+
+
+
+
+                                        altTextUI("vaccinations_covid_alt"),
+                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_covid_plot")),
+
+                                        br(),
+                                        h3(textOutput("vaccinations_covid_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_covid")
+                               ),
+
+                               ######## FLU #############
+                               tabPanel(title = "Influenza vaccinations",
+                                        value = "flu_vaccinations",
+
+                                        h2("Influenza vaccinations uptake",
+                                           iButtonUI("vaccinations_FLU",
+                                                     content = paste("Influenza is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from influenza, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_flu_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_flu_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
+
+                                        altTextUI("vaccinations_flu_alt"),
+                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_flu_plot")),
+
+                                        br(),
+                                        h3(textOutput("vaccinations_flu_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_flu"),
+
+
+                               )
+                        )
+
                ),
 
                ##############################################.
                # WORK-RELATED ILL HEALTH----
                ##############################################.
 
-               tabPanel(title = "Work-related ill health",
+               tabPanel(title = "Work-related ill health (to be developed)",
                         value = "work_related_health",
 
-                        h2("Work-related ill health")
+                        h2("Work-related ill health"),
+
+                        p("Content to be developed")
                ),
 
   ) # navlistpanel

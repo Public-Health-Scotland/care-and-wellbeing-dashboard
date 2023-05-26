@@ -95,6 +95,8 @@ source(paste0(path_pop_health, "/transfer_adult_mental_wellbeing.R"))
 # VACCINATIONS----
 ##############################################.
 
+source(paste0(path_pop_health, "/transfer_vaccinations.R"))
+
 ##############################################.
 # EXPERIENCE OF SOCIAL CARE RECIPIENTS----
 ##############################################.
