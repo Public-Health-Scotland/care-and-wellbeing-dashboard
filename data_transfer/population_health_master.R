@@ -81,6 +81,11 @@ source(paste0(path_pop_health, "/transfer_adult_self_assessed_health.R"))
 
 source(paste0(path_pop_health, "/transfer_adult_long_term_condition.R"))
 
+##############################################.
+# MENTAL WELLBEING OF ADULTS (16+)----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_adult_mental_wellbeing.R"))
 
 ##############################################.
 # SCREENING UPTAKE----

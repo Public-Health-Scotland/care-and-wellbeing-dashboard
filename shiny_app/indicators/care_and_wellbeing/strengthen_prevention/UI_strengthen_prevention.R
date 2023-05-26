@@ -551,7 +551,15 @@ tagList(
 
                         h2("Mental wellbeing of adults (16+)",
                         iButtonUI("mental_wellbeing",
-                                  content = paste("Paste mental wellbeing info"))),
+                                  content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
+                                                  "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
+                                                  "contribution to their community.[1] Positive mental health encourages better quality of life overall,",
+                                                  "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
+                                                  "<br> <br>",
+                                                  "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scale (WEMWBS).",
+                                                  "<br> <br>",
+                                                  "Further breakdowns can be found on the",
+                                                  "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site)."))),
 
                         altTextUI("mental_wellbeing_alt"),
                         wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
