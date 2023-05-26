@@ -4,46 +4,38 @@
 
 data_path <-paste0(path_in_pop, "premature_mortality_nrs.xlsx")
 
-# Read in full data
-hb_rate_full <- read_excel(data_path, sheet = "data for tab 3",
-                      range = "A3:AW116")
+# Read in full table
+hb_rate_full <- read_excel(data_path, sheet = "Table 6",
+                         range = "B119:BJ137")
 
-# Rates
+#Rates
 hb_rate <- hb_rate_full %>%
-  select(1:17) %>%
-  row_to_names(row_number = 1)
+  select(c(1, seq(2, 61, by = 4)))
 names(hb_rate)[1] <- "date"
-names(hb_rate)[2] <- "cause"
+column_names <- names(hb_rate)
 hb_rate <- hb_rate %>%
-  filter(cause == "All causes of death") %>%
-  pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "geography",
+  filter(!is.na(date)) %>%
+  pivot_longer(cols = 2:16, names_to = "geography",
                values_to = "indicator") %>%
   mutate(indicator = round_half_up(as.numeric(indicator), 1))
 
-# Rates - LCL
+# Lower confidence interval
 hb_rate_lcl <- hb_rate_full %>%
-  select(1, 18:33) %>%
-  row_to_names(row_number = 1)
-names(hb_rate_lcl)[1] <- "date"
-names(hb_rate_lcl)[2] <- "cause"
+  select(c(1, seq(3, 61, by = 4)))
+names(hb_rate_lcl) <- column_names
 hb_rate_lcl <- hb_rate_lcl %>%
-  filter(cause == "All causes of death") %>%
-  pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "geography",
+  filter(!is.na(date)) %>%
+  pivot_longer(cols = 2:16, names_to = "geography",
                values_to = "lower_confidence_interval") %>%
   mutate(lower_confidence_interval = round_half_up(as.numeric(lower_confidence_interval), 1))
 
-# Rates - UCL
+# Upper confidence interval
 hb_rate_ucl <- hb_rate_full %>%
-  select(1, 34:49) %>%
-  row_to_names(row_number = 1)
-names(hb_rate_ucl)[1] <- "date"
-names(hb_rate_ucl)[2] <- "cause"
+  select(c(1, seq(4, 61, by = 4)))
+names(hb_rate_ucl) <- column_names
 hb_rate_ucl <- hb_rate_ucl %>%
-  filter(cause == "All causes of death") %>%
-  pivot_longer(cols = Scotland:`Western Isles`,
-               names_to = "geography",
+  filter(!is.na(date)) %>%
+  pivot_longer(cols = 2:16, names_to = "geography",
                values_to = "upper_confidence_interval") %>%
   mutate(upper_confidence_interval = round_half_up(as.numeric(upper_confidence_interval), 1))
 
@@ -51,52 +43,47 @@ hb_rate_ucl <- hb_rate_ucl %>%
 hb_rate <- hb_rate %>%
   left_join(hb_rate_lcl) %>%
   left_join(hb_rate_ucl) %>%
-  select(-cause) %>%
   filter(date >= 2008) %>%
   mutate(geography_type = ifelse(geography == "Scotland",
                                  "Scotland", "Health Board")) %>%
   mutate(geography = ifelse(geography_type == "Health Board",
                             paste0("NHS ", geography), geography))
 
+# Remove
 rm(hb_rate_full, hb_rate_lcl, hb_rate_ucl)
 
 # Read in full SIMD data
-simd_rate_full <- read_excel(data_path, sheet = "data for tab 8",
-                           range = "A2:S24")
+simd_rate_full <- read_excel(data_path, sheet = "Table 8",
+                             range = "A6:S29")
 
-# Rates
+#Rates
 simd_rate <- simd_rate_full %>%
-  select(1:7)
-names(simd_rate) <- c("date", "All", "SIMD 1", "SIMD 2", "SIMD 3",
-                      "SIMD 4", "SIMD 5")
+  select(c(1, seq(5, 19, by = 3)))
+names(simd_rate)[1] <- "date"
+column_names <- names(simd_rate)
 simd_rate <- simd_rate %>%
-  filter(!is.na(date)) %>%
-  pivot_longer(cols = All:`SIMD 5`,
-               names_to = "simd",
+  filter(!is.na(date) & date != "Registration Year") %>%
+  pivot_longer(cols = 2:6, names_to = "simd",
                values_to = "indicator") %>%
   mutate(indicator = round_half_up(as.numeric(indicator), 1))
 
-# Rates - LCL
+# Lower confidence interval
 simd_rate_lcl <- simd_rate_full %>%
-  select(1, 8:13)
-names(simd_rate_lcl) <- c("date", "All", "SIMD 1", "SIMD 2", "SIMD 3",
-                          "SIMD 4", "SIMD 5")
+  select(c(1, seq(6, 19, by = 3)))
+names(simd_rate_lcl) <- column_names
 simd_rate_lcl <- simd_rate_lcl %>%
-  filter(!is.na(date)) %>%
-  pivot_longer(cols = All:`SIMD 5`,
-               names_to = "simd",
+  filter(!is.na(date) & date != "Registration Year") %>%
+  pivot_longer(cols = 2:6, names_to = "simd",
                values_to = "lower_confidence_interval") %>%
   mutate(lower_confidence_interval = round_half_up(as.numeric(lower_confidence_interval), 1))
 
-# Rates - UCL
+# Upper confidence interval
 simd_rate_ucl <- simd_rate_full %>%
-  select(1, 14:19)
-names(simd_rate_ucl) <- c("date", "All", "SIMD 1", "SIMD 2", "SIMD 3",
-                          "SIMD 4", "SIMD 5")
+  select(c(1, seq(7, 19, by = 3)))
+names(simd_rate_ucl) <- column_names
 simd_rate_ucl <- simd_rate_ucl %>%
-  filter(!is.na(date)) %>%
-  pivot_longer(cols = All:`SIMD 5`,
-               names_to = "simd",
+  filter(!is.na(date) & date != "Registration Year") %>%
+  pivot_longer(cols = 2:6, names_to = "simd",
                values_to = "upper_confidence_interval") %>%
   mutate(upper_confidence_interval = round_half_up(as.numeric(upper_confidence_interval), 1))
 
@@ -106,6 +93,7 @@ simd_rate <- simd_rate %>%
   left_join(simd_rate_ucl) %>%
   filter(date >= 2008)
 
+# Remove
 rm(simd_rate_full, simd_rate_lcl, simd_rate_ucl)
 
 replace_file_fn(hb_rate,
