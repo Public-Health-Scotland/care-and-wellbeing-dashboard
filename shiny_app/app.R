@@ -13,7 +13,11 @@
 source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
 source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
 source(file.path("modules/data_download/data_download_ui.R"), local = TRUE)$value
+
+source(file.path("modules/summary_boxes/summary_boxes_ui.R"), local = TRUE)$value
+
 source(file.path("modules/defintions/defintions_ui.R"), local = TRUE)$value
+
 # source(file.path("modules/nav_buttons/nav_buttons_ui.R"), local = TRUE)$value
 
 source("setup.R")
@@ -49,24 +53,12 @@ ui <- shinymanager::secure_app(
         ), # tabpanel
 
         ##############################################.
-        # SUMMARY ----
-        ##############################################.
-        # tabPanel(title = "Summary",
-        #          #icon = icon_no_warning_fn("lemon"),
-        #          value = "summary",
-        #
-        #          source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
-        #
-        # ), # tabpanel
-
-        ##############################################.
         # SUMMARY V2 ----
         ##############################################.
         tabPanel(title = "At a glance",
-                 #icon = icon_no_warning_fn("clipboard"),
                  value = "summary",
 
-                 source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
+                 source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
 
         ), # tabpanel
 
@@ -180,7 +172,7 @@ server <- function(input, output, session) {
 
   #Pages functions
   source(file.path("indicators/home/functions_home.R"), local = TRUE)$value
-  source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
+  # source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/functions_info_notes.R"), local = TRUE)$value
 
 
@@ -191,6 +183,7 @@ server <- function(input, output, session) {
   source(file.path("modules/alt_text/alt_text_server.R"), local = TRUE)$value
   source(file.path("modules/plot_info/plot_info_server.R"), local = TRUE)$value
   source(file.path("modules/data_download/data_download_server.R"), local = TRUE)$value
+  source(file.path("modules/summary_boxes/summary_boxes_server.R"), local = TRUE)$value
   # source(file.path("modules/nav_buttons/nav_buttons_server.R"), local = TRUE)$value
 
   ####Get servers ----
@@ -198,7 +191,7 @@ server <- function(input, output, session) {
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
   # source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
-  source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value

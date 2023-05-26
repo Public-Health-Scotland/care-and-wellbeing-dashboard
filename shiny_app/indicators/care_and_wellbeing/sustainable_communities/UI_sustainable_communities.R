@@ -2,11 +2,8 @@ tagList(
 
   h1("Create and Develop Healthy and Sustainable Places and Communities"),
   br(),
-  bsButton("sustainable_communities_to_info", "Go to information page", class = "info-btn"),
-  h4(strong("Select indicator: ")),
 
-
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "sustainable_communities_panel",
 
                ##############################################.
                # LONELINESS----
@@ -22,8 +19,9 @@ tagList(
                ##############################################.
                # NUMBER OF AREAS WHERE HEALTH INEQUALITIES ARE REDUCING----
                ##############################################.
+
                tabPanel(title = "Number of areas where health inequalities are reducing (to be developed)",
-                        value = "ares_of_health_inequalities",
+                        value = "areas_of_health_inequalities",
 
                         h2("Number of areas where health inequalities are reducing"),
 

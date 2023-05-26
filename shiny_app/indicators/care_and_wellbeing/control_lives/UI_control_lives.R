@@ -3,10 +3,7 @@ tagList(
   h1("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives"),
   br(),
 
-  h4(strong("Select indicator: ")),
-
-
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "control_lives_panel",
 
                ##############################################.
                # CAMHS WAITING TIMES----
@@ -30,18 +27,18 @@ tagList(
                         #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
 
                         fluidRow(column(4,
-                                         selectInput("camhs_waiting_times_cw_geog_type",
-                                         "Step 1: Select national or local geography level",
-                                         choices = c("Scotland", "Health Board"),
-                                         selected = "Scotland",
-                                         width = "100%")),
+                                        selectInput("camhs_waiting_times_cw_geog_type",
+                                                    "Step 1: Select national or local geography level",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    selected = "Scotland",
+                                                    width = "100%")),
 
                                  column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
-                                          "Step 2: Select national or local geography area",
-                                          choices = c("Scotland"),
-                                          width = "100%"))
-                                 ),
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
 
                         altTextUI("camhs_waiting_times_cw_seen_since_alt"),
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),

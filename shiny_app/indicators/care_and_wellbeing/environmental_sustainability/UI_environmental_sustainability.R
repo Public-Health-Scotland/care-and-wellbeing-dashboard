@@ -1,9 +1,7 @@
 tagList(
   h1("Pursuing Environmental Sustainability and Health Equity Together" ),
   br(),
-  bsButton("environmental_sustainability_to_info", "Go to information page", class = "info-btn"),
-  h4(strong("Select indicator: ")),
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "environmental_sustainability_panel",
 
                ##############################################.
                # ACCESS TO GREEN AND BLUE SPACE----
