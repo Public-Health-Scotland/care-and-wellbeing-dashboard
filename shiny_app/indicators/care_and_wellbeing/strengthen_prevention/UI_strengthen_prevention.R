@@ -529,7 +529,7 @@ tagList(
                         h2("Premature mortality", iButtonUI("premature_mortality",
                                                             content = paste("The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
                                                                             "Further information on the available Deaths data is available on the NRS website:",
-                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> Vital Events - Deaths </a>",
+                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths target = _blank> Vital Events - Deaths </a>",
                                                                             "<br>",
                                                                             "<br>",
                                                                             "The European Age-Standardised mortality rate is a weighted sum of age-specific mortality rates and is used here to indicate the overall mortality rate for Scotland.",
@@ -559,6 +559,7 @@ tagList(
                         br(),
                         altTextUI("premature_mortality_simd_alt"),
                         ciDefinitionUI("premature_mortality_simd_ci"),
+                        simdQuintileDefinitionUI("premature_mortality_simd_desc"),
                         withSpinner(plotlyOutput("premature_mortality_simd_plot")),
 
                         h3("Data table: Under 75 age-standardised all-cause mortality rates per 100,000 population by SIMD quintile in Scotland"),
