@@ -544,11 +544,18 @@ tagList(
                         altTextUI("premature_mortality_hb_alt"),
                         withSpinner(plotlyOutput("premature_mortality_hb_plot")),
 
-                        br(),
                         h3(textOutput("premature_mortality_hb_title")),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_hb"),
+
                         br(),
-                        dataDownloadUI("premature_mortality_hb")
+                        br(),
+                        altTextUI("premature_mortality_simd_alt"),
+                        withSpinner(plotlyOutput("premature_mortality_simd_plot")),
+
+                        h3("Data table: Under 75 age-standardised death rates per 100,000 population by SIMD quintile in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_simd")
 
                ),
 
