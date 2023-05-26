@@ -12,11 +12,11 @@ tagList(
 
                         h2("Admissions for asthma", iButtonUI("asthma_admissions",
                                                               content = paste("The Scottish Morbidity Record (SMR) database is the",
-                                                              "national inpatient and day case database in Scotland. These statistics",
-                                                              "are derived from data collected on discharges from non-obstetric and",
-                                                              "non-psychiatric hospitals (SMR01).",
-                                                              "For more information, please visit the",
-                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
+                                                                              "national inpatient and day case database in Scotland. These statistics",
+                                                                              "are derived from data collected on discharges from non-obstetric and",
+                                                                              "non-psychiatric hospitals (SMR01).",
+                                                                              "For more information, please visit the",
+                                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
@@ -363,12 +363,12 @@ tagList(
 
                         h2("Experience of unpaid carers", iButtonUI("experience_unpaid_carers",
                                                                     content = paste("The Health and Care Experience Survey (successor to the GP",
-                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
-                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
-                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
-                                                                    "<li> caring responsibilities and related support </li>",
-                                                                    "The survey has been run every two years since 2009 and can be found here:",
-                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
+                                                                                    "and Local NHS Services Patient Experience Survey) asks about people’s experiences of:",
+                                                                                    "<li> accessing and using their GP practice and Out of Hours services </li>",
+                                                                                    "<li> aspects of care and support provided by local authorities and other organisations </li>",
+                                                                                    "<li> caring responsibilities and related support </li>",
+                                                                                    "The survey has been run every two years since 2009 and can be found here:",
+                                                                                    "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
                         altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
@@ -639,7 +639,103 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        h2("Vaccinations uptake")
+                        # h2("Vaccinations uptake")
+
+                        tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
+
+
+                               ######### COVID-19 ##########
+                               tabPanel(title = "COVID-19 vaccinations",
+                                        value = "covid_vaccinations",
+
+                                        h2("COVID-19 vaccinations uptake",
+                                           iButtonUI("vaccinations_covid",
+                                                     content = paste("COVID-19 is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from COVID-19, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+
+
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_covid_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_covid_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
+
+
+
+
+
+                                        altTextUI("vaccinations_covid_alt"),
+                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_covid_plot")),
+
+                                        br(),
+                                        h3(textOutput("vaccinations_covid_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_covid")
+                               ),
+
+                               ######## FLU #############
+                               tabPanel(title = "Influenza vaccinations",
+                                        value = "flu_vaccinations",
+
+                                        h2("Influenza vaccinations uptake",
+                                           iButtonUI("vaccinations_FLU",
+                                                     content = paste("Influenza is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from influenza, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_flu_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_flu_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
+
+                                        altTextUI("vaccinations_flu_alt"),
+                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_flu_plot")),
+
+                                        br(),
+                                        h3(textOutput("vaccinations_flu_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_flu"),
+
+
+                               )
+                        )
+
                ),
 
                ##############################################.
