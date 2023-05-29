@@ -28,7 +28,7 @@ tagList(
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
-                                                      "Step 1: Select national of local geography level",
+                                                      "Step 1: Select national or local geography level",
                                                       choices = c("Scotland", "Council Area"),
                                                       selected = "Scotland")),
                                  column(3,
