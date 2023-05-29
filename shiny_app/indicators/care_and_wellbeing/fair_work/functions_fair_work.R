@@ -147,7 +147,7 @@ make_economic_inactivity_cw_plot <- function(data) {
                           titlefont = list(size = 18),
                           showline = TRUE,
                           dtick = 2),
-             legend = list(xanchor = "center", valign = "bottom", x = 0.5, y = -0.3, orientation = 'h',
+             legend = list(xanchor = "center", valign = "bottom", x = 0.5, y = -0.4, orientation = 'h',
                            tracegroupgap = 20),
              margin = list(t = 90, b = 40),
              hovermode = "x unified") %>%
