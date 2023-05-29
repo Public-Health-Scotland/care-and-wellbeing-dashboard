@@ -957,7 +957,7 @@ output$asthma_admissions_plot <- renderPlotly({
     breakdown <- "by sex "
   }
 
-  title <- glue("Total number of asthma admissions ",
+  title <- glue("Total number of asthma-related hospital admissions ",
                 breakdown, "in \n ", geog)
 
   if(input$asthma_admissions_breakdowns == "Yearly total"){
@@ -1072,7 +1072,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
       breakdown <- "by sex "
     }
 
-    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
+    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma-related hospital admissions ",
                                                        breakdown, "in ", geog)})
   })
 })
