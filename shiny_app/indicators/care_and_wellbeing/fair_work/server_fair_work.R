@@ -299,6 +299,7 @@ observeEvent(input$economic_inactivity_cw_geog_type,
 
 output$economic_inactivity_cw_plot <- renderPlotly({
   region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
+    mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
     make_economic_inactivity_cw_plot(.)
 
 })
