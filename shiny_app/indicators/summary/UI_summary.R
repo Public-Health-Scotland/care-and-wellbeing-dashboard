@@ -193,6 +193,24 @@ tagList(
 
                    fluidRow(
                      column(3,
+                            h3(actionLink("jump_summary_to_life_expectancy_male", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_male", title = "Life expectancy for males",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(3,
+                            h3(actionLink("jump_summary_to_life_expectancy_female", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_female", title = "Life expectancy for females",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of females at birth in the year range {max(life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(3,
                             h3(actionLink("jump_summary_to_healthy_life_expectancy_male", "Healthy life expectancy")),
                             summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy for males",
                                          button_title = "Healthy life expectancy",
@@ -215,8 +233,9 @@ tagList(
                                                                "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
+                                         )),
 
+                     fluidRow(
                      column(3,
                             h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                             summaryBoxUI("healthy_weight")

@@ -250,6 +250,36 @@ observeEvent(input$geog_name_summary_CW,{
                    percentage_symbol = "%")
 })
 
+##### Life expectancy #####
+
+
+observeEvent(input$geog_name_summary_CW,{
+  recent_date <- max(life_expectancy$time_period)
+  previous_date <- max(life_expectancy%>% filter(time_period != recent_date) %>% .$time_period)
+
+  value <- life_expectancy %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value_male <- value %>% filter(sex == "Male", time_period == recent_date) %>% .$indicator
+  previous_value_male <- value %>% filter(sex == "Male", time_period == previous_date) %>% .$indicator
+
+  recent_value_female <- value %>% filter(sex == "Female", time_period == recent_date) %>% .$indicator
+  previous_value_female <- value %>% filter(sex == "Female", time_period == previous_date) %>% .$indicator
+
+  summaryBoxServer("life_expectancy_male",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_male,
+                   previous_value = previous_value_male
+  )
+
+  summaryBoxServer("life_expectancy_female",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_female,
+                   previous_value = previous_value_female
+  )
+})
+
 ##### Healthy life expectancy #####
 
 
