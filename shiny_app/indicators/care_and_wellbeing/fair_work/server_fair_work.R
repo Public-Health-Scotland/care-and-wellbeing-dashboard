@@ -330,12 +330,13 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
-    rename("category" = "breakdown",
+    rename("geography" = "region",
+           "category" = "breakdown",
            "Number of People" = "n",
            "Percentage of People (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
-    filter(region == input$economic_inactivity_cw_geog_name)
+    filter(geography == input$economic_inactivity_cw_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "economic_inactivity_cw", filename = "economic_inactivity",
