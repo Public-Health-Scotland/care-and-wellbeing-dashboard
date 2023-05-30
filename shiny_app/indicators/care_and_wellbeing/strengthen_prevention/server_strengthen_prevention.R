@@ -1275,6 +1275,7 @@ output$experience_unpaid_carers_plot <- renderPlotly({
   experience_unpaid_carers %>%
     mutate(proportion = as.numeric(indicator)) %>%
     stacked_bar_function(., category_var = .$breakdown, title = title)
+    #yaxis_title =  "Percentage (%)"
 
 
 })
