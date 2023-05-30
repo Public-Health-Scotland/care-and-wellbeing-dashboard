@@ -35,6 +35,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
 
                         br(),
+                        altTextUI("economic_inactivity_cw_alt"),
                         withSpinner(plotlyOutput("economic_inactivity_cw_plot")),
 
                         br(),
