@@ -10,7 +10,7 @@ sidebarLayout(
               condition= 'input.home_select == "about"',
               tagList(h3("About"), #div
 
-                      h4("Covid-19 Recovery and Care and Wellbeing Dashboard"),
+                      h4("Care and Wellbeing Portfolio"),
 
                       p("The Covid Recovery and Care and Wellbeing Dashboard is a source of intelligence to assess how Scotland is making progress towards ",
                         "the three outcomes of the Scottish Government’s Covid Recovery Strategy and the policy objectives which underpin the ",
@@ -20,13 +20,13 @@ sidebarLayout(
                         "Taking a cross-portfolio approach aligned with the COVID Recovery Strategy will enable us to maximise our reach and impact, ",
                         "and deliver improved outcomes. A range of indicators are included in this dashboard to inform and support decision-making at a range of levels across Scotland. ",
                         "The latest data for each indicator can be quickly accessed using the summary page."),
-
-                      h4("Covid Recovery"),
-
-                      p("The Scottish Government’s Covid Recovery Strategy aims to reduce systemic inequalities and focuses on three outcomes: "),
-                      p(tags$li("enhancing the wellbeing of children and young people;"),
-                        tags$li("increasing financial security for low income households; and "),
-                        tags$li("creating good, green jobs and fair work.")),
+#
+#                       h4("Covid Recovery"),
+#
+#                       p("The Scottish Government’s Covid Recovery Strategy aims to reduce systemic inequalities and focuses on three outcomes: "),
+#                       p(tags$li("enhancing the wellbeing of children and young people;"),
+#                         tags$li("increasing financial security for low income households; and "),
+#                         tags$li("creating good, green jobs and fair work.")),
 
                       h4("Care and Wellbeing"),
 
