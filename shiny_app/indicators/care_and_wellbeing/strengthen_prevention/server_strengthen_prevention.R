@@ -390,12 +390,12 @@ altTextServer("chd_deaths_alt",
 
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
-  title <- "Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland"
+  title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
 
   p <- heart_attack %>%
     filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
                         "2016","2017","2018","2019","2020")) %>%
-    line_chart_function(y_title = "Total number of <br> admissions", label = "Number of admissions", title = title) %>%
+    line_chart_function(y_title = "Total number of admissions", label = "Number of admissions", title = title) %>%
     layout(yaxis=list(tickformat=","))
 
 })
@@ -812,7 +812,9 @@ output$healthy_birthweight_plot = renderPlotly({
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
-    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
+    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type,
+           financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
+                                         "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
     layout(legend = list(y = -0.4))
 })
@@ -824,6 +826,8 @@ observeEvent(input$healthy_birthweight_geog_name,{
     mutate(percentage = round_half_up(proportion*100,1)) %>%
     select(financial_year, geography_type, geography,
            birthweight_for_gestational_age, percentage) %>%
+    filter(financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
+                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     mutate(financial_year = factor(financial_year),
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
     rename("Percentage of babies (%)" = "percentage")
@@ -1295,7 +1299,7 @@ experience_unpaid_carers %>%
          breakdown = factor(breakdown)) %>%
   rename("Financial Year" = "date",
          Answer = "breakdown",
-         Percentage = "indicator") %>%
+         "Percentage (%)"= "indicator") %>%
   dataDownloadServer(id = "experience_unpaid_carers",
                      filename = "experience_unpaid_carers")
 
