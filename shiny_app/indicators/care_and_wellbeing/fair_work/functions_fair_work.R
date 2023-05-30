@@ -27,7 +27,8 @@ make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_col
             hoverinfo = "text") %>%
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Proportion (%)", range = c(0,100), ticksuffix = "%"),
-           title = title,
+           title = list(text = str_wrap(title, width = 60), font = subtitle_style),
+           margin = list(t = 90, b = 40),
            legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
