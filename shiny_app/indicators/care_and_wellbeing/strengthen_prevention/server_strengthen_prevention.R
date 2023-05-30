@@ -322,13 +322,16 @@ observeEvent(input$chd_deaths_geog_type,
 
 
 output$chd_deaths_plot = renderPlotly({
-  title <- glue("Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
+  title <- glue("Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in ",
                 input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
-           geography == input$chd_deaths_geog_name) %>%
+           geography == input$chd_deaths_geog_name,
+           year_range %in%  c("2008-2010", "2009-2011","2010-2012", "2011-2013",
+                              "2012-2014", "2013-2015","2014-2016","2015-2017",
+                              "2016-2017", "2017-2019", "2018-2020")) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Age-sex standardised <br> rates per 100,000 population", title = title) %>%
+    confidence_line_function(., y_title = "Age-sex standardised rate of <br>deaths per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
@@ -340,6 +343,9 @@ observeEvent(input$chd_deaths_geog_type,{
     data_unfiltered <- chd_deaths %>%
       select(year_range, area_type, area_name, measure,
              lower_confidence_interval, upper_confidence_interval) %>%
+      filter(year_range %in%  c("2008-2010", "2009-2011","2010-2012", "2011-2013",
+                                "2012-2014", "2013-2015","2014-2016","2015-2017",
+                                "2016-2017", "2017-2019", "2018-2020")) %>%
       arrange(year_range) %>%
       mutate(year_range = factor(year_range)) %>%
       rename("geography_type" = "area_type",
@@ -358,7 +364,7 @@ observeEvent(input$chd_deaths_geog_type,{
 
 observeEvent(input$chd_deaths_geog_name,{
 
-  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
+  output$chd_deaths_title <- renderText({glue("Data table:Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in",
                                               input$chd_deaths_geog_name)})
 })
 
@@ -1275,9 +1281,6 @@ output$experience_unpaid_carers_plot <- renderPlotly({
   experience_unpaid_carers %>%
     mutate(proportion = as.numeric(indicator)) %>%
     stacked_bar_function(., category_var = .$breakdown, title = title)
-    #yaxis_title =  "Percentage (%)"
-
-
 })
 
 experience_unpaid_carers %>%
