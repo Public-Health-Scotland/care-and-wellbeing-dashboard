@@ -101,7 +101,7 @@ make_gender_pay_gap_cw_plot = function(data, title = NULL, second_axis = FALSE) 
 # ECONOMIC INACTIVITY ----
 ##############################################.
 
-make_economic_inactivity_cw_plot <- function(data) {
+make_economic_inactivity_cw_plot <- function(data, title = "") {
 
   fig = data %>%
     plot_ly(x = ~year,
@@ -119,7 +119,8 @@ make_economic_inactivity_cw_plot <- function(data) {
             hoverinfo = "text",
             textposition="none") %>%
     layout(yaxis = yaxis_proportion,
-           xaxis = xaxis_year) %>%
+           xaxis = xaxis_year,
+           title = list(text = str_wrap(title, width = 60), font = title_style)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 

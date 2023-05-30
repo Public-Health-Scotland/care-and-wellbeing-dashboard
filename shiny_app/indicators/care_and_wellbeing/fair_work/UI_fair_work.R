@@ -33,12 +33,14 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                  ),
 
 
-                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")
-                        ,
 
+                        br(),
+                        withSpinner(plotlyOutput("economic_inactivity_cw_plot")),
 
+                        br(),
                         h3(textOutput("economic_inactivity_cw_table_title")),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
                         dataDownloadUI("economic_inactivity_cw")
 
 
