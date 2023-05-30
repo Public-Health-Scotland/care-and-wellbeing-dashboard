@@ -342,7 +342,20 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Mental wellbeing of adults #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("mental_wellbeing")
+
+  recent_date <- max(adult_mental_welbeing$year)
+  previous_date <- max(adult_mental_welbeing %>% filter(year != recent_date) %>% .$year)
+
+  value <- adult_mental_welbeing %>% filter(geography == input$geog_name_summary_CW, sex == "All")
+
+  recent_value <- value %>% filter(year == recent_date) %>% .$indicator
+  previous_value <- value %>% filter(year == previous_date) %>% .$indicator
+
+  summaryBoxServer("mental_wellbeing",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value)
 })
 
 ##### Physical activity #####
