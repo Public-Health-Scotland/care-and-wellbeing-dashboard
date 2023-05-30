@@ -393,13 +393,17 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
   title <- "Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland"
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title) %>%
+    filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+                        "2016","2017","2018","2019","2020")) %>%
+    line_chart_function(y_title = "Total number of <br> admissions", label = "Number of admissions", title = title) %>%
     layout(yaxis=list(tickformat=","))
 
 })
 
 heart_attack %>%
   select(date, total_admissions) %>%
+  filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+                       "2016","2017","2018","2019","2020")) %>%
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
