@@ -275,7 +275,8 @@ output$all_cause_mortality_plot = renderPlotly({
 observeEvent(input$all_cause_mortality_geog_name,{
 
   data_unfiltered <- all_cause_mortality %>%
-    filter(indicator_age == "15 to 44") %>%
+    filter(indicator_age == "15 to 44",
+           year %in%  c("2008", "2009", "2010", "2011","2012","2013","2014","2015","2016","2017","2018","2019","2020", "2021"))  %>%
     group_by(year, geography_type, geography) %>%
     summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     ungroup() %>%
@@ -293,7 +294,6 @@ observeEvent(input$all_cause_mortality_geog_name,{
                      id = "all_cause_mortality", filename = "all_cause_mortality",
                      add_separator_cols = c(4),
                      add_separator_cols_2dp = c(5))
-
 })
 
 observeEvent(input$all_cause_mortality_geog_name,{
