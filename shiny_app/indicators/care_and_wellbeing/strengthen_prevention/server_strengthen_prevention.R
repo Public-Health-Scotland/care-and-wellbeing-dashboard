@@ -244,7 +244,8 @@ output$all_cause_mortality_plot = renderPlotly({
   data = all_cause_mortality %>%
     filter(geography_type == input$all_cause_mortality_geog_type,
            geography == input$all_cause_mortality_geog_name,
-           indicator_age == "15 to 44") %>%
+           indicator_age == "15 to 44",
+           year %in%  c("2008", "2009", "2010", "2011","2012","2013","2014","2015","2016","2017","2018","2019","2020", "2021")) %>%
     group_by(year) %>%
     summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000,
@@ -259,7 +260,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = deaths)
 
-    indicator_y = "Number of deaths"
+    indicator_y = "Total number of deaths"
   }
 
 
