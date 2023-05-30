@@ -87,7 +87,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
   plot <- premature_mortality_all_cause_hb %>%
       filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function_pm(., y_title = "European age-standardised<br>premature mortality rate<br>per 100,000 population",
+      confidence_line_function_pm(., y_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4))
 
@@ -105,7 +105,7 @@ output$premature_mortality_simd_plot <- renderPlotly({
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$simd,
                                 title = title,
-                                y_axis_title = "European age-standardised<br>premature mortality rate<br>per 100,000 population",
+                                y_axis_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
                                 x_axis_title = "Year") %>%
     layout(legend = list(y = -0.4))
 
