@@ -4,18 +4,12 @@
 
 altTextServer("life_expectancy_trend_alt",
               title = "Life expectancy by year range plot",
-              content = tags$ul(tags$li("This is a plot for the trend in healthy life expectancy in Scotland."),
+              content = tags$ul(tags$li("This is a plot for the trend in life expectancy in Scotland."),
                                 tags$li("The x axis is the 3 year range, starting from 2009-2011."),
-                                tags$li("There are two drop downs above the chart which allow you to select sex",
-                                        "and whether the healthy life expectancy is at birth or at age 65."),
-                                tags$li("The solid purple line is the specified sex and stage of life and the lighter purple area around",
-                                        "the line indicates the confidence interval."),
-                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
-                                        "area represents the upper confidence interval."),
-                                tags$li("Since the data began there has been a general downwards trend in male healthy life expectancy for both",
-                                        "at birth and at age 65"),
-                                tags$li("Since the data began there has been a general downwards trend in female healthy life expectancy at birth,",
-                                        "but a general upwards trend in female healthy life expectancy at age 65.")
+                                tags$li("There is a drop down above the chart which allows you to select sex"),
+                                tags$li("The solid purple line is the specified sex"),
+                                tags$li("Since the 2017-2019 there has been a downwards trend in male healthy life expectancy at birth for both males and females")
+
 
 
               )
@@ -29,7 +23,7 @@ output$life_expectancy_trend_plot = renderPlotly({
     filter(geography == "Scotland",
            sex == input$life_expectancy_sex) %>%
     rename(date = time_period) %>%
-    line_chart_function(., y_title = "Life expectancy", title = title) %>%
+    line_chart_function(., y_title = "Life expectancy", title = title, label = "Life expectancy") %>%
     layout(xaxis = list(tickangle = 30),
            yaxis = yaxis_number_normal,
            legend = list(y = -0.4))
@@ -37,15 +31,13 @@ output$life_expectancy_trend_plot = renderPlotly({
 
 altTextServer("life_expectancy_council_area_alt",
               title = "Life expectancy by council area plot",
-              content = tags$ul(tags$li("This is a plot for healthy life expectancy for the time period of 2019-2021 by council area."),
+              content = tags$ul(tags$li("This is a plot for life expectancy for the time period of 2019-2021 by council area."),
                                 tags$li("The x axis is the council area."),
-                                tags$li("There are two drop downs above the chart which allow you to select sex",
-                                        "and whether the healthy life expectancy is at birth or at age 65."),
-                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex and stage of life",
+                                tags$li("There is a drop down above the chart which allows you to select sex"),
+                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex",
                                         "and the vertical lines from each dot indicates the confidence interval."),
-                                tags$li("Orkney Islands had the highest healthy life expectancy at birth for both males and females."),
-                                tags$li("North Lanarkshire had the lowest healthy life expectancy at birth for males and",
-                                        "North Ayrshire had the lowest healthy life expectancy at birth for females.")
+                                tags$li("Orkney Islands had the highest life expectancy at birth for both males and females."),
+                                tags$li("Glasgow City had the lowest life expectancy at birth for both males and females.")
 
               )
 )

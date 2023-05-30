@@ -480,7 +480,7 @@ tagList(
                ),
 
                ##############################################.
-               # LIFE EXPECTANCY AND HEALTHY LIFE EXPECTANCY----
+               # LIFE EXPECTANCY----
                ##############################################.
 
                tabPanel(title = "Life expectancy",
@@ -497,16 +497,18 @@ tagList(
 
                                          h2("Life expectancy",
                                             iButtonUI("life_expectancy",
-                                                      content = paste("All of the estimates presented in this report are ‘period’ life expectancy.",
-                                                                      "They are calculated assuming that mortality rates for each age group in the time period (here 2019-2021)",
+                                                      content = paste("All of the life expectancy estimates presented in this dashboard are ‘period’ life expectancy.",
+                                                                      "They are calculated assuming that mortality rates for each age group in the time period",
                                                                       "are constant throughout a person’s life. Period life expectancy is often described as how long a baby born",
                                                                       "now could expect to live if they experienced today’s mortality rates throughout their lifetime.",
                                                                       "It is very unlikely that this would be the case as it means that future changes in things such as medicine",
                                                                       "and legislation are not taken into consideration.",
                                                                       "<br> <br>",
-                                                                      "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
+                                                                      "Period life expectancy is not an accurate prediction of how long a person born today will actually live,",
+                                                                      "but it is a useful measure of population health at a point in time and is most useful for comparing trends over time,",
+                                                                      "between areas of a country and with other countries.",
                                                                       "For more information, please visit the",
-                                                                      "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
+                                                                      "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
 
                                          fluidRow(
                                            column(4,
