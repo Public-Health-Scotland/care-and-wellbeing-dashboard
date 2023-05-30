@@ -82,12 +82,12 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
   geog <- input$premature_mortality_geog_name
 
-  title <- glue("Under 75 age-standardised all-cause mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
       filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function(., y_title = "Rate per 100,000",
+      confidence_line_function_pm(., y_title = "European age-standardised<br>premature mortality rate<br>per 100,000 population",
                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4))
 
@@ -95,14 +95,17 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("Under 75 age-standardised all-cause mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
+    mutate(simd = substr(simd, 14, nchar(simd))) %>%
+    mutate(simd = sub('\\(', '\\- ', simd)) %>%
+    mutate(simd = sub('\\)', '', simd)) %>%
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$simd,
                                 title = title,
-                                y_axis_title = "Rate per 100,000",
+                                y_axis_title = "European age-standardised<br>premature mortality rate<br>per 100,000 population",
                                 x_axis_title = "Year") %>%
     layout(legend = list(y = -0.4))
 
@@ -111,7 +114,7 @@ output$premature_mortality_simd_plot <- renderPlotly({
 
 observeEvent(input$premature_mortality_geog_name,{
 
-  output$premature_mortality_hb_title <- renderText({glue("Data table: Under 75 age-standardised all-cause mortality rates per 100,000 population ",
+  output$premature_mortality_hb_title <- renderText({glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
                                                           "in ", input$premature_mortality_geog_name)})
 
     data_unfiltered <- premature_mortality_all_cause_hb %>%
@@ -119,7 +122,7 @@ observeEvent(input$premature_mortality_geog_name,{
       mutate(date = factor(date)) %>%
       select(c(date, geography_type, geography, indicator,
                lower_confidence_interval, upper_confidence_interval)) %>%
-      rename(`Under 75 age-standardised all-cause mortality rate per 100,000 population` = "indicator",
+      rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
              "Year" = "date")
 
     data_filtered <- data_unfiltered %>%
@@ -133,12 +136,14 @@ observeEvent(input$premature_mortality_geog_name,{
 
 premature_mortality_all_cause_simd %>%
   mutate(simd = substr(simd, 14, nchar(simd))) %>%
+  mutate(simd = sub('\\(', '\\- ', simd)) %>%
+  mutate(simd = sub('\\)', '', simd)) %>%
   arrange(desc(date)) %>%
   mutate(date = factor(date),
          simd = factor(simd)) %>%
   select(c(date, simd, indicator,
            lower_confidence_interval, upper_confidence_interval)) %>%
-  rename(`Under 75 age-standardised all-cause mortality rate per 100,000 population` = "indicator",
+  rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
          "Year" = "date",
          `SIMD Quintile` = simd) %>%
   dataDownloadServer(id = "premature_mortality_simd", filename = "all_cause_premature_mortality_by_SIMD",

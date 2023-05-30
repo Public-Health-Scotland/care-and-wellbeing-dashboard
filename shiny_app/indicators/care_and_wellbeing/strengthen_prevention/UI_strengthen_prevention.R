@@ -527,7 +527,10 @@ tagList(
                         value = "premature_mortality",
 
                         h2("Premature mortality", iButtonUI("premature_mortality",
-                                                            content = paste("The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
+                                                            content = paste("Premature mortality is defined as deaths occurring before the age of 75.  It is measured for this indicator using the European Age-Standardised mortality rate for people aged under 75.",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
                                                                             "Further information on the available Deaths data is available on the NRS website:",
                                                                             "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths target = _blank> Vital Events - Deaths </a>",
                                                                             "<br>",
@@ -558,11 +561,10 @@ tagList(
                         br(),
                         br(),
                         altTextUI("premature_mortality_simd_alt"),
-                        ciDefinitionUI("premature_mortality_simd_ci"),
                         simdQuintileDefinitionUI("premature_mortality_simd_desc"),
                         withSpinner(plotlyOutput("premature_mortality_simd_plot")),
 
-                        h3("Data table: Under 75 age-standardised all-cause mortality rates per 100,000 population by SIMD quintile in Scotland"),
+                        h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
                         p("To view the full dataset, please use the download buttons below."),
                         dataDownloadUI("premature_mortality_simd")
 
