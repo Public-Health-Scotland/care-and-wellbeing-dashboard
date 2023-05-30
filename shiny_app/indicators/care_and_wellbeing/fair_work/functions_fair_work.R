@@ -26,7 +26,7 @@ make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_col
                           "Proportion (%): ", data$measure_value,"% <br>"),
             hoverinfo = "text") %>%
     layout(xaxis = list(title = "Year"),
-           yaxis = list(title = "Proportion (%)", range = c(0,100), ticksuffix = "%"),
+           yaxis = list(title = "Percentage (%)", range = c(0,100), ticksuffix = "%"),
            title = title,
            legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
@@ -136,7 +136,7 @@ make_economic_inactivity_cw_plot <- function(data) {
               hovertemplate = ~paste0(percent, "%",
                                       "<br>Number of people : ", format(data$n, big.mark = ","))) %>%
       layout(barmode = "stack",
-             yaxis = list(title = "Percentage",
+             yaxis = list(title = "Percentage (%)",
                           rangemode="tozero",
                           tickfont = list(size=14),
                           titlefont = list(size=18),
