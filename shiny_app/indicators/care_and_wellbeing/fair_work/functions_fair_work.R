@@ -120,7 +120,8 @@ make_economic_inactivity_cw_plot <- function(data, title = "") {
             textposition="none") %>%
     layout(yaxis = yaxis_proportion,
            xaxis = xaxis_year,
-           title = list(text = str_wrap(title, width = 60), font = title_style)) %>%
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
