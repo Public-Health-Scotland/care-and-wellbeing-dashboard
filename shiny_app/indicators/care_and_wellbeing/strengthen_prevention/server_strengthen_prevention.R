@@ -623,7 +623,7 @@ output$alcohol_admissions_plot = renderPlotly({
     rename(date = "financial_year",
            indicator = "stays_easr")
 
-  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population", title = title) %>%
+  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population", title = title, label = "Rate") %>%
     layout(xaxis = list(tickangle = 45))
 
 })

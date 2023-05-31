@@ -71,17 +71,18 @@ tagList(
                                          h2("Alcohol-related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_type",
                                                               "Step 1: Select national or local geography level",
                                                               choices = c("Scotland", "Health Board"),
                                                               width = "100%")),
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_name",
                                                               "Step 2: Select national or local geography area",
                                                               choices = c("Scotland"),
                                                               width = "100%"))),
 
+                                         altTextUI("alcohol_admissions_alt"),
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
@@ -102,14 +103,17 @@ tagList(
                                          h2("Alcohol specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectizeInput("alcohol_deaths_sex",
                                                                  "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
-                                                                 selected = "All sexes"))
+                                                                 selected = "All sexes",
+                                                                 width = "100%"))
                                          ),
+                                         altTextUI("alcohol_deaths_sex_alt"),
                                          withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
                                          br(),
+                                         altTextUI("alcohol_deaths_age_alt"),
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
@@ -701,7 +705,7 @@ tagList(
 
 
                                         altTextUI("vaccinations_covid_alt"),
-                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        simdDecileDefinitionUI("vaccinations_covid_simd"),
                                         withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
                                         br(),
@@ -743,7 +747,7 @@ tagList(
                                                                     width = "100%"))),
 
                                         altTextUI("vaccinations_flu_alt"),
-                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        simdDecileDefinitionUI("vaccinations_flu_simd"),
                                         withSpinner(plotlyOutput("vaccinations_flu_plot")),
 
                                         br(),
