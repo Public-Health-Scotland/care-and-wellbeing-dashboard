@@ -616,7 +616,7 @@ observeEvent(input$alcohol_admissions_geog_type,
 
 output$alcohol_admissions_plot = renderPlotly({
 
-  title <- glue("Total number of alcohol related admissions in ",
+  title <- glue("Total number of alcohol-related admissions in ",
                 input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
@@ -653,7 +653,7 @@ observeEvent(input$alcohol_admissions_geog_name,{
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
-  output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol related admissions in ",
+  output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol-related admissions in ",
                                                       input$alcohol_admissions_geog_name)})
 })
 

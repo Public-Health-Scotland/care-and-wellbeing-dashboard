@@ -52,23 +52,23 @@ tagList(
                ),
 
                ##############################################.
-               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
+               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
                ##############################################.
 
-               tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
+               tabPanel(title = "Alcohol: alcohol-related hospital admissions and deaths",
                         value = "alcohol",
 
                         tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
 
 
                                 ##############################################.
-                                # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+                                # ALCOHOL RELATED HOSPITAL ADMISSIONS ----
                                 ##############################################.
 
                                 tabPanel(title = "Alcohol-related hospital admissions",
                                          value = "alcohol_admissions",
 
-                                         h2("Alcohol related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
+                                         h2("Alcohol-related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
 
                                          fluidRow(
                                            column(3,
@@ -93,7 +93,7 @@ tagList(
 
 
                                 ##############################################.
-                                # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
+                                # ALCOHOL SPECIFIC DEATHS ----
                                 ##############################################.
 
                                 tabPanel(title = "Alcohol specific deaths",
@@ -116,15 +116,6 @@ tagList(
                                          br(),
 
 
-                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                         #                             "alcohol_deaths_plot"),
-                                         #
-                                         #                  br(),
-                                         #                  br(),
-                                         #
-                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                         #                             "alcohol_deaths_by_age_plot"),
-                                         #
                                          h3("Data Table"),
                                          DT::dataTableOutput("alcohol_deaths_table")
                                 )
