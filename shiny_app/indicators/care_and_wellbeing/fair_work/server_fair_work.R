@@ -242,10 +242,17 @@ output$gender_pay_gap_cw_plot = renderPlotly({
   plot_data =pay_gap_by_sector_line_data %>%
     pivot_wider(names_from = gender, values_from = measure_value)
 
+  string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+                          "all sectors, ",
+                          tolower(paste0("the ", input$gender_pay_gap_cw_sector, " sector, ")))
+  string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
+  title <- glue("Difference between male and female full-time hourly earnings in ",
+                string_sector, string_work)
 
   add_Earning = input$gender_pay_gap_cw_show_earnings_check_box
-  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning)
+  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning, title = title)
+
 
 })
 

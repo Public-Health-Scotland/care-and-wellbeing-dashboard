@@ -100,23 +100,24 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                #############################################.
                #PAY GAP----
                #############################################.
-               tabPanel(title = "Pay gap",
+               tabPanel(title = "Gender pay gap",
                         value = "gender_pay_gap_cw",
 
-                        h2("Pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
+                        h2("Gender pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
 
-                        actionButton(
-                          "gender_pay_gap_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
-
-                        actionButton(
-                          "gender_pay_gap_cw_modal_comment",
-                          tags$b("Summary of indicator during covid and pre-covid period"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
                         altTextUI("gender_pay_gap_cw_alt"),
+
+#                         actionButton(
+#                           "gender_pay_gap_cw_modal_info",
+#                           tags$b("Background information and source"),
+#                           icon = icon_no_warning_fn("info-circle")
+#                         ),
+#
+#                         actionButton(
+#                           "gender_pay_gap_cw_modal_comment",
+#                           tags$b("Summary of indicator during covid and pre-covid period"),
+#                           icon = icon_no_warning_fn("info-circle")
+#                         ),
 
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
