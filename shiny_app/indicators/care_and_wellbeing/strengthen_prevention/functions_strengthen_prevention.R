@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-confidence_line_function_pm = function(data, y_title, x_title = "Year range", title = "") {
-=======
 confidence_line_function_hle = function(data, y_title, x_title = "Year range", title = "") {
->>>>>>> origin
-=======
-confidence_line_function_hle = function(data, y_title, x_title = "Year range", title = "") {
->>>>>>> 8d581558497122f5f09094ef043da6354e9fc858
+
 
   yaxis_number[["title"]] = y_title
   xaxis_year[["title"]] = x_title
@@ -40,23 +33,17 @@ confidence_line_function_hle = function(data, y_title, x_title = "Year range", t
               y=~indicator,
               type = "scatter",
               mode = "lines",
-<<<<<<< HEAD
-<<<<<<< HEAD
+
               name = "Rate",
-=======
+
               name = "Healthy life expectancy",
->>>>>>> origin
-=======
-              name = "Healthy life expectancy",
->>>>>>> 8d581558497122f5f09094ef043da6354e9fc858
               line = list(color = phsstyles::phs_colours("phs-purple")),
               showlegend = TRUE,
               hovertemplate = ~glue("{indicator %>% round_half_up(2)}"),
               hoverinfo = "text",
               textposition = "none",
               legendgroup = "rate") %>%
-<<<<<<< HEAD
-<<<<<<< HEAD
+
     layout(xaxis = xaxis_year,
            yaxis = list(title = y_title,
                         tickfont = list(size=14),
@@ -64,12 +51,6 @@ confidence_line_function_hle = function(data, y_title, x_title = "Year range", t
                         showline = FALSE,
                         fixedrange=FALSE,
                         showlegend = T),
-=======
-    layout(xaxis = xaxis_year, yaxis = yaxis_number,
->>>>>>> origin
-=======
-    layout(xaxis = xaxis_year, yaxis = yaxis_number,
->>>>>>> 8d581558497122f5f09094ef043da6354e9fc858
            legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
@@ -77,11 +58,6 @@ confidence_line_function_hle = function(data, y_title, x_title = "Year range", t
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 8d581558497122f5f09094ef043da6354e9fc858
 
 confidence_scatter_function_hle = function(data, y_title, x_title = "Year range", title = "") {
 
@@ -154,9 +130,7 @@ make_mental_wellbeing_plot <- function(data, y_title, x_title = "Year", title = 
 
 
 }
-<<<<<<< HEAD
->>>>>>> origin
-=======
+
 
 confidence_line_function_pm = function(data, y_title, x_title = "Year range", title = "") {
 
@@ -213,4 +187,3 @@ confidence_line_function_pm = function(data, y_title, x_title = "Year range", ti
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 }
->>>>>>> 8d581558497122f5f09094ef043da6354e9fc858
