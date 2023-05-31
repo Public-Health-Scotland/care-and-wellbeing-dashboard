@@ -514,7 +514,7 @@ observeEvent(input$drug_deaths_geog_type,
 altTextServer("drug_deaths_alt",
               title = "Drug-related deaths plot",
               content = tags$ul(tags$b("If in the above choice labelled `Step 3`, `Rate` has been chosen, then the plot description is as follows: "),
-                                tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+                                tags$li("This is a plot for the age-standardised drug-related deaths rate per 100,000 population."),
                                 tags$li("Rates based on fewer than 10 deaths not shown."),
                                 tags$li("The x axis are the 5 year ranges."),
                                 tags$li("The y axis is the age standardised rate per 100,000."),
@@ -598,7 +598,7 @@ observeEvent(input$drug_deaths_geog_name,{
 ##############################################.
 
 ##############################################.
-# ALCOHOL RELATED HOSPITAL ADMISSIONS ----
+# ALCOHOL-RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 observeEvent(input$alcohol_admissions_geog_type,
              {
@@ -609,6 +609,15 @@ observeEvent(input$alcohol_admissions_geog_type,
                updateSelectizeInput(session, "alcohol_admissions_geog_name",
                                     choices = unique(alcohol_filtered$geography))
              })
+
+altTextServer("alcohol_admissions_alt",
+              title = "Drug-related deaths plot",
+              content = tags$ul(tags$li("This is a plot for the european age-sex standardised alocohol-related hospital admissions rate per 100,000 population."),
+                                tags$li("The x axis is financial year."),
+                                tags$li("The y axis is the european age-sex standardised rate per 100,000 population."),
+                                tags$li("The solid purple line is the rate."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")))
 
 output$alcohol_admissions_plot = renderPlotly({
 
@@ -657,15 +666,29 @@ observeEvent(input$alcohol_admissions_geog_name,{
 
 
 ##############################################.
-# ALCOHOL SPECIFIC DEATHS ----
+# ALCOHOL-SPECIFIC DEATHS ----
 ##############################################.
 
+altTextServer("alcohol_deaths_sex_alt",
+              title = "Alcohol-specific rate of deaths plot",
+              content = tags$ul(tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+                                tags$li("The x axis is year."),
+                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
+                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
+                                        "the line indicates the confidence interval."),
+                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                        "area represents the upper confidence interval."),
+                                tags$li("The dropdown above the plot indicates which sex the plot is showing, the choices are",
+                                        "'All sexes', 'Female' and 'Male'. The default is 'All sexes'.")))
 
 # death sex plot
 output$alcohol_deaths_sex_plot = renderPlotly({
 
-  title <- glue("Age-sex standardised death rates per 100,000 in ",
-                str_to_lower(input$alcohol_deaths_sex))
+  title <- glue("Age-sex standardised death rates of ",
+                str_to_lower(input$alcohol_deaths_sex),
+                ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
+                "  per 100,000",
+  )
 
   data = alcohol_deaths %>%
     filter(sex == input$alcohol_deaths_sex) %>%
@@ -678,11 +701,23 @@ output$alcohol_deaths_sex_plot = renderPlotly({
                              title=title)
 })
 
+altTextServer("alcohol_deaths_age_alt",
+              title = "Alcohol-specific rate of deaths by age plot",
+              content = tags$ul(tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+                                tags$li("The x axis is year."),
+                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
+                                tags$li("There are five lines showing the five age breakdowns: '10-24', '25-44', '45'64', '65-75' and '75+'."),
+                                tags$li("The dropdown above the previous plot indicates which sex the plot is showing, the choices are",
+                                        "'All sexes', 'Female' and 'Male'. The default is 'All sexes' .")
+              ))
+
 # age background plot
 output$alcohol_deaths_age_plot = renderPlotly({
 
-  title <- glue("Age-sex standardised death rates per 100,000 in ", str_to_lower(input$alcohol_deaths_sex),
-                " by age group")
+  title <- glue("Age-sex standardised death rates of ",
+                str_to_lower(input$alcohol_deaths_sex),
+                ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
+                "  per 100,000 by age group")
 
   data = alcohol_deaths_by_age %>%
     filter(sex == input$alcohol_deaths_sex) %>%
