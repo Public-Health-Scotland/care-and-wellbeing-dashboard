@@ -68,7 +68,19 @@ tagList(
                                 tabPanel(title = "Alcohol-related hospital admissions",
                                          value = "alcohol_admissions",
 
-                                         h2("Alcohol-related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
+                                         h2("Alcohol-related hospital admissions",
+                                            iButtonUI("alcohol_admissions",
+                                                      content = paste("This indicator uses data from Public Health Scotland Alcohol related hospital statistics.",
+                                                      "Consumption of alcohol can result in a wide range of health problems. Some may occur after drinking",
+                                                      "over a relatively short period, such as acute intoxication (drunkenness) or poisoning (toxic effect).",
+                                                      "Others develop more gradually, such as damage to the liver and brain. Estimates of the number of",
+                                                      "inpatient and day case hospitalisations are based on counts where alcohol-related conditions are",
+                                                      "diagnosed during the hospital stay. The publication found ",
+                                                      "<a href = https://publichealthscotland.scot/publications/show-all-releases?id=20558 target = _blank> here (external website) </a>",
+                                                      "provides an annual update to figures on the alcohol-related inpatient and day case activity",
+                                                      "taking place within general acute hospitals and psychiatric hospitals in Scotland. ",
+                                                      "<br> <br> Data from the most recent financial year are provisional and subject to change in future",
+                                                      "publications as figures will be updated to reflect more complete data from NHS Boards."))),
 
                                          fluidRow(
                                            column(4,
@@ -100,7 +112,14 @@ tagList(
                                 tabPanel(title = "Alcohol-specific deaths",
                                          value = "alcohol_deaths",
 
-                                         h2("Alcohol-specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
+                                         h2("Alcohol-specific deaths",
+                                            iButtonUI("alcohol_deaths",
+                                                      content = paste("Deaths are coded according to the International Statistical Classification of Diseases",
+                                                      "and Related Health Problems, Tenth Revision (ICD-10), which has been used by",
+                                                      "National Records of Scotland (NRS) since the start of 2000. ‘Alcohol-specific’ deaths",
+                                                      "are deaths which are known to be direct consequences of alcohol misuse, meaning they",
+                                                      "are wholly attributable to alcohol misuse. For more information please visit the",
+                                                      "<a href =https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/alcohol-deaths target=_blank> NRS site (external site)."))),
 
                                          fluidRow(
                                            column(4,
@@ -143,14 +162,15 @@ tagList(
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
 
-                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality",
-                                                                         content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
-                                                                                         "You can find more information about this",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
-                                                                                         "Information about the background of the statistics can be found on the NRS site:",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
-                                                                                         "and",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
+                        h2("All-cause mortality (ages 15-44)",
+                           iButtonUI("all_cause_mortality",
+                                     content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
+                                                     "You can find more information about this",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
+                                                     "Information about the background of the statistics can be found on the NRS site:",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
+                                                     "and",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
 
                         fluidRow(
                           column(4,
@@ -375,14 +395,14 @@ tagList(
                                                                                     "The survey has been run every two years since 2009 and can be found here:",
                                                                                     "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
-                        altTextUI("experience_of_unpaid_carers_alt"),
-                        withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
+                 altTextUI("experience_of_unpaid_carers_alt"),
+               withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
-                        br(),
-                        h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
-                        br(),
-                        dataDownloadUI("experience_unpaid_carers")
-               ),
+               br(),
+               h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
+               br(),
+               dataDownloadUI("experience_unpaid_carers")
+                                         ),
 
 
                ##############################################.
@@ -786,5 +806,5 @@ tagList(
                         p("Content to be developed")
                ),
 
-  ) # navlistpanel
-) # tagList
+                                ) # navlistpanel
+                        ) # tagList
