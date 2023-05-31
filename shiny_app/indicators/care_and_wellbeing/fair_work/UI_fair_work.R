@@ -20,11 +20,12 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
-                        p("Use the below drop-downs to select a region of interest."),
+                        br(),
+                        br(),
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
-                                                      "Step 1: Select national of local geography level",
+                                                      "Step 1: Select national or local geography level",
                                                       choices = c("Scotland", "Council Area"),
                                                       selected = "Scotland")),
                                  column(3,

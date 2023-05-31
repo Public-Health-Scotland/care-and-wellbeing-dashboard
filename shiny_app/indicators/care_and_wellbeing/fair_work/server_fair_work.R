@@ -299,6 +299,8 @@ observeEvent(input$economic_inactivity_cw_geog_type,
 
 output$economic_inactivity_cw_plot <- renderPlotly({
   region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
+    filter(year >= 2008) %>%
+    mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
     make_economic_inactivity_cw_plot(.)
 
 })
@@ -307,6 +309,7 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
+    filter(year >= 2008) %>%
     rename("category" = "breakdown",
            "Number of People" = "n",
            "Percentage of People (%)" = "percent")
