@@ -328,10 +328,10 @@ altTextServer("economic_inactivity_cw_alt",
                                 tags$li("There are two drop downs above the chart which allow you to select select a national",
                                         "or local geography level and area for plotting. The default is Scotland."),
                                 tags$li("The purple line is the percentage of economically inactive people who do not want to work."),
-                                tags$li("The grey line is the percentage of economically inactive people who do want to work."),
-                                tags$li("The proportion of those who were economically inactive and would like to work increased",
-                                        "by 0.9 percentage points, from 20.7 per cent in April 2019-March 2020 (the lowest point",
-                                        "in the series to date) to 21.6 per cent in April 2020-March 2021.")
+                                tags$li("The grey line is the percentage of economically inactive people who do want to work.")
+                                # tags$li("The proportion of those who were economically inactive and would like to work increased",
+                                #         "by 0.9 percentage points, from 20.7 per cent in April 2019-March 2020 (the lowest point",
+                                #         "in the series to date) to 21.6 per cent in April 2020-March 2021.")
               )
 )
 
