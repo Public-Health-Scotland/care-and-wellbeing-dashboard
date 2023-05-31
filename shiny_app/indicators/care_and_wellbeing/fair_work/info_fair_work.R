@@ -52,13 +52,6 @@ output$info_employees_living_wage_cw = renderUI({
 
 })
 
-observeEvent(input$employees_living_wage_cw_modal_comment,
-             showModal(
-               modalDialog(
-                 title = "Summary of indicator during covid and pre-covid period",
-                 #p("The proportion of employees earning less than the Living Wage has decreased from 18.8% in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021. The proportion of employees earning less than the Living Wage is now lower than at any previous point in the series, which began in 2012. This indicates that performance is maintaining."),
-                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
-             ))
 
 ##############################################.
 # GENDER PAY GAP CW ----

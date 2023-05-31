@@ -2,6 +2,23 @@
 # EMPLOYEES ON THE LIVING WAGE----
 ##############################################.
 
+altTextServer("employees_living_wage_cw_alt",
+              title = "Employees earning less than the Living Wage by year and sector plot",
+              content = tags$ul(tags$li("This is a plot for the trend in employees earning less than the real Living Wage by sector."),
+                                tags$li("The x axis shows the year, starting from 2012."),
+                                tags$li("The y axis shows the proportion of employees earning less than the real Living Wage."),
+                                tags$li("The purple line is the proportion of employees earning less than the real Living Wage in all sectors."),
+                                tags$li("The light grey line is the proportion of employees earning less than the real Living Wage in the public sector."),
+                                tags$li("The blue line is the proportion of employees earning less than the real Living Wage in the private sector."),
+                                tags$li("The dark grey  line is the proportion of employees earning less than the real Living Wage in the Not for profit or mutual organisation sector."),
+                                tags$li("The proportion of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
+                                        "in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021."),
+                                tags$li("The proportion of employees earning less than the Living Wage is now lower than at",
+                                        "any previous point in the series, which began in 2012.")
+              )
+)
+
+
 ## lines overall
 output$employees_living_wage_cw_plot = renderPlotly({
 
