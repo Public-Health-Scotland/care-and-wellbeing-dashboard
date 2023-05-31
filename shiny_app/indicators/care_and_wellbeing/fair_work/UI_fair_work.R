@@ -11,7 +11,9 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         value = "economic_inactivity_cw",
 
 
-                        h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = "Paste background info and source for economic inactivity here")),
+                        h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = paste("This indicator measures the percentage of economically inactive",
+                                                                                                      "adults aged 16 to 64 who want to work, from the",
+                                                                                                      "<a href= https://www.gov.scot/collections/labour-market-statistics/ target = _blank> Annual Population Survey. </a>"))),
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
