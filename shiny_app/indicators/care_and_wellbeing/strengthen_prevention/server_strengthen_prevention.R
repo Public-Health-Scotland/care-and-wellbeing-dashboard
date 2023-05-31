@@ -687,7 +687,7 @@ output$alcohol_deaths_sex_plot = renderPlotly({
   title <- glue("Age-sex standardised death rates of ",
                 str_to_lower(input$alcohol_deaths_sex),
                 ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
-                "  per 100,000",
+                "  per 100,000 population",
   )
 
   data = alcohol_deaths %>%
@@ -717,7 +717,7 @@ output$alcohol_deaths_age_plot = renderPlotly({
   title <- glue("Age-sex standardised death rates of ",
                 str_to_lower(input$alcohol_deaths_sex),
                 ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
-                "  per 100,000 by age group")
+                "  per 100,000 population by age group")
 
   data = alcohol_deaths_by_age %>%
     filter(sex == input$alcohol_deaths_sex) %>%
@@ -731,7 +731,10 @@ output$alcohol_deaths_age_plot = renderPlotly({
 observeEvent(input$alcohol_deaths_tabBox, {
   observeEvent(input$alcohol_deaths_sex,{
 
-    title_start <- glue("Age-sex standardised death rates per 100,000 in ", str_to_lower(input$alcohol_deaths_sex))
+    title_start <- glue("Age-sex standardised death rates of ",
+                        str_to_lower(input$alcohol_deaths_sex),
+                        ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
+                        "per 100,000 population")
 
     title_end <- ifelse(input$alcohol_deaths_tabBox == "Rate for all ages",
                         "", " by age group")
