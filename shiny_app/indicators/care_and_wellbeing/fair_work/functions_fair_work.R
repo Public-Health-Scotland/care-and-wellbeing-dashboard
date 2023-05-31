@@ -20,16 +20,17 @@ make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_col
             type="scatter",
             mode="lines+markers",
             color = color_column_option,
-            colors = palette,
-            text = paste0("Sector: ", color_column_option, "<br>",
-                          "Year: ", data$year, "<br>",
-                          "Proportion (%): ", data$measure_value,"% <br>"),
-            hoverinfo = "text") %>%
+            colors = palette) %>%
+            # text = paste0("Sector: ", color_column_option, "<br>",
+            #               "Year: ", data$year, "<br>",
+            #               "Proportion (%): ", data$measure_value,"% <br>"),
+            #hoverinfo = "text") %>%
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Proportion (%)", range = c(0,100), ticksuffix = "%"),
            title = list(text = str_wrap(title, width = 60), font = subtitle_style),
            margin = list(t = 90, b = 40),
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>")),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
@@ -46,12 +47,12 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
             y=~`Pay Gap`,
             type="scatter",
             mode="lines+markers",
-            name = "Pay Gap \n(Women/Men) (%)",
+            name = "Pay Gap \n(Women/Men) (%)")
             #color = color_column_option,
             #colors = palette,
-            text = paste0("Year: ", data$year, "<br>",
-                          "Pay Gap (Women/Men) (%): ", data$`Pay Gap`,"% <br>"),
-            hoverinfo = "text")
+            #text = paste0(data$year, "<br>",
+            #              "Pay Gap (Women/Men) (%): ", data$`Pay Gap`,"% <br>"),
+            #hoverinfo = "text")
 
   if(second_axis)
   {
@@ -61,20 +62,20 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
                             type="scatter",
                             mode="lines+markers",
                             name = "Men (£)",
-                            line = list(dash = 'dash'),
-                            text = paste0("Year: ", data$year, "<br>",
-                                          "Men Median Hourly Earnings (£): ", data$Men," <br>"),
-                            hoverinfo = "text")
+                            line = list(dash = 'dash'))
+                            # text = paste0("Year: ", data$year, "<br>",
+                            #               "Men Median Hourly Earnings (£): ", data$Men," <br>"),
+                            #hoverinfo = "text")
     fig = fig %>% add_trace(x=~year,
                             y=~Woman,
                             yaxis = "y2",
                             type="scatter",
                             mode="lines+markers",
                             name = "Women (£)",
-                            line = list(dash = 'dash'),
-                            text = paste0("Year: ", data$year, "<br>",
-                                          "Women Median Hourly Earnings (£): ", data$Woman," <br>"),
-                            hoverinfo = "text")  %>%
+                            line = list(dash = 'dash')) %>%
+                            # text = paste0("Year: ", data$year, "<br>",
+                            #               "Women Median Hourly Earnings (£): ", data$Woman," <br>"),
+                            #hoverinfo = "text")  %>%
       layout(yaxis2 =  list(title = "Median Hourly Earnings (£)",
                             overlaying = "y",
                             side = "right",
@@ -91,7 +92,8 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            showlegend = TRUE,
-           legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(x = 1.2, y = 1, bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>")),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
   fig
@@ -112,15 +114,15 @@ make_economic_inactivity_cw_plot <- function(data, title = "") {
             type="scatter",
             mode="lines+markers",
             colors = palette,
-            text = paste0("Year: ", data$year, "<br>",
-                          "Proportion (%): ",
-                          data$percent, "%"),
-            hoverinfo = "text",
+            # text = paste0("Year: ", data$year, "<br>",
+            #               "Proportion (%): ",
+            #               data$percent, "%")
             textposition="none") %>%
     layout(yaxis = yaxis_proportion,
            xaxis = xaxis_year,
            title = list(text = str_wrap(title, width = 60), font = title_style),
-           margin = list(t = 90, b = 40)) %>%
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
