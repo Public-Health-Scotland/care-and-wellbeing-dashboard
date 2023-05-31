@@ -73,7 +73,7 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
                             name = "Women (£)",
                             line = list(dash = 'dash'),
                             text = paste0("Year: ", data$year, "<br>",
-                                          "Women Median Hourly Earnings (£): ", data$Men," <br>"),
+                                          "Women Median Hourly Earnings (£): ", data$Woman," <br>"),
                             hoverinfo = "text")  %>%
       layout(yaxis2 =  list(title = "Median Hourly Earnings (£)",
                             overlaying = "y",
