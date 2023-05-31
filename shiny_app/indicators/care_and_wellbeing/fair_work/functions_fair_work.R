@@ -66,7 +66,7 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
                                           "Men Median Hourly Earnings (£): ", data$Men," <br>"),
                             hoverinfo = "text")
     fig = fig %>% add_trace(x=~year,
-                            y=~Women,
+                            y=~Woman,
                             yaxis = "y2",
                             type="scatter",
                             mode="lines+markers",
