@@ -114,10 +114,7 @@ make_economic_inactivity_cw_plot <- function(data, title = "") {
             colors = palette,
             text = paste0("Year: ", data$year, "<br>",
                           "Proportion (%): ",
-                          data$percent, "%",
-                          "<br>",
-                          "Number of Vacancies: ",
-                          format(data$n, big.mark = ",")),
+                          data$percent, "%"),
             hoverinfo = "text",
             textposition="none") %>%
     layout(yaxis = yaxis_proportion,
