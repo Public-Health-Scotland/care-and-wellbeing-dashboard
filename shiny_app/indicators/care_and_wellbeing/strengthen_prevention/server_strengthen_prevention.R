@@ -1,4 +1,91 @@
 ##############################################.
+# LIFE EXPECTANCY----
+##############################################.
+
+altTextServer("life_expectancy_trend_alt",
+              title = "Life expectancy by year range plot",
+              content = tags$ul(tags$li("This is a plot for the trend in life expectancy in Scotland."),
+                                tags$li("The x axis is the 3 year range, starting from 2009-2011."),
+                                tags$li("The y axis is the life expectancy in years."),
+                                tags$li("There is a drop down above the chart which allows you to select sex"),
+                                tags$li("The solid purple line is the specified sex"),
+                                tags$li("Since the 2017-2019 there has been a downwards trend in male healthy life expectancy at birth for both males and females")
+
+
+
+              )
+)
+
+output$life_expectancy_trend_plot = renderPlotly({
+  title <- glue(input$life_expectancy_sex,
+                " life expectancy at birth in Scotland"
+  )
+  data = life_expectancy %>%
+    filter(geography == "Scotland",
+           sex == input$life_expectancy_sex) %>%
+    rename(date = time_period) %>%
+    line_chart_function(., y_title = "Life expectancy (years)", title = title, label = "Life expectancy") %>%
+    layout(xaxis = list(tickangle = 30),
+           yaxis = yaxis_number_normal,
+           legend = list(y = -0.4))
+})
+
+altTextServer("life_expectancy_council_area_alt",
+              title = "Life expectancy by council area plot",
+              content = tags$ul(tags$li("This is a plot for life expectancy for the time period of 2019-2021 by council area."),
+                                tags$li("The x axis is the council area."),
+                                tags$li("The y axis is the life expectancy in years."),
+                                tags$li("There is a drop down above the chart which allows you to select sex"),
+                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex",
+                                        "and the vertical lines from each dot indicates the confidence interval."),
+                                tags$li("Orkney Islands had the highest life expectancy at birth for both males and females."),
+                                tags$li("Glasgow City had the lowest life expectancy at birth for both males and females.")
+
+              )
+)
+
+output$life_expectancy_council_area_plot = renderPlotly({
+  title <- glue(input$life_expectancy_sex,
+                " life expectancy at birth in council areas 2019-2021"
+  )
+  data = life_expectancy %>%
+    filter(sex == input$life_expectancy_sex) %>%
+    mutate(ErrorBarHeight = upper_confidence_interval - lower_confidence_interval,
+           ErrorBarLowerHeight = indicator - lower_confidence_interval) %>%
+    rename(date = time_period) %>%
+    confidence_scatter_function_le(., y_title = "Life expectancy (years)", title = title) %>%
+    layout(xaxis = list(tickangle = -90),
+           yaxis = yaxis_number_normal,
+           legend = list(y = -1.3))
+})
+
+observeEvent(input$life_expectancy_sex,{
+
+    data_unfiltered <- life_expectancy %>%
+      select(time_period, geography_type, geography, sex, stage_of_life, indicator,
+             lower_confidence_interval, upper_confidence_interval) %>%
+      arrange(time_period) %>%
+      mutate(time_period = factor(time_period)) %>%
+      rename("year_range" = "time_period",
+             "life_expectancy (years)" = "indicator")
+
+    data_filtered <- data_unfiltered %>%
+      filter(sex == input$life_expectancy_sex)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "life_expectancy", filename = "life_expectancy",
+                       add_separator_cols_2dp = c(6,7,8))
+  })
+
+observeEvent(input$life_expectancy_sex,{
+
+    output$life_expectancy_title <- renderText({glue("Data table:",
+                                                             input$life_expectancy_sex,
+                                                             " life expectancy at birth")})
+  })
+
+
+##############################################.
 # HEALTHY LIFE EXPECTANCY----
 ##############################################.
 
@@ -6,6 +93,7 @@ altTextServer("healthy_life_expectancy_trend_alt",
               title = "Healthy life expectancy by year range plot",
               content = tags$ul(tags$li("This is a plot for the trend in healthy life expectancy in Scotland."),
                                 tags$li("The x axis is the 3 year range, starting from 2009-2011."),
+                                tags$li("The y axis is the healthy life expectancy in years."),
                                 tags$li("There are two drop downs above the chart which allow you to select sex",
                                         "and whether the healthy life expectancy is at birth or at age 65."),
                                 tags$li("The solid purple line is the specified sex and stage of life and the lighter purple area around",
@@ -32,7 +120,7 @@ output$healthy_life_expectancy_trend_plot = renderPlotly({
            sex == input$healthy_life_expectancy_sex,
            stage_of_life == input$healthy_life_expectancy_life_stage) %>%
     rename(date = time_period) %>%
-    confidence_line_function_hle(., y_title = "Healthy life expectancy", title = title) %>%
+    confidence_line_function_hle(., y_title = "Healthy life expectancy (years)", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            yaxis = yaxis_number_normal,
            legend = list(y = -0.4))
@@ -42,6 +130,7 @@ altTextServer("healthy_life_expectancy_council_area_alt",
               title = "Healthy life expectancy by council area plot",
               content = tags$ul(tags$li("This is a plot for healthy life expectancy for the time period of 2019-2021 by council area."),
                                 tags$li("The x axis is the council area."),
+                                tags$li("The y axis is the healthy life expectancy in years."),
                                 tags$li("There are two drop downs above the chart which allow you to select sex",
                                         "and whether the healthy life expectancy is at birth or at age 65."),
                                 tags$li("The purple dots is the healthy life expectancy for each council area for specified sex and stage of life",
@@ -65,7 +154,7 @@ output$healthy_life_expectancy_council_area_plot = renderPlotly({
     mutate(ErrorBarHeight = upper_confidence_interval - lower_confidence_interval,
            ErrorBarLowerHeight = indicator - lower_confidence_interval) %>%
     rename(date = time_period) %>%
-    confidence_scatter_function_hle(., y_title = "Healthy life expectancy", title = title) %>%
+    confidence_scatter_function_hle(., y_title = "Healthy life expectancy (years)", title = title) %>%
     layout(xaxis = list(tickangle = -90),
            yaxis = yaxis_number_normal,
            legend = list(y = -1.3))
@@ -80,7 +169,7 @@ observeEvent(input$healthy_life_expectancy_sex,{
       arrange(time_period) %>%
       mutate(time_period = factor(time_period)) %>%
       rename("year_range" = "time_period",
-             "healthy_life_expectancy" = "indicator")
+             "healthy_life_expectancy (years)" = "indicator")
 
     data_filtered <- data_unfiltered %>%
       filter(sex == input$healthy_life_expectancy_sex) %>%

@@ -193,8 +193,26 @@ tagList(
 
                    fluidRow(
                      column(3,
+                            h3(actionLink("jump_summary_to_life_expectancy_male", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_male", title = "Life expectancy (years) for males",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(3,
+                            h3(actionLink("jump_summary_to_life_expectancy_female", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_female", title = "Life expectancy (years) for females",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of females at birth in the year range {max(life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(3,
                             h3(actionLink("jump_summary_to_healthy_life_expectancy_male", "Healthy life expectancy")),
-                            summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy for males",
+                            summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy (years) for males",
                                          button_title = "Healthy life expectancy",
                                          button_content = glue("This is the healthy life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
                                                                "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
@@ -206,7 +224,7 @@ tagList(
                      ),
                      column(3,
                             h3(actionLink("jump_summary_to_healthy_life_expectancy_female", "Healthy life expectancy")),
-                            summaryBoxUI("healthy_life_expectancy_female", title = "Healthy life expectancy for females",
+                            summaryBoxUI("healthy_life_expectancy_female", title = "Healthy life expectancy (years) for females",
                                          button_title = "Healthy life expectancy",
                                          button_content = glue("This is the healthy life expectancy of females at birth in the year range {max(healthy_life_expectancy$time_period)}.",
                                                                "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
@@ -215,15 +233,23 @@ tagList(
                                                                "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
+                                         )),
 
+                     fluidRow(
                      column(3,
                             h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                             summaryBoxUI("healthy_weight")
                      ),
                      column(3,
                             h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
-                            summaryBoxUI("mental_wellbeing")
+                            summaryBoxUI("mental_wellbeing", title = "Mean WEMWBS score",
+                                         button_title = "Mental wellbeing of adults (16+)",
+                                         button_content = glue("This is the mean Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS) score for people aged 16+ in Scotland.",
+                                                               "The 14-item scale WEMWBS has 5 response categories, summed to provide a single score.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland level. Further breakdown of mental wellbeing of adults by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      )),
                    fluidRow(
                      column(4,
