@@ -213,6 +213,19 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 #PAY GAP----
 ##############################################.
 
+altTextServer("gender_pay_gap_cw_alt",
+              title = "Gender pay gap plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the difference in full-time hourly earnings between women and men."),
+                                tags$li("The x axis shows the year, starting from 2014."),
+                                tags$li("The y axis shows the difference in earnings as a percentage of male full time hourly earnings."),
+                                tags$li("There are two panels on the left of the chart. The first panel allows you to select the private,",
+                                        "public, or all sectors. The second panel allows you to select a work pattern of full-time, part-time,",
+                                        "or all work patterns. The default is all work patterns for all sectors."),
+                                tags$li("There is a checkbox to the left of the chart which allows you to show women and men's earnings",
+                                        "on a secondary axis alongside the difference in pay.")
+
+              )
+)
 
 output$gender_pay_gap_cw_plot = renderPlotly({
 

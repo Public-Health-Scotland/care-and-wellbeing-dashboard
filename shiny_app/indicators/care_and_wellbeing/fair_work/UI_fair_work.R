@@ -116,6 +116,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                           tags$b("Summary of indicator during covid and pre-covid period"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
+                        altTextUI("gender_pay_gap_cw_alt"),
 
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
