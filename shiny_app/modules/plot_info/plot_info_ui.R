@@ -64,6 +64,7 @@ iButtonUI <- function(id, content = "", placement = "right") {
 }
 
 
+
 ciDefinitionUI <- function(id) {
   ns <- NS(id)
 
@@ -100,6 +101,26 @@ simdQuintileDefinitionUI <- function(id) {
                                   "People living in the most and least deprived areas that each contain a fifth of the population are assigned to SIMD quintile 1 and 5 respectively."),
                   placement = "bottom",
                   label = "What is SIMD?",
+                  icon = "circle-question",
+                  class = "plotinfo-btn"
+  )
+
+
+}
+
+wemwbsDefinitionUI <- function(id) {
+  ns <- NS(id)
+
+  summaryButtonUI(ns("wemwbs_defintion"),
+                  title = "What is the Warwick-Edinburgh Mental Wellbeing Scales  (WEMWBS)?",
+                  content = paste("The Warwick-Edinburgh Mental Wellbeing Scales were developed to enable the measuring of mental wellbeing in the general population and the evaluation",
+                                  "of projects, programmes and policies which aim to improve mental wellbeing. The 14-item scale WEMWBS has 5 response categories, summed to provide a",
+                                  "single score. The items are all worded positively and cover both feeling and functioning aspects of mental wellbeing, thereby making the concept more accessible.",
+                                  "<br> <br>",
+                                  "More information can be found",
+                                  "<a href = https://warwick.ac.uk/fac/sci/med/research/platform/wemwbs target = _blank> here (external website)."),
+                  placement = "bottom",
+                  label = "What is WEMWBS?",
                   icon = "circle-question",
                   class = "plotinfo-btn"
   )

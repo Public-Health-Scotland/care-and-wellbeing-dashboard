@@ -58,6 +58,12 @@ source(paste0(path_pop_health, "transfer_asthma_admissions.R"))
 source(paste0(path_pop_health, "/transfer_healthy_birthweight.R"))
 
 ##############################################.
+# HEALTHY LIFE EXPECTANCY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_healthy_life_expectancy.R"))
+
+##############################################.
 # CHILDREN (2-15) AT RISK OF OBESITY----
 ##############################################.
 
@@ -75,6 +81,11 @@ source(paste0(path_pop_health, "/transfer_adult_self_assessed_health.R"))
 
 source(paste0(path_pop_health, "/transfer_adult_long_term_condition.R"))
 
+##############################################.
+# MENTAL WELLBEING OF ADULTS (16+)----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_adult_mental_wellbeing.R"))
 
 ##############################################.
 # SCREENING UPTAKE----
@@ -83,6 +94,8 @@ source(paste0(path_pop_health, "/transfer_adult_long_term_condition.R"))
 ##############################################.
 # VACCINATIONS----
 ##############################################.
+
+source(paste0(path_pop_health, "/transfer_vaccinations.R"))
 
 ##############################################.
 # EXPERIENCE OF SOCIAL CARE RECIPIENTS----

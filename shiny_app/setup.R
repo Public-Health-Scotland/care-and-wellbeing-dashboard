@@ -139,6 +139,12 @@ xaxis_finyear = list(title = "Financial year",
                      titlefont = list(size=18),
                      showline = TRUE)
 
+# X axis for council area
+xaxis_council_area = list(title = "Council area",
+                          tickfont = list(size=14),
+                          titlefont = list(size=18),
+                          showline = TRUE)
+
 
 # X axis for year
 xaxis_year = list(title = "Year",
@@ -148,9 +154,9 @@ xaxis_year = list(title = "Year",
 
 # X axis for survey year
 xaxis_survey_year = list(title = "Survey Year",
-                  tickfont = list(size=14),
-                  titlefont = list(size=18),
-                  showline = TRUE)
+                         tickfont = list(size=14),
+                         titlefont = list(size=18),
+                         showline = TRUE)
 
 # Y axis style for % format
 yaxis_proportion = list(rangemode="tozero",
@@ -162,11 +168,11 @@ yaxis_proportion = list(rangemode="tozero",
                         range=c(0,100))
 
 yaxis_proportion_30 = list(rangemode="tozero",
-                        tickfont = list(size=14),
-                        titlefont = list(size=18),
-                        showline = FALSE,
-                        ticksuffix = "%",
-                        range=c(0,30))
+                           tickfont = list(size=14),
+                           titlefont = list(size=18),
+                           showline = FALSE,
+                           ticksuffix = "%",
+                           range=c(0,30))
 
 
 yaxis_number = list(title = FALSE,
@@ -174,6 +180,11 @@ yaxis_number = list(title = FALSE,
                     tickfont = list(size=14),
                     titlefont = list(size=18),
                     showline = FALSE)
+
+yaxis_number_normal = list(rangemode="normal",
+                           tickfont = list(size=14),
+                           titlefont = list(size=18),
+                           showline = FALSE)
 
 home_list<- c("About"= "about",
               "Using the dashboard"= "use",

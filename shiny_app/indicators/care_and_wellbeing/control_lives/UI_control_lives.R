@@ -1,12 +1,9 @@
 tagList(
 
-  h1("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
+  h1("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives"),
   br(),
 
-  h4(strong("Select indicator: ")),
-
-
-  navlistPanel(widths = c(2,10),
+  navlistPanel(widths = c(2,10), id = "control_lives_panel",
 
                ##############################################.
                # CAMHS WAITING TIMES----
@@ -30,18 +27,18 @@ tagList(
                         #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
 
                         fluidRow(column(4,
-                                         selectInput("camhs_waiting_times_cw_geog_type",
-                                         "Step 1: Select national or local geography level",
-                                         choices = c("Scotland", "Health Board"),
-                                         selected = "Scotland",
-                                         width = "100%")),
+                                        selectInput("camhs_waiting_times_cw_geog_type",
+                                                    "Step 1: Select national or local geography level",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    selected = "Scotland",
+                                                    width = "100%")),
 
                                  column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
-                                          "Step 2: Select national or local geography area",
-                                          choices = c("Scotland"),
-                                          width = "100%"))
-                                 ),
+                                                    "Step 2: Select national or local geography area",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
 
                         altTextUI("camhs_waiting_times_cw_seen_since_alt"),
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_since_plot")),
@@ -66,19 +63,23 @@ tagList(
                ##############################################.
                # CHILDREN HAVE POSITIVE RELATIONSHIPS----
                ##############################################.
-               tabPanel(title = "Children have positive relationships",
+               tabPanel(title = "Children have positive relationships (to be developed)",
                         value = "children_relationships",
 
-                        h2("Children have positive relationships")
+                        h2("Children have positive relationships"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
                # CHILDREN'S VOICES----
                ##############################################.
-               tabPanel(title = "Children’s voices",
+               tabPanel(title = "Children’s voices (to be developed)",
                         value = "childrens_voices",
 
-                        h2("Children’s voices")
+                        h2("Children’s voices"),
+
+                        p("Content to be developed")
                ),
 
 
@@ -86,19 +87,23 @@ tagList(
                ##############################################.
                # CONFIDENCE AND RESILIENCE OF CHILDREN AND YOUNG PEOPLE----
                ##############################################.
-               tabPanel(title = "Confidence and resilience of children and young people",
+               tabPanel(title = "Confidence and resilience of children and young people (to be developed)",
                         value = "confidence_of_young",
 
-                        h2("Confidence and resilience of children and young people")
+                        h2("Confidence and resilience of children and young people"),
+
+                        p("Content to be developed")
                ),
 
                ##############################################.
                # MENTAL HEALTH / MENTAL WELLBEING----
                ##############################################.
-               tabPanel(title = "Mental health / mental wellbeing ",
+               tabPanel(title = "Mental health / mental wellbeing (to be developed)",
                         value = "mental_health_cw",
 
-                        h2("Mental health / mental wellbeing ")
+                        h2("Mental health / mental wellbeing "),
+
+                        p("Content to be developed")
                )
 
 
