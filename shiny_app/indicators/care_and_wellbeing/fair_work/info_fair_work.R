@@ -71,38 +71,6 @@ output$info_gender_pay_gap_cw = renderUI({
 
 })
 
-observeEvent(input$gender_pay_gap_cw_modal_info,
-             showModal(
-               modalDialog(
-                 title = "Background information and source",
-                 h4("Indicator"),
-                 p("Difference between male and female full-time hourly earnings, as % of male full time hourly earnings."),
-                 h4("Source"),
-                 p("Annual Survey of Hours and Earnings, ONS"),
-                 h4("Notes"),
-                 tags$div(
-                   tags$ul(
-                     tags$li(
-                       "Estimates for employees aged 16+ on the PAYE system on adult rates whose pay for the survey pay-period was not affected by absence. Estimates for 2020 and ",
-                       "have been furloughed under the Coronavirus Job Retention Scheme (CJRS)."
-                     ),
-                     tags$li(
-                       "2021 data are provisional."
-                     )
-                   )
-                 ),
-                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
-             ))
-
-
-
-observeEvent(input$gender_pay_gap_cw_modal_comment,
-             showModal(
-               modalDialog(
-                 title = "Summary of indicator during covid and pre-covid period",
-                 #p("The gender pay gap has decreased from 8.4% in 2012. In 2021, the gender pay gap for Scotland was 3.0%, an increase of 0.6 percentage points on the previous year. This indicates that performance is maintaining."),
-                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
-             ))
 
 ##############################################.
 # WORK-RELATED ILL HEALTH ----

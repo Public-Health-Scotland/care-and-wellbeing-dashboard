@@ -103,21 +103,15 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                tabPanel(title = "Gender pay gap",
                         value = "gender_pay_gap_cw",
 
-                        h2("Gender pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
+                        h2("Gender pay gap", iButtonUI("gender_pay_gap_cw", content = paste("This indicator uses data from the Annual Survey of Hours and Earnings from the",
+                                                                                            "Office for National Statistics (ONS).",
+                                                                                            "<br> <br>",
+                                                                                            "Estimates for employees aged 16+ on the PAYE system on adult rates whose pay",
+                                                                                            "for the survey pay-period was not affected by absence. Estimates for 2020 and 2021 include",
+                                                                                            "employees who have been furloughed under the Coronavirus Job Retention Scheme (CJRS)."))),
 
                         altTextUI("gender_pay_gap_cw_alt"),
 
-#                         actionButton(
-#                           "gender_pay_gap_cw_modal_info",
-#                           tags$b("Background information and source"),
-#                           icon = icon_no_warning_fn("info-circle")
-#                         ),
-#
-#                         actionButton(
-#                           "gender_pay_gap_cw_modal_comment",
-#                           tags$b("Summary of indicator during covid and pre-covid period"),
-#                           icon = icon_no_warning_fn("info-circle")
-#                         ),
 
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
