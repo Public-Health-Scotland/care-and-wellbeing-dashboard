@@ -94,13 +94,13 @@ tagList(
 
 
                                 ##############################################.
-                                # ALCOHOL SPECIFIC DEATHS ----
+                                # ALCOHOL-SPECIFIC DEATHS ----
                                 ##############################################.
 
-                                tabPanel(title = "Alcohol specific deaths",
+                                tabPanel(title = "Alcohol-specific deaths",
                                          value = "alcohol_deaths",
 
-                                         h2("Alcohol specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
+                                         h2("Alcohol-specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
 
                                          fluidRow(
                                            column(4,
@@ -110,16 +110,28 @@ tagList(
                                                                  selected = "All sexes",
                                                                  width = "100%"))
                                          ),
+
                                          altTextUI("alcohol_deaths_sex_alt"),
+                                         ciDefinitionUI("alcohol_deaths"),
                                          withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
+
                                          br(),
                                          altTextUI("alcohol_deaths_age_alt"),
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
+                                         h3(textOutput("alcohol_deaths_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
-                                         h3("Data Table"),
-                                         DT::dataTableOutput("alcohol_deaths_table")
+                                         tabBox(
+                                           id = "alcohol_deaths_tabBox", height = "250px", width=12,
+                                           tabPanel("Rate for all ages",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_sex")),
+                                           tabPanel("Age breakdown",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_age"))
+                                         )
                                 )
                         )),
 
