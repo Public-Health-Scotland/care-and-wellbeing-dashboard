@@ -247,7 +247,7 @@ output$gender_pay_gap_cw_plot = renderPlotly({
                           tolower(paste0("the ", input$gender_pay_gap_cw_sector, " sector, ")))
   string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-  title <- glue("Difference between male and female full-time hourly earnings in ",
+  title <- glue("Difference between women and men's full-time hourly earnings in ",
                 string_sector, string_work)
 
   add_Earning = input$gender_pay_gap_cw_show_earnings_check_box
