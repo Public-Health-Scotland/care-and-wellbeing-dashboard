@@ -594,11 +594,11 @@ observeEvent(input$drug_deaths_geog_name,{
 })
 
 ##############################################.
-# ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
+# ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
 ##############################################.
 
 ##############################################.
-# ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+# ALCOHOL RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 observeEvent(input$alcohol_admissions_geog_type,
              {
@@ -606,17 +606,13 @@ observeEvent(input$alcohol_admissions_geog_type,
                alcohol_filtered = alcohol_admissions %>%
                  filter(geography_type == input$alcohol_admissions_geog_type)
 
-               #select_choice <- ifelse(input$geog_type_summary_CW == "Scotland", "area", input$geog_type_summary)
-
                updateSelectizeInput(session, "alcohol_admissions_geog_name",
-                                    #label = glue("4. Select {select_choice}"),
-                                    choices = unique(alcohol_filtered$geography))#,
-               #selected = "")
+                                    choices = unique(alcohol_filtered$geography))
              })
 
 output$alcohol_admissions_plot = renderPlotly({
 
-  title <- glue("Total number of alcohol-related admissions in ",
+  title <- glue("European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
                 input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
@@ -640,7 +636,7 @@ observeEvent(input$alcohol_admissions_geog_name,{
            smr_type == "Combined") %>%
     mutate(financial_year = factor(financial_year)) %>%
     select(financial_year, geography_type, geography, stays_easr) %>%
-    rename("Number of alcohol related admissions" = "stays_easr")
+    rename("Alcohol-related hospital admissions rate" = "stays_easr")
 
   data_filtered <- data_unfiltered %>%
     filter(geography == input$alcohol_admissions_geog_name)
@@ -653,14 +649,14 @@ observeEvent(input$alcohol_admissions_geog_name,{
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
-  output$alcohol_admissions_title <- renderText({glue("Data table: Total number of alcohol-related admissions in ",
+  output$alcohol_admissions_title <- renderText({glue("Data table: European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
                                                       input$alcohol_admissions_geog_name)})
 })
 
 
 
 ##############################################.
-# ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
+# ALCOHOL SPECIFIC DEATHS ----
 ##############################################.
 # output$alcohol_deaths_plot <- renderPlotly({
 #
