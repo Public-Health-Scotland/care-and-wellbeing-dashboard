@@ -52,34 +52,6 @@ output$info_employees_living_wage_cw = renderUI({
 
 })
 
-observeEvent(input$employees_living_wage_cw_modal_info,
-             showModal(
-               modalDialog(
-                 title = "Background information and source",
-                 h4("Indicator"),
-                 p("Proportion of employees (18+) earning less than the real Living Wage "),
-                 h4("Source"),
-                 p("Annual Survey of Hours and Earnings, ONS"),
-                 h4("Notes"),
-                 tags$div(
-                   tags$ul(
-                     tags$li(
-                       "Estimates for employees aged 18+ on the PAYE system on adult rates whose pay for the survey pay-period was not affected by absence. Estimates for 2020 and 2021 include employees who have been furloughed under the Coronavirus Job Retention Scheme (CJRS)."
-                     ),
-                     tags$li(
-                       "2021 data are provisional."
-                     ),
-                     tags$li(
-                       "Levels calculated using low pay calibration weights in line with ONS guidance."
-                     ),
-                     tags$li(
-                       "Hourly earnings excludes any overtime payments."
-                     )
-                   )
-                 ),
-                 easyClose = TRUE, fade=FALSE, footer = modalButton("Close (Esc)"))
-             ))
-
 observeEvent(input$employees_living_wage_cw_modal_comment,
              showModal(
                modalDialog(
