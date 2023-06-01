@@ -323,10 +323,6 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Premature mortality #####
 
-# observeEvent(input$geog_name_summary_CW,{
-#   summaryBoxServer("premature_mortality")
-# })
-
 observeEvent(input$geog_name_summary_CW,{
   recent_date <- max(premature_mortality_all_cause_hb$date)
   previous_date <- max(premature_mortality_all_cause_hb %>% filter(date != recent_date) %>% .$date)
