@@ -97,9 +97,9 @@ add_lines_and_notes <- function(p, xs, ys, fracs, notes, colors, widths=NULL){
 create_palette <- function(colour) {
 
   if (length(unique(colour)) ==1 ) {
-    palette <- phs_colours('phs-purple')
+    palette <- phs_colours('phs-blue')
   } else {
-    palette <- phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-green', 'phs-rust'))
+    palette <- phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-green', 'phs-rust', 'phs-blue'))
   }
 
   return(palette)
@@ -220,9 +220,8 @@ stacked_bar_function = function(data, category_var, title = "") {
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage", category_var, mode = "group", title = "",
-                          hover_end = "") {
-
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage", category_var,
+                          mode = "group", title = "", hover_end = "") {
 
   #Modifying standard layout
   yaxis_plots[["title"]] <- yaxis_title

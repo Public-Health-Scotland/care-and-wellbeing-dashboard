@@ -65,7 +65,7 @@ for (i in 1:nrow(LA_Look_up))
 
 output$employees_living_wage_cw_map = renderLeaflet({
 
-  employees_living_wage_cw_by_LA_ind_year = employees_living_wage_by_LA_ind %>%
+  employees_living_wage_cw_by_LA_ind_year = employees_living_wage_cw_by_LA_ind %>%
     filter(year == input$employees_living_wage_cw_year)
 
   employees_living_wage_cw_las_shape@data = employees_living_wage_cw_las_shape@data %>%
@@ -115,7 +115,7 @@ updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
 # plot trend
 output$employees_living_wage_cw_line_LA = renderPlotly({
 
-  employees_living_wage_cw_line_LA_data = employees_living_wage_by_LA_ind %>%
+  employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
     filter(ca2019  == rv_employees_living_wage_cw())
 
 
@@ -299,6 +299,8 @@ observeEvent(input$economic_inactivity_cw_geog_type,
 
 output$economic_inactivity_cw_plot <- renderPlotly({
   region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
+    filter(year >= 2008) %>%
+    mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
     make_economic_inactivity_cw_plot(.)
 
 })
@@ -307,6 +309,7 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
+    filter(year >= 2008) %>%
     rename("category" = "breakdown",
            "Number of People" = "n",
            "Percentage of People (%)" = "percent")

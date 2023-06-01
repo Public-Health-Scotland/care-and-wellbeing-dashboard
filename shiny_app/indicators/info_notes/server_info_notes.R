@@ -209,7 +209,7 @@ output$info_panel = renderUI({
                  ),
                  bsCollapsePanel(
                    "Healthy Life Expectancy",
-                   uiOutput("info_healthy_life_expctancy")
+                   uiOutput("info_healthy_life_expectancy")
                  ),
                  bsCollapsePanel(
                    "Healthy Weight adults",

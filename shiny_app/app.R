@@ -13,6 +13,11 @@
 source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
 source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
 source(file.path("modules/data_download/data_download_ui.R"), local = TRUE)$value
+
+source(file.path("modules/summary_boxes/summary_boxes_ui.R"), local = TRUE)$value
+
+source(file.path("modules/defintions/defintions_ui.R"), local = TRUE)$value
+
 # source(file.path("modules/nav_buttons/nav_buttons_ui.R"), local = TRUE)$value
 
 source("setup.R")
@@ -48,24 +53,12 @@ ui <- shinymanager::secure_app(
         ), # tabpanel
 
         ##############################################.
-        # SUMMARY ----
-        ##############################################.
-        # tabPanel(title = "Summary",
-        #          #icon = icon_no_warning_fn("lemon"),
-        #          value = "summary",
-        #
-        #          source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
-        #
-        # ), # tabpanel
-
-        ##############################################.
         # SUMMARY V2 ----
         ##############################################.
         tabPanel(title = "At a glance",
-                 #icon = icon_no_warning_fn("clipboard"),
                  value = "summary",
 
-                 source(file.path("indicators/summary/UI_summary_v2.R"), local = TRUE)$value
+                 source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
 
         ), # tabpanel
 
@@ -114,19 +107,19 @@ ui <- shinymanager::secure_app(
                             value = "fair_work",
                             source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Ensure healthy standard of living for all",
+                   tabPanel(title = "Ensure healthy standard of living for all (to be developed)",
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Create and develop healthy and sustainable places and communities",
+                   tabPanel(title = "Create and develop healthy and sustainable places and communities (to be developed)",
                             value = "sustainable_communities",
                             source(file.path("indicators/care_and_wellbeing/sustainable_communities/UI_sustainable_communities.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Tackling discrimination, racism and their outcomes",
+                   tabPanel(title = "Tackling discrimination, racism and their outcomes (to be developed)",
                             value = "discrimination_racism",
                             source(file.path("indicators/care_and_wellbeing/discrimination_racism/UI_discrimination_racism.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Pursuing environmental sustainability and health equity together",
+                   tabPanel(title = "Pursuing environmental sustainability and health equity together (to be developed)",
                             value = "environmental_sustainability",
                             source(file.path("indicators/care_and_wellbeing/environmental_sustainability/UI_environmental_sustainability.R"), local = TRUE)$value)
 
@@ -179,7 +172,7 @@ server <- function(input, output, session) {
 
   #Pages functions
   source(file.path("indicators/home/functions_home.R"), local = TRUE)$value
-  source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
+  # source(file.path("indicators/summary/functions_summary.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/functions_info_notes.R"), local = TRUE)$value
 
 
@@ -190,6 +183,7 @@ server <- function(input, output, session) {
   source(file.path("modules/alt_text/alt_text_server.R"), local = TRUE)$value
   source(file.path("modules/plot_info/plot_info_server.R"), local = TRUE)$value
   source(file.path("modules/data_download/data_download_server.R"), local = TRUE)$value
+  source(file.path("modules/summary_boxes/summary_boxes_server.R"), local = TRUE)$value
   # source(file.path("modules/nav_buttons/nav_buttons_server.R"), local = TRUE)$value
 
   ####Get servers ----
@@ -197,7 +191,7 @@ server <- function(input, output, session) {
   # Get content for pages
   source(file.path("indicators/home/server_home.R"), local = TRUE)$value
   # source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
-  source(file.path("indicators/summary/server_summary_v2.R"), local = TRUE)$value
+  source(file.path("indicators/summary/server_summary.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CR.R"), local = TRUE)$value
   source(file.path("indicators/summary/server_summary_CW.R"), local = TRUE)$value
   source(file.path("indicators/info_notes/server_info_notes.R"), local = TRUE)$value
