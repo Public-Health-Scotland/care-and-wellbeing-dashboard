@@ -20,7 +20,8 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                           icon = icon_no_warning_fn("info-circle")
                         ),
 
-                        p("Use the below drop-downs to select a region of interest."),
+                        br(),
+                        br(),
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
@@ -123,6 +124,9 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                           tags$b("Summary of indicator during covid and pre-covid period"),
                           icon = icon_no_warning_fn("info-circle")
                         ),
+
+                        br(),
+                        br(),
 
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
