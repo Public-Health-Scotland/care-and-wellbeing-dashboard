@@ -52,12 +52,21 @@ tagList(
 
 
                      column(4,
-                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
-                            summaryBoxUI("alcohol_deaths"),
+                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-specific deaths")),
+                            summaryBoxUI("alcohol_deaths", title = "Rate of deaths per 100,000",
+                                         button_title = "Alcohol-specific deaths",
+                                         button_content = glue("This is the Age-sex Standardised Rate of alcohol-specific deaths for the year {alcohol_deaths$year %>% max()}. <br> <br>",
+                                                               "This data is available at Scotland level. Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
+                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
+
+
+
+
                      column(4,
                             h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions")),
-                            summaryBoxUI("alcohol_admissions", title = "Yearly total",
+                            summaryBoxUI("alcohol_admissions", title = "Rate of admissions per 100,000",
                                          button_title = "Alcohol-related hospital admissions",
                                          button_content = glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
                                                                "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",

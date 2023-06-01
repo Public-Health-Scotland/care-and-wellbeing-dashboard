@@ -40,14 +40,30 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_value = recent_value,
                    previous_value = previous_value,
                    value_dp = 0
-                   )
+  )
 })
 
 
 ##### Alcohol deaths #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("alcohol_deaths")
+
+  recent_date <- alcohol_deaths$year %>% max()
+  previous_date <- max(alcohol_deaths %>% filter(year != recent_date) %>% .$year)
+
+  value <- alcohol_deaths %>%
+    filter(geography == input$geog_name_summary_CW,
+           sex == "All sexes")
+
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+  summaryBoxServer("alcohol_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Alcohol admission #####
@@ -69,9 +85,8 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
-                   value_dp = 0
-                   )
+                   previous_value = previous_value
+  )
 
 })
 
@@ -84,7 +99,7 @@ observeEvent(input$geog_name_summary_CW,{
 
   value <- all_cause_mortality %>%
     filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW
-           ) %>%
+    ) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000)
 
@@ -96,7 +111,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value
-                   )
+  )
 })
 
 ##### CHD deaths #####
