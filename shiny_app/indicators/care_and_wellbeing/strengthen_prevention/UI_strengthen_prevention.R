@@ -465,54 +465,7 @@ tagList(
                         dataDownloadUI("healthy_birthweight")),
 
 
-               tabPanel(title = "Healthy life expectancy",
-                        value = "healthy_life_expctancy",
 
-                        h2("Healthy life expectancy",
-                           iButtonUI("healthy_life_expectancy",
-                                     content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
-                                                     "or ‘good’ general health, based on how individuals perceive their state of health at the time",
-                                                     "of completing the annual population survey (APS)",
-                                                     "<br> <br>",
-                                                     "Some of the smaller council areas and health boards have very wide confidence intervals.",
-                                                     "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
-                                                     "<br> <br>",
-                                                     "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
-                                                     "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
-                                                     "of health the population is in, as well as their years of life expectancy.",
-                                                     "<br> <br>",
-                                                     "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
-                                                     "For more information, please visit the",
-                                                     "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
-                        fluidRow(
-                          column(4,
-                                 selectizeInput("healthy_life_expectancy_sex",
-                                                "Step 1. Select sex",
-                                                choices = c("Male", "Female"),
-                                                width = "100%")),
-                          column(4,
-                                 selectizeInput("healthy_life_expectancy_life_stage",
-                                                "Step 2. Select stage of life",
-                                                choices = c("At birth", "At age 65"),
-                                                width = "100%"))
-
-                        ),
-
-                        altTextUI("healthy_life_expectancy_trend_alt"),
-                        ciDefinitionUI("healthy_life_expectancy_trend_ci"),
-                        withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
-
-                        altTextUI("healthy_life_expectancy_council_area_alt"),
-                        ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
-                        withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
-
-                        br(),
-                        h3(textOutput("healthy_life_expectancy_title")),
-                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-                        br(),
-                        dataDownloadUI("healthy_life_expectancy")
-
-               ),
 
                ##############################################.
                # HEALTHY WEIGHT ADULTS----
