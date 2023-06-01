@@ -13,7 +13,8 @@ output$employees_living_wage_cw_plot = renderPlotly({
            earning == earning_option)
 
 
-  make_employees_living_wage_cw_line_plot(plot_data, color_column = "sector")
+  make_employees_living_wage_cw_line_plot(plot_data, color_column = "sector") %>%
+    layout(yaxis = list(range = c(0,35)))
 
 })
 
@@ -120,7 +121,8 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
 
 
   title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
-  make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title)
+  make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title) %>%
+    layout(xaxis = list(tickangle = -30))
 })
 
 
