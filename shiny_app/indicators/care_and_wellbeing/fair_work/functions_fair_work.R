@@ -28,7 +28,7 @@ make_employees_living_wage_cw_line_plot = function(data, title = NULL, color_col
     layout(xaxis = list(title = "Year"),
            yaxis = list(title = "Percentage (%)", range = c(0,100), ticksuffix = "%"),
            title = title,
-           legend = list(bgcolor = 'rgba(0,0,0,0)', title = list(text = "<b>Double click on one legend <br>to isolate one trace</b>"))) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.2, orientation = "h")) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
