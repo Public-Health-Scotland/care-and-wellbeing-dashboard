@@ -25,7 +25,7 @@ output$life_expectancy_trend_plot = renderPlotly({
            sex == input$life_expectancy_sex) %>%
     rename(date = time_period) %>%
     line_chart_function(., y_title = "Life expectancy (years)", title = title, label = "Life expectancy") %>%
-    layout(xaxis = list(tickangle = 30),
+    layout(xaxis = list(tickangle = -30),
            yaxis = yaxis_number_normal,
            legend = list(y = -0.4))
 })
@@ -56,7 +56,7 @@ output$life_expectancy_council_area_plot = renderPlotly({
     confidence_scatter_function_le(., y_title = "Life expectancy (years)", title = title) %>%
     layout(xaxis = list(tickangle = -90),
            yaxis = yaxis_number_normal,
-           legend = list(y = -1.3))
+           legend = list(y = -1.5))
 })
 
 observeEvent(input$life_expectancy_sex,{
@@ -121,7 +121,7 @@ output$healthy_life_expectancy_trend_plot = renderPlotly({
            stage_of_life == input$healthy_life_expectancy_life_stage) %>%
     rename(date = time_period) %>%
     confidence_line_function_hle(., y_title = "Healthy life expectancy (years)", title = title) %>%
-    layout(xaxis = list(tickangle = 30),
+    layout(xaxis = list(tickangle = -30),
            yaxis = yaxis_number_normal,
            legend = list(y = -0.4))
 })
@@ -155,7 +155,7 @@ output$healthy_life_expectancy_council_area_plot = renderPlotly({
            ErrorBarLowerHeight = indicator - lower_confidence_interval) %>%
     rename(date = time_period) %>%
     confidence_scatter_function_hle(., y_title = "Healthy life expectancy (years)", title = title) %>%
-    layout(xaxis = list(tickangle = -90),
+    layout(xaxis = list(tickangle = -30),
            yaxis = yaxis_number_normal,
            legend = list(y = -1.3))
 })
@@ -211,7 +211,9 @@ output$mental_wellbeing_trend_plot = renderPlotly({
   title <- glue("Mental wellbeing (WEMWBS score) by sex in Scotland"
   )
   data = adult_mental_welbeing %>%
-    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$sex, y_axis_title = "Mean WEMWBS score", title = title)
+    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$sex,
+                                y_axis_title = "Mean WEMWBS score", title = title) %>%
+    layout(legend = list(y = -0.4))
 
   })
 
@@ -235,7 +237,9 @@ output$mental_wellbeing_simd_plot = renderPlotly({
   title <- glue("Mental wellbeing (WEMWBS score) by SIMD in Scotland"
   )
   data = adult_mental_welbeing_simd %>%
-    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$simd, y_axis_title = "Mean WEMWBS score", title = title)
+    make_line_chart_multi_lines(.,x = .$year, y = .$indicator, colour = .$simd,
+                                y_axis_title = "Mean WEMWBS score", title = title) %>%
+    layout(legend = list(y = -0.4))
 
 })
 
@@ -337,7 +341,8 @@ output$premature_mortality_hb_plot <- renderPlotly({
       filter(geography == input$premature_mortality_geog_name) %>%
       confidence_line_function_pm(., y_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
                                x_title = "Year", title = title) %>%
-    layout(legend = list(y = -0.4))
+    layout(legend = list(y = -0.4),
+           xaxis = list(dtick = 1))
 
 })
 
@@ -461,7 +466,8 @@ output$all_cause_mortality_plot = renderPlotly({
   line_chart_function(data, indicator_y,
                       title = title,
                       label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths")) %>%
-  layout(yaxis=list(tickformat=","))
+  layout(yaxis=list(tickformat=","),
+         xaxis = list(tickangle = -30))
 
 })
 
@@ -522,9 +528,9 @@ output$chd_deaths_plot = renderPlotly({
     filter(geography_type == input$chd_deaths_geog_type,
            geography == input$chd_deaths_geog_name) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Age-sex standardised <br> rates per 100,000 population", title = title) %>%
-    layout(xaxis = list(tickangle = 30),
-           legend = list(y = -0.4))
+    confidence_line_function(., y_title = "Age-sex standardised<br>rates per 100,000<br>population", title = title) %>%
+    layout(xaxis = list(tickangle = -30),
+           legend = list(y = -0.5))
 })
 
 
@@ -582,7 +588,8 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 
   p <- heart_attack %>%
     line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title) %>%
-    layout(yaxis=list(tickformat=","))
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(dtick = 1, tickangle = -30))
 
 })
 
@@ -650,7 +657,7 @@ output$drug_admissions_plot = renderPlotly({
                                 title = title,
                                 y_axis_title = "Age-sex standardised<br> rate per 100,000 population",
                                 x_axis_title = "Financial year") %>%
-    layout(xaxis = list(tickangle = 30),
+    layout(xaxis = list(tickangle = -30),
            legend = list(y = -0.4))
 
 })
@@ -752,7 +759,7 @@ output$drug_deaths_plot = renderPlotly({
       filter(#geography_type == input$drug_deaths_geog_type,
         geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Total number of deaths", title = title_number) %>%
-      layout(xaxis = list(tickangle = 30,
+      layout(xaxis = list(tickangle = -30,
                           title = "Year range"),
              yaxis = list(tickformat=","))
 
@@ -823,7 +830,7 @@ output$alcohol_admissions_plot = renderPlotly({
            indicator = "stays_easr")
 
   line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population", title = title) %>%
-    layout(xaxis = list(tickangle = 45))
+    layout(xaxis = list(tickangle = -30))
 
 })
 
@@ -998,7 +1005,8 @@ output$healthy_birthweight_plot = renderPlotly({
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
-    layout(legend = list(y = -0.4))
+    layout(xaxis = list(tickangle = -30),
+           legend = list(y = -0.4))
 })
 
 observeEvent(input$healthy_birthweight_geog_name,{
@@ -1088,7 +1096,8 @@ output$adult_long_term_condition_plot <- renderPlotly({
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
     line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
-    layout(yaxis = yaxis_proportion)
+    layout(yaxis = yaxis_proportion,
+           xaxis = list(dtick = 1))
 
 })
 
@@ -1339,7 +1348,8 @@ output$vaccinations_covid_plot <- renderPlotly({
                   hover_end = "%",
                   title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}, ",
                                "as at 29 January 2023")) %>%
-    layout(yaxis = list(ticksuffix = "%"))
+    layout(yaxis = list(ticksuffix = "%"),
+           xaxis = list(tickangle = -30))
 
 })
 
