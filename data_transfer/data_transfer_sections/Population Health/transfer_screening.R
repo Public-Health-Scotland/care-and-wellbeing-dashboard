@@ -25,8 +25,6 @@ breast_by_board <- input_breast_board %>%
   select(geography_type, geography, year_range, percentage_uptake)
 
 
-screening_breast_board <- breast_by_board
-
 input_breast_simd <- read_excel(breast_simd_path, range = "A6:S12") %>%
   select(-starts_with(".")) %>%
   rename("SIMD" = "SIMD2 Deprivation Category") %>%
@@ -38,7 +36,16 @@ input_breast_simd <- read_excel(breast_simd_path, range = "A6:S12") %>%
   select(geography_type, geography, SIMD, percentage_uptake)
 
 
-screening_breast_simd <- input_breast_simd
+replace_file_fn(breast_by_board,
+                paste0(path_out, "/screening_breast_board.rds"))
+
+replace_file_fn(input_breast_simd,
+                paste0(path_out, "/screening_breast_simd.rds"))
+
+rm(breast_board_path, breast_simd_path,
+   input_breast_board, input_breast_simd,
+   previous_years, current_year,
+   breast_by_board)
 
 
 ##########################
@@ -71,34 +78,13 @@ input_bowel_simd <- read_excel(bowel_path, sheet = "KPI_2", range = "A16:Q39") %
   arrange(geography, SIMD) %>%
   select(geography_type, geography, Sex, SIMD, percentage_uptake)
 
-screening_bowel_board <- input_bowel_board
-screening_bowel_simd <- input_bowel_simd
+
+replace_file_fn(input_bowel_board,
+                paste0(path_out, "/screening_bowel_board.rds"))
+
+replace_file_fn(input_bowel_simd,
+                paste0(path_out, "/screening_bowel_simd.rds"))
+
+rm(bowel_path,
+   input_bowel_board, input_bowel_simd)
 ##########################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

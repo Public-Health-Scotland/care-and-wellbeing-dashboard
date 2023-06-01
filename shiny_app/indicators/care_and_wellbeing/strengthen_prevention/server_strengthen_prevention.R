@@ -1192,7 +1192,7 @@ altTextServer("asthma_admissions_alt",
 
 ######### BREAST ############
 
-screening_breast_years <- unique(breast_by_board %>% arrange(year_range) %>% .$year_range)
+screening_breast_years <- unique(screening_breast_board %>% arrange(year_range) %>% .$year_range)
 
 altTextServer("screening_breast_board_alt",
               title = "Breast screening by health board plot",
