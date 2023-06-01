@@ -706,7 +706,18 @@ tagList(
                                         h2("Screening uptake for breast cancer",
 
                                            iButtonUI("screening_breast",
-                                                     content = paste("Paste here."))),
+                                                     content = paste("The Scottish Breast Screening Programme (SBSP) invites women aged between 50 and 70 years old for screening every three years.",
+                                                                     "Number of women invited to attend for screening and number of women screened",
+                                                                     "are reported as a count; uptake/attendance. <br> <br>",
+                                                                     "The reporting period (2019-22) includes the pause to the SBSP due to the COVID-19 pandemic.",
+                                                                     "No individuals were invited to breast screenings during this period, causing a reduction",
+                                                                     "in overall numbers screened. Services have worked hard to recover but have been under",
+                                                                     "additional strain with limited capacity due to infection prevention and control measures",
+                                                                     "including social distancing and staffing pressures. <br> <br>",
+                                                                     "More information can be found ",
+                                                                     "<a href = https://www.healthscotland.scot/health-topics/screening/breast-screening target = _blank > here (external link). </a>",
+                                                                     "Alternatively, more information on the latest statistics can be be found",
+                                                                     "<a href= https://publichealthscotland.scot/publications/scottish-breast-screening-programme-statistics/scottish-breast-screening-programme-statistics-annual-update-to-31-march-2022/ target = _blank> here (external link). </a>"))),
 
                                         altTextUI("screening_breast_board_alt"),
                                         withSpinner(plotlyOutput("screening_breast_board_plot")),
@@ -760,7 +771,12 @@ tagList(
 
                                         h2("Screening uptake for bowel cancer",
                                            iButtonUI("screening_bowel",
-                                                     content = paste("1st May 2020 - 31st April 2022."))),
+                                                     content = paste("Bowel screening statistics relates to men and women registered",
+                                                                     "with a Community Health Index number at a GP and aged between 50-74",
+                                                                     "years old, who are invited to complete a bowel screening test every two years. <br> <br>",
+                                                                     "The data visualised on this dashboard includes a record of all eligible people invited to be screened between 1st May 2020 and 30th April 2022<br> <br>",
+                                                                     "More information can be found",
+                                                                     "<a href = https://publichealthscotland.scot/publications/scottish-bowel-screening-programme-statistics/scottish-bowel-screening-programme-statistics-for-the-period-of-invitations-from-may-2020-to-april-2022/ target = _blank> here (external link). </a>"))),
 
                                         altTextUI("screening_bowel_board_alt"),
                                         withSpinner(plotlyOutput("screening_bowel_board_plot")),
@@ -801,147 +817,147 @@ tagList(
                                )
                         )),
 
-                              ##############################################.
-                              #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
-                              ##############################################.
-                              tabPanel(title = "Self-assessed health of adults",
-                                       value = "adult_self_assessed_health",
+               ##############################################.
+               #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
+               ##############################################.
+               tabPanel(title = "Self-assessed health of adults",
+                        value = "adult_self_assessed_health",
 
-                                       h2("Self-assessed health of adults",
-                                          iButtonUI("adult_self_assessed_health",
-                                                    content = paste("This indicator uses data from the Scottish Health Survey. Participants",
-                                                                    "who are aged 13 and over are asked to rate their health in general with",
-                                                                    "answer options ranging from 'very good' to 'very bad'. The data for",
-                                                                    "those participants who described their general health as good or very good",
-                                                                    "are presented at a national level. More information can be found",
-                                                                    "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>"))),
+                        h2("Self-assessed health of adults",
+                           iButtonUI("adult_self_assessed_health",
+                                     content = paste("This indicator uses data from the Scottish Health Survey. Participants",
+                                                     "who are aged 13 and over are asked to rate their health in general with",
+                                                     "answer options ranging from 'very good' to 'very bad'. The data for",
+                                                     "those participants who described their general health as good or very good",
+                                                     "are presented at a national level. More information can be found",
+                                                     "<a href = https://www.gov.scot/collections/scottish-health-survey/ target = _blank> here. </a>"))),
 
-                                       altTextUI("adult_self_assessed_health_alt"),
-                                       withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
+                        altTextUI("adult_self_assessed_health_alt"),
+                        withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
 
-                                       br(),
-                                       h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
-                                       br(),
-                                       dataDownloadUI("adult_self_assessed_health")
-                              ),
+                        br(),
+                        h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
+                        br(),
+                        dataDownloadUI("adult_self_assessed_health")
+               ),
 
-                              ##############################################.
-                              # VACCINATIONS UPTAKE----
-                              ##############################################.
-                              tabPanel(title = "Vaccinations uptake",
-                                       value = "vaccinations",
+               ##############################################.
+               # VACCINATIONS UPTAKE----
+               ##############################################.
+               tabPanel(title = "Vaccinations uptake",
+                        value = "vaccinations",
 
-                                       # h2("Vaccinations uptake")
+                        # h2("Vaccinations uptake")
 
-                                       tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
-
-
-                                              ######### COVID-19 ##########
-                                              tabPanel(title = "COVID-19 vaccinations",
-                                                       value = "covid_vaccinations",
-
-                                                       h2("COVID-19 vaccinations uptake",
-                                                          iButtonUI("vaccinations_covid",
-                                                                    content = paste("COVID-19 is a respiratory infection caused by viruses. The infections",
-                                                                                    "can be serious even if you are healthy; the illness varies from having no",
-                                                                                    "symptoms to mild/moderate symptoms to severe complications including",
-                                                                                    "death. Seasonal vaccination programmes are designed to boost your immunity.",
-                                                                                    "Vaccination is the best way to help protect you from COVID-19, and reduce",
-                                                                                    "the likelihood of needing hospital treatment. It is offered free by the",
-                                                                                    "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
-                                                                                    "The data presented here indicate the number of vaccinations administered and",
-                                                                                    "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                                    "booster during seasonal vaccination programmes. <br> <br>",
-                                                                                    "For more information please visit the ",
-                                                                                    "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                        tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
 
-                                                       fluidRow(column(4,
-                                                                       selectInput("vaccinations_covid_geog_type",
-                                                                                   "Step 1: Select national or local geography level ",
-                                                                                   choices = c("Scotland", "Health Board"),
-                                                                                   selected = "Scotland",
-                                                                                   width = "100%")),
-                                                                column(4,
-                                                                       selectInput("vaccinations_covid_geog_name",
-                                                                                   "Step 2: Select national or local geography area ",
-                                                                                   choices = "Scotland",
-                                                                                   width = "100%"))),
+                               ######### COVID-19 ##########
+                               tabPanel(title = "COVID-19 vaccinations",
+                                        value = "covid_vaccinations",
+
+                                        h2("COVID-19 vaccinations uptake",
+                                           iButtonUI("vaccinations_covid",
+                                                     content = paste("COVID-19 is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from COVID-19, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
 
 
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_covid_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_covid_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
 
 
 
-                                                       altTextUI("vaccinations_covid_alt"),
-                                                       simd10DefinitionUI("vaccinations_covid_simd"),
-                                                       withSpinner(plotlyOutput("vaccinations_covid_plot")),
-
-                                                       br(),
-                                                       h3(textOutput("vaccinations_covid_title")),
-                                                       p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-                                                       br(),
-                                                       dataDownloadUI("vaccinations_covid")
-                                              ),
-
-                                              ######## FLU #############
-                                              tabPanel(title = "Influenza vaccinations",
-                                                       value = "flu_vaccinations",
-
-                                                       h2("Influenza vaccinations uptake",
-                                                          iButtonUI("vaccinations_FLU",
-                                                                    content = paste("Influenza is a respiratory infection caused by viruses. The infections",
-                                                                                    "can be serious even if you are healthy; the illness varies from having no",
-                                                                                    "symptoms to mild/moderate symptoms to severe complications including",
-                                                                                    "death. Seasonal vaccination programmes are designed to boost your immunity.",
-                                                                                    "Vaccination is the best way to help protect you from influenza, and reduce",
-                                                                                    "the likelihood of needing hospital treatment. It is offered free by the",
-                                                                                    "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
-                                                                                    "The data presented here indicate the number of vaccinations administered and",
-                                                                                    "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                                    "booster during seasonal vaccination programmes. <br> <br>",
-                                                                                    "For more information please visit the ",
-                                                                                    "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
-
-                                                       fluidRow(column(4,
-                                                                       selectInput("vaccinations_flu_geog_type",
-                                                                                   "Step 1: Select national or local geography level ",
-                                                                                   choices = c("Scotland", "Health Board"),
-                                                                                   selected = "Scotland",
-                                                                                   width = "100%")),
-                                                                column(4,
-                                                                       selectInput("vaccinations_flu_geog_name",
-                                                                                   "Step 2: Select national or local geography area ",
-                                                                                   choices = "Scotland",
-                                                                                   width = "100%"))),
-
-                                                       altTextUI("vaccinations_flu_alt"),
-                                                       simd10DefinitionUI("vaccinations_flu_simd"),
-                                                       withSpinner(plotlyOutput("vaccinations_flu_plot")),
-
-                                                       br(),
-                                                       h3(textOutput("vaccinations_flu_title")),
-                                                       p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-                                                       br(),
-                                                       dataDownloadUI("vaccinations_flu"),
 
 
-                                              )
-                                       )
+                                        altTextUI("vaccinations_covid_alt"),
+                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
-                              ),
+                                        br(),
+                                        h3(textOutput("vaccinations_covid_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_covid")
+                               ),
+
+                               ######## FLU #############
+                               tabPanel(title = "Influenza vaccinations",
+                                        value = "flu_vaccinations",
+
+                                        h2("Influenza vaccinations uptake",
+                                           iButtonUI("vaccinations_FLU",
+                                                     content = paste("Influenza is a respiratory infection caused by viruses. The infections",
+                                                                     "can be serious even if you are healthy; the illness varies from having no",
+                                                                     "symptoms to mild/moderate symptoms to severe complications including",
+                                                                     "death. Seasonal vaccination programmes are designed to boost your immunity.",
+                                                                     "Vaccination is the best way to help protect you from influenza, and reduce",
+                                                                     "the likelihood of needing hospital treatment. It is offered free by the",
+                                                                     "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
+                                                                     "The data presented here indicate the number of vaccinations administered and",
+                                                                     "uptake across Scotland to those eligible to receive either flu or flu and COVID",
+                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "For more information please visit the ",
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+
+                                        fluidRow(column(4,
+                                                        selectInput("vaccinations_flu_geog_type",
+                                                                    "Step 1: Select national or local geography level ",
+                                                                    choices = c("Scotland", "Health Board"),
+                                                                    selected = "Scotland",
+                                                                    width = "100%")),
+                                                 column(4,
+                                                        selectInput("vaccinations_flu_geog_name",
+                                                                    "Step 2: Select national or local geography area ",
+                                                                    choices = "Scotland",
+                                                                    width = "100%"))),
+
+                                        altTextUI("vaccinations_flu_alt"),
+                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        withSpinner(plotlyOutput("vaccinations_flu_plot")),
+
+                                        br(),
+                                        h3(textOutput("vaccinations_flu_title")),
+                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        br(),
+                                        dataDownloadUI("vaccinations_flu"),
 
 
-                              ##############################################.
-                              # WORK-RELATED ILL HEALTH----
-                              ##############################################.
+                               )
+                        )
 
-                              tabPanel(title = "Work-related ill health (to be developed)",
-                                       value = "work_related_health",
+               ),
 
-                                       h2("Work-related ill health"),
 
-                                       p("Content to be developed")
-                              )
+               ##############################################.
+               # WORK-RELATED ILL HEALTH----
+               ##############################################.
+
+               tabPanel(title = "Work-related ill health (to be developed)",
+                        value = "work_related_health",
+
+                        h2("Work-related ill health"),
+
+                        p("Content to be developed")
+               )
 
   ) # navlistpanel
 ) # tagList
