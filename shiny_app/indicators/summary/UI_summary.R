@@ -237,7 +237,7 @@ tagList(
                                          button_content = glue("This is the European Age-Standardised all-cause premature mortality rate per 100,000 population for the year {max(premature_mortality_all_cause_hb$date)}. ",
                                                                "Premature mortality is defined as deaths occurring before the age of 75.",
                                                                "<br> <br>",
-                                                               "This data is available at Scotland and Health Board level. Further breakdown by SIMD quintile is ",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD quintile is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
                      ),
