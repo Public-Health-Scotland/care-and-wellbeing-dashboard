@@ -3,6 +3,8 @@
 #plot title style
 title_style <- list(size =24, color = "#4B006E", family = "Arial")
 
+subtitle_style <- list(size =20, color = "#4B006E", family = "Arial")
+
 # Insert a chart and its title
 plot_title <- function(title_plot, plot_output, subtitle = "") {
   tagList(h3(title_plot),

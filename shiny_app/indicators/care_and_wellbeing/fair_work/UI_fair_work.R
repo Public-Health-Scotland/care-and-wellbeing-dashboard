@@ -11,16 +11,9 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         value = "economic_inactivity_cw",
 
 
-                        h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = "Paste background info and source for economic inactivity here")),
-
-
-                        actionButton(
-                          "economic_inactivity_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
-
-                        p("Use the below drop-downs to select a region of interest."),
+                        h2("Economic inactivity", iButtonUI("economic_inactivity_cw", content = paste("This indicator measures the percentage of economically inactive",
+                                                                                                      "adults aged 16 to 64 who want to work, from the",
+                                                                                                      "<a href= https://www.gov.scot/collections/labour-market-statistics/ target = _blank> Annual Population Survey. </a>"))),
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
@@ -35,12 +28,15 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                  ),
 
 
-                        plot_title(title_plot = "Percentage of economically inactive people aged 16 to 64 by willingness to work", "economic_inactivity_cw_plot")
-                        ,
 
+                        br(),
+                        altTextUI("economic_inactivity_cw_alt"),
+                        withSpinner(plotlyOutput("economic_inactivity_cw_plot")),
 
+                        br(),
                         h3(textOutput("economic_inactivity_cw_table_title")),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        br(),
                         dataDownloadUI("economic_inactivity_cw")
 
 
@@ -53,8 +49,22 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         value = "employees_living_wage_cw",
 
                         h2("Employees on the Living Wage", iButtonUI("employees_living_wage_cw",
-                                                                     content = paste("The Living Wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
-                                                                                     "More details about Living Wage rates and how it is calculated can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")))),
+                                                                     content = paste("This indicator uses data from the Annual Survey of Hours and Earnings from the Office for National Statistics (ONS).",
+                                                                                     "<br> <br>",
+                                                                                     "The real Living Wage is calculated annually by the Resolution",
+                                                                                     "Foundation and is overseen by the Living Wage Commission.",
+                                                                                     "It is the only UK wage rate based on the cost of living. It is voluntarily paid by over 12,000 UK businesses",
+                                                                                     "who believe their staff deserve a wage which meets everyday needs. The real Living Wage rate for 2022-23 is £10.90",
+                                                                                     "across the UK (£11.95 in London). More details about Living Wage",
+                                                                                     "rates and calculations can be found on the",
+                                                                                     "<a href= https://www.livingwage.org.uk/what-real-living-wage/ target = _blank> Living Wage Foundation website. </a>",
+                                                                                     "<br> <br>",
+                                                                                     "Estimates for employees aged 18+ on the PAYE system on adult rates whose pay",
+                                                                                     "for the survey pay-period was not affected by absence. Estimates for 2020 and",
+                                                                                     "2021 include employees who have been furloughed under the Coronavirus Job Retention Scheme (CJRS).",
+                                                                                     "Data for 2021 are provisional.",
+                                                                                     "Levels calculated using low pay calibration weights in line with ONS guidance.",
+                                                                                     "Hourly earnings excludes any overtime payments."))),
 
                         altTextUI("employees_living_wage_cw_sector_alt"),
                         withSpinner(plotlyOutput("employees_living_wage_cw_sector_plot")),
@@ -98,22 +108,18 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                #############################################.
                #PAY GAP----
                #############################################.
-               tabPanel(title = "Pay gap",
+               tabPanel(title = "Gender pay gap",
                         value = "gender_pay_gap_cw",
 
-                        h2("Pay gap", iButtonUI("gender_pay_gap_cw", content = "Paste background info and source for pay gap here")),
+                        h2("Gender pay gap", iButtonUI("gender_pay_gap_cw", content = paste("This indicator uses data from the Annual Survey of Hours and Earnings from the",
+                                                                                            "Office for National Statistics (ONS).",
+                                                                                            "<br> <br>",
+                                                                                            "Estimates for employees aged 16+ on the PAYE system on adult rates whose pay",
+                                                                                            "for the survey pay-period was not affected by absence. Estimates for 2020 and 2021 include",
+                                                                                            "employees who have been furloughed under the Coronavirus Job Retention Scheme (CJRS)."))),
 
-                        actionButton(
-                          "gender_pay_gap_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
+                        altTextUI("gender_pay_gap_cw_alt"),
 
-                        actionButton(
-                          "gender_pay_gap_cw_modal_comment",
-                          tags$b("Summary of indicator during covid and pre-covid period"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
 
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
