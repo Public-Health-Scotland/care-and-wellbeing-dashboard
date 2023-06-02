@@ -267,7 +267,14 @@ tagList(
                      ),
                      column(4,
                             h3(actionLink("jump_summary_to_premature_mortality", "Premature mortality")),
-                            summaryBoxUI("premature_mortality")
+                            summaryBoxUI("premature_mortality", title = "Rate of deaths per 100,000",
+                                         button_title =  "Premature mortality",
+                                         button_content = glue("This is the European Age-Standardised all-cause premature mortality rate per 100,000 population for the year {max(premature_mortality_all_cause_hb$date)}. ",
+                                                               "Premature mortality is defined as deaths occurring before the age of 75.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD quintile is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
                      column(4,
                             h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
