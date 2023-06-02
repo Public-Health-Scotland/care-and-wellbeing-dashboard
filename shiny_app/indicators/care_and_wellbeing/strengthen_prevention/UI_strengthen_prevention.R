@@ -242,7 +242,7 @@ tagList(
                # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
-               tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
+               tabPanel(title = "Drugs: deaths and hospital admissions",
                         value = "drugs",
 
                         tabBox(title = "", id = "drugs_tabBox", type = "pills", width = NULL,
