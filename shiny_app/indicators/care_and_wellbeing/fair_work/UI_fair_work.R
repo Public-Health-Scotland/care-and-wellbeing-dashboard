@@ -50,12 +50,12 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                ##############################################.
                # EMPLOYEES ON THE LIVING WAGE----
                ##############################################.
-               tabPanel(title = "Employees on the living wage",
+               tabPanel(title = "Employees on the Living Wage",
                         value = "employees_living_wage_cw",
 
-                        h2("Employees on the living wage", iButtonUI("employees_living_wage_cw",
-                                                                     content = paste("The Living wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
-                                                                                     "More details about Living Wage rates and calculation can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")))),
+                        h2("Employees on the Living Wage", iButtonUI("employees_living_wage_cw",
+                                                                     content = paste("The Living Wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
+                                                                                     "More details about Living Wage rates and how it is calculated can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")))),
 
                         altTextUI("employees_living_wage_cw_sector_alt"),
                         withSpinner(plotlyOutput("employees_living_wage_cw_sector_plot")),

@@ -3,10 +3,10 @@
 ##############################################.
 
 altTextServer("employees_living_wage_cw_sector_alt",
-              title = "Employees earning less than the real living wage by sector plot",
-              content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real living wage by sector in Scotland."),
+              title = "Employees earning less than the real Living Wage by sector plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real Living Wage by sector in Scotland."),
                                 tags$li("The x axis is the year, starting from 2012."),
-                                tags$li("The y axis is the percentage of employees earning less than the real living wage."),
+                                tags$li("The y axis is the percentage of employees earning less than the real  Living Wage."),
                                 tags$li("The plot contains a trace for each sector: `public`, `private`, and `not for profit or mutual organisation`.",
                                         "There is also a trace for all sectors."),
                                 tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013.")
@@ -24,7 +24,7 @@ output$employees_living_wage_cw_sector_plot = renderPlotly({
                                 title = title, label = "Percentage",
                                 hover_end = "%") %>%
     layout(yaxis = list(rangemode="tozero",
-                        title = "Percentage",
+                        title = "Percentage (%)",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
                         showline = FALSE,
@@ -162,7 +162,14 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
   plot <- employees_living_wage_cw_line_LA_data %>%
     mutate(indicator = round(as.integer(measure_value), 1),
            date = year) %>%
-    line_chart_function_lw_la(., y_title = "Percentage", label = "Percentage", title = title)
+    line_chart_function_lw_la(., y_title = "Percentage", label = "Percentage (%)", title = title) %>%
+  layout(yaxis = list(rangemode="tozero",
+                      title = "Percentage (%)",
+                      tickfont = list(size=14),
+                      titlefont = list(size=18),
+                      showline = FALSE,
+                      ticksuffix = "%",
+                      range=c(0,35)))
 })
 
 
