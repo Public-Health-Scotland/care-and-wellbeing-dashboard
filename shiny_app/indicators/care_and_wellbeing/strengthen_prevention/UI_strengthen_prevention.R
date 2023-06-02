@@ -242,7 +242,7 @@ tagList(
                # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
-               tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
+               tabPanel(title = "Drugs: deaths and hospital admissions",
                         value = "drugs",
 
                         tabBox(title = "", id = "drugs_tabBox", type = "pills", width = NULL,
@@ -394,7 +394,7 @@ tagList(
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
 
                         br(),
-                        h3("Data table: Total number of first ever hospital admissions for heart attack (under 75) in Scotland"),
+                        h3("Data table: First ever hospital admission for heart attack (under 75) in Scotland"),
                         br(),
                         dataDownloadUI("heart_attack_admission")
 
