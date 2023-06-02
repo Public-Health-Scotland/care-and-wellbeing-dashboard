@@ -764,7 +764,7 @@ output$drug_deaths_plot = renderPlotly({
         geography == input$drug_deaths_geog_name) %>%
       line_chart_function(., "Total number of deaths", title = title_number) %>%
       layout(xaxis = list(tickangle = 30,
-                          title = "Year range"),
+                          title = "Year"),
              yaxis = list(tickformat=","))
 
   }
