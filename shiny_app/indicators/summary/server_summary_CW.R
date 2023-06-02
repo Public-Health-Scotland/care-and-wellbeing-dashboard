@@ -367,8 +367,22 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Premature mortality #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("premature_mortality")
+  recent_date <- max(premature_mortality_all_cause_hb$date)
+  previous_date <- max(premature_mortality_all_cause_hb %>% filter(date != recent_date) %>% .$date)
+
+  value <- premature_mortality_all_cause_hb %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$indicator
+  previous_value <- value %>% filter(date == previous_date) %>% .$indicator
+
+  summaryBoxServer("premature_mortality",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
+
 
 ##### Quality of care experience #####
 
