@@ -52,12 +52,21 @@ tagList(
 
 
                      column(4,
-                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-related deaths")),
-                            summaryBoxUI("alcohol_deaths"),
+                            h3(actionLink("jump_summary_to_alcohol_deaths","Alcohol-specific deaths")),
+                            summaryBoxUI("alcohol_deaths", title = "Rate of deaths per 100,000",
+                                         button_title = "Alcohol-specific deaths",
+                                         button_content = glue("This is the Age-sex Standardised Rate of alcohol-specific deaths for the year {alcohol_deaths$year %>% max()}. <br> <br>",
+                                                               "This data is available at Scotland level. Further breakdown of age groups and sex is available under `Strengthen the role and impact ",
+                                                               "of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
+
+
+
+
                      column(4,
                             h3(actionLink("jump_summary_to_alcohol_admissions","Alcohol-related hospital admissions")),
-                            summaryBoxUI("alcohol_admissions", title = "Yearly total",
+                            summaryBoxUI("alcohol_admissions", title = "Rate of admissions per 100,000",
                                          button_title = "Alcohol-related hospital admissions",
                                          button_content = glue("This is the European Age-sex Standardised Rate of alcohol-related hospital admissions (stays) for the financial year {alcohol_admissions$financial_year %>% max()}. <br> <br>",
                                                                "This data is available at Scotland and health board level. Further information is available under `Strengthen the role and impact ",
@@ -233,9 +242,9 @@ tagList(
                                                                "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                                         )),
+                     )),
 
-                     fluidRow(
+                   fluidRow(
                      column(3,
                             h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                             summaryBoxUI("healthy_weight")
@@ -266,12 +275,61 @@ tagList(
                      )),
                    fluidRow(
                      column(4,
-                            h3(actionLink("jump_summary_to_screening", "Screening - uptake for breast and bowel cancer")),
-                            summaryBoxUI("screening")
+                            h3(actionLink("jump_summary_to_screening_breast", "Screening - uptake for breast and bowel cancer")),
+                            summaryBoxUI("screening_breast", title = "Percentage uptake of breast screenings",
+                                         button_title = "Breast screening uptake",
+                                         button_content = glue("The is the three year rolling average percentage uptake of breast screening for the year range {max(screening_breast_board %>% .$year_range)}.",
+                                                               "The Scottish Breast Screening Programme (SBSP) invites women aged between 50 and 70 years old for screening every three years.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
                      column(4,
-                            h3(actionLink("jump_summary_to_vaccinations", "Vaccinations – uptake ")),
-                            summaryBoxUI("vaccinations")
+                            h3(actionLink("jump_summary_to_screening_bowel_female", "Screening - uptake for breast and bowel cancer")),
+                            summaryBoxUI("screening_bowel_f", title = "Percentage uptake of bowel screenings by females",
+                                         button_title = "Bowel screening uptake by females",
+                                         button_content = glue("The is the percentage uptake of bowel screenings by females between 1st May 2020 and 30th April 2022.",
+                                                               "Bowel screening statistics relates to men and women registered with a Community Health Index number at a",
+                                                               "GP and aged between 50-74 years old, who are invited to complete a bowel screening test every two years.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_screening_bowel_male", "Screening - uptake for breast and bowel cancer")),
+                            summaryBoxUI("screening_bowel_m", title = "Percentage uptake of bowel screenings by males",
+                                         button_title = "Bowel screening uptake by males",
+                                         button_content = glue("The is the percentage uptake of bowel screenings by males between 1st May 2020 and 30th April 2022.",
+                                                               "Bowel screening statistics relates to men and women registered with a Community Health Index number at a",
+                                                               "GP and aged between 50-74 years old, who are invited to complete a bowel screening test every two years.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     )),
+
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_vaccinations_covid", "Vaccinations – uptake ")),
+                            summaryBoxUI("vaccinations_covid", title = "Percentage uptake of COVID-19 vaccinations in the most deprived SIMD decile",
+                                         button_title = "COVID-19 vaccinations uptake",
+                                         button_content = glue("The is the percentage uptake of COVID-19 vaccinations in the most deprived SIMD decile as at {vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_vaccinations_flu", "Vaccinations – uptake ")),
+                            summaryBoxUI("vaccinations_flu", title = "Percentage uptake of influenza vaccinations in the most deprived SIMD decile",
+                                         button_title = "Influenza vaccinations uptake",
+                                         button_content = glue("The is the percentage uptake of influenza vaccinations in the most deprived SIMD decile as at {vaccinations_flu %>% slice(which.max(.$date)) %>% .$date}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
                      ),
                      column(4,
                             h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),

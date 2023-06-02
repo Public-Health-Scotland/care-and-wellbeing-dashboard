@@ -774,9 +774,17 @@ tagList(
                                                      content = paste("Bowel screening statistics relates to men and women registered",
                                                                      "with a Community Health Index number at a GP and aged between 50-74",
                                                                      "years old, who are invited to complete a bowel screening test every two years. <br> <br>",
-                                                                     "The data visualised on this dashboard includes a record of all eligible people invited to be screened between 1st May 2020 and 30th April 2022<br> <br>",
+                                                                     "The year ranges visualised on this tab start on the 1st May and end on the 31st April. For example, 2020-22 refers to the 1st May 2020 to the 31st April 2022. <br> <br>",
                                                                      "More information can be found",
                                                                      "<a href = https://publichealthscotland.scot/publications/scottish-bowel-screening-programme-statistics/scottish-bowel-screening-programme-statistics-for-the-period-of-invitations-from-may-2020-to-april-2022/ target = _blank> here (external link). </a>"))),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_board_year",
+                                                                "Select a year range",
+                                                                choices = unique(screening_bowel_board$year_range),
+                                                                width = "100%"))),
+
 
                                         altTextUI("screening_bowel_board_alt"),
                                         withSpinner(plotlyOutput("screening_bowel_board_plot")),
@@ -784,14 +792,19 @@ tagList(
 
                                         fluidRow(
                                           column(4,
+                                                 selectizeInput("screening_bowel_simd_year",
+                                                                "Step 1. Select a year range",
+                                                                choices = unique(screening_bowel_simd$year_range),
+                                                                width = "100%")),
+                                          column(4,
                                                  selectizeInput("screening_bowel_geog_type",
-                                                                "Step 1. Select a national or local geography level",
+                                                                "Step 2. Select a national or local geography level",
                                                                 choices = c("Scotland", "Health Board"),
                                                                 width = "100%")),
 
                                           column(4,
                                                  selectizeInput("screening_bowel_geog_name",
-                                                                "Step 2. Select a national or local geography area",
+                                                                "Step 3. Select a national or local geography area",
                                                                 choices = unique(screening_bowel_simd %>% filter(geography_type == "Scotland") %>%
                                                                                    .$geography),
                                                                 width = "100%")
@@ -802,7 +815,7 @@ tagList(
                                         withSpinner(plotlyOutput("screening_bowel_simd_plot")),
 
                                         h3(textOutput("screening_bowel_table_title")),
-                                        p("The data table for the SIMD breakdown is based on the selections above.",
+                                        p("The data tables below are based on the selections above.",
                                           "To view the full dataset, please use the download buttons below."),
 
                                         tabBox(
@@ -847,8 +860,6 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        # h2("Vaccinations uptake")
-
                         tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
 
@@ -867,9 +878,12 @@ tagList(
                                                                      "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
 
 
                                         fluidRow(column(4,
@@ -914,9 +928,13 @@ tagList(
                                                                      "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
+
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",

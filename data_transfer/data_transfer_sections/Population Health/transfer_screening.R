@@ -52,21 +52,37 @@ rm(breast_board_path, breast_simd_path,
 
 ####### BOWEL ############
 
-bowel_path <- paste0(path_in_pop, "bowel_screening_uptake.xlsx")
+bowel_path <- paste0(path_in_pop, "bowel_screening_uptake_2022.xlsx")
+bowel_path_previous <- paste0(path_in_pop, "bowel_screening_uptake_2021.xlsx")
 
-input_bowel_board <- read_excel(bowel_path, sheet = "KPI_1", range = "B16:Q20") %>%
+input_bowel_board_recent <- read_excel(bowel_path, sheet = "KPI_1", range = "B16:Q20") %>%
   rename("Sex" = `...1`) %>%
+  mutate(year_range = "2020-22")
+
+input_bowel_board_previous <- read_excel(bowel_path_previous, sheet = "KPI_1", range = "B16:Q20") %>%
+  rename("Sex" = `...1`) %>%
+  mutate(year_range = "2019-21")
+
+input_bowel_board <- rbind(input_bowel_board_recent, input_bowel_board_previous) %>%
   filter(!is.na(Sex)) %>%
   pivot_longer(cols = 2:16, names_to = "geography", values_to = "percentage_uptake") %>%
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
          geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
   arrange(geography, Sex) %>%
-  select(geography_type, geography, Sex, percentage_uptake)
+  select(year_range, geography_type, geography, Sex, percentage_uptake)
 
 
-input_bowel_simd <- read_excel(bowel_path, sheet = "KPI_2", range = "A16:Q39") %>%
+input_bowel_simd_recent <- read_excel(bowel_path, sheet = "KPI_2", range = "A16:Q39") %>%
   rename("Sex" = `...1`,
          "SIMD" = `...2`) %>%
+  mutate(year_range = "2020-22")
+
+input_bowel_simd_previous <- read_excel(bowel_path_previous, sheet = "KPI_2", range = "A16:Q39") %>%
+  rename("Sex" = `...1`,
+         "SIMD" = `...2`) %>%
+  mutate(year_range = "2019-21")
+
+input_bowel_simd <- rbind(input_bowel_simd_recent, input_bowel_simd_previous) %>%
   slice(-1) %>%
   mutate(Sex = zoo::na.locf(Sex),
          SIMD = recode(SIMD, "1 most deprived" = "1 (Most deprived)",
@@ -76,7 +92,7 @@ input_bowel_simd <- read_excel(bowel_path, sheet = "KPI_2", range = "A16:Q39") %
   mutate(geography_type = ifelse(geography == "Scotland", "Scotland", "Health Board"),
          geography = ifelse(geography == "Scotland", geography, paste("NHS", geography))) %>%
   arrange(geography, SIMD) %>%
-  select(geography_type, geography, Sex, SIMD, percentage_uptake)
+  select(year_range, geography_type, geography, Sex, SIMD, percentage_uptake)
 
 
 replace_file_fn(input_bowel_board,

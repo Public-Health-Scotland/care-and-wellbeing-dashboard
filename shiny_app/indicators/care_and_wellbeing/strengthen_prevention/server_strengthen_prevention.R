@@ -1305,17 +1305,18 @@ altTextServer("screening_bowel_board_alt",
                                 tags$li("The x axis shows the health board, including Scotland."),
                                 tags$li("The y axis shows the percentage uptake."),
                                 tags$li("Each health board has two corresponding bars representing percentage uptake. The dark blue bar on the left hand side for each health board represents females",
-                                        "and the light blue bar on the right hand side for each health board represents males.")
+                                        "and the light blue bar on the right hand side for each health board represents males."),
+                                tags$li("The drop down above the chart allows you to choose which year range for plotting. The default is 2020-22.")
               )
 )
 
 output$screening_bowel_board_plot <- renderPlotly({
 
   screening_bowel_board %>%
-    filter(Sex != "All persons") %>%
+    filter(Sex != "All persons", year_range == input$screening_bowel_board_year) %>%
     mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "Health Board",
-                  title = "Percentage uptake of bowel screening by health board and sex",
+                  title = glue("Percentage uptake of bowel screening by health board and sex in the year range {input$screening_bowel_board_year}"),
                   hover_end = "%") %>%
     layout(xaxis = list(tickangle = -90,
                         tickmode = "array",
@@ -1345,8 +1346,9 @@ altTextServer("screening_bowel_simd_alt",
                                 tags$li("The y axis shows the percentage uptake."),
                                 tags$li("Each SIMD quintile has two corresponding bars representing percentage uptake. The dark blue bar on the left hand side for each health board represents females",
                                         "and the light blue bar on the right hand side for each health board represents males."),
-                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                tags$li("The drop down above the chart allows you to choose which year range for plotting. The default is 2020-22."),
+                                tags$li("There are three drop downs above the chart which allow you to choose which year range, national or local",
+                                        "geography level and area for plotting. The default year range is 2020-22 and the default geography level and area is Scotland.")
 
               )
 )
@@ -1355,10 +1357,10 @@ output$screening_bowel_simd_plot <- renderPlotly({
 
   screening_bowel_simd %>%
     filter(geography == input$screening_bowel_geog_name,
-           Sex != "All persons") %>%
+           Sex != "All persons", year_range == input$screening_bowel_simd_year) %>%
     mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "SIMD",
-                  title = glue("Percentage uptake of bowel screening by SIMD category and sex in {input$screening_bowel_geog_name}"),
+                  title = glue("Percentage uptake of bowel screening by SIMD category and sex in the year range {input$screening_bowel_simd_year} in {input$screening_bowel_geog_name}"),
                   hover_end = "%")
 
 })
@@ -1377,25 +1379,34 @@ observeEvent(input$screening_bowel_tabBox, {
 
 
 observeEvent(input$screening_bowel_geog_name,{
+  observeEvent(input$screening_bowel_board_year,{
+    observeEvent(input$screening_bowel_simd_year,{
 
-  data_unfiltered_board <- screening_bowel_board %>%
-    filter(Sex != "All persons")
+      data_unfiltered_board <- screening_bowel_board %>%
+        filter(Sex != "All persons") %>%
+        arrange(geography, desc(year_range), Sex)
+
+      data_filtered_board <- data_unfiltered_board %>%
+        filter(year_range == input$screening_bowel_board_year)
 
 
-  dataDownloadServer(data = data_unfiltered_board, data_download = data_unfiltered_board,
-                     id = "screening_bowel_board", filename = "bowel_screening_uptake_by_board",
-                     add_percentage_cols = c(4))
+      dataDownloadServer(data = data_filtered_board, data_download = data_unfiltered_board,
+                         id = "screening_bowel_board", filename = "bowel_screening_uptake_by_board",
+                         add_percentage_cols = c(5))
 
-  data_unfiltered_simd <- screening_bowel_simd %>%
-    filter(Sex != "All persons") %>% arrange(geography, SIMD)
+      data_unfiltered_simd <- screening_bowel_simd %>%
+        filter(Sex != "All persons") %>% arrange(geography, desc(year_range), SIMD)
 
-  data_filtered_simd <- data_unfiltered_simd %>%
-    filter(geography == input$screening_bowel_geog_name)
+      data_filtered_simd <- data_unfiltered_simd %>%
+        filter(geography == input$screening_bowel_geog_name,
+               year_range == input$screening_bowel_simd_year)
 
-  dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
-                     id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
-                     add_percentage_cols = c(5))
+      dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
+                         id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
+                         add_percentage_cols = c(6))
 
+    })
+  })
 })
 
 ##############################################.
@@ -1417,8 +1428,12 @@ observeEvent(input$vaccinations_covid_geog_type,
 
 altTextServer("vaccinations_covid_alt",
               title = "Covid vaccinations uptake plot",
-              content = tags$ul(tags$li("This is a bar plot for the breakdown of vaccination uptake by SIMD as at 29 January 2023."),
-                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of COVID-19 vaccinations uptake by SIMD."),
+                                tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents",
+                                        glue("{vaccinations_covid %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
+                                        glue("{vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}")),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived,",
+                                        "Scotland level data also showns the percentage uptake of people whose SIMD decile is Not known."),
                                 tags$li("The y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland.")
@@ -1433,13 +1448,12 @@ output$vaccinations_covid_plot <- renderPlotly({
   plot <- vaccinations_covid %>%
     filter(geography == input$vaccinations_covid_geog_name) %>%
     mode_bar_plot(x = .$SIMD,
-                  y = .$uptake_percent,
+                  y = .$percentage_uptake,
                   xaxis_title = "SIMD",
-                  yaxis_title = "Percentage (%)",
-                  category_var = .$value,
+                  category_var = .$date,
                   hover_end = "%",
-                  title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}, ",
-                               "as at 29 January 2023")) %>%
+                  title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}"
+                  )) %>%
     layout(yaxis = list(ticksuffix = "%"))
 
 })
@@ -1455,20 +1469,18 @@ observeEvent(input$vaccinations_covid_geog_name,{
 observeEvent(input$vaccinations_covid_geog_name,{
 
   data_unfiltered <- vaccinations_covid %>%
-    filter(!is.na(vaccinated)) %>%
-    select(geography_type, geography, SIMD, eligible_winter_2022_population,
-           vaccinated, uptake_percent) %>%
-    rename(`uptake_percentage_(%)` = uptake_percent,
-           vaccinated_population = vaccinated)
+    filter(!(percentage_uptake == 0)) %>%
+    select(date, geography_type, geography, SIMD,
+           percentage_uptake) %>%
+    rename(`uptake_percentage_(%)` = percentage_uptake) %>%
+    arrange(date, SIMD)
 
   data_filtered <- data_unfiltered %>%
     filter(geography == input$vaccinations_covid_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_covid", filename = "vaccinations_covid",
-                     add_separator_cols = c(4,5),
-                     add_percentage_cols = c(6),
-                     cap_colname = c(3))
+                     add_percentage_cols = c(5))
 })
 
 
@@ -1487,8 +1499,12 @@ observeEvent(input$vaccinations_flu_geog_type,
 
 altTextServer("vaccinations_flu_alt",
               title = "Influenza vaccinations uptake plot",
-              content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccination uptake by SIMD as at 29 January 2023."),
-                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccinations uptake by SIMD."),
+                                tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents",
+                                        glue("{vaccinations_flu %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
+                                        glue("{vaccinations_flu %>% slice(which.max(.$date)) %>% .$date}")),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived,",
+                                        "Scotland level data also showns the percentage uptake of people whose SIMD decile is Not known."),
                                 tags$li("The y axis is the percentage uptake of vaccinations."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland.")
@@ -1502,13 +1518,13 @@ output$vaccinations_flu_plot <- renderPlotly({
   plot <- vaccinations_flu %>%
     filter(geography == input$vaccinations_flu_geog_name) %>%
     mode_bar_plot(x = .$SIMD,
-                  y = .$uptake_percent,
+                  y = .$percentage_uptake,
                   xaxis_title = "SIMD",
                   yaxis_title = "Percentage (%)",
-                  category_var = .$value,
+                  category_var = .$date,
                   hover_end = "%",
-                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, ",
-                               "as at 29 January 2023")) %>%
+                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, "
+                  )) %>%
     layout(yaxis = list(ticksuffix = "%"))
 
 })
@@ -1524,20 +1540,18 @@ observeEvent(input$vaccinations_flu_geog_name,{
 observeEvent(input$vaccinations_flu_geog_name,{
 
   data_unfiltered <- vaccinations_flu %>%
-    filter(!is.na(vaccinated)) %>%
-    select(geography_type, geography, SIMD, eligible_winter_2022_population,
-           vaccinated, uptake_percent) %>%
-    rename(`uptake_percentage_(%)` = uptake_percent,
-           vaccinated_population = vaccinated)
+    filter(!(percentage_uptake == 0)) %>%
+    select(date, geography_type, geography, SIMD,
+           percentage_uptake) %>%
+    rename(`uptake_percentage_(%)` = percentage_uptake) %>%
+    arrange(date, SIMD)
 
   data_filtered <- data_unfiltered %>%
     filter(geography == input$vaccinations_flu_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_flu", filename = "vaccinations_flu",
-                     add_separator_cols = c(4,5),
-                     add_percentage_cols = c(6),
-                     cap_colname = c(3))
+                     add_percentage_cols = c(5))
 })
 
 ##############################################.
