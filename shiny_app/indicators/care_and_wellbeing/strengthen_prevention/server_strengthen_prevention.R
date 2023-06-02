@@ -1305,17 +1305,18 @@ altTextServer("screening_bowel_board_alt",
                                 tags$li("The x axis shows the health board, including Scotland."),
                                 tags$li("The y axis shows the percentage uptake."),
                                 tags$li("Each health board has two corresponding bars representing percentage uptake. The dark blue bar on the left hand side for each health board represents females",
-                                        "and the light blue bar on the right hand side for each health board represents males.")
+                                        "and the light blue bar on the right hand side for each health board represents males."),
+                                tags$li("The drop down above the chart allows you to choose which year range for plotting. The default is 2020-22.")
               )
 )
 
 output$screening_bowel_board_plot <- renderPlotly({
 
   screening_bowel_board %>%
-    filter(Sex != "All persons") %>%
+    filter(Sex != "All persons", year_range == input$screening_bowel_board_year) %>%
     mode_bar_plot(x = .$geography, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "Health Board",
-                  title = "Percentage uptake of bowel screening by health board and sex",
+                  title = glue("Percentage uptake of bowel screening by health board and sex in the year range {input$screening_bowel_board_year}"),
                   hover_end = "%") %>%
     layout(xaxis = list(tickangle = -90,
                         tickmode = "array",
@@ -1345,8 +1346,9 @@ altTextServer("screening_bowel_simd_alt",
                                 tags$li("The y axis shows the percentage uptake."),
                                 tags$li("Each SIMD quintile has two corresponding bars representing percentage uptake. The dark blue bar on the left hand side for each health board represents females",
                                         "and the light blue bar on the right hand side for each health board represents males."),
-                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                tags$li("The drop down above the chart allows you to choose which year range for plotting. The default is 2020-22."),
+                                tags$li("There are three drop downs above the chart which allow you to choose which year range, national or local",
+                                        "geography level and area for plotting. The default year range is 2020-22 and the default geography level and area is Scotland.")
 
               )
 )
@@ -1355,10 +1357,10 @@ output$screening_bowel_simd_plot <- renderPlotly({
 
   screening_bowel_simd %>%
     filter(geography == input$screening_bowel_geog_name,
-           Sex != "All persons") %>%
+           Sex != "All persons", year_range == input$screening_bowel_simd_year) %>%
     mode_bar_plot(x = .$SIMD, y = .$percentage_uptake, category_var = .$Sex,
                   xaxis_title = "SIMD",
-                  title = glue("Percentage uptake of bowel screening by SIMD category and sex in {input$screening_bowel_geog_name}"),
+                  title = glue("Percentage uptake of bowel screening by SIMD category and sex in the year range {input$screening_bowel_simd_year} in {input$screening_bowel_geog_name}"),
                   hover_end = "%")
 
 })
@@ -1377,25 +1379,34 @@ observeEvent(input$screening_bowel_tabBox, {
 
 
 observeEvent(input$screening_bowel_geog_name,{
+  observeEvent(input$screening_bowel_board_year,{
+    observeEvent(input$screening_bowel_simd_year,{
 
-  data_unfiltered_board <- screening_bowel_board %>%
-    filter(Sex != "All persons")
+      data_unfiltered_board <- screening_bowel_board %>%
+        filter(Sex != "All persons") %>%
+        arrange(geography, desc(year_range), Sex)
+
+      data_filtered_board <- data_unfiltered_board %>%
+        filter(year_range == input$screening_bowel_board_year)
 
 
-  dataDownloadServer(data = data_unfiltered_board, data_download = data_unfiltered_board,
-                     id = "screening_bowel_board", filename = "bowel_screening_uptake_by_board",
-                     add_percentage_cols = c(4))
+      dataDownloadServer(data = data_filtered_board, data_download = data_unfiltered_board,
+                         id = "screening_bowel_board", filename = "bowel_screening_uptake_by_board",
+                         add_percentage_cols = c(5))
 
-  data_unfiltered_simd <- screening_bowel_simd %>%
-    filter(Sex != "All persons") %>% arrange(geography, SIMD)
+      data_unfiltered_simd <- screening_bowel_simd %>%
+        filter(Sex != "All persons") %>% arrange(geography, desc(year_range), SIMD)
 
-  data_filtered_simd <- data_unfiltered_simd %>%
-    filter(geography == input$screening_bowel_geog_name)
+      data_filtered_simd <- data_unfiltered_simd %>%
+        filter(geography == input$screening_bowel_geog_name,
+               year_range == input$screening_bowel_simd_year)
 
-  dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
-                     id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
-                     add_percentage_cols = c(5))
+      dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
+                         id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
+                         add_percentage_cols = c(6))
 
+    })
+  })
 })
 
 ##############################################.
