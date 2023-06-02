@@ -52,36 +52,49 @@ tagList(
                ),
 
                ##############################################.
-               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
+               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
                ##############################################.
 
-               tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
+               tabPanel(title = "Alcohol: alcohol-related hospital admissions and deaths",
                         value = "alcohol",
 
                         tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
 
 
                                 ##############################################.
-                                # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+                                # ALCOHOL RELATED HOSPITAL ADMISSIONS ----
                                 ##############################################.
 
                                 tabPanel(title = "Alcohol-related hospital admissions",
                                          value = "alcohol_admissions",
 
-                                         h2("Alcohol related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
+                                         h2("Alcohol-related hospital admissions",
+                                            iButtonUI("alcohol_admissions",
+                                                      content = paste("This indicator uses data from Public Health Scotland Alcohol related hospital statistics.",
+                                                      "Consumption of alcohol can result in a wide range of health problems. Some may occur after drinking",
+                                                      "over a relatively short period, such as acute intoxication (drunkenness) or poisoning (toxic effect).",
+                                                      "Others develop more gradually, such as damage to the liver and brain. Estimates of the number of",
+                                                      "inpatient and day case hospitalisations are based on counts where alcohol-related conditions are",
+                                                      "diagnosed during the hospital stay. The publication found ",
+                                                      "<a href = https://publichealthscotland.scot/publications/show-all-releases?id=20558 target = _blank> here (external website) </a>",
+                                                      "provides an annual update to figures on the alcohol-related inpatient and day case activity",
+                                                      "taking place within general acute hospitals and psychiatric hospitals in Scotland. ",
+                                                      "<br> <br> Data from the most recent financial year are provisional and subject to change in future",
+                                                      "publications as figures will be updated to reflect more complete data from NHS Boards."))),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_type",
                                                               "Step 1: Select national or local geography level",
                                                               choices = c("Scotland", "Health Board"),
                                                               width = "100%")),
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_name",
                                                               "Step 2: Select national or local geography area",
                                                               choices = c("Scotland"),
                                                               width = "100%"))),
 
+                                         altTextUI("alcohol_admissions_alt"),
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
@@ -93,40 +106,51 @@ tagList(
 
 
                                 ##############################################.
-                                # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
+                                # ALCOHOL-SPECIFIC DEATHS ----
                                 ##############################################.
 
-                                tabPanel(title = "Alcohol specific deaths",
+                                tabPanel(title = "Alcohol-specific deaths",
                                          value = "alcohol_deaths",
 
-                                         h2("Alcohol specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
+                                         h2("Alcohol-specific deaths",
+                                            iButtonUI("alcohol_deaths",
+                                                      content = paste("Deaths are coded according to the International Statistical Classification of Diseases",
+                                                      "and Related Health Problems, Tenth Revision (ICD-10), which has been used by",
+                                                      "National Records of Scotland (NRS) since the start of 2000. ‘Alcohol-specific’ deaths",
+                                                      "are deaths which are known to be direct consequences of alcohol misuse, meaning they",
+                                                      "are wholly attributable to alcohol misuse. For more information please visit the",
+                                                      "<a href =https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/alcohol-deaths target=_blank> NRS site (external site)."))),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectizeInput("alcohol_deaths_sex",
                                                                  "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
-                                                                 selected = "All sexes"))
+                                                                 selected = "All sexes",
+                                                                 width = "100%"))
                                          ),
+
+                                         altTextUI("alcohol_deaths_sex_alt"),
+                                         ciDefinitionUI("alcohol_deaths"),
                                          withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
+
                                          br(),
-                                         p("Alternative plot, death by age group."),
-                                         br(),
+                                         altTextUI("alcohol_deaths_age_alt"),
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
+                                         h3(textOutput("alcohol_deaths_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
-                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                         #                             "alcohol_deaths_plot"),
-                                         #
-                                         #                  br(),
-                                         #                  br(),
-                                         #
-                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                         #                             "alcohol_deaths_by_age_plot"),
-                                         #
-                                         h3("Data Table"),
-                                         DT::dataTableOutput("alcohol_deaths_table")
+                                         tabBox(
+                                           id = "alcohol_deaths_tabBox", height = "250px", width=12,
+                                           tabPanel("Rate for all ages",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_sex")),
+                                           tabPanel("Age breakdown",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_age"))
+                                         )
                                 )
                         )),
 
@@ -138,14 +162,15 @@ tagList(
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
 
-                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality",
-                                                                         content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
-                                                                                         "You can find more information about this",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
-                                                                                         "Information about the background of the statistics can be found on the NRS site:",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
-                                                                                         "and",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
+                        h2("All-cause mortality (ages 15-44)",
+                           iButtonUI("all_cause_mortality",
+                                     content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
+                                                     "You can find more information about this",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
+                                                     "Information about the background of the statistics can be found on the NRS site:",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
+                                                     "and",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
 
                         fluidRow(
                           column(4,
@@ -370,14 +395,14 @@ tagList(
                                                                                     "The survey has been run every two years since 2009 and can be found here:",
                                                                                     "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
-                        altTextUI("experience_of_unpaid_carers_alt"),
-                        withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
+                 altTextUI("experience_of_unpaid_carers_alt"),
+               withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
-                        br(),
-                        h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
-                        br(),
-                        dataDownloadUI("experience_unpaid_carers")
-               ),
+               br(),
+               h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
+               br(),
+               dataDownloadUI("experience_unpaid_carers")
+                                         ),
 
 
                ##############################################.
@@ -463,6 +488,7 @@ tagList(
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("healthy_birthweight")),
+
 
 
 
@@ -944,7 +970,7 @@ tagList(
 
 
                                         altTextUI("vaccinations_covid_alt"),
-                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        simdDecileDefinitionUI("vaccinations_covid_simd"),
                                         withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
                                         br(),
@@ -990,7 +1016,7 @@ tagList(
                                                                     width = "100%"))),
 
                                         altTextUI("vaccinations_flu_alt"),
-                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        simdDecileDefinitionUI("vaccinations_flu_simd"),
                                         withSpinner(plotlyOutput("vaccinations_flu_plot")),
 
                                         br(),
@@ -1018,5 +1044,5 @@ tagList(
                         p("Content to be developed")
                )
 
-  ) # navlistpanel
-) # tagList
+                                ) # navlistpanel
+                        ) # tagList
