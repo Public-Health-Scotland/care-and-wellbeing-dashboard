@@ -173,6 +173,32 @@ observeEvent(input$jump_summary_to_health_risk_behaviours, {
                      selected = "health_risk_behaviours")
 })
 
+observeEvent(input$jump_summary_to_life_expectancy_male, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "life_expectancy")
+})
+
+observeEvent(input$jump_summary_to_life_expectancy_female, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "life_expectancy")
+})
+
 
 observeEvent(input$jump_summary_to_healthy_life_expectancy_male, {
 
@@ -181,7 +207,10 @@ observeEvent(input$jump_summary_to_healthy_life_expectancy_male, {
                     selected = "strengthen_prevention")
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
-                     selected = "healthy_life_expectancy")
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "healthy_life_expectancy")
 })
 
 observeEvent(input$jump_summary_to_healthy_life_expectancy_female, {
@@ -191,7 +220,10 @@ observeEvent(input$jump_summary_to_healthy_life_expectancy_female, {
                     selected = "strengthen_prevention")
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
-                     selected = "healthy_life_expectancy")
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "drugs_tabBox",
+                 selected = "healthy_life_expectancy")
 })
 
 

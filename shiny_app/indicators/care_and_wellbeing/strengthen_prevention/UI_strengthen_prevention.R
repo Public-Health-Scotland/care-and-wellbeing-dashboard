@@ -242,7 +242,7 @@ tagList(
                # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
-               tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
+               tabPanel(title = "Drugs: deaths and hospital admissions",
                         value = "drugs",
 
                         tabBox(title = "", id = "drugs_tabBox", type = "pills", width = NULL,
@@ -394,7 +394,7 @@ tagList(
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
 
                         br(),
-                        h3("Data table: Total number of first ever hospital admissions for heart attack (under 75) in Scotland"),
+                        h3("Data table: First ever hospital admission for heart attack (under 75) in Scotland"),
                         br(),
                         dataDownloadUI("heart_attack_admission")
 
@@ -465,58 +465,7 @@ tagList(
                         dataDownloadUI("healthy_birthweight")),
 
 
-               ##############################################.
-               # HEALTHY LIFE EXPECTANCY----
-               ##############################################.
 
-               tabPanel(title = "Healthy life expectancy",
-                        value = "healthy_life_expectancy",
-
-                        h2("Healthy life expectancy",
-                           iButtonUI("healthy_life_expectancy",
-                                                              content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
-                                                                              "or ‘good’ general health, based on how individuals perceive their state of health at the time",
-                                                                              "of completing the annual population survey (APS)",
-                                                                              "<br> <br>",
-                                                                              "Some of the smaller council areas and health boards have very wide confidence intervals.",
-                                                                              "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
-                                                                              "<br> <br>",
-                                                                              "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
-                                                                              "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
-                                                                              "of health the population is in, as well as their years of life expectancy.",
-                                                                              "<br> <br>",
-                                                                              "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
-                                                                              "For more information, please visit the",
-                                                                              "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
-                        fluidRow(
-                          column(4,
-                                 selectizeInput("healthy_life_expectancy_sex",
-                                                "Step 1. Select sex",
-                                                choices = c("Male", "Female"),
-                                                width = "100%")),
-                          column(4,
-                                 selectizeInput("healthy_life_expectancy_life_stage",
-                                                "Step 2. Select stage of life",
-                                                choices = c("At birth", "At age 65"),
-                                                width = "100%"))
-
-               ),
-
-               altTextUI("healthy_life_expectancy_trend_alt"),
-               ciDefinitionUI("healthy_life_expectancy_trend_ci"),
-               withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
-
-               altTextUI("healthy_life_expectancy_council_area_alt"),
-               ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
-               withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
-
-               br(),
-               h3(textOutput("healthy_life_expectancy_title")),
-               p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-               br(),
-               dataDownloadUI("healthy_life_expectancy")
-
-               ),
 
                ##############################################.
                # HEALTHY WEIGHT ADULTS----
@@ -529,6 +478,113 @@ tagList(
 
                         p("Content to be developed")
                ),
+
+               ##############################################.
+               # LIFE EXPECTANCY----
+               ##############################################.
+
+               tabPanel(title = "Life expectancy",
+                        value = "expectancy",
+
+                        tabBox( title = "", id = "life_expectancy_tabBox", type = "pills", width = NULL,
+
+                                ##############################################.
+                                # LIFE EXPECTANCY----
+                                ##############################################.
+
+                                tabPanel(title = "Life expectancy",
+                                         value = "life_expectancy",
+
+                                         h2("Life expectancy",
+                                            iButtonUI("life_expectancy",
+                                                      content = paste("All of the life expectancy estimates presented in this dashboard are ‘period’ life expectancy.",
+                                                                      "They are calculated assuming that mortality rates for each age group in the time period",
+                                                                      "are constant throughout a person’s life. Period life expectancy is often described as how long a baby born",
+                                                                      "now could expect to live if they experienced today’s mortality rates throughout their lifetime.",
+                                                                      "It is very unlikely that this would be the case as it means that future changes in things such as medicine",
+                                                                      "and legislation are not taken into consideration.",
+                                                                      "<br> <br>",
+                                                                      "Period life expectancy is not an accurate prediction of how long a person born today will actually live,",
+                                                                      "but it is a useful measure of population health at a point in time and is most useful for comparing trends over time,",
+                                                                      "between areas of a country and with other countries.",
+                                                                      "For more information, please visit the",
+                                                                      "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
+
+                                         fluidRow(
+                                           column(4,
+                                                  selectizeInput("life_expectancy_sex",
+                                                                 "Select sex",
+                                                                 choices = c("Male", "Female"),
+                                                                 width = "100%"))
+                                         ),
+
+                                         altTextUI("life_expectancy_trend_alt"),
+                                         withSpinner(plotlyOutput("life_expectancy_trend_plot")),
+
+                                         altTextUI("life_expectancy_council_area_alt"),
+                                         ciDefinitionUI("life_expectancy_council_area_ci"),
+                                         withSpinner(plotlyOutput("life_expectancy_council_area_plot")),
+
+                                         br(),
+                                         h3(textOutput("life_expectancy_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                         br(),
+                                         dataDownloadUI("life_expectancy")
+
+                                ),
+
+                                ##############################################.
+                                # HEALTHY LIFE EXPECTANCY----
+                                ##############################################.
+
+                                tabPanel(title = "Healthy life expectancy",
+                                         value = "healthy_life_expectancy",
+
+                                         h2("Healthy life expectancy",
+                                            iButtonUI("healthy_life_expectancy",
+                                                      content = paste("Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’",
+                                                                      "or ‘good’ general health, based on how individuals perceive their state of health at the time",
+                                                                      "of completing the annual population survey (APS)",
+                                                                      "<br> <br>",
+                                                                      "Some of the smaller council areas and health boards have very wide confidence intervals.",
+                                                                      "You need to use great care when comparing the estimates of these small areas with wide confidence intervals.",
+                                                                      "<br> <br>",
+                                                                      "Healthy life expectancy provides insight into the proportion of life expectancy spent in good health.",
+                                                                      "HLE estimates are important to analyse alongside the life expectancy estimates, to understand the state",
+                                                                      "of health the population is in, as well as their years of life expectancy.",
+                                                                      "<br> <br>",
+                                                                      "These figures are also used to help deliver local and national services in addition to use for teaching and research purposes.",
+                                                                      "For more information, please visit the",
+                                                                      "<a href= https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/life-expectancy/healthy-life-expectancy-in-scotland/2019-2021 target = _blank> NRS website (external site). </a>"))),
+                                         fluidRow(
+                                           column(4,
+                                                  selectizeInput("healthy_life_expectancy_sex",
+                                                                 "Step 1. Select sex",
+                                                                 choices = c("Male", "Female"),
+                                                                 width = "100%")),
+                                           column(4,
+                                                  selectizeInput("healthy_life_expectancy_life_stage",
+                                                                 "Step 2. Select stage of life",
+                                                                 choices = c("At birth", "At age 65"),
+                                                                 width = "100%"))
+
+                                         ),
+
+                                         altTextUI("healthy_life_expectancy_trend_alt"),
+                                         ciDefinitionUI("healthy_life_expectancy_trend_ci"),
+                                         withSpinner(plotlyOutput("healthy_life_expectancy_trend_plot")),
+
+                                         altTextUI("healthy_life_expectancy_council_area_alt"),
+                                         ciDefinitionUI("healthy_life_expectancy_council_area_ci"),
+                                         withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
+
+                                         br(),
+                                         h3(textOutput("healthy_life_expectancy_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                         br(),
+                                         dataDownloadUI("healthy_life_expectancy")
+                                )
+                        )),
 
                ##############################################.
                #  LIMITING LONG-TERM CONDITIONS (16+)----
@@ -616,7 +672,48 @@ tagList(
                tabPanel(title = "Premature mortality",
                         value = "premature_mortality",
 
-                        h2("Premature mortality")
+                        h2("Premature mortality", iButtonUI("premature_mortality",
+                                                            content = paste("Premature mortality is defined as deaths occurring before the age of 75.  It is measured for this indicator using the European Age-Standardised mortality rate for people aged under 75.",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
+                                                                            "Further information on the available Deaths data is available on the NRS website:",
+                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths target = _blank> Vital Events - Deaths </a>",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age-Standardised mortality rate is a weighted sum of age-specific mortality rates and is used here to indicate the overall mortality rate for Scotland.",
+                                                                            "In effect, it is the mortality rate that would have been found if the population of Scotland had the same age-composition (proportion of total population in each five year age class) as the hypothetical 2013 European Standard Population.  The rates are calculated by applying the age-specific rates for Scotland to the European Standard Population and expressed per 100,000 persons per year."))),
+
+                        fluidRow(column(4,
+                                        selectInput("premature_mortality_geog_type",
+                                                    "Step 1: Select national or local geography level ",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    width = "100%")),
+                                 column(4,
+                                        selectInput("premature_mortality_geog_name",
+                                                    "Step 2: Select national or local geography area ",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
+
+                        altTextUI("premature_mortality_hb_alt"),
+                        ciDefinitionUI("premature_mortality_hb_ci"),
+                        withSpinner(plotlyOutput("premature_mortality_hb_plot")),
+
+                        h3(textOutput("premature_mortality_hb_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_hb"),
+
+                        br(),
+                        br(),
+                        altTextUI("premature_mortality_simd_alt"),
+                        simdQuintileDefinitionUI("premature_mortality_simd_desc"),
+                        withSpinner(plotlyOutput("premature_mortality_simd_plot")),
+
+                        h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_simd")
+
                ),
 
                ##############################################.
