@@ -672,7 +672,48 @@ tagList(
                tabPanel(title = "Premature mortality",
                         value = "premature_mortality",
 
-                        h2("Premature mortality")
+                        h2("Premature mortality", iButtonUI("premature_mortality",
+                                                            content = paste("Premature mortality is defined as deaths occurring before the age of 75.  It is measured for this indicator using the European Age-Standardised mortality rate for people aged under 75.",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age Standardised mortality rate is calculated using deaths and population data from the National Records of Scotland (NRS).  Rates are based on the 2013 European Standard Population.",
+                                                                            "Further information on the available Deaths data is available on the NRS website:",
+                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths target = _blank> Vital Events - Deaths </a>",
+                                                                            "<br>",
+                                                                            "<br>",
+                                                                            "The European Age-Standardised mortality rate is a weighted sum of age-specific mortality rates and is used here to indicate the overall mortality rate for Scotland.",
+                                                                            "In effect, it is the mortality rate that would have been found if the population of Scotland had the same age-composition (proportion of total population in each five year age class) as the hypothetical 2013 European Standard Population.  The rates are calculated by applying the age-specific rates for Scotland to the European Standard Population and expressed per 100,000 persons per year."))),
+
+                        fluidRow(column(4,
+                                        selectInput("premature_mortality_geog_type",
+                                                    "Step 1: Select national or local geography level ",
+                                                    choices = c("Scotland", "Health Board"),
+                                                    width = "100%")),
+                                 column(4,
+                                        selectInput("premature_mortality_geog_name",
+                                                    "Step 2: Select national or local geography area ",
+                                                    choices = c("Scotland"),
+                                                    width = "100%"))
+                        ),
+
+                        altTextUI("premature_mortality_hb_alt"),
+                        ciDefinitionUI("premature_mortality_hb_ci"),
+                        withSpinner(plotlyOutput("premature_mortality_hb_plot")),
+
+                        h3(textOutput("premature_mortality_hb_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_hb"),
+
+                        br(),
+                        br(),
+                        altTextUI("premature_mortality_simd_alt"),
+                        simdQuintileDefinitionUI("premature_mortality_simd_desc"),
+                        withSpinner(plotlyOutput("premature_mortality_simd_plot")),
+
+                        h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("premature_mortality_simd")
+
                ),
 
                ##############################################.
