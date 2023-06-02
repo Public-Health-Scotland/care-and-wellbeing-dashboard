@@ -439,7 +439,8 @@ output$all_cause_mortality_plot = renderPlotly({
   data = all_cause_mortality %>%
     filter(geography_type == input$all_cause_mortality_geog_type,
            geography == input$all_cause_mortality_geog_name,
-           indicator_age == "15 to 44") %>%
+           indicator_age == "15 to 44",
+           year %in%  c("2008", "2009", "2010", "2011","2012","2013","2014","2015","2016","2017","2018","2019","2020", "2021")) %>%
     group_by(year) %>%
     summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000,
@@ -454,7 +455,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = deaths)
 
-    indicator_y = "Number of deaths"
+    indicator_y = "Total number of deaths"
   }
 
 
@@ -469,7 +470,8 @@ output$all_cause_mortality_plot = renderPlotly({
 observeEvent(input$all_cause_mortality_geog_name,{
 
   data_unfiltered <- all_cause_mortality %>%
-    filter(indicator_age == "15 to 44") %>%
+    filter(indicator_age == "15 to 44",
+           year %in%  c("2008", "2009", "2010", "2011","2012","2013","2014","2015","2016","2017","2018","2019","2020", "2021"))  %>%
     group_by(year, geography_type, geography) %>%
     summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     ungroup() %>%
@@ -487,7 +489,6 @@ observeEvent(input$all_cause_mortality_geog_name,{
                      id = "all_cause_mortality", filename = "all_cause_mortality",
                      add_separator_cols = c(4),
                      add_separator_cols_2dp = c(5))
-
 })
 
 observeEvent(input$all_cause_mortality_geog_name,{
@@ -516,13 +517,16 @@ observeEvent(input$chd_deaths_geog_type,
 
 
 output$chd_deaths_plot = renderPlotly({
-  title <- glue("Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
+  title <- glue("Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in ",
                 input$chd_deaths_geog_name)
   data = chd_deaths %>%
     filter(geography_type == input$chd_deaths_geog_type,
-           geography == input$chd_deaths_geog_name) %>%
+           geography == input$chd_deaths_geog_name,
+           year_range %in%  c("2008-2010", "2009-2011","2010-2012", "2011-2013",
+                              "2012-2014", "2013-2015","2014-2016","2015-2017",
+                              "2016-2017", "2017-2019", "2018-2020")) %>%
     rename(date = year_range) %>%
-    confidence_line_function(., y_title = "Age-sex standardised <br> rates per 100,000 population", title = title) %>%
+    confidence_line_function(., y_title = "Age-sex standardised rate of <br>deaths per 100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = 30),
            legend = list(y = -0.4))
 })
@@ -534,6 +538,9 @@ observeEvent(input$chd_deaths_geog_type,{
     data_unfiltered <- chd_deaths %>%
       select(year_range, area_type, area_name, measure,
              lower_confidence_interval, upper_confidence_interval) %>%
+      filter(year_range %in%  c("2008-2010", "2009-2011","2010-2012", "2011-2013",
+                                "2012-2014", "2013-2015","2014-2016","2015-2017",
+                                "2016-2017", "2017-2019", "2018-2020")) %>%
       arrange(year_range) %>%
       mutate(year_range = factor(year_range)) %>%
       rename("geography_type" = "area_type",
@@ -552,7 +559,7 @@ observeEvent(input$chd_deaths_geog_type,{
 
 observeEvent(input$chd_deaths_geog_name,{
 
-  output$chd_deaths_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of CHD deaths (under 75) in ",
+  output$chd_deaths_title <- renderText({glue("Data table:Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in",
                                               input$chd_deaths_geog_name)})
 })
 
@@ -578,16 +585,20 @@ altTextServer("chd_deaths_alt",
 
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
-  title <- "Total number of first ever hopsital admissions for heart attack (under 75) annually in Scotland"
+  title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
 
   p <- heart_attack %>%
-    line_chart_function(y_title = "Total number of hospital admissions", label = "Number of admissions", title = title) %>%
+    filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+                        "2016","2017","2018","2019","2020")) %>%
+    line_chart_function(y_title = "Total number of admissions", label = "Number of admissions", title = title) %>%
     layout(yaxis=list(tickformat=","))
 
 })
 
 heart_attack %>%
   select(date, total_admissions) %>%
+  filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+                       "2016","2017","2018","2019","2020")) %>%
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
@@ -996,7 +1007,9 @@ output$healthy_birthweight_plot = renderPlotly({
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
-    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
+    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type,
+           financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
+                                         "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
     layout(legend = list(y = -0.4))
 })
@@ -1008,6 +1021,8 @@ observeEvent(input$healthy_birthweight_geog_name,{
     mutate(percentage = round_half_up(proportion*100,1)) %>%
     select(financial_year, geography_type, geography,
            birthweight_for_gestational_age, percentage) %>%
+    filter(financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
+                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     mutate(financial_year = factor(financial_year),
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
     rename("Percentage of babies (%)" = "percentage")
@@ -1152,7 +1167,7 @@ output$asthma_admissions_plot <- renderPlotly({
     breakdown <- "by sex "
   }
 
-  title <- glue("Total number of asthma admissions ",
+  title <- glue("Total number of asthma-related hospital admissions ",
                 breakdown, "in \n ", geog)
 
   if(input$asthma_admissions_breakdowns == "Yearly total"){
@@ -1267,7 +1282,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
       breakdown <- "by sex "
     }
 
-    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma admissions ",
+    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma-related hospital admissions ",
                                                        breakdown, "in ", geog)})
   })
 })
@@ -1469,8 +1484,6 @@ output$experience_unpaid_carers_plot <- renderPlotly({
   experience_unpaid_carers %>%
     mutate(proportion = as.numeric(indicator)) %>%
     stacked_bar_function(., category_var = .$breakdown, title = title)
-
-
 })
 
 experience_unpaid_carers %>%
@@ -1481,7 +1494,7 @@ experience_unpaid_carers %>%
          breakdown = factor(breakdown)) %>%
   rename("Financial Year" = "date",
          Answer = "breakdown",
-         Percentage = "indicator") %>%
+         "Percentage (%)"= "indicator") %>%
   dataDownloadServer(id = "experience_unpaid_carers",
                      filename = "experience_unpaid_carers")
 
