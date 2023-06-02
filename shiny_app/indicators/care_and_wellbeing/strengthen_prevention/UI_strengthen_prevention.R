@@ -847,8 +847,6 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        # h2("Vaccinations uptake")
-
                         tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
 
@@ -867,9 +865,12 @@ tagList(
                                                                      "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
 
 
                                         fluidRow(column(4,
@@ -914,9 +915,13 @@ tagList(
                                                                      "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
+
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",
