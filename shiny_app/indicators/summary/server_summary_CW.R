@@ -185,7 +185,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value_agree,
                    previous_value = previous_value_agree,
-                   percentage_symbol = "%"
+                   percentage = TRUE
   )
 
   summaryBoxServer("experience_of_unpaid_carers_disagree",
@@ -193,7 +193,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value_disagree,
                    previous_value = previous_value_disagree,
-                   percentage_symbol = "%"
+                   percentage = TRUE
 
   )
 
@@ -247,7 +247,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Life expectancy #####
@@ -335,7 +335,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -413,7 +413,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -450,7 +450,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -477,7 +477,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -545,7 +545,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date %>% format('%B %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -598,7 +598,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 
@@ -619,7 +619,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Employees on the living wage #####
@@ -641,7 +641,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Pay gap #####
@@ -665,7 +665,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Work related ill health #####
