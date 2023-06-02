@@ -2,37 +2,51 @@
 # EMPLOYEES ON THE LIVING WAGE----
 ##############################################.
 
-altTextServer("employees_living_wage_cw_alt",
-              title = "Employees earning less than the Living Wage by year and sector plot",
-              content = tags$ul(tags$li("This is a plot for the trend in employees earning less than the real Living Wage by sector."),
+altTextServer("employees_living_wage_cw_sector_alt",
+              title = "Employees earning less than the real Living Wage by sector plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real Living Wage by sector in Scotland."),
                                 tags$li("The x axis shows the year, starting from 2012."),
-                                tags$li("The y axis shows the proportion of employees earning less than the real Living Wage."),
-                                tags$li("The purple line is the proportion of employees earning less than the real Living Wage in all sectors."),
-                                tags$li("The light grey line is the proportion of employees earning less than the real Living Wage in the public sector."),
-                                tags$li("The blue line is the proportion of employees earning less than the real Living Wage in the private sector."),
-                                tags$li("The dark grey  line is the proportion of employees earning less than the real Living Wage in the Not for profit or mutual organisation sector."),
-                                tags$li("The proportion of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
+                                tags$li("The y axis shows the percentage of employees earning less than the real  Living Wage."),
+                                tags$li("The plot contains a trace for each sector: `public`, `private`, and `not for profit or mutual organisation`.",
+                                        "A trace for all sectors is also included."),
+                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013."),
+                                tags$li("The percentage of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
                                         "in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021."),
-                                tags$li("The proportion of employees earning less than the Living Wage is now lower than at",
+                                tags$li("The percentage of employees earning less than the Living Wage is now lower than at",
                                         "any previous point in the series, which began in 2012.")
+
               )
 )
 
+output$employees_living_wage_cw_sector_plot = renderPlotly({
+  title <- glue("Percentage of employees (18+) earning less than the real Living Wage by sector in Scotland")
 
-## lines overall
-output$employees_living_wage_cw_plot = renderPlotly({
-
-  measure_option = "proportion"
-  earning_option = "Earning less than the living wage"
-
-  plot_data = employees_living_wage_by_sector %>%
-    filter(measure == measure_option,
-           earning == earning_option)
-
-
-  make_employees_living_wage_cw_line_plot(plot_data, color_column = "sector")
+  data = employees_living_wage_by_sector %>%
+    filter(measure == "proportion",
+           earning == "Earning less than the living wage") %>%
+    make_line_chart_multi_lines(.,x = .$year, y = .$measure_value, colour = .$sector, y_axis_title = "Percentage",
+                                title = title, label = "Percentage",
+                                hover_end = "%") %>%
+    layout(yaxis = list(rangemode="tozero",
+                        title = "Percentage (%)",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = FALSE,
+                        ticksuffix = "%",
+                        range=c(0,35)))
 
 })
+
+employees_living_wage_by_sector %>%
+  filter(measure == "proportion",
+         earning == "Earning less than the living wage") %>%
+  select(year, sector, measure_value) %>%
+  arrange(year, sector) %>%
+  mutate(year = factor(year),
+         sector = factor(sector)) %>%
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = measure_value) %>%
+  dataDownloadServer(id = "living_wage_sector_cw", filename = "living_wage_by_sector",
+                     add_separator_cols_1dp = c(3))
 
 
 # map
@@ -129,15 +143,37 @@ updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
 })
 
 
-# plot trend
+# # plot trend
+# output$employees_living_wage_cw_line_LA = renderPlotly({
+#
+#   employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
+#     filter(ca2019  == rv_employees_living_wage_cw())
+#
+#
+#   title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
+#   make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title)
+# })
+
 output$employees_living_wage_cw_line_LA = renderPlotly({
 
   employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
     filter(ca2019  == rv_employees_living_wage_cw())
 
+  geog = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
+  title = paste("Percentage of employees (18+) earning less than the real Living Wage in ",
+                geog)
 
-  title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
-  make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title)
+  plot <- employees_living_wage_cw_line_LA_data %>%
+    mutate(indicator = round(as.integer(measure_value), 1),
+           date = year) %>%
+    line_chart_function_lw_la(., y_title = "Percentage", label = "Percentage (%)", title = title) %>%
+  layout(yaxis = list(rangemode="tozero",
+                      title = "Percentage (%)",
+                      tickfont = list(size=14),
+                      titlefont = list(size=18),
+                      showline = FALSE,
+                      ticksuffix = "%",
+                      range=c(0,35)))
 })
 
 
@@ -147,42 +183,42 @@ living_wage_sector <- employees_living_wage_by_sector %>%
   mutate(local_authority = "Scotland",
          ca2019 = "S92000003") %>%
   select(year, ca2019, local_authority, sector, earning, measure_value) %>%
-  rename("Proportion of employees" = "measure_value")
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = "measure_value")
 
 living_wage_la <- employees_living_wage_by_LA %>%
   filter(local_authority != "Scotland") %>%
   filter(measure == "proportion") %>%
   mutate(sector = "All") %>%
   select(year, ca2019, local_authority, sector, earning, measure_value) %>%
-  rename("Proportion of employees" = "measure_value")
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = "measure_value")
 
 living_wage_all <- bind_rows(living_wage_sector, living_wage_la) %>%
   arrange(year, sector, earning) %>%
   filter(earning == "Earning less than the living wage") %>%
-  select(-earning)
+  filter(sector == "All") %>%
+  select(-earning, -sector)
 
 living_wage_scotland <- living_wage_all %>%
   filter(local_authority == "Scotland") %>%
-  mutate(year = factor(year),
-         sector = factor(sector)) %>%
+  mutate(year = factor(year)) %>%
   select(-ca2019)
 
 dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
-                   id = "living_wage_cw", filename = "living_wage",
-                   add_separator_cols_1dp = c(4))
+                   id = "living_wage_cw", filename = "living_wage_by_council",
+                   add_separator_cols_1dp = c(3))
 
 output$living_wage_cw_table_title <- renderText({
-  glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+  glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
 })
 
 observeEvent(input$employees_living_wage_cw_map_button, {
 
   dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
-                     id = "living_wage_cw", filename = "living_wage",
-                     add_separator_cols_1dp = c(4))
+                     id = "living_wage_cw", filename = "living_wage_by_council",
+                     add_separator_cols_1dp = c(3))
 
   output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
   })
 
 })
@@ -191,18 +227,17 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 
   living_wage_la <- living_wage_all %>%
     filter(ca2019 == rv_employees_living_wage_cw()) %>%
-    mutate(year = factor(year),
-           sector = factor(sector)) %>%
+    mutate(year = factor(year)) %>%
     select(-ca2019)
 
   dataDownloadServer(data = living_wage_la, data_download = living_wage_all,
-                     id = "living_wage_cw", filename = "living_wage",
-                     add_separator_cols_1dp = c(4))
+                     id = "living_wage_cw", filename = "living_wage_by_council",
+                     add_separator_cols_1dp = c(3))
 
   la_selected <- unique(living_wage_la$local_authority)
 
   output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in ", la_selected)
+    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected)
   })
 
 })
@@ -323,15 +358,15 @@ observeEvent(input$gender_pay_gap_cw_tabBox, {
 altTextServer("economic_inactivity_cw_alt",
               title = "Economic inactivity by year plot",
               content = tags$ul(tags$li("This is a plot for the trend in economically inactive people aged 16 to 64 by willingness to work."),
-                                tags$li("The x axis shows the year, starting from 2004."),
+                                tags$li("It is a stacked bar plot, where each bar refers to one year, and each bar is split into",
+                                        "two sections representing the percentage of economically inactive people who want to work",
+                                        "in contrast with the percentage of these individuals who do not want to work."),
+                                tags$li("The x axis shows the year, starting from 2008."),
                                 tags$li("The y axis shows the percentage of economically inactive people."),
-                                tags$li("There are two drop downs above the chart which allow you to select select a national",
+                                tags$li("The legend shows two categories: 'Wants to work' and 'Does not want to work', which are displayed",
+                                        "on the plot in this order from top to bottom."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national",
                                         "or local geography level and area for plotting. The default is Scotland."),
-                                tags$li("The purple line is the percentage of economically inactive people who do not want to work."),
-                                tags$li("The grey line is the percentage of economically inactive people who do want to work.")
-                                # tags$li("The proportion of those who were economically inactive and would like to work increased",
-                                #         "by 0.9 percentage points, from 20.7 per cent in April 2019-March 2020 (the lowest point",
-                                #         "in the series to date) to 21.6 per cent in April 2020-March 2021.")
               )
 )
 
@@ -357,8 +392,9 @@ output$economic_inactivity_cw_plot <- renderPlotly({
                 input$economic_inactivity_cw_geog_name)
 
   region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
+    filter(year >= 2008) %>%
+    mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
     make_economic_inactivity_cw_plot(., title = title)
-
 
 })
 
@@ -367,13 +403,14 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
-    rename("geography" = "region",
-           "category" = "breakdown",
+    filter(year >= 2008) %>%
+    rename("Geography" = "region",
+           "Category" = "breakdown",
            "Number of People" = "n",
            "Percentage of People (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
-    filter(geography == input$economic_inactivity_cw_geog_name)
+    filter(Geography == input$economic_inactivity_cw_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "economic_inactivity_cw", filename = "economic_inactivity",

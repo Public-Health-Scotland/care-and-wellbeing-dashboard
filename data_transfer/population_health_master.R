@@ -64,6 +64,12 @@ source(paste0(path_pop_health, "/transfer_healthy_birthweight.R"))
 source(paste0(path_pop_health, "/transfer_healthy_life_expectancy.R"))
 
 ##############################################.
+# LIFE EXPECTANCY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_life_expectancy.R"))
+
+##############################################.
 # CHILDREN (2-15) AT RISK OF OBESITY----
 ##############################################.
 
@@ -108,4 +114,10 @@ source(paste0(path_pop_health, "/transfer_vaccinations.R"))
 
 source(paste0(path_pop_health, "/transfer_experience_unpaid_carers.R"))
 
+
+##############################################.
+# PREMATURE MORTALITY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_premature_mortality.R"))
 
