@@ -620,16 +620,16 @@ tagList(
                         value = "mental_wellbeing",
 
                         h2("Mental wellbeing of adults (16+)",
-                        iButtonUI("mental_wellbeing",
-                                  content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
-                                                  "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
-                                                  "contribution to their community. Positive mental health encourages better quality of life overall,",
-                                                  "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
-                                                  "<br> <br>",
-                                                  "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
-                                                  "<br> <br>",
-                                                  "Further breakdowns can be found on the",
-                                                  "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site).</a>"))),
+                           iButtonUI("mental_wellbeing",
+                                     content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
+                                                     "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
+                                                     "contribution to their community. Positive mental health encourages better quality of life overall,",
+                                                     "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
+                                                     "<br> <br>",
+                                                     "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
+                                                     "<br> <br>",
+                                                     "Further breakdowns can be found on the",
+                                                     "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site).</a>"))),
 
                         altTextUI("mental_wellbeing_alt"),
                         wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
@@ -734,8 +734,142 @@ tagList(
                tabPanel(title = "Screening uptake",
                         value = "screening",
 
-                        h2("Screening uptake")
-               ),
+                        tabBox(title = "", id = "screening_tabBox", type = "pills", width = NULL,
+
+                               ##############################################.
+                               # BREAST ----
+                               ##############################################.
+
+
+                               tabPanel(title = "Breast cancer",
+                                        value = "screening_breast",
+
+                                        h2("Screening uptake for breast cancer",
+
+                                           iButtonUI("screening_breast",
+                                                     content = paste("The Scottish Breast Screening Programme (SBSP) invites women aged between 50 and 70 years old for screening every three years.",
+                                                                     "Number of women invited to attend for screening and number of women screened",
+                                                                     "are reported as a count; uptake/attendance. <br> <br>",
+                                                                     "The reporting period (2019-22) includes the pause to the SBSP due to the COVID-19 pandemic.",
+                                                                     "No individuals were invited to breast screenings during this period, causing a reduction",
+                                                                     "in overall numbers screened. Services have worked hard to recover but have been under",
+                                                                     "additional strain with limited capacity due to infection prevention and control measures",
+                                                                     "including social distancing and staffing pressures. <br> <br>",
+                                                                     "More information can be found ",
+                                                                     "<a href = https://www.healthscotland.scot/health-topics/screening/breast-screening target = _blank > here (external link). </a>",
+                                                                     "Alternatively, more information on the latest statistics can be be found",
+                                                                     "<a href= https://publichealthscotland.scot/publications/scottish-breast-screening-programme-statistics/scottish-breast-screening-programme-statistics-annual-update-to-31-march-2022/ target = _blank> here (external link). </a>"))),
+
+                                        altTextUI("screening_breast_board_alt"),
+                                        withSpinner(plotlyOutput("screening_breast_board_plot")),
+                                        br(),
+
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_type",
+                                                                "Step 1. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_name",
+                                                                "Step 2. Select a national or local geography area",
+                                                                choices = unique(screening_breast_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                                        altTextUI("screening_breast_simd_alt"),
+                                        simdQuintileDefinitionUI("screening_breast_simd"),
+                                        withSpinner(plotlyOutput("screening_breast_simd_plot")),
+
+                                        h3(textOutput("screening_breast_table_title")),
+                                        p("The data table for the SIMD breakdown is based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
+
+                                        tabBox(
+                                          id = "screening_breast_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_simd"))
+                                        )
+
+
+
+                               ),
+
+                               ##############################################.
+                               # BOWEL ----
+                               ##############################################.
+
+                               tabPanel(title = "Bowel cancer",
+                                        value = "screening_bowel",
+
+                                        h2("Screening uptake for bowel cancer",
+                                           iButtonUI("screening_bowel",
+                                                     content = paste("Bowel screening statistics relates to men and women registered",
+                                                                     "with a Community Health Index number at a GP and aged between 50-74",
+                                                                     "years old, who are invited to complete a bowel screening test every two years. <br> <br>",
+                                                                     "The year ranges visualised on this tab start on the 1st May and end on the 31st April. For example, 2020-22 refers to the 1st May 2020 to the 31st April 2022. <br> <br>",
+                                                                     "More information can be found",
+                                                                     "<a href = https://publichealthscotland.scot/publications/scottish-bowel-screening-programme-statistics/scottish-bowel-screening-programme-statistics-for-the-period-of-invitations-from-may-2020-to-april-2022/ target = _blank> here (external link). </a>"))),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_board_year",
+                                                                "Select a year range",
+                                                                choices = unique(screening_bowel_board$year_range),
+                                                                width = "100%"))),
+
+
+                                        altTextUI("screening_bowel_board_alt"),
+                                        withSpinner(plotlyOutput("screening_bowel_board_plot")),
+                                        br(),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_simd_year",
+                                                                "Step 1. Select a year range",
+                                                                choices = unique(screening_bowel_simd$year_range),
+                                                                width = "100%")),
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_type",
+                                                                "Step 2. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_name",
+                                                                "Step 3. Select a national or local geography area",
+                                                                choices = unique(screening_bowel_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                                        altTextUI("screening_bowel_simd_alt"),
+                                        simdQuintileDefinitionUI("screening_bowel_simd"),
+                                        withSpinner(plotlyOutput("screening_bowel_simd_plot")),
+
+                                        h3(textOutput("screening_bowel_table_title")),
+                                        p("The data tables below are based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
+
+                                        tabBox(
+                                          id = "screening_bowel_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_simd"))
+                                        )
+                               )
+                        )),
 
                ##############################################.
                #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
@@ -767,8 +901,6 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        # h2("Vaccinations uptake")
-
                         tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
 
@@ -787,9 +919,12 @@ tagList(
                                                                      "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
 
 
                                         fluidRow(column(4,
@@ -834,9 +969,13 @@ tagList(
                                                                      "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
+
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",
@@ -866,6 +1005,7 @@ tagList(
 
                ),
 
+
                ##############################################.
                # WORK-RELATED ILL HEALTH----
                ##############################################.
@@ -876,7 +1016,7 @@ tagList(
                         h2("Work-related ill health"),
 
                         p("Content to be developed")
-               ),
+               )
 
   ) # navlistpanel
 ) # tagList

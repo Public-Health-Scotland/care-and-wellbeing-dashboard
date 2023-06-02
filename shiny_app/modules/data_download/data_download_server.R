@@ -44,7 +44,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
           }
 
           for (i in add_percentage_cols){
-            data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=1, perc=T)
+            data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=2, perc=T)
           }
 
           for (i in add_percentage_cols){
