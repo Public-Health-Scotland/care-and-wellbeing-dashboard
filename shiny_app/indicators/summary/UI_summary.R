@@ -3,18 +3,18 @@ tagList(
   fluidRow(width=12,
            h1("At a glance"),
 
-           p("Select either Covid Recovery or Care and Wellbeing, and then select at which national or",
-             "local geography level and area you wish to see data for."),
+           p("This tab summarises the most recent data for all the indicators across the Care and Wellbeing Dashboard"),
 
-           p(tags$li("Each box will provide the date and value of the latest data for the corresponding indicator."),
-             tags$li("If a box states TBC, then it has not yet been confimed if the indicator will be moved onto the dashboard."),
-             tags$li("If a box states 'Not available' then the data is not available for the chosen national or local level and area.")),
+           p("Select which national or local geography level and area you wish to see data for."),
+
+           p(tags$li("Each box will provide the date and value of the latest and previous data for the corresponding indicator",
+                     "and provide either the percentage change or difference between these data if available."),
+             tags$li("If a box states 'Not available' then the data is not available for the chosen national or local level and area."),
+             tags$li("If a box states 'To be developed', then the data for the corresponding indicator is not yet available on the dashboard")),
 
            p("Clicking on the 'i' button will provide additional information about the indicator."),
 
-           p("Click the title above each box to jump to the relevant tab within the dashboard.",
-             "(Only the first row of Care and Wellbeing is working - please provide feedback so",
-             "we can make a decision on whether or not to advance on making all titles jump links)"),
+           p("Clicking the title above each box will take you to the relevant tab within the dashboard"),
            br(),
 
            tagList(
@@ -233,9 +233,9 @@ tagList(
                                                                "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                                         )),
+                     )),
 
-                     fluidRow(
+                   fluidRow(
                      column(3,
                             h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
                             summaryBoxUI("healthy_weight")
