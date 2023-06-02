@@ -40,7 +40,7 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_value = recent_value,
                    previous_value = previous_value,
                    value_dp = 0
-                   )
+  )
 })
 
 
@@ -71,7 +71,7 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_value = recent_value,
                    previous_value = previous_value,
                    value_dp = 0
-                   )
+  )
 
 })
 
@@ -84,7 +84,7 @@ observeEvent(input$geog_name_summary_CW,{
 
   value <- all_cause_mortality %>%
     filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW
-           ) %>%
+    ) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000)
 
@@ -96,7 +96,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value
-                   )
+  )
 })
 
 ##### CHD deaths #####
@@ -626,14 +626,19 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(employees_living_wage_by_LA$year)
-  previous_date <- max(employees_living_wage_by_LA %>% filter(year != recent_date) %>% .$year)
+  ### Slightly different to counter NA values
+  summary_data <- employees_living_wage_by_LA %>%
+    filter(geography == input$geog_name_summary_CW,
+           !is.na(measure_value))
 
-  recent_value <- employees_living_wage_by_LA %>%
-    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == recent_date) %>%
+  recent_date <- max(summary_data$year)
+  previous_date <- max(summary_data %>% filter(year != recent_date) %>% .$year)
+
+  recent_value <- summary_data %>%
+    filter(earning == "Earning less than the living wage", year == recent_date) %>%
     .$measure_value %>% round_half_up(2)
-  previous_value <- employees_living_wage_by_LA %>%
-    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == previous_date) %>%
+  previous_value <- summary_data %>%
+    filter(earning == "Earning less than the living wage", year == previous_date) %>%
     .$measure_value %>% round_half_up(2)
 
   summaryBoxServer("employees_living_wage_cw",
