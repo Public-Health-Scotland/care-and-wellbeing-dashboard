@@ -50,33 +50,23 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                ##############################################.
                # EMPLOYEES ON THE LIVING WAGE----
                ##############################################.
-               tabPanel(title = "Employees on the living wage",
+               tabPanel(title = "Employees on the Living Wage",
                         value = "employees_living_wage_cw",
 
-                        h2("Employees on the living wage", iButtonUI("employees_living_wage_cw", content = "Paste background info and source for employees on the living wage here")),
+                        h2("Employees on the Living Wage", iButtonUI("employees_living_wage_cw",
+                                                                     content = paste("The Living Wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
+                                                                                     "More details about Living Wage rates and how it is calculated can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")))),
 
-                        actionButton(
-                          "employees_living_wage_cw_modal_info",
-                          tags$b("Background information and source"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
+                        altTextUI("employees_living_wage_cw_sector_alt"),
+                        withSpinner(plotlyOutput("employees_living_wage_cw_sector_plot")),
 
-                        actionButton(
-                          "employees_living_wage_cw_modal_comment",
-                          tags$b("Summary of indicator during covid and pre-covid period"),
-                          icon = icon_no_warning_fn("info-circle")
-                        ),
+                        h3("Data table: Percentage of employees (18+) earning less than the real Living Wage by sector in Scotland"),
+                        p("To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("living_wage_sector_cw"),
 
                         br(),
-                        br(),
 
-                        tags$b("Definition of Living Wage"),
-                        p("The Living wage is the real Living Wage calculated annually by the Resolution Foundation and are overseen by the Living Wage Commission.  It is the UK wage rate that is voluntarily paid by over 10,000 UK businesses who believe their staff deserve a wage which meets everyday needs - like the weekly shop, or a surprise trip to the dentist.",
-                          "More details about Living Wage rates and calculation can be found in", a("Living Wage foundation website.", href="https://www.livingwage.org.uk/what-real-living-wage")),
-
-                        plot_title("Proportion of employees (18+) earning less than the real Living Wage (by sector)", "employees_living_wage_cw_plot"),
-
-                        h3("Proportion of employees (18+) earning less than the real Living Wage (by local authority)"),
+                        h3("Percentage of employees (18+) earning less than the real Living Wage by local authority"),
 
                         fluidRow(
                           column(6,
@@ -102,6 +92,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                         br(),
                         h3(textOutput("living_wage_cw_table_title")),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("living_wage_cw")),
 

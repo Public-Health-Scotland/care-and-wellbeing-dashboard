@@ -156,3 +156,27 @@ make_economic_inactivity_cw_plot <- function(data) {
 }
 
 
+
+line_chart_function_lw_la = function(data, y_title, x_title = "Year", title = "", label = "Number") {
+
+  yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
+
+  ylim <- round(data$measure_value/10)*10
+
+  plot_ly(data = data) %>%
+    add_trace(x=~date,
+              y=~indicator,
+              type = "scatter",
+              mode = "lines",
+              line = list(color = phs_colours("phs-purple")),
+              name = glue("{label}"),
+              hovertemplate = ~glue("{format(round_half_up(indicator, 2), big.mark=',')}{ifelse(label == 'Percentage','%','')}")) %>%
+    layout(xaxis = xaxis_year,
+           yaxis = list(title = "Percentage", range = c(0,ylim), ticksuffix = "%"),
+           title = list(text = str_wrap(title, width = 60), font = list(size =16, color = "#4B006E", family = "Arial")),
+           margin = list(t = 90, b = 40),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           hovermode = "x unified") %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+}

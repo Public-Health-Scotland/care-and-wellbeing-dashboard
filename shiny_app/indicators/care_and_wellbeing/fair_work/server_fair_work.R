@@ -2,21 +2,47 @@
 # EMPLOYEES ON THE LIVING WAGE----
 ##############################################.
 
-## lines overall
-output$employees_living_wage_cw_plot = renderPlotly({
+altTextServer("employees_living_wage_cw_sector_alt",
+              title = "Employees earning less than the real Living Wage by sector plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real Living Wage by sector in Scotland."),
+                                tags$li("The x axis is the year, starting from 2012."),
+                                tags$li("The y axis is the percentage of employees earning less than the real  Living Wage."),
+                                tags$li("The plot contains a trace for each sector: `public`, `private`, and `not for profit or mutual organisation`.",
+                                        "There is also a trace for all sectors."),
+                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013.")
 
-  measure_option = "proportion"
-  earning_option = "Earning less than the living wage"
+              )
+)
 
-  plot_data = employees_living_wage_by_sector %>%
-    filter(measure == measure_option,
-           earning == earning_option)
+output$employees_living_wage_cw_sector_plot = renderPlotly({
+  title <- glue("Percentage of employees (18+) earning less than the real Living Wage by sector in Scotland")
 
-
-  make_employees_living_wage_cw_line_plot(plot_data, color_column = "sector") %>%
-    layout(yaxis = list(range = c(0,35)))
+  data = employees_living_wage_by_sector %>%
+    filter(measure == "proportion",
+           earning == "Earning less than the living wage") %>%
+    make_line_chart_multi_lines(.,x = .$year, y = .$measure_value, colour = .$sector, y_axis_title = "Percentage",
+                                title = title, label = "Percentage",
+                                hover_end = "%") %>%
+    layout(yaxis = list(rangemode="tozero",
+                        title = "Percentage (%)",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = FALSE,
+                        ticksuffix = "%",
+                        range=c(0,35)))
 
 })
+
+employees_living_wage_by_sector %>%
+  filter(measure == "proportion",
+         earning == "Earning less than the living wage") %>%
+  select(year, sector, measure_value) %>%
+  arrange(year, sector) %>%
+  mutate(year = factor(year),
+         sector = factor(sector)) %>%
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = measure_value) %>%
+  dataDownloadServer(id = "living_wage_sector_cw", filename = "living_wage_by_sector",
+                     add_separator_cols_1dp = c(3))
 
 
 # map
@@ -113,16 +139,43 @@ updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
 })
 
 
-# plot trend
+# # plot trend
+# output$employees_living_wage_cw_line_LA = renderPlotly({
+#
+#   employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
+#     filter(ca2019  == rv_employees_living_wage_cw())
+#
+#
+#   title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
+#   make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title)
+# })
+
 output$employees_living_wage_cw_line_LA = renderPlotly({
 
   employees_living_wage_cw_line_LA_data = employees_living_wage_cw_by_LA_ind %>%
     filter(ca2019  == rv_employees_living_wage_cw())
 
+  geog = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
+  title = paste("Percentage of employees (18+) earning less than the real Living Wage in ",
+                geog)
 
+<<<<<<< HEAD
   title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
   make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title) %>%
     layout(xaxis = list(tickangle = -30))
+=======
+  plot <- employees_living_wage_cw_line_LA_data %>%
+    mutate(indicator = round(as.integer(measure_value), 1),
+           date = year) %>%
+    line_chart_function_lw_la(., y_title = "Percentage", label = "Percentage (%)", title = title) %>%
+  layout(yaxis = list(rangemode="tozero",
+                      title = "Percentage (%)",
+                      tickfont = list(size=14),
+                      titlefont = list(size=18),
+                      showline = FALSE,
+                      ticksuffix = "%",
+                      range=c(0,35)))
+>>>>>>> origin
 })
 
 
@@ -132,42 +185,42 @@ living_wage_sector <- employees_living_wage_by_sector %>%
   mutate(local_authority = "Scotland",
          ca2019 = "S92000003") %>%
   select(year, ca2019, local_authority, sector, earning, measure_value) %>%
-  rename("Proportion of employees" = "measure_value")
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = "measure_value")
 
 living_wage_la <- employees_living_wage_by_LA %>%
   filter(local_authority != "Scotland") %>%
   filter(measure == "proportion") %>%
   mutate(sector = "All") %>%
   select(year, ca2019, local_authority, sector, earning, measure_value) %>%
-  rename("Proportion of employees" = "measure_value")
+  rename(`Percentage of employees (18+) earning less than the real Living Wage (%)` = "measure_value")
 
 living_wage_all <- bind_rows(living_wage_sector, living_wage_la) %>%
   arrange(year, sector, earning) %>%
   filter(earning == "Earning less than the living wage") %>%
-  select(-earning)
+  filter(sector == "All") %>%
+  select(-earning, -sector)
 
 living_wage_scotland <- living_wage_all %>%
   filter(local_authority == "Scotland") %>%
-  mutate(year = factor(year),
-         sector = factor(sector)) %>%
+  mutate(year = factor(year)) %>%
   select(-ca2019)
 
 dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
-                   id = "living_wage_cw", filename = "living_wage",
-                   add_separator_cols_1dp = c(4))
+                   id = "living_wage_cw", filename = "living_wage_by_council",
+                   add_separator_cols_1dp = c(3))
 
 output$living_wage_cw_table_title <- renderText({
-  glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+  glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
 })
 
 observeEvent(input$employees_living_wage_cw_map_button, {
 
   dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
-                     id = "living_wage_cw", filename = "living_wage",
-                     add_separator_cols_1dp = c(4))
+                     id = "living_wage_cw", filename = "living_wage_by_council",
+                     add_separator_cols_1dp = c(3))
 
   output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage by sector in Scotland")
+    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
   })
 
 })
@@ -176,18 +229,17 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 
   living_wage_la <- living_wage_all %>%
     filter(ca2019 == rv_employees_living_wage_cw()) %>%
-    mutate(year = factor(year),
-           sector = factor(sector)) %>%
+    mutate(year = factor(year)) %>%
     select(-ca2019)
 
   dataDownloadServer(data = living_wage_la, data_download = living_wage_all,
-                     id = "living_wage_cw", filename = "living_wage",
-                     add_separator_cols_1dp = c(4))
+                     id = "living_wage_cw", filename = "living_wage_by_council",
+                     add_separator_cols_1dp = c(3))
 
   la_selected <- unique(living_wage_la$local_authority)
 
   output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Proportion of employees (18+) earning less than the real Living Wage in ", la_selected)
+    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected)
   })
 
 })
