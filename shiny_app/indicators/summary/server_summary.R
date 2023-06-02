@@ -173,6 +173,32 @@ observeEvent(input$jump_summary_to_health_risk_behaviours, {
                      selected = "health_risk_behaviours")
 })
 
+observeEvent(input$jump_summary_to_life_expectancy_male, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "life_expectancy")
+})
+
+observeEvent(input$jump_summary_to_life_expectancy_female, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "life_expectancy")
+})
+
 
 observeEvent(input$jump_summary_to_healthy_life_expectancy_male, {
 
@@ -181,7 +207,10 @@ observeEvent(input$jump_summary_to_healthy_life_expectancy_male, {
                     selected = "strengthen_prevention")
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
-                     selected = "healthy_life_expectancy")
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "life_expectancy_tabBox",
+                 selected = "healthy_life_expectancy")
 })
 
 observeEvent(input$jump_summary_to_healthy_life_expectancy_female, {
@@ -191,7 +220,10 @@ observeEvent(input$jump_summary_to_healthy_life_expectancy_female, {
                     selected = "strengthen_prevention")
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
-                     selected = "healthy_life_expectancy")
+                     selected = "life_expectancy")
+  updateTabItems(session = session,
+                 inputId = "drugs_tabBox",
+                 selected = "healthy_life_expectancy")
 })
 
 
@@ -271,7 +303,7 @@ observeEvent(input$jump_summary_to_quality_care, {
 })
 
 
-observeEvent(input$jump_summary_to_screening, {
+observeEvent(input$jump_summary_to_screening_breast, {
 
   updateTabsetPanel(session = session,
                     inputId = "intabset",
@@ -279,10 +311,39 @@ observeEvent(input$jump_summary_to_screening, {
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
                      selected = "screening")
+  updateTabItems(session = session,
+                 inputId = "screening_tabBox",
+                 selected = "screening_breast")
+})
+
+observeEvent(input$jump_summary_to_screening_bowel_female, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "screening")
+  updateTabItems(session = session,
+                 inputId = "screening_tabBox",
+                 selected = "screening_bowel")
+})
+
+observeEvent(input$jump_summary_to_screening_bowel_male, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "screening")
+  updateTabItems(session = session,
+                 inputId = "screening_tabBox",
+                 selected = "screening_bowel")
 })
 
 
-observeEvent(input$jump_summary_to_vaccinations, {
+observeEvent(input$jump_summary_to_vaccinations_covid, {
 
   updateTabsetPanel(session = session,
                     inputId = "intabset",
@@ -290,6 +351,22 @@ observeEvent(input$jump_summary_to_vaccinations, {
   updateNavlistPanel(session = session,
                      inputId = "strengthen_prevention_panel",
                      selected = "vaccinations")
+  updateTabItems(session = session,
+                 inputId = "vaccinations_tabBox",
+                 selected = "covid_vaccinations")
+})
+
+observeEvent(input$jump_summary_to_vaccinations_flu, {
+
+  updateTabsetPanel(session = session,
+                    inputId = "intabset",
+                    selected = "strengthen_prevention")
+  updateNavlistPanel(session = session,
+                     inputId = "strengthen_prevention_panel",
+                     selected = "vaccinations")
+  updateTabItems(session = session,
+                 inputId = "vaccinations_tabBox",
+                 selected = "flu_vaccinations")
 })
 
 

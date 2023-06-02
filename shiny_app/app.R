@@ -38,6 +38,7 @@ ui <- shinymanager::secure_app(
                  href = "https://www.publichealthscotland.scot/",
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
+
         windowTitle = "Care & Wellbeing Portfolio",# Title for browser tab
         header = source(file.path("header.R"), local=TRUE)$value,
 
@@ -156,9 +157,9 @@ server <- function(input, output, session) {
   # source(file.path("functions/generic_charts.R"), local = TRUE)$value
 
   #Covid recovery functions
-  # source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
-  # source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
-  # source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/wellbeing/functions_wellbeing.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/financial_security/functions_financial_security.R"), local = TRUE)$value
+  source(file.path("indicators/covid_recovery/good_green/functions_good_green.R"), local = TRUE)$value
 
   #Care and wellbeing functions
   source(file.path("indicators/care_and_wellbeing/strengthen_prevention/functions_strengthen_prevention.R"), local = TRUE)$value

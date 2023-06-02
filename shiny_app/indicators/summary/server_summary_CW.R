@@ -40,14 +40,30 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_value = recent_value,
                    previous_value = previous_value,
                    value_dp = 0
-                   )
+  )
 })
 
 
 ##### Alcohol deaths #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("alcohol_deaths")
+
+  recent_date <- alcohol_deaths$year %>% max()
+  previous_date <- max(alcohol_deaths %>% filter(year != recent_date) %>% .$year)
+
+  value <- alcohol_deaths %>%
+    filter(geography == input$geog_name_summary_CW,
+           sex == "All sexes")
+
+  recent_value <- value %>% filter(year == recent_date) %>% .$rate
+  previous_value <- value %>% filter(year == previous_date) %>% .$rate
+
+  summaryBoxServer("alcohol_deaths",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
 
 ##### Alcohol admission #####
@@ -69,9 +85,8 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
-                   value_dp = 0
-                   )
+                   previous_value = previous_value
+  )
 
 })
 
@@ -84,7 +99,7 @@ observeEvent(input$geog_name_summary_CW,{
 
   value <- all_cause_mortality %>%
     filter(indicator_age == "15 to 44", geography == input$geog_name_summary_CW
-           ) %>%
+    ) %>%
     group_by(year) %>% summarise(pop = sum(pop), deaths = sum(deaths)) %>%
     mutate(rate = deaths/pop*100000)
 
@@ -96,7 +111,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value
-                   )
+  )
 })
 
 ##### CHD deaths #####
@@ -250,6 +265,36 @@ observeEvent(input$geog_name_summary_CW,{
                    percentage_symbol = "%")
 })
 
+##### Life expectancy #####
+
+
+observeEvent(input$geog_name_summary_CW,{
+  recent_date <- max(life_expectancy$time_period)
+  previous_date <- max(life_expectancy%>% filter(time_period != recent_date) %>% .$time_period)
+
+  value <- life_expectancy %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value_male <- value %>% filter(sex == "Male", time_period == recent_date) %>% .$indicator
+  previous_value_male <- value %>% filter(sex == "Male", time_period == previous_date) %>% .$indicator
+
+  recent_value_female <- value %>% filter(sex == "Female", time_period == recent_date) %>% .$indicator
+  previous_value_female <- value %>% filter(sex == "Female", time_period == previous_date) %>% .$indicator
+
+  summaryBoxServer("life_expectancy_male",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_male,
+                   previous_value = previous_value_male
+  )
+
+  summaryBoxServer("life_expectancy_female",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_female,
+                   previous_value = previous_value_female
+  )
+})
+
 ##### Healthy life expectancy #####
 
 
@@ -312,7 +357,20 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Mental wellbeing of adults #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("mental_wellbeing")
+
+  recent_date <- max(adult_mental_welbeing$year)
+  previous_date <- max(adult_mental_welbeing %>% filter(year != recent_date) %>% .$year)
+
+  value <- adult_mental_welbeing %>% filter(geography == input$geog_name_summary_CW, sex == "All")
+
+  recent_value <- value %>% filter(year == recent_date) %>% .$indicator
+  previous_value <- value %>% filter(year == previous_date) %>% .$indicator
+
+  summaryBoxServer("mental_wellbeing",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value)
 })
 
 ##### Physical activity #####
@@ -324,8 +382,22 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Premature mortality #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("premature_mortality")
+  recent_date <- max(premature_mortality_all_cause_hb$date)
+  previous_date <- max(premature_mortality_all_cause_hb %>% filter(date != recent_date) %>% .$date)
+
+  value <- premature_mortality_all_cause_hb %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$indicator
+  previous_value <- value %>% filter(date == previous_date) %>% .$indicator
+
+  summaryBoxServer("premature_mortality",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value
+  )
 })
+
 
 ##### Quality of care experience #####
 
@@ -335,9 +407,72 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Screening #####
 
+#### Breast ####
+
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("screening")
+
+  recent_date <- max(screening_breast_board$year_range)
+  previous_date <- max(screening_breast_board %>% filter(year_range != recent_date) %>% .$year_range)
+
+  value <- screening_breast_board %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value <- value %>% filter(year_range == recent_date) %>%
+    .$percentage_uptake
+  previous_value <-  value %>% filter(year_range == previous_date) %>%
+    .$percentage_uptake
+
+  summaryBoxServer("screening_breast",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
+  })
+
+#### Bowel ####
+
+observeEvent(input$geog_name_summary_CW,{
+
+  recent_date <- max(screening_bowel_board$year_range)
+  previous_date <- max(screening_bowel_board %>% filter(year_range != recent_date) %>% .$year_range)
+
+  value <- screening_bowel_board %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value_f <- value %>% filter(year_range == recent_date, Sex == "Females") %>%
+    .$percentage_uptake
+  previous_value_f <-  value %>% filter(year_range == previous_date, Sex == "Females") %>%
+    .$percentage_uptake
+
+  recent_value_m <- value %>% filter(year_range == recent_date, Sex == "Males") %>%
+    .$percentage_uptake
+  previous_value_m <-  value %>% filter(year_range == previous_date, Sex == "Males") %>%
+    .$percentage_uptake
+
+  summaryBoxServer("screening_bowel_f",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_f,
+                   previous_value = previous_value_f,
+                   percentage_symbol = "%")
+
+  summaryBoxServer("screening_bowel_m",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_m,
+                   previous_value = previous_value_m,
+                   percentage_symbol = "%")
+
 })
+
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("screening_bowel_female")
+})
+
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("screening_bowel_male")
+})
+
 
 ##### Self-assessed health of adults #####
 
@@ -363,8 +498,44 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Vaccinations #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("vaccinations")
+
+  recent_date <- vaccinations_covid %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- vaccinations_covid %>% slice(which.min(.$date)) %>% .$date
+
+  value <- vaccinations_covid %>% filter(geography == input$geog_name_summary_CW,
+                                         SIMD == "1 (Most deprived)")
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
+  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+
+  summaryBoxServer("vaccinations_covid",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
 })
+
+observeEvent(input$geog_name_summary_CW,{
+
+  recent_date <- vaccinations_flu %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- vaccinations_flu %>% slice(which.min(.$date)) %>% .$date
+
+  value <- vaccinations_flu %>% filter(geography == input$geog_name_summary_CW,
+                                         SIMD == "1 (Most deprived)")
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
+  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+
+  summaryBoxServer("vaccinations_flu",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
+  })
 
 ##### Work-related ill health #####
 
