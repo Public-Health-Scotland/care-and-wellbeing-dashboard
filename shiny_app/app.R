@@ -38,6 +38,7 @@ ui <- shinymanager::secure_app(
                  href = "https://www.publichealthscotland.scot/",
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
+
         windowTitle = "Care & Wellbeing Portfolio",# Title for browser tab
         header = source(file.path("header.R"), local=TRUE)$value,
 
