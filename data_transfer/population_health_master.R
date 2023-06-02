@@ -115,3 +115,9 @@ source(paste0(path_pop_health, "/transfer_vaccinations.R"))
 source(paste0(path_pop_health, "/transfer_experience_unpaid_carers.R"))
 
 
+##############################################.
+# PREMATURE MORTALITY----
+##############################################.
+
+source(paste0(path_pop_health, "/transfer_premature_mortality.R"))
+
