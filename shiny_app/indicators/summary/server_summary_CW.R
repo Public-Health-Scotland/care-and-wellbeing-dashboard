@@ -393,9 +393,72 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Screening #####
 
+#### Breast ####
+
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("screening")
+
+  recent_date <- max(screening_breast_board$year_range)
+  previous_date <- max(screening_breast_board %>% filter(year_range != recent_date) %>% .$year_range)
+
+  value <- screening_breast_board %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value <- value %>% filter(year_range == recent_date) %>%
+    .$percentage_uptake
+  previous_value <-  value %>% filter(year_range == previous_date) %>%
+    .$percentage_uptake
+
+  summaryBoxServer("screening_breast",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
+  })
+
+#### Bowel ####
+
+observeEvent(input$geog_name_summary_CW,{
+
+  recent_date <- max(screening_bowel_board$year_range)
+  previous_date <- max(screening_bowel_board %>% filter(year_range != recent_date) %>% .$year_range)
+
+  value <- screening_bowel_board %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_value_f <- value %>% filter(year_range == recent_date, Sex == "Females") %>%
+    .$percentage_uptake
+  previous_value_f <-  value %>% filter(year_range == previous_date, Sex == "Females") %>%
+    .$percentage_uptake
+
+  recent_value_m <- value %>% filter(year_range == recent_date, Sex == "Males") %>%
+    .$percentage_uptake
+  previous_value_m <-  value %>% filter(year_range == previous_date, Sex == "Males") %>%
+    .$percentage_uptake
+
+  summaryBoxServer("screening_bowel_f",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_f,
+                   previous_value = previous_value_f,
+                   percentage_symbol = "%")
+
+  summaryBoxServer("screening_bowel_m",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value_m,
+                   previous_value = previous_value_m,
+                   percentage_symbol = "%")
+
 })
+
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("screening_bowel_female")
+})
+
+observeEvent(input$geog_name_summary_CW,{
+  summaryBoxServer("screening_bowel_male")
+})
+
 
 ##### Self-assessed health of adults #####
 
@@ -421,8 +484,44 @@ observeEvent(input$geog_name_summary_CW,{
 ##### Vaccinations #####
 
 observeEvent(input$geog_name_summary_CW,{
-  summaryBoxServer("vaccinations")
+
+  recent_date <- vaccinations_covid %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- vaccinations_covid %>% slice(which.min(.$date)) %>% .$date
+
+  value <- vaccinations_covid %>% filter(geography == input$geog_name_summary_CW,
+                                         SIMD == "1 (Most deprived)")
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
+  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+
+  summaryBoxServer("vaccinations_covid",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
 })
+
+observeEvent(input$geog_name_summary_CW,{
+
+  recent_date <- vaccinations_flu %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- vaccinations_flu %>% slice(which.min(.$date)) %>% .$date
+
+  value <- vaccinations_flu %>% filter(geography == input$geog_name_summary_CW,
+                                         SIMD == "1 (Most deprived)")
+
+  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
+  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+
+  summaryBoxServer("vaccinations_flu",
+                   recent_date = recent_date,
+                   previous_date = previous_date,
+                   recent_value = recent_value,
+                   previous_value = previous_value,
+                   percentage_symbol = "%")
+
+  })
 
 ##### Work-related ill health #####
 
