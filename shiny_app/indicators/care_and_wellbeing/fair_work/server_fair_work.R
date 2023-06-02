@@ -159,11 +159,6 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
   title = paste("Percentage of employees (18+) earning less than the real Living Wage in ",
                 geog)
 
-<<<<<<< HEAD
-  title = employees_living_wage_cw_line_LA_data$local_authority %>% unique()
-  make_employees_living_wage_cw_line_plot(employees_living_wage_cw_line_LA_data, title = title) %>%
-    layout(xaxis = list(tickangle = -30))
-=======
   plot <- employees_living_wage_cw_line_LA_data %>%
     mutate(indicator = round(as.integer(measure_value), 1),
            date = year) %>%
@@ -175,7 +170,6 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
                       showline = FALSE,
                       ticksuffix = "%",
                       range=c(0,35)))
->>>>>>> origin
 })
 
 
