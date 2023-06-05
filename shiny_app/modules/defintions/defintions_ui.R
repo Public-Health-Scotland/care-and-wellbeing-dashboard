@@ -47,7 +47,7 @@ simdQuintileDefinitionUI <- function(id) {
 
 #### SIMD DECILE DEFINTION ####
 
-simd10DefinitionUI <- function(id) {
+simdDecileDefinitionUI <- function(id) {
   ns <- NS(id)
 
   summaryButtonUI(ns("simd_defintion"),
@@ -70,6 +70,8 @@ simd10DefinitionUI <- function(id) {
 
 }
 
+
+#### WEMWBS DEFINTION ####
 
 wemwbsDefinitionUI <- function(id) {
   ns <- NS(id)

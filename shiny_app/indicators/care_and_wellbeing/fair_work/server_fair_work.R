@@ -5,11 +5,17 @@
 altTextServer("employees_living_wage_cw_sector_alt",
               title = "Employees earning less than the real Living Wage by sector plot",
               content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real Living Wage by sector in Scotland."),
-                                tags$li("The x axis is the year, starting from 2012."),
-                                tags$li("The y axis is the percentage of employees earning less than the real  Living Wage."),
-                                tags$li("The plot contains a trace for each sector: `public`, `private`, and `not for profit or mutual organisation`.",
-                                        "There is also a trace for all sectors."),
-                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013.")
+                                tags$li("The x axis shows the year, starting from 2012."),
+                                tags$li("The y axis shows the percentage of employees earning less than the real  Living Wage."),
+                                tags$li("The purple line is the percentage of employees earning less than the real Living Wage in all sectors."),
+                                tags$li("The light grey line is the percentage of employees earning less than the real Living Wage in the public sector."),
+                                tags$li("The blue line is the percentage of employees earning less than the real Living Wage in the private sector."),
+                                tags$li("The dark grey  line is the percentage of employees earning less than the real Living Wage in the Not for profit or mutual organisation sector."),
+                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013."),
+                                tags$li("The percentage of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
+                                        "in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021."),
+                                tags$li("The percentage of employees earning less than the Living Wage is now lower than at",
+                                        "any previous point in the series, which began in 2012.")
 
               )
 )
@@ -244,6 +250,19 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 #PAY GAP----
 ##############################################.
 
+altTextServer("gender_pay_gap_cw_alt",
+              title = "Gender pay gap plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the difference in full-time hourly earnings between women and men."),
+                                tags$li("The x axis shows the year, starting from 2014."),
+                                tags$li("The y axis shows the difference in earnings as a percentage of male full time hourly earnings."),
+                                tags$li("There are two panels on the left of the chart. The first panel allows you to select the private,",
+                                        "public, or all sectors. The second panel allows you to select a work pattern of full-time, part-time,",
+                                        "or all work patterns. The default is all work patterns for all sectors."),
+                                tags$li("There is a checkbox to the left of the chart which allows you to show women and men's earnings",
+                                        "on a secondary axis alongside the difference in pay.")
+
+              )
+)
 
 output$gender_pay_gap_cw_plot = renderPlotly({
 
@@ -260,10 +279,17 @@ output$gender_pay_gap_cw_plot = renderPlotly({
   plot_data =pay_gap_by_sector_line_data %>%
     pivot_wider(names_from = gender, values_from = measure_value)
 
+  string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+                          "all sectors, ",
+                          tolower(paste0("the ", input$gender_pay_gap_cw_sector, " sector, ")))
+  string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
+  title <- glue("Difference between women and men's full-time hourly earnings in ",
+                string_sector, string_work)
 
   add_Earning = input$gender_pay_gap_cw_show_earnings_check_box
-  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning)
+  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning, title = title)
+
 
 })
 
@@ -331,6 +357,22 @@ observeEvent(input$gender_pay_gap_cw_tabBox, {
 # ECONOMIC INACTIVITY ----
 ##############################################.
 
+altTextServer("economic_inactivity_cw_alt",
+              title = "Economic inactivity by year plot",
+              content = tags$ul(tags$li("This is a plot for the trend in economically inactive people aged 16 to 64 by willingness to work."),
+                                tags$li("It is a stacked bar plot, where each bar refers to one year, and each bar is split into",
+                                        "two sections representing the percentage of economically inactive people who want to work",
+                                        "in contrast with the percentage of these individuals who do not want to work."),
+                                tags$li("The x axis shows the year, starting from 2008."),
+                                tags$li("The y axis shows the percentage of economically inactive people."),
+                                tags$li("The legend shows two categories: 'Wants to work' and 'Does not want to work', which are displayed",
+                                        "on the plot in this order from top to bottom."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national",
+                                        "or local geography level and area for plotting. The default is Scotland."),
+              )
+)
+
+
 observeEvent(input$economic_inactivity_cw_geog_type,
              {
 
@@ -345,25 +387,32 @@ observeEvent(input$economic_inactivity_cw_geog_type,
                #selected = "")
              })
 
+
 output$economic_inactivity_cw_plot <- renderPlotly({
+
+  title <- glue("Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+                input$economic_inactivity_cw_geog_name)
+
   region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
     filter(year >= 2008) %>%
     mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
-    make_economic_inactivity_cw_plot(.)
+    make_economic_inactivity_cw_plot(., title = title)
 
 })
+
 
 observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
     select(year, region, breakdown, n, percent) %>%
     filter(year >= 2008) %>%
-    rename("category" = "breakdown",
+    rename("Geography" = "region",
+           "Category" = "breakdown",
            "Number of People" = "n",
            "Percentage of People (%)" = "percent")
 
   data_filtered <- data_unfiltered %>%
-    filter(region == input$economic_inactivity_cw_geog_name)
+    filter(Geography == input$economic_inactivity_cw_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "economic_inactivity_cw", filename = "economic_inactivity",

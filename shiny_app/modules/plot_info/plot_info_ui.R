@@ -62,3 +62,4 @@ iButtonUI <- function(id, content = "", placement = "right") {
                   class = "plotinfo-btn"
   )
 }
+
