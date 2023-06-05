@@ -35,7 +35,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE, title) {
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            hovermode = "x unified",
-           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h')) %>%
+           legend = list(xanchor = "center", x = 0.5, y = -0.4, orientation = 'h')) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -101,7 +101,7 @@ make_camhs_waiting_times_cw_bar_plot = function(data, title) {
                         showline = FALSE,
                         ticksuffix = "%"),
            legend = list(xanchor = "center", x = 0.5,
-                         y = -0.3, orientation = 'h',
+                         y = -0.4, orientation = 'h',
                          traceorder = "normal"),
            title = list(text =str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
