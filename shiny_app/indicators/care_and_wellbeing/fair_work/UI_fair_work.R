@@ -2,7 +2,7 @@ tagList(
 
   h1("Create Fair Employment and Good Work For All"),
   br(),
-navlistPanel(widths = c(2,10), id = "fair_work_panel",
+  navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                ##############################################.
                # ECONOMIC INACTIVITY----
@@ -16,16 +16,16 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                                                                       "<a href= https://www.gov.scot/collections/labour-market-statistics/ target = _blank> Annual Population Survey. </a>"))),
 
                         fluidRow(column(3,
-                                          selectInput("economic_inactivity_cw_geog_type",
-                                                      "Step 1: Select national of local geography level",
-                                                      choices = c("Scotland", "Council Area"),
-                                                      selected = "Scotland")),
+                                        selectInput("economic_inactivity_cw_geog_type",
+                                                    "Step 1: Select national of local geography level",
+                                                    choices = c("Scotland", "Council Area"),
+                                                    selected = "Scotland")),
                                  column(3,
                                         selectInput("economic_inactivity_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
                                                     width = "100%"))
-                                 ),
+                        ),
 
 
 
@@ -86,16 +86,18 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                   select(year, local_authority, ca2019, measure_value) %>%
                                                   .$year %>% unique()
                                  )),
-                                 column(6,
-                                        actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
-                          ),
+                          column(6,
+                                 actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
+                        ),
 
                         fluidRow(
                           column(12,
                                  tags$b("Select a local authority on the map to view local trend:")),
                           column(6,
+                                 mapAltTextUI("employees_living_wage_cw_map_alt"),
                                  withSpinner(leafletOutput("employees_living_wage_cw_map"))),
                           column(6,
+                                 altTextUI("employees_living_wage_cw_map_plot_alt"),
                                  withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
                         ),
 

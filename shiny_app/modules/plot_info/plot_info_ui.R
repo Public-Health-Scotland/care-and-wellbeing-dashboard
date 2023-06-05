@@ -45,6 +45,25 @@ plotInfoButtonUI <- function(id, placement = "bottom") {
   )
 }
 
+# Buttons that go next to maps for how to interact with the map
+mapInfoButtonUI <- function(id, placement = "bottom") {
+  ns <- NS(id)
+
+  summaryButtonUI(ns("mapinfo"),
+                  title = "How to interact with the map",
+                  content = paste("<ul>",
+                                  "<li>Click an area of the map to get a pop up with the area\\'s name, and the key data.</li>",
+                                  "<li>Hold down and move your cursor to pan around the map.</li>",
+                                  "<li>Use the \\'+\\' or \\'-\\' buttons in the top left corner of the map to zoom in or out respectively.</li>",
+                                  "<li>The key to the map is found in the bottom right corner.</li>",
+                                  "</ul>",
+                                  strong("Click again to close.")),
+                  placement = placement,
+                  label = "Using the map",
+                  class = "plotinfo-btn"
+  )
+}
+
 
 
 
