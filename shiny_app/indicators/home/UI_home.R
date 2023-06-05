@@ -8,9 +8,9 @@ sidebarLayout(
             # About
             conditionalPanel(
               condition= 'input.home_select == "about"',
-              tagList(h3("About"), #div
+              tagList(h3("Care & Wellbeing"), #div
 
-                      h4("Care & Wellbeing"),
+                      #h4("Care & Wellbeing"),
 
                       p("The Care & Wellbeing dashboard is one source of data and intelligence to support the",
                         "ambitions to improve population health, address health inequalities and improve the",
@@ -22,6 +22,10 @@ sidebarLayout(
                         p("A range of indicators are included in this dashboard structured around the evidence-based",
                           "Marmot framework which looks at the social determinants of health, the conditions in which",
                           "people are born, grow, live, work and age which can lead to health inequalities."),
+                        p("The dashboard and indicators will continue to be updated over the coming months.",
+                          "This is an early release of the dashboard - it will be further developed following",
+                          "user feedback. Please send any feeback to",
+                          tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot")),
                         p("Explore the latest data below."),
                         br(),
 
@@ -85,7 +89,11 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_environmental_sustainability", "Sustainability and equity"))),
-                          column(8, p("Pursuing environmental sustainability and health equity together.")))
+                          column(8, p("Pursuing environmental sustainability and health equity together."))),
+
+
+                      br(),
+                      br(),
 
                         #                       h4("Covid Recovery"),
                         #
