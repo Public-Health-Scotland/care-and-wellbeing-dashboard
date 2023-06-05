@@ -1068,7 +1068,7 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "healthy_birthweight", filename = "healthy_birthweight",
-                     add_separator_cols_1dp = c(5))
+                     add_percentage_cols = c(5))
 
 })
 
