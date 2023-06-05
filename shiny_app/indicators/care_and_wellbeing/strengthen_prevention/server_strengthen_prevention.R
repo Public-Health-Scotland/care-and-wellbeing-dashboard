@@ -1678,7 +1678,7 @@ output$vaccinations_flu_plot <- renderPlotly({
                   yaxis_title = "Percentage (%)",
                   category_var = .$date,
                   hover_end = "%",
-                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, "
+                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}"
                   )) %>%
     layout(yaxis = list(ticksuffix = "%"))
 
