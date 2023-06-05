@@ -233,6 +233,47 @@ th, td {
 }
 
 
+/*https://codepen.io/JavaScriptJunkie/pen/pPRooV*/
+/*Special buttons for intro page*/
+ .special_button > .btn{
+    /*display: block;*/
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: white;
+
+    /*Button shape & animation*/
+    border-radius: border-rounded;
+    border: 0px solid var(--phs-purple-S);
+    margin: 5px;
+    width:  100%;
+    height: 100%;
+    min-height: 50px;
+    background-size: 100% auto;
+    color: var(--phs-purple-S);
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+    background-color: var(--vlight-purple);
+    background-position: right center;
+}
+
+.special_button > .btn:hover {
+    background-position: right center;
+    background-color: var(--phs-purple-S);
+    color: var(--vlight-purple);
+    box-shadow: 0 4px 10px 0 var(--phs-purple-S);
+}
+
+.special_button > .btn:focus:active {
+    outline: none;
+    background-color: var(--phs-purple-S);
+    color: var(--vlight-purple);
+    box-shadow: 0 8px 15px 0 var(--phs-purple-S);
+}
+
+
+
+
 /* Boxes */
 
 
