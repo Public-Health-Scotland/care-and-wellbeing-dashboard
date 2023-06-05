@@ -10,42 +10,94 @@ sidebarLayout(
               condition= 'input.home_select == "about"',
               tagList(h3("About"), #div
 
-                      h4("Care and Wellbeing Portfolio"),
+                      h4("Care & Wellbeing"),
 
-                      p("The Covid Recovery and Care and Wellbeing Dashboard is a source of intelligence to assess how Scotland is making progress towards ",
-                        "the three outcomes of the Scottish Government’s Covid Recovery Strategy and the policy objectives which underpin the ",
-                        "Scottish Government’s work on Care and Wellbeing. Many of the influences on health outcomes lie out with health and social care. ",
-                        "So it is critical that we work across government, with our local government partners, and wider public sector to ensure health and ",
-                        "wellbeing are at the core in our wider policy and delivery. ",
-                        "Taking a cross-portfolio approach aligned with the COVID Recovery Strategy will enable us to maximise our reach and impact, ",
-                        "and deliver improved outcomes. A range of indicators are included in this dashboard to inform and support decision-making at a range of levels across Scotland. ",
-                        "The latest data for each indicator can be quickly accessed using the summary page."),
-#
-#                       h4("Covid Recovery"),
-#
-#                       p("The Scottish Government’s Covid Recovery Strategy aims to reduce systemic inequalities and focuses on three outcomes: "),
-#                       p(tags$li("enhancing the wellbeing of children and young people;"),
-#                         tags$li("increasing financial security for low income households; and "),
-#                         tags$li("creating good, green jobs and fair work.")),
+                      p("The Care & Wellbeing dashboard is one source of data and intelligence to support the",
+                        "ambitions to improve population health, address health inequalities and improve the",
+                        "health and care system - the missions of the ",
+                        tags$a(href= "https://www.gov.scot/groups/care-and-wellbeing-portfolio-board/", "Care & Wellbeing Portfolio.")),
+                        p("Many of the influences on health outcomes lie out with health and social care.",
+                          "Collective action across government, with local government partners and the wider",
+                          "public sector, is fundamental to improving population health and reducing health inequalities."),
+                        p("A range of indicators are included in this dashboard structured around the evidence-based",
+                          "Marmot framework which looks at the social determinants of health, the conditions in which",
+                          "people are born, grow, live, work and age which can lead to health inequalities."),
+                        p("Explore the latest data below."),
+                        br(),
 
-                      h4("Care and Wellbeing"),
 
-                      p("The Scottish Government’s Care and Wellbeing Portfolio is the principle strategic reform vehicle for ",
-                        "the major health and care reform programmes aimed at improving population health, ",
-                        "addressing health inequalities and improving health and care system sustainability. ",
-                        "It is informed by the policy objectives of the Marmot Review:"),
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_child_start", "Early years"))),
+                          column(8, p("Giving every child the best start in life"))),
 
-                      p(tags$li("giving every child the best start in life;"),
-                        tags$li("enabling all to maximise their capabilities and have control over their lives;"),
-                        tags$li("creating fair employment and good work for all;"),
-                        tags$li("ensuring a healthy standard of living for all;"),
-                        tags$li("creating and developing healthy and sustainable places and communities;"),
-                        tags$li("Strengthening the role and impact of ill health prevention;"),
-                        tags$li("Tackling discrimination, racism and their outcomes; and"),
-                        tags$li("Pursuing environmental sustainability and health equity together."))
+                        br(),
 
-              )# tagList
-            ), # conditionalPanel
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_control_lives", "Education"))),
+                          column(8, p("Enabling all to maximise their capabilities and have control over their lives"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_fair_work", "Work"))),
+                          column(8, p("Creating fair employment and good work for all"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_healthy_standard", "Living standards"))),
+                          column(8, p("Ensuring a healthy standard of living for all"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_sustainable_communities", "Places"))),
+                          column(8, p("Creating and developing healthy and sustainable places and communities"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_strengthen_prevention", "Ill health prevention"))),
+                          column(8, p("Strengthening the role and impact of ill health prevention"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_discrimination_racism", "Discrimination and racism"))),
+                          column(8, p("Tackling discrimination, racism and their outcomes"))),
+
+                        br(),
+
+
+                        fluidRow(
+                          column(4, tags$div(class = "special_button",
+                                             actionButton("jump_to_environmental_sustainability", "Sustainability and equity"))),
+                          column(8, p("Pursuing environmental sustainability and health equity together.")))
+
+                        #                       h4("Covid Recovery"),
+                        #
+                        #                       p("The Scottish Government’s Covid Recovery Strategy aims to reduce systemic inequalities and focuses on three outcomes: "),
+                        #                       p(tags$li("enhancing the wellbeing of children and young people;"),
+                        #                         tags$li("increasing financial security for low income households; and "),
+                        #                         tags$li("creating good, green jobs and fair work.")),
+
+
+
+                ) # tagList
+              ), # conditionalPanel
 
             # Using the dashboard
             conditionalPanel(
@@ -56,7 +108,8 @@ sidebarLayout(
             # News and future updates
             conditionalPanel(
               condition= 'input.home_select == "future"',
-              tagList(h3("News and future updates")
+              tagList(h3("News and future updates"),
+                      p("This section will be updated with news and future updates in due course."),
                 ) # tagList
             ), # conditionalPanel
 
