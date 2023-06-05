@@ -3,14 +3,14 @@ tagList(
   fluidRow(width=12,
            h1("At a glance"),
 
-           p("This tab summarises the most recent data for all the indicators across the Care and Wellbeing Dashboard"),
+           p("This tab summarises the most recent data for all the indicators across the Care and Wellbeing Dashboard."),
 
            p("Select which national or local geography level and area you wish to see data for."),
 
            p(tags$li("Each box will provide the date and value of the latest and previous data for the corresponding indicator",
                      "and provide either the percentage change or difference between these data if available."),
              tags$li("If a box states 'Not available' then the data is not available for the chosen national or local level and area."),
-             tags$li("If a box states 'To be developed', then the data for the corresponding indicator is not yet available on the dashboard")),
+             tags$li("If a box states 'To be developed', then the data for the corresponding indicator is not yet available on the dashboard.")),
 
            p("Clicking on the 'i' button will provide additional information about the indicator."),
 
