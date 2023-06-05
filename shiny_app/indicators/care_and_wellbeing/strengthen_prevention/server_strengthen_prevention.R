@@ -334,12 +334,12 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
   geog <- input$premature_mortality_geog_name
 
-  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
       filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function_pm(., y_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
+      confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4),
            xaxis = list(dtick = 1))
@@ -348,7 +348,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised rate for all-cause premature mortality per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
