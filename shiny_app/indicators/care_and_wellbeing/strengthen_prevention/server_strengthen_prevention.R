@@ -249,7 +249,8 @@ adult_mental_welbeing %>%
          Year = "year") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "mental_wellbeing",
-                     filename = "mental_wellbeing")
+                     filename = "mental_wellbeing",
+                     keep_colnames = c(3))
 
 adult_mental_welbeing_simd %>%
   select(c(year, simd, indicator)) %>%
@@ -258,7 +259,8 @@ adult_mental_welbeing_simd %>%
          SIMD = "simd") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "mental_wellbeing_simd",
-                     filename = "mental_wellbeing_simd")
+                     filename = "mental_wellbeing_simd",
+                     keep_colnames = c(2,3))
 
 ##############################################.
 # HEALTHY WEIGHT ADULTS----
@@ -1447,7 +1449,8 @@ observeEvent(input$screening_breast_geog_name,{
 
   dataDownloadServer(data = data_filtered, data_download = screening_breast_simd,
                      id = "screening_breast_simd", filename = "breast_screening_uptake_by_simd",
-                     add_percentage_cols = c(4))
+                     add_percentage_cols = c(4),
+                     keep_colnames = c(3))
 
 })
 
@@ -1557,7 +1560,8 @@ observeEvent(input$screening_bowel_geog_name,{
 
       dataDownloadServer(data = data_filtered_simd, data_download = data_unfiltered_simd,
                          id = "screening_bowel_simd", filename = "bowel_screening_uptake_by_simd",
-                         add_percentage_cols = c(6))
+                         add_percentage_cols = c(6),
+                         keep_colnames  = c(5))
 
     })
   })
@@ -1635,7 +1639,8 @@ observeEvent(input$vaccinations_covid_geog_name,{
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_covid", filename = "vaccinations_covid",
-                     add_percentage_cols = c(5))
+                     add_percentage_cols = c(5),
+                     keep_colnames = c(4))
 })
 
 
@@ -1706,7 +1711,9 @@ observeEvent(input$vaccinations_flu_geog_name,{
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "vaccinations_flu", filename = "vaccinations_flu",
-                     add_percentage_cols = c(5))
+                     add_percentage_cols = c(5),
+                     keep_colnames = c(4))
+
 })
 
 ##############################################.
