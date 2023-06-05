@@ -217,18 +217,27 @@ altTextServer("child_obesity_alt",
 
 output$child_obesity_plot <- renderPlotly({
 
-  title <- "Percentage of children (2-15) at risk of obesity in Scotland over time"
+  title <- "Children (2-15) at risk of obesity in Scotland over time"
 
   plot <- childhood_obesity %>%
-    mutate(indicator = round_half_up(as.numeric(indicator), 1)) %>%
+  #  filter(!(year %in%  c("2003", "1998)) %>%
+    mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
     line_chart_function(., y_title = "Percentage (%)", title = title)%>%
-    layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
+   # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
+    layout(yaxis = list(#rangemode="tozero",
+                        title = "Percentage (%)",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = FALSE,
+                        ticksuffix = "%",
+                        range=c(10,20)))
+
 
 })
 
 childhood_obesity %>%
   select(c(date, indicator)) %>%
-  mutate(indicator = round_half_up(as.numeric(indicator), 1)) %>%
+  mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
   rename("Percentage of children (%)" = "indicator",
          Year = "date") %>%
   arrange(desc(Year)) %>%
