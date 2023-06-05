@@ -52,36 +52,49 @@ tagList(
                ),
 
                ##############################################.
-               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
+               # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
                ##############################################.
 
-               tabPanel(title = "Alcohol: deaths and first hospital admissions (under 75)",
+               tabPanel(title = "Alcohol: alcohol-related hospital admissions and deaths",
                         value = "alcohol",
 
                         tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
 
 
                                 ##############################################.
-                                # ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+                                # ALCOHOL RELATED HOSPITAL ADMISSIONS ----
                                 ##############################################.
 
                                 tabPanel(title = "Alcohol-related hospital admissions",
                                          value = "alcohol_admissions",
 
-                                         h2("Alcohol related hospital admissions", iButtonUI("alcohol_admissions", content = "Paste background info and source for alcohol admissions here")),
+                                         h2("Alcohol-related hospital admissions",
+                                            iButtonUI("alcohol_admissions",
+                                                      content = paste("This indicator uses data from Public Health Scotland Alcohol related hospital statistics.",
+                                                      "Consumption of alcohol can result in a wide range of health problems. Some may occur after drinking",
+                                                      "over a relatively short period, such as acute intoxication (drunkenness) or poisoning (toxic effect).",
+                                                      "Others develop more gradually, such as damage to the liver and brain. Estimates of the number of",
+                                                      "inpatient and day case hospitalisations are based on counts where alcohol-related conditions are",
+                                                      "diagnosed during the hospital stay. The publication found ",
+                                                      "<a href = https://publichealthscotland.scot/publications/show-all-releases?id=20558 target = _blank> here (external website) </a>",
+                                                      "provides an annual update to figures on the alcohol-related inpatient and day case activity",
+                                                      "taking place within general acute hospitals and psychiatric hospitals in Scotland. ",
+                                                      "<br> <br> Data from the most recent financial year are provisional and subject to change in future",
+                                                      "publications as figures will be updated to reflect more complete data from NHS Boards."))),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_type",
                                                               "Step 1: Select national or local geography level",
                                                               choices = c("Scotland", "Health Board"),
                                                               width = "100%")),
-                                           column(3,
+                                           column(4,
                                                   selectInput("alcohol_admissions_geog_name",
                                                               "Step 2: Select national or local geography area",
                                                               choices = c("Scotland"),
                                                               width = "100%"))),
 
+                                         altTextUI("alcohol_admissions_alt"),
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
@@ -93,40 +106,51 @@ tagList(
 
 
                                 ##############################################.
-                                # ALCOHOL SPECIFIC DEATHS  (aged 45-74)----
+                                # ALCOHOL-SPECIFIC DEATHS ----
                                 ##############################################.
 
-                                tabPanel(title = "Alcohol specific deaths",
+                                tabPanel(title = "Alcohol-specific deaths",
                                          value = "alcohol_deaths",
 
-                                         h2("Alcohol specific deaths", iButtonUI("alcohol_deaths", content = "Paste background info and source for alcohol deaths here")),
+                                         h2("Alcohol-specific deaths",
+                                            iButtonUI("alcohol_deaths",
+                                                      content = paste("Deaths are coded according to the International Statistical Classification of Diseases",
+                                                      "and Related Health Problems, Tenth Revision (ICD-10), which has been used by",
+                                                      "National Records of Scotland (NRS) since the start of 2000. ‘Alcohol-specific’ deaths",
+                                                      "are deaths which are known to be direct consequences of alcohol misuse, meaning they",
+                                                      "are wholly attributable to alcohol misuse. For more information please visit the",
+                                                      "<a href =https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/alcohol-deaths target=_blank> NRS site (external site)."))),
 
                                          fluidRow(
-                                           column(3,
+                                           column(4,
                                                   selectizeInput("alcohol_deaths_sex",
                                                                  "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
-                                                                 selected = "All sexes"))
+                                                                 selected = "All sexes",
+                                                                 width = "100%"))
                                          ),
+
+                                         altTextUI("alcohol_deaths_sex_alt"),
+                                         ciDefinitionUI("alcohol_deaths"),
                                          withSpinner(plotlyOutput("alcohol_deaths_sex_plot")),
+
                                          br(),
-                                         p("Alternative plot, death by age group."),
-                                         br(),
+                                         altTextUI("alcohol_deaths_age_alt"),
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
+                                         h3(textOutput("alcohol_deaths_title")),
+                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
-                                         #                  plot_title("Alcohol specific deaths and age-standardised mortality rates (ASMR) by sex",
-                                         #                             "alcohol_deaths_plot"),
-                                         #
-                                         #                  br(),
-                                         #                  br(),
-                                         #
-                                         #                  plot_title("Rate of alcohol-specific deaths (result of intentional self harm or undetermined intent) in Scotland",
-                                         #                             "alcohol_deaths_by_age_plot"),
-                                         #
-                                         h3("Data Table"),
-                                         DT::dataTableOutput("alcohol_deaths_table")
+                                         tabBox(
+                                           id = "alcohol_deaths_tabBox", height = "250px", width=12,
+                                           tabPanel("Rate for all ages",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_sex")),
+                                           tabPanel("Age breakdown",
+                                                    br(),
+                                                    dataDownloadUI("alcohol_deaths_age"))
+                                         )
                                 )
                         )),
 
@@ -138,14 +162,15 @@ tagList(
                tabPanel(title = "All-cause mortality",
                         value = "all_cause_mortality",
 
-                        h2("All-cause mortality (ages 15-44)", iButtonUI("all_cause_mortality",
-                                                                         content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
-                                                                                         "You can find more information about this",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
-                                                                                         "Information about the background of the statistics can be found on the NRS site:",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
-                                                                                         "and",
-                                                                                         "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
+                        h2("All-cause mortality (ages 15-44)",
+                           iButtonUI("all_cause_mortality",
+                                     content = paste("This indicator uses the National Records of Scotland\\'s (NRS\\'s) statistics of deaths",
+                                                     "You can find more information about this",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target = _blank> here. </a>",
+                                                     "Information about the background of the statistics can be found on the NRS site:",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/general-background-information target = _blank> Vital Events – General Background Information </a>",
+                                                     "and",
+                                                     "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-background-information target = _blank> Deaths – Background Information. </a>"))),
 
                         fluidRow(
                           column(4,
@@ -242,7 +267,7 @@ tagList(
                # DRUGS: DEATHS AND FIRST HOSPITAL ADMISSIONS (UNDER 75) ----
                ##############################################.
 
-               tabPanel(title = "Drugs: deaths and hospital admissions (under 75)",
+               tabPanel(title = "Drugs: deaths and hospital admissions",
                         value = "drugs",
 
                         tabBox(title = "", id = "drugs_tabBox", type = "pills", width = NULL,
@@ -370,14 +395,14 @@ tagList(
                                                                                     "The survey has been run every two years since 2009 and can be found here:",
                                                                                     "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014> https://www.gov.scot/collections/health-and-care-experience-survey/#2013to2014 </a>"))),
 
-                        altTextUI("experience_of_unpaid_carers_alt"),
-                        withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
+                 altTextUI("experience_of_unpaid_carers_alt"),
+               withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
 
-                        br(),
-                        h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
-                        br(),
-                        dataDownloadUI("experience_unpaid_carers")
-               ),
+               br(),
+               h3('Data table: Percentage of unpaid carers who agree with the sentence: "I feel supported to continue caring"'),
+               br(),
+               dataDownloadUI("experience_unpaid_carers")
+                                         ),
 
 
                ##############################################.
@@ -394,7 +419,7 @@ tagList(
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
 
                         br(),
-                        h3("Data table: Total number of first ever hospital admissions for heart attack (under 75) in Scotland"),
+                        h3("Data table: First ever hospital admission for heart attack (under 75) in Scotland"),
                         br(),
                         dataDownloadUI("heart_attack_admission")
 
@@ -463,6 +488,7 @@ tagList(
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("healthy_birthweight")),
+
 
 
 
@@ -620,16 +646,16 @@ tagList(
                         value = "mental_wellbeing",
 
                         h2("Mental wellbeing of adults (16+)",
-                        iButtonUI("mental_wellbeing",
-                                  content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
-                                                  "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
-                                                  "contribution to their community. Positive mental health encourages better quality of life overall,",
-                                                  "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
-                                                  "<br> <br>",
-                                                  "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
-                                                  "<br> <br>",
-                                                  "Further breakdowns can be found on the",
-                                                  "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site).</a>"))),
+                           iButtonUI("mental_wellbeing",
+                                     content = paste("Mental health is defined by the World Health Organization as a state of well-being in which every individual",
+                                                     "realises their own potential, can cope with the stresses of life, can work productively, and is able to make a",
+                                                     "contribution to their community. Positive mental health encourages better quality of life overall,",
+                                                     "healthier lifestyles, better physical health, improved recovery from illness, better social relationships, and higher educational attainment.",
+                                                     "<br> <br>",
+                                                     "This indicator shows trends in mental wellbeing for adults aged 16+ using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
+                                                     "<br> <br>",
+                                                     "Further breakdowns can be found on the",
+                                                     "<a href = https://scotland.shinyapps.io/sg-scottish-health-survey/ target = _blank> SHeS site (external site).</a>"))),
 
                         altTextUI("mental_wellbeing_alt"),
                         wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
@@ -734,8 +760,142 @@ tagList(
                tabPanel(title = "Screening uptake",
                         value = "screening",
 
-                        h2("Screening uptake")
-               ),
+                        tabBox(title = "", id = "screening_tabBox", type = "pills", width = NULL,
+
+                               ##############################################.
+                               # BREAST ----
+                               ##############################################.
+
+
+                               tabPanel(title = "Breast cancer",
+                                        value = "screening_breast",
+
+                                        h2("Screening uptake for breast cancer",
+
+                                           iButtonUI("screening_breast",
+                                                     content = paste("The Scottish Breast Screening Programme (SBSP) invites women aged between 50 and 70 years old for screening every three years.",
+                                                                     "Number of women invited to attend for screening and number of women screened",
+                                                                     "are reported as a count; uptake/attendance. <br> <br>",
+                                                                     "The reporting period (2019-22) includes the pause to the SBSP due to the COVID-19 pandemic.",
+                                                                     "No individuals were invited to breast screenings during this period, causing a reduction",
+                                                                     "in overall numbers screened. Services have worked hard to recover but have been under",
+                                                                     "additional strain with limited capacity due to infection prevention and control measures",
+                                                                     "including social distancing and staffing pressures. <br> <br>",
+                                                                     "More information can be found ",
+                                                                     "<a href = https://www.healthscotland.scot/health-topics/screening/breast-screening target = _blank > here (external link). </a>",
+                                                                     "Alternatively, more information on the latest statistics can be be found",
+                                                                     "<a href= https://publichealthscotland.scot/publications/scottish-breast-screening-programme-statistics/scottish-breast-screening-programme-statistics-annual-update-to-31-march-2022/ target = _blank> here (external link). </a>"))),
+
+                                        altTextUI("screening_breast_board_alt"),
+                                        withSpinner(plotlyOutput("screening_breast_board_plot")),
+                                        br(),
+
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_type",
+                                                                "Step 1. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+
+                                          column(4,
+                                                 selectizeInput("screening_breast_geog_name",
+                                                                "Step 2. Select a national or local geography area",
+                                                                choices = unique(screening_breast_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                                        altTextUI("screening_breast_simd_alt"),
+                                        simdQuintileDefinitionUI("screening_breast_simd"),
+                                        withSpinner(plotlyOutput("screening_breast_simd_plot")),
+
+                                        h3(textOutput("screening_breast_table_title")),
+                                        p("The data table for the SIMD breakdown is based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
+
+                                        tabBox(
+                                          id = "screening_breast_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_breast_simd"))
+                                        )
+
+
+
+                               ),
+
+                               ##############################################.
+                               # BOWEL ----
+                               ##############################################.
+
+                               tabPanel(title = "Bowel cancer",
+                                        value = "screening_bowel",
+
+                                        h2("Screening uptake for bowel cancer",
+                                           iButtonUI("screening_bowel",
+                                                     content = paste("Bowel screening statistics relates to men and women registered",
+                                                                     "with a Community Health Index number at a GP and aged between 50-74",
+                                                                     "years old, who are invited to complete a bowel screening test every two years. <br> <br>",
+                                                                     "The year ranges visualised on this tab start on the 1st May and end on the 31st April. For example, 2020-22 refers to the 1st May 2020 to the 31st April 2022. <br> <br>",
+                                                                     "More information can be found",
+                                                                     "<a href = https://publichealthscotland.scot/publications/scottish-bowel-screening-programme-statistics/scottish-bowel-screening-programme-statistics-for-the-period-of-invitations-from-may-2020-to-april-2022/ target = _blank> here (external link). </a>"))),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_board_year",
+                                                                "Select a year range",
+                                                                choices = unique(screening_bowel_board$year_range),
+                                                                width = "100%"))),
+
+
+                                        altTextUI("screening_bowel_board_alt"),
+                                        withSpinner(plotlyOutput("screening_bowel_board_plot")),
+                                        br(),
+
+                                        fluidRow(
+                                          column(4,
+                                                 selectizeInput("screening_bowel_simd_year",
+                                                                "Step 1. Select a year range",
+                                                                choices = unique(screening_bowel_simd$year_range),
+                                                                width = "100%")),
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_type",
+                                                                "Step 2. Select a national or local geography level",
+                                                                choices = c("Scotland", "Health Board"),
+                                                                width = "100%")),
+
+                                          column(4,
+                                                 selectizeInput("screening_bowel_geog_name",
+                                                                "Step 3. Select a national or local geography area",
+                                                                choices = unique(screening_bowel_simd %>% filter(geography_type == "Scotland") %>%
+                                                                                   .$geography),
+                                                                width = "100%")
+                                          )),
+
+                                        altTextUI("screening_bowel_simd_alt"),
+                                        simdQuintileDefinitionUI("screening_bowel_simd"),
+                                        withSpinner(plotlyOutput("screening_bowel_simd_plot")),
+
+                                        h3(textOutput("screening_bowel_table_title")),
+                                        p("The data tables below are based on the selections above.",
+                                          "To view the full dataset, please use the download buttons below."),
+
+                                        tabBox(
+                                          id = "screening_bowel_tabBox", height = "250px", width=12,
+                                          tabPanel("Health Board",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_board")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("screening_bowel_simd"))
+                                        )
+                               )
+                        )),
 
                ##############################################.
                #  SELF-ASSESSED HEALTH OF ADULTS (16+)----
@@ -767,8 +927,6 @@ tagList(
                tabPanel(title = "Vaccinations uptake",
                         value = "vaccinations",
 
-                        # h2("Vaccinations uptake")
-
                         tabBox(title = "", id = "vaccinations_tabBox", type = "pills", width = NULL,
 
 
@@ -787,9 +945,12 @@ tagList(
                                                                      "NHS to help protect people at risk of COVID-19 and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
 
 
                                         fluidRow(column(4,
@@ -809,7 +970,7 @@ tagList(
 
 
                                         altTextUI("vaccinations_covid_alt"),
-                                        simd10DefinitionUI("vaccinations_covid_simd"),
+                                        simdDecileDefinitionUI("vaccinations_covid_simd"),
                                         withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
                                         br(),
@@ -834,9 +995,13 @@ tagList(
                                                                      "NHS to help protect people at risk of influenza and any further complications. <br> <br>",
                                                                      "The data presented here indicate the number of vaccinations administered and",
                                                                      "uptake across Scotland to those eligible to receive either flu or flu and COVID",
-                                                                     "booster during seasonal vaccination programmes. <br> <br>",
+                                                                     "booster during seasonal vaccination programmes.",
+                                                                     "This tab looks into the uptake for Winter 2022 Flu & COVID-19 vaccination programmes. <br> <br>",
                                                                      "For more information please visit the ",
-                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>"))),
+                                                                     "<a href = https://publichealthscotland.scot/our-areas-of-work/immunisations/seasonal-immunisations/ target = _blank > PHS website.</a>",
+                                                                     "Alternatively, visit the ",
+                                                                     "<a href = https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/national-respiratory-infection-and-covid-19-statistics-1-june-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank> Flu & COVID-19 vaccination uptake in Scotland dashboard (external link)."))),
+
 
                                         fluidRow(column(4,
                                                         selectInput("vaccinations_flu_geog_type",
@@ -851,7 +1016,7 @@ tagList(
                                                                     width = "100%"))),
 
                                         altTextUI("vaccinations_flu_alt"),
-                                        simd10DefinitionUI("vaccinations_flu_simd"),
+                                        simdDecileDefinitionUI("vaccinations_flu_simd"),
                                         withSpinner(plotlyOutput("vaccinations_flu_plot")),
 
                                         br(),
@@ -866,6 +1031,7 @@ tagList(
 
                ),
 
+
                ##############################################.
                # WORK-RELATED ILL HEALTH----
                ##############################################.
@@ -876,7 +1042,7 @@ tagList(
                         h2("Work-related ill health"),
 
                         p("Content to be developed")
-               ),
+               )
 
-  ) # navlistpanel
-) # tagList
+                                ) # navlistpanel
+                        ) # tagList

@@ -3,6 +3,8 @@
 #plot title style
 title_style <- list(size =24, color = "#4B006E", family = "Arial")
 
+subtitle_style <- list(size =20, color = "#4B006E", family = "Arial")
+
 # Insert a chart and its title
 plot_title <- function(title_plot, plot_output, subtitle = "") {
   tagList(h3(title_plot),
@@ -206,7 +208,7 @@ stacked_bar_function = function(data, category_var, title = "") {
     ) %>%
     layout(barmode = "stack",
            xaxis = xaxis_finyear,
-           yaxis = list(title = "Percentage",
+           yaxis = list(title = "Percentage (%)",
                         rangemode="tozero",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
@@ -220,9 +222,8 @@ stacked_bar_function = function(data, category_var, title = "") {
 
 }
 
-mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total", category_var,
-                          mode = "stack", title = "", hover_end = "") {
-
+mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Percentage (%)", category_var,
+                          mode = "group", title = "", hover_end = "") {
 
   #Modifying standard layout
   yaxis_plots[["title"]] <- yaxis_title
@@ -233,9 +234,9 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Total
     plot_ly(x=~x,
             y=~y,
             color = ~category_var,
-            colors = create_palette(category_var),
+            colors = c("#0060a9", phs_colours(c('phs-blue', 'phs-blue-80', 'phs-blue-50', 'phs-blue-30'))),
             type = 'bar',
-            #name = glue("{category_var}{label}"),
+            # name = yaxis_title,
             hovertemplate = ~glue("{y %>% round_half_up(2)}{hover_end}"),
             textposition = "none"
     ) %>%
