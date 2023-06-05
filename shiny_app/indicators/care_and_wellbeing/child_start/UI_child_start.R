@@ -6,17 +6,7 @@ tagList(
   navlistPanel(widths = c(2,10), id = "child_start_panel",
 
 
-               ##############################################.
-               # CHILD MATERIAL DEPRIVATION----
-               ##############################################.
 
-               tabPanel(title = "Child material deprivation (to be developed)",
-                        value = "child_material_deprivation",
-
-                        h2("Child material deprivation"),
-
-                        p("Content to be developed")
-               ),
 
                ##############################################.
                # CHILD SOCIAL AND PHYSICAL DEVELOPMENT----
@@ -96,18 +86,6 @@ tagList(
                ),
 
                ##############################################.
-               # CHILD WELLBEING AND HAPPINESS----
-               ##############################################.
-
-               tabPanel(title = "Child wellbeing and happiness (to be developed)",
-                        value = "child_wellbeing",
-
-                        h2("Child wellbeing and happiness"),
-
-                        p("Content to be developed")
-               ),
-
-               ##############################################.
                # CHILDREN AT RISK OF OBESITY----
                ##############################################.
 
@@ -141,10 +119,10 @@ tagList(
 
                         h2("Infant mortality",
                            iButtonUI("infant_mortality_cw", content = paste("This indicator uses the",
-                                                                      "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths. </a></a>",
-                                                                      "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages. ",
-                                                                      "<br> <br>",
-                                                                      "A live birth is where the baby was born breathing or showing other signs of life."))),
+                                                                            "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/deaths-time-series-data target=_blank> National Records of Scotland’s (NRS\\'s) statistics of deaths. </a></a>",
+                                                                            "Information about the basis of these statistics is available from the Vital Events – General Background Information and the Deaths – Background Information pages. ",
+                                                                            "<br> <br>",
+                                                                            "A live birth is where the baby was born breathing or showing other signs of life."))),
 
                         altTextUI("infant_mortality_cw_alt"),
                         withSpinner(plotlyOutput("infant_mortality_cw_plot")),
@@ -156,6 +134,29 @@ tagList(
                         dataDownloadUI("infant_mortality_cw")
                ),
 
+               ##############################################.
+               # CHILD MATERIAL DEPRIVATION----
+               ##############################################.
+
+               tabPanel(title = "Child material deprivation (to be developed)",
+                        value = "child_material_deprivation",
+
+                        h2("Child material deprivation"),
+
+                        p("Content to be developed")
+               ),
+
+               ##############################################.
+               # CHILD WELLBEING AND HAPPINESS----
+               ##############################################.
+
+               tabPanel(title = "Child wellbeing and happiness (to be developed)",
+                        value = "child_wellbeing",
+
+                        h2("Child wellbeing and happiness"),
+
+                        p("Content to be developed")
+               ),
 
                ##############################################.
                # PERINATAL MORTALITY RATE----
