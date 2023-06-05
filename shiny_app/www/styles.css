@@ -254,21 +254,21 @@ th, td {
     background-size: 100% auto;
     color: var(--phs-purple-S);
     box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
-    background-color: var(--vlight-purple);
+    background-color: var(--phs-purple-W);
     background-position: right center;
 }
 
 .special_button > .btn:hover {
     background-position: right center;
     background-color: var(--phs-purple-S);
-    color: var(--vlight-purple);
+    color: var(--phs-purple-W);
     box-shadow: 0 4px 10px 0 var(--phs-purple-S);
 }
 
 .special_button > .btn:focus:active {
     outline: none;
     background-color: var(--phs-purple-S);
-    color: var(--vlight-purple);
+    color: var(--phs-purple-W);
     box-shadow: 0 8px 15px 0 var(--phs-purple-S);
 }
 
