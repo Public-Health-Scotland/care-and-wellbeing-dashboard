@@ -455,7 +455,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate of death <br>per 100,000 population"
+    indicator_y = "Rate of deaths <br>per 100,000 population"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -913,7 +913,9 @@ output$alcohol_deaths_sex_plot = renderPlotly({
            "indicator" = rate) %>%
     confidence_line_function(y_title = "Age-sex standardised rate of death <br> per 100,000 population",
                              x_title = "Year",
-                             title=title)
+                             title=title) %>%
+    layout(xaxis = list(dtick = 1, tickangle = -30))
+
 })
 
 altTextServer("alcohol_deaths_age_alt",
@@ -940,7 +942,9 @@ output$alcohol_deaths_age_plot = renderPlotly({
     make_line_chart_multi_lines(., x = .$year, y = .$indicator,
                                 colour = .$age_group,
                                 y_axis_title = "Age-sex standardised rate of death <br> per 100,000 population",
-                                title=title)
+                                title=title) %>%
+    layout(xaxis = list(dtick = 1, tickangle = -30))
+
 })
 
 observeEvent(input$alcohol_deaths_tabBox, {
