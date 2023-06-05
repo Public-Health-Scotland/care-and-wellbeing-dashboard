@@ -911,7 +911,7 @@ output$alcohol_deaths_sex_plot = renderPlotly({
            "upper_confidence_interval" = upper_ci,
            "date" = year,
            "indicator" = rate) %>%
-    confidence_line_function(y_title = "Age-sex standardised rate of death <br> per 100,000 population",
+    confidence_line_function(y_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
                              x_title = "Year",
                              title=title) %>%
     layout(xaxis = list(dtick = 1, tickangle = -30))
@@ -941,7 +941,7 @@ output$alcohol_deaths_age_plot = renderPlotly({
 
     make_line_chart_multi_lines(., x = .$year, y = .$indicator,
                                 colour = .$age_group,
-                                y_axis_title = "Age-sex standardised rate of death <br> per 100,000 population",
+                                y_axis_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
                                 title=title) %>%
     layout(xaxis = list(dtick = 1, tickangle = -30))
 
