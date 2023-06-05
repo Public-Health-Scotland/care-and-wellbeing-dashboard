@@ -121,6 +121,9 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         altTextUI("gender_pay_gap_cw_alt"),
 
 
+                        br(),
+                        br(),
+
                         sidebarLayout(
                           sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
                                                     choices = list("All" = "All", "Public" = "Public", "Private" = "Private"),

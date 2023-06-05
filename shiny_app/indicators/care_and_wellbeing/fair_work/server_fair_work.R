@@ -35,7 +35,8 @@ output$employees_living_wage_cw_sector_plot = renderPlotly({
                         titlefont = list(size=18),
                         showline = FALSE,
                         ticksuffix = "%",
-                        range=c(0,35)))
+                        range=c(0,35)),
+           legend = list(y = -0.4))
 
 })
 
