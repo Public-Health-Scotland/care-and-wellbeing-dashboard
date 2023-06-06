@@ -728,7 +728,7 @@ tagList(
                                                                      "<br><br>Source:",
                                                                      "<a href=https://www.healthscotland.scot/health-topics/screening/breast-screening/ target = _blank> Breast screening, Public Health Scotland (external site)</a>.",
                                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is ",
-                                                                     "is 2019-2022 year range",
+                                                                     "is 2019-2022 year range.",
                                                                      #"More up to data is available at source.",
                                                                      "<br><br>These data are available at Scotland,",
                                                                      "and NHS Health Board levels with additional breakdown by SIMD quintile.",
@@ -786,14 +786,15 @@ tagList(
 
                                         h2("Screening uptake for bowel cancer",
                                            iButtonUI("screening_bowel",
-                                                     content = paste("This indicator provides data on the number of women invited to attend for breast cancer screening.",
+                                                     content = paste("This indicator provides data of the number of men",
+                                                     "and women invited to attend for bowel cancer screening.",
                                                                      "<br><br>Source:",
                                                                      "<a href=https://publichealthscotland.scot/publications/scottish-bowel-screening-programme-statistics/scottish-bowel-screening-programme-statistics-for-the-period-of-invitations-from-may-2020-to-april-2022/ target = _blank> Scottish bowel screening programme statistics(external site)</a>.",
                                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is ",
                                                                      "is 2020-2022 year range",
                                                                      #"More up to data is available at source.",
                                                                      "<br><br>These data are available at Scotland,",
-                                                                     "and NHS Health Board levels with additional breakdowns by age and SIMD quintile.",
+                                                                     "and NHS Health Board levels with additional breakdowns by sex and SIMD quintile.",
                                                                      "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                                         fluidRow(
