@@ -11,12 +11,12 @@ tagList(
                         value = "asthma_admissions",
 
                         h2("Admissions for asthma", iButtonUI("asthma_admissions",
-                                                              content = paste("The Scottish Morbidity Record (SMR) database is the",
-                                                                              "national inpatient and day case database in Scotland. These statistics",
-                                                                              "are derived from data collected on discharges from non-obstetric and",
-                                                                              "non-psychiatric hospitals (SMR01).",
-                                                                              "For more information, please visit the",
-                                                                              "<a href= https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/ target = _blank> PHS website. </a>"))),
+                                                              content = paste("This indicator provides data on asthma related hospital admisions.",
+                                                                              "Source:",
+                                                                              "<a href=https://publichealthscotland.scot/publications/acute-hospital-activity-and-nhs-beds-information-annual/acute-hospital-activity-and-nhs-beds-information-annual-annual-year-ending-31-march-2022/, target = _blank> Acute hospital activity and NHS beds information (annual), March 2022 (external site)</a>.",
+                                                                              "<br><br> The most current data available displayed in the Care and Wellbeing dashboard is 2021/22.",
+                                                                              "<br><br>These data are available at Scotland and NHS Health Board level with additional breakdown by age and sex.  ",
+                                                                              "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_breakdowns",
