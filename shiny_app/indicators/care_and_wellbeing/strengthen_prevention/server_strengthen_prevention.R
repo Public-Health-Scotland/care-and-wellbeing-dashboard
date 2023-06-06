@@ -1197,141 +1197,141 @@ altTextServer("asthma_admissions_alt",
 
 ################# COVID #####################
 
-# observeEvent(input$vaccinations_covid_geog_type,
-#              {
-#
-#                vacc_filtered = vaccinations_covid %>%
-#                  filter(geography_type == input$vaccinations_covid_geog_type)
-#
-#
-#                updateSelectizeInput(session, "vaccinations_covid_geog_name",
-#                                     choices = unique(vacc_filtered$geography))
-#              })
-#
-# altTextServer("vaccinations_covid_alt",
-#               title = "Covid vaccinations uptake plot",
-#               content = tags$ul(tags$li("This is a bar plot for the breakdown of vaccination uptake by SIMD as at 29 January 2023."),
-#                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
-#                                 tags$li("The y axis is the percentage uptake of vaccinations."),
-#                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-#                                         "geography level and area for plotting. The default is Scotland.")
-#
-#               )
-# )
-#
-#
-#
-# output$vaccinations_covid_plot <- renderPlotly({
-#
-#   plot <- vaccinations_covid %>%
-#     filter(geography == input$vaccinations_covid_geog_name) %>%
-#     mode_bar_plot(x = .$SIMD,
-#                   y = .$uptake_percent,
-#                   xaxis_title = "SIMD",
-#                   yaxis_title = "Percentage (%)",
-#                   category_var = .$value,
-#                   hover_end = "%",
-#                   title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}, ",
-#                                "as at 29 January 2023")) %>%
-#     layout(yaxis = list(ticksuffix = "%"))
-#
-# })
-#
-#
-# observeEvent(input$vaccinations_covid_geog_name,{
-#
-#   output$vaccinations_covid_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
-#                                                       "eligible population by SIMD in {input$vaccinations_covid_geog_name}"))})
-# })
-#
-#
-# observeEvent(input$vaccinations_covid_geog_name,{
-#
-#   data_unfiltered <- vaccinations_covid %>%
-#     filter(!is.na(vaccinated)) %>%
-#     select(geography_type, geography, SIMD, eligible_winter_2022_population,
-#            vaccinated, uptake_percent) %>%
-#     rename(`uptake_percentage_(%)` = uptake_percent,
-#            vaccinated_population = vaccinated)
-#
-#   data_filtered <- data_unfiltered %>%
-#     filter(geography == input$vaccinations_covid_geog_name)
-#
-#   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-#                      id = "vaccinations_covid", filename = "vaccinations_covid",
-#                      add_separator_cols = c(4,5),
-#                      add_percentage_cols = c(6),
-#                      cap_colname = c(3))
-# })
+observeEvent(input$vaccinations_covid_geog_type,
+             {
+
+               vacc_filtered = vaccinations_covid %>%
+                 filter(geography_type == input$vaccinations_covid_geog_type)
+
+
+               updateSelectizeInput(session, "vaccinations_covid_geog_name",
+                                    choices = unique(vacc_filtered$geography))
+             })
+
+altTextServer("vaccinations_covid_alt",
+              title = "Covid vaccinations uptake plot",
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of vaccination uptake by SIMD as at 29 January 2023."),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+                                tags$li("The y axis is the percentage uptake of vaccinations."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
+
+
+
+output$vaccinations_covid_plot <- renderPlotly({
+
+  plot <- vaccinations_covid %>%
+    filter(geography == input$vaccinations_covid_geog_name) %>%
+    mode_bar_plot(x = .$SIMD,
+                  y = .$uptake_percent,
+                  xaxis_title = "SIMD",
+                  yaxis_title = "Percentage (%)",
+                  category_var = .$value,
+                  hover_end = "%",
+                  title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}, ",
+                               "as at 29 January 2023")) %>%
+    layout(yaxis = list(ticksuffix = "%"))
+
+})
+
+
+observeEvent(input$vaccinations_covid_geog_name,{
+
+  output$vaccinations_covid_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
+                                                      "eligible population by SIMD in {input$vaccinations_covid_geog_name}"))})
+})
+
+
+observeEvent(input$vaccinations_covid_geog_name,{
+
+  data_unfiltered <- vaccinations_covid %>%
+    filter(!is.na(vaccinated)) %>%
+    select(geography_type, geography, SIMD, eligible_winter_2022_population,
+           vaccinated, uptake_percent) %>%
+    rename(`uptake_percentage_(%)` = uptake_percent,
+           vaccinated_population = vaccinated)
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$vaccinations_covid_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "vaccinations_covid", filename = "vaccinations_covid",
+                     add_separator_cols = c(4,5),
+                     add_percentage_cols = c(6),
+                     cap_colname = c(3))
+})
 #
 #
 # ############## FLU ##################
 #
-# observeEvent(input$vaccinations_flu_geog_type,
-#              {
-#
-#                vacc_filtered = vaccinations_flu %>%
-#                  filter(geography_type == input$vaccinations_flu_geog_type)
-#
-#
-#                updateSelectizeInput(session, "vaccinations_flu_geog_name",
-#                                     choices = unique(vacc_filtered$geography))
-#              })
-#
-# altTextServer("vaccinations_flu_alt",
-#               title = "Influenza vaccinations uptake plot",
-#               content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccination uptake by SIMD as at 29 January 2023."),
-#                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
-#                                 tags$li("The y axis is the percentage uptake of vaccinations."),
-#                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-#                                         "geography level and area for plotting. The default is Scotland.")
-#
-#               )
-# )
-#
-#
-# output$vaccinations_flu_plot <- renderPlotly({
-#
-#   plot <- vaccinations_flu %>%
-#     filter(geography == input$vaccinations_flu_geog_name) %>%
-#     mode_bar_plot(x = .$SIMD,
-#                   y = .$uptake_percent,
-#                   xaxis_title = "SIMD",
-#                   yaxis_title = "Percentage (%)",
-#                   category_var = .$value,
-#                   hover_end = "%",
-#                   title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, ",
-#                                "as at 29 January 2023")) %>%
-#     layout(yaxis = list(ticksuffix = "%"))
-#
-# })
-#
-#
-# observeEvent(input$vaccinations_flu_geog_name,{
-#
-#   output$vaccinations_flu_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
-#                                                     "eligible population by SIMD in {input$vaccinations_flu_geog_name}"))})
-# })
-#
-#
-# observeEvent(input$vaccinations_flu_geog_name,{
-#
-#   data_unfiltered <- vaccinations_flu %>%
-#     filter(!is.na(vaccinated)) %>%
-#     select(geography_type, geography, SIMD, eligible_winter_2022_population,
-#            vaccinated, uptake_percent) %>%
-#     rename(`uptake_percentage_(%)` = uptake_percent,
-#            vaccinated_population = vaccinated)
-#
-#   data_filtered <- data_unfiltered %>%
-#     filter(geography == input$vaccinations_flu_geog_name)
-#
-#   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-#                      id = "vaccinations_flu", filename = "vaccinations_flu",
-#                      add_separator_cols = c(4,5),
-#                      add_percentage_cols = c(6),
-#                      cap_colname = c(3))
-# })
+observeEvent(input$vaccinations_flu_geog_type,
+             {
+
+               vacc_filtered = vaccinations_flu %>%
+                 filter(geography_type == input$vaccinations_flu_geog_type)
+
+
+               updateSelectizeInput(session, "vaccinations_flu_geog_name",
+                                    choices = unique(vacc_filtered$geography))
+             })
+
+altTextServer("vaccinations_flu_alt",
+              title = "Influenza vaccinations uptake plot",
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of influenza vaccination uptake by SIMD as at 29 January 2023."),
+                                tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived."),
+                                tags$li("The y axis is the percentage uptake of vaccinations."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+
+              )
+)
+
+
+output$vaccinations_flu_plot <- renderPlotly({
+
+  plot <- vaccinations_flu %>%
+    filter(geography == input$vaccinations_flu_geog_name) %>%
+    mode_bar_plot(x = .$SIMD,
+                  y = .$uptake_percent,
+                  xaxis_title = "SIMD",
+                  yaxis_title = "Percentage (%)",
+                  category_var = .$value,
+                  hover_end = "%",
+                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, ",
+                               "as at 29 January 2023")) %>%
+    layout(yaxis = list(ticksuffix = "%"))
+
+})
+
+
+observeEvent(input$vaccinations_flu_geog_name,{
+
+  output$vaccinations_flu_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
+                                                    "eligible population by SIMD in {input$vaccinations_flu_geog_name}"))})
+})
+
+
+observeEvent(input$vaccinations_flu_geog_name,{
+
+  data_unfiltered <- vaccinations_flu %>%
+    filter(!is.na(vaccinated)) %>%
+    select(geography_type, geography, SIMD, eligible_winter_2022_population,
+           vaccinated, uptake_percent) %>%
+    rename(`uptake_percentage_(%)` = uptake_percent,
+           vaccinated_population = vaccinated)
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$vaccinations_flu_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "vaccinations_flu", filename = "vaccinations_flu",
+                     add_separator_cols = c(4,5),
+                     add_percentage_cols = c(6),
+                     cap_colname = c(3))
+})
 
 ##############################################.
 # EXPERIENCE OF SOCIAL CARE RECIPIENTS----
