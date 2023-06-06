@@ -411,7 +411,16 @@ tagList(
 
                         h2("First ever hospital admission for heart attack (under 75)",
                            iButtonUI("heart_attack_admission",
-                                     content = paste(""))),
+                                     content =  paste("This indicator provides data for heart attack-related hospital admisions.",
+
+                                                      "<br><br>Source: TO BE CONFIRMED",
+                                                     # "<a href=https://www.gov.scot/collections/health-and-care-experience-survey/ target = _blank> Health and Care Experience Survey, Scottish Government</a>.",
+                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is ",
+                                                      "is the year range 2020/21",
+                                                      "More up to data is available at source.",
+                                                      "<br><br>These data are available at Scotland level,",
+                                                      # " NHS Health Board and Council Area levels.",
+                                                      "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                         altTextUI("hospital_admission_heart_attack_alt"),
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
