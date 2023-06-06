@@ -33,7 +33,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_child_start", "Early years"))),
-                          column(8, p("Giving every child the best start in life"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_child_start2", "Giving every child the best start in life")))),
 
                         br(),
 
@@ -41,7 +42,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_control_lives", "Education"))),
-                          column(8, p("Enabling all to maximise their capabilities and have control over their lives"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_control_lives2", "Enabling all to maximise their capabilities and have control over their lives")))),
 
                         br(),
 
@@ -49,7 +51,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_fair_work", "Work"))),
-                          column(8, p("Creating fair employment and good work for all"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_fair_work2", "Creating fair employment and good work for all")))),
 
                         br(),
 
@@ -57,7 +60,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_healthy_standard", "Living standards"))),
-                          column(8, p("Ensuring a healthy standard of living for all"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_healthy_standard2", "Ensuring a healthy standard of living for all")))),
 
                         br(),
 
@@ -65,7 +69,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_sustainable_communities", "Places"))),
-                          column(8, p("Creating and developing healthy and sustainable places and communities"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_sustainable_communities2", "Creating and developing healthy and sustainable places and communities")))),
 
                         br(),
 
@@ -73,7 +78,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_strengthen_prevention", "Ill health prevention"))),
-                          column(8, p("Strengthening the role and impact of ill health prevention"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_strengthen_prevention2", "Strengthening the role and impact of ill health prevention")))),
 
                         br(),
 
@@ -81,7 +87,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_discrimination_racism", "Discrimination and racism"))),
-                          column(8, p("Tackling discrimination, racism and their outcomes"))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_discrimination_racism2", "Tackling discrimination, racism and their outcomes")))),
 
                         br(),
 
@@ -89,7 +96,8 @@ sidebarLayout(
                         fluidRow(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_environmental_sustainability", "Sustainability and equity"))),
-                          column(8, p("Pursuing environmental sustainability and health equity together."))),
+                          column(8, tags$div(class= "invisible_button",
+                                             actionButton("jump_to_environmental_sustainability2", "Pursuing environmental sustainability and health equity together.")))),
 
 
                       br(),
