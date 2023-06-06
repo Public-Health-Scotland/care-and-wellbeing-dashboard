@@ -45,7 +45,7 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # HOME ----
         ##############################################.
-        tabPanel(title = "Home",
+        tabPanel(title = tags$b("Home"),
                  #icon = icon_no_warning_fn("house"),
                  value = "home",
 
@@ -56,7 +56,7 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # SUMMARY V2 ----
         ##############################################.
-        tabPanel(title = "At a glance",
+        tabPanel(title = tags$b("At a glance"),
                  value = "summary",
 
                  source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
@@ -88,7 +88,7 @@ ui <- shinymanager::secure_app(
         # CARE AND WELLBEING ----
         ##############################################.
 
-        navbarMenu(title = "Care and Wellbeing", #icon = icon_no_warning_fn("spa"),
+        navbarMenu(title = tags$b("Care and Wellbeing"), #icon = icon_no_warning_fn("spa"),
 
 
                    tabPanel(title = "Strengthen the role and impact of ill health prevention",
