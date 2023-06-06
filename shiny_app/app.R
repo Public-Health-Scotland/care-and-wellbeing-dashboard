@@ -130,13 +130,13 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # INFORMATION AND NOTES ----
         ##############################################.
-        tabPanel(title = "Information and Notes",
-                 #icon = icon_no_warning_fn("lemon"),
-                 value = "info_notes",
-
-                 source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
-
-        ) # tabpanel
+        # tabPanel(title = "Information and Notes",
+        #          #icon = icon_no_warning_fn("lemon"),
+        #          value = "info_notes",
+        #
+        #          source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
+        #
+        # ) # tabpanel
       ) # navbar
     ) # taglist
   ) # ui fluidpage
