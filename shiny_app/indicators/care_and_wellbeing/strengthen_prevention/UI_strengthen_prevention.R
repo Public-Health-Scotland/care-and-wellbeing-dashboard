@@ -284,10 +284,10 @@ tagList(
                                                                                                          "general acute and psychiatric hospital stays with a diagnosis of drug misuse.",
                                                                                                          "<br><br>Source:",
                                                                                                          "<a href=https://www.publichealthscotland.scot/publications/show-all-releases?id=32315/ target = _blank>  Drug-related hospital statistics, PHS (external site)</a>.",
-                                                                                                         "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 20109-2020 year range.",
+                                                                                                         "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 2019-2020 year range.",
                                                                                                          "More up to data is available at source.",
                                                                                                          "<br><br>These data are available at Scotland,",
-                                                                                                         "level with additional breakdown by age,",
+                                                                                                         "level with additional breakdown by age.",
                                                                                                          "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                                         fluidRow(
@@ -319,10 +319,14 @@ tagList(
                                         value = "drug_deaths",
 
                                         h2("Drug-related deaths", iButtonUI("drug_deaths",
-                                                                            content = paste("Statistics of drug-related deaths in 2021 and earlier years,",
-                                                                                            "broken down by age, sex, substances implicated in the death, underlying",
-                                                                                            "cause of death, and NHS Board and Council areas can be found",
-                                                                                            "<a href = https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/drug-related-deaths-in-scotland target = _blank> here (external link). </a>"))),
+                                                                            content =  paste("This indicator provides data on drug-related deaths.",
+                                                                                             "<br><br>Source:",
+                                                                                             "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/drug-related-deaths-in-scotland/ target = _blank>  Drug Related Deaths in Scotland, NRS (external site)</a>.",
+                                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 20107-2021 year range.",
+                                                                                             #"More up to data is available at source.",
+                                                                                             "<br><br>These data are available at Scotland,",
+                                                                                             " NHS Health Board and Council Area levels.",
+                                                                                             "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                                         fluidRow(
                                           column(4,
