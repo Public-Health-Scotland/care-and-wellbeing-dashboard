@@ -12,16 +12,16 @@ tagList(
                         value = "camhs_waiting_times_cw",
 
                         h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw",
-                                                            content = paste("<p>Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
-                                                                            "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
-                                                                            "children and young people should start treatment within 18 weeks of referral to CAMHS.</p>",
-
-                                                                            "<p>For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
-                                                                            "are providing initial telephone triage to elicit more information. Dependent on levels of ",
-                                                                            "risk identified some will be offered a time/date to undertake a complete assessment where ",
-                                                                            "others, where levels of risk/concern identified a face-to-face assessment will be offered.</p>",
-
-                                                                            "<a href=https://publichealthscotland.scot/publications/show-all-releases?id=20497> Source: CAMHS Waiting Times, Public Health Scotland </a>"))),
+                                                            content = paste("This indicator provides data on Child and Adolescent Mental Health Services",
+                                                            "(CAMHS) appointment waiting times.",
+                                                                            "<br><br>Source:",
+                                                                            "<a href= https://publichealthscotland.scot/publications/show-all-releases?id=20497/ target =_blank> CAMHS waiting times,  Public Health Scotland (external site)</a>.",
+                                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
+                                                                            "is 2021",
+                                                                            "More up to data is available at source.",
+                                                                            "<br><br>These data are available at Scotland",
+                                                                            "and NH Health Board levels.",
+                                                                            "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                         # p("Use the below drop-down menu to select a Health Board of interest.",
                         #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
