@@ -34,7 +34,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         withSpinner(plotlyOutput("economic_inactivity_cw_plot")),
 
                         br(),
-                        h3(textOutput("economic_inactivity_cw_table_title")),
+                        uiOutput("economic_inactivity_cw_table_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("economic_inactivity_cw")
@@ -100,7 +100,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                         ),
 
                         br(),
-                        h3(textOutput("living_wage_cw_table_title")),
+                        uiOutput("living_wage_cw_table_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("living_wage_cw")),
@@ -149,7 +149,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
 
 
-                        h3(textOutput("gender_pay_gap_cw_table_title")),
+                        uiOutput("gender_pay_gap_cw_table_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         tabBox(

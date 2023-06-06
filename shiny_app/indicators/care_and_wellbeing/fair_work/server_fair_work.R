@@ -210,8 +210,8 @@ dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
                    id = "living_wage_cw", filename = "living_wage_by_council",
                    add_separator_cols_1dp = c(3))
 
-output$living_wage_cw_table_title <- renderText({
-  glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
+output$living_wage_cw_table_title <- renderUI({
+  h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland"))
 })
 
 observeEvent(input$employees_living_wage_cw_map_button, {
@@ -220,8 +220,8 @@ observeEvent(input$employees_living_wage_cw_map_button, {
                      id = "living_wage_cw", filename = "living_wage_by_council",
                      add_separator_cols_1dp = c(3))
 
-  output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
+  output$living_wage_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland"))
   })
 
 })
@@ -239,8 +239,8 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 
   la_selected <- unique(living_wage_la$local_authority)
 
-  output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected)
+  output$living_wage_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected))
   })
 
 })
@@ -345,7 +345,7 @@ observeEvent(input$gender_pay_gap_cw_tabBox, {
                     tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
   string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-  output$gender_pay_gap_cw_table_title <- renderText({glue(string_tab, string_sector, string_work)})
+  output$gender_pay_gap_cw_table_title <- renderUI({h3(glue(string_tab, string_sector, string_work))})
     })
   })
 })
@@ -423,9 +423,9 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
 observeEvent(input$economic_inactivity_cw_geog_name, {
 
-  output$economic_inactivity_cw_table_title <- renderText({
-    glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
-         input$economic_inactivity_cw_geog_name)})
+  output$economic_inactivity_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+         input$economic_inactivity_cw_geog_name))})
 
 })
 

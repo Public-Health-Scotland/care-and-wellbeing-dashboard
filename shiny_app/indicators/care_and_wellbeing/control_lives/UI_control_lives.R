@@ -53,7 +53,7 @@ tagList(
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_within_plot")),
 
                         br(),
-                        h3(textOutput({"camhs_cw_table_title"})),
+                        uiOutput({"camhs_cw_table_title"}),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("camhs_cw")

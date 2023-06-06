@@ -94,9 +94,9 @@ observeEvent(input$camhs_waiting_times_cw_geog_name,{
 
 observeEvent(input$camhs_waiting_times_cw_geog_name, {
 
-  output$camhs_cw_table_title <- renderText({
-    glue("Data table: Percentage of CAMHS patients seen by wait time since referral in ",
-         input$camhs_waiting_times_cw_geog_name)})
+  output$camhs_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of CAMHS patients seen by wait time since referral in ",
+         input$camhs_waiting_times_cw_geog_name))})
 
 })
 

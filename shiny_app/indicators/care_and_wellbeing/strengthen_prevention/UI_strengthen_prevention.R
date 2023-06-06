@@ -43,7 +43,7 @@ tagList(
                         withSpinner(plotlyOutput("asthma_admissions_plot")),
 
                         br(),
-                        h3(textOutput("asthma_admissions_title")),
+                        uiOutput("asthma_admissions_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("asthma_admissions")
@@ -98,7 +98,7 @@ tagList(
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
-                                         h3(textOutput("alcohol_admissions_title")),
+                                         uiOutput("alcohol_admissions_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("alcohol_related_admissions")
@@ -139,7 +139,7 @@ tagList(
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
-                                         h3(textOutput("alcohol_deaths_title")),
+                                         uiOutput("alcohol_deaths_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                                          tabBox(
@@ -199,7 +199,7 @@ tagList(
                         withSpinner(plotlyOutput("all_cause_mortality_plot")),
 
                         br(),
-                        h3(textOutput("all_cause_mortality_title")),
+                        uiOutput("all_cause_mortality_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("all_cause_mortality")
@@ -254,7 +254,7 @@ tagList(
                         withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
-                        h3(textOutput("chd_deaths_title")),
+                        uiOutput("chd_deaths_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("chd_deaths")
@@ -303,7 +303,7 @@ tagList(
                                         withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
-                                        h3(textOutput("drug_admissions_title")),
+                                        uiOutput("drug_admissions_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("drug_admissions")
@@ -355,7 +355,7 @@ tagList(
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
-                                        h3(textOutput("drug_deaths_title")),
+                                        uiOutput("drug_deaths_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("drug_deaths")
@@ -462,7 +462,7 @@ tagList(
                         withSpinner(plotlyOutput("healthy_birthweight_plot")),
 
                         br(),
-                        h3(textOutput("healthy_birthweight_title")),
+                        uiOutput("healthy_birthweight_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("healthy_birthweight")),
@@ -515,7 +515,7 @@ tagList(
                                          withSpinner(plotlyOutput("life_expectancy_council_area_plot")),
 
                                          br(),
-                                         h3(textOutput("life_expectancy_title")),
+                                         uiOutput("life_expectancy_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("life_expectancy")
@@ -568,7 +568,7 @@ tagList(
                                          withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
 
                                          br(),
-                                         h3(textOutput("healthy_life_expectancy_title")),
+                                         uiOutput("healthy_life_expectancy_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("healthy_life_expectancy")
@@ -678,7 +678,7 @@ tagList(
                         ciDefinitionUI("premature_mortality_hb_ci"),
                         withSpinner(plotlyOutput("premature_mortality_hb_plot")),
 
-                        h3(textOutput("premature_mortality_hb_title")),
+                        uiOutput("premature_mortality_hb_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         dataDownloadUI("premature_mortality_hb"),
 
@@ -752,7 +752,7 @@ tagList(
                                         simdQuintileDefinitionUI("screening_breast_simd"),
                                         withSpinner(plotlyOutput("screening_breast_simd_plot")),
 
-                                        h3(textOutput("screening_breast_table_title")),
+                                        uiOutput("screening_breast_table_title"),
                                         p("The data table for the SIMD breakdown is based on the selections above.",
                                           "To view the full dataset, please use the download buttons below."),
 
@@ -822,7 +822,7 @@ tagList(
                                         simdQuintileDefinitionUI("screening_bowel_simd"),
                                         withSpinner(plotlyOutput("screening_bowel_simd_plot")),
 
-                                        h3(textOutput("screening_bowel_table_title")),
+                                        uiOutput("screening_bowel_table_title"),
                                         p("The data tables below are based on the selections above.",
                                           "To view the full dataset, please use the download buttons below."),
 
@@ -915,7 +915,7 @@ tagList(
                                         withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
                                         br(),
-                                        h3(textOutput("vaccinations_covid_title")),
+                                        uiOutput("vaccinations_covid_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("vaccinations_covid")
@@ -961,7 +961,7 @@ tagList(
                                         withSpinner(plotlyOutput("vaccinations_flu_plot")),
 
                                         br(),
-                                        h3(textOutput("vaccinations_flu_title")),
+                                        uiOutput("vaccinations_flu_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("vaccinations_flu"),
