@@ -170,7 +170,7 @@ tagList(
                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 2021.",
                                                            "More up to data is available at source.",
                                                            "<br><br>These data are available at Scotland, NHS Health Board",
-                                                            "and Council Area levels with additional breakdown by sex.",
+                                                            "and Council Area levels.",
                                                            "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                         fluidRow(
@@ -217,18 +217,16 @@ tagList(
                         value = "chd_deaths",
 
                         h2("Coronary heart disease (CHD) deaths (under 75)",
-                           iButtonUI("chd_deaths", content = paste("This indicator uses SMR data and covers early deaths from coronary",
-                                                                   "heart disease (CHD). Heart disease is a broad term for a variety of",
-                                                                   "conditions that affect the structure and function of the heart.",
-                                                                   "The most common type of heart disease is coronary heart disease (CHD)",
-                                                                   "where the blood vessels carrying oxygen-rich blood (coronary arteries)",
-                                                                   "to the heart muscle become narrowed or blocked. If insufficient blood",
-                                                                   "reaches the heart muscle the result can be damage to the heart muscle",
-                                                                   "which is known as a heart attack.",
-                                                                   "<br> <br>",
-                                                                   "Public Health Scotland publishes a range of heart disease-related information.",
-                                                                   "You can find all our information on the heart disease section of the",
-                                                                   "<a href=https://beta.isdscotland.org/topics/heart-disease-and-stroke/ target = _blank> Data and Intelligence website. </a>"))),
+                           iButtonUI("chd_deaths",
+                                     content = paste("This indicator provides data on early deaths from Coronary Heart Disease (CHD).",
+                                                     "<br><br>Source:",
+                                                     "<a href=https://publichealthscotland.scot/our-areas-of-work/conditions-and-diseases/heart-disease-and-stroke/overview/ target = _blank> Public Health Scotland Data and Intelligence website (external site)</a>.",
+                                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 2018-2020.",
+                                                                      "More up to data is available at source.",
+                                                                      "<br><br>These data are available at Scotland,",
+                                                                      "NHS Health Board, HSCP partnership,",
+                                                                      "local Authority, Locality and Intermediate Zone (2011) levels.",
+                                                                      "<br><br> More detailed information can be found in the accompanying metadata file."))),
 
                         fluidRow(
                           column(4,
