@@ -8,9 +8,18 @@ sidebarLayout(
             # About
             conditionalPanel(
               condition= 'input.home_select == "about"',
-              tagList(h3("Care & Wellbeing"), #div
+              tagList(h3(tags$b("Care & Wellbeing Dashboard")),
 
-                      #h4("Care & Wellbeing"),
+                      box(width = 12,
+                          #class = "info",
+                          #status = "primary",
+                          #icon = icon_no_warning_fn("user-shield"),
+                          p("The dashboard and indicators will continue to be updated over the coming months.",
+                            "This is an early release of the dashboard - it will be further developed following",
+                            "user feedback. Please send any feeback to",
+                            tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))),
+                      br(),
+                      br(),
 
                       p("The Care & Wellbeing dashboard is one source of data and intelligence to support the",
                         "ambitions to improve population health, address health inequalities and improve the",
@@ -22,10 +31,6 @@ sidebarLayout(
                         p("A range of indicators are included in this dashboard structured around the evidence-based",
                           "Marmot framework which looks at the social determinants of health, the conditions in which",
                           "people are born, grow, live, work and age which can lead to health inequalities."),
-                        p("The dashboard and indicators will continue to be updated over the coming months.",
-                          "This is an early release of the dashboard - it will be further developed following",
-                          "user feedback. Please send any feeback to",
-                          tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot")),
                         p("Explore the latest data below."),
                         br(),
 

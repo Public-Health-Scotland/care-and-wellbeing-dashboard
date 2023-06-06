@@ -235,7 +235,7 @@ th, td {
 
 
 /*https://codepen.io/JavaScriptJunkie/pen/pPRooV*/
-/*Special buttons for intro page*/
+/*Special buttons for home page*/
  .special_button > .btn{
     /*display: block;*/
     text-align: right;
@@ -273,7 +273,7 @@ th, td {
 }
 
 
-/*Invisible buttons for intro page*/
+/*Invisible buttons for home page*/
  .invisible_button > .btn{
     /*display: block;*/
     text-align: left;
@@ -319,9 +319,18 @@ th, td {
 
 /* box */
 .box {
-  background-color: var(--phs-liberty-10);
-  border-radius: 5px 5px 5px 5px;
-  box-shadow: 0 8px 8px var(--phs-blue-30)
+    border-radius: 5px;
+    border: 2px solid var(--phs-purple-S);
+    margin: 15px 15px 15px -15px;
+    width:  100%;
+    min-height: 50px;
+    background-size: 100% auto;
+    box-shadow: 0 0 0 0;
+    background-color: var(--vlight-purple);
+    font-weight: 400;
+    font-size: 18px;
+    color: black;
+    padding: 10px 0px 0px 15px;
 }
 
 /* boxes for summary page*/
@@ -329,6 +338,8 @@ th, td {
    background-color: var(--vlight-purple);
    box-shadow: 0 8px 8px var(--phs-purple-M)
 }
+
+
 
 /*
  For info box e.g. summary page boxes
