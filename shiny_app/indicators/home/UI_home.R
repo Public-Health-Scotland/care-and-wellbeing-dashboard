@@ -11,10 +11,8 @@ sidebarLayout(
               tagList(h3(tags$b("Care & Wellbeing Dashboard")),
 
                       box(width = 12,
-                          #class = "info",
-                          #status = "primary",
-                          #icon = icon_no_warning_fn("user-shield"),
-                          p("The dashboard and indicators will continue to be updated over the coming months.",
+                          status = "warning",
+                          p(icon("inbox", style = "color: #4B006E"), "  The dashboard and indicators will continue to be updated over the coming months.",
                             "This is an early release of the dashboard - it will be further developed following",
                             "user feedback. Please send any feeback to",
                             tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))),
