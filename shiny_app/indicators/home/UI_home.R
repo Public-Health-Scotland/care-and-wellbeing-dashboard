@@ -12,9 +12,10 @@ sidebarLayout(
 
                       box(width = 12,
                           status = "warning",
-                          p(icon("inbox", style = "color: #4B006E"), "  The dashboard and indicators will continue to be updated over the coming months.",
-                            "This is an early release of the dashboard - it will be further developed following",
-                            "user feedback. Please send any feeback to",
+                          p(icon("inbox", style = "color: #4B006E"),
+                            "  This is an early release of the dashboard and it will be further developed following",
+                            "user feedback. The dashboard and indicators will continue to be updated over the coming months.",
+                            "Please send any feeback to",
                             tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))),
                       br(),
                       br(),
@@ -121,13 +122,78 @@ sidebarLayout(
             # Using the dashboard
             conditionalPanel(
               condition= 'input.home_select == "use"',
-              tagList(h3("Using the dashboard")) #tagList
-                      ), # condtionalPanel
+              tagList(h3(tags$b("Using the dashboard")),
+                              p(tags$li("Click on tabs in the purple navigation bar at the top to view each section")),
+                                # tags$img(src = "intro_images/nav_bar.png", height = 50,
+                                # alt ="Image of the a part of the navigation bar for reference")),
+                              p(tags$li("Click on 'At a glance' to view the most recently available statistics")),
+                                # tags$img(src = "intro_images/at_a_glance_tab.png", height = 50,
+                                # alt ="Image of the 'At a glance' tab in the navigation bar")),
+                              p(tags$li("Click on 'Care and Wellbeing' to view the indicators in each objective in more detail")),
+                                # tags$img(src = "intro_images/cases.png", height = 50,
+                                # alt ="Image of the 'COVID-19 cases' tab in the navigation bar"),
+                             br(),
+
+                             p(tags$b("Within each indicator tab")),
+                            # p(tags$li("Click the 'Metadata' button in each tab to navigate to corresponding notes"),
+                            #   tags$img(src = "intro_images/metadata_btn.png", height = 50,
+                            #            alt ="Image of the metadata button")),
+                             p(tags$li("Click on the toggles to change the visible sub-indicator")),
+                            #   "e.g.", tags$img(src = "intro_images/tab_toggles.png", height = 50,
+                            #                    alt ="Image of the tab toggle options used in the tabs. This image shows an example of the toggles
+                            #    in the 'COVID-19 hospital admissions' tab")),
+                             p(tags$li("Click the 'background information and source' button for further information on the indicator and the data source")),
+                            # p(tags$li("Click 'Plot/Data' toggle to switch between chart and data table view"),
+                            #   tags$img(src = "intro_images/plot_data_toggle.png", height = 60,
+                            #            alt ="Image of the plot and data toggle")),
+                             p(tags$li("Select an appropriate breakdown if available using the drop down menus. This will change the data displayed in both the chart and the table.")),
+                             br(),
+
+                             p(tags$b("Interacting with the charts")),
+                             p(tags$li("Click the 'Plot description' button for a summary of the plot content")),
+                            #   tags$img(src = "intro_images/plot_description.png", height = 50,
+                            #            alt ="Image of the plot description button")),
+                             p(tags$li("Click the 'Using the plot' button for a recap of the information in this section")),
+                              #   tags$img(src = "intro_images/using_the_plot.png", height = 50,
+                              #            alt ="Image of the 'using the plot' button on the charts which when clicked,
+                              #    provides a recap of the 'ineracting with the charts' section")),
+                             p(tags$li("Move the cursor over the data points in the charts to see the data values")),
+                             p(tags$li("Click the magnifying glass in the top right of the charts to enable zoom capabilities.
+                                        Then zoom into the plot by holding down the cursor and dragging to select the region")),
+                            # tags$a(img(src = "intro_images/zoom_graph.png", height = 60,
+                            #            alt ="Image of the zoom button on the graphs"))),
+                             p(tags$li("Click the pan button (four way arrows) in the top right of the charts to enable panning capabilites.
+                                        Then move the chart around by holding down the cursor and dragging")),
+                            # tags$img(src = "intro_images/pan_graph.png", height = 60,
+                            #          alt ="Image of the pan button")),
+                            # p(tags$li("Alter the x axis range by dragging the vertical white bars on the left and right of the bottom panel")),
+                             p(tags$li("Click the home button in the top right to reset the axes")),
+                            #   tags$img(src = "intro_images/home_graph.png", height = 50,
+                            #            alt ="Image of the home button on the graphs used to reset the axes")),
+                             p(tags$li("Single click on legend variables to remove the corresponding trace")),
+                             p(tags$li("Double click on legend variables to isolate the corresponding trace")),
+                             p(tags$li("Double click on the legend to restore all traces")),
+                             p(tags$li("Click the camera icon in the top right to download the plot as a png file")),
+                            #   tags$a(img(src = "intro_images/camera.png", height = 50,
+                            #              alt ="Image of the camera button on the graphs used to download the plot as a png file"))),
+
+                             br(),
+                             p(tags$b("Downloading data")),
+                             p(tags$li("Data can be downloaded from the data table within each indicator. Click either the 'CSV' or 'Excel' button above
+                                       the table depending on what format you require")),
+                            # tags$a(href="https://www.opendata.nhs.scot",
+                            #        "Scottish Health and Social Care Open Data platform (external website)", target="_blank")),
+                            # tags$img(src = "intro_images/download_data.png", height = 50,
+                            #          alt ="Image of the download data button")
+
+
+            )
+              ), # condtionalPanel
 
             # News and future updates
             conditionalPanel(
               condition= 'input.home_select == "future"',
-              tagList(h3("News and future updates"),
+              tagList(h3(tags$b("News and future updates")),
                       p("This is an early release of the dashboard and it will be further developed shaped by user feedback."),
                       p("Over the coming months, we are planning to:",
                         tags$li("Add content for all indicators"),
@@ -143,7 +209,7 @@ sidebarLayout(
             # Further information
             conditionalPanel(
               condition= 'input.home_select == "info"',
-              tagList(h3("Care & Wellbeing Portfolio"),
+              tagList(h3(tags$b("Care & Wellbeing Portfolio")),
                       p("The", tags$a(href= "https://www.gov.scot/groups/care-and-wellbeing-portfolio-board/", "Care & Wellbeing Portfolio (CWP)"),
                         "is the principal strategic reform vehicle in the Scottish Government.  It brings oversight and coherence to the",
                         "major health and care reform programmes designed to improve population health, address health inequalities",
