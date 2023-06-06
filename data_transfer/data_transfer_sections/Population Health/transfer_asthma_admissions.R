@@ -55,7 +55,17 @@ input_asthma_admissions %<>%
   mutate(age_group = str_remove(age_group, " years"),
          age_group = factor(age_group, levels = c( "0-4", "5-9", "10-14", "15-19", "<18", "20-24", "25-29", "30-34",
                                                    "35-39", "40-44",  "45-49", "50-54", "55-59", "60-64", "65+",
-                                                   "65-69", "70-74", "75+", "75-79", "80-84", "85+",  "85-89", "90+", "All Ages"))) %>%
+                                                   "65-69", "70-74", "75+", "75-79", "80-84", "85+",  "85-89", "90+", "All Ages")),
+         age_bands = case_when(age_group %in% c("0-4", "5-9") ~ "0-9",
+                               age_group %in% c("10-14", "15-19") ~ "10-19",
+                               age_group %in% c("20-24", "25-29") ~ "20-29",
+                               age_group %in% c("30-34", "35-39") ~ "30-39",
+                               age_group %in% c("40-44", "45-49") ~ "40-49",
+                               age_group %in% c("50-54", "55-59") ~ "50-59",
+                               age_group %in% c("60-64", "65-69") ~ "60-69",
+                               age_group %in% c("70-74", "75-79") ~ "70-79",
+                               age_group %in% c("80-84", "85-89") ~ "80-89",
+                               T ~ age_group)) %>%
   arrange(age_group) %>%
   summary_format_function(date = .$date,
                           geog_type = .$geog_type,

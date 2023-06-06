@@ -338,9 +338,9 @@ output$premature_mortality_hb_plot <- renderPlotly({
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
-      filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
-                               x_title = "Year", title = title) %>%
+    filter(geography == input$premature_mortality_geog_name) %>%
+    confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
+                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4),
            xaxis = list(dtick = 1))
 
@@ -370,20 +370,20 @@ observeEvent(input$premature_mortality_geog_name,{
   output$premature_mortality_hb_title <- renderText({glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
                                                           "in ", input$premature_mortality_geog_name)})
 
-    data_unfiltered <- premature_mortality_all_cause_hb %>%
-      arrange(desc(date)) %>%
-      mutate(date = factor(date)) %>%
-      select(c(date, geography_type, geography, indicator,
-               lower_confidence_interval, upper_confidence_interval)) %>%
-      rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
-             "Year" = "date")
+  data_unfiltered <- premature_mortality_all_cause_hb %>%
+    arrange(desc(date)) %>%
+    mutate(date = factor(date)) %>%
+    select(c(date, geography_type, geography, indicator,
+             lower_confidence_interval, upper_confidence_interval)) %>%
+    rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
+           "Year" = "date")
 
-    data_filtered <- data_unfiltered %>%
-        filter(geography == input$premature_mortality_geog_name)
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$premature_mortality_geog_name)
 
-    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
-                       add_separator_cols_1dp = c(4,5,6))
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
+                     add_separator_cols_1dp = c(4,5,6))
 
 })
 
@@ -467,8 +467,8 @@ output$all_cause_mortality_plot = renderPlotly({
   line_chart_function(data, indicator_y,
                       title = title,
                       label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths")) %>%
-  layout(yaxis=list(tickformat=","),
-         xaxis = list(tickangle = -30))
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(tickangle = -30))
 
 })
 
@@ -605,7 +605,7 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 heart_attack %>%
   select(date, total_admissions) %>%
   filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                       "2016","2017","2018","2019","2020")) %>%
+                      "2016","2017","2018","2019","2020")) %>%
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
@@ -1044,7 +1044,7 @@ output$healthy_birthweight_plot = renderPlotly({
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type,
            financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
-                                         "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
+                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
     layout(xaxis = list(tickangle = -30),
            legend = list(y = -0.4))
@@ -1223,12 +1223,15 @@ output$asthma_admissions_plot <- renderPlotly({
 
     plot <- asthma_admissions %>%
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
-      filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
-      arrange(age_group) %>%
+      filter(!(age_bands %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
+      arrange(age_bands) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
-                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
-                                  title = title)%>%
+      # make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
+      #                             x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+      #                             title = title)%>%
+      mode_bar_plot(x = .$date, y = .$indicator, category_var = .$age_bands,
+                    xaxis_title = "Year range", yaxis_title = "Total number of admissions",
+                    title = title, mode = "stack") %>%
       layout(yaxis=list(tickformat=","))
 
 
@@ -1236,12 +1239,15 @@ output$asthma_admissions_plot <- renderPlotly({
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
     plot <- asthma_admissions %>%
-      filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
+      filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name, sex != "All Sexes") %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
-                                  x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
-                                  title = title)%>%
-      layout(yaxis=list(tickformat=","))
+      # make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
+      #                             x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
+      #                             title = title)%>%
+      mode_bar_plot(x = .$date, y = .$indicator, category_var = .$sex,
+                    xaxis_title = "Year range", yaxis_title = "Total number of admissions",
+                    title = title, mode = "stack") %>%
+    layout(yaxis=list(tickformat=","))
 
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
@@ -1266,8 +1272,8 @@ observeEvent(input$asthma_admissions_breakdowns,{
       mutate(provisional = ifelse(provisional == "1", "p", ""),
              date = factor(date),
              sex = factor(sex),
-             age_group = factor(age_group)) %>%
-      select(c(date, geography_type, geography, sex, age_group, indicator, provisional)) %>%
+             age_bands = factor(age_bands)) %>%
+      select(c(date, geography_type, geography, sex, age_bands, indicator, provisional)) %>%
       rename(`Total number of admissions` = "indicator",
              "Year" = "date",
              "Is data provisional (p)?" = "provisional")
@@ -1275,7 +1281,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
     if(input$asthma_admissions_breakdowns == "Yearly total"){
 
       data_filtered <- data_unfiltered %>%
-        filter(sex == "All Sexes", age_group == "All Ages",
+        filter(sex == "All Sexes", age_bands == "All Ages",
                geography == input$asthma_admissions_geog_name)
 
     } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
@@ -1283,13 +1289,13 @@ observeEvent(input$asthma_admissions_breakdowns,{
       data_filtered <- data_unfiltered %>%
         filter(sex == "All Sexes",
                geography == input$asthma_admissions_geog_name) %>%
-        filter(!(age_group %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
+        filter(!(age_bands %in% c("All Ages", "65+", "75+", "85+", "90+", "<18")))
 
 
     } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
       data_filtered <- data_unfiltered %>%
-        filter(age_group == "All Ages",
+        filter(age_bands == "All Ages",
                geography == input$asthma_admissions_geog_name)
     }
 
