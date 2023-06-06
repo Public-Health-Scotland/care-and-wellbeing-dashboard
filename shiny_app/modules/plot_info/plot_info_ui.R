@@ -55,7 +55,7 @@ mapInfoButtonUI <- function(id, placement = "bottom") {
                                   "<li>Click an area of the map to get a pop up with the area\\'s name, and the key data.</li>",
                                   "<li>Hold down and move your cursor to pan around the map.</li>",
                                   "<li>Use the \\'+\\' or \\'-\\' buttons in the top left corner of the map to zoom in or out respectively.</li>",
-                                  "<li>The key to the map is found in the bottom right corner.</li>",
+                                  "<li>The map legend is found in the bottom right corner.</li>",
                                   "</ul>",
                                   strong("Click again to close.")),
                   placement = placement,
