@@ -155,49 +155,49 @@ sidebarLayout(
             ), # conditionalPane
 
             # Accessibility
-            conditionalPanel(
-              condition= 'input.home_select == "accessibility"',
-              tagList(h3("Accessibility"),
-
-                              p("This website is run by ", tags$a(href="https://www.publichealthscotland.scot/",
-                                                                  "Public Health Scotland", target="_blank"),
-                                ", Scotland's national organisation for public health. As a new organisation formed
-                                   on 01 April 2020, Public Health Scotland is currently reviewing its web estate. Public
-                                   Health Scotland is committed to making its website accessible, in accordance with
-                                   the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility
-                                   Regulations 2018. This accessibility statement applies to the dashboard that accompanies
-                                   the HSMR quarterly publication."),
-                              p(tags$a(href="https://mcmw.abilitynet.org.uk/", "AbilityNet (external website)", target="_blank"),
-                                " has advice on making your device easier to use if you have a disability."),
-
-                              p(tags$b("Compliance status")),
-                              p("This site has not yet been evaluated against Web Content Accessibility Guidelines
-                                   version 2.1 level AA standard. We are currently working towards an evaluation."),
-                              br(),
-                              p(tags$b("Accessible features")),
-                              p("We have taken the following steps to make this dashboard more accessible:"),
-                              p(tags$li("Colours have been chosen to meet colour contrast standards")),
-                              p(tags$li("Plot colours have been chosen to be colour blind friendly")),
-                              p(tags$li("The dashboard can be navigated using a keyboard")),
-                              p(tags$li("The content is still readable at 400% zoom")),
-                              p(tags$li("Alternative descriptions of plot contents have been provided via 'Plot description' buttons")),
-                              p(tags$li("Data tables have been provided alongside plots where possible")),
-                              p(tags$li("Hover content has been replaced with clickable content where possible")),
-                              br(),
-                              p(tags$b("Reporting any accessibility problems with this website")),
-                              p("If you wish to contact us about any accessibility issues you encounter on this
-                                   site, please email "), #, tags$a(href="mailto:phs.covid19data&analytics@phs.scot", "phs.covid19data&analytics@phs.scot", ".")),
-
-                              p(tags$b("Enforcement procedure")),
-                              p("The Equality and Human Rights Commission (EHRC) is responsible for enforcing the
-                                   Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations
-                                   2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint,",
-                                tags$a(href="https://www.equalityadvisoryservice.com/", "contact the Equality Advisory and Support Service (EASS) (external website).",
-                                       target = "_blank")),
-
-                              p(tags$b("Preparation of this accessibility statement")),
-                              p("This statement was prepared on 13 January 2023. It was last reviewed on 13 January 2023.")
-              ) # tagList
-            ) # conditonalPanel
+            # conditionalPanel(
+            #   condition= 'input.home_select == "accessibility"',
+            #   tagList(h3("Accessibility"),
+            #
+            #                   p("This website is run by ", tags$a(href="https://www.publichealthscotland.scot/",
+            #                                                       "Public Health Scotland", target="_blank"),
+            #                     ", Scotland's national organisation for public health. As a new organisation formed
+            #                        on 01 April 2020, Public Health Scotland is currently reviewing its web estate. Public
+            #                        Health Scotland is committed to making its website accessible, in accordance with
+            #                        the Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility
+            #                        Regulations 2018. This accessibility statement applies to the dashboard that accompanies
+            #                        the HSMR quarterly publication."),
+            #                   p(tags$a(href="https://mcmw.abilitynet.org.uk/", "AbilityNet (external website)", target="_blank"),
+            #                     " has advice on making your device easier to use if you have a disability."),
+            #
+            #                   p(tags$b("Compliance status")),
+            #                   p("This site has not yet been evaluated against Web Content Accessibility Guidelines
+            #                        version 2.1 level AA standard. We are currently working towards an evaluation."),
+            #                   br(),
+            #                   p(tags$b("Accessible features")),
+            #                   p("We have taken the following steps to make this dashboard more accessible:"),
+            #                   p(tags$li("Colours have been chosen to meet colour contrast standards")),
+            #                   p(tags$li("Plot colours have been chosen to be colour blind friendly")),
+            #                   p(tags$li("The dashboard can be navigated using a keyboard")),
+            #                   p(tags$li("The content is still readable at 400% zoom")),
+            #                   p(tags$li("Alternative descriptions of plot contents have been provided via 'Plot description' buttons")),
+            #                   p(tags$li("Data tables have been provided alongside plots where possible")),
+            #                   p(tags$li("Hover content has been replaced with clickable content where possible")),
+            #                   br(),
+            #                   p(tags$b("Reporting any accessibility problems with this website")),
+            #                   p("If you wish to contact us about any accessibility issues you encounter on this
+            #                        site, please email "), #, tags$a(href="mailto:phs.covid19data&analytics@phs.scot", "phs.covid19data&analytics@phs.scot", ".")),
+            #
+            #                   p(tags$b("Enforcement procedure")),
+            #                   p("The Equality and Human Rights Commission (EHRC) is responsible for enforcing the
+            #                        Public Sector Bodies (Websites and Mobile Applications) (No. 2) Accessibility Regulations
+            #                        2018 (the ‘accessibility regulations’). If you’re not happy with how we respond to your complaint,",
+            #                     tags$a(href="https://www.equalityadvisoryservice.com/", "contact the Equality Advisory and Support Service (EASS) (external website).",
+            #                            target = "_blank")),
+            #
+            #                   p(tags$b("Preparation of this accessibility statement")),
+            #                   p("This statement was prepared on 13 January 2023. It was last reviewed on 13 January 2023.")
+            #   ) # tagList
+            # ) # conditonalPanel
                       ) # mainPanel
   ) # sidebarLayout
