@@ -128,30 +128,57 @@ sidebarLayout(
             conditionalPanel(
               condition= 'input.home_select == "future"',
               tagList(h3("News and future updates"),
-                      p("This section will be updated with news and future updates in due course."),
+                      p("This is an early release of the dashboard and it will be further developed shaped by user feedback."),
+                      p("Over the coming months, we are planning to:",
+                        tags$li("Add content for all indicators"),
+                        tags$li("Review and add further equalities breakdowns where data exists"),
+                        tags$li("Develop the ‘at a glance’ section to make it easier to gain a quick overview and assessment of progress across the Marmot policy objectives"),
+                        tags$li("Add further metadata to help explain the rationale for each indicator"),
+                        tags$li("Review and add new indicators where needed")),
+                      p("We are keen to develop the dashboard in an agile way and hear feedback from users."),
+                      p("Please send any feedback to", tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))
                 ) # tagList
             ), # conditionalPanel
 
             # Further information
             conditionalPanel(
               condition= 'input.home_select == "info"',
-              tagList(h3("Further sources of information"),
+              tagList(h3("Care & Wellbeing Portfolio"),
+                      p("The", tags$a(href= "https://www.gov.scot/groups/care-and-wellbeing-portfolio-board/", "Care & Wellbeing Portfolio (CWP)"),
+                        "is the principal strategic reform vehicle in the Scottish Government.  It brings oversight and coherence to the",
+                        "major health and care reform programmes designed to improve population health, address health inequalities",
+                        "and improve health and care system sustainability."),
+
+                      p("The underpinning framework of the Portfolio is the evidence-based Marmot model of factors – \"policy objectives\"",
+                        "that create health and reduce inequalities.  This globally recognised framework was first set out in",
+                        tags$a(href= "https://www.instituteofhealthequity.org/resources-reports/fair-society-healthy-lives-the-marmot-review", "Fair Society, Health Lives"),
+                        "in 2010, updated in a", tags$a(href = "https://www.health.org.uk/publications/reports/the-marmot-review-10-years-on", "10 year on report."),
+                        "These include good early years; good education; good work; good income; healthy places; tackling discrimination",
+                        "and racism; and good ill health prevention."),
+                      br(),
+
+
+                      h4("Other resources"),
+
+                      p("The Care & Wellbeing dashboard is one source of data and intelligence.",
+                        "A number of other sources of helpful information is also available:"),
+
+
                       p(tags$li("The ", tags$b("Scottish Public Health Observatory"), "collaboration is led by Public Health Scotland, ",
                                 "and includes the Glasgow Centre for Population Health, the MRC/CSO Social and Public Health Sciences Unit, ",
                                 "National Records of Scotland and the Scottish Learning Disabilities Observatory. ",
-                                "It provides a clear picture of the health of the Scottish population and the factors that affect it. ",
-                                tags$p("More information can be found here: ",
-                                tags$a(href="https://www.scotpho.org.uk/", "ScotPHO"))),
-                        tags$li("The ",  tags$b("Improvement Service (IS)"),  "is the 'go-to' organisation for local government improvement in Scotland. ",
-                                "The IS was established in 2005 as the national improvement organisation for Local Government in Scotland. ",
-                                "We were set up to deliver improvement support that would help councils to provide effective community leadership, ",
-                                "strong local governance and deliver high quality, efficient local services. ",
-                                tags$p("More information can be found here:",
-                                tags$a(href="https://www.improvementservice.org.uk/","Improvement Service"))),
-                        tags$li("The ",  tags$b("Local Government Benchmarking Framework (LGBF)"),  "is a high-level benchmarking tool designed to ",
-                                "support senior management teams and elected members to ask questions about key council services.",
-                                tags$p("More information can be found here:",
-                                       tags$a(href="https://www.improvementservice.org.uk/benchmarking/home","Local Government Benchmarking Framework"))))
+                                "The ScotPHO profiles present a range of indicators to give an overview of health",
+                                "and its wider determinants at a local level. More information can be found at: ",
+                                tags$a(href="https://www.scotpho.org.uk/comparative-health/profiles/online-profiles-tool/", "Online Profiles Tool - ScotPHO"))),
+                      p(tags$li("The ",  tags$b("Improvement Service (IS)"),  "is the 'go-to' organisation for local government improvement in Scotland. ",
+                                "It provides performance management and benchmarking products and services to help councils assess and improve",
+                                "their own performance, and support decision-making in councils and community planning partnerships.",
+                                "More information can be found at: ",
+                                tags$a(href="https://www.improvementservice.org.uk/products-and-services/performance-management-and-benchmarking","Performance Management and Benchmarking | Improvement Service"))),
+                      p(tags$li("The ", tags$b("National Performance Framework (NPF)"), "provides a measure of national wellbeing and keeps track",
+                                "of how Scotland is performing. It aims to reduce inequalities and gives equal importance to economic,",
+                                "environmental and social progress. More information can be found at:",
+                                tags$a(href= "https://nationalperformance.gov.scot/measuring-progress", "Measuring progress | National Performance Framework")))
 
 
                       ) # tagList
