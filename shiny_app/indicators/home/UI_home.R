@@ -27,7 +27,7 @@ sidebarLayout(
                           tags$a(href= "https://www.gov.scot/groups/care-and-wellbeing-portfolio-board/", "Care & Wellbeing Portfolio"),
                           "to improve population health, address health inequalities and improve the health and care system."),
                         p("Many of the influences on health outcomes lie out with health and social care.",
-                          "Collective action across government, with local government partners and the wider",
+                          "Collective action across government, with health boards, local government partners and the wider",
                           "public sector, is fundamental to improving population health and reducing health inequalities."),
                         p("A range of indicators are included in this dashboard structured around the evidence-based",
                           "Marmot framework which looks at the social determinants of health, the conditions in which",
