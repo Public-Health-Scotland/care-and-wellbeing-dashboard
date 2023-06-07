@@ -85,7 +85,7 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_strengthen_prevention", "Ill health prevention"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_strengthen_prevention2", "Strengthening the role and impact of ill health prevention")))),
+                                             actionButton("jump_to_strengthen_prevention2", "Strengthen the role and impact of ill health prevention")))),
 
                         br(),
 
@@ -233,7 +233,7 @@ sidebarLayout(
                         "A number of other sources of helpful information is also available:"),
 
 
-                      p(tags$li("The ", tags$b("Scottish Public Health Observatory"), "collaboration is led by Public Health Scotland, ",
+                      p(tags$li("The ", tags$b("Scottish Public Health Observatory (ScotPHO)"), "collaboration is led by Public Health Scotland, ",
                                 "and includes the Glasgow Centre for Population Health, the MRC/CSO Social and Public Health Sciences Unit, ",
                                 "National Records of Scotland and the Scottish Learning Disabilities Observatory. ",
                                 "The ScotPHO profiles present a range of indicators to give an overview of health",
