@@ -220,7 +220,7 @@ output$child_obesity_plot <- renderPlotly({
   title <- "Children (2-15) at risk of obesity in Scotland over time"
 
   plot <- childhood_obesity %>%
-  #  filter(!(year %in%  c("2003", "1998)) %>%
+    filter(!(date %in%  c("2003", "1998"))) %>%
     mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
     line_chart_function(., y_title = "Percentage (%)", title = title)%>%
    # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
@@ -237,6 +237,7 @@ output$child_obesity_plot <- renderPlotly({
 
 childhood_obesity %>%
   select(c(date, indicator)) %>%
+  filter(!(date %in%  c("2003", "1998"))) %>%
   mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
   rename("Percentage of children (%)" = "indicator",
          Year = "date") %>%
