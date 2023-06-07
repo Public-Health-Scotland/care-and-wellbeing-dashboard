@@ -6,7 +6,7 @@ tagList(
            p("Select at which national or local geography level and area you wish to see data for."),
 
            p(tags$li("Each box will provide the date and value of the latest data for the corresponding indicator and the change from a previous time point."),
-             tags$li("If a box states TBC, then it has not yet been confimed if the indicator will be moved onto the dashboard."),
+             tags$li("If a box states 'To be developed', then the content for that indicator is still to be added to the dashboard."),
              tags$li("If a box states 'Not available' then the data is not available for the chosen national or local level and area.")),
 
            p("Clicking on the 'i' button will provide additional information about the indicator."),
