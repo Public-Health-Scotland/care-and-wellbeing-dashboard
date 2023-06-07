@@ -21,7 +21,8 @@ tagList(
                                                                             "More up to data is available at source.",
                                                                             "<br><br>These data are available at Scotland",
                                                                             "and NH Health Board levels.",
-                                                                            "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                            "<br><br> More detailed information can be found in the accompanying",
+                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         # p("Use the below drop-down menu to select a Health Board of interest.",
                         #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),

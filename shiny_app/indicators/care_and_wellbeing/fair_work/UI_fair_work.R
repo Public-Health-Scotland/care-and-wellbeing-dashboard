@@ -21,7 +21,8 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                                              "More up to data is available at source.",
                                                                              "<br><br>These data are available at Scotland",
                                                                              "and Council Area levels.",
-                                                                             "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                            "<br><br> More detailed information can be found in the accompanying",
+                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(column(3,
                                           selectInput("economic_inactivity_cw_geog_type",
@@ -67,7 +68,8 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                                              "More up to data is available at source.",
                                                                              "<br><br>These data are available at a Scotland",
                                                                              "level.",
-                                                                             "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                             "<br><br> More detailed information can be found in the accompanying",
+                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
 
@@ -125,7 +127,8 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                                                              "More up to data is available at source.",
                                                                                              "<br><br>These data are available at a Scotland",
                                                                                              "level.",
-                                                                                             "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                                            "<br><br> More detailed information can be found in the accompanying",
+                                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("gender_pay_gap_cw_alt"),
 
