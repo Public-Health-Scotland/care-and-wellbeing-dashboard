@@ -24,7 +24,8 @@ tagList(
                                                                               "More up to data is available at source.",
                                                                               "<br><br>These data are available at Scotland",
                                                                               ", NHS Health Board and Council Area levels.",
-                                                                              "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                              "<br><br> More detailed information can be found in the accompanying",
+                                                                              "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
                           "Scotland will always be displayed"),
@@ -86,7 +87,8 @@ tagList(
                                                                         #"More up to data is available at source.",
                                                                         "<br><br>These data are available at Scotland level",
                                                                         #", NHS Health Board and Council Area levels.",
-                                                                        "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                     "<br><br> More detailed information can be found in the accompanying",
+                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("child_obesity_alt"),
                         withSpinner(plotlyOutput("child_obesity_plot")),
@@ -115,7 +117,8 @@ tagList(
                                                                             "More up to data is available at source.",
                                                                             "<br><br>These data are available at Scotland",
                                                                             "level.",
-                                                                            "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                            "<br><br> More detailed information can be found in the accompanying",
+                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("infant_mortality_cw_alt"),
                         withSpinner(plotlyOutput("infant_mortality_cw_plot")),

@@ -746,7 +746,8 @@ tagList(
                                                                      #"More up to data is available at source.",
                                                                      "<br><br>These data are available at Scotland,",
                                                                      "and NHS Health Board levels with additional breakdown by SIMD quintile.",
-                                                                     "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                     "<br><br> More detailed information can be found in the accompanying",
+                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         altTextUI("screening_breast_board_alt"),
                                         withSpinner(plotlyOutput("screening_breast_board_plot")),
@@ -809,7 +810,8 @@ tagList(
                                                                      #"More up to data is available at source.",
                                                                      "<br><br>These data are available at Scotland,",
                                                                      "and NHS Health Board levels with additional breakdowns by sex and SIMD quintile.",
-                                                                     "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                     "<br><br> More detailed information can be found in the accompanying",
+                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         fluidRow(
                                           column(4,
@@ -880,7 +882,8 @@ tagList(
                                                     #"More up to data is available at source.",
                                                     "<br><br>These data are available at Scotland level.",
                                                     #"and NHS Health Board levels.",
-                                                    "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                   "<br><br> More detailed information can be found in the accompanying",
+                                                   "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("adult_self_assessed_health_alt"),
                         withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
@@ -915,7 +918,8 @@ tagList(
                                                                      #"More up to data is available at source.",
                                                                      "<br><br>These data are available at Scotland level",
                                                                      "and NHS Health Board levels.",
-                                                                     "<br><br> More detailed information can be found in the accompanying metadata file."))),
+                                                                     "<br><br> More detailed information can be found in the accompanying",
+                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                                         fluidRow(column(4,
@@ -960,8 +964,8 @@ tagList(
                                                                        #"More up to data is available at source.",
                                                                        "<br><br>These data are available at Scotland level",
                                                                        "and NHS Health Board levels.",
-                                                                       "<br><br> More detailed information can be found in the accompanying metadata file."))),
-
+                                                                     "<br><br> More detailed information can be found in the accompanying",
+                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                                         fluidRow(column(4,
