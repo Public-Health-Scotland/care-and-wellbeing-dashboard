@@ -12,11 +12,13 @@ sidebarLayout(
 
                       box(width = 12,
                           status = "warning",
-                          p(icon("inbox", style = "color: #4B006E"),
-                            "  This is an early release of the dashboard and it will be further developed following",
-                            "user feedback. The dashboard and indicators will continue to be updated over the coming months.",
-                            "Please send any feeback to",
-                            tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))),
+                          fluidRow(column(1, style = 'margin-right: -15px',
+                                          p(icon("inbox", style = "color: #4B006E"))),
+                                  (column(11, style = 'margin-left: -15px',
+                                          "This is an early release of the dashboard and it will be further developed following",
+                                          "user feedback. The dashboard and indicators will continue to be updated over the coming months.",
+                                          "Please send any feeback to",
+                                           tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))))),
                       br(),
                       br(),
 
