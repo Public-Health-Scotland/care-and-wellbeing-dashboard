@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Give Every Child the Best Start In Life" ),
+  h1("Giving Every Child the Best Start In Life" ),
   br(),
 
   navlistPanel(widths = c(2,10), id = "child_start_panel",
