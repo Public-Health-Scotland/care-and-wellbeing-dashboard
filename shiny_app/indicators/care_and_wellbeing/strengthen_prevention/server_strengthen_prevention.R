@@ -1210,7 +1210,7 @@ output$asthma_admissions_plot <- renderPlotly({
   if(input$asthma_admissions_breakdowns == "Yearly total"){
 
     plot <- asthma_admissions %>%
-      filter(sex == "All Sexes", age_group == "All Ages", geography == input$asthma_admissions_geog_name) %>%
+      filter(sex == "All Sexes", age_bands == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       line_chart_function(., y_title = "Total number of admissions",
                           x_title = "Financial year", title = title,
@@ -1239,7 +1239,7 @@ output$asthma_admissions_plot <- renderPlotly({
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
     plot <- asthma_admissions %>%
-      filter(age_group == "All Ages", geography == input$asthma_admissions_geog_name, sex != "All Sexes") %>%
+      filter(age_bands == "All Ages", geography == input$asthma_admissions_geog_name, sex != "All Sexes") %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       # make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
       #                             x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
