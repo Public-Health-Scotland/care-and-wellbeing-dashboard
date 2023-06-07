@@ -224,13 +224,14 @@ output$child_obesity_plot <- renderPlotly({
     mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
     line_chart_function(., y_title = "Percentage (%)", title = title)%>%
    # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
-    layout(yaxis = list(#rangemode="tozero",
+    layout(yaxis = list(rangemode="tozero",
                         title = "Percentage (%)",
                         tickfont = list(size=14),
                         titlefont = list(size=18),
+                        # range=c(10,20),
                         showline = FALSE,
-                        ticksuffix = "%",
-                        range=c(10,20)))
+                        ticksuffix = "%"
+                       ))
 
 
 })
