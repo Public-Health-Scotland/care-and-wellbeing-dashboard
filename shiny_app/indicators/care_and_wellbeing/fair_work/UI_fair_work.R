@@ -58,7 +58,7 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                         h2("Employees on the Living Wage", iButtonUI("employees_living_wage_cw",
                                                                      content =
-                                                                       paste("This indicator provides data on those earning less than,",
+                                                                       paste("This indicator provides data on those earning less than",
                                                                              "the living wage in Scotland. ",
                                                                              "<br><br>Source:",
                                                                              "<a href=https://www.gov.scot/publications/annual-survey-of-hours-and-earnings-2021/ target =_blank> Annual summary of earnings statistics, Scottish Government (external site)</a>.",

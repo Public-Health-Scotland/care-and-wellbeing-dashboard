@@ -109,7 +109,7 @@ tagList(
                            iButtonUI("infant_mortality_cw", content = paste("This indicator provides data on all deaths in the first year  of life;",
                                                                             "this includes neonatal and post-neonatal deaths, but not stillbirths",
                                                                             "<br><br>Source:",
-                                                                            "<a href=https://scotland.shinyapps.io/phs-covid-wider-impact/ target = _blank>  COVID-19 wider impacts on the health care system (external site)</a>.",
+                                                                            "<a href=https://scotland.shinyapps.io/phs-covid-wider-impact/ target = _blank>  COVID-19 wider impacts on the health care system, PHS (external site)</a>.",
                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
                                                                             "is March, 2022.",
                                                                             "More up to data is available at source.",
