@@ -18,7 +18,7 @@ sidebarLayout(
                                           "This is an early release of the dashboard and it will be further developed following",
                                           "user feedback. The dashboard and indicators will continue to be updated over the coming months.",
                                           "Please send any feeback to",
-                                           tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))))),
+                                           tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot."))))),
                       br(),
                       br(),
 
@@ -205,7 +205,7 @@ sidebarLayout(
                         tags$li("Add further metadata to help explain the rationale for each indicator"),
                         tags$li("Review and add new indicators where needed")),
                       p("We are keen to develop the dashboard in an agile way and hear feedback from users."),
-                      p("Please send any feedback to", tags$a(href = "phs.Covid19Data&Analytics@phs.scot", "phs.Covid19Data&Analytics@phs.scot."))
+                      p("Please send any feedback to", tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot."))
                 ) # tagList
             ), # conditionalPanel
 
