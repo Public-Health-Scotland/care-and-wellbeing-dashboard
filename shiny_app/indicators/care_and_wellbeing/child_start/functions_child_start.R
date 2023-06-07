@@ -1,22 +1,30 @@
 
 make_child_development_cw_plot = function(data, data_baseline, baseline = FALSE,
-                               geog_name = NA, baseline_name) {
+                               geog_name = "Scotland", baseline_name = "Scotland",
+                               title = "Proportion of health visitor reviews where any form of developmental concern was raised") {
+
+  yaxis_number[["title"]] <- "Percentage (%)"
+
   plot = data %>%
     plot_ly(x=~financial_year,
             y=~prop_concern_any*100,
             type="scatter",
-            mode="lines+markers",
+            mode="lines",
             line = list(color=palette[1]),
             marker = list(color=palette[1]),
-            text = paste0(data$financial_year, "<br>",
-                          "Proportion of reviews with any concern: ",
+            hovertemplate = paste0("<br>", "Proportion of reviews with any concern: ",
                           scales::percent(data$prop_concern_any, accuracy = .1),"<br>",
                           "Number of reviews with any concern: ",
-                          format(data$concern_any), big.mark = ","),
-            hoverinfo = "text",
-            name = geog_name) %>%
-    layout(xaxis = xaxis_finyear,
-           yaxis = yaxis_proportion) %>%
+                          format(data$concern_any, big.mark = ",")),
+            # hoverinfo = "text",
+            name = geog_name
+            ) %>%
+    layout(xaxis = c(xaxis_finyear, tickangle = -30),
+           yaxis = c(yaxis_number, ticksuffix = "%"),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified",
+           legend = list(xanchor = "center", x = 0.5, y = -0.4, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style)) %>%
     config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 
 
@@ -29,12 +37,11 @@ make_child_development_cw_plot = function(data, data_baseline, baseline = FALSE,
                 mode="lines+markers",
                 line = list(color=palette[2]),
                 marker = list(color=palette[2]),
-                text = paste0(data_baseline$financial_year, "<br>",
-                              "Proportion of reviews with any concern: ",
+                text = paste ("<br>", "Proportion of reviews with any concern: ",
                               scales::percent(data_baseline$prop_concern_any, accuracy = .1),"<br>",
                               "Number of reviews with any concern: ",
                               format(data_baseline$concern_any), big.mark = ","),
-                hoverinfo = "text",
+                #hoverinfo = "text",
                 name = baseline_name)
   }
 
@@ -58,7 +65,7 @@ make_child_development_cw_plot_2 = function(data) {
             #               format(data$concern_any, big.mark = ",")),
             # hoverinfo = "text",
             hovertemplate = ~glue("{round_half_up(prop_concern_any*100,2)}")) %>%
-    layout(xaxis = xaxis_finyear,
+    layout(xaxis = c(xaxis_finyear),
            yaxis = yaxis_proportion,
            margin = list(t = 90, b = 40),
            hovermode = "x unified",

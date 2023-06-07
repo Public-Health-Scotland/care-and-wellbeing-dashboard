@@ -9,42 +9,43 @@
 observeEvent(input$child_development_cw_geog_type,
              {
 
-  areas_summary <- preschool %>%
-    filter(geography_type == input$child_development_cw_geog_type)
+               areas_summary <- preschool %>%
+                 filter(geography_type == input$child_development_cw_geog_type)
 
-  updateSelectizeInput(session,
-                 "child_development_cw_geog_name", label = "Step 2. Select national or local geography area",
-                 choices = unique(areas_summary$geography))
-})
+               updateSelectizeInput(session,
+                                    "child_development_cw_geog_name", label = "Step 2. Select national or local geography area",
+                                    choices = unique(areas_summary$geography))
+             })
 
 altTextServer("child_development_cw_alt",
               title = "Child social and physical development plot",
               content = tags$ul(tags$li("This is a plot for the trend in the proportion of health visitor reviews where any form of developmental concern was raised."),
                                 tags$li("The x axis is the financial year from 2013/14 to 2020/21."),
                                 tags$li("The y axis is the proportion of reviews where concern has been raised."),
-                                tags$li("The solid lines represent the selected geographies"),
-                                tags$li("Since the data began for Scotland there has been a general downwards trend before levelling out."),
-                                tags$li("The dropdowns labelled `Select Health Boards` and `Select Council Areas` will determine the locations that the data refers to."),
-                                tags$li("There are two drop downs above the chart which allow you to select up to 3 health boards and 3 council areas at a time",
-                                        "for plotting. Scotland is always displayed.")
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("If Scotland is selected then there the plot will show one purple line representing the data for Scotland.",
+                                        "If a health board is selected then the purple line on the plot will represent the health board chosen and the magenta line ",
+                                        "will represent Scotland as a baseline. If a council area is selected then the purple line on the plot will represent",
+                                        "the council area chosen and the magenta line will represent the health board the council area is located in as a baseline."),
+                                tags$li("Since the data began for Scotland there has been a general downwards trend before levelling out.")
+
 
               )
 )
-
-output$child_development_cw_plot_2 = renderPlotly({
-  data = preschool %>%
-    filter(geography %in% c("Scotland", input$child_development_cw_healthboard, input$child_development_cw_local_LA))
-
-  make_child_development_cw_plot_2(data)
-
-})
+#
+# output$child_development_cw_plot_2 = renderPlotly({
+#   data = preschool %>%
+#     filter(geography %in% c("Scotland", input$child_development_cw_healthboard, input$child_development_cw_local_LA))
+#
+#   make_child_development_cw_plot_2(data)
+#
+# })
 
 
 output$child_development_cw_plot = renderPlotly({
 
-  data = geog_all_filter_table(preschool,
-                               input$child_development_cw_geog_type,
-                               input$child_development_cw_geog_name)
+  data = preschool %>% filter(geography == input$child_development_cw_geog_name)
 
 
   if(input$child_development_cw_geog_type == "Health Board") {
@@ -52,8 +53,8 @@ output$child_development_cw_plot = renderPlotly({
       filter(geography_type=="Scotland")
 
     p = make_child_development_cw_plot(data, data_baseline, TRUE,
-                            input$child_development_cw_geog_name,
-                            "Scotland")
+                                       input$child_development_cw_geog_name,
+                                       baseline_name = "Scotland")
 
   } else if (input$child_development_cw_geog_type == "Council Area") {
 
@@ -66,29 +67,32 @@ output$child_development_cw_plot = renderPlotly({
              `hb2019name` %in% hb)
 
     p = make_child_development_cw_plot(data, data_baseline, TRUE,
-                            input$child_development_cw_geog_name,
-                            hb)
+                                       input$child_development_cw_geog_name,
+                                       hb)
   } else {
-    p = make_child_development_cw_plot(data)
+
+    title = "Proportion of health visitor reviews where any form of developmental concern was raised in Scotland"
+
+    p = make_child_development_cw_plot(data, title = title)
   }
 
   return(p)
 
 })
 
-output$child_development_cw_data = DT::renderDataTable({
+# output$child_development_cw_data = DT::renderDataTable({
+#
+#   child_development_out = preschool %>%
+#     filter(geography_type == input$child_development_cw_geog_table) %>%
+#     select(financial_year, geography, number_of_reviews,
+#            concern_any, proportion = prop_concern_any)
+#   datatable_style_download(child_development_out,
+#                            datetype = "financial_year",
+#                            data_name = "preschool",
+#                            geogtype = "council_area")
+# })
 
-  child_development_out = preschool %>%
-    filter(geography_type == input$child_development_cw_geog_table) %>%
-    select(financial_year, geography, number_of_reviews,
-           concern_any, proportion = prop_concern_any)
-  datatable_style_download(child_development_out,
-                           datetype = "financial_year",
-                           data_name = "preschool",
-                           geogtype = "council_area")
-})
-
-observeEvent(input$child_development_cw_geog_table, {
+observeEvent(input$child_development_cw_geog_name, {
 
   data_unfiltered <- preschool %>%
     select(financial_year, geography_type, geography, number_of_reviews,
@@ -98,7 +102,7 @@ observeEvent(input$child_development_cw_geog_table, {
            "Proportion of total reviews with any concern" = "proportion")
 
   data_filtered <- data_unfiltered %>%
-    filter(geography_type == input$child_development_cw_geog_table) %>%
+    filter(geography == input$child_development_cw_geog_name) %>%
     mutate(financial_year = factor(financial_year),
            geography = factor(geography))
 
@@ -108,15 +112,15 @@ observeEvent(input$child_development_cw_geog_table, {
                      add_separator_cols_2dp = c(6))
 })
 
-observeEvent(input$child_development_cw_geog_table, {
+observeEvent(input$child_development_cw_geog_name, {
 
-  geog_type <- ifelse(input$child_development_cw_geog_table == "Scotland",
-                      "in Scotland",
-                      paste0("by ", input$child_development_cw_geog_table))
+  # geog_type <- ifelse(input$child_development_cw_geog_table == "Scotland",
+  #                     "in Scotland",
+  #                     paste0("by ", input$child_development_cw_geog_table))
 
   output$child_development_cw_table_title <- renderText({
     glue("Data table: Proportion of health visitor reviews where any ",
-         "form of developmental concern was raised ", geog_type)})
+         "form of developmental concern was raised in ", input$child_development_cw_geog_name)})
 })
 
 ##############################################.
