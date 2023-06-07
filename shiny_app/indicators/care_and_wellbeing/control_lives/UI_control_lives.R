@@ -15,7 +15,7 @@ tagList(
                                                             content = paste("This indicator provides data on Child and Adolescent Mental Health Services",
                                                             "(CAMHS) appointment waiting times.",
                                                                             "<br><br>Source:",
-                                                                            "<a href= https://publichealthscotland.scot/publications/show-all-releases?id=20497/ target =_blank> CAMHS Waiting Times,  Public Health Scotland (PHS) (external site)</a>.",
+                                                                            "<a href= https://publichealthscotland.scot/publications/show-all-releases?id=20497/ target =_blank> CAMHS Waiting Times,  Public Health Scotland (external site)</a>.",
                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
                                                                             "is 2021",
                                                                             "More up to data is available at source.",
