@@ -31,7 +31,8 @@ sidebarLayout(
                           "public sector, is fundamental to improving population health and reducing health inequalities."),
                         p("A range of indicators are included in this dashboard structured around the evidence-based",
                           "Marmot framework which looks at the social determinants of health, the conditions in which",
-                          "people are born, grow, live, work and age which can lead to health inequalities."),
+                          "people are born, grow, live, work and age which can lead to health inequalities.",
+                          "More information on the Marmot framework can be found in the 'further information' tab."),
                         p("Explore the latest data below."),
                         br(),
 
