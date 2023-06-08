@@ -40,16 +40,16 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_child_start", "Early years"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_child_start2", "Giving every child the best start in life")))),
+                                             actionButton("jump_to_child_start2", "Give every child the best start in life")))),
 
                         br(),
 
 
                         fluidRow(
                           column(4, tags$div(class = "special_button",
-                                             actionButton("jump_to_control_lives", "Education"))),
+                                             actionButton("jump_to_control_lives", "Mental wellbeing"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_control_lives2", "Enabling all to maximise their capabilities and have control over their lives")))),
+                                             actionButton("jump_to_control_lives2", "Enable all children, young people and adults to maximise their capabilities and control their lives")))),
 
                         br(),
 
@@ -58,7 +58,7 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_fair_work", "Work"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_fair_work2", "Creating fair employment and good work for all")))),
+                                             actionButton("jump_to_fair_work2", "Create fair employment and good work for all")))),
 
                         br(),
 
@@ -67,7 +67,7 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_healthy_standard", "Living standards"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_healthy_standard2", "Ensuring a healthy standard of living for all")))),
+                                             actionButton("jump_to_healthy_standard2", "Ensure a healthy standard of living for all (to be developed)")))),
 
                         br(),
 
@@ -76,14 +76,14 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_sustainable_communities", "Places"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_sustainable_communities2", "Creating and developing healthy and sustainable places and communities")))),
+                                             actionButton("jump_to_sustainable_communities2", "Create and develop healthy and sustainable places and communities (to be developed)")))),
 
                         br(),
 
 
                         fluidRow(
                           column(4, tags$div(class = "special_button",
-                                             actionButton("jump_to_strengthen_prevention", "Ill health prevention"))),
+                                             actionButton("jump_to_strengthen_prevention", "Impact of ill health prevention"))),
                           column(8, tags$div(class= "invisible_button",
                                              actionButton("jump_to_strengthen_prevention2", "Strengthen the role and impact of ill health prevention")))),
 
@@ -94,7 +94,7 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_discrimination_racism", "Discrimination and racism"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_discrimination_racism2", "Tackling discrimination, racism and their outcomes")))),
+                                             actionButton("jump_to_discrimination_racism2", "Tackling discrimination, racism and their outcomes (to be developed)")))),
 
                         br(),
 
@@ -103,7 +103,7 @@ sidebarLayout(
                           column(4, tags$div(class = "special_button",
                                              actionButton("jump_to_environmental_sustainability", "Sustainability and equity"))),
                           column(8, tags$div(class= "invisible_button",
-                                             actionButton("jump_to_environmental_sustainability2", "Pursuing environmental sustainability and health equity together.")))),
+                                             actionButton("jump_to_environmental_sustainability2", "Pursuing environmental sustainability and health equity together (to be developed)")))),
 
 
                       br(),
@@ -132,7 +132,7 @@ sidebarLayout(
                                 tags$img(src = "intro_images/at_a_glance_tab.png", height = 40,
                                          alt ="Image of the 'At a glance' tab in the navigation bar")),
                               p(tags$li("Click on 'Care and Wellbeing' to view the indicators in each objective in more detail"),
-                                tags$img(src = "intro_images/care_and_wellbeing_tab.png", height = 80,
+                                tags$img(src = "intro_images/care_and_wellbeing_tab.png", height = 90,
                                          alt ="Image of the 'Care and Wellbeing' tab in the navigation bar")),
                              br(),
 
@@ -144,20 +144,32 @@ sidebarLayout(
                              p(tags$li("Click the 'background information and source' button for further information on the indicator and the data source"),
                                tags$img(src = "intro_images/info_button.png", height = 40,
                                         alt ="Image of the background information and source button")),
-                             p(tags$li("Select an appropriate breakdown if available using the drop down menus. This will change the data displayed in both the chart and the table.")),
+                             p(tags$li("Select an appropriate breakdown if available using the drop down menus. This will change the data displayed in both the chart and the table."),
                                tags$img(src = "intro_images/select_breakdown.png", height = 65,
                                         alt ="Image of the dropdown menu used to select a data breakdown")),
+                             p(tags$li("Click the definition button for an explanation of a word or term used."),
+                               tags$img(src = "intro_images/definition_button.png", height = 43,
+                                        alt ="Image of the SIMD definition button")),
                              br(),
                              br(),
 
                         p(tags$b("Interacting with the charts")),
                              p(tags$li("Click the 'Plot description' button for a summary of the plot content"),
-                               tags$img(src = "intro_images/plot_description.png", height = 45,
+                               tags$img(src = "intro_images/plot_description.png", height = 46,
                                         alt ="Image of the plot description button")),
                              p(tags$li("Click the 'Using the plot' button for a recap of the information in this section"),
                                tags$img(src = "intro_images/using_the_plot.png", height = 40,
                                         alt ="Image of the 'using the plot' button on the charts which when clicked,
                                               provides a recap of the 'interacting with the charts' section")),
+                             p(tags$li("Click the 'Map description' button for a summary of the map chart content"),
+                               tags$img(src = "intro_images/map_description.png", height = 40,
+                                        alt ="Image of the map description button")),
+                             p(tags$li("Click the 'Using the map' button for information on how to use the map chart"),
+                               tags$img(src = "intro_images/using_the_map.png", height = 40,
+                                        alt ="Image of the 'using the map' button on the charts")),
+                             p(tags$li("Click the 'What is a confidence interval?' button for an explanation of confidence intervals"),
+                               tags$img(src = "intro_images/ci_button.png", height = 43,
+                                        alt ="Image of the confidence interval button")),
                              p(tags$li("Move the cursor over the data points in the charts to see the data values")),
                              p(tags$li("Click the magnifying glass in the top right of the charts to enable zoom capabilities.
                                         Then zoom into the plot by holding down the cursor and dragging to select the region"),
@@ -180,15 +192,18 @@ sidebarLayout(
 
                              br(),
 
-                        p(tags$b("Downloading data")),
-                             p(tags$li("Data can be downloaded from the data table within each indicator. Click either the 'CSV' or 'Excel' button above
+                        p(tags$b("Interacting with the data tables")),
+                             p(tags$li("Click on the toggles to change the data displayed in the tables"),
+                               tags$img(src = "intro_images/data_toggles.png", height = 60,
+                                        alt ="Image of the data table toggle options. This image shows an example of the toggles in the 'Screening uptake' indicator")),
+                             p(tags$li("Data can be downloaded from the data table within each indicator. Click either the 'Download as CSV' or 'Download as Excel' button above
                                        the table depending on what format you require"),
-                               tags$img(src = "intro_images/download_data.png", height = 40,
+                               tags$img(src = "intro_images/download_data2.png", height = 43,
                                         alt ="Image of the download data buttons")),
 
                              br(),
                              br(),
-
+                 ) # tagList
 
 
               ), # condtionalPanel
@@ -197,7 +212,7 @@ sidebarLayout(
             conditionalPanel(
               condition= 'input.home_select == "future"',
               tagList(h3(tags$b("News and future updates")),
-                      p("This is an early release of the dashboard and it will be further developed shaped by user feedback."),
+                      p("This is an early release of the dashboard and it will be further developed following user feedback."),
                       p("Over the coming months, we are planning to:",
                         tags$li("Add content for all indicators"),
                         tags$li("Review and add further equalities breakdowns where data exists"),

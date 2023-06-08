@@ -90,7 +90,7 @@ ui <- shinymanager::secure_app(
 
         navbarMenu(title = tags$b("Care and Wellbeing"), #icon = icon_no_warning_fn("spa"),
 
-                   tabPanel(title = "Giving every child the best start in life",
+                   tabPanel(title = "Give every child the best start in life",
                             value = "child_start",
                             source(file.path("indicators/care_and_wellbeing/child_start/UI_child_start.R"), local = TRUE)$value),
 
@@ -106,7 +106,7 @@ ui <- shinymanager::secure_app(
                             value = "strengthen_prevention",
                             source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Ensure healthy standard of living for all (to be developed)",
+                   tabPanel(title = "Ensure a healthy standard of living for all (to be developed)",
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 

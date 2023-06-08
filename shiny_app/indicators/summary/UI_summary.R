@@ -344,7 +344,7 @@ tagList(
              box(width = 12,
                  status = "info",
                  tagList(
-                   h2("Giving every child the best start in life"),
+                   h2("Give every child the best start in life"),
 
                    fluidRow(
                      column(4,
@@ -495,7 +495,7 @@ tagList(
              box(width = 12,
                  status = "info",
                  tagList(
-                   h2("Ensure healthy standard of living for all"),
+                   h2("Ensure a healthy standard of living for all"),
 
                    fluidRow(
                      column(4,
