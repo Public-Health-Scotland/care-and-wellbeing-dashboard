@@ -80,6 +80,9 @@ $(document).ready( () => {
      }
   });
 
+
+  //experimental to fix nav issues
+
 //<ul class="test_ul">
 //    <li class="item" id="item1">
 //        Item 1
@@ -94,5 +97,14 @@ $(document).ready( () => {
 //        Item 4
 //    </li>
 //</ul>
+
+
+//document.addEventListener("DOMContentLoaded", function() {
+
+//  var elList = document.querySelectorAll('*[class=""]');
+
+//  elList.forEach(el => el.removeAttribute('class'));
+
+//});
 
 });
