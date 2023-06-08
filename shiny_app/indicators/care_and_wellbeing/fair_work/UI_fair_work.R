@@ -19,11 +19,13 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                           selectInput("economic_inactivity_cw_geog_type",
                                                       "Step 1: Select national of local geography level",
                                                       choices = c("Scotland", "Council Area"),
+                                                      selectize = FALSE,
                                                       selected = "Scotland")),
                                  column(3,
                                         selectInput("economic_inactivity_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
+                                                    selectize = FALSE,
                                                     width = "100%"))
                                  ),
 

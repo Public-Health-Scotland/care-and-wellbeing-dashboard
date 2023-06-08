@@ -31,12 +31,14 @@ tagList(
                                                     "Step 1: Select national or local geography level",
                                                     choices = c("Scotland", "Health Board"),
                                                     selected = "Scotland",
+                                                    selectize = FALSE,
                                                     width = "100%")),
 
                                  column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
+                                                    selectize = FALSE,
                                                     width = "100%"))
                         ),
 
