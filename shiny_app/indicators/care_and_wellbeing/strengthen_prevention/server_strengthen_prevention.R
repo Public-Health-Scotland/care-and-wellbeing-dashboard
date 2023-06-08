@@ -661,7 +661,8 @@ output$drug_admissions_plot = renderPlotly({
 
   data = drug_stays %>%
     filter(age_group %in% input$drug_admissions_age) %>%
-    mutate(indicator = rate, date = financial_year) %>%
+    mutate(indicator = round_half_up(rate,1),
+           date = financial_year) %>%
 
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$age_group,
@@ -678,6 +679,7 @@ output$drug_admissions_plot = renderPlotly({
 observeEvent(input$drug_admissions_age,{
 
   data_unfiltered <- drug_stays %>%
+    mutate(rate = round_half_up(rate,1)) %>%
     select(financial_year, age_group, rate) %>%
     arrange(financial_year) %>%
     mutate(financial_year = factor(financial_year)) %>%
