@@ -16,6 +16,7 @@ tagList(
 
            p("Clicking the title above each box will take you to the relevant tab within the dashboard"),
 
+
            br(),
 
            tagList(
@@ -165,7 +166,53 @@ tagList(
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_healthy_life_expectancy_male", "Healthy life expectancy")),
+                            summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy (years) for males",
+                                         button_title = "Healthy life expectancy",
+                                         button_content = glue("This is the healthy life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
+                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     )),
 
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_healthy_life_expectancy_female", "Healthy life expectancy")),
+                            summaryBoxUI("healthy_life_expectancy_female", title = "Healthy life expectancy (years) for females",
+                                         button_title = "Healthy life expectancy",
+                                         button_content = glue("This is the healthy life expectancy of females at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
+                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
+                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_life_expectancy_male", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_male", title = "Life expectancy (years) for males",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_life_expectancy_female", "Life expectancy")),
+                            summaryBoxUI("life_expectancy_female", title = "Life expectancy (years) for females",
+                                         button_title = "Life expectancy",
+                                         button_content = glue("This is the life expectancy of females at birth in the year range {max(life_expectancy$time_period)}.",
+                                                               "<br> <br>",
+                                                               "This data is available at Scotland and council area level.",
+                                                               "<br> <br> {strong('Click again to close.')}"))
+                     )),
+
+                   fluidRow(
                      column(4,
                             h3(actionLink("jump_summary_to_adult_long_term_condition", "Limiting long-term conditions (age 16+)")),
                             summaryBoxUI("adult_long_term_condition", title = "Percentage of adults",
@@ -177,80 +224,9 @@ tagList(
                                                                 "This data is available at Scotland level. Further information is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
-                     )),
-
-                   fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults")),
-                            summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
-                                         button_title =  "Self-assessed health of adults",
-                                         button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
-                                                                "Scottish Health Survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years ",
-                                                                "and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
-                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
                      ),
 
                      column(4,
-                            h3(actionLink("jump_summary_to_experience_recipients", "Experience of social care recipients")),
-                            summaryBoxUI("experience_recipients")
-                     ),
-                     column(4,
-                            h3(actionLink("jump_summary_to_health_risk_behaviours", "Health risk behaviours")),
-                            summaryBoxUI("health_risk_behaviours")
-                     )),
-
-                   fluidRow(
-                     column(3,
-                            h3(actionLink("jump_summary_to_life_expectancy_male", "Life expectancy")),
-                            summaryBoxUI("life_expectancy_male", title = "Life expectancy (years) for males",
-                                         button_title = "Life expectancy",
-                                         button_content = glue("This is the life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
-                                                               "<br> <br>",
-                                                               "This data is available at Scotland and council area level.",
-                                                               "<br> <br> {strong('Click again to close.')}"))
-                     ),
-                     column(3,
-                            h3(actionLink("jump_summary_to_life_expectancy_female", "Life expectancy")),
-                            summaryBoxUI("life_expectancy_female", title = "Life expectancy (years) for females",
-                                         button_title = "Life expectancy",
-                                         button_content = glue("This is the life expectancy of females at birth in the year range {max(life_expectancy$time_period)}.",
-                                                               "<br> <br>",
-                                                               "This data is available at Scotland and council area level.",
-                                                               "<br> <br> {strong('Click again to close.')}"))
-                     ),
-                     column(3,
-                            h3(actionLink("jump_summary_to_healthy_life_expectancy_male", "Healthy life expectancy")),
-                            summaryBoxUI("healthy_life_expectancy_male", title = "Healthy life expectancy (years) for males",
-                                         button_title = "Healthy life expectancy",
-                                         button_content = glue("This is the healthy life expectancy of males at birth in the year range {max(healthy_life_expectancy$time_period)}.",
-                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
-                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
-                                                               "<br> <br>",
-                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
-                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                               "<br> <br> {strong('Click again to close.')}"))
-                     ),
-                     column(3,
-                            h3(actionLink("jump_summary_to_healthy_life_expectancy_female", "Healthy life expectancy")),
-                            summaryBoxUI("healthy_life_expectancy_female", title = "Healthy life expectancy (years) for females",
-                                         button_title = "Healthy life expectancy",
-                                         button_content = glue("This is the healthy life expectancy of females at birth in the year range {max(healthy_life_expectancy$time_period)}.",
-                                                               "Healthy life expectancy (HLE) is an estimate of the number of years lived in ‘very good’ or ‘good’ general health,",
-                                                               "based on how individuals perceive their state of health at the time of completing the annual population survey (APS).",
-                                                               "<br> <br>",
-                                                               "This data is available at Scotland and council area level. Further breakdown of healthy life expectancy at age 65 is ",
-                                                               "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
-                                                               "<br> <br> {strong('Click again to close.')}"))
-                     )),
-
-                   fluidRow(
-                     column(3,
-                            h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
-                            summaryBoxUI("healthy_weight")
-                     ),
-                     column(3,
                             h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
                             summaryBoxUI("mental_wellbeing", title = "Mean WEMWBS score",
                                          button_title = "Mental wellbeing of adults (16+)",
@@ -260,11 +236,6 @@ tagList(
                                                                "This data is available at Scotland level. Further breakdown of mental wellbeing of adults by SIMD is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                     )),
-                   fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_physical_activity", "Physical activity")),
-                            summaryBoxUI("physical_activity")
                      ),
                      column(4,
                             h3(actionLink("jump_summary_to_premature_mortality", "Premature mortality")),
@@ -276,11 +247,8 @@ tagList(
                                                                "This data is available at Scotland and health board level. Further breakdown by SIMD quintile is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-                     column(4,
-                            h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
-                            summaryBoxUI("quality_care")
                      )),
+
                    fluidRow(
                      column(4,
                             h3(actionLink("jump_summary_to_screening_breast", "Screening - uptake for breast and bowel cancer")),
@@ -320,6 +288,18 @@ tagList(
 
                    fluidRow(
                      column(4,
+                            h3(actionLink("jump_summary_to_adults_self_assessed_health", "Self-assessed health of adults")),
+                            summaryBoxUI("adults_self_assessed_health", title = "Percentage of adults",
+                                         button_title =  "Self-assessed health of adults",
+                                         button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
+                                                                "Scottish Health Survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years ",
+                                                                "and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
+                                                                "This data is available at Scotland level. Further information is ",
+                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
                             h3(actionLink("jump_summary_to_vaccinations_covid", "Vaccinations – uptake ")),
                             summaryBoxUI("vaccinations_covid", title = "Percentage uptake of COVID-19 vaccinations in the most deprived SIMD decile",
                                          button_title = "COVID-19 vaccinations uptake",
@@ -338,7 +318,33 @@ tagList(
                                                                "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                "<br> <br> {strong('Click again to close.')}"))
+                     )),
+                   fluidRow(
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_experience_recipients", "Experience of social care recipients")),
+                            summaryBoxUI("experience_recipients")
                      ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_health_risk_behaviours", "Health risk behaviours")),
+                            summaryBoxUI("health_risk_behaviours")
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_healthy_weight", "Healthy weight adults")),
+                            summaryBoxUI("healthy_weight")
+                     )),
+
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_physical_activity", "Physical activity")),
+                            summaryBoxUI("physical_activity")
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
+                            summaryBoxUI("quality_care")
+                     ),
+
                      column(4,
                             h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
                             summaryBoxUI("work_related_health")
