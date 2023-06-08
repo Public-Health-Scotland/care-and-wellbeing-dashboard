@@ -4,6 +4,8 @@ make_child_development_cw_plot = function(data, data_baseline, baseline = FALSE,
                                title = "Proportion of health visitor reviews where any form of developmental concern was raised") {
 
   yaxis_number[["title"]] <- "Percentage (%)"
+  xaxis_finyear[["title"]] <- "Year range"
+
 
   plot = data %>%
     plot_ly(x=~financial_year,
