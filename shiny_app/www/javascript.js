@@ -14,16 +14,16 @@ $(document).ready( () => {
   // Add padding at the top of the page which is 12px bigger
   // than the navbar height
 
-  // function padNavbar() {
-  //    var navHeight = $(".navbar").height();
-  //    $("body").css({paddingTop: (navHeight+12)+'px'});
-  //}
+   function padNavbar() {
+      var navHeight = $(".navbar").height();
+      $("body").css({paddingTop: (navHeight+12)+'px'});
+  }
 
-  //padNavbar();
-  // // Do this again when the window is resized or navbar is opened/closed
-  //$(window).resize(padNavbar);
-  //$('.collapse').on('shown.bs.collapse', padNavbar);
-  //$('.collapse').on('hidden.bs.collapse', padNavbar);
+  padNavbar();
+   // Do this again when the window is resized or navbar is opened/closed
+  $(window).resize(padNavbar);
+  $('.collapse').on('shown.bs.collapse', padNavbar);
+  $('.collapse').on('hidden.bs.collapse', padNavbar);
 
   // Ensures that when a modal opens keyboard focus is given to the
   // close button in the modal - accessibility
