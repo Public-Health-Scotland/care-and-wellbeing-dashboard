@@ -13,11 +13,8 @@
 source(file.path("modules/plot_info/plot_info_ui.R"), local = TRUE)$value
 source(file.path("modules/alt_text/alt_text_ui.R"), local = TRUE)$value
 source(file.path("modules/data_download/data_download_ui.R"), local = TRUE)$value
-
 source(file.path("modules/summary_boxes/summary_boxes_ui.R"), local = TRUE)$value
-
 source(file.path("modules/defintions/defintions_ui.R"), local = TRUE)$value
-
 # source(file.path("modules/nav_buttons/nav_buttons_ui.R"), local = TRUE)$value
 
 source("setup.R")
@@ -39,7 +36,7 @@ ui <- shinymanager::secure_app(
                  target = "_blank"), # PHS logo links to PHS website
           style = "position: relative; top: -5px;"),
 
-        windowTitle = "Care & Wellbeing Portfolio",# Title for browser tab
+        windowTitle = "Care & Wellbeing Dashboard",# Title for browser tab
         header = source(file.path("header.R"), local=TRUE)$value,
 
         ##############################################.
