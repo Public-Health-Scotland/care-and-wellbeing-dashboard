@@ -184,7 +184,7 @@ mapAltTextServer("employees_living_wage_cw_map_alt",
               content = tags$ul(tags$li("This is a map for the percentage of employees (18+) earning less than the real Living Wage by council area in Scotland."),
                                 tags$li("The map splits Scotland into council areas using white lines as the borders."),
                                 tags$li("The dropdown above the map allows you to select the year for plotting on the map. The default is 2012"),
-                                tags$li("The colour that a council area is highlighted relates to a percentage range as indicated by the map legend",
+                                tags$li("The colour that a council area is highlighted relates to a percentage range as indicated by the map legend.",
                                 "The colours range from light yellow for 0-10% to dark red for 40-100% between which the ranges cover 5% increments.",
                                 "The percentage range indicated relates to the key data for the council area for the chosen year."),
                                 tags$li("If an area is grey, then there is no available data for the chosen year for that council area.")
