@@ -27,45 +27,67 @@ tagList(
                                                                               "<br><br> More detailed information can be found in the accompanying",
                                                                               "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
-                        p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
-                          "Scotland will always be displayed"),
+                        # p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
+                        #   "Scotland will always be displayed"),
+                        #
+                        # fluidRow(
+                        #
+                        #   column(4,
+                        #          selectizeInput("child_development_cw_healthboard",
+                        #                         label = "Select Health Board(s) (3 Max)",
+                        #                         choices = unique(master_lookup$hb2019name),
+                        #                         multiple = TRUE,
+                        #                         selected = "NHS Ayrshire and Arran",
+                        #                         width = "100%",
+                        #                         options = list(maxItems = 3,
+                        #                                        plugins = c('remove_button')))
+                        #   ),
+                        #   column(4,
+                        #          selectizeInput("child_development_cw_local_LA",
+                        #                         label = "Select Council Area(s) (3 Max)",
+                        #                         choices = unique(lookup_LA),
+                        #                         multiple = TRUE,
+                        #                         selected = "Aberdeen City",
+                        #                         width = "100%",
+                        #                         options = list(maxItems = 3,
+                        #                                        plugins = c('remove_button')))
+                        #   )),
 
                         fluidRow(
-
                           column(4,
-                                 selectizeInput("child_development_cw_healthboard",
-                                                label = "Select Health Board(s) (3 Max)",
-                                                choices = unique(master_lookup$hb2019name),
-                                                multiple = TRUE,
-                                                selected = "NHS Ayrshire and Arran",
-                                                width = "100%",
-                                                options = list(maxItems = 3,
-                                                               plugins = c('remove_button')))
-                          ),
+                                 selectInput("child_development_cw_geog_type",
+                                             label = "Step 1. Select national or local geography level",
+                                             choices = c("Scotland", "Health Board", "Council Area"),
+                                             selected = "Scotland",
+                                             selectize = FALSE,
+                                             width = "100%")),
                           column(4,
-                                 selectizeInput("child_development_cw_local_LA",
-                                                label = "Select Council Area(s) (3 Max)",
-                                                choices = unique(lookup_LA),
-                                                multiple = TRUE,
-                                                selected = "Aberdeen City",
-                                                width = "100%",
-                                                options = list(maxItems = 3,
-                                                               plugins = c('remove_button')))
-                          )),
+                                 selectInput("child_development_cw_geog_name",
+                                             label = "Step 2. Select national or local geography area",
+                                             choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography),
+                                             selectize = FALSE,
+                                             width = "100%",
+                                 ))),
 
+
+                        # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
+                        #            "child_development_cw_plot",
+                        #            subtitle = "This chart will display a comparison line on the chart.
+                        #            For health boards, Scotland data will also be provided.
+                        #            For council areas, health board data will also be provided."),
 
 
                         altTextUI("child_development_cw_alt"),
-                        withSpinner(plotlyOutput("child_development_cw_plot_2")),
+                        withSpinner(plotlyOutput("child_development_cw_plot")),
 
 
 
                         uiOutput("child_development_cw_table_title"),
                         p("To view the full dataset, please use the download buttons below."),
-                        radioButtons("child_development_cw_geog_table",
-                                     "Select geography type for data table",
-                                     choices = unique(preschool$geography_type),
-                                     inline = TRUE),
+                        # radioButtons("child_development_cw_geog_table",
+                        #              "Select geography type for data table",
+                        #              choices = unique(preschool$geography_type),
+                        #              inline = TRUE),
                         dataDownloadUI("child_development_cw")
                ),
 

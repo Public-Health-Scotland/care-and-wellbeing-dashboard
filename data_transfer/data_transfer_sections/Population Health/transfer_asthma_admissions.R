@@ -48,23 +48,39 @@ input_asthma_admissions %<>%
                          "NHS Dumfries & Galloway" = "NHS Dumfries and Galloway",
                          "NHS Greater Glasgow & Clyde" = "NHS Greater Glasgow and Clyde")) %>%
   mutate(geog_type = ifelse(lookup == "All Scottish and Non-Scottish Residents", "Scotland",
-                                 ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
+                            ifelse(str_starts(lookup, "NHS"), "Health Board", "Other")),
          geography = lookup
-         ) %>%
+  ) %>%
   mutate(geog = recode(lookup, `All Scottish and Non-Scottish Residents` = "Scotland")) %>%
   mutate(age_group = str_remove(age_group, " years"),
          age_group = factor(age_group, levels = c( "0-4", "5-9", "10-14", "15-19", "<18", "20-24", "25-29", "30-34",
                                                    "35-39", "40-44",  "45-49", "50-54", "55-59", "60-64", "65+",
-                                                   "65-69", "70-74", "75+", "75-79", "80-84", "85+",  "85-89", "90+", "All Ages"))) %>%
-  arrange(age_group) %>%
-  summary_format_function(date = .$date,
-                          geog_type = .$geog_type,
-                          geog = .$geog,
-                          indicator_in = .$stays_number,
-                          value_in = "asthma_admissions") %>%
+                                                   "65-69", "70-74", "75+", "75-79", "80-84", "85+",  "85-89", "90+", "All Ages")),
+         age_bands = case_when(age_group %in% c("0-4", "5-9") ~ "0-9",
+                               age_group %in% c("10-14", "15-19") ~ "10-19",
+                               age_group %in% c("20-24", "25-29") ~ "20-29",
+                               age_group %in% c("30-34", "35-39") ~ "30-39",
+                               age_group %in% c("40-44", "45-49") ~ "40-49",
+                               age_group %in% c("50-54", "55-59") ~ "50-59",
+                               age_group %in% c("60-64", "65-69") ~ "60-69",
+                               age_group %in% c("70-74", "75-79", "80-84", "85-89", "90+") ~ "70+",
+                               T ~ age_group),
+         age_bands = factor(age_bands, levels = c("All Ages", "85+", "75+", "70+", "65+", "60-69",
+                                                  "50-59", "40-49", "30-39", "20-29", "<18", "10-19", "0-9")),
+         sex = factor(sex, levels = c("All Sexes", "Male", "Female"))) %>%
+  group_by(date, sex, age_bands, geog_type, geog, provisional) %>%
+  summarise(indicator = sum(stays_number)) %>%
+  ungroup() %>%
+  arrange(age_bands) %>%
+  mutate(geography_type = geog_type,
+         geography = geog,
+         value = "asthma_admissions") %>%
+  # summary_format_function(date = .$date,
+  #                         geog_type = .$geog_type,
+  #                         geog = .$geog,
+  #                         indicator_in = .$stays_number,
+  #                         value_in = "asthma_admissions") %>%
   select(-c(geog, geog_type))
-
-
 
 replace_file_fn(input_asthma_admissions,
                 paste0(path_out, "/asthma_admissions.rds"))
