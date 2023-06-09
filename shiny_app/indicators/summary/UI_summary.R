@@ -15,6 +15,8 @@ tagList(
            p("Clicking on the 'i' button will provide additional information about the indicator."),
 
            p("Clicking the title above each box will take you to the relevant tab within the dashboard"),
+
+
            br(),
 
            tagList(
@@ -506,7 +508,7 @@ tagList(
              box(width = 12,
                  status = "info",
                  tagList(
-                   h2("Ensure healthy standard of living for all"),
+                   h2("Ensure a healthy standard of living for all"),
 
                    fluidRow(
                      column(4,

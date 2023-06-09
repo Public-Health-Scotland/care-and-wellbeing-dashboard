@@ -10,7 +10,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                                order_by_firstcol = NULL, # asc, desc or NULL
                                filter_cols = NULL, # columns to have filters for
                                highlight_column = NULL, # Column to highlight specific entries based off
-                               cap_colname = NULL) { # columns with names that need to be uppercase (e.g. SIMD)
+                               keep_colnames = NULL) { # columns with names that don't need to be altered from what's in data (e.g. to allow for SIMD with all caps)
 
   moduleServer(
     id,
@@ -25,8 +25,8 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
             gsub("_", " ", .) %>%
             str_to_sentence(.)
 
-          for (i in cap_colname){
-            table_colnames[i] %<>% toupper(.)
+          for (i in keep_colnames){
+          table_colnames[i] <- names(data)[i]
           }
 
           # Add column formatting
