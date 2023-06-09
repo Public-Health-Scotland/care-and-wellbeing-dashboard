@@ -557,4 +557,12 @@ a > .info-box {
   color: var(--white);
 }
 
-/*
+
+
+
+.pagination > .disabled > a
+{color: var(--phs-purple);
+
+}
+
+}

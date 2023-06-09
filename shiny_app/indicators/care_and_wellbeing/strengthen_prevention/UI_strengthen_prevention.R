@@ -23,16 +23,19 @@ tagList(
                                         selectInput("asthma_admissions_breakdowns",
                                                     "Step 1: Select a breakdown ",
                                                     choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
+                                                    selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
                                         selectInput("asthma_admissions_geog_type",
                                                     "Step 2: Select national or local geography level ",
                                                     choices = c("Scotland", "Health Board"),
+                                                    selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
                                         selectInput("asthma_admissions_geog_name",
                                                     "Step 3: Select national or local geography area ",
                                                     choices = c("Scotland"),
+                                                    selectize = FALSE,
                                                     width = "100%"))
 
                         ),#, "Age and sex breakdown"))),
@@ -44,7 +47,7 @@ tagList(
                         withSpinner(plotlyOutput("asthma_admissions_plot")),
 
                         br(),
-                        h3(textOutput("asthma_admissions_title")),
+                        uiOutput("asthma_admissions_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("asthma_admissions")
@@ -86,18 +89,20 @@ tagList(
                                                   selectInput("alcohol_admissions_geog_type",
                                                               "Step 1: Select national or local geography level",
                                                               choices = c("Scotland", "Health Board"),
+                                                              selectize = FALSE,
                                                               width = "100%")),
                                            column(4,
                                                   selectInput("alcohol_admissions_geog_name",
                                                               "Step 2: Select national or local geography area",
                                                               choices = c("Scotland"),
+                                                              selectize = FALSE,
                                                               width = "100%"))),
 
                                          altTextUI("alcohol_admissions_alt"),
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
 
                                          br(),
-                                         h3(textOutput("alcohol_admissions_title")),
+                                         uiOutput("alcohol_admissions_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("alcohol_related_admissions")
@@ -124,10 +129,11 @@ tagList(
 
                                          fluidRow(
                                            column(4,
-                                                  selectizeInput("alcohol_deaths_sex",
+                                                  selectInput("alcohol_deaths_sex",
                                                                  "Select sex",
                                                                  choices = unique(alcohol_deaths$sex),
                                                                  selected = "All sexes",
+                                                                 selectize = FALSE,
                                                                  width = "100%"))
                                          ),
 
@@ -140,7 +146,7 @@ tagList(
                                          withSpinner(plotlyOutput("alcohol_deaths_age_plot")),
                                          br(),
 
-                                         h3(textOutput("alcohol_deaths_title")),
+                                         uiOutput("alcohol_deaths_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                                          tabBox(
@@ -179,16 +185,18 @@ tagList(
 
                         fluidRow(
                           column(4,
-                                 selectizeInput("all_cause_mortality_geog_type",
+                                 selectInput("all_cause_mortality_geog_type",
                                                 "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
                                                             "Health Board",
                                                             "Council Area"),
+                                                selectize = FALSE,
                                                 width = "100%")),
                           column(4,
-                                 selectizeInput("all_cause_mortality_geog_name",
+                                 selectInput("all_cause_mortality_geog_name",
                                                 "Step 2. Select national or local geography area",
                                                 choices = unique(all_cause_mortality %>% filter(geography_type == "Scotland") %>% .$geography),
+                                                selectize = FALSE,
                                                 width = "100%")),
                           column(4,
                                  radioButtons("all_cause_mortality_rate_number",
@@ -204,7 +212,7 @@ tagList(
                         withSpinner(plotlyOutput("all_cause_mortality_plot")),
 
                         br(),
-                        h3(textOutput("all_cause_mortality_title")),
+                        uiOutput("all_cause_mortality_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("all_cause_mortality")
@@ -235,7 +243,7 @@ tagList(
 
                         fluidRow(
                           column(4,
-                                 selectizeInput("chd_deaths_geog_type",
+                                 selectInput("chd_deaths_geog_type",
                                                 "Step 1. Select national or local geography level",
                                                 choices = c("Scotland",
                                                             "Health Board",
@@ -243,12 +251,14 @@ tagList(
                                                             "Council Area",
                                                             "Locality",
                                                             "Intermediate Zone"),
+                                                selectize = FALSE,
                                                 width = '100%'),
                           ),
                           column(4,
-                                 selectizeInput("chd_deaths_geog_name",
+                                 selectInput("chd_deaths_geog_name",
                                                 "Step 2. Select national or local geography area",
                                                 choices = unique(chd_deaths %>% filter(geography_type == "Scotland") %>% .$geography),
+                                                selectize = FALSE,
                                                 width = '100%')),
                         ),
 
@@ -258,7 +268,7 @@ tagList(
                         withSpinner(plotlyOutput("chd_deaths_plot")),
 
                         br(),
-                        h3(textOutput("chd_deaths_title")),
+                        uiOutput("chd_deaths_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("chd_deaths")
@@ -298,19 +308,17 @@ tagList(
 
                                         fluidRow(
                                           column(4,
-                                                 selectizeInput("drug_admissions_age", "Select age group(s)",
+                                                 selectInput("drug_admissions_age", "Select age group(s)",
                                                                 choices = unique(drug_stays$age_group),
                                                                 selected = "All age groups",
-                                                                multiple = TRUE,
-                                                                width = "100%",
-                                                                options = list(plugins = c('remove_button'),
-                                                                               `actions-box` = TRUE)))),
+                                                                selectize = FALSE,
+                                                                width = "100%"))),
 
                                         altTextUI("drug_admissions_alt"),
                                         withSpinner(plotlyOutput("drug_admissions_plot")),
 
                                         br(),
-                                        h3(textOutput("drug_admissions_title")),
+                                        uiOutput("drug_admissions_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("drug_admissions")
@@ -338,17 +346,19 @@ tagList(
 
                                         fluidRow(
                                           column(4,
-                                                 selectizeInput("drug_deaths_geog_type",
+                                                 selectInput("drug_deaths_geog_type",
                                                                 "Step 1. Select a national or local geography level",
                                                                 choices = c("Scotland", "Health Board", "Council Area"),
+                                                                selectize = FALSE,
                                                                 width = "100%"
                                                  )),
 
                                           column(4,
 
-                                                 selectizeInput("drug_deaths_geog_name",
+                                                 selectInput("drug_deaths_geog_name",
                                                                 "Step 2. Select a national or local geography area",
                                                                 choices = unique(drug_related_deaths %>% filter(geography_type == "Scotland") %>%  .$geography),
+                                                                selectize = FALSE,
                                                                 width = "100%"
                                                  )
                                           ),
@@ -368,7 +378,7 @@ tagList(
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
                                         br(),
-                                        h3(textOutput("drug_deaths_title")),
+                                        uiOutput("drug_deaths_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("drug_deaths")
@@ -466,16 +476,18 @@ tagList(
 
                         fluidRow(
                           column(4,
-                                 selectizeInput("healthy_birthweight_geog_type",
+                                 selectInput("healthy_birthweight_geog_type",
                                                 "Step 1. Select a national or local geography level",
                                                 choices = c("Scotland", "Health Board", "Council Area"),
+                                                selectize = FALSE,
                                                 width = "100%")),
 
                           column(4,
-                                 selectizeInput("healthy_birthweight_geog_name",
+                                 selectInput("healthy_birthweight_geog_name",
                                                 "Step 2. Select a national or local geography area",
                                                 choices = unique(birthweight %>% filter(geography_type == "Scotland") %>%
                                                                    .$geography),
+                                                selectize = FALSE,
                                                 width = "100%")
                           )),
 
@@ -483,7 +495,7 @@ tagList(
                         withSpinner(plotlyOutput("healthy_birthweight_plot")),
 
                         br(),
-                        h3(textOutput("healthy_birthweight_title")),
+                        uiOutput("healthy_birthweight_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("healthy_birthweight")),
@@ -521,9 +533,10 @@ tagList(
 
                                          fluidRow(
                                            column(4,
-                                                  selectizeInput("life_expectancy_sex",
+                                                  selectInput("life_expectancy_sex",
                                                                  "Select sex",
                                                                  choices = c("Male", "Female"),
+                                                                 selectize = FALSE,
                                                                  width = "100%"))
                                          ),
 
@@ -535,7 +548,7 @@ tagList(
                                          withSpinner(plotlyOutput("life_expectancy_council_area_plot")),
 
                                          br(),
-                                         h3(textOutput("life_expectancy_title")),
+                                         uiOutput("life_expectancy_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("life_expectancy")
@@ -564,14 +577,16 @@ tagList(
                                                                        "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
                                          fluidRow(
                                            column(4,
-                                                  selectizeInput("healthy_life_expectancy_sex",
+                                                  selectInput("healthy_life_expectancy_sex",
                                                                  "Step 1. Select sex",
                                                                  choices = c("Male", "Female"),
+                                                                 selectize = FALSE,
                                                                  width = "100%")),
                                            column(4,
-                                                  selectizeInput("healthy_life_expectancy_life_stage",
+                                                  selectInput("healthy_life_expectancy_life_stage",
                                                                  "Step 2. Select stage of life",
                                                                  choices = c("At birth", "At age 65"),
+                                                                 selectize = FALSE,
                                                                  width = "100%"))
 
                                          ),
@@ -585,7 +600,7 @@ tagList(
                                          withSpinner(plotlyOutput("healthy_life_expectancy_council_area_plot")),
 
                                          br(),
-                                         h3(textOutput("healthy_life_expectancy_title")),
+                                         uiOutput("healthy_life_expectancy_title"),
                                          p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
                                          dataDownloadUI("healthy_life_expectancy")
@@ -688,11 +703,13 @@ tagList(
                                         selectInput("premature_mortality_geog_type",
                                                     "Step 1: Select national or local geography level ",
                                                     choices = c("Scotland", "Health Board"),
+                                                    selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
                                         selectInput("premature_mortality_geog_name",
                                                     "Step 2: Select national or local geography area ",
                                                     choices = c("Scotland"),
+                                                    selectize = FALSE,
                                                     width = "100%"))
                         ),
 
@@ -700,7 +717,7 @@ tagList(
                         ciDefinitionUI("premature_mortality_hb_ci"),
                         withSpinner(plotlyOutput("premature_mortality_hb_plot")),
 
-                        h3(textOutput("premature_mortality_hb_title")),
+                        uiOutput("premature_mortality_hb_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         dataDownloadUI("premature_mortality_hb"),
 
@@ -754,17 +771,19 @@ tagList(
 
                                         fluidRow(
                                           column(4,
-                                                 selectizeInput("screening_breast_geog_type",
+                                                 selectInput("screening_breast_geog_type",
                                                                 "Step 1. Select a national or local geography level",
                                                                 choices = c("Scotland", "Health Board"),
+                                                                selectize = FALSE,
                                                                 width = "100%")),
 
 
                                           column(4,
-                                                 selectizeInput("screening_breast_geog_name",
+                                                 selectInput("screening_breast_geog_name",
                                                                 "Step 2. Select a national or local geography area",
                                                                 choices = unique(screening_breast_simd %>% filter(geography_type == "Scotland") %>%
                                                                                    .$geography),
+                                                                selectize = FALSE,
                                                                 width = "100%")
                                           )),
 
@@ -772,7 +791,7 @@ tagList(
                                         simdQuintileDefinitionUI("screening_breast_simd"),
                                         withSpinner(plotlyOutput("screening_breast_simd_plot")),
 
-                                        h3(textOutput("screening_breast_table_title")),
+                                        uiOutput("screening_breast_table_title"),
                                         p("The data table for the SIMD breakdown is based on the selections above.",
                                           "To view the full dataset, please use the download buttons below."),
 
@@ -812,9 +831,10 @@ tagList(
 
                                         fluidRow(
                                           column(4,
-                                                 selectizeInput("screening_bowel_board_year",
+                                                 selectInput("screening_bowel_board_year",
                                                                 "Select a year range",
                                                                 choices = unique(screening_bowel_board$year_range),
+                                                                selectize = FALSE,
                                                                 width = "100%"))),
 
 
@@ -824,21 +844,24 @@ tagList(
 
                                         fluidRow(
                                           column(4,
-                                                 selectizeInput("screening_bowel_simd_year",
+                                                 selectInput("screening_bowel_simd_year",
                                                                 "Step 1. Select a year range",
                                                                 choices = unique(screening_bowel_simd$year_range),
+                                                                selectize = FALSE,
                                                                 width = "100%")),
                                           column(4,
-                                                 selectizeInput("screening_bowel_geog_type",
+                                                 selectInput("screening_bowel_geog_type",
                                                                 "Step 2. Select a national or local geography level",
                                                                 choices = c("Scotland", "Health Board"),
+                                                                selectize = FALSE,
                                                                 width = "100%")),
 
                                           column(4,
-                                                 selectizeInput("screening_bowel_geog_name",
+                                                 selectInput("screening_bowel_geog_name",
                                                                 "Step 3. Select a national or local geography area",
                                                                 choices = unique(screening_bowel_simd %>% filter(geography_type == "Scotland") %>%
                                                                                    .$geography),
+                                                                selectize = FALSE,
                                                                 width = "100%")
                                           )),
 
@@ -846,7 +869,7 @@ tagList(
                                         simdQuintileDefinitionUI("screening_bowel_simd"),
                                         withSpinner(plotlyOutput("screening_bowel_simd_plot")),
 
-                                        h3(textOutput("screening_bowel_table_title")),
+                                        uiOutput("screening_bowel_table_title"),
                                         p("The data tables below are based on the selections above.",
                                           "To view the full dataset, please use the download buttons below."),
 
@@ -924,11 +947,13 @@ tagList(
                                                                     "Step 1: Select national or local geography level ",
                                                                     choices = c("Scotland", "Health Board"),
                                                                     selected = "Scotland",
+                                                                    selectize = FALSE,
                                                                     width = "100%")),
                                                  column(4,
                                                         selectInput("vaccinations_covid_geog_name",
                                                                     "Step 2: Select national or local geography area ",
                                                                     choices = "Scotland",
+                                                                    selectize = FALSE,
                                                                     width = "100%"))),
 
 
@@ -940,7 +965,7 @@ tagList(
                                         withSpinner(plotlyOutput("vaccinations_covid_plot")),
 
                                         br(),
-                                        h3(textOutput("vaccinations_covid_title")),
+                                        uiOutput("vaccinations_covid_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("vaccinations_covid")
@@ -970,11 +995,13 @@ tagList(
                                                                     "Step 1: Select national or local geography level ",
                                                                     choices = c("Scotland", "Health Board"),
                                                                     selected = "Scotland",
+                                                                    selectize = FALSE,
                                                                     width = "100%")),
                                                  column(4,
                                                         selectInput("vaccinations_flu_geog_name",
                                                                     "Step 2: Select national or local geography area ",
                                                                     choices = "Scotland",
+                                                                    selectize = FALSE,
                                                                     width = "100%"))),
 
                                         altTextUI("vaccinations_flu_alt"),
@@ -982,7 +1009,7 @@ tagList(
                                         withSpinner(plotlyOutput("vaccinations_flu_plot")),
 
                                         br(),
-                                        h3(textOutput("vaccinations_flu_title")),
+                                        uiOutput("vaccinations_flu_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("vaccinations_flu"),

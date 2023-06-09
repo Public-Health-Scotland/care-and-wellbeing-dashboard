@@ -1,22 +1,29 @@
 // Javascript code supporting R shiny app //
 // -------------------------------------- //
 
+
 $(document).ready( () => {
+
+
+  // Set tabindex = 0 for all elements to allow tabbing navigation
+  $('[tabindex]').each(function(i){
+    $(this).attr("tabindex", 0);
+  });
 
   // Making sure navbar doesn't overlap content
   // Add padding at the top of the page which is 12px bigger
   // than the navbar height
 
-  // function padNavbar() {
-  //    var navHeight = $(".navbar").height();
-  //    $("body").css({paddingTop: (navHeight+12)+'px'});
-  //}
+   function padNavbar() {
+      var navHeight = $(".navbar").height();
+      $("body").css({paddingTop: (navHeight+12)+'px'});
+  }
 
-  //padNavbar();
-  // // Do this again when the window is resized or navbar is opened/closed
-  //$(window).resize(padNavbar);
-  //$('.collapse').on('shown.bs.collapse', padNavbar);
-  //$('.collapse').on('hidden.bs.collapse', padNavbar);
+  padNavbar();
+   // Do this again when the window is resized or navbar is opened/closed
+  $(window).resize(padNavbar);
+  $('.collapse').on('shown.bs.collapse', padNavbar);
+  $('.collapse').on('hidden.bs.collapse', padNavbar);
 
   // Ensures that when a modal opens keyboard focus is given to the
   // close button in the modal - accessibility
@@ -78,7 +85,35 @@ $(document).ready( () => {
      if (!(active_tab.includes("Plot") | active_tab.includes("Data"))) {
         $(document).scrollTop(0);
      }
+
+
+     // Set tabindex = 0 every time a tab is changed, due to bootsrap bslib library forcing to = -1, to allow tabbing navigation   https://github.com/rstudio/bslib/blob/e2de14ea9a8b6c4ef5299cc03e64b4c850391c66/inst/lib/bs-a11y-p/plugins/js/bootstrap-accessibility.js#LL240C1-L247C7
+     $('[tabindex]').each(function(i){
+        $(this).attr("tabindex", 0);
+     });
   });
+
+
+
+
+  //experimental to fix nav issues
+
+//<ul class="test_ul">
+//    <li class="item" id="item1">
+//        Item 1
+//    </li>
+//    <li class="item" id="item2">
+//        Item 2
+//    </li>
+//    <li class="item" id="item3">
+//        Item 3
+//    </li>
+//    <li class="item" id="item4">
+//        Item 4
+//    </li>
+//</ul>
+
+
 
 
 });

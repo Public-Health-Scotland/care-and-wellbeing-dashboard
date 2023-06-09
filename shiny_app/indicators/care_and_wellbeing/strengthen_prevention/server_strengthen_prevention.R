@@ -79,9 +79,9 @@ observeEvent(input$life_expectancy_sex,{
 
 observeEvent(input$life_expectancy_sex,{
 
-  output$life_expectancy_title <- renderText({glue("Data table:",
+  output$life_expectancy_title <- renderUI({h3(glue("Data table:",
                                                    input$life_expectancy_sex,
-                                                   " life expectancy at birth")})
+                                                   " life expectancy at birth"))})
 })
 
 
@@ -184,10 +184,10 @@ observeEvent(input$healthy_life_expectancy_sex,{
 observeEvent(input$healthy_life_expectancy_sex,{
   observeEvent(input$healthy_life_expectancy_life_stage,{
 
-    output$healthy_life_expectancy_title <- renderText({glue("Data table:",
+    output$healthy_life_expectancy_title <- renderUI({h3(glue("Data table:",
                                                              input$healthy_life_expectancy_sex,
                                                              " healthy life expectancy ",
-                                                             str_to_lower(input$healthy_life_expectancy_life_stage))})
+                                                             str_to_lower(input$healthy_life_expectancy_life_stage)))})
   })
 })
 
@@ -340,9 +340,9 @@ output$premature_mortality_hb_plot <- renderPlotly({
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
-      filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
-                               x_title = "Year", title = title) %>%
+    filter(geography == input$premature_mortality_geog_name) %>%
+    confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
+                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4),
            xaxis = list(dtick = 1))
 
@@ -369,23 +369,23 @@ output$premature_mortality_simd_plot <- renderPlotly({
 
 observeEvent(input$premature_mortality_geog_name,{
 
-  output$premature_mortality_hb_title <- renderText({glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
-                                                          "in ", input$premature_mortality_geog_name)})
+  output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
+                                                          "in ", input$premature_mortality_geog_name))})
 
-    data_unfiltered <- premature_mortality_all_cause_hb %>%
-      arrange(desc(date)) %>%
-      mutate(date = factor(date)) %>%
-      select(c(date, geography_type, geography, indicator,
-               lower_confidence_interval, upper_confidence_interval)) %>%
-      rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
-             "Year" = "date")
+  data_unfiltered <- premature_mortality_all_cause_hb %>%
+    arrange(desc(date)) %>%
+    mutate(date = factor(date)) %>%
+    select(c(date, geography_type, geography, indicator,
+             lower_confidence_interval, upper_confidence_interval)) %>%
+    rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
+           "Year" = "date")
 
-    data_filtered <- data_unfiltered %>%
-        filter(geography == input$premature_mortality_geog_name)
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$premature_mortality_geog_name)
 
-    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                       id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
-                       add_separator_cols_1dp = c(4,5,6))
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
+                     add_separator_cols_1dp = c(4,5,6))
 
 })
 
@@ -469,8 +469,8 @@ output$all_cause_mortality_plot = renderPlotly({
   line_chart_function(data, indicator_y,
                       title = title,
                       label = ifelse(input$all_cause_mortality_rate_number == "Rate", "Rate of death", "Number of deaths")) %>%
-  layout(yaxis=list(tickformat=","),
-         xaxis = list(tickangle = -30))
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(tickangle = -30))
 
 })
 
@@ -501,8 +501,8 @@ observeEvent(input$all_cause_mortality_geog_name,{
 
 observeEvent(input$all_cause_mortality_geog_name,{
 
-  output$all_cause_mortality_title <- renderText({glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
-                                                       input$all_cause_mortality_geog_name)})
+  output$all_cause_mortality_title <- renderUI({h3(glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
+                                                       input$all_cause_mortality_geog_name))})
 })
 
 
@@ -567,8 +567,8 @@ observeEvent(input$chd_deaths_geog_type,{
 
 observeEvent(input$chd_deaths_geog_name,{
 
-  output$chd_deaths_title <- renderText({glue("Data table:Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in",
-                                              input$chd_deaths_geog_name)})
+  output$chd_deaths_title <- renderUI({h3(glue("Data table:Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in",
+                                              input$chd_deaths_geog_name))})
 })
 
 altTextServer("chd_deaths_alt",
@@ -607,7 +607,7 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 heart_attack %>%
   select(date, total_admissions) %>%
   filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                       "2016","2017","2018","2019","2020")) %>%
+                      "2016","2017","2018","2019","2020")) %>%
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
@@ -703,8 +703,8 @@ observeEvent(input$drug_admissions_age,{
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  output$drug_admissions_title <- renderText({glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
-                                                   age_title, ") in Scotland")})
+  output$drug_admissions_title <- renderUI({h3(glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+                                                   age_title, ") in Scotland"))})
 })
 
 
@@ -804,8 +804,8 @@ observeEvent(input$drug_deaths_geog_name,{
 
 observeEvent(input$drug_deaths_geog_name,{
 
-  output$drug_deaths_title <- renderText({glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths in ",
-                                               input$drug_deaths_geog_name)})
+  output$drug_deaths_title <- renderUI({h3(glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths in ",
+                                               input$drug_deaths_geog_name))})
 })
 
 ##############################################.
@@ -874,8 +874,8 @@ observeEvent(input$alcohol_admissions_geog_name,{
 
 observeEvent(input$alcohol_admissions_geog_name,{
 
-  output$alcohol_admissions_title <- renderText({glue("Data table: European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
-                                                      input$alcohol_admissions_geog_name)})
+  output$alcohol_admissions_title <- renderUI({h3(glue("Data table: European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
+                                                      input$alcohol_admissions_geog_name))})
 })
 
 
@@ -960,9 +960,9 @@ observeEvent(input$alcohol_deaths_tabBox, {
     title_end <- ifelse(input$alcohol_deaths_tabBox == "Rate for all ages",
                         "", " by age group")
 
-    output$alcohol_deaths_title <- renderText({
+    output$alcohol_deaths_title <- renderUI({
 
-      title <- glue(title_start, title_end)
+      title <- h3(glue(title_start, title_end))
 
     })
 
@@ -1046,7 +1046,7 @@ output$healthy_birthweight_plot = renderPlotly({
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
     filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type,
            financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
-                                         "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
+                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
     layout(xaxis = list(tickangle = -30),
            legend = list(y = -0.4))
@@ -1076,8 +1076,8 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
 observeEvent(input$healthy_birthweight_geog_name,{
 
-  output$healthy_birthweight_title <- renderText({glue("Data table: Birthweight of babies based on gestational age in ",
-                                                       input$healthy_birthweight_geog_name)})
+  output$healthy_birthweight_title <- renderUI({h3(glue("Data table: Birthweight of babies based on gestational age in ",
+                                                       input$healthy_birthweight_geog_name))})
 })
 
 
@@ -1321,8 +1321,8 @@ observeEvent(input$asthma_admissions_breakdowns,{
       breakdown <- "by sex "
     }
 
-    output$asthma_admissions_title <- renderText({glue("Data table: Total number of asthma-related hospital admissions ",
-                                                       breakdown, "in ", geog)})
+    output$asthma_admissions_title <- renderUI({h3(glue("Data table: Total number of asthma-related hospital admissions ",
+                                                       breakdown, "in ", geog))})
   })
 })
 
@@ -1418,7 +1418,7 @@ output$screening_breast_simd_plot <- renderPlotly({
 
 })
 
-# output$screening_breast_table_title <- renderText({glue("Data table: Percentage uptake of breast screening by SIMD")})
+# output$screening_breast_table_title <- renderUI({glue("Data table: Percentage uptake of breast screening by SIMD")})
 
 observeEvent(input$screening_breast_tabBox, {
   observeEvent(input$screening_breast_geog_name, {
@@ -1433,7 +1433,7 @@ observeEvent(input$screening_breast_tabBox, {
     #                         tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
     # string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
 
-    output$screening_breast_table_title <- renderText({title})
+    output$screening_breast_table_title <- renderUI(h3(title))
     # })
   })
 })
@@ -1534,7 +1534,7 @@ observeEvent(input$screening_bowel_tabBox, {
                     glue("Data table: Percentage uptake of bowel screening by SIMD category and sex",
                          "in {input$screening_bowel_geog_name}"))
 
-    output$screening_bowel_table_title <- renderText({title})
+    output$screening_bowel_table_title <- renderUI(h3(title))
   })
 })
 
@@ -1624,8 +1624,8 @@ output$vaccinations_covid_plot <- renderPlotly({
 
 observeEvent(input$vaccinations_covid_geog_name,{
 
-  output$vaccinations_covid_title <- renderText({glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
-                                                      "eligible population by SIMD in {input$vaccinations_covid_geog_name}")})
+  output$vaccinations_covid_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
+                                                      "eligible population by SIMD in {input$vaccinations_covid_geog_name}"))})
 })
 
 
@@ -1696,8 +1696,8 @@ output$vaccinations_flu_plot <- renderPlotly({
 
 observeEvent(input$vaccinations_flu_geog_name,{
 
-  output$vaccinations_flu_title <- renderText({glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
-                                                    "eligible population by SIMD in {input$vaccinations_flu_geog_name}")})
+  output$vaccinations_flu_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
+                                                    "eligible population by SIMD in {input$vaccinations_flu_geog_name}"))})
 })
 
 
@@ -1764,5 +1764,3 @@ experience_unpaid_carers %>%
          "Percentage (%)"= "indicator") %>%
   dataDownloadServer(id = "experience_unpaid_carers",
                      filename = "experience_unpaid_carers")
-
-

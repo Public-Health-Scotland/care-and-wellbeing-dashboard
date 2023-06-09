@@ -26,7 +26,7 @@ summaryBoxServer <- function(id,
           ## Sentence for recent value
           div(class = "recent-value",
               ifelse(length(recent_value)[1] == 0,'Not available',
-                     ifelse(recent_value == "To be developed", recent_value,
+                     ifelse(recent_value == "To be developed", "",
                             glue("{recent_date}: {format(round_half_up(recent_value,value_dp),big.mark=',')}{percentage_symbol}")))),
 
           ## Sentence for previous value
