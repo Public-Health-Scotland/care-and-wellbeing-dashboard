@@ -55,7 +55,7 @@ tagList(
                # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
                ##############################################.
 
-               tabPanel(title = "Alcohol: alcohol-related hospital admissions and deaths",
+               tabPanel(title = "Alcohol: deaths and hospital admissions",
                         value = "alcohol",
 
                         tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
