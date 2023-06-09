@@ -691,8 +691,7 @@ observeEvent(input$drug_admissions_age,{
     filter(age_group %in% input$drug_admissions_age)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "drug_admissions", filename = "drug_admissions",
-                     add_separator_cols_2dp = c(3))
+                     id = "drug_admissions", filename = "drug_admissions")
 })
 
 observeEvent(input$drug_admissions_age,{
@@ -766,8 +765,8 @@ output$drug_deaths_plot = renderPlotly({
       filter(#geography_type == input$drug_deaths_geog_type,
         geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Age-standardised rate of deaths <br> per 100,000 population", title = title_rate) %>%
-      layout(xaxis = list(tickangle = -30),
-             legend = list(y = -0.4))
+      layout(xaxis = list(tickangle = -60),
+             legend = list(y = -0.7))
   } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
       mutate(date = year, indicator = number) %>%
