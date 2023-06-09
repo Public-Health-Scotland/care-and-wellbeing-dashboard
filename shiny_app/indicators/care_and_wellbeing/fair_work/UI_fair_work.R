@@ -24,13 +24,15 @@ tagList(
                                                                             "<br><br> More detailed information can be found in the accompanying",
                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
-                        fluidRow(column(3,
+
+                        fluidRow(column(4,
                                         selectInput("economic_inactivity_cw_geog_type",
                                                     "Step 1: Select national of local geography level",
                                                     choices = c("Scotland", "Council Area"),
+                                                    selected = "Scotland",
                                                     selectize = FALSE,
-                                                    selected = "Scotland")),
-                                 column(3,
+                                                    width = "100%")),
+                                 column(4,
                                         selectInput("economic_inactivity_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
@@ -104,8 +106,10 @@ tagList(
                           column(12,
                                  tags$b("Select a local authority on the map to view local trend:")),
                           column(6,
+                                 mapAltTextUI("employees_living_wage_cw_map_alt"),
                                  withSpinner(leafletOutput("employees_living_wage_cw_map"))),
                           column(6,
+                                 altTextUI("employees_living_wage_cw_map_plot_alt"),
                                  withSpinner(plotlyOutput("employees_living_wage_cw_line_LA")))
                         ),
 

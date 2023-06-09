@@ -179,6 +179,29 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
                       range=c(0,35)))
 })
 
+mapAltTextServer("employees_living_wage_cw_map_alt",
+              title = "Employees earning less than the real Living Wage by council area map",
+              content = tags$ul(tags$li("This is a map for the percentage of employees (18+) earning less than the real Living Wage by council area in Scotland."),
+                                tags$li("The map splits Scotland into council areas using white lines as the borders."),
+                                tags$li("The dropdown above the map allows you to select the year for plotting on the map. The default is 2012"),
+                                tags$li("The colour that a council area is highlighted relates to a percentage range as indicated by the map legend.",
+                                "The colours range from light yellow for 0-10% to dark red for 40-100% between which the ranges cover 5% increments.",
+                                "The percentage range indicated relates to the key data for the council area for the chosen year."),
+                                tags$li("If an area is grey, then there is no available data for the chosen year for that council area.")
+              ))
+
+altTextServer("employees_living_wage_cw_map_plot_alt",
+              title = "Employees earning less than the real Living Wage by council area plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the percentage of employees (18+) earning less than the real Living Wage by council area in Scotland."),
+                                tags$li("The x axis shows the year starting from 2012."),
+                                tags$li("The y axis shows the percentage of employees earning less than the real Living Wage."),
+                                tags$li("The purple line is the percentage of employees earning less than the real Living Wage for the corresponding council area."),
+                                tags$li("By default, this chart will show the trend for Scotland. When an area of the map to the left hand side of this plot is clicked,",
+                                        "the plot will update to show the trend of the corresponding council area."),
+                                tags$li("Clicking the 'Trend for Scotland' button above will return this plot to it's default of showing the trend in Scotland."),
+                                tags$li("When an area of the map is clicked where data is partially or completey unavailable,",
+                                        "the plot will either show breaks in the trend line or the plot will show as empty.")
+              ))
 
 
 living_wage_sector <- employees_living_wage_by_sector %>%

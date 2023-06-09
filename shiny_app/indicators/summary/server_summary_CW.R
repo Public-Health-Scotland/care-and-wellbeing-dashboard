@@ -29,10 +29,10 @@ observeEvent(input$geog_name_summary_CW,{
   recent_date <- max(asthma_admissions$date)
   previous_date <- max(asthma_admissions %>% filter(date != recent_date) %>% .$date)
 
-  value <- asthma_admissions %>% filter(sex == "All Sexes", age_group == "All Ages", geography == input$geog_name_summary_CW)
+  value <- asthma_admissions %>% filter(sex == "All Sexes", age_bands == "All Ages", geography == input$geog_name_summary_CW)
 
-  recent_value <- value %>% filter(date == recent_date) %>% .$stays_number
-  previous_value <- value %>% filter(date == previous_date) %>% .$stays_number
+  recent_value <- value %>% filter(date == recent_date) %>% .$indicator
+  previous_value <- value %>% filter(date == previous_date) %>% .$indicator
 
   summaryBoxServer("asthma_admissions",
                    recent_date = recent_date,
