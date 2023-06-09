@@ -766,7 +766,7 @@ output$drug_deaths_plot = renderPlotly({
       filter(#geography_type == input$drug_deaths_geog_type,
         geography == input$drug_deaths_geog_name) %>%
       confidence_line_function(., "Age-standardised rate of deaths <br> per 100,000 population", title = title_rate) %>%
-      layout(xaxis = list(tickangle = 30),
+      layout(xaxis = list(tickangle = -30),
              legend = list(y = -0.4))
   } else if (input$drug_deaths_rate_number == "Number") {
     drug_related_deaths %>%
