@@ -244,5 +244,6 @@ childhood_obesity %>%
          Year = "date") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "children_at_risk_of_obesity",
-                     filename = "children_at_risk_of_obesity")
+                     filename = "children_at_risk_of_obesity",
+                     add_percentage_cols = c(2))
 
