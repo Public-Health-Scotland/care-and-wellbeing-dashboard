@@ -138,10 +138,10 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(drug_related_deaths$year)
-  previous_date <- max(drug_related_deaths %>% filter(year != recent_date) %>% .$year)
-
   value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW)
+
+  recent_date <- max(value$year)
+  previous_date <- max(value %>% filter(year != recent_date) %>% .$year)
 
   recent_value <- value %>% filter(year == recent_date) %>% .$rate
   previous_value <- value %>% filter(year == previous_date) %>% .$rate
