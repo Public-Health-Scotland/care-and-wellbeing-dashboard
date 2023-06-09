@@ -25,12 +25,14 @@ tagList(
                              selectInput("geog_type_summary_CW",
                                          "Step 1: Select national or local geography level ",
                                          choices = c("Scotland", "Health board", "Council area"),
+                                         selectize = FALSE,
                                          width = "100%")),
                       column(6,
 
                              selectInput("geog_name_summary_CW",
                                          "Step 2: Select national or local geography area ",
                                          choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography),
+                                         selectize = FALSE,
                                          width = "100%"))
 
              ),
@@ -343,12 +345,13 @@ tagList(
                      column(4,
                             h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
                             summaryBoxUI("quality_care")
-                     ),
+                     )#,
 
-                     column(4,
-                            h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
-                            summaryBoxUI("work_related_health")
-                     )),
+                     # column(4,
+                     #        h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
+                     #        summaryBoxUI("work_related_health")
+                     # )
+                     ),
                    fluidRow(column(12, br()))
                  )),
 

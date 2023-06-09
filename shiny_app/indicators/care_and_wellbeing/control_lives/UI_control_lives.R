@@ -12,16 +12,17 @@ tagList(
                         value = "camhs_waiting_times_cw",
 
                         h2("CAMHS waiting times", iButtonUI("camhs_waiting_times_cw",
-                                                            content = paste("<p>Child and Adolescent Mental Health Services (CAMHS) data are collected from all NHS Health Boards ",
-                                                                            "across Scotland in a variety of ways. The Scottish Government standard states that 90% of ",
-                                                                            "children and young people should start treatment within 18 weeks of referral to CAMHS.</p>",
-
-                                                                            "<p>For all children/young people referred into the service during the Covid-19 pandemic CAMHS ",
-                                                                            "are providing initial telephone triage to elicit more information. Dependent on levels of ",
-                                                                            "risk identified some will be offered a time/date to undertake a complete assessment where ",
-                                                                            "others, where levels of risk/concern identified a face-to-face assessment will be offered.</p>",
-
-                                                                            "<a href=https://publichealthscotland.scot/publications/show-all-releases?id=20497> Source: CAMHS Waiting Times, Public Health Scotland </a>"))),
+                                                            content = paste("This indicator provides data on Child and Adolescent Mental Health Services",
+                                                            "(CAMHS) appointment waiting times.",
+                                                                            "<br><br>Source:",
+                                                                            "<a href= https://publichealthscotland.scot/publications/show-all-releases?id=20569/ target =_blank> CAMHS Waiting Times,  Public Health Scotland (external site)</a>.",
+                                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
+                                                                            "is 2021",
+                                                                            "More up to date data is available at source.",
+                                                                            "<br><br>These data are available at Scotland",
+                                                                            "and NHS Health Board levels.",
+                                                            "<br><br> More detailed information can be found in the accompanying",
+                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         # p("Use the below drop-down menu to select a Health Board of interest.",
                         #   "Please note that for some healthboards there are no data in some months and will appear as a gap on the graphs."),
@@ -31,12 +32,14 @@ tagList(
                                                     "Step 1: Select national or local geography level",
                                                     choices = c("Scotland", "Health Board"),
                                                     selected = "Scotland",
+                                                    selectize = FALSE,
                                                     width = "100%")),
 
                                  column(4,
                                         selectInput("camhs_waiting_times_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
+                                                    selectize = FALSE,
                                                     width = "100%"))
                         ),
 
@@ -53,7 +56,7 @@ tagList(
                         withSpinner(plotlyOutput("camhs_waiting_times_cw_seen_within_plot")),
 
                         br(),
-                        h3(textOutput({"camhs_cw_table_title"})),
+                        uiOutput({"camhs_cw_table_title"}),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("camhs_cw")

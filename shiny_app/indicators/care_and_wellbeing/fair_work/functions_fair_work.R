@@ -100,6 +100,67 @@ make_gender_pay_gap_cw_plot = function(data, title = "", second_axis = FALSE) {
 
 }
 
+line_chart_function_pg = function(data, y_title, x_title = "Year", title = "",
+                                  label = "Gender Pay Gap", ylim = 100) {
+
+  yaxis_number[["title"]] = y_title
+  xaxis_year[["title"]] = x_title
+
+  plot_ly(data = data) %>%
+    add_trace(x=~date,
+              y=~indicator,
+              type = "scatter",
+              mode = "lines",
+              line = list(color = phs_colours("phs-purple")),
+              name = glue("{label}"),
+              hovertemplate = ~glue("{format(round_half_up(indicator, 2), big.mark=',')}", "%")) %>%
+    layout(xaxis = xaxis_year,
+           yaxis = list(title = y_title, range = c(-ylim, ylim), ticksuffix = "%",
+                        tickfont = list(size=14), titlefont = list(size=18)),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           hovermode = "x unified") %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+}
+
+make_line_chart_multi_lines_pg <- function(data, x, y, colour, y_axis_title, x_axis_title = "Year",
+                                           label = "", title = "", hover_end="",
+                                           ylim = 30) {
+
+  plot_ly(data = data,
+          x = ~x,
+          y = ~y,
+          color = ~colour,
+          type="scatter",
+          mode="lines",
+          colors = palette,
+          # text = "rate",
+          # name = glue("{colour}{label}"), ## unordering factors - levels didn't match legend
+          hovertemplate = ~glue("£", "{format(round_half_up(y, 2), big.mark=',')}{hover_end}")
+
+  ) %>%
+    layout(yaxis = list(title = y_axis_title,
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = FALSE,
+                        fixedrange=FALSE,
+                        range = c(0, ylim),
+                        showlegend = T),
+           xaxis = list(title = x_axis_title,
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = TRUE),
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
+    config(displaylogo = FALSE, displayModeBar = TRUE,
+           modeBarButtonsToRemove = bttn_remove)
+
+
+}
+
 
 ##############################################.
 # ECONOMIC INACTIVITY ----

@@ -233,8 +233,8 @@ dataDownloadServer(data = living_wage_scotland, data_download = living_wage_all,
                    id = "living_wage_cw", filename = "living_wage_by_council",
                    add_separator_cols_1dp = c(3))
 
-output$living_wage_cw_table_title <- renderText({
-  glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
+output$living_wage_cw_table_title <- renderUI({
+  h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland"))
 })
 
 observeEvent(input$employees_living_wage_cw_map_button, {
@@ -243,8 +243,8 @@ observeEvent(input$employees_living_wage_cw_map_button, {
                      id = "living_wage_cw", filename = "living_wage_by_council",
                      add_separator_cols_1dp = c(3))
 
-  output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland")
+  output$living_wage_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in Scotland"))
   })
 
 })
@@ -262,8 +262,8 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 
   la_selected <- unique(living_wage_la$local_authority)
 
-  output$living_wage_cw_table_title <- renderText({
-    glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected)
+  output$living_wage_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of employees (18+) earning less than the real Living Wage in ", la_selected))
   })
 
 })
@@ -276,52 +276,107 @@ observeEvent(input$employees_living_wage_cw_map_shape_click,{
 
 altTextServer("gender_pay_gap_cw_alt",
               title = "Gender pay gap plot",
-              content = tags$ul(tags$li("This is a plot for the trend in the difference in full-time hourly earnings between women and men."),
+              content = tags$ul(tags$li("This is a plot for the trend in the gender pay gap between men and women."),
                                 tags$li("The x axis shows the year, starting from 2014."),
-                                tags$li("The y axis shows the difference in earnings as a percentage of male full time hourly earnings."),
-                                tags$li("There are two panels on the left of the chart. The first panel allows you to select the private,",
-                                        "public, or all sectors. The second panel allows you to select a work pattern of full-time, part-time,",
-                                        "or all work patterns. The default is all work patterns for all sectors."),
-                                tags$li("There is a checkbox to the left of the chart which allows you to show women and men's earnings",
-                                        "on a secondary axis alongside the difference in pay.")
+                                tags$li("The y axis shows the difference between the median hourly earnings (excluding overtime) for ",
+                                        "men and women as a percentage of the median hourly earnings (excluding overtime) for men."),
+                                tags$li("There are two dropdowns above the chart. The first dropdown allows you to select by sector: `all`, `private`,",
+                                        "or `public`. The second dropdown allows you to select by work pattern: `all`, `full-time`, or `part-time`.")
 
               )
 )
 
+altTextServer("gender_pay_gap_cw_earnings_alt",
+              title = "Median Hourly Earnings (£) by gender plot",
+              content = tags$ul(tags$li("This is a plot for the trend in the median hourly earnings (excluding overtime) for men and women."),
+                                tags$li("The x axis shows the year, starting from 2014."),
+                                tags$li("The y axis shows the median hourly earnings in pounds."),
+                                tags$li("There are two dropdowns above the chart. The first dropdown allows you to select by sector: `all`, `private`,",
+                                        "or `public`. The second dropdown allows you to select by work pattern: `all`, `full-time`, or `part-time`.")
+
+              )
+)
+
+
 output$gender_pay_gap_cw_plot = renderPlotly({
 
-  sector_option = input$gender_pay_gap_cw_sector
-  work_pattern_option = input$gender_pay_gap_cw_work
+  sector_option = input$gender_pay_gap_cw_sector_type
+  work_pattern_option = input$gender_pay_gap_cw_work_pattern_type
 
+  string_sector <- ifelse(input$gender_pay_gap_cw_sector_type == "All",
+                          " in all sectors",
+                          tolower(paste0(" in the ", input$gender_pay_gap_cw_sector_type, " sector")))
+  string_work <- tolower(paste0(input$gender_pay_gap_cw_work_pattern_type, " work patterns"))
 
-  pay_gap_by_sector_pattern = gender_pay_gap_by_sector %>%
-    filter(work_pattern == work_pattern_option)
+  title <- glue("Gender pay gap for ", string_work, string_sector)
 
-  pay_gap_by_sector_line_data = pay_gap_by_sector_pattern %>%
-    filter(sector == sector_option)
+  plot_data <- gender_pay_gap_by_sector %>%
+    mutate(year = as.character(year)) %>%
+    filter(work_pattern == work_pattern_option,
+           sector == sector_option,
+           gender == "Pay Gap") %>%
+    select(year, sector, work_pattern, measure_value) %>%
+    rename(indicator = measure_value,
+           date = year)
 
-  plot_data =pay_gap_by_sector_line_data %>%
-    pivot_wider(names_from = gender, values_from = measure_value)
+  ylimits <- gender_pay_gap_by_sector %>%
+    filter(gender == "Pay Gap") %>%
+    mutate(measure_value = abs(round(measure_value/10)*10))
+  ylim <- max(ylimits$measure_value)
 
-  string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
-                          "all sectors, ",
-                          tolower(paste0("the ", input$gender_pay_gap_cw_sector, " sector, ")))
-  string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
-
-  title <- glue("Difference between women and men's full-time hourly earnings in ",
-                string_sector, string_work)
-
-  add_Earning = input$gender_pay_gap_cw_show_earnings_check_box
-  make_gender_pay_gap_cw_plot(plot_data, second_axis = add_Earning, title = title)
+  line_chart_function_pg(plot_data, y_title = "Pay Gap (Women/Men) (%)",
+                      x_title = "Year", title = title, ylim = ylim)
 
 
 })
 
 
+output$gender_pay_gap_cw_earnings_plot = renderPlotly({
 
-observeEvent(input$gender_pay_gap_cw_sector, {
+  sector_option = input$gender_pay_gap_cw_sector_type
+  work_pattern_option = input$gender_pay_gap_cw_work_pattern_type
 
-  observeEvent(input$gender_pay_gap_cw_work, {
+  string_sector <- ifelse(input$gender_pay_gap_cw_sector_type == "All",
+                          " in all sectors",
+                          tolower(paste0(" in the ", input$gender_pay_gap_cw_sector_type, " sector")))
+  string_work <- tolower(paste0(input$gender_pay_gap_cw_work_pattern_type, " work patterns"))
+
+  title <- glue("Median Hourly Earnings (£) by gender for ", string_work, string_sector)
+
+  ylimits <- gender_pay_gap_by_sector %>%
+    filter(gender != "Pay Gap") %>%
+    mutate(measure_value = abs(round(measure_value/5)*5))
+  ylim <- max(ylimits$measure_value)
+
+  plot_data <- gender_pay_gap_by_sector %>%
+    mutate(year = as.character(year)) %>%
+    filter(work_pattern == work_pattern_option,
+           sector == sector_option,
+           gender != "Pay Gap") %>%
+    select(year, sector, work_pattern, gender, measure_value) %>%
+    rename(indicator = measure_value,
+           date = year) %>%
+    make_line_chart_multi_lines_pg(x = .$date,
+                                   y = .$indicator, colour = .$gender,
+                                   y_axis_title = "Median Hourly Earnings (£)",
+                                   title = title, ylim = ylim)
+
+
+})
+
+
+observeEvent(input$gender_pay_gap_cw_sector_type, {
+
+  observeEvent(input$gender_pay_gap_cw_work_pattern_type, {
+
+    string_sector <- ifelse(input$gender_pay_gap_cw_sector_type == "All",
+                            " in all sectors",
+                            tolower(paste0(" in the ", input$gender_pay_gap_cw_sector_type, " sector")))
+    string_work <- tolower(paste0(input$gender_pay_gap_cw_work_pattern_type, " work patterns"))
+
+    title <- glue("Data table: Gender pay gap for ", string_work, string_sector)
+
+    output$gender_pay_gap_cw_table_title <- renderUI({h3(title)})
 
     data_unfiltered <- gender_pay_gap_by_sector %>%
       filter(gender == "Pay Gap") %>%
@@ -329,17 +384,27 @@ observeEvent(input$gender_pay_gap_cw_sector, {
       rename("Gender Pay Gap (%)" = "measure_value")
 
     data_filtered <- data_unfiltered %>%
-      filter(sector == input$gender_pay_gap_cw_sector) %>%
-      filter(work_pattern == input$gender_pay_gap_cw_work)
+      filter(sector == input$gender_pay_gap_cw_sector_type) %>%
+      filter(work_pattern == input$gender_pay_gap_cw_work_pattern_type) %>%
+      mutate(year = factor(year))
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "gender_pay_gap_cw", filename = "gender_pay_gap")
   })
 })
 
-observeEvent(input$gender_pay_gap_cw_sector, {
+observeEvent(input$gender_pay_gap_cw_sector_type, {
 
-  observeEvent(input$gender_pay_gap_cw_work, {
+  observeEvent(input$gender_pay_gap_cw_work_pattern_type, {
+
+    string_sector <- ifelse(input$gender_pay_gap_cw_sector_type == "All",
+                            " in all sectors",
+                            tolower(paste0(" in the ", input$gender_pay_gap_cw_sector_type, " sector")))
+    string_work <- tolower(paste0(input$gender_pay_gap_cw_work_pattern_type, " work patterns"))
+
+    title <- glue("Data table: Median Hourly Earnings (£) by gender for ", string_work, string_sector)
+
+    output$gender_pay_gap_cw_earnings_table_title <- renderUI({h3(title)})
 
     data_unfiltered <- gender_pay_gap_by_sector %>%
       filter(gender != "Pay Gap") %>%
@@ -347,8 +412,10 @@ observeEvent(input$gender_pay_gap_cw_sector, {
       rename("Median Hourly Earnings (£)" = "measure_value")
 
     data_filtered <- data_unfiltered %>%
-      filter(sector == input$gender_pay_gap_cw_sector) %>%
-      filter(work_pattern == input$gender_pay_gap_cw_work)
+      filter(sector == input$gender_pay_gap_cw_sector_type) %>%
+      filter(work_pattern == input$gender_pay_gap_cw_work_pattern_type) %>%
+      mutate(year = factor(year),
+             gender = factor(gender))
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "gender_pay_gap_earnings_cw", filename = "gender_pay_gap_earnings")
@@ -356,23 +423,26 @@ observeEvent(input$gender_pay_gap_cw_sector, {
 })
 
 
-observeEvent(input$gender_pay_gap_cw_tabBox, {
-  observeEvent(input$gender_pay_gap_cw_sector, {
-    observeEvent(input$gender_pay_gap_cw_work, {
-
-  string_tab <- ifelse(input$gender_pay_gap_cw_tabBox == "Earnings",
-                    "Data table: Median Hourly Earnings (£) by gender - ",
-                    "Data table: Gender pay gap (%) - ")
-  string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
-                    "all sectors, ",
-                    tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
-  string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
-
-  output$gender_pay_gap_cw_table_title <- renderText({glue(string_tab, string_sector, string_work)})
-    })
-  })
-})
-
+# <<<<<<< HEAD
+# observeEvent(input$gender_pay_gap_cw_tabBox, {
+#   observeEvent(input$gender_pay_gap_cw_sector, {
+#     observeEvent(input$gender_pay_gap_cw_work, {
+#
+#   string_tab <- ifelse(input$gender_pay_gap_cw_tabBox == "Earnings",
+#                     "Data table: Median Hourly Earnings (£) by gender - ",
+#                     "Data table: Gender pay gap (%) - ")
+#   string_sector <- ifelse(input$gender_pay_gap_cw_sector == "All",
+#                     "all sectors, ",
+#                     tolower(paste0(input$gender_pay_gap_cw_sector, " sector, ")))
+#   string_work <- tolower(paste0(input$gender_pay_gap_cw_work, " work patterns"))
+#
+#   output$gender_pay_gap_cw_table_title <- renderUI({h3(glue(string_tab, string_sector, string_work))})
+#     })
+#   })
+# })
+#
+# =======
+# >>>>>>> origin
 ##############################################.
 #WORK RELATED ILL HEALTH----
 ##############################################.
@@ -446,9 +516,9 @@ observeEvent(input$economic_inactivity_cw_geog_name, {
 
 observeEvent(input$economic_inactivity_cw_geog_name, {
 
-  output$economic_inactivity_cw_table_title <- renderText({
-    glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
-         input$economic_inactivity_cw_geog_name)})
+  output$economic_inactivity_cw_table_title <- renderUI({
+    h3(glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+         input$economic_inactivity_cw_geog_name))})
 
 })
 

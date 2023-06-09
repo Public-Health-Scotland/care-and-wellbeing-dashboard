@@ -7,9 +7,9 @@ dataDownloadUI <- function(id) {
 
   tagList(
     downloadButton(ns("csv"),
-                   "CSV"),
+                   "Download as CSV"),
     downloadButton(ns("excel"),
-                   "Excel"),
+                   "Download as Excel"),
     withSpinner(DT::dataTableOutput(ns("table")))
   )
 }

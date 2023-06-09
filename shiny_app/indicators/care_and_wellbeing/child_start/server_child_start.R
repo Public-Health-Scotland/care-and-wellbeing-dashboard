@@ -118,9 +118,11 @@ observeEvent(input$child_development_cw_geog_name, {
   #                     "in Scotland",
   #                     paste0("by ", input$child_development_cw_geog_table))
 
-  output$child_development_cw_table_title <- renderText({
-    glue("Data table: Proportion of health visitor reviews where any ",
-         "form of developmental concern was raised in ", input$child_development_cw_geog_name)})
+
+  output$child_development_cw_table_title <- renderUI({
+    h3(glue("Data table: Proportion of health visitor reviews where any ",
+         "form of developmental concern was raised in ", input$child_development_cw_geog_name))})
+
 })
 
 ##############################################.
