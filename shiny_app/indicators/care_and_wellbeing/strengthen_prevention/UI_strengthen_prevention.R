@@ -1032,19 +1032,19 @@ tagList(
                         h2("Quality of care experience"),
 
                         p("Content to be developed")
-               ),
+               )#,
 
                ##############################################.
                # WORK-RELATED ILL HEALTH----
                ##############################################.
 
-               tabPanel(title = "Work-related ill health (to be developed)",
-                        value = "work_related_health",
-
-                        h2("Work-related ill health"),
-
-                        p("Content to be developed")
-               )
+               # tabPanel(title = "Work-related ill health (to be developed)",
+               #          value = "work_related_health",
+               #
+               #          h2("Work-related ill health"),
+               #
+               #          p("Content to be developed")
+               # )
 
   ) # navlistpanel
 ) # tagList

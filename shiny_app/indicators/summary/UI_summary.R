@@ -341,12 +341,13 @@ tagList(
                      column(4,
                             h3(actionLink("jump_summary_to_quality_care", "Quality of care experience")),
                             summaryBoxUI("quality_care")
-                     ),
+                     )#,
 
-                     column(4,
-                            h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
-                            summaryBoxUI("work_related_health")
-                     )),
+                     # column(4,
+                     #        h3(actionLink("jump_summary_to_work_related_health", "Work-related ill health")),
+                     #        summaryBoxUI("work_related_health")
+                     # )
+                     ),
                    fluidRow(column(12, br()))
                  )),
 
