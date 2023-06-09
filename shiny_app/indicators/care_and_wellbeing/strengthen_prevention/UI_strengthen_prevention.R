@@ -1,5 +1,5 @@
 tagList(
-  h1("Strengthen the Role and Impact of Ill Health Prevention" ),
+  h1("Strengthen the role and impact of ill health prevention" ),
   br(),
   navlistPanel(widths = c(2,10), id = "strengthen_prevention_panel",
 
@@ -59,7 +59,7 @@ tagList(
                # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
                ##############################################.
 
-               tabPanel(title = "Alcohol: alcohol-related hospital admissions and deaths",
+               tabPanel(title = "Alcohol: deaths and hospital admissions",
                         value = "alcohol",
 
                         tabBox( title = "", id = "alcohol_tabBox", type = "pills", width = NULL,
@@ -1080,19 +1080,19 @@ tagList(
                         h2("Quality of care experience"),
 
                         p("Content to be developed")
-               ),
+               )#,
 
                ##############################################.
                # WORK-RELATED ILL HEALTH----
                ##############################################.
 
-               tabPanel(title = "Work-related ill health (to be developed)",
-                        value = "work_related_health",
-
-                        h2("Work-related ill health"),
-
-                        p("Content to be developed")
-               )
+               # tabPanel(title = "Work-related ill health (to be developed)",
+               #          value = "work_related_health",
+               #
+               #          h2("Work-related ill health"),
+               #
+               #          p("Content to be developed")
+               # )
 
   ) # navlistpanel
 ) # tagList

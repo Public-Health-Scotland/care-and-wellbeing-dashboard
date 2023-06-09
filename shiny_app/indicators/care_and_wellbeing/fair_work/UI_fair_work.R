@@ -13,14 +13,14 @@ tagList(
 
                         h2("Economic inactivity", iButtonUI("economic_inactivity_cw",
                                                             content = paste("This indicator provides data on economically inactive adults aged",
-                                                                             "16 to 64 who want to work.",
-                                                                             "<br><br>Source:",
-                                                                             "<a href= https://www.gov.scot/collections/labour-market-statistics/ target =_blank> Labour Market Statistics, Scottlish Government (external site)</a>.",
-                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
-                                                                             "is 2020.",
-                                                                             "More up to date data are available at source.",
-                                                                             "<br><br>These data are available at Scotland",
-                                                                             "and Council Area levels.",
+                                                                            "16 to 64 who want to work.",
+                                                                            "<br><br>Source:",
+                                                                            "<a href= https://www.gov.scot/collections/labour-market-statistics/ target =_blank> Labour Market Statistics, Scottlish Government (external site)</a>.",
+                                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
+                                                                            "is 2020.",
+                                                                            "More up to date data are available at source.",
+                                                                            "<br><br>These data are available at Scotland",
+                                                                            "and Council Area levels.",
                                                                             "<br><br> More detailed information can be found in the accompanying",
                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
@@ -127,57 +127,46 @@ tagList(
                                                                                             "<a href=https://www.gov.scot/publications/annual-survey-of-hours-and-earnings-2021/ target =_blank> Annual summary of earnings statistics, Scottish Government (external site)</a>.",
                                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",
                                                                                             "is 2021.",
-                                                                                             "More up to date data are available at source.",
-                                                                                             "<br><br>These data are available at a Scotland",
-                                                                                             "level.",
+                                                                                            "More up to date data are available at source.",
+                                                                                            "<br><br>These data are available at a Scotland",
+                                                                                            "level.",
                                                                                             "<br><br> More detailed information can be found in the accompanying",
                                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
-                        altTextUI("gender_pay_gap_cw_alt"),
-
-
-                        br(),
-                        br(),
-
-                        sidebarLayout(
-                          sidebarPanel(radioButtons("gender_pay_gap_cw_sector", label = h3("Sector"),
-                                                    choices = list("All" = "All", "Public" = "Public", "Private" = "Private"),
-                                                    selected = "All"),
-                                       radioButtons("gender_pay_gap_cw_work", label = h3("Work pattern"),
-                                                    choices = list("All" = "All", "Full-time" = "Full-time", "Part-time" = "Part-time"),
-                                                    selected = "All"),
-                                       checkboxInput("gender_pay_gap_cw_show_earnings_check_box",
-                                                     "Show earnings",
-                                                     value = FALSE),
-                                       width = 3),
-                          mainPanel(withSpinner(plotlyOutput("gender_pay_gap_cw_plot")),
-                                    width = 9
-                          )
+                        fluidRow(column(4,
+                                        selectInput("gender_pay_gap_cw_sector_type",
+                                                    "Step 1: Select sector",
+                                                    choices = c("All" = "All", "Public" = "Public", "Private" = "Private"),
+                                                    selected = "All",
+                                                    width = "100%",
+                                                    selectize = FALSE)),
+                                 column(4,
+                                        selectInput("gender_pay_gap_cw_work_pattern_type",
+                                                    "Step 2: Select work pattern",
+                                                    choices = c("All" = "All", "Full-time" = "Full-time", "Part-time" = "Part-time"),
+                                                    selected = "All",
+                                                    width = "100%",
+                                                    selectize = FALSE))
                         ),
 
-                        # fluidRow(
-                        #   column(12,
-                        #          h3("Data table"),
-                        #
-                        #          withSpinner(DT::dataTableOutput("gender_pay_gap_data")))
-                        # ),
+                        altTextUI("gender_pay_gap_cw_alt"),
+                        withSpinner(plotlyOutput("gender_pay_gap_cw_plot")),
 
-
-
+                        br(),
                         uiOutput("gender_pay_gap_cw_table_title"),
-                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
 
-                        tabBox(
-                          #title = "Data tables",
-                          # The id lets us use input$tabset1 on the server to find the current tab
-                          id = "gender_pay_gap_cw_tabBox", height = "250px", width=12,
-                          tabPanel("Pay gap",
-                                   br(),
-                                   dataDownloadUI("gender_pay_gap_cw")),
-                          tabPanel("Earnings",
-                                   br(),
-                                   dataDownloadUI("gender_pay_gap_earnings_cw"))
-                        )),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("gender_pay_gap_cw"),
+
+                        br(),
+                        altTextUI("gender_pay_gap_cw_earnings_alt"),
+                        withSpinner(plotlyOutput("gender_pay_gap_cw_earnings_plot")),
+                        br(),
+                        uiOutput("gender_pay_gap_cw_earnings_table_title"),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        dataDownloadUI("gender_pay_gap_earnings_cw")
+
+               ),
 
                ##############################################.
                # WORK RELATED ILL HEALTH----
