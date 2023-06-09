@@ -88,7 +88,7 @@ observeEvent(input$camhs_waiting_times_cw_geog_name,{
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "camhs_cw", filename = "CAMHS_waiting_times",
                      add_separator_cols = c(4),
-                     add_separator_cols_1dp = c(5))
+                     add_percentage_cols = c(5))
 
 })
 
