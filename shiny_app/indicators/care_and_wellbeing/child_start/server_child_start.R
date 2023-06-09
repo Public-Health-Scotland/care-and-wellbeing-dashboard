@@ -222,7 +222,7 @@ output$child_obesity_plot <- renderPlotly({
   plot <- childhood_obesity %>%
     filter(!(date %in%  c("2003", "1998"))) %>%
     mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
-    line_chart_function(., y_title = "Percentage (%)", title = title)%>%
+    line_chart_function(., y_title = "Percentage (%)", title = title, label = "Percentage")%>%
    # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
     layout(yaxis = list(rangemode="tozero",
                         title = "Percentage (%)",
