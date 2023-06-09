@@ -2,7 +2,7 @@ tagList(
 
   h1("Create Fair Employment and Good Work For All"),
   br(),
-navlistPanel(widths = c(2,10), id = "fair_work_panel",
+  navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                ##############################################.
                # ECONOMIC INACTIVITY----
@@ -16,18 +16,18 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
                                                                                                       "<a href= https://www.gov.scot/collections/labour-market-statistics/ target = _blank> Annual Population Survey. </a>"))),
 
                         fluidRow(column(3,
-                                          selectInput("economic_inactivity_cw_geog_type",
-                                                      "Step 1: Select national of local geography level",
-                                                      choices = c("Scotland", "Council Area"),
-                                                      selectize = FALSE,
-                                                      selected = "Scotland")),
+                                        selectInput("economic_inactivity_cw_geog_type",
+                                                    "Step 1: Select national of local geography level",
+                                                    choices = c("Scotland", "Council Area"),
+                                                    selectize = FALSE,
+                                                    selected = "Scotland")),
                                  column(3,
                                         selectInput("economic_inactivity_cw_geog_name",
                                                     "Step 2: Select national or local geography area",
                                                     choices = c("Scotland"),
                                                     selectize = FALSE,
                                                     width = "100%"))
-                                 ),
+                        ),
 
 
 
@@ -81,16 +81,17 @@ navlistPanel(widths = c(2,10), id = "fair_work_panel",
 
                         fluidRow(
                           column(6,
-                                 selectizeInput("employees_living_wage_cw_year",
-                                                label = "Select year to view on heatmap:",
-                                                choices = employees_living_wage_by_LA %>%
-                                                  filter(earning == "Earning less than the living wage") %>%
-                                                  select(year, local_authority, ca2019, measure_value) %>%
-                                                  .$year %>% unique()
+                                 selectInput("employees_living_wage_cw_year",
+                                             label = "Select year to view on heatmap:",
+                                             choices = employees_living_wage_by_LA %>%
+                                               filter(earning == "Earning less than the living wage") %>%
+                                               select(year, local_authority, ca2019, measure_value) %>%
+                                               .$year %>% unique(),
+                                             selectize = FALSE
                                  )),
-                                 column(6,
-                                        actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
-                          ),
+                          column(6,
+                                 actionButton("employees_living_wage_cw_map_button", "Trend for Scotland"))
+                        ),
 
                         fluidRow(
                           column(12,
