@@ -186,10 +186,10 @@ yaxis_number_normal = list(rangemode="normal",
                            titlefont = list(size=18),
                            showline = FALSE)
 
-home_list<- c("About"= "about",
+home_list<- c("Home"= "about",
               "Using the dashboard"= "use",
               "News and future updates"="future",
-              "Further information"= "info",
-              "Accessibility"= "accessibility")
+              "Further information"= "info")
+              #"Accessibility"= "accessibility")
 
 

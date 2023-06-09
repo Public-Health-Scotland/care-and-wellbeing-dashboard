@@ -336,12 +336,12 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
   geog <- input$premature_mortality_geog_name
 
-  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "in ", geog)
 
   plot <- premature_mortality_all_cause_hb %>%
       filter(geography == input$premature_mortality_geog_name) %>%
-      confidence_line_function_pm(., y_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
+      confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
                                x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4),
            xaxis = list(dtick = 1))
@@ -350,7 +350,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("European age-standardised all-cause premature mortality rates per 100,000 population \n ",
+  title <- glue("European age-standardised rate for all-cause premature mortality per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
@@ -457,7 +457,7 @@ output$all_cause_mortality_plot = renderPlotly({
     data %<>%
       mutate(indicator = rate)
 
-    indicator_y = "Rate of death <br>per 100,000 population"
+    indicator_y = "Rate of deaths <br>per 100,000 population"
   } else if (input$all_cause_mortality_rate_number == "Number") {
     data %<>%
       mutate(indicator = deaths)
@@ -836,7 +836,7 @@ altTextServer("alcohol_admissions_alt",
 
 output$alcohol_admissions_plot = renderPlotly({
 
-  title <- glue("European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
+  title <- glue("European age-sex standardised rate (EASR) per 100,000 population of alcohol-related admissions in ",
                 input$alcohol_admissions_geog_name)
 
   data_alc = alcohol_admissions %>%
@@ -847,7 +847,7 @@ output$alcohol_admissions_plot = renderPlotly({
     rename(date = "financial_year",
            indicator = "stays_easr")
 
-  line_chart_function(data_alc, y_title = "European age-sex standardised<br>rate per 100,000 population", x_title = "Financial year",
+  line_chart_function(data_alc, y_title = "EASR per 100,000 population", x_title = "Financial year",
                       title = title, label = "Rate") %>%
     layout(xaxis = list(tickangle = -30))
 
@@ -913,9 +913,11 @@ output$alcohol_deaths_sex_plot = renderPlotly({
            "upper_confidence_interval" = upper_ci,
            "date" = year,
            "indicator" = rate) %>%
-    confidence_line_function(y_title = "Age-sex standardised rate of death <br> per 100,000 population",
+    confidence_line_function(y_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
                              x_title = "Year",
-                             title=title)
+                             title=title) %>%
+    layout(xaxis = list(dtick = 1, tickangle = -30))
+
 })
 
 altTextServer("alcohol_deaths_age_alt",
@@ -941,8 +943,10 @@ output$alcohol_deaths_age_plot = renderPlotly({
 
     make_line_chart_multi_lines(., x = .$year, y = .$indicator,
                                 colour = .$age_group,
-                                y_axis_title = "Age-sex standardised rate of death <br> per 100,000 population",
-                                title=title)
+                                y_axis_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
+                                title=title) %>%
+    layout(xaxis = list(dtick = 1, tickangle = -30))
+
 })
 
 observeEvent(input$alcohol_deaths_tabBox, {
@@ -1683,7 +1687,7 @@ output$vaccinations_flu_plot <- renderPlotly({
                   yaxis_title = "Percentage (%)",
                   category_var = .$date,
                   hover_end = "%",
-                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}, "
+                  title = glue("Percentage (%) uptake of influenza vaccinations in eligible population by SIMD in {input$vaccinations_flu_geog_name}"
                   )) %>%
     layout(yaxis = list(ticksuffix = "%"))
 

@@ -9,7 +9,8 @@ input_alcohol_deaths_rates <- read_excel(data_path, sheet = data_sheet_rate,
                                                        "rate_all", "lower_ci_all", "upper_ci_all",
                                                        "rate_females", "lower_ci_females", "upper_ci_females",
                                                        "rate_males", "lower_ci_males", "upper_ci_males"), range="A6:M48") %>%
-  filter(!is.na(rate_all))
+  filter(!is.na(rate_all),
+         year >= 2008)
 
 pivot_number <- input_alcohol_deaths_rates %>% select(year, number_all, number_females, number_males) %>%
   pivot_longer(starts_with("number"), values_to = "number", names_to = "sex") %>%
@@ -39,6 +40,7 @@ alcohol_deaths <- reduce(alcohol_list, full_join) %>%
 input_alcohol_deaths_ages <- read_excel(data_path, sheet = data_sheet_ages,
                                         col_names =  c("year", "sex", "measure", "10-24", "25-44", "45-64", "65-74", "75+"),
                                         range="A6:H89") %>%
+  filter(year >= 2008) %>%
   pivot_longer(cols =  c("10-24", "25-44", "45-64", "65-74", "75+"), names_to = "age_group", values_to = "indicator") %>%
   select(-measure) %>%
   mutate(value = "alcohol_deaths",

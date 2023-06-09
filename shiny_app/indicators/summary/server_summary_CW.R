@@ -200,7 +200,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value_agree,
                    previous_value = previous_value_agree,
-                   percentage_symbol = "%"
+                   percentage = TRUE
   )
 
   summaryBoxServer("experience_of_unpaid_carers_disagree",
@@ -208,7 +208,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value_disagree,
                    previous_value = previous_value_disagree,
-                   percentage_symbol = "%"
+                   percentage = TRUE
 
   )
 
@@ -262,7 +262,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Life expectancy #####
@@ -350,7 +350,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -426,7 +426,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
   })
 
@@ -454,14 +454,14 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value_f,
                    previous_value = previous_value_f,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
   summaryBoxServer("screening_bowel_m",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_m,
                    previous_value = previous_value_m,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -491,7 +491,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -513,7 +513,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -533,7 +533,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
   })
 
@@ -564,7 +564,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -591,7 +591,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -659,7 +659,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date %>% format('%B %Y'),
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 
 })
 
@@ -712,7 +712,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 
@@ -733,21 +733,26 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Employees on the living wage #####
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(employees_living_wage_by_LA$year)
-  previous_date <- max(employees_living_wage_by_LA %>% filter(year != recent_date) %>% .$year)
+  ### Slightly different to counter NA values
+  summary_data <- employees_living_wage_by_LA %>%
+    filter(geography == input$geog_name_summary_CW,
+           !is.na(measure_value))
 
-  recent_value <- employees_living_wage_by_LA %>%
-    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == recent_date) %>%
+  recent_date <- max(summary_data$year)
+  previous_date <- max(summary_data %>% filter(year != recent_date) %>% .$year)
+
+  recent_value <- summary_data %>%
+    filter(earning == "Earning less than the living wage", year == recent_date) %>%
     .$measure_value %>% round_half_up(2)
-  previous_value <- employees_living_wage_by_LA %>%
-    filter(geography == input$geog_name_summary_CW, earning == "Earning less than the living wage", year == previous_date) %>%
+  previous_value <- summary_data %>%
+    filter(earning == "Earning less than the living wage", year == previous_date) %>%
     .$measure_value %>% round_half_up(2)
 
   summaryBoxServer("employees_living_wage_cw",
@@ -755,7 +760,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Pay gap #####
@@ -779,7 +784,7 @@ observeEvent(input$geog_name_summary_CW,{
                    previous_date = previous_date,
                    recent_value = recent_value,
                    previous_value = previous_value,
-                   percentage_symbol = "%")
+                   percentage = TRUE)
 })
 
 ##### Work related ill health #####
