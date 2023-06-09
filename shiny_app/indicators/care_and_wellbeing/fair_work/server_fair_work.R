@@ -288,6 +288,7 @@ output$gender_pay_gap_cw_plot = renderPlotly({
   title <- glue("Gender pay gap for ", string_work, string_sector)
 
   plot_data <- gender_pay_gap_by_sector %>%
+    mutate(year = as.character(year)) %>%
     filter(work_pattern == work_pattern_option,
            sector == sector_option,
            gender == "Pay Gap") %>%
@@ -325,6 +326,7 @@ output$gender_pay_gap_cw_earnings_plot = renderPlotly({
   ylim <- max(ylimits$measure_value)
 
   plot_data <- gender_pay_gap_by_sector %>%
+    mutate(year = as.character(year)) %>%
     filter(work_pattern == work_pattern_option,
            sector == sector_option,
            gender != "Pay Gap") %>%
