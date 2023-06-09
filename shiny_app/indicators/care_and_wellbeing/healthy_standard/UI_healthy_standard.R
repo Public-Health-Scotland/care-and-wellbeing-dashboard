@@ -1,6 +1,6 @@
 tagList(
 
-  h1("Ensure Healthy Standard of Living For All"),
+  h1("Ensure a Healthy Standard of Living For All"),
   br(),
 
   navlistPanel(widths = c(2,10), id = "healthy_standard_panel",

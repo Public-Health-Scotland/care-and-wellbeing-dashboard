@@ -42,7 +42,7 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # HOME ----
         ##############################################.
-        tabPanel(title = "Home",
+        tabPanel(title = tags$b("Home"),
                  #icon = icon_no_warning_fn("house"),
                  value = "home",
 
@@ -53,7 +53,7 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # SUMMARY V2 ----
         ##############################################.
-        tabPanel(title = "At a glance",
+        tabPanel(title = tags$b("At a glance"),
                  value = "summary",
 
                  source(file.path("indicators/summary/UI_summary.R"), local = TRUE)$value
@@ -85,13 +85,7 @@ ui <- shinymanager::secure_app(
         # CARE AND WELLBEING ----
         ##############################################.
 
-        navbarMenu(title = "Care and Wellbeing", #icon = icon_no_warning_fn("spa"),
-
-
-                   tabPanel(title = "Strengthen the role and impact of ill health prevention",
-                            value = "strengthen_prevention",
-                            source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
-
+        navbarMenu(title = tags$b("Care and Wellbeing"), #icon = icon_no_warning_fn("spa"),
 
                    tabPanel(title = "Give every child the best start in life",
                             value = "child_start",
@@ -105,7 +99,11 @@ ui <- shinymanager::secure_app(
                             value = "fair_work",
                             source(file.path("indicators/care_and_wellbeing/fair_work/UI_fair_work.R"), local = TRUE)$value),
 
-                   tabPanel(title = "Ensure healthy standard of living for all (to be developed)",
+                   tabPanel(title = "Strengthen the role and impact of ill health prevention",
+                            value = "strengthen_prevention",
+                            source(file.path("indicators/care_and_wellbeing/strengthen_prevention/UI_strengthen_prevention.R"), local = TRUE)$value),
+
+                   tabPanel(title = "Ensure a healthy standard of living for all (to be developed)",
                             value = "healthy_standard",
                             source(file.path("indicators/care_and_wellbeing/healthy_standard/UI_healthy_standard.R"), local = TRUE)$value),
 
@@ -127,13 +125,13 @@ ui <- shinymanager::secure_app(
         ##############################################.
         # INFORMATION AND NOTES ----
         ##############################################.
-        tabPanel(title = "Information and Notes",
-                 #icon = icon_no_warning_fn("lemon"),
-                 value = "info_notes",
-
-                 source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
-
-        ) # tabpanel
+        # tabPanel(title = "Information and Notes",
+        #          #icon = icon_no_warning_fn("lemon"),
+        #          value = "info_notes",
+        #
+        #          source(file.path("indicators/info_notes/UI_info_notes.R"), local = TRUE)$value
+        #
+        # ) # tabpanel
       ) # navbar
     ) # taglist
   ) # ui fluidpage
