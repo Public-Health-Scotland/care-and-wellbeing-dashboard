@@ -24,6 +24,7 @@ output$employees_living_wage_cw_sector_plot = renderPlotly({
   title <- glue("Percentage of employees (18+) earning less than the real Living Wage by sector in Scotland")
 
   data = employees_living_wage_by_sector %>%
+    mutate(sector=str_replace(sector, "All", "All sectors")) %>%
     filter(measure == "proportion",
            earning == "Earning less than the living wage") %>%
     make_line_chart_multi_lines(.,x = .$year, y = .$measure_value, colour = .$sector, y_axis_title = "Percentage",
@@ -41,6 +42,7 @@ output$employees_living_wage_cw_sector_plot = renderPlotly({
 })
 
 employees_living_wage_by_sector %>%
+  mutate(sector=str_replace(sector, "All", "All sectors")) %>%
   filter(measure == "proportion",
          earning == "Earning less than the living wage") %>%
   select(year, sector, measure_value) %>%
