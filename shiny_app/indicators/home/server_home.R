@@ -43,7 +43,7 @@ output$home_about <- renderUI({
 
           fluidRow(
             column(4, tags$div(class = "special_button",
-                               actionButton("jump_to_control_lives", "Mental wellbeing"))),
+                               actionButton("jump_to_control_lives", "Education"))),
             column(8, tags$div(class= "invisible_button",
                                actionButton("jump_to_control_lives2", "Enable all children, young people and adults to maximise their capabilities and control their lives")))),
 

@@ -223,7 +223,7 @@ altTextServer("child_obesity_alt",
 
 output$child_obesity_plot <- renderPlotly({
 
-  title <- "Children (2-15) at risk of obesity in Scotland over time"
+  title <- "Children (age 2-15) at risk of obesity in Scotland over time"
 
   plot <- childhood_obesity %>%
     filter(!(date %in%  c("2003", "1998"))) %>%
