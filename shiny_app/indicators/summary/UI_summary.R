@@ -44,21 +44,20 @@ tagList(
 
                    fluidRow(
                      column(4,
-                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
-                            summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
-                                         button_title =  "At risk of obesity",
-                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
-                                                                "This data is available at Scotland level. Further information is ",
-                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(4,
                             h3(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
                             summaryBoxUI("child_development_cw", title = "Percentage showing concern",
                                          button_title =  "Child social and physical development",
                                          button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
                                                                 "This data is available at Scotland, health board and council area level. Further information is ",
+                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "Children at risk of obesity")),
+                            summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
+                                         button_title =  "At risk of obesity",
+                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
+                                                                "This data is available at Scotland level. Further information is ",
                                                                 "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
