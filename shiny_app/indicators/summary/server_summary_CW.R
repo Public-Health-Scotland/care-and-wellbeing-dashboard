@@ -498,13 +498,17 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Vaccinations #####
 
+##### COVID #####
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- vaccinations_covid %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- vaccinations_covid %>% slice(which.min(.$date)) %>% .$date
-
   value <- vaccinations_covid %>% filter(geography == input$geog_name_summary_CW,
-                                         SIMD == "1 (Most deprived)")
+                                         SIMD == "1 (Most deprived)",
+                                         fill_flag != "f")
+
+  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
+
+
 
   recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
   previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
@@ -518,13 +522,15 @@ observeEvent(input$geog_name_summary_CW,{
 
 })
 
+##### Flu #####
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- vaccinations_flu %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- vaccinations_flu %>% slice(which.min(.$date)) %>% .$date
-
   value <- vaccinations_flu %>% filter(geography == input$geog_name_summary_CW,
-                                         SIMD == "1 (Most deprived)")
+                                       SIMD == "1 (Most deprived)",
+                                       fill_flag != "f")
+
+  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
 
   recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
   previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
