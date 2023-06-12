@@ -126,7 +126,7 @@ tagList(
                         value = "gender_pay_gap_cw",
 
                         h2("Gender pay gap", iButtonUI("gender_pay_gap_cw", content = paste("This indicator provides data on the gender pay gap",
-                                                                                            "and Median Hourly Earnings estimates.",
+                                                                                            "and median hourly earnings estimates.",
                                                                                             "<br><br>Source:",
                                                                                             "<a href=https://www.gov.scot/publications/annual-survey-of-hours-and-earnings-2021/ target =_blank> Annual summary of earnings statistics, Scottish Government (external site)</a>.",
                                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard",

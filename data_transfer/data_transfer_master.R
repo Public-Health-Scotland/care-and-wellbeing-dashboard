@@ -338,36 +338,4 @@ source(paste0(path_main_script_location,
 
 ##############################################.
 # APP DATA PREPARATION ----
-##############################################.
-# This section will archive current dashboard data files and replace them with
-# new ones that have been prepared
-
-if(askYesNo("Are you sure you want to DELETE the old archive folder and replace the shiny app data with your new outputs?")) {
-
-  # Deleting the old archive
-  do.call(file.remove, list(list.files(paste0(path_shiny_app_data, "/archive"), full.names = TRUE)))
-
-  # Getting all files currently in shiny_app/data
-  old_files = list.files(path_shiny_app_data, full.names = TRUE) %>%
-    as_tibble() %>%
-    filter(str_detect(value, ".rds"))
-
-  # Copying all the files from data folder into archive
-  file.copy(from = old_files$value, to = paste0(path_shiny_app_data, "/archive"))
-
-  # Listing current files in output data folder
-  new_files = list.files(path_out) %>% as_tibble() %>%
-    filter(str_detect(value, ".rds"))
-
-  new_files = new_files %>% add_row(value = "tab values.xlsx")
-
-  # Replaces the updated files in the data folder
-  for (file in new_files$value) {
-    if (file.exists(paste0(path_shiny_app_data, "/", file))) {
-      file.remove(paste0(path_shiny_app_data, "/", file))
-    }
-    file.copy(from = paste0(path_out, "/", file),
-              to = paste0(path_shiny_app_data, "/", file))
-  }
-
-}
+#############################Yes

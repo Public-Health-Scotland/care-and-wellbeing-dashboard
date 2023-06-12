@@ -95,12 +95,12 @@ tagList(
                # CHILDREN AT RISK OF OBESITY----
                ##############################################.
 
-               tabPanel(title = "Children at risk of obesity",
+               tabPanel(title = "Children at risk of obesity (ages 2-15 years)",
                         value = "child_obesity",
 
                         h2("Children at risk of obesity",
                            iButtonUI("child_obesity", content = paste("This indicator provides data on children at risk of obesity i.e.",
-                                                                     "children, aged 2-15 years, with a BMI at or above the 95th percentile.",
+                                                                     "children, ages 2-15 years, with a BMI at or above the 95th percentile.",
                                                                         "<br><br>Source:",
                                                                         "<a href=https://www.gov.scot/collections/scottish-health-survey/ target = _blank> Scottish Health Survey (SHeS), Scottish Government (external site)</a>.",
                                                                         "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
@@ -115,7 +115,7 @@ tagList(
                         withSpinner(plotlyOutput("child_obesity_plot")),
 
                         br(),
-                        h3("Data table: Percentage of children, aged 2-15 years, at risk of obesity in Scotland"),
+                        h3("Data table: Percentage of children, ages 2-15 years, at risk of obesity in Scotland"),
                         p("To view the full dataset, please use the download buttons below."),
                         br(),
                         dataDownloadUI("children_at_risk_of_obesity")

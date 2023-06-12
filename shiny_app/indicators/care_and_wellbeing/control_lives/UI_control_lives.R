@@ -17,7 +17,7 @@ tagList(
                                                                             "<br><br>Source:",
                                                                             "<a href= https://www.publichealthscotland.scot/publications/child-and-adolescent-mental-health-services-camhs-waiting-times/child-and-adolescent-mental-health-services-camhs-waiting-times-quarter-ending-31-december-2021/#:~:text=For%20the%20quarter%20ending%20December%202021%3A%20Seven%20out,from%2073.1%25%20for%20the%20quarter%20ending%20December%202020./ target =_blank> CAMHS Waiting Times,  Public Health Scotland (external site)</a>.",
                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
-                                                                            "2021",
+                                                                            "2021.",
                                                                             "More up to date data is available at source.",
                                                                             "<br><br>These data are available at Scotland",
                                                                             "and NHS Health Board levels.",
