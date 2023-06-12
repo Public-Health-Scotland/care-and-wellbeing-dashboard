@@ -285,14 +285,16 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_male,
-                   previous_value = previous_value_male
+                   previous_value = previous_value_male,
+                   years = TRUE
   )
 
   summaryBoxServer("life_expectancy_female",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_female,
-                   previous_value = previous_value_female
+                   previous_value = previous_value_female,
+                   years = TRUE
   )
 })
 
@@ -315,14 +317,16 @@ observeEvent(input$geog_name_summary_CW,{
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_male,
-                   previous_value = previous_value_male
+                   previous_value = previous_value_male,
+                   years = TRUE
   )
 
   summaryBoxServer("healthy_life_expectancy_female",
                    recent_date = recent_date,
                    previous_date = previous_date,
                    recent_value = recent_value_female,
-                   previous_value = previous_value_female
+                   previous_value = previous_value_female,
+                   years = TRUE
   )
 })
 

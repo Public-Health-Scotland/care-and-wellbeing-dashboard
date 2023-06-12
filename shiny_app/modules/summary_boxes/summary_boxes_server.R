@@ -6,7 +6,8 @@ summaryBoxServer <- function(id,
                              recent_value = "To be developed",
                              previous_value = numeric(0),
                              value_dp = 2,
-                             percentage = FALSE
+                             percentage = FALSE,
+                             years = FALSE
 ) {
 
   moduleServer(
@@ -42,6 +43,15 @@ summaryBoxServer <- function(id,
 
             div(class = "value-change",
                 ifelse(length(change)[1] == 0,"", glue("Difference: {ifelse(change < 0,'','+')}{round_half_up(change,2)}%")))
+
+
+           }  else if(years) {
+
+              if(is.numeric(recent_value)) {change = round_half_up((recent_value-previous_value), 2)}
+
+              div(class = "value-change",
+                  ifelse(length(change)[1] == 0,"", glue("Difference: {ifelse(change < 0,'','+')}{round_half_up(change,2)} years")))
+
 
 
           # Percentage change
