@@ -20,10 +20,6 @@ altTextServer("employees_living_wage_cw_sector_alt",
               )
 )
 
-
-aaaaa<-employees_living_wage_by_sector %>%
- mutate(sector=str_replace(sector, "All", "All sectors"))
-
 output$employees_living_wage_cw_sector_plot = renderPlotly({
   title <- glue("Percentage of employees (18+) earning less than the real Living Wage by sector in Scotland")
 
