@@ -53,7 +53,7 @@ tagList(
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
                      column(4,
-                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "Children at risk of obesity")),
+                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "Children at risk of obesity (age 2-15)")),
                             summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
                                          button_title =  "At risk of obesity",
                                          button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
