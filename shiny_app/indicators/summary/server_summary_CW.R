@@ -138,10 +138,11 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(drug_related_deaths$year)
-  previous_date <- max(drug_related_deaths %>% filter(year != recent_date) %>% .$year)
+  value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW,
+                                          !is.na(rate))
 
-  value <- drug_related_deaths %>% filter(geography == input$geog_name_summary_CW)
+  recent_date <- max(value$year)
+  previous_date <- max(value %>% filter(year != recent_date) %>% .$year)
 
   recent_value <- value %>% filter(year == recent_date) %>% .$rate
   previous_value <- value %>% filter(year == previous_date) %>% .$rate
@@ -497,13 +498,17 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Vaccinations #####
 
+##### COVID #####
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- vaccinations_covid %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- vaccinations_covid %>% slice(which.min(.$date)) %>% .$date
-
   value <- vaccinations_covid %>% filter(geography == input$geog_name_summary_CW,
-                                         SIMD == "1 (Most deprived)")
+                                         SIMD == "1 (Most deprived)",
+                                         fill_flag != "f")
+
+  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
+
+
 
   recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
   previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
@@ -517,13 +522,15 @@ observeEvent(input$geog_name_summary_CW,{
 
 })
 
+##### Flu #####
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- vaccinations_flu %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- vaccinations_flu %>% slice(which.min(.$date)) %>% .$date
-
   value <- vaccinations_flu %>% filter(geography == input$geog_name_summary_CW,
-                                         SIMD == "1 (Most deprived)")
+                                       SIMD == "1 (Most deprived)",
+                                       fill_flag != "f")
+
+  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
+  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
 
   recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
   previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
@@ -642,16 +649,20 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(camhs_waiting_times2$date)
-  previous_date <- max(camhs_waiting_times2$date) - years(1)
+  value <- camhs_waiting_times2 %>%
+    filter(geography == input$geog_name_summary_CW,
+           !is.na(proportion),
+           wait_time == "0 to 18 weeks",)
 
-  recent_value <-  camhs_waiting_times2 %>%
-    filter(geography == input$geog_name_summary_CW, wait_time == "0 to 18 weeks",
-           date == recent_date) %>%
+  recent_date <- max(value$date)
+  previous_date <- max(value$date) - years(1)
+
+  recent_value <-  value %>%
+    filter(date == recent_date) %>%
     .$proportion %>% round_half_up(4)*100
-  previous_value <-  camhs_waiting_times2 %>%
-    filter(geography == input$geog_name_summary_CW, wait_time == "0 to 18 weeks",
-           date == previous_date) %>%
+
+  previous_value <-  value %>%
+    filter(date == previous_date) %>%
     .$proportion %>% round_half_up(4)*100
 
   summaryBoxServer("camhs_waiting_times_cw",

@@ -39,6 +39,159 @@ tagList(
 
              box(width = 12,
                  status = "info",
+                 tagList(
+                   h2("Give every child the best start in life"),
+
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
+                            summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
+                                         button_title =  "At risk of obesity",
+                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
+                                                                "This data is available at Scotland level. Further information is ",
+                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
+                            summaryBoxUI("child_development_cw", title = "Percentage showing concern",
+                                         button_title =  "Child social and physical development",
+                                         button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
+                                                                "This data is available at Scotland, health board and council area level. Further information is ",
+                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_infant_mortality_cw", "Infant mortality")),
+                            summaryBoxUI("infant_mortality_cw", title = "Rate per 1,000 livebirths",
+                                         button_title =  "Infant mortality",
+                                         button_content =  glue("This is the rate of infant deaths per 1,000 live births in {max(inf_deaths$date) %>% format('%B %Y')}. <br> <br>",
+                                                                "This data is available at Scotland level. Further information is ",
+                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     )),
+
+                   fluidRow(
+                     column(6,
+                            h3(actionLink("jump_summary_to_child_material_deprivation", "Child material deprivation")),
+                            summaryBoxUI("child_material_deprivation")
+                     ),
+                     column(6,
+                            h3(actionLink("jump_summary_to_child_wellbeing", "Child wellbeing and happiness")),
+                            summaryBoxUI("child_wellbeing")
+                     )),
+
+                   fluidRow(
+                     column(6,
+                            h3(actionLink("jump_summary_to_perinatal_mortality", "Perinatal mortality rate")),
+                            summaryBoxUI("perinatal_mortality")
+                     ),
+                     column(6,
+                            h3(actionLink("jump_summary_to_physical_activity_children_cw", "Physical activity")),
+                            summaryBoxUI("physical_activity_children_cw")
+                     )),
+                   fluidRow(column(12, br()))
+                 )),
+
+             box(width = 12,
+                 status = "info",
+                 tagList(
+                   h2("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
+
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_camhs_waiting_times_cw", "CAMHS waiting times")),
+                            summaryBoxUI("camhs_waiting_times_cw", title = "Percentage of children and young people",
+                                         button_title =  "CAMHS waiting times",
+                                         button_content =  glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
+                                                                "to CAMHS (Children and Adolescent Mental Health Services) in {max(camhs_waiting_times2$date) %>% format('%B %Y')}. <br> <br>",
+                                                                "This data is available at Scotland and health board level. Further breakdown information for other wait times is ",
+                                                                "available under `Enable all children, young people and adults to maximise their capabilities and control over their lives` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_children_relationships", "Children have positive relationships")),
+                            summaryBoxUI("children_relationships")
+                     ),
+                     column(4,
+                            h3(actionLink("jump_summary_to_childrens_voices", "Children’s voices")),
+                            summaryBoxUI("childrens_voices")
+                     )),
+
+                   fluidRow(
+
+                     column(6,
+                            h3(actionLink("jump_summary_to_confidence_of_young", "Confidence and resilience of children and young people")),
+                            summaryBoxUI("confidence_of_young")
+                     ),
+                     column(6,
+                            h3(actionLink("jump_summary_to_mental_health_cw", "Mental health / mental wellbeing")),
+                            summaryBoxUI("mental_health_cw")
+                     )),
+                   fluidRow(column(12, br()))
+                 )),
+
+             box(width = 12,
+                 status = "info",
+                 tagList(
+                   h2("Create fair employment and good work for all"),
+
+                   fluidRow(
+                     column(4,
+                            h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
+                            summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
+                                         button_title =  "Economic inactivity",
+                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
+                                                                "This data is available at Scotland and council area level. Further information is available under ",
+                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_economic_inactivity_cw_not_want", "Economic inactivity")),
+                            summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
+                                         button_title =  "Economic inactivity",
+                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
+                                                                "This data is available at Scotland and council area level. Further information is available under ",
+                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(4,
+                            h3(actionLink("jump_summary_to_employees_living_wage_cw", "Employees on the living wage")),
+                            summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
+                                         button_title =  "Employees on the living wage",
+                                         button_content =  glue("This is the percentage of employees earning less than the living wage in {max(employees_living_wage_by_LA$year)}. <br> <br>",
+                                                                "This data is available at Scotland and council area level. Further breakdown information of employees by sector is available under ",
+                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     )),
+
+                   fluidRow(
+                     column(6,
+                            h3(actionLink("jump_summary_to_gender_pay_gap_cw", "Pay gap")),
+                            summaryBoxUI("gender_pay_gap_cw", title = "Percentage difference between men`s and women`s hourly earnings",
+                                         button_title =  "Pay gap",
+                                         button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {max(gender_pay_gap_by_sector$year)}. <br> <br>",
+                                                                "This data is available at Scotland level. Further breakdown information of sector, work pattern and information regarding median hourly earnings for each sex is available under ",
+                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                                                                "<br> <br> {strong('Click again to close.')}"))
+                     ),
+
+                     column(6,
+                            h3(actionLink("jump_summary_to_work_related_ill_health", "Work related ill health")),
+                            summaryBoxUI("work_related_ill_health")
+                     )),
+
+                   fluidRow(column(12, br()))
+                 )),
+
+
+
+             box(width = 12,
+                 status = "info",
                  icon = icon_no_warning_fn("user-shield"),
                  tagList(
                    h2("Strengthen the role and impact of ill health prevention"),
@@ -303,9 +456,9 @@ tagList(
 
                      column(4,
                             h3(actionLink("jump_summary_to_vaccinations_covid", "Vaccinations – uptake ")),
-                            summaryBoxUI("vaccinations_covid", title = "Percentage uptake of COVID-19 vaccinations in the most deprived SIMD decile",
+                            summaryBoxUI("vaccinations_covid", title = "Percentage uptake of COVID-19 vaccinations in SIMD decile 1 (Most deprived)",
                                          button_title = "COVID-19 vaccinations uptake",
-                                         button_content = glue("The is the percentage uptake of COVID-19 vaccinations in the most deprived SIMD decile as at {vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}.",
+                                         button_content = glue("The is the percentage uptake of COVID-19 vaccinations in SIMD decile 1 (Most deprived) as at {vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}.",
                                                                "<br> <br>",
                                                                "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
@@ -313,9 +466,9 @@ tagList(
                      ),
                      column(4,
                             h3(actionLink("jump_summary_to_vaccinations_flu", "Vaccinations – uptake ")),
-                            summaryBoxUI("vaccinations_flu", title = "Percentage uptake of influenza vaccinations in the most deprived SIMD decile",
+                            summaryBoxUI("vaccinations_flu", title = "Percentage uptake of influenza vaccinations in SIMD decile 1 (Most deprived)",
                                          button_title = "Influenza vaccinations uptake",
-                                         button_content = glue("The is the percentage uptake of influenza vaccinations in the most deprived SIMD decile as at {vaccinations_flu %>% slice(which.max(.$date)) %>% .$date}.",
+                                         button_content = glue("The is the percentage uptake of influenza vaccinations in SIMD decile 1 (Most deprived) as at {vaccinations_flu %>% slice(which.max(.$date)) %>% .$date}.",
                                                                "<br> <br>",
                                                                "This data is available at Scotland and health board level. Further breakdown by SIMD is ",
                                                                "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
@@ -355,156 +508,7 @@ tagList(
                    fluidRow(column(12, br()))
                  )),
 
-             box(width = 12,
-                 status = "info",
-                 tagList(
-                   h2("Give every child the best start in life"),
 
-                   fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_children_at_risk_of_obesity", "At risk of obesity")),
-                            summaryBoxUI("children_at_risk_of_obesity", title = "Percentage of children",
-                                         button_title =  "At risk of obesity",
-                                         button_content =  glue("This is the percentage of children aged between 2 and 15 years at risk of obesity in {max(childhood_obesity$date)}. <br> <br> ",
-                                                                "This data is available at Scotland level. Further information is ",
-                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(4,
-                            h3(actionLink("jump_summary_to_child_development_cw", "Child social and physical development")),
-                            summaryBoxUI("child_development_cw", title = "Percentage showing concern",
-                                         button_title =  "Child social and physical development",
-                                         button_content =  glue("This is the percentage of children with a concern at their 27-30 month health review recorded in {max(preschool$financial_year)}. <br> <br> ",
-                                                                "This data is available at Scotland, health board and council area level. Further information is ",
-                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(4,
-                            h3(actionLink("jump_summary_to_infant_mortality_cw", "Infant mortality")),
-                            summaryBoxUI("infant_mortality_cw", title = "Rate per 1,000 livebirths",
-                                         button_title =  "Infant mortality",
-                                         button_content =  glue("This is the rate of infant deaths per 1,000 live births in {max(inf_deaths$date) %>% format('%B %Y')}. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
-                                                                "available under `Give every child the best start in life` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     )),
-
-                   fluidRow(
-                     column(6,
-                            h3(actionLink("jump_summary_to_child_material_deprivation", "Child material deprivation")),
-                            summaryBoxUI("child_material_deprivation")
-                     ),
-                     column(6,
-                            h3(actionLink("jump_summary_to_child_wellbeing", "Child wellbeing and happiness")),
-                            summaryBoxUI("child_wellbeing")
-                     )),
-
-                   fluidRow(
-                     column(6,
-                            h3(actionLink("jump_summary_to_perinatal_mortality", "Perinatal mortality rate")),
-                            summaryBoxUI("perinatal_mortality")
-                     ),
-                     column(6,
-                            h3(actionLink("jump_summary_to_physical_activity_children_cw", "Physical activity")),
-                            summaryBoxUI("physical_activity_children_cw")
-                     )),
-                   fluidRow(column(12, br()))
-                 )),
-
-             box(width = 12,
-                 status = "info",
-                 tagList(
-                   h2("Enable all children, young people and adults to maximise their capabilities and control over their lives"),
-
-                   fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_camhs_waiting_times_cw", "CAMHS waiting times")),
-                            summaryBoxUI("camhs_waiting_times_cw", title = "Percentage of children and young people",
-                                         button_title =  "CAMHS waiting times",
-                                         button_content =  glue("This is the percentage of children and young people who were seen within 18 weeks of referral ",
-                                                                "to CAMHS (Children and Adolescent Mental Health Services) in {max(camhs_waiting_times2$date) %>% format('%B %Y')}. <br> <br>",
-                                                                "This data is available at Scotland and health board level. Further breakdown information for other wait times is ",
-                                                                "available under `Enable all children, young people and adults to maximise their capabilities and control over their lives` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-                     column(4,
-                            h3(actionLink("jump_summary_to_children_relationships", "Children have positive relationships")),
-                            summaryBoxUI("children_relationships")
-                     ),
-                     column(4,
-                            h3(actionLink("jump_summary_to_childrens_voices", "Children’s voices")),
-                            summaryBoxUI("childrens_voices")
-                     )),
-
-                   fluidRow(
-
-                     column(6,
-                            h3(actionLink("jump_summary_to_confidence_of_young", "Confidence and resilience of children and young people")),
-                            summaryBoxUI("confidence_of_young")
-                     ),
-                     column(6,
-                            h3(actionLink("jump_summary_to_mental_health_cw", "Mental health / mental wellbeing")),
-                            summaryBoxUI("mental_health_cw")
-                     )),
-                   fluidRow(column(12, br()))
-                 )),
-
-             box(width = 12,
-                 status = "info",
-                 tagList(
-                   h2("Create fair employment and good work for all"),
-
-                   fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
-                            summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
-                                         button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
-                                                                "This data is available at Scotland and council area level. Further information is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(4,
-                            h3(actionLink("jump_summary_to_economic_inactivity_cw_not_want", "Economic inactivity")),
-                            summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
-                                         button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
-                                                                "This data is available at Scotland and council area level. Further information is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(4,
-                            h3(actionLink("jump_summary_to_employees_living_wage_cw", "Employees on the living wage")),
-                            summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
-                                         button_title =  "Employees on the living wage",
-                                         button_content =  glue("This is the percentage of employees earning less than the living wage in {max(employees_living_wage_by_LA$year)}. <br> <br>",
-                                                                "This data is available at Scotland and council area level. Further breakdown information of employees by sector is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     )),
-
-                   fluidRow(
-                     column(6,
-                            h3(actionLink("jump_summary_to_gender_pay_gap_cw", "Pay gap")),
-                            summaryBoxUI("gender_pay_gap_cw", title = "Percentage difference between men`s and women`s hourly earnings",
-                                         button_title =  "Pay gap",
-                                         button_content =  glue("This is the percentage difference between men`s and women`s hourly earnings as a percentage of men`s earnings (excluding overtime) in {max(gender_pay_gap_by_sector$year)}. <br> <br>",
-                                                                "This data is available at Scotland level. Further breakdown information of sector, work pattern and information regarding median hourly earnings for each sex is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
-
-                     column(6,
-                            h3(actionLink("jump_summary_to_work_related_ill_health", "Work related ill health")),
-                            summaryBoxUI("work_related_ill_health")
-                     )),
-
-                   fluidRow(column(12, br()))
-                 )),
 
              box(width = 12,
                  status = "info",

@@ -38,14 +38,18 @@ vaccinations <- rbind(input_flu_vacc, input_covid_vacc) %>%
 add_ons <- vaccinations %>%
   filter(!(SIMD == "Not Known")) %>%
   select(health_board_code, geography, geography_type, value, SIMD, uptake_percent) %>%
-  pivot_wider(names_from = "SIMD", values_from = "uptake_percent", values_fill = 0) %>%
+  # add in incorrect value so can set a flag - needs to be a numeric so 111 is used randomly
+  pivot_wider(names_from = "SIMD", values_from = "uptake_percent", values_fill = 111) %>%
   pivot_longer(cols = c("1", "2", "3", "4", "5",
                         "6", "7", "8", "9", "10"), values_to = "uptake_percent", names_to = "SIMD")
 
 # bind together and update SIMD and dates to be factors and take the values defined above
 vaccinations <- full_join(vaccinations, add_ons) %>%
   rename(recent = uptake_percent) %>%
-  mutate(SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
+  # add in fill flag where uptake_percent has been set to 0 for plot, f = filled
+  mutate(fill_flag = ifelse(recent == 111, "f", ""),
+         recent = ifelse(fill_flag == "f", 0, recent),
+         SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
                                         "6", "7", "8", "9", "10", "Not Known"),
                        labels = c("1 (Most deprived)", "2", "3", "4", "5",
                                   "6", "7", "8", "9", "10 (Least deprived)", "Not Known")),

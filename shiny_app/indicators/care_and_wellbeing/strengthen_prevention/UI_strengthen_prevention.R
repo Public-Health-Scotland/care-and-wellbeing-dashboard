@@ -644,7 +644,7 @@ tagList(
 
                         h2("Mental wellbeing of adults (16+)",
                            iButtonUI("mental_wellbeing",
-                                     content = paste("This indicator provides dataon mental wellbeing for adults,",
+                                     content = paste("This indicator provides data on mental wellbeing for adults,",
                                                      "(aged over 16) using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
                                                      "<br><br>Source:",
                                                      "<a href=https://www.gov.scot/collections/scottish-health-survey/ target = _blank> Scottish Health Survey (SHeS), Scottish Government (external site)</a>.",

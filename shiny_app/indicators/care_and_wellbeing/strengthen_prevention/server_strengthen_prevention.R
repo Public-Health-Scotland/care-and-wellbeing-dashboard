@@ -532,7 +532,7 @@ output$chd_deaths_plot = renderPlotly({
            geography == input$chd_deaths_geog_name,
            year_range %in%  c("2008-2010", "2009-2011","2010-2012", "2011-2013",
                               "2012-2014", "2013-2015","2014-2016","2015-2017",
-                              "2016-2017", "2017-2019", "2018-2020")) %>%
+                              "2016-2018", "2017-2019", "2018-2020")) %>%
     rename(date = year_range) %>%
     confidence_line_function(., y_title = "Age-sex standardised<br>rate of deaths per<br>100,000 population", title = title) %>%
     layout(xaxis = list(tickangle = -30),
