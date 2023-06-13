@@ -381,7 +381,7 @@ tagList(
                      ),
 
                      column(4,
-                            h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (16+)")),
+                            h3(actionLink("jump_summary_to_mental_wellbeing", "Mental wellbeing of adults (age 16+)")),
                             summaryBoxUI("mental_wellbeing", title = "Mean WEMWBS score",
                                          button_title = "Mental wellbeing of adults (16+)",
                                          button_content = glue("This is the mean Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS) score for people aged 16+ in Scotland.",
