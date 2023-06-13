@@ -166,10 +166,10 @@ tagList(
                # ALL-CAUSE MORTALITY (15-44)----
                ##############################################.
 
-               tabPanel(title = "All-cause mortality",
+               tabPanel(title = "All-cause mortality (age 15-44)",
                         value = "all_cause_mortality",
 
-                        h2("All-cause mortality (ages 15-44)",
+                        h2("All-cause mortality (age 15-44)",
                            iButtonUI("all_cause_mortality",
                                      content = paste("This indicator provides data on the number and rate of all causes of death.",
                                                            "<br><br>Source:",
@@ -639,10 +639,10 @@ tagList(
                # MENTAL WELLBEING OF ADULTS (16+)----
                ##############################################.
 
-               tabPanel(title = "Mental wellbeing of adults (16+)",
+               tabPanel(title = "Mental wellbeing of adults (age 16+)",
                         value = "mental_wellbeing",
 
-                        h2("Mental wellbeing of adults (16+)",
+                        h2("Mental wellbeing of adults (age 16+)",
                            iButtonUI("mental_wellbeing",
                                      content = paste("This indicator provides data on mental wellbeing for adults,",
                                                      "(aged over 16) using the Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS).",
