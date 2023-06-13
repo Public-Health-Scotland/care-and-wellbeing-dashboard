@@ -14,7 +14,7 @@ tagList(
 
            p("Clicking on the 'i' button will provide additional information about the indicator."),
 
-           p("Clicking the title above each box will take you to the relevant tab within the dashboard"),
+           p("Clicking the title above each box will take you to the relevant trend tab within the dashboard"),
 
 
            br(),
