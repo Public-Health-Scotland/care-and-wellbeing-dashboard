@@ -71,19 +71,19 @@ for (file in data_files$value) {
 section_lookup = read_excel("data/tab values.xlsx") %>%
   mutate(Indicator = title)
 
-summary_final <- summary_table %>%
-  mutate(geography_type = ifelse(is.na(geography_type), "Scotland", geography_type),
-         geography = ifelse(is.na(geography), "Scotland", geography),
-         pillar = case_when(section %in% c("Strengthen the role and impact of ill health prevention",
-                                           "Give every child the best start in life",
-                                           "Enable all children, young people and adults to maximise their capabilities and control over their lives",
-                                           "Create fair employment and good work for all",
-                                           "Ensure healthy standard of living for all",
-                                           "Create and develop healthy and sustainable places and communities",
-                                           "Tackling discrimination, racism and their outcomes",
-                                           "Pursuing environmental sustainability and health equity together") ~ "Care and Wellbeing",
-                            T ~ "COVID Recovery"))
-
+# summary_final <- summary_table %>%
+#   mutate(geography_type = ifelse(is.na(geography_type), "Scotland", geography_type),
+#          geography = ifelse(is.na(geography), "Scotland", geography),
+#          pillar = case_when(section %in% c("Strengthen the role and impact of ill health prevention",
+#                                            "Give every child the best start in life",
+#                                            "Enable all children, young people and adults to maximise their capabilities and control over their lives",
+#                                            "Create fair employment and good work for all",
+#                                            "Ensure healthy standard of living for all",
+#                                            "Create and develop healthy and sustainable places and communities",
+#                                            "Tackling discrimination, racism and their outcomes",
+#                                            "Pursuing environmental sustainability and health equity together") ~ "Care and Wellbeing",
+#                             T ~ "COVID Recovery"))
+#
 
 
 ##############################################.
