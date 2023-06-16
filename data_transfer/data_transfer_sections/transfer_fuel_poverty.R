@@ -84,21 +84,6 @@ replace_file_fn(fuel_SHCS_LA,
                 paste0(path_out, "/fuel_SHCS_LA.rds"))
 
 
-# ShapeFile = paste0(path_in, "/pub_las.shp")
-# pub_las = readOGR(ShapeFile)
-# pub_las$code = as.character(pub_las$code)
-# pub_las = spTransform(pub_las,
-#                        CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
-# replace_file_fn(pub_las,
-#                 paste0(path_out, "/pub_las.rds"))
 
-
-# ShapeFile = paste0(path_in, "/pub_las_simplified.shp")
-# pub_las_simplified = readOGR(ShapeFile)
-# pub_las_simplified$code = as.character(pub_las_simplified$code)
-# pub_las_simplified = spTransform(pub_las_simplified,
-#                       CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
-# replace_file_fn(pub_las_simplified,
-#                 paste0(path_out, "/pub_las_simplified.rds"))
 
 

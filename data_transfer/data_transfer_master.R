@@ -48,7 +48,7 @@ path_shiny_app_data = path_main_script_location %>%
   paste0(., "/shiny_app/data")
 
 
-path_pop_health = paste0(path_main_script_location, "/data_transfer_sections/Population Health/")
+path_transfer = paste0(path_main_script_location, "/data_transfer_sections/")
 path_in_pop = paste0(path_in, "/Population Health/")
 
 
@@ -148,6 +148,31 @@ replace_file_fn(lookup_master,
 #
 # replace_file_fn(geog_lookup, paste0(path_out, "/geog_lookup.rds"))
 
+
+
+##############################################
+# transfer pub_las + pub_las_simplified files for the maps
+##############################################
+
+# ShapeFile = paste0(path_in, "/pub_las.shp")
+# pub_las = readOGR(ShapeFile)
+# pub_las$code = as.character(pub_las$code)
+# pub_las = spTransform(pub_las,
+#                        CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
+# replace_file_fn(pub_las,
+#                 paste0(path_out, "/pub_las.rds"))
+#
+#
+# ShapeFile = paste0(path_in, "/pub_las_simplified.shp")
+# pub_las_simplified = readOGR(ShapeFile)
+# pub_las_simplified$code = as.character(pub_las_simplified$code)
+# pub_las_simplified = spTransform(pub_las_simplified,
+#                       CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
+# replace_file_fn(pub_las_simplified,
+#                 paste0(path_out, "/pub_las_simplified.rds"))
+
+
+
 ##############################################.
 # tab values ----
 ##############################################.
@@ -166,175 +191,169 @@ file.copy(from = paste0(path_in, "/", "tab values.xlsx"),
 # INFANT MORTALITY ----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_infant_mortality.R"))
+source(paste0(path_transfer, "transfer_infant_mortality.R"))
 
 
 ##############################################.
 # CAMHS WAITING TIMES ----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_camhs_waiting_times.R"))
+source(paste0(path_transfer, "transfer_camhs_waiting_times.R"))
 
 
 ##############################################.
 # PRE-SCHOOL DEVELOPMENT ----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_pre-school_development.R"))
-
-
-##############################################.
-# CHILD POVERTY ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_child_poverty.R"))
-
-
-##############################################.
-# POSITIVE DESTINATIONS FOR SCHOOL LEAVERS----
-##############################################.
-
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_positive_desinations_of_school_leavers.R"))
-
-##############################################.
-# PROTECTION FROM HARM----
-##############################################.
-
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_protection_from_harm.R"))
-
-
-##############################################.
-# FUEL AFFORDABILITY ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_fuel_poverty.R"))
-
-##############################################.
-# MANAGING FINANCIALLY----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_managing_financially.R"))
-
-
-##############################################.
-# UNMANAGEABLE DEBT ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_unmanageable_debt.R"))
-
-
-
-##############################################.
-# Savings ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_savings.R"))
-
-##############################################.
-# CHILDCARE UPTAKE ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_childcare_uptake.R"))
-
-
-##############################################.
-# EMPLOYEES ON THE LIVING WAGE ----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_employees_living_wage.R"))
-
-##############################################.
-# GENDER PAY GAP----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_gender_pay_gap.R"))
-
-##############################################.
-# DISABILITY EMPLOYMENT GAP----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_disability_employment_gap.R"))
-
-
-##############################################.
-# ETHNICITY EMPLOYMENT GAP----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_ethnicity_employment_gap.R"))
-
-
-##############################################.
-# ZERO-HOURS CONTRACTS----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_zero_hours_contracts.R"))
-
-##############################################.
-# EMPLOYABILITY----
-##############################################.
-
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_employability.R"))
-
-
-##############################################.
-# SKILLS SHORTAGE VACANCIES----
-##############################################.
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_skills_shortage.R"))
-
+source(paste0(path_transfer, "transfer_pre-school_development.R"))
 
 
 ##############################################.
 # ECONOMIC INACTIVITY----
 ##############################################.
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_economic_inactivity.R"))
+source(paste0(path_transfer, "transfer_economic_inactivity.R"))
+
 
 ##############################################.
-# UNDEREMPLOYMENT----
+# GENDER PAY GAP----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_underemployment.R"))
+source(paste0(path_transfer, "transfer_gender_pay_gap.R"))
 
 ##############################################.
-# HOUSEHOLD SPENDING----
-##############################################.
-source(paste0(path_main_script_location,
-              "/data_transfer_sections/transfer_household_spending.R"))
-
-##############################################.
-# POPULATION HEALTH----
+# EMPLOYEES ON THE LIVING WAGE ----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/population_health_master.R"))
+source(paste0(path_transfer, "transfer_employees_living_wage.R"))
+
 
 ##############################################.
-# MASTER DATA - SUMMARY TABLES----
+# ALL-CAUSE MORTALITY (15-44)----
 ##############################################.
 
-source(paste0(path_main_script_location,
-              "/summary_master.R"))
+source(paste0(path_transfer, "transfer_all_cause_mortality.R"))
+
+##############################################.
+# CORONARY HEART DISEASE (CHD) DEATHS (45-74)----
+##############################################.
+
+source(paste0(path_transfer, "transfer_chd_deaths.R"))
+
+##############################################.
+# FIRST EVER HOSPITAL ADMISSION FOR HEART ATTACKED (<75)----
+##############################################.
+
+source(paste0(path_transfer, "transfer_hospital_admission_heart_attack.R"))
+
+##############################################.
+# DRUG RELATED HOSPITAL ADMISSIONS (<75)----
+##############################################.
+
+source(paste0(path_transfer, "transfer_drug_admissions.R"))
+
+##############################################.
+# DRUG RELATED DEATHS----
+##############################################.
+
+source(paste0(path_transfer, "transfer_drug_deaths.R"))
+
+##############################################.
+# ALCOHOL RELATED HOSPITAL ADMISSIONS (<75)----
+##############################################.
+source(paste0(path_transfer, "transfer_alcohol_admissions.R"))
+
+##############################################.
+# ALCOHOL SPECIFIC DEATHS (45-74)----
+##############################################.
+source(paste0(path_transfer, "transfer_alcohol_deaths.R"))
+
+##############################################.
+# ASTHMA HOSPITAL ADMISSIONS----
+##############################################.
+
+source(paste0(path_transfer, "transfer_asthma_admissions.R"))
+
+
+##############################################.
+# HEALTHY BIRTHWEIGHT BABIES----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_healthy_birthweight.R"))
+
+##############################################.
+# HEALTHY LIFE EXPECTANCY----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_healthy_life_expectancy.R"))
+
+##############################################.
+# LIFE EXPECTANCY----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_life_expectancy.R"))
+
+##############################################.
+# CHILDREN (2-15) AT RISK OF OBESITY----
+##############################################.
+
+source(paste0(path_transfer, "transfer_childhood_obesity.R"))
+
+##############################################.
+# ADULTS (16+) SELF-ASSESSED HEALTH----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_adult_self_assessed_health.R"))
+
+##############################################.
+# ADULTS (16+) LIVING WITH LIMITING LONG-TERM CONDITIONS----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_adult_long_term_condition.R"))
+
+##############################################.
+# MENTAL WELLBEING OF ADULTS (16+)----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_adult_mental_wellbeing.R"))
+
+##############################################.
+# SCREENING UPTAKE----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_screening.R"))
+
+##############################################.
+# VACCINATIONS----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_vaccinations.R"))
+
+##############################################.
+# EXPERIENCE OF SOCIAL CARE RECIPIENTS----
+##############################################.
+
+
+##############################################.
+# EXPERIENCE OF UNPAID CARERS----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_experience_unpaid_carers.R"))
+
+
+##############################################.
+# PREMATURE MORTALITY----
+##############################################.
+
+source(paste0(path_transfer, "/transfer_premature_mortality.R"))
+
+
+##############################################.
+# COVID RECOVERY----
+##############################################.
+
+## To transfer data for the covid recovery section - please run the the covid_recovery_master
+## sections. It is not sourced here to avoid accidently transferring and including rds files
+## that take up space and are unneccessary
 
 ##############################################.
 # APP DATA PREPARATION ----
@@ -343,6 +362,9 @@ source(paste0(path_main_script_location,
 # new ones that have been prepared
 
 if(askYesNo("Are you sure you want to DELETE the old archive folder and replace the shiny app data with your new outputs?")) {
+
+  if (!file.exists(here("shiny_app", "data"))) {dir.create(here("shiny_app", "data"))}
+  if (!file.exists(here("shiny_app", "data", "archive"))) {dir.create(here("shiny_app", "data", "archive"))}
 
   # Deleting the old archive
   do.call(file.remove, list(list.files(paste0(path_shiny_app_data, "/archive"), full.names = TRUE)))
