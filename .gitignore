@@ -16,7 +16,7 @@ shiny_app/rsconnect/
 shiny_app/admin/
 
 # Google analytics html
-#shiny_app/www/google-analytics.html
+shiny_app/www/google-analytics.html
 
 # Common text files that may contain data #
 *.[cC][sS][vV]
