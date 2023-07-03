@@ -42,7 +42,7 @@ check_logs <- function(app_loc, development = TRUE){
     app_name = "phs-covid19-recovery-dashboard"
 
   } else {
-    app_name = "pphs-care-and-wellbeing-dashboard"
+    app_name = "phs-care-and-wellbeing-dashboard"
 
   }
 
