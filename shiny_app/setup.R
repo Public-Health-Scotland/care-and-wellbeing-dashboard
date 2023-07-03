@@ -62,6 +62,19 @@ for (file in data_files$value) {
 }
 
 ##############################################.
+# PASSWORD PROTECTION ----
+##############################################.
+
+# If on shinyapps.io config::get()$online is TRUE, else FALSE
+if (config::get()$online){
+  # Whether to password protect the app - set in deployment script
+  # TRUE if deployed to PRA, FALSE if not
+  password_protect <- Password_Protect
+} else {
+  password_protect <- FALSE
+}
+
+##############################################.
 # Set-Up ----
 ##############################################.
 
