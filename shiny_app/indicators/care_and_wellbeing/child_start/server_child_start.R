@@ -20,7 +20,7 @@ observeEvent(input$child_development_cw_geog_type,
 altTextServer("child_development_cw_alt",
               title = "Child social and physical development plot",
               content = tags$ul(tags$li("This is a plot for the trend in the proportion of health visitor reviews where any form of developmental concern was raised."),
-                                tags$li("The x axis is the financial year from 2013/14 to 2020/21."),
+                                tags$li("The x axis is the financial year from 2013/14 to 2021/22."),
                                 tags$li("The y axis is the proportion of reviews where concern has been raised."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland."),
@@ -109,7 +109,7 @@ observeEvent(input$child_development_cw_geog_name, {
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "child_development_cw", filename = "child_development",
                      add_separator_cols = c(4,5),
-                     add_separator_cols_2dp = c(6))
+                     add_percentage_cols = c(6))
 })
 
 observeEvent(input$child_development_cw_geog_name, {
