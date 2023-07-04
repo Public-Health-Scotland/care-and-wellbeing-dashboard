@@ -2,7 +2,7 @@
 # Pre-school development----
 ##############################################.
 # Read in the data
-preschool = read_csv(paste0(path_in, "/open27mlatotals.csv")) %>%
+preschool = read_csv(paste0(path_in, "/open27mlatotals_2023.csv")) %>%
   clean_names() %>%
   select(ca2019 = ca, financial_year, number_of_reviews, concern_any) %>%
   left_join(., lookup_LA)# Geography lookup
@@ -50,8 +50,8 @@ preschool_structures = do.call(rbind, list(preschool, preschool_HB, preschool_Sc
 
 # Calculating proportion
 preschool_structures %<>%
-  mutate(prop_concern_any = concern_any/number_of_reviews,
-         indicator = scales::percent(prop_concern_any, accuracy = .1),
+  mutate(prop_concern_any = 100*concern_any/number_of_reviews,
+         # indicator = prop_concern_any, accuracy = .1,
          pretty_date = financial_year,
          value = "pre_school_development") %>%
   arrange(pretty_date, geography_type, geography)

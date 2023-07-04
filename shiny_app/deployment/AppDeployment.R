@@ -1,6 +1,8 @@
 ########################################
 #Deploying app
 
+setwd(here())
+
 # Source this file to deploy the app
 # Set this to TRUE to deploy for development (password protected)
 # Set this to FALSE to deploy to the public app

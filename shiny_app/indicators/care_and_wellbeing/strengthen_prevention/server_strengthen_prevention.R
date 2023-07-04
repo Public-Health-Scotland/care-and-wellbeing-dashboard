@@ -80,8 +80,8 @@ observeEvent(input$life_expectancy_sex,{
 observeEvent(input$life_expectancy_sex,{
 
   output$life_expectancy_title <- renderUI({h3(glue("Data table:",
-                                                   input$life_expectancy_sex,
-                                                   " life expectancy at birth"))})
+                                                    input$life_expectancy_sex,
+                                                    " life expectancy at birth"))})
 })
 
 
@@ -185,9 +185,9 @@ observeEvent(input$healthy_life_expectancy_sex,{
   observeEvent(input$healthy_life_expectancy_life_stage,{
 
     output$healthy_life_expectancy_title <- renderUI({h3(glue("Data table:",
-                                                             input$healthy_life_expectancy_sex,
-                                                             " healthy life expectancy ",
-                                                             str_to_lower(input$healthy_life_expectancy_life_stage)))})
+                                                              input$healthy_life_expectancy_sex,
+                                                              " healthy life expectancy ",
+                                                              str_to_lower(input$healthy_life_expectancy_life_stage)))})
   })
 })
 
@@ -370,7 +370,7 @@ output$premature_mortality_simd_plot <- renderPlotly({
 observeEvent(input$premature_mortality_geog_name,{
 
   output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
-                                                          "in ", input$premature_mortality_geog_name))})
+                                                           "in ", input$premature_mortality_geog_name))})
 
   data_unfiltered <- premature_mortality_all_cause_hb %>%
     arrange(desc(date)) %>%
@@ -502,7 +502,7 @@ observeEvent(input$all_cause_mortality_geog_name,{
 observeEvent(input$all_cause_mortality_geog_name,{
 
   output$all_cause_mortality_title <- renderUI({h3(glue("Data table: Total number and rate of all-cause deaths for ages 15-44 in ",
-                                                       input$all_cause_mortality_geog_name))})
+                                                        input$all_cause_mortality_geog_name))})
 })
 
 
@@ -568,7 +568,7 @@ observeEvent(input$chd_deaths_geog_type,{
 observeEvent(input$chd_deaths_geog_name,{
 
   output$chd_deaths_title <- renderUI({h3(glue("Data table:Age-sex standardised rates of CHD deaths (under 75) per 100,000 population in",
-                                              input$chd_deaths_geog_name))})
+                                               input$chd_deaths_geog_name))})
 })
 
 altTextServer("chd_deaths_alt",
@@ -705,7 +705,7 @@ observeEvent(input$drug_admissions_age,{
   }
 
   output$drug_admissions_title <- renderUI({h3(glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
-                                                   age_title, ") in Scotland"))})
+                                                    age_title, ") in Scotland"))})
 })
 
 
@@ -806,7 +806,7 @@ observeEvent(input$drug_deaths_geog_name,{
 observeEvent(input$drug_deaths_geog_name,{
 
   output$drug_deaths_title <- renderUI({h3(glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths in ",
-                                               input$drug_deaths_geog_name))})
+                                                input$drug_deaths_geog_name))})
 })
 
 ##############################################.
@@ -876,7 +876,7 @@ observeEvent(input$alcohol_admissions_geog_name,{
 observeEvent(input$alcohol_admissions_geog_name,{
 
   output$alcohol_admissions_title <- renderUI({h3(glue("Data table: European age-sex standardised rate per 100,000 population of alcohol-related admissions in ",
-                                                      input$alcohol_admissions_geog_name))})
+                                                       input$alcohol_admissions_geog_name))})
 })
 
 
@@ -1028,7 +1028,7 @@ observeEvent(input$healthy_birthweight_geog_type,
 altTextServer("healthy_birthweight_alt",
               title = "Healthy birthweight plot",
               content = tags$ul(tags$li("This is a stacked bar plot showing the babies in each birthweight category based on gestational age"),
-                                tags$li("The x axis is the financial year, starting from 1997/98."),
+                                tags$li("The x axis is the financial year, starting from 2008/09."),
                                 tags$li("The y axis is the percentage."),
                                 tags$li("The legend shows 4 categories: `Not applicable`, `Large`, `Appropriate` ",
                                         " and `Small`. These are represented on the bar plot in the same order from top to bottom."),
@@ -1045,9 +1045,7 @@ output$healthy_birthweight_plot = renderPlotly({
   birthweight %>%
     mutate(date = financial_year,
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age, levels = c("Small", "Appropriate", "Large", "Not Applicable"))) %>%
-    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type,
-           financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
-                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
+    filter(geography == input$healthy_birthweight_geog_name, geography_type == input$healthy_birthweight_geog_type) %>%
     stacked_bar_function(., .$birthweight_for_gestational_age, title = title) %>%
     layout(xaxis = list(tickangle = -30),
            legend = list(y = -0.4))
@@ -1078,7 +1076,7 @@ observeEvent(input$healthy_birthweight_geog_name,{
 observeEvent(input$healthy_birthweight_geog_name,{
 
   output$healthy_birthweight_title <- renderUI({h3(glue("Data table: Birthweight of babies based on gestational age in ",
-                                                       input$healthy_birthweight_geog_name))})
+                                                        input$healthy_birthweight_geog_name))})
 })
 
 
@@ -1250,7 +1248,7 @@ output$asthma_admissions_plot <- renderPlotly({
       mode_bar_plot(x = .$date, y = .$indicator, category_var = .$sex,
                     xaxis_title = "Year range", yaxis_title = "Total number of admissions",
                     title = title, mode = "stack") %>%
-    layout(yaxis=list(tickformat=","))
+      layout(yaxis=list(tickformat=","))
 
 
     # } else if(input$asthma_admissions_breakdowns == "Age and sex breakdown"){
@@ -1329,7 +1327,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
     }
 
     output$asthma_admissions_title <- renderUI({h3(glue("Data table: Total number of asthma-related hospital admissions ",
-                                                       breakdown, "in ", geog))})
+                                                        breakdown, "in ", geog))})
   })
 })
 
@@ -1632,7 +1630,7 @@ output$vaccinations_covid_plot <- renderPlotly({
 observeEvent(input$vaccinations_covid_geog_name,{
 
   output$vaccinations_covid_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of COVID-19 vaccinations in ",
-                                                      "eligible population by SIMD in {input$vaccinations_covid_geog_name}"))})
+                                                       "eligible population by SIMD in {input$vaccinations_covid_geog_name}"))})
 })
 
 
@@ -1704,7 +1702,7 @@ output$vaccinations_flu_plot <- renderPlotly({
 observeEvent(input$vaccinations_flu_geog_name,{
 
   output$vaccinations_flu_title <- renderUI({h3(glue("Data table: Percentage (%) uptake of influenza vaccinations in ",
-                                                    "eligible population by SIMD in {input$vaccinations_flu_geog_name}"))})
+                                                     "eligible population by SIMD in {input$vaccinations_flu_geog_name}"))})
 })
 
 

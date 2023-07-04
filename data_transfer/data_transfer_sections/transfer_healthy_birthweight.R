@@ -46,6 +46,8 @@ birthweight_all %<>%
   group_by(geography, geography_type, financial_year) %>%
   mutate(proportion = livebirths/sum(livebirths)) %>%
   ungroup() %>%
+  filter(str_detect(financial_year, "20")) %>%
+  filter(!(financial_year %in% c("2000/01","2001/02","2002/03","2003/04","2004/05","2005/06","2006/07","2007/08"))) %>%
   summary_format_function(., .$financial_year, .$geography_type,
                           .$geography, scales::percent(.$proportion, 1),
                           "healthy_birthweight")
