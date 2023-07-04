@@ -11,11 +11,11 @@ altTextServer("employees_living_wage_cw_sector_alt",
                                 tags$li("The light grey line is the percentage of employees earning less than the real Living Wage in the public sector."),
                                 tags$li("The blue line is the percentage of employees earning less than the real Living Wage in the private sector."),
                                 tags$li("The dark grey  line is the percentage of employees earning less than the real Living Wage in the Not for profit or mutual organisation sector."),
-                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013."),
-                                tags$li("The percentage of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
-                                        "in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021."),
-                                tags$li("The percentage of employees earning less than the Living Wage is now lower than at",
-                                        "any previous point in the series, which began in 2012.")
+                                tags$li("There is no data available for the `not for profit or mutual organisation` sector for years 2012 and 2013.")#,
+                                # tags$li("The percentage of employees earning less than the Living Wage in all sectors has decreased from 18.8%",
+                                #         "in 2012 to 14.4% in 2021; and decreased 0.7 percentage points from 2020 to 2021."),
+                                # tags$li("The percentage of employees earning less than the Living Wage is now lower than at",
+                                #         "any previous point in the series, which began in 2012.")
 
               )
 )
