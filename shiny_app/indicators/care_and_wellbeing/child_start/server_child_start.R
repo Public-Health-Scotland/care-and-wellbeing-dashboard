@@ -27,8 +27,8 @@ altTextServer("child_development_cw_alt",
                                 tags$li("If Scotland is selected then there the plot will show one purple line representing the data for Scotland.",
                                         "If a health board is selected then the purple line on the plot will represent the health board chosen and the magenta line ",
                                         "will represent Scotland as a baseline. If a council area is selected then the purple line on the plot will represent",
-                                        "the council area chosen and the magenta line will represent the health board the council area is located in as a baseline."),
-                                tags$li("Since the data began for Scotland there has been a general downwards trend before levelling out.")
+                                        "the council area chosen and the magenta line will represent the health board the council area is located in as a baseline.")#,
+                                # tags$li("Since the data began for Scotland there has been a general downwards trend before levelling out.")
 
 
               )
