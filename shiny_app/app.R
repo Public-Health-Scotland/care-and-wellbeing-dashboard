@@ -118,8 +118,9 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  res_auth <- secure_server(
-    timeout = 30)
+  if(password_protect){
+    source(file.path("password_protect/password_protect_server.R"), local = TRUE)$value
+  }
 
 
   #### Get functions ----
@@ -189,6 +190,9 @@ server <- function(input, output, session) {
 
 #sets language right at the top of source (required this way for screen readers)
 attr(ui, "lang") = "en"
+
+#conditionally password protect app
+if (password_protect){ ui <- secure_app(ui) }
 
 # Run the application
 shinyApp(ui=ui, server=server)

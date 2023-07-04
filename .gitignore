@@ -7,7 +7,10 @@
 shiny_app/data/
 
 # Deployment
-shiny_app/AppDeployment.R
+shiny_app/deployment/DeploymentSecrets.R
+
+# credentials_update script
+shiny_app/password_protect/credentials.R
 
 # rsconnect folder
 shiny_app/rsconnect/
