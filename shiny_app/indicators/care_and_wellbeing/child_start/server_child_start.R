@@ -152,10 +152,10 @@ observeEvent(input$child_development_cw_geog_name, {
 altTextServer("infant_mortality_cw_alt",
               title = "Child social and physical development plot",
               content = tags$ul(tags$li("This is a plot for the trend in the rate of infant deaths per 1,000 live births in Scotland.."),
-                                tags$li("The x axis is the month from July 2017 to March 2022."),
+                                tags$li("The x axis is the month from July 2017 to April 2023."),
                                 tags$li("The y axis is the rate of deaths per 1,000 live births."),
-                                tags$li("The solid line represents the trend for Scotland"),
-                                tags$li("Since the data began for Scotland the trend has fluctuated, however, an upward trend is evident from January 2021 onwards.")
+                                tags$li("The solid line represents the trend for Scotland")#,
+                                # tags$li("Since the data began for Scotland the trend has fluctuated, however, an upward trend is evident from January 2021 onwards.")
 
               )
 )
