@@ -596,8 +596,8 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
   title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
 
   p <- heart_attack %>%
-    filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                        "2016","2017","2018","2019","2020")) %>%
+    # filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+    #                     "2016","2017","2018","2019","2020")) %>%
     line_chart_function(y_title = "Total number of admissions", label = "Number of admissions", title = title) %>%
     layout(yaxis=list(tickformat=","),
            xaxis = list(dtick = 1, tickangle = -30))
@@ -606,8 +606,8 @@ output$hospital_admission_heart_attack_plot <- renderPlotly({
 
 heart_attack %>%
   select(date, total_admissions) %>%
-  filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                      "2016","2017","2018","2019","2020")) %>%
+  # filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
+  #                     "2016","2017","2018","2019","2020")) %>%
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
@@ -620,7 +620,7 @@ heart_attack %>%
 altTextServer("hospital_admission_heart_attack_alt",
               title = "First ever hospital admissions for heart attack plot",
               content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
-                                tags$li("The x axis is year, starting in 1997"),
+                                tags$li("The x axis is year, starting in 2008"),
                                 tags$li("The y axis total number."),
                                 tags$li("The solid purple line shows the trend in number of hospital admissions.")
               )
