@@ -299,7 +299,7 @@ adult_mental_welbeing_simd %>%
 observeEvent(input$premature_mortality_geog_type,
              {
 
-               premature_mortality_filtered = premature_mortality_all_cause_hb %>%
+               premature_mortality_filtered = premature_mortality_all_cause %>%
                  filter(geography_type == input$premature_mortality_geog_type)
 
 
@@ -339,12 +339,23 @@ output$premature_mortality_hb_plot <- renderPlotly({
   title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "in ", geog)
 
-  plot <- premature_mortality_all_cause_hb %>%
+  plot <- premature_mortality_all_cause %>%
     filter(geography == input$premature_mortality_geog_name) %>%
     confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
                                 x_title = "Year", title = title) %>%
     layout(legend = list(y = -0.4),
            xaxis = list(dtick = 1))
+
+})
+
+
+output$premature_mortality_hb_comp_plot <- renderPlotly({
+
+plot <- premature_mortality_all_cause %>%
+  comparison_data(geog_name = input$premature_mortality_geog_name) %>%
+  make_line_chart_multi_lines(x = .$date, y = .$indicator, colour = .$geography,
+                              y_axis_title = "Rate")
+
 
 })
 
@@ -372,7 +383,7 @@ observeEvent(input$premature_mortality_geog_name,{
   output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
                                                            "in ", input$premature_mortality_geog_name))})
 
-  data_unfiltered <- premature_mortality_all_cause_hb %>%
+  data_unfiltered <- premature_mortality_all_cause %>%
     arrange(desc(date)) %>%
     mutate(date = factor(date)) %>%
     select(c(date, geography_type, geography, indicator,

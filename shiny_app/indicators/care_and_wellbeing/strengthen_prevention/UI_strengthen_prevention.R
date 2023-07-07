@@ -711,7 +711,7 @@ tagList(
                         fluidRow(column(4,
                                         selectInput("premature_mortality_geog_type",
                                                     "Step 1: Select national or local geography level ",
-                                                    choices = c("Scotland", "Health Board"),
+                                                    choices = c("Scotland", "Health Board", "Council Area"),
                                                     selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
@@ -725,6 +725,10 @@ tagList(
                         altTextUI("premature_mortality_hb_alt"),
                         ciDefinitionUI("premature_mortality_hb_ci"),
                         withSpinner(plotlyOutput("premature_mortality_hb_plot")),
+
+                        br(),
+
+                        withSpinner(plotlyOutput("premature_mortality_hb_comp_plot")),
 
                         uiOutput("premature_mortality_hb_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
