@@ -723,27 +723,37 @@ tagList(
                         ),
 
                         altTextUI("premature_mortality_hb_alt"),
-                        ciDefinitionUI("premature_mortality_hb_ci"),
-                        withSpinner(plotlyOutput("premature_mortality_hb_plot")),
-
-                        br(),
-
                         withSpinner(plotlyOutput("premature_mortality_hb_comp_plot")),
-
-                        uiOutput("premature_mortality_hb_title"),
-                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-                        dataDownloadUI("premature_mortality_hb"),
+                        # withSpinner(plotlyOutput("premature_mortality_hb_plot")),
 
                         br(),
                         br(),
+
                         altTextUI("premature_mortality_simd_alt"),
                         simdQuintileDefinitionUI("premature_mortality_simd_desc"),
                         withSpinner(plotlyOutput("premature_mortality_simd_plot")),
 
-                        h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
-                        p("To view the full dataset, please use the download buttons below."),
-                        dataDownloadUI("premature_mortality_simd")
+                        uiOutput("premature_mortality_title"),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        # dataDownloadUI("premature_mortality_hb"),
 
+                        br(),
+
+                        # h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
+                        # p("To view the full dataset, please use the download buttons below."),
+                        # dataDownloadUI("premature_mortality_simd")
+
+                        tabBox(
+                          id = "spremature_mortality_tabBox", height = "250px", width=12,
+                          tabPanel("Health Board",
+                                   br(),
+                                   dataDownloadUI("premature_mortality_hb")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("premature_mortality_simd")
+                          )
+
+                        )
                ),
 
 

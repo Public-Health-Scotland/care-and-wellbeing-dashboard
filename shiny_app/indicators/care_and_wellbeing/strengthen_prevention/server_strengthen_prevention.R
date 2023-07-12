@@ -313,12 +313,14 @@ altTextServer("premature_mortality_hb_alt",
               content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause mortality rates for people under 75."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the age-standardised rate per 100,000 population."),
-                                tags$li("The purple line indicates the trend in age-standardised all-cause mortality rates and",
-                                        "the lighter purple area around the line indicates the confidence interval."),
-                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
-                                        "area represents the upper confidence interval."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("If Scotland is chosen then there will be one trend line representing Scotland.",
+                                        "If a Health board is chosen then there will be two lines, a light green colour representing the trend in",
+                                        "Scotland, and a purple line representing the trend in the chosen Health board.",
+                                        "If a council area is chosen then there will be three lines, where the health board and Scotland are represented",
+                                        "as previously described and the council area will be represented by a teal line.")
+
 
               )
 )
@@ -354,10 +356,10 @@ output$premature_mortality_hb_comp_plot <- renderPlotly({
   title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "in ", input$premature_mortality_geog_name)
 
-plot <- premature_mortality_all_cause %>%
-  comparison_data(geog_name = input$premature_mortality_geog_name) %>%
-  make_line_chart_multi_lines(x = .$date, y = .$indicator, colour = .$geography,
-                              y_axis_title = "EASR of deaths per 100,000<br>population", title = title)
+  plot <- premature_mortality_all_cause %>%
+    comparison_data(geog_name = input$premature_mortality_geog_name) %>%
+    make_line_chart_multi_lines(x = .$date, y = .$indicator, colour = .$geography,
+                                y_axis_title = "EASR of deaths per 100,000<br>population", title = title)
 
 
 })
@@ -380,26 +382,40 @@ output$premature_mortality_simd_plot <- renderPlotly({
 
 })
 
+observeEvent(input$spremature_mortality_tabBox, {
 
-observeEvent(input$premature_mortality_geog_name,{
 
-  output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
-                                                           "in ", input$premature_mortality_geog_name))})
 
-  data_unfiltered <- premature_mortality_all_cause %>%
-    arrange(desc(date)) %>%
-    mutate(date = factor(date)) %>%
-    select(c(date, geography_type, geography, indicator,
-             lower_confidence_interval, upper_confidence_interval)) %>%
-    rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
-           "Year" = "date")
+  title <- ifelse(input$spremature_mortality_tabBox == "Health Board",
+                  glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population "),
+                  glue("Data table: European age-standardised all-cause premature mortality
+                           rates per 100,000 population by SIMD quintile in Scotland"))
 
-  data_filtered <- data_unfiltered %>%
-    filter(geography == input$premature_mortality_geog_name)
+  output$premature_mortality_title <- renderUI(h3(title))
 
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
-                     add_separator_cols_1dp = c(4,5,6))
+
+
+  # output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
+  #                                                          "in ", input$premature_mortality_geog_name))})
+
+  observeEvent(input$premature_mortality_geog_name,{
+
+    data_unfiltered <- premature_mortality_all_cause %>%
+      arrange(desc(date)) %>%
+      mutate(date = factor(date)) %>%
+      select(c(date, geography_type, geography, indicator,
+               lower_confidence_interval, upper_confidence_interval)) %>%
+      rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
+             "Year" = "date")
+
+    data_filtered <- data_unfiltered %>%
+      comparison_data(geog_name = input$premature_mortality_geog_name)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
+                       add_separator_cols_1dp = c(4,5,6))
+
+  })
 
 })
 
@@ -607,20 +623,20 @@ altTextServer("chd_deaths_alt",
 
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
-    title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
-    label <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "Rate", "Number")
-    y_title <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "EASR per 100,000 population",
-                      "Total number of hospital <br> admissions")
+  title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
+  label <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "Rate", "Number")
+  y_title <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "EASR per 100,000 population",
+                    "Total number of hospital <br> admissions")
 
-    if(input$hospital_admission_heart_attack_rate_number == "Rate") {
+  if(input$hospital_admission_heart_attack_rate_number == "Rate") {
 
-      data <- heart_attack %>%
-        mutate(indicator = rate_per_100_000_easr)
-    } else {
+    data <- heart_attack %>%
+      mutate(indicator = rate_per_100_000_easr)
+  } else {
 
-      data <- heart_attack %>%
-        mutate(indicator = total_admissions)
-    }
+    data <- heart_attack %>%
+      mutate(indicator = total_admissions)
+  }
 
   p <- data %>%
     line_chart_function(y_title = y_title, label = label, title = title) %>%
