@@ -121,7 +121,7 @@ observeEvent(input$child_development_cw_geog_name, {
 
   output$child_development_cw_table_title <- renderUI({
     h3(glue("Data table: Proportion of health visitor reviews where any ",
-         "form of developmental concern was raised in ", input$child_development_cw_geog_name))})
+            "form of developmental concern was raised in ", input$child_development_cw_geog_name))})
 
 })
 
@@ -151,8 +151,8 @@ observeEvent(input$child_development_cw_geog_name, {
 
 altTextServer("infant_mortality_cw_alt",
               title = "Child social and physical development plot",
-              content = tags$ul(tags$li("This is a plot for the trend in the rate of infant deaths per 1,000 live births in Scotland.."),
-                                tags$li("The x axis is the month from July 2017 to April 2023."),
+              content = tags$ul(tags$li("This is a plot for the trend in the rate of infant deaths per 1,000 live births in Scotland."),
+                                tags$li("The x axis is the month from July 2017 to May 2023."),
                                 tags$li("The y axis is the rate of deaths per 1,000 live births."),
                                 tags$li("The solid line represents the trend for Scotland")#,
                                 # tags$li("Since the data began for Scotland the trend has fluctuated, however, an upward trend is evident from January 2021 onwards.")
@@ -160,35 +160,32 @@ altTextServer("infant_mortality_cw_alt",
               )
 )
 
-yaxis_inf_deaths <- list(title = "Rate per 1,000 live births",
-                         rangemode="tozero",
-                         fixedrange=TRUE,
-                         tickfont = list(size=14),
-                         titlefont = list(size=18),
-                         showline = TRUE)
 
 output$infant_mortality_cw_plot = renderPlotly({
-  inf_deaths %>%
-    plot_ly(x=~date,
-            y=~rate,
-            type = "scatter",
-            mode = "lines",
-            line = list(color="#655E9D"),
-            # marker = list(color="#655E9D"),
-            name = "Rate",
-            #text = paste0(format(inf_deaths$date, "%B %Y"), "<br>",
-            #              "Rate per 1,000 live births: ",
-            #              round_half_up(inf_deaths$rate, 1),"<br>",
-            #              "Number of infant deaths: ", inf_deaths$count, "<br>"),
-            #hoverinfo = "text",
-            hovertemplate = ~glue("{round_half_up(inf_deaths$rate,1)}")) %>%
-    layout(yaxis = yaxis_inf_deaths,
-           xaxis = xaxis_month,
-           hovermode = "x unified",
-           margin = list(t = 90, b = 40),
-           title = list(text = str_wrap("Monthly rate of infant deaths per 1,000 live births in Scotland", width = 60), font = title_style)) %>%
-    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+
+
+  title <-"Infant mortality in Scotland"
+
+  data =inf_deaths
+  if (input$inf_morality_rate_number== "Rate") {
+    data %<>%
+      mutate(indicator = rate)
+    indicator_y = "Rate of infant deaths <br>per 1,000 live births"
+  }
+  else if (input$inf_morality_rate_number== "Number") {
+    data %<>%
+      mutate(indicator = count)
+
+    indicator_y = "Number of infant deaths"
+  }
+
+  line_chart_function(data, indicator_y,
+                      title = title,
+                      label = ifelse(input$inf_morality_rate_number== "Rate", "Rate of death", "Number of deaths")) %>%
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(tickangle = -30))
 })
+
 
 inf_deaths %>%
   arrange(desc(date)) %>%
@@ -229,7 +226,7 @@ output$child_obesity_plot <- renderPlotly({
     filter(!(date %in%  c("2003", "1998"))) %>%
     mutate(indicator = round_half_up(as.numeric(indicator), 2)) %>%
     line_chart_function(., y_title = "Percentage (%)", title = title, label = "Percentage")%>%
-   # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
+    # layout(yaxis = yaxis_proportion_30, xaxis = xaxis_survey_year)
     layout(yaxis = list(rangemode="tozero",
                         title = "Percentage (%)",
                         tickfont = list(size=14),
@@ -237,7 +234,7 @@ output$child_obesity_plot <- renderPlotly({
                         # range=c(10,20),
                         showline = FALSE,
                         ticksuffix = "%"
-                       ))
+    ))
 
 
 })

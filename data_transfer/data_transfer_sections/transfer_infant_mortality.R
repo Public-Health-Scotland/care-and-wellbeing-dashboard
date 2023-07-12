@@ -4,7 +4,7 @@
 
 # Read in input data
 stillbirth_infantdeaths_extract <- read_csv(paste0(path_in,
-                                                   "/stillbirth_infantdeaths_extract.csv"))
+                                                   "/stillbirth_infantdeaths_extract_jul_23.csv"))
 
 
 # Cleaning and reformatting
