@@ -351,10 +351,13 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 output$premature_mortality_hb_comp_plot <- renderPlotly({
 
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
+                "in ", input$premature_mortality_geog_name)
+
 plot <- premature_mortality_all_cause %>%
   comparison_data(geog_name = input$premature_mortality_geog_name) %>%
   make_line_chart_multi_lines(x = .$date, y = .$indicator, colour = .$geography,
-                              y_axis_title = "Rate")
+                              y_axis_title = "EASR of deaths per 100,000<br>population", title = title)
 
 
 })
