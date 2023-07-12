@@ -547,11 +547,24 @@ tagList(
                                          ciDefinitionUI("life_expectancy_council_area_ci"),
                                          withSpinner(plotlyOutput("life_expectancy_council_area_plot")),
 
+                                         altTextUI("life_expectancy_simd_alt"),
+                                         simdDecileDefinitionUI("life_expectancy_simd"),
+                                         withSpinner(plotlyOutput("life_expectancy_simd_plot")),
+
                                          br(),
                                          uiOutput("life_expectancy_title"),
-                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                         # p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
-                                         dataDownloadUI("life_expectancy")
+
+                                         tabBox(
+                                           id = "life_expectancy_tabBox", height = "250px", width=12,
+                                           tabPanel("Council area",
+                                                    br(),
+                                                    dataDownloadUI("life_expectancy")),
+                                           tabPanel("SIMD",
+                                                    br(),
+                                                    dataDownloadUI("life_expectancy_simd"))
+                                         )
 
                                 ),
 
