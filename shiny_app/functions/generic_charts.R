@@ -289,7 +289,7 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis
 }
 
 
-comparison_data <- function(data, geog_name = "Angus") #, x = "date", y = "indicator",
+comparison_data <- function(data, geog_name = "Scotland") #, x = "date", y = "indicator",
   #colour = "geography", y_axis_title = "Rate", x_axis_title = "Year",
   #label = "", title = "", hover_end = "")
 {
@@ -301,7 +301,7 @@ comparison_data <- function(data, geog_name = "Angus") #, x = "date", y = "indic
       filter(ca2019name %in% c(geog_name)) %>%
       .$hb2019name
 
-    data_plot <- premature_mortality_all_cause %>%
+    data_plot <- data %>%
       filter(geography %in% c(geog_name, hbname, "Scotland"))
 
   } else {
