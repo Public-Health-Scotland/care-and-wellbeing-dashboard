@@ -297,7 +297,7 @@ comparison_data <- function(data, geog_name = "Angus") #, x = "date", y = "indic
 
   if(geog == "Council Area") {
 
-    hbname <- lookup_master %>%
+    hbname <- master_lookup %>%
       filter(ca2019name %in% c(geog_name)) %>%
       .$hb2019name
 
