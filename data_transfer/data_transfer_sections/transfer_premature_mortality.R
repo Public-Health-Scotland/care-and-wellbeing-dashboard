@@ -2,6 +2,9 @@
 # PREMATURE MORTALITY ----
 ##############################.
 
+
+#################### READ IN HB DATA ############################
+
 data_path <-paste0(path_in_pop, "premature_mortality_nrs.xlsx")
 
 # Read in full table
@@ -68,6 +71,8 @@ rm(hb_rate_full, hb_rate_lcl, hb_rate_ucl) #, hb_deaths)
 
 
 
+################### READ IN LA DATA ##########################
+
 ##########LAs##############
 
 data_path <-paste0(path_in_pop, "premature_mortality_tab4.xlsx")
@@ -123,7 +128,8 @@ la_rate <- la_rate %>%
 rm(la_rate_full, la_rate_lcl, la_rate_ucl)
 
 
-#### JOin hb and la data
+#### JOIN HB AND LA DATA ###############
+# LA data does not contain number of deaths, only hb does
 
 premature_mortality_rate <- rbind(hb_rate, la_rate) %>%
   arrange(date, geography_type, geography) %>%
