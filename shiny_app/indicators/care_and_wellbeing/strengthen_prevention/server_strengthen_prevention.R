@@ -11,8 +11,6 @@ altTextServer("life_expectancy_trend_alt",
                                 tags$li("The solid purple line is the specified sex"),
                                 tags$li("Since the 2017-2019 there has been a downwards trend in male healthy life expectancy at birth for both males and females")
 
-
-
               )
 )
 
