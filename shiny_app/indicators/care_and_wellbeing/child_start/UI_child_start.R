@@ -136,18 +136,30 @@ tagList(
                                                                             "and",
                                                                             "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/  target =_blank>Vital Events - Deaths, National Records of Scotland (external site)</a>.",
                                                                             "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
-                                                                            "April, 2023.",
+                                                                            "May, 2023.",
                                                                             # "More up to date data is available at source.",
                                                                             "<br><br>These data are available at a Scotland",
                                                                             "level.",
                                                                             "<br><br> More detailed information can be found in the accompanying",
                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
-                        altTextUI("infant_mortality_cw_alt"),
+                        fluidRow(
+                          column(4,
+                                 radioButtons("inf_morality_rate_number",
+                                              "View as Rate per 1,000 Live Births or as Number of Deaths",
+                                              choices = c("Rate",
+                                                          "Number"),
+                                              width = "100%"))
+
+                      ),
+
+
+
+                          altTextUI("infant_mortality_cw_alt"),
                         withSpinner(plotlyOutput("infant_mortality_cw_plot")),
 
 
-                        h3("Data table: Monthly rate of infant deaths per 1,000 live births in Scotland"),
+                        h3("Data table: Infant mortality in Scotland"),
                         p("To view the full dataset, please use the download buttons below."),
 
                         dataDownloadUI("infant_mortality_cw")
