@@ -58,6 +58,8 @@ output$life_expectancy_council_area_plot = renderPlotly({
 })
 
 
+
+
 altTextServer("life_expectancy_simd_alt",
               title = "Life expectancy by council area plot",
               content = tags$ul(tags$li("This is a bar plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
@@ -72,14 +74,24 @@ output$life_expectancy_simd_plot = renderPlotly({
   title <- glue(input$life_expectancy_sex,
                 " life expectancy at birth by SIMD deciles 2019-2021"
   )
+
   data = life_expectancy_simd %>%
     filter(sex == input$life_expectancy_sex) %>%
-    mode_bar_plot(x = .$simd_2020_decile, y = .$life_expectancy_at_birth, category_var = .$sex,
-                  xaxis_title = "SIMD decile", yaxis_title = "Life expectancy (years)",
-                  title = title) %>%
+    mutate(ErrorBarHeight = upper_confidence_interval - lower_confidence_interval,
+           ErrorBarLowerHeight = life_expectancy_at_birth - lower_confidence_interval) %>%
+    confidence_scatter_function_le_simd(title = title) %>%
     layout(xaxis = list(tickangle = -30),
-           yaxis = yaxis_number_normal
-    )
+           legend = list(y = -0.4))
+
+
+  # data = life_expectancy_simd %>%
+  #   filter(sex == input$life_expectancy_sex) %>%
+  #   mode_bar_plot(x = .$simd_2020_decile, y = .$life_expectancy_at_birth, category_var = .$sex,
+  #                 xaxis_title = "SIMD decile", yaxis_title = "Life expectancy (years)",
+  #                 title = title) %>%
+  #   layout(xaxis = list(tickangle = -30),
+  #          yaxis = yaxis_number_normal
+  #   )
 })
 
 observeEvent(input$life_expectancy_tabBox, {
