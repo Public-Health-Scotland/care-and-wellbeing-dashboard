@@ -591,34 +591,50 @@ altTextServer("chd_deaths_alt",
 
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
-  title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
+    title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
+    label <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "Rate", "Number")
+    y_title <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "EASR per 100,000 population",
+                      "Total number of hospital <br> admissions")
 
-  p <- heart_attack %>%
-    filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                        "2016","2017","2018","2019","2020")) %>%
-    line_chart_function(y_title = "Total number of admissions", label = "Number of admissions", title = title) %>%
+    if(input$hospital_admission_heart_attack_rate_number == "Rate") {
+
+      data <- heart_attack %>%
+        mutate(indicator = rate_per_100_000_easr)
+    } else {
+
+      data <- heart_attack %>%
+        mutate(indicator = total_admissions)
+    }
+
+  p <- data %>%
+    line_chart_function(y_title = y_title, label = label, title = title) %>%
     layout(yaxis=list(tickformat=","),
            xaxis = list(dtick = 1, tickangle = -30))
 
 })
 
 heart_attack %>%
-  select(date, total_admissions) %>%
-  filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                      "2016","2017","2018","2019","2020")) %>%
+  select(date, total_admissions, rate_per_100_000_easr) %>%
+
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
-         "Total number of hospital admissions" = "total_admissions") %>%
+         "Total number of hospital admissions" = "total_admissions",
+         "EASR per 100,000 population" = "rate_per_100_000_easr") %>%
   dataDownloadServer(id = "heart_attack_admission",
                      filename = "first_ever_hospital_admission_heart_attack",
-                     add_separator_cols = c(2))
+                     add_separator_cols = c(2),
+                     add_separator_cols_1dp = c(3))
 
 
 altTextServer("hospital_admission_heart_attack_alt",
               title = "First ever hospital admissions for heart attack plot",
-              content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
-                                tags$li("The x axis is year, starting in 1997"),
+              content = tags$ul(tags$li("This is a plot for the trend in first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
+                                tags$li("The x axis is year, starting in 2008"),
+                                tags$li("If in the choice above the plot `Rate` is chosen, then the y axis is the European Age-Standerdised Rate (EASR) per 100,000 population.",
+                                        "The purple line indicates the trend in EASR per 100,000 population of first ever hopsital admissions for heart attack."),
+                                tags$li("If in the choice above the plot `Number` is chosen, then the y axis is the total number of first ever hospital admissions",
+                                        "The purple line indicates the trend in the number of first ever hospital admissions."),
                                 tags$li("The y axis total number."),
                                 tags$li("The solid purple line shows the trend in number of hospital admissions.")
               )

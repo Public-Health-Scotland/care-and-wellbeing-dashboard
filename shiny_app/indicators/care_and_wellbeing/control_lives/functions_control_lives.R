@@ -29,7 +29,7 @@ make_camhs_waiting_times_cw_line_plot = function(data, vline=TRUE, title) {
                         titlefont = list(size=18),
                         range =
                           c(as.numeric(as.POSIXct("2012-07-01", format="%Y-%m-%d"))*1000,
-                            as.numeric(as.POSIXct("2021-12-31", format="%Y-%m-%d"))*1000),
+                            as.numeric(as.POSIXct("2023-03-31", format="%Y-%m-%d"))*1000),
                         showline = TRUE),
            yaxis = list(yaxis_proportion,
                         title= "Percentage (%)"),

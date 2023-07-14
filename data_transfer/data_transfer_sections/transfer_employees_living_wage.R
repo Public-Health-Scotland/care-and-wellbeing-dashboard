@@ -2,26 +2,30 @@
 # EMPLOYEES ON THE LIVING WAGE by sector ----
 ##############################################.
 
-employees_living_wage_less = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+
+
+############### Will need to update labels of columns for this transfer to wrok ##############################
+
+employees_living_wage_less = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                               sheet = "Table 5.5",
-                                              range = "A6:W10",
+                                              range = "A6:Y10",
                                               na = ":") %>%
   rename(`sector` = `...1`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2021...11`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...14`:`2021...23`) %>%
-  select(-`Annual change`, -`...13`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2022...12`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...15`:`2022...25`) %>%
+  select(-`Annual change`, -`...14`) %>%
   mutate(earning = "Earning less than the living wage")
 
 
 
-employees_living_wage_more = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+employees_living_wage_more = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                         sheet = "Table 5.5",
-                                        range = "A14:W18",
+                                        range = "A14:Y18",
                                         na = ":") %>%
   rename(`sector` = `...1`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2021...11`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...14`:`2021...23`) %>%
-  select(-`Annual change`, -`...13`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2022...12`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...15`:`2022...25`) %>%
+  select(-`Annual change`, -`...14`) %>%
   mutate(earning = "Earning the living wage or more")
 
 
@@ -42,26 +46,26 @@ replace_file_fn(employees_living_wage_by_sector,
 ##############################################.
 
 
-employees_living_wage_less = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+employees_living_wage_less = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                         sheet = "Table 5.7",
-                                        range = "A6:W39",
+                                        range = "A6:Y39",
                                         na = c(":","x","..")) %>%
   rename(`local_authority` = `...1`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2021...11`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...14`:`2021...23`) %>%
-  select(-c(`Annual Change`, `...13`)) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2022...12`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...15`:`2022...25`) %>%
+  select(-c(`Annual Change`, `...14`)) %>%
   mutate(earning = "Earning less than the living wage")
 
 
 
-employees_living_wage_more = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+employees_living_wage_more = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                         sheet = "Table 5.7",
-                                        range = "A44:W77",
+                                        range = "A44:Y77",
                                         na = c(":","x","..")) %>%
   rename(`local_authority` = `...1`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2021...11`) %>%
-  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...14`:`2021...23`) %>%
-  select(-c(`Annual Change`, `...13`)) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-level", .x), .cols = `2012...2`:`2022...12`) %>%
+  rename_with(~gsub("[.]{3}[0-9]*", "-proportion", .x), .cols = `2012...15`:`2022...25`) %>%
+  select(-c(`Annual Change`, `...14`)) %>%
   mutate(earning = "Earning the living wage or more")
 
 
