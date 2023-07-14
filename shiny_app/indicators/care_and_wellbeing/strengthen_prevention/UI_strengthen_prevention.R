@@ -703,8 +703,8 @@ tagList(
                                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                                            "2021.",
                                                                            #"More up to date data is available at source.",
-                                                                           "<br><br>These data are available at Scotland",
-                                                                           "and NHS Health Board levels.",
+                                                                           "<br><br>These data are available at Scotland, ",
+                                                                           "NHS Health Board and Council Area levels with additional breakdown by SIMD quintile.",
                                                                            "<br><br> More detailed information can be found in the accompanying",
                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
