@@ -623,7 +623,8 @@ heart_attack %>%
          "EASR per 100,000 population" = "rate_per_100_000_easr") %>%
   dataDownloadServer(id = "heart_attack_admission",
                      filename = "first_ever_hospital_admission_heart_attack",
-                     add_separator_cols_1dp = c(2,3))
+                     add_separator_cols = c(2),
+                     add_separator_cols_1dp = c(3))
 
 
 altTextServer("hospital_admission_heart_attack_alt",
