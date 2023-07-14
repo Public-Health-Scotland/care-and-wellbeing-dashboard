@@ -364,7 +364,7 @@ output$premature_mortality_hb_comp_plot <- renderPlotly({
 
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("European age-standardised rate for all-cause premature mortality per 100,000 population \n ",
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
@@ -374,7 +374,7 @@ output$premature_mortality_simd_plot <- renderPlotly({
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$simd,
                                 title = title,
-                                y_axis_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
+                                y_axis_title = "EASR of deaths per 100,000<br>population",
                                 x_axis_title = "Year") %>%
     layout(legend = list(y = -0.4))
 
