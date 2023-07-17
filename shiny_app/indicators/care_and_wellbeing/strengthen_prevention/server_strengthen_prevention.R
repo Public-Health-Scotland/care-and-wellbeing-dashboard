@@ -316,8 +316,12 @@ altTextServer("premature_mortality_hb_alt",
                                 tags$li("If Scotland is chosen then there will be one trend line representing Scotland.",
                                         "If a Health board is chosen then there will be two lines, a light green colour representing the trend in",
                                         "Scotland, and a purple line representing the trend in the chosen Health board.",
-                                        "If a council area is chosen then there will be three lines, where the health board and Scotland are represented",
-                                        "as previously described and the council area will be represented by a teal line.")
+                                        "If a council area is chosen then there will be three lines, a purple line representing the Council Area, a teal line
+                                        representing the NHS Health Board and a light green line representing Scotland."),
+                                tags$li("Please be aware, in some instances where the an NHS Health Board contains only one Council Area
+                                        then the values for both geographies will match and only two lines will be visible
+                                        when that Council Area has been chosen. All lines are present and can be seen by clicking on the
+                                        legend as described under the 'Using the plot' button.")
 
 
               )
