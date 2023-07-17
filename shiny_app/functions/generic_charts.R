@@ -302,7 +302,8 @@ comparison_data <- function(data, geog_name = "Scotland") #, x = "date", y = "in
       .$hb2019name
 
     data_plot <- data %>%
-      filter(geography %in% c(geog_name, hbname, "Scotland"))
+      filter(geography %in% c(geog_name, hbname, "Scotland")) %>%
+      mutate(geography = factor(geography, levels = c(geog_name, hbname, "Scotland")))
 
   } else {
 
