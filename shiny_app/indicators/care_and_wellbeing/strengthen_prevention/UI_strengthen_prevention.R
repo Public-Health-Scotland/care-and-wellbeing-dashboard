@@ -745,7 +745,7 @@ tagList(
 
                         tabBox(
                           id = "spremature_mortality_tabBox", height = "250px", width=12,
-                          tabPanel("Health Board",
+                          tabPanel("Geography",
                                    br(),
                                    dataDownloadUI("premature_mortality_hb")),
                           tabPanel("SIMD",

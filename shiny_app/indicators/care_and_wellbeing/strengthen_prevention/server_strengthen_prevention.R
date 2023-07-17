@@ -314,11 +314,11 @@ altTextServer("premature_mortality_hb_alt",
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland."),
                                 tags$li("If Scotland is chosen then there will be one trend line representing Scotland.",
-                                        "If a Health board is chosen then there will be two lines, a light green colour representing the trend in",
-                                        "Scotland, and a purple line representing the trend in the chosen Health board.",
-                                        "If a council area is chosen then there will be three lines, a purple line representing the Council Area, a teal line
+                                        "If a NHS Health Board is chosen then there will be two lines, a light green colour representing the trend in",
+                                        "Scotland, and a purple line representing the trend in the chosen NHS Health Board.",
+                                        "If a Council Area is chosen then there will be three lines, a purple line representing the Council Area, a teal line
                                         representing the NHS Health Board and a light green line representing Scotland."),
-                                tags$li("Please be aware, in some instances where the an NHS Health Board contains only one Council Area
+                                tags$li("Please be aware, for instances where a NHS Health Board contains only one Council Area
                                         then the values for both geographies will match and only two lines will be visible
                                         when that Council Area has been chosen. All lines are present and can be seen by clicking on the
                                         legend as described under the 'Using the plot' button.")
@@ -388,7 +388,7 @@ observeEvent(input$spremature_mortality_tabBox, {
 
 
 
-  title <- ifelse(input$spremature_mortality_tabBox == "Health Board",
+  title <- ifelse(input$spremature_mortality_tabBox == "Geography",
                   glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population "),
                   glue("Data table: European age-standardised all-cause premature mortality
                            rates per 100,000 population by SIMD quintile in Scotland"))
