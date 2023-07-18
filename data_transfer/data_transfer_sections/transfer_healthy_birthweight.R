@@ -40,8 +40,8 @@ birthweight_scotland = birthweight %>%
 birthweight_all = birthweight_scotland %>%
   rbind(birthweight_hb, birthweight_ca)
 
-birthweight_all %<>%
-  group_by(geography, geography_type, financial_year, simd_quintile,
+birthweight <- birthweight_all %>%
+  group_by(geography, geography_type, financial_year,
            birthweight_for_gestational_age) %>%
   summarise(livebirths = sum(livebirths)) %>%
   group_by(geography, geography_type, financial_year) %>%
@@ -54,30 +54,31 @@ birthweight_all %<>%
                           "healthy_birthweight")
 
 
-# replace_file_fn(birthweight_all, paste0(path_out, "/birthweight.rds"))
+replace_file_fn(birthweight, paste0(path_out, "/birthweight.rds"))
 
-rm(birthweight, birthweight_all, birthweight_ca, birthweight_hb,
+rm(birthweight, birthweight_ca, birthweight_hb,
    birthweight_scotland)
 
-#
-# birthweight_all %>%
-#   filter(geography == "Scotland",
-#          financial_year == "2020/21") %>%
-#   select(-c(pretty_date, indicator, value, proportion)) %>%
-#   mutate(simd_quintile = as.character(simd_quintile)) %>%
-#   group_by(simd_quintile) %>%
-#   mutate(proportion = (100 * livebirths / sum(livebirths))) %>%
-#   ungroup() %>%
-# mode_bar_plot(x = .$simd_quintile, y = .$proportion, category_var = .$birthweight_for_gestational_age, mode = "stack")
-#
-#
-# birthweight_all %>%
-#   filter(geography == "Scotland",
-#          #financial_year == "2020/21",
-#          birthweight_for_gestational_age == "Approporiate") %>%
-#   select(-c(pretty_date, indicator, value, proportion)) %>%
-#   mutate(simd_quintile = as.character(simd_quintile)) %>%
-#   # group_by(simd_quintile) %>%
-#   # mutate(proportion = (100 * livebirths / sum(livebirths))) %>%
-#   # ungroup() %>%
-#   mode_bar_plot(x = .$simd_quintile, y = .$proportion, category_var = .$birthweight_for_gestational_age, mode = "stack")
+
+birthweight_simd <- birthweight_all %>%
+  mutate(birthweight = ifelse(birthweight %in% c("1500-2499g", "Under 1500g"), "<2500g", ">2500g")) %>%
+  filter(birthweight == "<2500g") %>%
+  select(-birthweight_for_gestational_age) %>%
+  group_by(financial_year, simd_quintile, geography) %>%
+  summarise(livebirths = sum(livebirths)) %>%
+  ungroup() %>%
+  group_by(financial_year, geography) %>%
+  mutate(proportion = (100 * livebirths / sum(livebirths))) %>%
+  ungroup() %>%
+  filter(financial_year >= "2008/09",
+         !is.na(simd_quintile)) %>%
+  mutate(simd = factor(simd_quintile, levels = c(1:5),
+                       labels = c("1 (Most deprived)", "2", "3", "4", "5 (Least deprived)")),
+         geography_type = ifelse(geography == "Scotland", "Scotland",
+                                 ifelse(str_starts(geography, "NHS"), "NHS Health Board", "Council Area"))) %>%
+  select(-simd_quintile) %>%
+  arrange(financial_year, geography_type, geography, simd)
+
+replace_file_fn(birthweight_simd, paste0(path_out, "/birthweight_simd.rds"))
+
+rm(birthweight_all, birthweight_simd)
