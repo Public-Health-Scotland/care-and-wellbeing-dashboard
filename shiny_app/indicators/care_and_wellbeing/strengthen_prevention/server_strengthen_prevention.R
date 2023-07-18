@@ -34,8 +34,10 @@ altTextServer("life_expectancy_council_area_alt",
                                 tags$li("The x axis is the council area."),
                                 tags$li("The y axis is the life expectancy in years."),
                                 tags$li("There is a drop down above the chart which allows you to select sex"),
-                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex",
-                                        "and the vertical lines from each dot indicates the confidence interval."),
+                                tags$li("The purple dots represent the life expectancy for each council area for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex"),
                                 tags$li("Orkney Islands had the highest life expectancy at birth for both males and females."),
                                 tags$li("Glasgow City had the lowest life expectancy at birth for both males and females.")
 
@@ -62,10 +64,14 @@ output$life_expectancy_council_area_plot = renderPlotly({
 
 altTextServer("life_expectancy_simd_alt",
               title = "Life expectancy by council area plot",
-              content = tags$ul(tags$li("This is a bar plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
-                                tags$li("The x axis is the SIMD decile."),
+              content = tags$ul(tags$li("This is a plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
+                                tags$li("The x axis is the SIMD deciles."),
                                 tags$li("The y axis is the life expectancy in years."),
-                                tags$li("There is a drop down above the charts which allows you to select sex")
+                                tags$li("There is a drop down above the charts which allows you to select sex"),
+                                tags$li("The purple dots represent the life expectancy for each SIMD decile for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex.")
 
               )
 )

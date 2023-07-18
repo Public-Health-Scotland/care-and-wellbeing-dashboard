@@ -172,7 +172,7 @@ confidence_scatter_function_le_simd = function(data, y_title = "Life expectancy 
   xaxis_council_area[["title"]] = x_title
 
   filtered_data <- life_expectancy %>%
-    filter(sex == "Male",
+    filter(sex == data %>% head(1) %>% .$sex,
            geography == "Scotland",
            time_period == max(time_period))
 

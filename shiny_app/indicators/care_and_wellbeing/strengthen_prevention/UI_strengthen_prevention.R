@@ -549,6 +549,7 @@ tagList(
 
                                          altTextUI("life_expectancy_simd_alt"),
                                          simdDecileDefinitionUI("life_expectancy_simd"),
+                                         ciDefinitionUI("life_expectancy_simd_ci"),
                                          withSpinner(plotlyOutput("life_expectancy_simd_plot")),
 
                                          br(),
