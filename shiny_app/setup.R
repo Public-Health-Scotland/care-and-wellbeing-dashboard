@@ -132,7 +132,7 @@ bttn_remove <-  list('select2d',
                      'hoverCompareCartesian',
                      'hoverClosestCartesian')
 
-palette = phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-blue', 'phs-green', 'phs-graphite'))
+palette = phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-blue', 'phs-green'))
 palette_camhs = phs_colours(c('phs-purple', 'phs-magenta', 'phs-teal', 'phs-blue'))
 
 # X axis style when data are by month
