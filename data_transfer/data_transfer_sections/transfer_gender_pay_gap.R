@@ -1,9 +1,12 @@
 ##############################################.
 # GENDER PAY GAP----
 ##############################################.
-gender_pay_gap_all = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+
+#### To run this transfer the labels will need to be updated - e.g A6:L14 -- > A6:L15 to contain an extra year
+
+gender_pay_gap_all = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                         sheet = "Table 2.2",
-                                        range = "A6:L14",
+                                        range = "A6:L15",
                                         na = ":") %>%
   rename(`year` = `...1`) %>%
   rename_with(~gsub("[.]{3}[0-9]*", "...Men", .x), .cols = `Full-time...2`:`All...4`) %>%
@@ -14,9 +17,9 @@ gender_pay_gap_all = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Ear
 
 
 
-gender_pay_gap_public = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+gender_pay_gap_public = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                 sheet = "Table 2.2",
-                                range = "A17:L25",
+                                range = "A18:L27",
                                 na = ":") %>%
   rename(`year` = `...1`) %>%
   rename_with(~gsub("[.]{3}[0-9]*", "...Men", .x), .cols = `Full-time...2`:`All...4`) %>%
@@ -26,9 +29,9 @@ gender_pay_gap_public = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+
   mutate(sector = "Public")
 
 
-gender_pay_gap_private = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+2021+-+Tables.xlsx"),
+gender_pay_gap_private = read_excel(paste0(path_in, "/Annual+Survey+of+Hours+and+Earnings+-+2022+-+Tables.xlsx"),
                                    sheet = "Table 2.2",
-                                   range = "A28:L36",
+                                   range = "A30:L39",
                                    na = ":") %>%
   rename(`year` = `...1`) %>%
   rename_with(~gsub("[.]{3}[0-9]*", "...Men", .x), .cols = `Full-time...2`:`All...4`) %>%

@@ -433,12 +433,23 @@ tagList(
                                                       "<br><br>Source:",
                                                       "<a href=https://www.gov.scot/publications/long-term-monitoring-health-inequalities-march-2022-report/pages/9 target = _blank> Long-term monitoring of health inequalities: March 2022 report, Scottish Government (external site)</a>.",
                                                       "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
-                                                      "2020.",
-                                                      "More up to date data is available at source.",
+                                                      "2021.",
+                                                      # "More up to date data is available at source.",
                                                       "<br><br>These data are available at a Scotland level.",
                                                       # "NHS Health Board and Council Area level.",
                                                       "<br><br> More detailed information can be found in the accompanying",
                                                       "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+
+
+                        fluidRow(
+                          column(4,
+                                 radioButtons("hospital_admission_heart_attack_rate_number",
+                                              "View rate per 100,000 population or number of deaths",
+                                              choices = c("Rate",
+                                                          "Number"),
+                                              width = "100%")
+                          )),
+
 
                         altTextUI("hospital_admission_heart_attack_alt"),
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
@@ -709,15 +720,15 @@ tagList(
                                                                            "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                                            "2021.",
                                                                            #"More up to date data is available at source.",
-                                                                           "<br><br>These data are available at Scotland",
-                                                                           "and NHS Health Board levels.",
+                                                                           "<br><br>These data are available at Scotland, ",
+                                                                           "NHS Health Board and Council Area levels with additional breakdown by SIMD quintile.",
                                                                            "<br><br> More detailed information can be found in the accompanying",
                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
                         fluidRow(column(4,
                                         selectInput("premature_mortality_geog_type",
                                                     "Step 1: Select national or local geography level ",
-                                                    choices = c("Scotland", "Health Board"),
+                                                    choices = c("Scotland", "Health Board", "Council Area"),
                                                     selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
@@ -729,23 +740,37 @@ tagList(
                         ),
 
                         altTextUI("premature_mortality_hb_alt"),
-                        ciDefinitionUI("premature_mortality_hb_ci"),
-                        withSpinner(plotlyOutput("premature_mortality_hb_plot")),
-
-                        uiOutput("premature_mortality_hb_title"),
-                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
-                        dataDownloadUI("premature_mortality_hb"),
+                        withSpinner(plotlyOutput("premature_mortality_hb_comp_plot")),
+                        # withSpinner(plotlyOutput("premature_mortality_hb_plot")),
 
                         br(),
                         br(),
+
                         altTextUI("premature_mortality_simd_alt"),
                         simdQuintileDefinitionUI("premature_mortality_simd_desc"),
                         withSpinner(plotlyOutput("premature_mortality_simd_plot")),
 
-                        h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
-                        p("To view the full dataset, please use the download buttons below."),
-                        dataDownloadUI("premature_mortality_simd")
+                        uiOutput("premature_mortality_title"),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                        # dataDownloadUI("premature_mortality_hb"),
 
+                        br(),
+
+                        # h3("Data table: European age-standardised all-cause premature mortality rates per 100,000 population by SIMD quintile in Scotland"),
+                        # p("To view the full dataset, please use the download buttons below."),
+                        # dataDownloadUI("premature_mortality_simd")
+
+                        tabBox(
+                          id = "spremature_mortality_tabBox", height = "250px", width=12,
+                          tabPanel("Geography",
+                                   br(),
+                                   dataDownloadUI("premature_mortality_hb")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("premature_mortality_simd")
+                          )
+
+                        )
                ),
 
 
