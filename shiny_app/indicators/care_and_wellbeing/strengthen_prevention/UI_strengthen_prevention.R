@@ -536,7 +536,7 @@ tagList(
                                                                        #"More up to date data is available at source.",
                                                                        "<br><br>These data are available at a Scotland level, broken down by sex,",
                                                                        "for the year ranges 2009-11 to 2019-21.",
-                                                                       "An additional break down by Council Area is provided using the 2019-21 dataset.",
+                                                                       "Additional break downs by Council Area or Scottish Index of Multiple Deprivation (SIMD) are provided using the 2019-21 dataset.",
                                                                        "<br><br> More detailed information can be found in the accompanying",
                                                                        "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
@@ -556,11 +556,25 @@ tagList(
                                          ciDefinitionUI("life_expectancy_council_area_ci"),
                                          withSpinner(plotlyOutput("life_expectancy_council_area_plot")),
 
+                                         altTextUI("life_expectancy_simd_alt"),
+                                         simdDecileDefinitionUI("life_expectancy_simd"),
+                                         ciDefinitionUI("life_expectancy_simd_ci"),
+                                         withSpinner(plotlyOutput("life_expectancy_simd_plot")),
+
                                          br(),
                                          uiOutput("life_expectancy_title"),
-                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                         # p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                          br(),
-                                         dataDownloadUI("life_expectancy")
+
+                                         tabBox(
+                                           id = "life_expectancy_tabBox", height = "250px", width=12,
+                                           tabPanel("Council area",
+                                                    br(),
+                                                    dataDownloadUI("life_expectancy")),
+                                           tabPanel("SIMD",
+                                                    br(),
+                                                    dataDownloadUI("life_expectancy_simd"))
+                                         )
 
                                 ),
 

@@ -34,8 +34,10 @@ altTextServer("life_expectancy_council_area_alt",
                                 tags$li("The x axis is the council area."),
                                 tags$li("The y axis is the life expectancy in years."),
                                 tags$li("There is a drop down above the chart which allows you to select sex"),
-                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex",
-                                        "and the vertical lines from each dot indicates the confidence interval."),
+                                tags$li("The purple dots represent the life expectancy for each council area for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex"),
                                 tags$li("Orkney Islands had the highest life expectancy at birth for both males and females."),
                                 tags$li("Glasgow City had the lowest life expectancy at birth for both males and females.")
 
@@ -55,6 +57,70 @@ output$life_expectancy_council_area_plot = renderPlotly({
     layout(xaxis = list(tickangle = -90),
            yaxis = yaxis_number_normal,
            legend = list(y = -1.5))
+})
+
+
+
+
+altTextServer("life_expectancy_simd_alt",
+              title = "Life expectancy by council area plot",
+              content = tags$ul(tags$li("This is a plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
+                                tags$li("The x axis is the SIMD deciles."),
+                                tags$li("The y axis is the life expectancy in years."),
+                                tags$li("There is a drop down above the charts which allows you to select sex"),
+                                tags$li("The purple dots represent the life expectancy for each SIMD decile for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex.")
+
+              )
+)
+
+output$life_expectancy_simd_plot = renderPlotly({
+  title <- glue(input$life_expectancy_sex,
+                " life expectancy at birth by SIMD deciles 2019-2021"
+  )
+
+  data = life_expectancy_simd %>%
+    filter(sex == input$life_expectancy_sex) %>%
+    mutate(ErrorBarHeight = upper_confidence_interval - lower_confidence_interval,
+           ErrorBarLowerHeight = life_expectancy_at_birth - lower_confidence_interval) %>%
+    confidence_scatter_function_le_simd(title = title) %>%
+    layout(xaxis = list(tickangle = -30),
+           legend = list(y = -0.4))
+
+
+  # data = life_expectancy_simd %>%
+  #   filter(sex == input$life_expectancy_sex) %>%
+  #   mode_bar_plot(x = .$simd_2020_decile, y = .$life_expectancy_at_birth, category_var = .$sex,
+  #                 xaxis_title = "SIMD decile", yaxis_title = "Life expectancy (years)",
+  #                 title = title) %>%
+  #   layout(xaxis = list(tickangle = -30),
+  #          yaxis = yaxis_number_normal
+  #   )
+})
+
+observeEvent(input$life_expectancy_tabBox, {
+  observeEvent(input$life_expectancy_sex,{
+
+    if(input$life_expectancy_tabBox == "SIMD") {
+
+      title <- glue("Data table:",
+                    input$life_expectancy_sex,
+                    " life expectancy at birth by SIMD decile, 2019-2021")
+
+    } else {
+
+      title <- glue("Data table:",
+                    input$life_expectancy_sex,
+                    " life expectancy at birth")
+
+    }
+
+
+    output$life_expectancy_title <- renderUI({h3(title)})
+  })
+
 })
 
 observeEvent(input$life_expectancy_sex,{
@@ -77,10 +143,17 @@ observeEvent(input$life_expectancy_sex,{
 
 observeEvent(input$life_expectancy_sex,{
 
-  output$life_expectancy_title <- renderUI({h3(glue("Data table:",
-                                                    input$life_expectancy_sex,
-                                                    " life expectancy at birth"))})
+  data_unfiltered <- life_expectancy_simd %>%
+    select(sex, simd_2020_decile, life_expectancy_at_birth)
+
+  data_filtered <- data_unfiltered %>%
+    filter(sex == input$life_expectancy_sex)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "life_expectancy_simd", filename = "life_expectancy",
+                     add_separator_cols_2dp = c(3))
 })
+
 
 
 ##############################################.

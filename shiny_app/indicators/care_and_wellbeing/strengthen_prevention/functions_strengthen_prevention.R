@@ -165,6 +165,50 @@ confidence_scatter_function_le = function(data, y_title, x_title = "Year range",
 }
 
 
+
+confidence_scatter_function_le_simd = function(data, y_title = "Life expectancy (years)", x_title = "SIMD", title = "") {
+
+  yaxis_number_normal[["title"]] = y_title
+  xaxis_council_area[["title"]] = x_title
+
+  filtered_data <- life_expectancy %>%
+    filter(sex == data %>% head(1) %>% .$sex,
+           geography == "Scotland",
+           time_period == max(time_period))
+
+  plot_ly(data = data) %>%
+
+    add_lines(x = ~simd_2020_decile, y = ~life_expectancy_at_birth,
+              line = list(color = "white"),
+              name = 'Life expectancy',
+              error_y = ~list(array = ErrorBarHeight/2,
+                              arrayminus = ErrorBarLowerHeight,
+                              symmetric = FALSE,
+                              width = 0.5,
+                              color = phsstyles::phs_colours("phs-purple")),
+              marker = list(color = phsstyles::phs_colours("phs-purple"),
+                            size = 5),
+              hovertemplate = ~glue("{life_expectancy_at_birth %>% round_half_up(2)}")) %>%
+    add_segments(data=filtered_data, inherit = FALSE, text = NULL, hoverinfo = "text",
+                 x = data %>% slice(which.min(.$simd_2020_decile)) %>% .$simd_2020_decile,
+                 xend = data %>% slice(which.max(.$simd_2020_decile)) %>% .$simd_2020_decile,
+                 y = (filtered_data %>% .$indicator),
+                 yend=(filtered_data %>% .$indicator),
+                 type = "line",
+                 name = "Scotland",
+                 line = list(color = "#C73918",width=1,dash = "dash"),
+                 hovertemplate = ~glue("{filtered_data %>% .$indicator %>% round_half_up(2)}")) %>%
+
+    layout(xaxis = xaxis_council_area, yaxis = yaxis_number_normal,
+           legend = list(xanchor = "center", x = 0.5, y = -0.3, orientation = 'h'),
+           title = list(text = str_wrap(title, width = 60), font = title_style),
+           margin = list(t = 90, b = 40),
+           hovermode = "x unified") %>%
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+
+}
+
+
 make_mental_wellbeing_plot <- function(data, y_title, x_title = "Year", title = "") {
 
   yaxis_number_normal[["title"]] = y_title
