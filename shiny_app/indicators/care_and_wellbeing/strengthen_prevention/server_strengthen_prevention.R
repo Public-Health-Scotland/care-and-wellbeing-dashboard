@@ -1312,6 +1312,24 @@ output$asthma_admissions_plot <- renderPlotly({
 
   geog <- input$asthma_admissions_geog_name
 
+
+  ## Number or Rate
+  if(input$asthma_admissions_rate_number == "Rate"){
+
+    data <- asthma_admissions %>% mutate(indicator = rate)
+    y_title = "Rate of admissions <br> per 100,000"
+    title_start = "Rate per 100,000 "
+
+  } else {
+
+    data <- asthma_admissions %>% mutate(indicator = number)
+    y_title = "Total number of admissions"
+    title_start = "Total number "
+
+  }
+
+
+  ## Which breakdown
   if(input$asthma_admissions_breakdowns == "Yearly total"){
 
     breakdown <- ""
@@ -1326,15 +1344,17 @@ output$asthma_admissions_plot <- renderPlotly({
     breakdown <- "by sex "
   }
 
-  title <- glue("Total number of asthma-related hospital admissions ",
+  title <- glue(title_start, "of asthma-related hospital admissions ",
                 breakdown, "in \n ", geog)
+
+
 
   if(input$asthma_admissions_breakdowns == "Yearly total"){
 
-    plot <- asthma_admissions %>%
+    plot <- data %>%
       filter(sex == "All Sexes", age_bands == "All Ages", geography == input$asthma_admissions_geog_name) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      line_chart_function(., y_title = "Total number of admissions",
+      line_chart_function(., y_title = y_title,
                           x_title = "Financial year", title = title,
                           label = "Number of admissions")%>%
       layout(yaxis=list(tickformat=","))
@@ -1343,16 +1363,13 @@ output$asthma_admissions_plot <- renderPlotly({
 
   } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
-    plot <- asthma_admissions %>%
+    plot <- data %>%
       filter(sex == "All Sexes", geography == input$asthma_admissions_geog_name) %>%
       filter(!(age_bands %in% c("All Ages", "65+", "75+", "85+", "<18"))) %>%
       arrange(age_bands) %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
-      # make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$age_group,
-      #                             x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
-      #                             title = title)%>%
       mode_bar_plot(x = .$date, y = .$indicator, category_var = .$age_bands,
-                    xaxis_title = "Year range", yaxis_title = "Total number of admissions",
+                    xaxis_title = "Year range", yaxis_title = y_title,
                     title = title, mode = "stack") %>%
       layout(yaxis=list(tickformat=","))
 
@@ -1360,14 +1377,14 @@ output$asthma_admissions_plot <- renderPlotly({
 
   } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
-    plot <- asthma_admissions %>%
+    plot <- data %>%
       filter(age_bands == "All Ages", geography == input$asthma_admissions_geog_name, sex != "All Sexes") %>%
       mutate(indicator = round(as.integer(indicator), 1)) %>%
       # make_line_chart_multi_lines(x= .$date, y = .$indicator, colour = .$sex,
       #                             x_axis_title = "Financial year", y_axis_title = "Total number of admissions",
       #                             title = title)%>%
       mode_bar_plot(x = .$date, y = .$indicator, category_var = .$sex,
-                    xaxis_title = "Year range", yaxis_title = "Total number of admissions",
+                    xaxis_title = "Year range", yaxis_title = y_title,
                     title = title, mode = "stack") %>%
       layout(yaxis=list(tickformat=","))
 
@@ -1395,8 +1412,9 @@ observeEvent(input$asthma_admissions_breakdowns,{
              date = factor(date),
              sex = factor(sex),
              age_bands = factor(age_bands)) %>%
-      select(c(date, geography_type, geography, sex, age_bands, indicator, provisional)) %>%
-      rename(`Total number of admissions` = "indicator",
+      select(c(date, geography_type, geography, sex, age_bands, number, rate, provisional)) %>%
+      rename(`Total number of admissions` = "number",
+             `Rate of admissions per 100,000` = "rate",
              "Year" = "date",
              "Is data provisional (p)?" = "provisional")
 
@@ -1423,7 +1441,8 @@ observeEvent(input$asthma_admissions_breakdowns,{
 
     dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                        id = "asthma_admissions", filename = "asthma_admissions",
-                       add_separator_cols = c(6))
+                       add_separator_cols = c(6),
+                       add_separator_cols_2dp = c(7))
 
   })
 })
@@ -1431,6 +1450,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
 observeEvent(input$asthma_admissions_breakdowns,{
   observeEvent(input$asthma_admissions_geog_name,{
 
+    ## breakdown
     geog <- input$asthma_admissions_geog_name
 
     if(input$asthma_admissions_breakdowns == "Yearly total"){
@@ -1447,7 +1467,18 @@ observeEvent(input$asthma_admissions_breakdowns,{
       breakdown <- "by sex "
     }
 
-    output$asthma_admissions_title <- renderUI({h3(glue("Data table: Total number of asthma-related hospital admissions ",
+    ## Number or Rate
+    if(input$asthma_admissions_rate_number == "Rate"){
+
+      title_start = "Rate per 100,000 "
+
+    } else {
+
+      title_start = "Total number "
+
+    }
+
+    output$asthma_admissions_title <- renderUI({h3(glue("Data table: ", title_start, "of asthma-related hospital admissions ",
                                                         breakdown, "in ", geog))})
   })
 })
@@ -1455,9 +1486,11 @@ observeEvent(input$asthma_admissions_breakdowns,{
 
 altTextServer("asthma_admissions_alt",
               title = "Asthma admissions plot",
-              content = tags$ul(tags$li("This is a plot for the number of admissions for asthma."),
+              content = tags$ul(tags$li("This is a plot for the trend in admissions for asthma."),
                                 tags$li("The x axis shows the financial year."),
-                                tags$li("The y axis shows the total number of admissions."),
+                                tags$li("If in the choice above the plot `Rate` is chosen,
+                                        then the y axis is the Crude Rate per 100,000 population. If instead `Number` is chosen, the the y
+                                        axis is the total number of admissions."),
                                 tags$li("Data is based on date of discharge."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland."),

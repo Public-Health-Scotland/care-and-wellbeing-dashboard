@@ -31,8 +31,8 @@ observeEvent(input$geog_name_summary_CW,{
 
   value <- asthma_admissions %>% filter(sex == "All Sexes", age_bands == "All Ages", geography == input$geog_name_summary_CW)
 
-  recent_value <- value %>% filter(date == recent_date) %>% .$indicator
-  previous_value <- value %>% filter(date == previous_date) %>% .$indicator
+  recent_value <- value %>% filter(date == recent_date) %>% .$number
+  previous_value <- value %>% filter(date == previous_date) %>% .$number
 
   summaryBoxServer("asthma_admissions",
                    recent_date = recent_date,

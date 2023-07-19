@@ -20,25 +20,36 @@ tagList(
                                                                               "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(column(4,
-                                        selectInput("asthma_admissions_breakdowns",
-                                                    "Step 1: Select a breakdown ",
-                                                    choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
-                                                    selectize = FALSE,
-                                                    width = "100%")),
-                                 column(4,
                                         selectInput("asthma_admissions_geog_type",
-                                                    "Step 2: Select national or local geography level ",
+                                                    "Step 1: Select national or local geography level ",
                                                     choices = c("Scotland", "Health Board"),
                                                     selectize = FALSE,
                                                     width = "100%")),
                                  column(4,
                                         selectInput("asthma_admissions_geog_name",
-                                                    "Step 3: Select national or local geography area ",
+                                                    "Step 2: Select national or local geography area ",
                                                     choices = c("Scotland"),
                                                     selectize = FALSE,
-                                                    width = "100%"))
+                                                    width = "100%")),
+                                 column(4,
+                                        radioButtons("asthma_admissions_rate_number",
+                                                     "Step 3. View rate per 100,000 population or number of deaths",
+                                                     choices = c("Rate",
+                                                                 "Number"),
+                                                     width = "100%"))
 
-                        ),#, "Age and sex breakdown"))),
+
+                        ),
+
+                        fluidRow(
+                          column(4,
+                                 selectInput("asthma_admissions_breakdowns",
+                                             "Step 4: Select a breakdown ",
+                                             choices = c("Yearly total", "Age breakdown", "Sex breakdown"),
+                                             selectize = FALSE,
+                                             width = "100%"))),
+
+                        #, "Age and sex breakdown"))),
                         # column(3,
                         #        uiOutput("asthma_admissions_years_ui"))),
 
