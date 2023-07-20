@@ -1317,7 +1317,7 @@ output$asthma_admissions_plot <- renderPlotly({
   if(input$asthma_admissions_rate_number == "Rate"){
 
     data <- asthma_admissions %>% mutate(indicator = rate)
-    y_title = "Rate of admissions <br> per 100,000"
+    y_title = "Rate of admissions <br> per 100,000 population"
     title_start = "Rate per 100,000 "
 
   } else {
@@ -1470,7 +1470,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
     ## Number or Rate
     if(input$asthma_admissions_rate_number == "Rate"){
 
-      title_start = "Rate per 100,000 "
+      title_start = "Rate per 100,000"
 
     } else {
 
@@ -1489,16 +1489,17 @@ altTextServer("asthma_admissions_alt",
               content = tags$ul(tags$li("This is a plot for the trend in admissions for asthma."),
                                 tags$li("The x axis shows the financial year."),
                                 tags$li("If in the choice above the plot `Rate` is chosen,
-                                        then the y axis is the Crude Rate per 100,000 population. If instead `Number` is chosen, the the y
+                                        then the y axis is the crude rate per 100,000 population. If instead `Number` is chosen, the the y
                                         axis is the total number of admissions."),
                                 tags$li("Data is based on date of discharge."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
                                         "geography level and area for plotting. The default is Scotland."),
-                                tags$li("For the plot visualising the yearly total, the purple line shows the total number of admissions for each financial year."),
-                                tags$li("For the plot visualising the age breakdown, the lines correspond to each age group consisting of 5 year age bands up to 90 years,",
-                                        "after which data is grouped for 90+."),
-                                tags$li("For the plot visualising sex breakdown, the purple line corresponds to `All sexes`, the blue line corresponds to `Females`",
-                                        "and the grey line corresponds to `Males`. Each line shows the total number of admissions for each financial year for each sex.")
+                                tags$li("For the plot visualising the yearly total, the purple line shows the total number/rate of admissions for each financial year."),
+                                tags$li("For the plot visualising the age breakdown, each section of the bar correspond to each age group consisting of 10 year age bands up to 70 years,",
+                                        "after which data is grouped for 70+. The age groups descend from youngest to oldest from the top of the stacked bar to the bottom respectively.
+                                        Each section shows the total number/rate of admissions for each financial year for each sex."),
+                                tags$li("For the plot visualising sex breakdown, the dark blue colour corresponds to `Male` and the light blue colour corresponds to `Female`.
+                                        Each section shows the total number/rate of admissions for each financial year for the corresponding sex.")
 
 
               )
