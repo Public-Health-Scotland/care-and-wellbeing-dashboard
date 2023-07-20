@@ -1191,6 +1191,32 @@ output$healthy_birthweight_plot = renderPlotly({
            legend = list(y = -0.4))
 })
 
+altTextServer("healthy_birthweight_simd_alt",
+              title = "Healthy birthweight SIMD plot",
+              content = tags$ul(tags$li("This is a line chart showing the percentage of babies born with a low birthweight (<2500g)."),
+                                tags$li("The x axis is the financial year, starting from 2008/09."),
+                                tags$li("The y axis is the percentage."),
+                                tags$li("The legend shows the 5 SIMD qunitles from 1 (Most deprived) to 5 (Least deprived)."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+              )
+)
+
+output$healthy_birthweight_simd_plot = renderPlotly({
+
+  title <- glue("Percentage of babies born with a low birthweight by SIMD in ",
+                input$healthy_birthweight_geog_name)
+
+  birthweight_simd %>%
+    filter(geography == input$healthy_birthweight_geog_name) %>%
+    make_line_chart_multi_lines(x = .$financial_year, y = .$proportion,
+                                colour = .$simd, y_axis_title = "Percentage (%)",
+                                title = title, hover_end = "%") %>%
+    layout(xaxis = list(tickangle = -30),
+           yaxis = list(ticksuffix = "%"),
+           legend = list(y = -0.4))
+})
+
 observeEvent(input$healthy_birthweight_geog_name,{
 
   data_unfiltered <- birthweight %>%
@@ -1198,8 +1224,7 @@ observeEvent(input$healthy_birthweight_geog_name,{
     mutate(percentage = round_half_up(proportion*100,1)) %>%
     select(financial_year, geography_type, geography,
            birthweight_for_gestational_age, percentage) %>%
-    filter(financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
-                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
+    filter(financial_year >= "2008/09") %>%
     mutate(financial_year = factor(financial_year),
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
     rename("Percentage of babies (%)" = "percentage")
@@ -1215,8 +1240,37 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
 observeEvent(input$healthy_birthweight_geog_name,{
 
-  output$healthy_birthweight_title <- renderUI({h3(glue("Data table: Birthweight of babies based on gestational age in ",
-                                                        input$healthy_birthweight_geog_name))})
+  data_unfiltered <- birthweight_simd %>%
+    select(financial_year, geography_type, geography,
+           simd, proportion) %>%
+    rename("Percentage of babies (%)" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$healthy_birthweight_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "healthy_birthweight_simd", filename = "healthy_birthweight_simd",
+                     add_percentage_cols = c(5))
+
+})
+
+observeEvent(input$healthy_birthweight_geog_name,{
+  observeEvent(input$healthy_birthweight_tabBox, {
+
+    if(input$healthy_birthweight_tabBox == "SIMD") {
+
+      title <-  glue("Data table: Precentage of babies with a low birthweight by SIMD in ",
+                     input$healthy_birthweight_geog_name)
+
+    } else {
+
+      title <- glue("Data table: Birthweight of babies based on gestational age in ",
+                    input$healthy_birthweight_geog_name)
+    }
+
+    output$healthy_birthweight_title <- renderUI({h3(title)})
+  })
+
 })
 
 

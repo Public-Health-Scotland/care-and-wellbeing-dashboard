@@ -451,6 +451,7 @@ tagList(
                                                       "<br><br> More detailed information can be found in the accompanying",
                                                       "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
+
                         fluidRow(
                           column(4,
                                  radioButtons("hospital_admission_heart_attack_rate_number",
@@ -459,6 +460,7 @@ tagList(
                                                           "Number"),
                                               width = "100%")
                           )),
+
 
                         altTextUI("hospital_admission_heart_attack_alt"),
                         withSpinner(plotlyOutput("hospital_admission_heart_attack_plot")),
@@ -489,7 +491,8 @@ tagList(
                                                                              "the year range 2021/22.",
                                                                              # "More up to date data is available at source.",
                                                                              "<br><br>These data are available at Scotland,",
-                                                                             " NHS Health Board and Council Area levels.",
+                                                                             " NHS Health Board and Council Area levels",
+                                                                             " with additional breakdowns by sex and SIMD quintile.",
                                                                              "<br><br> More detailed information can be found in the accompanying",
                                                                              "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
@@ -514,11 +517,25 @@ tagList(
                         altTextUI("healthy_birthweight_alt"),
                         withSpinner(plotlyOutput("healthy_birthweight_plot")),
 
+                        altTextUI("healthy_birthweight_simd_alt"),
+                        simdQuintileDefinitionUI("healthy_birthweight_simd"),
+                        withSpinner(plotlyOutput("healthy_birthweight_simd_plot")),
+
                         br(),
                         uiOutput("healthy_birthweight_title"),
                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         br(),
-                        dataDownloadUI("healthy_birthweight")),
+
+                        tabBox(
+                          id = "healthy_birthweight_tabBox", height = "250px", width=12,
+                          tabPanel("Birthweight for gestational age",
+                                   br(),
+                                   dataDownloadUI("healthy_birthweight")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("healthy_birthweight_simd"))
+                        )
+               ),
 
 
                ##############################################.
