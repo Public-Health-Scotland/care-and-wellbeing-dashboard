@@ -247,7 +247,7 @@ mode_bar_plot <- function(data, x, y, xaxis_title = "Date", yaxis_title = "Perce
            title = list(text = str_wrap(title, width = 60), font = title_style),
            margin = list(t = 90, b = 40),
            hovermode = "x unified") %>%
-  config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
+    config(displaylogo = F, displayModeBar = TRUE, modeBarButtonsToRemove = bttn_remove)
 }
 
 
@@ -288,5 +288,32 @@ make_line_chart_multi_lines <- function(data, x, y, colour, y_axis_title, x_axis
 
 }
 
+
+comparison_data <- function(data, geog_name = "Scotland") #, x = "date", y = "indicator",
+  #colour = "geography", y_axis_title = "Rate", x_axis_title = "Year",
+  #label = "", title = "", hover_end = "")
+{
+  geog <- data %>% filter(geography == geog_name) %>% head(1) %>% .$geography_type
+
+  if(geog == "Council Area") {
+
+    hbname <- master_lookup %>%
+      filter(ca2019name %in% c(geog_name)) %>%
+      .$hb2019name
+
+    data_plot <- data %>%
+      filter(geography %in% c(geog_name, hbname, "Scotland")) %>%
+      mutate(geography = factor(geography, levels = c(geog_name, hbname, "Scotland")))
+
+  } else {
+
+    data_plot <- data %>%
+      filter(geography %in% c("Scotland", geog_name))
+
+  }
+
+  return(data_plot)
+
+}
 
 

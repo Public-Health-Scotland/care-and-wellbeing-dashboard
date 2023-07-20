@@ -34,8 +34,10 @@ altTextServer("life_expectancy_council_area_alt",
                                 tags$li("The x axis is the council area."),
                                 tags$li("The y axis is the life expectancy in years."),
                                 tags$li("There is a drop down above the chart which allows you to select sex"),
-                                tags$li("The purple dots is the healthy life expectancy for each council area for specified sex",
-                                        "and the vertical lines from each dot indicates the confidence interval."),
+                                tags$li("The purple dots represent the life expectancy for each council area for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex"),
                                 tags$li("Orkney Islands had the highest life expectancy at birth for both males and females."),
                                 tags$li("Glasgow City had the lowest life expectancy at birth for both males and females.")
 
@@ -62,10 +64,14 @@ output$life_expectancy_council_area_plot = renderPlotly({
 
 altTextServer("life_expectancy_simd_alt",
               title = "Life expectancy by council area plot",
-              content = tags$ul(tags$li("This is a bar plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
-                                tags$li("The x axis is the SIMD decile."),
+              content = tags$ul(tags$li("This is a plot for life expectancy for the time period of 2019-2021 by SIMD decile."),
+                                tags$li("The x axis is the SIMD deciles."),
                                 tags$li("The y axis is the life expectancy in years."),
-                                tags$li("There is a drop down above the charts which allows you to select sex")
+                                tags$li("There is a drop down above the charts which allows you to select sex"),
+                                tags$li("The purple dots represent the life expectancy for each SIMD decile for the selected sex",
+                                        "and the vertical lines from each dot indicate the confidence interval."),
+                                tags$li("The red dashed line across the centre of the chart indicates the live expectancy in Scotland
+                                        for the selected sex.")
 
               )
 )
@@ -364,7 +370,7 @@ adult_mental_welbeing_simd %>%
 observeEvent(input$premature_mortality_geog_type,
              {
 
-               premature_mortality_filtered = premature_mortality_all_cause_hb %>%
+               premature_mortality_filtered = premature_mortality_all_cause %>%
                  filter(geography_type == input$premature_mortality_geog_type)
 
 
@@ -378,12 +384,18 @@ altTextServer("premature_mortality_hb_alt",
               content = tags$ul(tags$li("This is a plot for the trend in age-standardised all-cause mortality rates for people under 75."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the age-standardised rate per 100,000 population."),
-                                tags$li("The purple line indicates the trend in age-standardised all-cause mortality rates and",
-                                        "the lighter purple area around the line indicates the confidence interval."),
-                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
-                                        "area represents the upper confidence interval."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national or local",
-                                        "geography level and area for plotting. The default is Scotland.")
+                                        "geography level and area for plotting. The default is Scotland."),
+                                tags$li("If Scotland is chosen then there will be one trend line representing Scotland.",
+                                        "If a NHS Health Board is chosen then there will be two lines, a light green colour representing the trend in",
+                                        "Scotland, and a purple line representing the trend in the chosen NHS Health Board.",
+                                        "If a Council Area is chosen then there will be three lines, a purple line representing the Council Area, a teal line
+                                        representing the NHS Health Board and a light green line representing Scotland."),
+                                tags$li("Please be aware, for instances where a NHS Health Board contains only one Council Area
+                                        then the values for both geographies will match and only two lines will be visible
+                                        when that Council Area has been chosen. All lines are present and can be seen by clicking on the
+                                        legend as described under the 'Using the plot' button.")
+
 
               )
 )
@@ -404,7 +416,7 @@ output$premature_mortality_hb_plot <- renderPlotly({
   title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "in ", geog)
 
-  plot <- premature_mortality_all_cause_hb %>%
+  plot <- premature_mortality_all_cause %>%
     filter(geography == input$premature_mortality_geog_name) %>%
     confidence_line_function_pm(., y_title = "EASR of deaths per 100,000<br>population",
                                 x_title = "Year", title = title) %>%
@@ -413,9 +425,23 @@ output$premature_mortality_hb_plot <- renderPlotly({
 
 })
 
+
+output$premature_mortality_hb_comp_plot <- renderPlotly({
+
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
+                "in ", input$premature_mortality_geog_name)
+
+  plot <- premature_mortality_all_cause %>%
+    comparison_data(geog_name = input$premature_mortality_geog_name) %>%
+    make_line_chart_multi_lines(x = .$date, y = .$indicator, colour = .$geography,
+                                y_axis_title = "EASR of deaths per 100,000<br>population", title = title)
+
+
+})
+
 output$premature_mortality_simd_plot <- renderPlotly({
 
-  title <- glue("European age-standardised rate for all-cause premature mortality per 100,000 population \n ",
+  title <- glue("European age-standardised rate (EASR) for all-cause premature mortality per 100,000 population \n ",
                 "by SIMD quintile in Scotland")
 
   plot <- premature_mortality_all_cause_simd %>%
@@ -425,32 +451,46 @@ output$premature_mortality_simd_plot <- renderPlotly({
     make_line_chart_multi_lines(x = .$date, y = .$indicator,
                                 colour = .$simd,
                                 title = title,
-                                y_axis_title = "European age-standardised<br>rate of deaths per 100,000<br>population",
+                                y_axis_title = "EASR of deaths per 100,000<br>population",
                                 x_axis_title = "Year") %>%
     layout(legend = list(y = -0.4))
 
 })
 
+observeEvent(input$spremature_mortality_tabBox, {
 
-observeEvent(input$premature_mortality_geog_name,{
 
-  output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
-                                                           "in ", input$premature_mortality_geog_name))})
 
-  data_unfiltered <- premature_mortality_all_cause_hb %>%
-    arrange(desc(date)) %>%
-    mutate(date = factor(date)) %>%
-    select(c(date, geography_type, geography, indicator,
-             lower_confidence_interval, upper_confidence_interval)) %>%
-    rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
-           "Year" = "date")
+  title <- ifelse(input$spremature_mortality_tabBox == "Geography",
+                  glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population "),
+                  glue("Data table: European age-standardised all-cause premature mortality
+                           rates per 100,000 population by SIMD quintile in Scotland"))
 
-  data_filtered <- data_unfiltered %>%
-    filter(geography == input$premature_mortality_geog_name)
+  output$premature_mortality_title <- renderUI(h3(title))
 
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
-                     add_separator_cols_1dp = c(4,5,6))
+
+
+  # output$premature_mortality_hb_title <- renderUI({h3(glue("Data table: European age-standardised all-cause premature mortality rates per 100,000 population ",
+  #                                                          "in ", input$premature_mortality_geog_name))})
+
+  observeEvent(input$premature_mortality_geog_name,{
+
+    data_unfiltered <- premature_mortality_all_cause %>%
+      arrange(desc(date)) %>%
+      mutate(date = factor(date)) %>%
+      select(c(date, geography_type, geography, indicator,
+               lower_confidence_interval, upper_confidence_interval)) %>%
+      rename(`European age-standardised all-cause premature mortality rate per 100,000 population` = "indicator",
+             "Year" = "date")
+
+    data_filtered <- data_unfiltered %>%
+      comparison_data(geog_name = input$premature_mortality_geog_name)
+
+    dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                       id = "premature_mortality_hb", filename = "all_cause_premature_mortality_by_health_board",
+                       add_separator_cols_1dp = c(4,5,6))
+
+  })
 
 })
 
@@ -659,33 +699,49 @@ altTextServer("chd_deaths_alt",
 output$hospital_admission_heart_attack_plot <- renderPlotly({
 
   title <- "First ever hospital admission for heart attack (under 75) annually in Scotland"
+  label <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "Rate", "Number")
+  y_title <- ifelse(input$hospital_admission_heart_attack_rate_number == "Rate", "EASR per 100,000 population",
+                    "Total number of hospital <br> admissions")
 
-  p <- heart_attack %>%
-    filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                        "2016","2017","2018","2019","2020")) %>%
-    line_chart_function(y_title = "Total number of admissions", label = "Number of admissions", title = title) %>%
+  if(input$hospital_admission_heart_attack_rate_number == "Rate") {
+
+    data <- heart_attack %>%
+      mutate(indicator = rate_per_100_000_easr)
+  } else {
+
+    data <- heart_attack %>%
+      mutate(indicator = total_admissions)
+  }
+
+  p <- data %>%
+    line_chart_function(y_title = y_title, label = label, title = title) %>%
     layout(yaxis=list(tickformat=","),
            xaxis = list(dtick = 1, tickangle = -30))
 
 })
 
 heart_attack %>%
-  select(date, total_admissions) %>%
-  filter(date %in%  c("2008", "2009","2010","2011","2012", "2013", "2014","2015",
-                      "2016","2017","2018","2019","2020")) %>%
+  select(date, total_admissions, rate_per_100_000_easr) %>%
+
   arrange(date) %>%
   mutate(date = factor(date)) %>%
   rename("Year" = "date",
-         "Total number of hospital admissions" = "total_admissions") %>%
+         "Total number of hospital admissions" = "total_admissions",
+         "EASR per 100,000 population" = "rate_per_100_000_easr") %>%
   dataDownloadServer(id = "heart_attack_admission",
                      filename = "first_ever_hospital_admission_heart_attack",
-                     add_separator_cols = c(2))
+                     add_separator_cols = c(2),
+                     add_separator_cols_1dp = c(3))
 
 
 altTextServer("hospital_admission_heart_attack_alt",
               title = "First ever hospital admissions for heart attack plot",
-              content = tags$ul(tags$li("This is a plot for the trend in number of first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
-                                tags$li("The x axis is year, starting in 1997"),
+              content = tags$ul(tags$li("This is a plot for the trend in first ever hospital admissions for heart attacks for people aged under 75 in Scotland."),
+                                tags$li("The x axis is year, starting in 2008"),
+                                tags$li("If in the choice above the plot `Rate` is chosen, then the y axis is the European Age-Standerdised Rate (EASR) per 100,000 population.",
+                                        "The purple line indicates the trend in EASR per 100,000 population of first ever hopsital admissions for heart attack."),
+                                tags$li("If in the choice above the plot `Number` is chosen, then the y axis is the total number of first ever hospital admissions",
+                                        "The purple line indicates the trend in the number of first ever hospital admissions."),
                                 tags$li("The y axis total number."),
                                 tags$li("The solid purple line shows the trend in number of hospital admissions.")
               )
