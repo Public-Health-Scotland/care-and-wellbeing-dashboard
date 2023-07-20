@@ -971,7 +971,7 @@ tagList(
                                                                      "<br><br>Source:",
                                                                      "<a href=https://www.publichealthscotland.scot/publications/national-respiratory-infection-and-covid-19-statistics/weekly-national-respiratory-infection-and-covid-19-statistical-report-2-february-2023/flu-and-covid-19-vaccination-uptake-in-scotland-dashboard/ target = _blank>  National respiratory infection and COVID-19 statistics, Public Health Scotland (external site)</a>.",
                                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
-                                                                     "January, 2023.",
+                                                                     "June, 2023.",
                                                                      #"More up to date data is available at source.",
                                                                      "<br><br>These data are available at Scotland",
                                                                      "and NHS Health Board levels.",
