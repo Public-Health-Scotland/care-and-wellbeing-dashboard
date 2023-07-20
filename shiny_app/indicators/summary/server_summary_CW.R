@@ -159,10 +159,10 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(drug_stays$financial_year)
-  previous_date <- max(drug_stays %>% filter(financial_year != recent_date) %>% .$financial_year)
+  recent_date <- max(drug_admission_agesex$financial_year)
+  previous_date <- max(drug_admission_agesex %>% filter(financial_year != recent_date) %>% .$financial_year)
 
-  value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
+  value <- drug_admission_agesex %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
 
   recent_value <- value %>% filter(financial_year == recent_date) %>% .$rate
   previous_value <-  value %>% filter(financial_year == previous_date) %>% .$rate
@@ -509,19 +509,19 @@ observeEvent(input$geog_name_summary_CW,{
                                          SIMD == "1 (Most deprived)",
                                          fill_flag != "f")
 
-  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
+  recent_date <- value %>% head(1) %>% .$date
+  #previous_date <- numeric(0)
 
 
 
-  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
-  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+  recent_value <- value %>% filter(date == recent_date) %>% .$uptake_percent
+  # previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
 
   summaryBoxServer("vaccinations_covid",
                    recent_date = recent_date,
-                   previous_date = previous_date,
+                   #previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
+                   #previous_value = previous_value,
                    percentage = TRUE)
 
 })

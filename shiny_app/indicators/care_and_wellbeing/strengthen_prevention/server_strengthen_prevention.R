@@ -756,20 +756,23 @@ altTextServer("hospital_admission_heart_attack_alt",
 # DRUG RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 
-
 altTextServer("drug_admissions_alt",
               title = "Drug admissions plot",
-              content = tags$ul(tags$li("This is a plot for the age-sex standardised rate of drug-related",
-                                        "hospital admissions per 100,000 population."),
-                                tags$li("The x axis is the financial year starting from 1996/97."),
-                                tags$li("The y axis is the rate per 100,000 population."),
-                                tags$li("The drop down above the chart allows you to choose which age groups you wish",
+              content = tags$ul(tags$li("This is a plot for drug-related",
+                                        "hospital admissions in Scotland."),
+                                tags$li("The x axis is the financial year starting from 2008/09."),
+                                tags$li("The y axis is the number of hospital admissions or, these admissions,",
+                                        "expressed as an age-sex standardised rate per 100,000 population."),
+                                tags$li("A selection button above the chart allows you to choose between viewing",
+                                        "the y-axis as the number of admissions or as a rate."),
+                                tags$li("The drop down above the chart allows you to choose which age group you wish",
                                         "to visualise on the plot. The default is `All age groups`."),
-                                tags$li("The line(s) refer to the rate per 100,000 for each selected age group.")
+                                tags$li("The line refers to the number of hospital admissions",
+                                        " or the age-sex standardised rate of drug-related",
+                                        "hospital admissions per 100,000 population.")
               )
 )
-
-output$drug_admissions_plot = renderPlotly({
+output$drug_admissions_plot_v2 = renderPlotly({
 
   if(length(input$drug_admissions_age) != 1){
     age_title <- "by age"
@@ -779,34 +782,50 @@ output$drug_admissions_plot = renderPlotly({
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+  if(input$drug_admissions_rate_number== "Rate"){
+    num_rate_title<-"Age-sex standardised rates per 100,000 "
+  } else {num_rate_title<-"Number "
+  }
+
+  title <- glue(num_rate_title, "of drug-related hospital admissions (",
                 age_title, ") in Scotland")
 
-  data = drug_stays %>%
-    filter(age_group %in% input$drug_admissions_age) %>%
-    mutate(indicator = round_half_up(rate,1),
-           date = financial_year) %>%
+  data = drug_admission_agesex %>%
+    filter(age_group %in% input$drug_admissions_age,
+           sex=="All sexes")
+  if (input$drug_admissions_rate_number== "Rate") {
+    data %<>%
+      mutate(indicator = rate)
+    indicator_y = "Age-sex standardised<br> rate per 100,000 population"
+  }
+  else if (input$drug_admissions_rate_number== "Number") {
+    data %<>%
+      mutate(indicator = count)
+    indicator_y = "Number of hospital admissions"
+  }
 
-    make_line_chart_multi_lines(x = .$date, y = .$indicator,
-                                colour = .$age_group,
-                                title = title,
-                                y_axis_title = "Age-sex standardised<br> rate per 100,000 population",
-                                x_axis_title = "Financial year") %>%
-    layout(xaxis = list(tickangle = -30),
-           legend = list(y = -0.4))
-
+  data %>%
+    make_line_chart_multi_lines(
+      x=.$financial_year,
+      y=.$indicator,
+      y_axis_title =  indicator_y,
+      title = title,
+      colour = .$age_group,
+      label = ifelse(input$drug_admissions_rate_number== "Rate", "Rate of admissions", "Number of admissions")) %>%
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(tickangle = -30))
 })
-
 
 
 observeEvent(input$drug_admissions_age,{
 
-  data_unfiltered <- drug_stays %>%
+  data_unfiltered <- drug_admission_agesex %>%
     mutate(rate = round_half_up(rate,1)) %>%
-    select(financial_year, age_group, rate) %>%
+    select(financial_year, age_group,
+           "Drug-related hospital admissions rate" =rate,
+           "Number of drug-related hospital admissions"=count) %>%
     arrange(financial_year) %>%
-    mutate(financial_year = factor(financial_year)) %>%
-    rename("Drug-related hospital admissions rate" = "rate")
+    mutate(financial_year = factor(financial_year))
 
   data_filtered <- data_unfiltered %>%
     filter(age_group %in% input$drug_admissions_age)
@@ -825,7 +844,7 @@ observeEvent(input$drug_admissions_age,{
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  output$drug_admissions_title <- renderUI({h3(glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+  output$drug_admissions_title <- renderUI({h3(glue("Data table: Drug-related hospital admissions (",
                                                     age_title, ") in Scotland"))})
 })
 
@@ -1172,6 +1191,32 @@ output$healthy_birthweight_plot = renderPlotly({
            legend = list(y = -0.4))
 })
 
+altTextServer("healthy_birthweight_simd_alt",
+              title = "Healthy birthweight SIMD plot",
+              content = tags$ul(tags$li("This is a line chart showing the percentage of babies born with a low birthweight (<2500g)."),
+                                tags$li("The x axis is the financial year, starting from 2008/09."),
+                                tags$li("The y axis is the percentage."),
+                                tags$li("The legend shows the 5 SIMD qunitles from 1 (Most deprived) to 5 (Least deprived)."),
+                                tags$li("There are two drop downs above the chart which allow you to select a national or local",
+                                        "geography level and area for plotting. The default is Scotland.")
+              )
+)
+
+output$healthy_birthweight_simd_plot = renderPlotly({
+
+  title <- glue("Percentage of babies born with a low birthweight by SIMD in ",
+                input$healthy_birthweight_geog_name)
+
+  birthweight_simd %>%
+    filter(geography == input$healthy_birthweight_geog_name) %>%
+    make_line_chart_multi_lines(x = .$financial_year, y = .$proportion,
+                                colour = .$simd, y_axis_title = "Percentage (%)",
+                                title = title, hover_end = "%") %>%
+    layout(xaxis = list(tickangle = -30),
+           yaxis = list(ticksuffix = "%"),
+           legend = list(y = -0.4))
+})
+
 observeEvent(input$healthy_birthweight_geog_name,{
 
   data_unfiltered <- birthweight %>%
@@ -1179,8 +1224,7 @@ observeEvent(input$healthy_birthweight_geog_name,{
     mutate(percentage = round_half_up(proportion*100,1)) %>%
     select(financial_year, geography_type, geography,
            birthweight_for_gestational_age, percentage) %>%
-    filter(financial_year %in%  c("2008/09", "2009/10","2010/11","2011/12", "2012/13", "2013/14","2014/15",
-                                  "2015/16","2016/17","2017/18","2018/19","2019/20")) %>%
+    filter(financial_year >= "2008/09") %>%
     mutate(financial_year = factor(financial_year),
            birthweight_for_gestational_age = factor(birthweight_for_gestational_age)) %>%
     rename("Percentage of babies (%)" = "percentage")
@@ -1196,8 +1240,37 @@ observeEvent(input$healthy_birthweight_geog_name,{
 
 observeEvent(input$healthy_birthweight_geog_name,{
 
-  output$healthy_birthweight_title <- renderUI({h3(glue("Data table: Birthweight of babies based on gestational age in ",
-                                                        input$healthy_birthweight_geog_name))})
+  data_unfiltered <- birthweight_simd %>%
+    select(financial_year, geography_type, geography,
+           simd, proportion) %>%
+    rename("Percentage of babies (%)" = "proportion")
+
+  data_filtered <- data_unfiltered %>%
+    filter(geography == input$healthy_birthweight_geog_name)
+
+  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                     id = "healthy_birthweight_simd", filename = "healthy_birthweight_simd",
+                     add_percentage_cols = c(5))
+
+})
+
+observeEvent(input$healthy_birthweight_geog_name,{
+  observeEvent(input$healthy_birthweight_tabBox, {
+
+    if(input$healthy_birthweight_tabBox == "SIMD") {
+
+      title <-  glue("Data table: Precentage of babies with a low birthweight by SIMD in ",
+                     input$healthy_birthweight_geog_name)
+
+    } else {
+
+      title <- glue("Data table: Birthweight of babies based on gestational age in ",
+                    input$healthy_birthweight_geog_name)
+    }
+
+    output$healthy_birthweight_title <- renderUI({h3(title)})
+  })
+
 })
 
 
@@ -1449,37 +1522,39 @@ observeEvent(input$asthma_admissions_breakdowns,{
 
 observeEvent(input$asthma_admissions_breakdowns,{
   observeEvent(input$asthma_admissions_geog_name,{
+    observeEvent(input$asthma_admissions_rate_number, {
 
-    ## breakdown
-    geog <- input$asthma_admissions_geog_name
+      ## breakdown
+      geog <- input$asthma_admissions_geog_name
 
-    if(input$asthma_admissions_breakdowns == "Yearly total"){
+      if(input$asthma_admissions_breakdowns == "Yearly total"){
 
-      breakdown <- ""
+        breakdown <- ""
 
-    } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+      } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
-      breakdown <- "by age "
+        breakdown <- "by age "
 
 
-    } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+      } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
-      breakdown <- "by sex "
-    }
+        breakdown <- "by sex "
+      }
 
-    ## Number or Rate
-    if(input$asthma_admissions_rate_number == "Rate"){
+      ## Number or Rate
+      if(input$asthma_admissions_rate_number == "Rate"){
 
-      title_start = "Rate per 100,000 "
+        title_start = "Rate per 100,000 "
 
-    } else {
+      } else {
 
-      title_start = "Total number "
+        title_start = "Total number "
 
-    }
+      }
 
-    output$asthma_admissions_title <- renderUI({h3(glue("Data table: ", title_start, "of asthma-related hospital admissions ",
-                                                        breakdown, "in ", geog))})
+      output$asthma_admissions_title <- renderUI({h3(glue("Data table: ", title_start, "of asthma-related hospital admissions ",
+                                                          breakdown, "in ", geog))})
+    })
   })
 })
 
@@ -1750,10 +1825,12 @@ observeEvent(input$vaccinations_covid_geog_type,
 
 altTextServer("vaccinations_covid_alt",
               title = "Covid vaccinations uptake plot",
-              content = tags$ul(tags$li("This is a bar plot for the breakdown of COVID-19 vaccinations uptake by SIMD."),
-                                tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents",
-                                        glue("{vaccinations_covid %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
-                                        glue("{vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}")),
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of COVID-19 vaccinations uptake by SIMD where
+                                        the bar represents the percentage vaccination uptake for each SIMD decile.."),
+                                #tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents"#,
+                                # glue("{vaccinations_covid %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
+                                # glue("{vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}")
+                                #),
                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived,",
                                         "Scotland level data also showns the percentage uptake of people whose SIMD decile is Not known."),
                                 tags$li("The y axis is the percentage uptake of vaccinations."),
@@ -1770,9 +1847,9 @@ output$vaccinations_covid_plot <- renderPlotly({
   plot <- vaccinations_covid %>%
     filter(geography == input$vaccinations_covid_geog_name) %>%
     mode_bar_plot(x = .$SIMD,
-                  y = .$percentage_uptake,
+                  y = .$uptake_percent,
                   xaxis_title = "SIMD",
-                  category_var = .$date,
+                  category_var = .$geography,
                   hover_end = "%",
                   title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}"
                   )) %>%
@@ -1792,11 +1869,11 @@ observeEvent(input$vaccinations_covid_geog_name,{
 observeEvent(input$vaccinations_covid_geog_name,{
 
   data_unfiltered <- vaccinations_covid %>%
-    filter(!(percentage_uptake == 0)) %>%
+    filter(!(uptake_percent == 0)) %>%
     select(date, geography_type, geography, SIMD,
-           percentage_uptake) %>%
-    rename(`uptake_percentage_(%)` = percentage_uptake) %>%
-    arrange(date, SIMD)
+           uptake_percent) %>%
+    rename(`uptake_percentage_(%)` = uptake_percent) %>%
+    arrange(SIMD)
 
   data_filtered <- data_unfiltered %>%
     filter(geography == input$vaccinations_covid_geog_name)
