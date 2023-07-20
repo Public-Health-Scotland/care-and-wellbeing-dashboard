@@ -509,19 +509,19 @@ observeEvent(input$geog_name_summary_CW,{
                                          SIMD == "1 (Most deprived)",
                                          fill_flag != "f")
 
-  recent_date <- value %>% slice(which.max(.$date)) %>% .$date
-  previous_date <- value %>% slice(which.min(.$date)) %>% .$date
+  recent_date <- value %>% head(1) %>% .$date
+  #previous_date <- numeric(0)
 
 
 
-  recent_value <- value %>% filter(date == recent_date) %>% .$percentage_uptake
-  previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
+  recent_value <- value %>% filter(date == recent_date) %>% .$uptake_percent
+  # previous_value <- value %>% filter(date == previous_date) %>% .$percentage_uptake
 
   summaryBoxServer("vaccinations_covid",
                    recent_date = recent_date,
-                   previous_date = previous_date,
+                   #previous_date = previous_date,
                    recent_value = recent_value,
-                   previous_value = previous_value,
+                   #previous_value = previous_value,
                    percentage = TRUE)
 
 })
