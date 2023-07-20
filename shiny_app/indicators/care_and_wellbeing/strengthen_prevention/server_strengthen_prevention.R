@@ -1522,37 +1522,39 @@ observeEvent(input$asthma_admissions_breakdowns,{
 
 observeEvent(input$asthma_admissions_breakdowns,{
   observeEvent(input$asthma_admissions_geog_name,{
+    observeEvent(input$asthma_admissions_rate_number, {
 
-    ## breakdown
-    geog <- input$asthma_admissions_geog_name
+      ## breakdown
+      geog <- input$asthma_admissions_geog_name
 
-    if(input$asthma_admissions_breakdowns == "Yearly total"){
+      if(input$asthma_admissions_breakdowns == "Yearly total"){
 
-      breakdown <- ""
+        breakdown <- ""
 
-    } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
+      } else if(input$asthma_admissions_breakdowns == "Age breakdown"){
 
-      breakdown <- "by age "
+        breakdown <- "by age "
 
 
-    } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
+      } else if(input$asthma_admissions_breakdowns == "Sex breakdown"){
 
-      breakdown <- "by sex "
-    }
+        breakdown <- "by sex "
+      }
 
-    ## Number or Rate
-    if(input$asthma_admissions_rate_number == "Rate"){
+      ## Number or Rate
+      if(input$asthma_admissions_rate_number == "Rate"){
 
-      title_start = "Rate per 100,000 "
+        title_start = "Rate per 100,000 "
 
-    } else {
+      } else {
 
-      title_start = "Total number "
+        title_start = "Total number "
 
-    }
+      }
 
-    output$asthma_admissions_title <- renderUI({h3(glue("Data table: ", title_start, "of asthma-related hospital admissions ",
-                                                        breakdown, "in ", geog))})
+      output$asthma_admissions_title <- renderUI({h3(glue("Data table: ", title_start, "of asthma-related hospital admissions ",
+                                                          breakdown, "in ", geog))})
+    })
   })
 })
 
