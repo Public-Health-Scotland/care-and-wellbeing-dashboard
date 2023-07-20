@@ -767,7 +767,7 @@ observeEvent(input$drug_admissions_age,{
     mutate(rate = round_half_up(rate,1)) %>%
     select(financial_year, age_group,
            "Drug-related hospital admissions rate" =rate,
-           "Number of drug_related hospital admissions"=count) %>%
+           "Number of drug-related hospital admissions"=count) %>%
     arrange(financial_year) %>%
     mutate(financial_year = factor(financial_year))
 

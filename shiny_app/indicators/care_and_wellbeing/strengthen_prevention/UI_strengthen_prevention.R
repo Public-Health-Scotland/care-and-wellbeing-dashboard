@@ -318,7 +318,7 @@ tagList(
                                           ),
                                           column(4,
                                                  radioButtons("drug_admissions_rate_number",
-                                                              "View as Rate per 100,000 or as Number of Admissions",
+                                                              "View as rate per 100,000 or as number of admissions",
                                                               choices = c("Rate","Number"),
                                                               width = "100%")),
                                         ),
