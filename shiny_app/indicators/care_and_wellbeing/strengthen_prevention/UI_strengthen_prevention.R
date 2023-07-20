@@ -290,7 +290,6 @@ tagList(
                                # DRUG RELATED HOSPITAL ADMISSIONS ----
                                ##############################################.
 
-
                                tabPanel(title = "Drug-related hospital admissions",
                                         value = "drug_admissions",
 
@@ -312,27 +311,29 @@ tagList(
                                           column(4,
                                                  selectInput("drug_admissions_age",
                                                              "Select age group(s)",
-                                                                choices = unique(drug_admin_agesex$age_group),
-                                                                selected = "All age groups",
-                                                                selectize = FALSE,
-                                                                width = "100%"),
+                                                             choices = unique(drug_admission_agesex$age_group),
+                                                             selected = "All age groups",
+                                                             selectize = FALSE,
+                                                             width = "100%"),
                                           ),
                                           column(4,
                                                  radioButtons("drug_admissions_rate_number",
                                                               "View as Rate per 100,000 or as Number of Admissions",
                                                               choices = c("Rate","Number"),
-                                                               width = "100%")),
-                                          ),
+                                                              width = "100%")),
+                                        ),
 
                                         altTextUI("drug_admissions_alt"),
                                         withSpinner(plotlyOutput("drug_admissions_plot_v2")),
 
                                         br(),
                                         uiOutput("drug_admissions_title"),
-                                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
+                                        p("The data table is based on the age selections chosen above. To view the full dataset, please use the download buttons below."),
                                         br(),
                                         dataDownloadUI("drug_admissions")
                                ),
+
+
 
 
                                ##############################################.

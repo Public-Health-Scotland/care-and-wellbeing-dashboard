@@ -268,7 +268,7 @@ tagList(
                             h3(actionLink("jump_summary_to_drug_admissions","Drug-related hospital admissions")),
                             summaryBoxUI("drug_admissions", title = "Rate of stays per 100,000",
                                          button_title =  "Drug-related hospital admissions",
-                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_stays$financial_year)}. ",
+                                         button_content = glue("This is the Age-sex Standardised Rate of drug-related hospital admissions (stays) per 100,000 population for the financial year {max(drug_admission_agesex$financial_year)}. ",
                                                                "This data is relating to general acute and psychiatric hospital stays with a diagnosis of drug misuse. <br> <br>",
                                                                "This data is available at Scotland level. Further breakdown of age groups is ",
                                                                "available under `Strengthen the role and impact on the `Care and Wellbeing` tab.",

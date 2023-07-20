@@ -700,71 +700,43 @@ altTextServer("hospital_admission_heart_attack_alt",
 # DRUG RELATED HOSPITAL ADMISSIONS ----
 ##############################################.
 
-
 altTextServer("drug_admissions_alt",
               title = "Drug admissions plot",
               content = tags$ul(tags$li("This is a plot for drug-related",
                                         "hospital admissions in Scotland."),
                                 tags$li("The x axis is the financial year starting from 2008/09."),
-                                tags$li("The y axis is the number of hospital admissions or, admissions",
-                                "expressed as an age-sex standardised rate per 100,000 population."),
+                                tags$li("The y axis is the number of hospital admissions or, these admissions,",
+                                        "expressed as an age-sex standardised rate per 100,000 population."),
                                 tags$li("A selection button above the chart allows you to choose between viewing",
-                                       "the y-axis as the number of admissions or as a rate"),
+                                        "the y-axis as the number of admissions or as a rate."),
                                 tags$li("The drop down above the chart allows you to choose which age group you wish",
-                                        "to visualise on the plot. The default is `All age groups`,
-                                        you can however select multiple age groups."),
-                                tags$li("The line(s) refer to the number of hospital admissions",
+                                        "to visualise on the plot. The default is `All age groups`."),
+                                tags$li("The line refers to the number of hospital admissions",
                                         " or the age-sex standardised rate of drug-related",
                                         "hospital admissions per 100,000 population.")
               )
 )
-# #### existing chart #####
-# output$drug_admissions_plot = renderPlotly({
-#
-#   if(length(input$drug_admissions_age) != 1){
-#     age_title <- "by age"
-#   } else if (input$drug_admissions_age == "All age groups") {
-#     age_title <- "all age groups"
-#   } else {
-#     age_title <- paste0("ages ", input$drug_admissions_age)
-#   }
-#
-#   title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
-#                 age_title, ") in Scotland")
-#
-#   data = drug_stays %>%
-#     filter(age_group %in% input$drug_admissions_age) %>%
-#     mutate(indicator = round_half_up(rate,1),
-#            date = financial_year) %>%
-#
-#     make_line_chart_multi_lines(x = .$date, y = .$indicator,
-#                                 colour = .$age_group,
-#                                 title = title,
-#                                 y_axis_title = "Age-sex standardised<br> rate per 100,000 population",
-#                                 x_axis_title = "Financial year") %>%
-#     layout(xaxis = list(tickangle = -30),
-#            legend = list(y = -0.4))
-#
-# })
-
-#### my edits to drug admin plot #####
 output$drug_admissions_plot_v2 = renderPlotly({
 
-  # if(length(input$drug_admissions_age) != 1){
-  #   age_title <- "by age"
-  # } else if (input$drug_admissions_age == "All age groups") {
-  #   age_title <- "all age groups"
-  # } else {
-  #   age_title <- paste0("ages ", input$drug_admissions_age)
- # }
+  if(length(input$drug_admissions_age) != 1){
+    age_title <- "by age"
+  } else if (input$drug_admissions_age == "All age groups") {
+    age_title <- "all age groups"
+  } else {
+    age_title <- paste0("ages ", input$drug_admissions_age)
+  }
 
-  # title <- glue("Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
-  #               age_title, ") in Scotland")
-  title <- glue("Drug-related hospital admissions")
+  if(input$drug_admissions_rate_number== "Rate"){
+    num_rate_title<-"Age-sex standardised rates per 100,000 "
+  } else {num_rate_title<-"Number "
+  }
 
-  data = drug_admin_agesex %>%
+  title <- glue(num_rate_title, "of drug-related hospital admissions (",
+                age_title, ") in Scotland")
+
+  data = drug_admission_agesex %>%
     filter(age_group %in% input$drug_admissions_age,
-           sex!="All sexes") %>%
+           sex=="All sexes")
   if (input$drug_admissions_rate_number== "Rate") {
     data %<>%
       mutate(indicator = rate)
@@ -773,30 +745,31 @@ output$drug_admissions_plot_v2 = renderPlotly({
   else if (input$drug_admissions_rate_number== "Number") {
     data %<>%
       mutate(indicator = count)
-
     indicator_y = "Number of hospital admissions"
   }
 
-
-    mutate(date = financial_year) %>%
-
-line_chart_function(data, indicator_y,
-                    title = title,
-                    colour = .$age_group,
-                    label = ifelse(input$drug_admissions_rate_number== "Rate", "Rate of admissions", "Number of admissions")) %>%
-  layout(yaxis=list(tickformat=","),
-         xaxis = list(tickangle = -30))
+  data %>%
+    make_line_chart_multi_lines(
+      x=.$financial_year,
+      y=.$indicator,
+      y_axis_title =  indicator_y,
+      title = title,
+      colour = .$age_group,
+      label = ifelse(input$drug_admissions_rate_number== "Rate", "Rate of admissions", "Number of admissions")) %>%
+    layout(yaxis=list(tickformat=","),
+           xaxis = list(tickangle = -30))
 })
 
 
 observeEvent(input$drug_admissions_age,{
 
-  data_unfiltered <- drug_stays %>%
+  data_unfiltered <- drug_admission_agesex %>%
     mutate(rate = round_half_up(rate,1)) %>%
-    select(financial_year, age_group, rate) %>%
+    select(financial_year, age_group,
+           "Drug-related hospital admissions rate" =rate,
+           "Number of drug_related hospital admissions"=count) %>%
     arrange(financial_year) %>%
-    mutate(financial_year = factor(financial_year)) %>%
-    rename("Drug-related hospital admissions rate" = "rate")
+    mutate(financial_year = factor(financial_year))
 
   data_filtered <- data_unfiltered %>%
     filter(age_group %in% input$drug_admissions_age)
@@ -815,7 +788,7 @@ observeEvent(input$drug_admissions_age,{
     age_title <- paste0("ages ", input$drug_admissions_age)
   }
 
-  output$drug_admissions_title <- renderUI({h3(glue("Data table: Age-sex standardised rates per 100,000 of drug-related hospital admissions (",
+  output$drug_admissions_title <- renderUI({h3(glue("Data table: Drug-related hospital admissions (",
                                                     age_title, ") in Scotland"))})
 })
 
