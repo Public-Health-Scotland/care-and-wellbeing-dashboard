@@ -67,20 +67,27 @@ input_asthma_admissions %<>%
                                T ~ age_group),
          age_bands = factor(age_bands, levels = c("All Ages", "85+", "75+", "70+", "65+", "60-69",
                                                   "50-59", "40-49", "30-39", "20-29", "<18", "10-19", "0-9")),
-         sex = factor(sex, levels = c("All Sexes", "Male", "Female"))) %>%
+         sex = factor(sex, levels = c("All Sexes", "Male", "Female")))
+
+
+input_asthma_admissions_number <- input_asthma_admissions %>%
   group_by(date, sex, age_bands, geog_type, geog, provisional) %>%
-  summarise(indicator = sum(stays_number)) %>%
+  summarise(number = sum(stays_number)) %>%
+  ungroup()
+
+input_asthma_admissions_rate <- input_asthma_admissions %>%
+  group_by(date, age_bands, sex, geography, geog_type) %>%
+  mutate(pop = stays_number/stays_rate,
+         rate = (sum(stays_number)/sum(pop))) %>%
   ungroup() %>%
+  select(date, sex, age_bands, geog_type, geog, provisional, rate) %>%
+  distinct()
+
+
+input_asthma_admissions <- full_join(input_asthma_admissions_number, input_asthma_admissions_rate) %>%
   arrange(age_bands) %>%
-  mutate(geography_type = geog_type,
-         geography = geog,
-         value = "asthma_admissions") %>%
-  # summary_format_function(date = .$date,
-  #                         geog_type = .$geog_type,
-  #                         geog = .$geog,
-  #                         indicator_in = .$stays_number,
-  #                         value_in = "asthma_admissions") %>%
-  select(-c(geog, geog_type))
+  rename("geography_type" = "geog_type",
+         "geography" = "geog")
 
 replace_file_fn(input_asthma_admissions,
                 paste0(path_out, "/asthma_admissions.rds"))
