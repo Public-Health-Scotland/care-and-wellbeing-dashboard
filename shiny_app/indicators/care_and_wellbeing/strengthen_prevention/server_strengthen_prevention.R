@@ -1470,7 +1470,7 @@ observeEvent(input$asthma_admissions_breakdowns,{
     ## Number or Rate
     if(input$asthma_admissions_rate_number == "Rate"){
 
-      title_start = "Rate per 100,000"
+      title_start = "Rate per 100,000 "
 
     } else {
 
