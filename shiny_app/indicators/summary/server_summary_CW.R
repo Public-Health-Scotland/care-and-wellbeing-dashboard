@@ -159,10 +159,10 @@ observeEvent(input$geog_name_summary_CW,{
 
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(drug_stays$financial_year)
-  previous_date <- max(drug_stays %>% filter(financial_year != recent_date) %>% .$financial_year)
+  recent_date <- max(drug_admission_agesex$financial_year)
+  previous_date <- max(drug_admission_agesex %>% filter(financial_year != recent_date) %>% .$financial_year)
 
-  value <- drug_stays %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
+  value <- drug_admission_agesex %>% filter(geography == input$geog_name_summary_CW, age_group == "All age groups")
 
   recent_value <- value %>% filter(financial_year == recent_date) %>% .$rate
   previous_value <-  value %>% filter(financial_year == previous_date) %>% .$rate
