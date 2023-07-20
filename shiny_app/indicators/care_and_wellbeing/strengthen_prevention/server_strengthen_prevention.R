@@ -1789,10 +1789,12 @@ observeEvent(input$vaccinations_covid_geog_type,
 
 altTextServer("vaccinations_covid_alt",
               title = "Covid vaccinations uptake plot",
-              content = tags$ul(tags$li("This is a bar plot for the breakdown of COVID-19 vaccinations uptake by SIMD."),
-                                tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents",
-                                        glue("{vaccinations_covid %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
-                                        glue("{vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}")),
+              content = tags$ul(tags$li("This is a bar plot for the breakdown of COVID-19 vaccinations uptake by SIMD where
+                                        the bar represents the percentage vaccination uptake for each SIMD decile.."),
+                                #tags$li("The two bars represent the dates of collected data, positioned from left to right, the light blue bar represents"#,
+                                # glue("{vaccinations_covid %>% slice(which.min(.$date)) %>% .$date}"), "and the dark blue bar represents",
+                                # glue("{vaccinations_covid %>% slice(which.max(.$date)) %>% .$date}")
+                                #),
                                 tags$li("The x axis is the SIMD breakdown from 1 to 10 where 1 is least deprived and 10 is most deprived,",
                                         "Scotland level data also showns the percentage uptake of people whose SIMD decile is Not known."),
                                 tags$li("The y axis is the percentage uptake of vaccinations."),
@@ -1809,9 +1811,9 @@ output$vaccinations_covid_plot <- renderPlotly({
   plot <- vaccinations_covid %>%
     filter(geography == input$vaccinations_covid_geog_name) %>%
     mode_bar_plot(x = .$SIMD,
-                  y = .$percentage_uptake,
+                  y = .$uptake_percent,
                   xaxis_title = "SIMD",
-                  category_var = .$date,
+                  category_var = .$geography,
                   hover_end = "%",
                   title = glue("Percentage (%) uptake of COVID-19 vaccinations in eligible population by SIMD in {input$vaccinations_covid_geog_name}"
                   )) %>%
@@ -1831,11 +1833,11 @@ observeEvent(input$vaccinations_covid_geog_name,{
 observeEvent(input$vaccinations_covid_geog_name,{
 
   data_unfiltered <- vaccinations_covid %>%
-    filter(!(percentage_uptake == 0)) %>%
+    filter(!(uptake_percent == 0)) %>%
     select(date, geography_type, geography, SIMD,
-           percentage_uptake) %>%
-    rename(`uptake_percentage_(%)` = percentage_uptake) %>%
-    arrange(date, SIMD)
+           uptake_percent) %>%
+    rename(`uptake_percentage_(%)` = uptake_percent) %>%
+    arrange(SIMD)
 
   data_filtered <- data_unfiltered %>%
     filter(geography == input$vaccinations_covid_geog_name)
