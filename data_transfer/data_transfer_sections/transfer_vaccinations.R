@@ -72,8 +72,8 @@ vaccinations_covid <- vaccinations %>% filter(value == "COVID-19 vaccinations up
 replace_file_fn(vaccinations_flu,
                 paste0(path_out, "/vaccinations_flu.rds"))
 
-# replace_file_fn(vaccinations_covid,
-#                 paste0(path_out, "/vaccinations_covid.rds"))
+replace_file_fn(vaccinations_covid,
+                paste0(path_out, "/vaccinations_covid.rds"))
 
 rm(data_path_flu,data_path_covid,
    input_flu_vacc,input_covid_vacc,
@@ -81,47 +81,4 @@ rm(data_path_flu,data_path_covid,
    vaccinations_flu,vaccinations_covid)
 
 
-#############################################################################################
 
-## Updated transfer - data comes in different formats, the spring programme for COVID-19 has no comaprison, only 1 date of data.
-## No flu for Spring
-
-
-# read in path
-data_path_covid <- paste0(path_in_pop, "equality_spring_2023_covid-19.xlsx")
-
-# read excel in
-input_covid_vacc <- read_excel(data_path_covid, sheet = "SIMD - HB", skip=4) %>%
-  select(2,3,6) %>%
-  clean_names() %>%
-  rename(SIMD = "simd_2020_decile_1_most_deprived_10_least_deprived",
-         geography = "health_board_name") %>%
-  mutate(geography_type = ifelse(geography == "Scotland", "Scotland",
-                                 ifelse(geography == "Not Known", "Not Known" ,"Health Board")))
-
-add_ons <- input_covid_vacc %>%
-  filter(!(SIMD == "Not Known")) %>%
-  select(geography, geography_type, SIMD, uptake_percent) %>%
-  # add in incorrect value so can set a flag - needs to be a numeric so 111 is used randomly
-  pivot_wider(names_from = "SIMD", values_from = "uptake_percent", values_fill = 111) %>%
-  pivot_longer(cols = c("1", "2", "3", "4", "5",
-                        "6", "7", "8", "9", "10"), values_to = "uptake_percent", names_to = "SIMD")
-
-vaccinations_covid <- full_join(input_covid_vacc, add_ons) %>%
-  # add in fill flag where uptake_percent has been set to 0 for plot, f = filled
-  mutate(fill_flag = ifelse(uptake_percent == 111, "f", ""),
-         uptake_percent = ifelse(fill_flag == "f", 0, uptake_percent),
-         SIMD = factor(SIMD, levels = c("1", "2", "3", "4", "5",
-                                        "6", "7", "8", "9", "10", "Not Known"),
-                       labels = c("1 (Most deprived)", "2", "3", "4", "5",
-                                  "6", "7", "8", "9", "10 (Least deprived)", "Not Known"))) %>%
-  arrange(geography, SIMD) %>%
-  mutate(date = "18 June 2023")
-
-replace_file_fn(vaccinations_covid,
-                paste0(path_out, "/vaccinations_covid.rds"))
-
-rm(data_path_covid,
-   input_covid_vacc,
-   add_ons,
-   vaccinations_covid)
