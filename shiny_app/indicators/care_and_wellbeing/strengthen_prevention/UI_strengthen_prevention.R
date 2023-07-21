@@ -944,11 +944,22 @@ tagList(
 
                         altTextUI("adult_self_assessed_health_alt"),
                         withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
+                        
+                        altTextUI("adult_self_assessed_health_simd_alt"),
+                        simdQuintileDefinitionUI("adult_self_assessed_simd"),
+                        withSpinner(plotlyOutput("adult_self_assessed_health_simd_plot")),
 
                         br(),
                         h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
-                        br(),
-                        dataDownloadUI("adult_self_assessed_health")
+                        tabBox(
+                          id = "adult_self_assessed_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("adult_self_assessed_health")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("adult_self_assessed_health_simd"))
+                        )
                ),
 
                ##############################################.
