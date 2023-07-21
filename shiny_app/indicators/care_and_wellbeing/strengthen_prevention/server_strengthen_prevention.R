@@ -270,7 +270,7 @@ altTextServer("mental_wellbeing_alt",
               content = tags$ul(tags$li("This is a plot for the trend in mean Warwick-Edinburgh Mental Wellbeing Scales (WEMWBS) score for people aged 16+ in Scotland by sex."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the mean WEMWBS score."),
-                                tags$li("The solid purple line is all sexes, the blue line is females and the grey line is males"),
+                                tags$li("The solid purple line is all sexes, the blue line is females and the green line is males"),
                                 tags$li("In 2021, the WEMWBS mean score for adults was 48.6, the lowest figure in the time series"),
                                 tags$li("Before 2021 the mean scores had ranged between 49.4 and 50.0")
 
@@ -1206,37 +1206,74 @@ observeEvent(input$healthy_birthweight_geog_name,{
 ##############################################.
 
 altTextServer("adult_self_assessed_health_alt",
-              title = "Self-assessed health of adults plot",
+              title = "Self-assessed health of adults by sex plot",
               content = tags$ul(tags$li("This is a plot for the trend in percentage of adults who describe their health in general as 'good' or 'very good'."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the percentage of adults."),
-                                tags$li("The solid purple line is the percentage of adults for each year.")
+                                tags$li("The solid purple line is the percentage for all sexes, the blue line is females and the green line is males.")
 
               )
 )
 
 output$adult_self_assessed_health_plot <- renderPlotly({
 
-  title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"
+  title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good' by sex"
 
   plot <- adult_self_assessed_health %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
-    layout(yaxis = yaxis_proportion)
+    make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
+                                label = "Percentage", title = title, colour = .$Sex, hover_end = "%")
 
+
+})
+
+altTextServer("adult_self_assessed_health_simd_alt",
+              title = "Self-assessed health of adults by SIMD plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults who describe their health in general as 'good' or 'very good'."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("SIMD is a relative measure of deprivation across small areas in Scotland.",
+                                        "There are equal numbers of data zones in each of the five categories.",
+                                        "SIMD 1 contains the 20% most deprived zones and SIMD 5 contains the 20% least deprived zones."),
+                                tags$li("The plot contains a trace for each of the SIMD categories.")
+                                
+              )
+)
+
+output$adult_self_assessed_health_simd_plot <- renderPlotly({
+  
+  title<- "Percentage of adults in Scotland who describe their general health as 'good' or 'very good' by SIMD"
+  
+  plot <- adult_self_assessed_health_simd %>%
+    mutate(indicator = round(as.integer(indicator), 1),
+           date = Year) %>%
+    make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
+                                label = "Percentage", title = title, colour = .$SIMD, hover_end = "%")
+  
+  
 })
 
 
 
 adult_self_assessed_health %>%
-  select(c(Year, indicator)) %>%
+  select(c(Year, Sex, indicator)) %>%
   mutate(indicator = round(as.integer(indicator), 1)) %>%
   mutate(Year = factor(Year)) %>%
   rename("Percentage of adults who describe their general health as 'good' or 'very good' (%)" = "indicator") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "adult_self_assessed_health",
                      filename = "adult_self_assessed_health")
+
+adult_self_assessed_health_simd %>%
+  select(c(Year, SIMD, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults who describe their general health as 'good' or 'very good' (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "adult_self_assessed_health_simd",
+                     filename = "adult_self_assessed_health_simd",
+                     keep_colnames = c(2))
 
 
 ##############################################.
