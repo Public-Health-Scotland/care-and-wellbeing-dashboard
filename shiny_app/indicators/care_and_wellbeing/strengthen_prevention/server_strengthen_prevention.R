@@ -1358,7 +1358,7 @@ altTextServer("adult_long_term_condition_alt",
               content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the percentage of adults."),
-                                tags$li("The solid purple line is the percentage of adults for each year.")
+                                tags$li("The solid purple line is the percentage for all sexes, the blue line is females and the green line is males.")
 
               )
 )
