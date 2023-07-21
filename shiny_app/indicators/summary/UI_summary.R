@@ -448,7 +448,7 @@ tagList(
                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
                                                                 "Scottish Health Survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years ",
                                                                 "and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
+                                                                "This data is available at Scotland level. Further breakdown by SIMD is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
