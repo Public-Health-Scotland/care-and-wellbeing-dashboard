@@ -680,16 +680,30 @@ tagList(
                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                      "2021.",
                                                      #"More up to date data is available at source.",
-                                                     "<br><br>These data are available at a Scotland level.",
+                                                     "<br><br>These data are available at Scotland level.",
+                                                     " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                        
                         altTextUI("adult_long_term_condition_alt"),
                         withSpinner(plotlyOutput("adult_long_term_condition_plot")),
+                        
+                        altTextUI("adult_long_term_condition_simd_alt"),
+                        simdQuintileDefinitionUI("adult_self_assessed_simd"),
+                        withSpinner(plotlyOutput("adult_long_term_condition_simd_plot")),
 
                         br(),
                         h3("Data table: Percentage of adults with a limiting long-term condition in Scotland"),
-                        br(),
-                        dataDownloadUI("limiting_ltcs")
+                        
+                        tabBox(
+                          id = "adult_long_term_condition_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("limiting_ltcs")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("limiting_ltcs_simd"))
+                        )
                ),
 
                ##############################################.
@@ -708,7 +722,7 @@ tagList(
                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                      "2021.",
                                                      #"More up to date data is available at source.",
-                                                     "<br><br>These data are available at a Scotland level,",
+                                                     "<br><br>These data are available at Scotland level,",
                                                      " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
