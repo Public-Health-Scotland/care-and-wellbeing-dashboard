@@ -1354,7 +1354,7 @@ adult_self_assessed_health_simd %>%
 ##############################################.
 
 altTextServer("adult_long_term_condition_alt",
-              title = "Adults living with limiting long-term conditions plot",
+              title = "Adults living with limiting long-term conditions by sex plot",
               content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
                                 tags$li("The x axis is the year, starting from 2008."),
                                 tags$li("The y axis is the percentage of adults."),
@@ -1365,27 +1365,63 @@ altTextServer("adult_long_term_condition_alt",
 
 output$adult_long_term_condition_plot <- renderPlotly({
 
-  title <- "Percentage of adults with a limiting long-term condition in Scotland"
+  title <- "Percentage of adults with a limiting long-term condition in Scotland by sex"
 
   plot <- adult_living_limiting_long_term_condition %>%
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
-    line_chart_function(., y_title = "Percentage (%)", label = "Percentage", title = title)%>%
-    layout(yaxis = yaxis_proportion,
-           xaxis = list(dtick = 1))
+    make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
+                                label = "Percentage", title = title, colour = .$Sex, hover_end = "%")%>%
+    layout(xaxis = list(dtick = 1))
 
+})
+
+altTextServer("adult_long_term_condition_simd_alt",
+              title = "Adults living with limiting long-term conditions by SIMD plot",
+              content = tags$ul(tags$li("This is a plot for the trend in percentage of adults living with a limiting long-term condition in Scotland."),
+                                tags$li("The x axis is the year, starting from 2008."),
+                                tags$li("The y axis is the percentage of adults."),
+                                tags$li("SIMD is a relative measure of deprivation across small areas in Scotland.",
+                                        "There are equal numbers of data zones in each of the five categories.",
+                                        "SIMD 1 contains the 20% most deprived zones and SIMD 5 contains the 20% least deprived zones."),
+                                tags$li("The plot contains a trace for each of the SIMD categories.")
+                                
+              )
+)
+
+output$adult_long_term_condition_simd_plot <- renderPlotly({
+  
+  title <- "Percentage of adults with a limiting long-term condition in Scotland by SIMD"
+  
+  plot <- adult_living_limiting_long_term_condition_simd %>%
+    mutate(indicator = round(as.integer(indicator), 1),
+           date = Year) %>%
+    make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
+                                label = "Percentage", title = title, colour = .$SIMD, hover_end = "%")%>%
+    layout(xaxis = list(dtick = 1))
+  
 })
 
 
 
 adult_living_limiting_long_term_condition %>%
-  select(c(Year, indicator)) %>%
+  select(c(Year, Sex, indicator)) %>%
   mutate(indicator = round(as.integer(indicator), 1)) %>%
   mutate(Year = factor(Year)) %>%
   rename("Percentage of adults with a limiting long-term condition (%)" = "indicator") %>%
   arrange(desc(Year)) %>%
   dataDownloadServer(id = "limiting_ltcs",
                      filename = "limiting_long_term_conditions")
+
+adult_living_limiting_long_term_condition_simd %>%
+  select(c(Year, SIMD, indicator)) %>%
+  mutate(indicator = round(as.integer(indicator), 1)) %>%
+  mutate(Year = factor(Year)) %>%
+  rename("Percentage of adults with a limiting long-term condition (%)" = "indicator") %>%
+  arrange(desc(Year)) %>%
+  dataDownloadServer(id = "limiting_ltcs_simd",
+                     filename = "limiting_long_term_conditions_simd",
+                     keep_colnames = c(2))
 
 ##############################################.
 # ADMISSIONS FOR ASTHMA----
