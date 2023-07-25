@@ -1296,7 +1296,8 @@ output$adult_self_assessed_health_plot <- renderPlotly({
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
     make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
-                                label = "Percentage", title = title, colour = .$Sex, hover_end = "%")
+                                label = "Percentage", title = title, colour = .$Sex, hover_end = "%") %>% 
+    layout(yaxis = list(ticksuffix = "%"))
 
 
 })
@@ -1322,7 +1323,8 @@ output$adult_self_assessed_health_simd_plot <- renderPlotly({
     mutate(indicator = round(as.integer(indicator), 1),
            date = Year) %>%
     make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
-                                label = "Percentage", title = title, colour = .$SIMD, hover_end = "%")
+                                label = "Percentage", title = title, colour = .$SIMD, hover_end = "%") %>% 
+    layout(yaxis = list(ticksuffix = "%"))
   
   
 })
@@ -1372,7 +1374,8 @@ output$adult_long_term_condition_plot <- renderPlotly({
            date = Year) %>%
     make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
                                 label = "Percentage", title = title, colour = .$Sex, hover_end = "%")%>%
-    layout(xaxis = list(dtick = 1))
+    layout(xaxis = list(dtick = 1),
+           yaxis = list(ticksuffix = "%"))
 
 })
 
@@ -1398,7 +1401,8 @@ output$adult_long_term_condition_simd_plot <- renderPlotly({
            date = Year) %>%
     make_line_chart_multi_lines(., x=.$Year, y=.$indicator, y_axis_title = "Percentage (%)",
                                 label = "Percentage", title = title, colour = .$SIMD, hover_end = "%")%>%
-    layout(xaxis = list(dtick = 1))
+    layout(xaxis = list(dtick = 1),
+           yaxis = list(ticksuffix = "%"))
   
 })
 
