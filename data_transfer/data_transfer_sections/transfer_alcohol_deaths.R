@@ -46,12 +46,7 @@ input_alcohol_deaths_ages_rate <- read_excel(data_path, sheet = data_sheet_ages,
   mutate(value = "alcohol_deaths",
          geography_type = "Scotland",
          geography = "Scotland",
-         sex = recode(sex, Persons = "All sexes", Females = "Female", Males = "Male")) %>%
-  summary_format_function(date = .$year,
-                          geog_type = .$geography_type,
-                          geog = .$geography,
-                          indicator_in = .$indicator,
-                          value_in = .$value)
+         sex = recode(sex, Persons = "All sexes", Females = "Female", Males = "Male"))
 
 
 ## number
@@ -69,15 +64,21 @@ input_alcohol_deaths_ages_number %<>% mutate(`10-24` = `10-14` + `15-19` + `20-2
   select(1,2,25:29) %>%
   filter(Year >= 2008) %>%
   pivot_longer(cols =  c("10-24", "25-44", "45-64", "65-74", "75+"), names_to = "age_group", values_to = "number") %>%
+  rename("sex" = "Sex",
+         "year" = "Year") %>%
   mutate(value = "alcohol_deaths",
          geography_type = "Scotland",
          geography = "Scotland",
-         sex = recode(Sex, Persons = "All sexes", Females = "Female", Males = "Male"))
+         sex = recode(sex, Persons = "All sexes", Females = "Female", Males = "Male"))
+
+alcohol_deaths_ages <- full_join(input_alcohol_deaths_ages_number, input_alcohol_deaths_ages_rate)
+
+
 
 replace_file_fn(alcohol_deaths,
                 paste0(path_out, "/alcohol_deaths.rds"))
 
-replace_file_fn(input_alcohol_deaths_ages,
+replace_file_fn(alcohol_deaths_ages,
                 paste0(path_out, "/alcohol_deaths_by_age.rds"))
 
 
