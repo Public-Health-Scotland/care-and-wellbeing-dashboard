@@ -375,7 +375,7 @@ tagList(
                                                                 "A limiting long-term condition is defined as a physical or mental condition & health condition or illness lasting, ",
                                                                 "or expected to last 12 limiting months or more. <br> <br> A long-term condition is defined as limiting if the respondent reported ",
                                                                 "that it limited their activities in any way. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
+                                                                "This data is available at Scotland level. Further breakdown by SIMD is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),

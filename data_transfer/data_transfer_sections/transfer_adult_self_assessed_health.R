@@ -18,6 +18,11 @@ input_adult_self_assessed_health <- read_excel(data_path, sheet=data_sheet) %>%
 input_adult_self_assessed_health_simd <- read_excel(data_path_simd) %>%
   filter(Indicator == "Self-assessed general health" & Categories == "Very good/Good") %>%
   mutate(Year = as.character(Year)) %>%
+  mutate(SIMD = recode(SIMD, `1st-Most deprived` = "1 - Most deprived",
+                       `2nd` = "2",
+                       `3rd` = "3",
+                       `4th` = "4",
+                       `5th-Least deprived` = "5 - Least deprived")) %>% 
   summary_format_function(date = .$Year,
                           geog_type = .$Geographylevel,
                           geog = .$Geographylevel,
