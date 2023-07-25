@@ -16,6 +16,11 @@ input_living_limiting_long_term_condition <- read_excel(data_path, sheet=data_sh
 
 input_living_limiting_long_term_condition_simd <- read_excel(data_path_simd) %>% 
   filter(Indicator == "Long-term illness" & Categories == "Limiting long-term illness") %>%
+  mutate(SIMD = recode(SIMD, `1st-Most deprived` = "1 - Most deprived",
+                       `2nd` = "2",
+                       `3rd` = "3",
+                       `4th` = "4",
+                       `5th-Least deprived` = "5 - Least deprived")) %>% 
   summary_format_function(date = .$Year, 
                           geog_type = .$Geographylevel, 
                           geog = .$Geographylevel, 
