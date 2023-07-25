@@ -129,7 +129,7 @@ tagList(
                                                                       "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/alcohol-deaths/ target = _blank> Alcohol-specific deaths, 2021, National Records of Scotland (external site)</a>.",
                                                                       "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 2021.",
                                                                       # "More up to date data is available at source.",
-                                                                      "<br><br>These data are available at a Scotland level with additional breakdown by sex. ",
+                                                                      "<br><br>These data are available at a Scotland level with additional breakdown by sex and age group. ",
                                                                       "<br><br> More detailed information can be found in the accompanying",
                                                                       "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 

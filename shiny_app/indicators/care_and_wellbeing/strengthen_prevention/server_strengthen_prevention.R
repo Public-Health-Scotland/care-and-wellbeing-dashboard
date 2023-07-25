@@ -1027,13 +1027,14 @@ observeEvent(input$alcohol_admissions_geog_name,{
 
 altTextServer("alcohol_deaths_sex_alt",
               title = "Alcohol-specific rate of deaths plot",
-              content = tags$ul(tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+              content = tags$ul(tags$li("This is a plot for the trend in alcohol-specific deaths in Scotland."),
                                 tags$li("The x axis is year."),
-                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
-                                tags$li("The solid purple line is the specified rate and the lighter purple area around",
-                                        "the line indicates the confidence interval."),
-                                tags$li("The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
+                                tags$li("If rate is chosen in the option above, then the y axis is the age-sex
+                                        standardised rate per 100,000 population. The solid purple line is the specified rate and the lighter purple area around",
+                                        "the line indicates the confidence interval. The bottom of the light purple shaded area represents the lower confidence interval and the top of the",
                                         "area represents the upper confidence interval."),
+                                tags$li("If instead, number is chosen then the y axis
+                                        is number of deaths. The solid purple line indicates the trend in number."),
                                 tags$li("The dropdown above the plot indicates which sex the plot is showing, the choices are",
                                         "'All sexes', 'Female' and 'Male'. The default is 'All sexes'.")))
 
@@ -1042,21 +1043,21 @@ output$alcohol_deaths_sex_plot = renderPlotly({
 
   if(input$alcohol_deaths_rate_number == "Rate") {
 
-    title_start = "Age-sex standerdised deaths rates of "
+    title_start = "Age-sex standerdised deaths rates per 100,000 population of "
     indicator_y = "rate"
     y_title = "Age-sex standardised rate of deaths <br> per 100,000 population"
   } else {
 
-    title_start = "Number of deaths of "
+    title_start = "Total number of deaths of "
     indicator_y = "number"
-    y_title = "Number of deaths"
+    y_title = "Total number of deaths"
   }
 
 
   title <- glue(title_start,
                 str_to_lower(input$alcohol_deaths_sex),
-                ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
-                "  per 100,000 population",
+                ifelse(input$alcohol_deaths_sex == "All sexes", "", "s")
+
   )
 
 
@@ -1075,9 +1076,12 @@ output$alcohol_deaths_sex_plot = renderPlotly({
 
 altTextServer("alcohol_deaths_age_alt",
               title = "Alcohol-specific rate of deaths by age plot",
-              content = tags$ul(tags$li("This is a plot for the age-standerdised drug-related deaths rate per 100,000 population."),
+              content = tags$ul(tags$li("This is a plot for the trend in alcohol-specific deaths in Scotland by age group."),
                                 tags$li("The x axis is year."),
-                                tags$li("The y axis is the age-sex standardised rate per 100,000 population."),
+                                tags$li("If rate is chosen in the option above, then the y axis is the age-sex
+                                        standardised rate per 100,000 population."),
+                                tags$li("If instead, number is chosen then the y axis
+                                        is number of deaths."),
                                 tags$li("There are five lines showing the five age breakdowns: '10-24', '25-44', '45'64', '65-75' and '75+'."),
                                 tags$li("The dropdown above the previous plot indicates which sex the plot is showing, the choices are",
                                         "'All sexes', 'Female' and 'Male'. The default is 'All sexes' .")
@@ -1086,17 +1090,30 @@ altTextServer("alcohol_deaths_age_alt",
 # age background plot
 output$alcohol_deaths_age_plot = renderPlotly({
 
-  title <- glue("Age-sex standardised death rates of ",
+  if(input$alcohol_deaths_rate_number == "Rate") {
+
+    title_start = "Age-sex standerdised deaths rates per 100,000 population of "
+    indicator_y = "rate"
+    y_title = "Age-sex standardised rate of deaths <br> per 100,000 population"
+  } else {
+
+    title_start = "Total number of deaths of "
+    indicator_y = "number"
+    y_title = "Total number of deaths"
+  }
+
+  title <- glue(title_start,
                 str_to_lower(input$alcohol_deaths_sex),
                 ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
-                "  per 100,000 population by age group")
+                " by age group")
 
   data = alcohol_deaths_by_age %>%
     filter(sex == input$alcohol_deaths_sex) %>%
+    rename("indicator" = indicator_y) %>%
 
     make_line_chart_multi_lines(., x = .$year, y = .$indicator,
                                 colour = .$age_group,
-                                y_axis_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
+                                y_axis_title = y_title,
                                 title=title) %>%
     layout(xaxis = list(dtick = 1, tickangle = -30))
 
@@ -1105,10 +1122,9 @@ output$alcohol_deaths_age_plot = renderPlotly({
 observeEvent(input$alcohol_deaths_tabBox, {
   observeEvent(input$alcohol_deaths_sex,{
 
-    title_start <- glue("Age-sex standardised death rates of ",
+    title_start <- glue("Data table: Trend in alcohol-specific deaths of ",
                         str_to_lower(input$alcohol_deaths_sex),
-                        ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
-                        "per 100,000 population")
+                        ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"))
 
     title_end <- ifelse(input$alcohol_deaths_tabBox == "Rate for all ages",
                         "", " by age group")
@@ -1128,6 +1144,7 @@ observeEvent(input$alcohol_deaths_sex,{
   data_unfiltered_sex <- alcohol_deaths %>%
     select("Year"=year,
            "Sex"=sex,
+           "Number of alcohol-specific deaths" =number,
            "Alcohol-specific death rate"=rate,
            "Lower confidence interval"=lower_ci,
            "Upper confidence interval"=upper_ci
@@ -1143,7 +1160,8 @@ observeEvent(input$alcohol_deaths_sex,{
     select("Year"=year,
            "Sex"=sex,
            "Age group" = age_group,
-           "Alcohol-specific death rate"=indicator
+           "Number of alcohol-specific deaths" = number,
+           "Alcohol-specific death rate"=rate
     ) %>%
     arrange(Year) %>%
     mutate(Year = factor(Year))
@@ -1153,11 +1171,13 @@ observeEvent(input$alcohol_deaths_sex,{
 
   dataDownloadServer(data = data_filtered_sex, data_download = data_unfiltered_sex,
                      id = "alcohol_deaths_sex", filename = "alcohol_deaths",
-                     add_separator_cols_1dp = c(3,4,5))
+                     add_separator_cols_1dp = c(4,5,6),
+                     add_separator_cols = c(3))
 
   dataDownloadServer(data = data_filtered_age, data_download = data_unfiltered_age,
                      id = "alcohol_deaths_age", filename = "alcohol_deaths_by_age",
-                     add_separator_cols_2dp = c(4))
+                     add_separator_cols_2dp = c(5),
+                     add_separator_cols = c(4))
 })
 
 
