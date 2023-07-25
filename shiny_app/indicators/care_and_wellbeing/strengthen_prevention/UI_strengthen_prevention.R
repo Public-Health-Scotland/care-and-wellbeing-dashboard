@@ -136,11 +136,16 @@ tagList(
                                          fluidRow(
                                            column(4,
                                                   selectInput("alcohol_deaths_sex",
-                                                              "Select sex",
+                                                              "Step 1. Select sex",
                                                               choices = unique(alcohol_deaths$sex),
                                                               selected = "All sexes",
                                                               selectize = FALSE,
-                                                              width = "100%"))
+                                                              width = "100%")),
+                                           column(4,
+                                                  radioButtons("alcohol_deaths_rate_number",
+                                                                           "Step 2. View rate per 100,000 population or number of deaths",
+                                                                           choices = c("Rate", "Number"),
+                                                                           width = "100%"))
                                          ),
 
                                          altTextUI("alcohol_deaths_sex_alt"),

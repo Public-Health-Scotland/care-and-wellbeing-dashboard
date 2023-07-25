@@ -1040,8 +1040,20 @@ altTextServer("alcohol_deaths_sex_alt",
 # death sex plot
 output$alcohol_deaths_sex_plot = renderPlotly({
 
+  if(input$alcohol_deaths_rate_number == "Rate") {
 
-  title <- glue("Age-sex standardised death rates of ",
+    title_start = "Age-sex standerdised deaths rates of "
+    indicator_y = "rate"
+    y_title = "Age-sex standardised rate of deaths <br> per 100,000 population"
+  } else {
+
+    title_start = "Number of deaths of "
+    indicator_y = "number"
+    y_title = "Number of deaths"
+  }
+
+
+  title <- glue(title_start,
                 str_to_lower(input$alcohol_deaths_sex),
                 ifelse(input$alcohol_deaths_sex == "All sexes", "", "s"),
                 "  per 100,000 population",
@@ -1053,8 +1065,8 @@ output$alcohol_deaths_sex_plot = renderPlotly({
     rename("lower_confidence_interval" = lower_ci,
            "upper_confidence_interval" = upper_ci,
            "date" = year,
-           "indicator" = rate) %>%
-    confidence_line_function(y_title = "Age-sex standardised rate of deaths <br> per 100,000 population",
+           "indicator" = indicator_y) %>%
+    confidence_line_function(y_title = y_title,
                              x_title = "Year",
                              title=title) %>%
     layout(xaxis = list(dtick = 1, tickangle = -30))
