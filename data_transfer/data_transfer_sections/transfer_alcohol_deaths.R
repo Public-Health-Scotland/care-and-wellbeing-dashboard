@@ -36,12 +36,12 @@ alcohol_deaths <- reduce(alcohol_list, full_join) %>%
 
 
 ### need to split sexes so can pivot seperately and then join
-
-input_alcohol_deaths_ages <- read_excel(data_path, sheet = data_sheet_ages,
+## rates
+input_alcohol_deaths_ages_rate <- read_excel(data_path, sheet = data_sheet_ages,
                                         col_names =  c("year", "sex", "measure", "10-24", "25-44", "45-64", "65-74", "75+"),
                                         range="A6:H89") %>%
   filter(year >= 2008) %>%
-  pivot_longer(cols =  c("10-24", "25-44", "45-64", "65-74", "75+"), names_to = "age_group", values_to = "indicator") %>%
+  pivot_longer(cols =  c("10-24", "25-44", "45-64", "65-74", "75+"), names_to = "age_group", values_to = "rate") %>%
   select(-measure) %>%
   mutate(value = "alcohol_deaths",
          geography_type = "Scotland",
@@ -52,6 +52,27 @@ input_alcohol_deaths_ages <- read_excel(data_path, sheet = data_sheet_ages,
                           geog = .$geography,
                           indicator_in = .$indicator,
                           value_in = .$value)
+
+
+## number
+input_alcohol_deaths_ages_number <- read_excel(data_path, sheet = "Table_2A",
+                                        #range=cell_cols(c("A:X")),
+                                        skip = 4)
+
+names(input_alcohol_deaths_ages_number) <- str_remove(names(input_alcohol_deaths_ages_number), "Age ")
+
+input_alcohol_deaths_ages_number %<>% mutate(`10-24` = `10-14` + `15-19` + `20-24`,
+                                             `25-44` = `25-29` + `30-34` + `35-39` + `40-44`,
+                                             `45-64` = `45-49` + `50-54` + `55-59` + `60-64`,
+                                             `65-74` = `65-69` + `70-74`,
+                                             `75+` = `75-79` + `80-84`  + `85-89` + `90 or more`) %>%
+  select(1,2,25:29) %>%
+  filter(Year >= 2008) %>%
+  pivot_longer(cols =  c("10-24", "25-44", "45-64", "65-74", "75+"), names_to = "age_group", values_to = "number") %>%
+  mutate(value = "alcohol_deaths",
+         geography_type = "Scotland",
+         geography = "Scotland",
+         sex = recode(Sex, Persons = "All sexes", Females = "Female", Males = "Male"))
 
 replace_file_fn(alcohol_deaths,
                 paste0(path_out, "/alcohol_deaths.rds"))
