@@ -142,9 +142,9 @@ output$employees_living_wage_cw_map = renderLeaflet({
 observeEvent(input$employees_living_wage_cw_map_shape_click,{
   rv_employees_living_wage_cw(input$employees_living_wage_cw_map_shape_click$id)
 
-updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
-                  #label = paste("Select input label", length(x)),
-                  choices = input$employees_living_wage_cw_map_shape_click$id)
+  updateSelectizeInput(session, "employees_living_wage_cw_LA_input",
+                       #label = paste("Select input label", length(x)),
+                       choices = input$employees_living_wage_cw_map_shape_click$id)
 })
 
 
@@ -172,25 +172,25 @@ output$employees_living_wage_cw_line_LA = renderPlotly({
     mutate(indicator = round(as.integer(measure_value), 1),
            date = year) %>%
     line_chart_function_lw_la(., y_title = "Percentage", label = "Percentage (%)", title = title) %>%
-  layout(yaxis = list(rangemode="tozero",
-                      title = "Percentage (%)",
-                      tickfont = list(size=14),
-                      titlefont = list(size=18),
-                      showline = FALSE,
-                      ticksuffix = "%",
-                      range=c(0,35)))
+    layout(yaxis = list(rangemode="tozero",
+                        title = "Percentage (%)",
+                        tickfont = list(size=14),
+                        titlefont = list(size=18),
+                        showline = FALSE,
+                        ticksuffix = "%",
+                        range=c(0,35)))
 })
 
 mapAltTextServer("employees_living_wage_cw_map_alt",
-              title = "Employees earning less than the real Living Wage by council area map",
-              content = tags$ul(tags$li("This is a map for the percentage of employees (18+) earning less than the real Living Wage by council area in Scotland."),
-                                tags$li("The map splits Scotland into council areas using white lines as the borders."),
-                                tags$li("The dropdown above the map allows you to select the year for plotting on the map. The default is 2012"),
-                                tags$li("The colour that a council area is highlighted relates to a percentage range as indicated by the map legend.",
-                                "The colours range from light yellow for 0-10% to dark red for 40-100% between which the ranges cover 5% increments.",
-                                "The percentage range indicated relates to the key data for the council area for the chosen year."),
-                                tags$li("If an area is grey, then there is no available data for the chosen year for that council area.")
-              ))
+                 title = "Employees earning less than the real Living Wage by council area map",
+                 content = tags$ul(tags$li("This is a map for the percentage of employees (18+) earning less than the real Living Wage by council area in Scotland."),
+                                   tags$li("The map splits Scotland into council areas using white lines as the borders."),
+                                   tags$li("The dropdown above the map allows you to select the year for plotting on the map. The default is 2012"),
+                                   tags$li("The colour that a council area is highlighted relates to a percentage range as indicated by the map legend.",
+                                           "The colours range from light yellow for 0-10% to dark red for 40-100% between which the ranges cover 5% increments.",
+                                           "The percentage range indicated relates to the key data for the council area for the chosen year."),
+                                   tags$li("If an area is grey, then there is no available data for the chosen year for that council area.")
+                 ))
 
 altTextServer("employees_living_wage_cw_map_plot_alt",
               title = "Employees earning less than the real Living Wage by council area plot",
@@ -327,7 +327,7 @@ output$gender_pay_gap_cw_plot = renderPlotly({
   ylim <- max(ylimits$measure_value)
 
   line_chart_function_pg(plot_data, y_title = "Pay Gap (Women/Men) (%)",
-                      x_title = "Year", title = title, ylim = ylim)
+                         x_title = "Year", title = title, ylim = ylim)
 
 
 })
@@ -425,7 +425,7 @@ observeEvent(input$gender_pay_gap_cw_sector_type, {
 })
 
 
-# <<<<<<< HEAD
+
 # observeEvent(input$gender_pay_gap_cw_tabBox, {
 #   observeEvent(input$gender_pay_gap_cw_sector, {
 #     observeEvent(input$gender_pay_gap_cw_work, {
@@ -443,9 +443,7 @@ observeEvent(input$gender_pay_gap_cw_sector_type, {
 #   })
 # })
 #
-# =======
-# >>>>>>> origin
-##############################################.
+###########################.
 #WORK RELATED ILL HEALTH----
 ##############################################.
 
@@ -455,14 +453,9 @@ observeEvent(input$gender_pay_gap_cw_sector_type, {
 
 altTextServer("economic_inactivity_cw_alt",
               title = "Economic inactivity by year plot",
-              content = tags$ul(tags$li("This is a plot for the trend in economically inactive people aged 16 to 64 by willingness to work."),
-                                tags$li("It is a stacked bar plot, where each bar refers to one year, and each bar is split into",
-                                        "two sections representing the percentage of economically inactive people who want to work",
-                                        "in contrast with the percentage of these individuals who do not want to work."),
+              content = tags$ul(tags$li("This is a bar plot representing the percentage of economically inactive people aged 16 to 64 who don't want to work."),
                                 tags$li("The x axis shows the year, starting from 2008."),
                                 tags$li("The y axis shows the percentage of economically inactive people."),
-                                tags$li("The legend shows two categories: 'Wants to work' and 'Does not want to work', which are displayed",
-                                        "on the plot in this order from top to bottom."),
                                 tags$li("There are two drop downs above the chart which allow you to select a national",
                                         "or local geography level and area for plotting. The default is Scotland."),
               )
@@ -486,13 +479,13 @@ observeEvent(input$economic_inactivity_cw_geog_type,
 
 output$economic_inactivity_cw_plot <- renderPlotly({
 
-  title <- glue("Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
+  title <- glue("Percentage of economically inactive people aged 16 to 64 by
+                willingness to work who don't want to work in ",
                 input$economic_inactivity_cw_geog_name)
 
-  region_filter_table(economic_inactivity, region_of_interest = input$economic_inactivity_cw_geog_name) %>%
-    filter(year >= 2008) %>%
-    mutate(breakdown = gsub("\r\n", " ", breakdown)) %>%
-    make_economic_inactivity_cw_plot(., title = title)
+  economic_inactivity %>%
+    filter(geography == input$economic_inactivity_cw_geog_name) %>%
+    make_economic_inactivity_cw_plot(title = title)
 
 })
 
@@ -500,27 +493,24 @@ output$economic_inactivity_cw_plot <- renderPlotly({
 observeEvent(input$economic_inactivity_cw_geog_name, {
 
   data_unfiltered <- economic_inactivity %>%
-    select(year, region, breakdown, n, percent) %>%
-    filter(year >= 2008) %>%
-    rename("Geography" = "region",
-           "Category" = "breakdown",
-           "Number of People" = "n",
-           "Percentage of People (%)" = "percent")
+    select(Year, geography_type, geography, number, percentage) %>%
+    rename("Number of People" = "number",
+           "Percentage of people (%)" = "percentage")
 
   data_filtered <- data_unfiltered %>%
-    filter(Geography == input$economic_inactivity_cw_geog_name)
+    filter(geography == input$economic_inactivity_cw_geog_name)
 
   dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
                      id = "economic_inactivity_cw", filename = "economic_inactivity",
                      add_separator_cols = c(4),
-                     add_separator_cols_1dp = c(5))
+                     add_percentage_cols_1dp = c(5))
 })
 
 observeEvent(input$economic_inactivity_cw_geog_name, {
 
   output$economic_inactivity_cw_table_title <- renderUI({
-    h3(glue("Data table: Percentage of economically inactive people aged 16 to 64 by willingness to work in ",
-         input$economic_inactivity_cw_geog_name))})
+    h3(glue("Data table: Economically inactive people aged 16 to 64 who don't want to work in ",
+            input$economic_inactivity_cw_geog_name))})
 
 })
 
