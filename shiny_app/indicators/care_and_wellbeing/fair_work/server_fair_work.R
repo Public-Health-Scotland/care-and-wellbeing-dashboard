@@ -479,8 +479,8 @@ observeEvent(input$economic_inactivity_cw_geog_type,
 
 output$economic_inactivity_cw_plot <- renderPlotly({
 
-  title <- glue("Percentage of economically inactive people aged 16 to 64 by
-                willingness to work who don't want to work in ",
+  title <- glue("Percentage of economically inactive people aged 16 to 64
+                who don't want to work in ",
                 input$economic_inactivity_cw_geog_name)
 
   economic_inactivity %>%
