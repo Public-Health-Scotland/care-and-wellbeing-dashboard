@@ -2,13 +2,6 @@
 # ECONOMIC INACTIVITY DATA PROCESSING ----
 ####################################################.
 
-############
-
-## After downloading the data from nomis, you will need to edit and save the file.
-## Remove extra rows and add a column at the end that determines values that refer to percentage of
-## people wanting a job or not wanting a job. Please refer to original excel file when editing the new one
-##
-
 data_path <- paste0(path_in, "/economic_inactivity.xlsx")
 
 years <- c("geography")
@@ -19,43 +12,39 @@ for (i in range) {
   years <- append(years, x)
 }
 
-years <- append(years, "value")
 
 
-input_economic_inactivity <- read_excel(data_path, skip = 2, col_names = years)
+input_economic_inactivity <- read_excel(data_path, skip = 8, col_names = years) %>%
+  filter(!is.na(`2008numerator`)) %>%
+  mutate(geography = str_remove(geography, "ladu:"),
+         geography = str_remove(geography, "country:"),
+         across(everything(), as.character),
+         geography_type = ifelse(geography == "Scotland", "Scotland", "Council Area"))
 
 
 economic_inactivity_percent <- input_economic_inactivity %>%
-  select(1, seq(from = 4, to = length(years)-1, by = 4), length(years)) %>%
-  mutate(geography = str_remove(geography, "lacu:"),
-         geography = str_remove(geography, "country"),
-         across(everything(), as.character))
+  select("geography", "geography_type", seq(from = 4, to = length(years), by = 4))
 
-names(economic_inactivity_percent) <- c("geography", range, "value")
+names(economic_inactivity_percent) <- c("geography", "geography_type", range)
 
 economic_inactivity_percent %<>% pivot_longer(cols = as.character(c(range)), names_to = "Year", values_to = "percentage") %>%
-
-  # adding 0 if data unavailable
-  mutate(percentage = recode(percentage,"!" = "0"),
-         percentage = as.double(percentage))
+  mutate(percentage = as.double(percentage))
 
 
 economic_inactivity_number <- input_economic_inactivity %>%
-  select(1, seq(from = 2, to = length(years)-1, by = 4), length(years)) %>%
-  mutate(geography = str_remove(geography, "lacu:"),
-         geography = str_remove(geography, "country"),
-         across(everything(), as.character))
+  select("geography", "geography_type", seq(from = 2, to = length(years), by = 4))
 
-names(economic_inactivity_number) <- c("geography", range, "value")
+names(economic_inactivity_number) <- c("geography", "geography_type", range)
 
 economic_inactivity_number %<>% pivot_longer(cols = as.character(c(range)), names_to = "Year", values_to = "number") %>%
+  mutate(number = as.double(number))
 
-  # adding 0 if data unavailable
-  mutate(number = recode(number,"!" = "0",
-                         "~" = "0",
-                         "*" = "0"), ##what to do
-         number = as.double(number))
+economic_inactivity <- full_join(economic_inactivity_number, economic_inactivity_percent)
 
+
+
+replace_file_fn(economic_inactivity,
+                paste0(path_out, "/economic_inactivity.rds"))
 
 # economic_inactivity_scotland_rate <- bind_rows(read_excel(data_path,
 #                                                           sheet = data_sheet,
@@ -472,16 +461,16 @@ economic_inactivity_number %<>% pivot_longer(cols = as.character(c(range)), name
 #   bind_rows(economic_inactivity_region) %>%
 #   select(year, region, breakdown, n, percent) %>%
 #   arrange(year)
-
-economic_inactivity %<>%
-  mutate(geography = region,
-         geography_type = ifelse(region == "Scotland", "Scotland", "Council Area"),
-         value = "economic_inactivity",
-         indicator = paste0(percent, "%"),
-         pretty_date = year,
-         geography = recode(geography, "Edinburgh, City of" = "City of Edinburgh"))
-
-replace_file_fn(economic_inactivity,
-                paste0(path_out, "/economic_inactivity.rds"))
-
-rm(economic_inactivity_scotland_rate, economic_inactivity_scotland_n, economic_inactivity_region_n, economic_inactivity_region_rate)
+#
+# economic_inactivity %<>%
+#   mutate(geography = region,
+#          geography_type = ifelse(region == "Scotland", "Scotland", "Council Area"),
+#          value = "economic_inactivity",
+#          indicator = paste0(percent, "%"),
+#          pretty_date = year,
+#          geography = recode(geography, "Edinburgh, City of" = "City of Edinburgh"))
+#
+# replace_file_fn(economic_inactivity,
+#                 paste0(path_out, "/economic_inactivity.rds"))
+#
+# rm(economic_inactivity_scotland_rate, economic_inactivity_scotland_n, economic_inactivity_region_n, economic_inactivity_region_rate)
