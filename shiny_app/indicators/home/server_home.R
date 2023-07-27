@@ -266,8 +266,22 @@ output$home_news_updates <- renderUI({
             tags$li("Add further metadata to help explain the rationale for each indicator"),
             tags$li("Review and add new indicators where needed")),
           p("We are keen to develop the dashboard in an agile way and hear feedback from users."),
-          p("Please send any feedback to", tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot."))
-  ) # tagList
+          p("Please send any feedback to", tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot.")),
+
+          h3(tags$b("Recent updates")),
+          h4("Data updates"),
+          p("The below summarises the indicators updated to include the most recent available data."),
+          tags$ul("Give Every Child the Best Start In Life",
+                  tags$li("Child social and physical development: 2021/22"),
+                  tags$li("Infant mortality: May 2023")
+                  ),
+          tags$ul("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives",
+                  tags$li("CAMHS waiting times: March 2023"))
+
+
+
+
+          ) # tagList
 
 })
 
