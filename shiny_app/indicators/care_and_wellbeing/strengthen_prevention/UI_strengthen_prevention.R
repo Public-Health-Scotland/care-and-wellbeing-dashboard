@@ -17,7 +17,7 @@ tagList(
                                                                               "<br><br> The most current data available displayed in the Care and Wellbeing dashboard is 2021/22.",
                                                                               "<br><br>These data are available at Scotland and NHS Health Board levels with additional breakdown by age and sex.",
                                                                               "<br><br> More detailed information can be found in the accompanying",
-                                                                              "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                              "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(column(4,
                                         selectInput("asthma_admissions_geog_type",
@@ -88,7 +88,7 @@ tagList(
                                                                       # "More up to date data is available at source.",
                                                                       "<br><br>These data are available at Scotland and NHS Health Board levels.",
                                                                       "<br><br> More detailed information can be found in the accompanying",
-                                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                      "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                          fluidRow(
                                            column(4,
@@ -137,7 +137,7 @@ tagList(
                                                                       # "More up to date data is available at source.",
                                                                       "<br><br>These data are available at a Scotland level with additional breakdown by sex. ",
                                                                       "<br><br> More detailed information can be found in the accompanying",
-                                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                      "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                          fluidRow(
                                            column(4,
@@ -193,7 +193,7 @@ tagList(
                                                      "<br><br>These data are available at Scotland, NHS Health Board",
                                                      "and Council Area levels.",
                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(
                           column(4,
@@ -251,7 +251,7 @@ tagList(
                                                      "NHS Health Board, HSCP partnership,",
                                                      "Council Area, Locality and Intermediate Zone (2011) levels.",
                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(
                           column(4,
@@ -317,7 +317,7 @@ tagList(
                                                                                                          "number of admissions or as an age-sex standardised rate.",
 
                                                                                                          "<br><br> More detailed information can be found in the accompanying",
-                                                                                                         "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                                                         "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         fluidRow(
                                           column(4,
@@ -365,7 +365,7 @@ tagList(
                                                                                              "<br><br>These data are available at Scotland,",
                                                                                              " NHS Health Board and Council Area levels.",
                                                                                              "<br><br> More detailed information can be found in the accompanying",
-                                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                                             "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         fluidRow(
                                           column(4,
@@ -432,7 +432,7 @@ tagList(
                                                                                      "<br><br>These data are available at a Scotland level.",
                                                                                      # "NHS Health Board and Council Area level.",
                                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("experience_of_unpaid_carers_alt"),
                         withSpinner(plotlyOutput("experience_unpaid_carers_plot")),
@@ -461,7 +461,7 @@ tagList(
                                                       "<br><br>These data are available at a Scotland level.",
                                                       # "NHS Health Board and Council Area level.",
                                                       "<br><br> More detailed information can be found in the accompanying",
-                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                      "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                         fluidRow(
@@ -506,7 +506,7 @@ tagList(
                                                                              " NHS Health Board and Council Area levels",
                                                                              " with additional breakdowns by sex and SIMD quintile.",
                                                                              "<br><br> More detailed information can be found in the accompanying",
-                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                             "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                         fluidRow(
@@ -578,7 +578,7 @@ tagList(
                                                                        "for the year ranges 2009-11 to 2019-21.",
                                                                        "Additional break downs by Council Area or Scottish Index of Multiple Deprivation (SIMD) are provided using the 2019-21 dataset.",
                                                                        "<br><br> More detailed information can be found in the accompanying",
-                                                                       "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                                                                       "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
                                          fluidRow(
                                            column(4,
@@ -637,7 +637,7 @@ tagList(
                                                                        "for the year ranges 2009-11 to 2019-21.",
                                                                        "An additional break down by Council Area is provided using the 2019-21 dataset.",
                                                                        "<br><br> More detailed information can be found in the accompanying",
-                                                                       "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                                                                       "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
                                          fluidRow(
                                            column(4,
                                                   selectInput("healthy_life_expectancy_sex",
@@ -689,7 +689,7 @@ tagList(
                                                      "<br><br>These data are available at Scotland level",
                                                      " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
                         altTextUI("adult_long_term_condition_alt"),
                         withSpinner(plotlyOutput("adult_long_term_condition_plot")),
@@ -731,7 +731,7 @@ tagList(
                                                      "<br><br>These data are available at Scotland level,",
                                                      " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
                         altTextUI("mental_wellbeing_alt"),
                         wemwbsDefinitionUI("mental_wellbeing_wemwbs"),
@@ -774,7 +774,7 @@ tagList(
                                                                            "<br><br>These data are available at Scotland, ",
                                                                            "NHS Health Board and Council Area levels with additional breakdown by SIMD quintile.",
                                                                            "<br><br> More detailed information can be found in the accompanying",
-                                                                           "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+                                                                           "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
 
                         fluidRow(column(4,
                                         selectInput("premature_mortality_geog_type",
@@ -853,7 +853,7 @@ tagList(
                                                                      "<br><br>These data are available at Scotland",
                                                                      "and NHS Health Board levels with additional breakdown by SIMD quintile.",
                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         altTextUI("screening_breast_board_alt"),
                                         withSpinner(plotlyOutput("screening_breast_board_plot")),
@@ -918,7 +918,7 @@ tagList(
                                                                      "<br><br>These data are available at Scotland",
                                                                      "and NHS Health Board levels with additional breakdowns by sex and SIMD quintile.",
                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                         fluidRow(
                                           column(4,
@@ -995,7 +995,7 @@ tagList(
                                                     " with additional breakdowns by sex and SIMD quintile.",
                                                     #"and NHS Health Board level.",
                                                     "<br><br> More detailed information can be found in the accompanying",
-                                                    "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                    "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("adult_self_assessed_health_alt"),
                         withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
@@ -1042,7 +1042,7 @@ tagList(
                                                                      "<br><br>These data are available at Scotland",
                                                                      "and NHS Health Board levels.",
                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                                         fluidRow(column(4,
@@ -1090,7 +1090,7 @@ tagList(
                                                                      "<br><br>These data are available at Scotland",
                                                                      "and NHS Health Board levels.",
                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                                         fluidRow(column(4,

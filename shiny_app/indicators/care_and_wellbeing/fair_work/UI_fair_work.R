@@ -22,7 +22,7 @@ tagList(
                                                                             "<br><br>These data are available at Scotland",
                                                                             "and Council Area levels.",
                                                                             "<br><br> More detailed information can be found in the accompanying",
-                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                            "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
                         fluidRow(column(4,
@@ -73,7 +73,7 @@ tagList(
                                                                              "<br><br>These data are available at a Scotland",
                                                                              "level.",
                                                                              "<br><br> More detailed information can be found in the accompanying",
-                                                                             "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                             "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
 
 
@@ -135,7 +135,7 @@ tagList(
                                                                                             "<br><br>These data are available at a Scotland",
                                                                                             "level.",
                                                                                             "<br><br> More detailed information can be found in the accompanying",
-                                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                                            "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(column(4,
                                         selectInput("gender_pay_gap_cw_sector_type",
