@@ -168,13 +168,14 @@ make_line_chart_multi_lines_pg <- function(data, x, y, colour, y_axis_title, x_a
 
 make_economic_inactivity_cw_plot <- function(data, title) {
   fig = data %>%
-    plot_ly(x = ~year,
-            y = ~percent,
-            color = ~breakdown,
+    plot_ly(x = ~Year,
+            y = ~percentage,
+            # color = ~breakdown,
             type="bar",
-            colors = phs_colours(c("phs-blue", "phs-blue-50")),
-            hovertemplate = ~paste0(percent, "%",
-                                    "<br>Number of people : ", format(data$n, big.mark = ","))) %>%
+            name = "Percentage",
+            colors = phs_colours(c("phs-blue")),#, "phs-blue-50")),
+            hovertemplate = ~paste0(percentage, "%",
+                                    "<br>Number of people : ", format(data$number, big.mark = ","))) %>%
     layout(barmode = "stack",
            title = list(text = str_wrap(title, width = 60), font = title_style),
            yaxis = list(title = "Percentage (%)",

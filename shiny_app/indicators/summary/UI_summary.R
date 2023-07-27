@@ -138,27 +138,27 @@ tagList(
                    h2("Create fair employment and good work for all"),
 
                    fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
-                            summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
-                                         button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
-                                                                "This data is available at Scotland and council area level. Further information is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
+                     # column(4,
+                     #        h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
+                     #        summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
+                     #                     button_title =  "Economic inactivity",
+                     #                     button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
+                     #                                            "This data is available at Scotland and council area level. Further information is available under ",
+                     #                                            "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                     #                                            "<br> <br> {strong('Click again to close.')}"))
+                     # ),
 
-                     column(4,
+                     column(6,
                             h3(actionLink("jump_summary_to_economic_inactivity_cw_not_want", "Economic inactivity")),
                             summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
                                          button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
+                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$Year)}. <br> <br>",
                                                                 "This data is available at Scotland and council area level. Further information is available under ",
                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
 
-                     column(4,
+                     column(6,
                             h3(actionLink("jump_summary_to_employees_living_wage_cw", "Employees on the living wage")),
                             summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
                                          button_title =  "Employees on the living wage",
