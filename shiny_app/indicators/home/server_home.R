@@ -260,28 +260,57 @@ output$home_news_updates <- renderUI({
   tagList(h3(tags$b("News and future updates")),
           p("This is an early release of the dashboard and it will be further developed following user feedback."),
           p("Over the coming months, we are planning to:",
-            tags$li("Add content for all indicators"),
             tags$li("Review and add further equalities breakdowns where data exists"),
             tags$li("Develop the ‘at a glance’ section to make it easier to gain a quick overview and assessment of progress across the Marmot policy objectives"),
-            tags$li("Add further metadata to help explain the rationale for each indicator"),
             tags$li("Review and add new indicators where needed")),
           p("We are keen to develop the dashboard in an agile way and hear feedback from users."),
           p("Please send any feedback to", tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot.")),
 
-          h3(tags$b("Recent updates")),
+          h3(tags$b("Recent updates on the 31st July 2023")),
           h4("Data updates"),
           p("The below summarises the indicators updated to include the most recent available data."),
-          tags$ul("Give Every Child the Best Start In Life",
-                  tags$li("Child social and physical development: 2021/22"),
-                  tags$li("Infant mortality: May 2023")
-                  ),
-          tags$ul("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives",
-                  tags$li("CAMHS waiting times: March 2023"))
+          tags$ul(tags$b("Give Every Child the Best Start In Life"),
+                  tags$ul(tags$li("Child social and physical development: 2021/22"),
+                          tags$li("Infant mortality: May 2023"))
+          ),
+          tags$ul(tags$b("Enable All Children, Young People and Adults to Maximise Their Capabilities and Control Over Their Lives"),
+                  tags$ul(tags$li("CAMHS waiting times: March 2023"))
+          ),
+          tags$ul(tags$b("Create Fair Employment and Good Work For All"),
+                  tags$ul(tags$li("Economic Inactivity: 2022"),
+                          tags$li("Employees on the living wage: 2022"),
+                          tags$li("Gender pay gap: 2022"))
+          ),
+          tags$ul(tags$b("Strengthen the Role and Impact of Ill Health Prevention"),
+                  tags$ul(tags$li("Alcohol-related hospital admissions: 2021/22"),
+                          tags$li("Drug-related hospital admissions: 2021/22"),
+                          tags$li("First ever hospital admission for heart attack: 2020/21"),
+                          tags$li("Healthy birthweight: 2021/22"),
+                          tags$li("Vaccinations (COVID & Influenza): June 2023 (Spring Vaccination Programme"))
+          ),
+          h4("Further breakdowns added"),
+          p("The below summarises the indicators with additional breakdowns, including equality breakdowns, that are now available."),
+          tags$ul(tags$b("Give Every Child the Best Start In Life"),
+                  tags$ul(tags$li("Infant mortality"))
+          ),
+          tags$ul(tags$b("Strengthen the Role and Impact of Ill Health Prevention"),
+                  tags$ul(tags$li("Admissions for asthma"),
+                          tags$li("Alcohol-sepcific deaths"),
+                          tags$li("Alcohol-related hospital admissions"),
+                          tags$li("Drug-related hospital admissions"),
+                          tags$li("First ever hospital admission for heart attack"),
+                          tags$li("Healthy birthweight: SIMD breakdown for Scotland, Health board and council area level"),
+                          tags$li("Life Expectancy: SIMD breakdown at Scotland level"),
+                          tags$li("Limiting long-term conditions: SIMD and sex breakdown at Scotland level"),
+                          tags$li("Premature mortlaity: Number now available and new chart for comparing geographies now included"),
+                          tags$li("Self-assessed health of adults: SIMD and sex breakdown at Scotland level"))
+          ),
 
 
 
 
-          ) # tagList
+
+  ) # tagList
 
 })
 
