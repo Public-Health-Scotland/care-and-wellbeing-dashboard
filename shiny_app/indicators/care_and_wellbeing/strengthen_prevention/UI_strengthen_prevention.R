@@ -135,18 +135,23 @@ tagList(
                                                                       "<a href=https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/vital-events/deaths/alcohol-deaths/ target = _blank> Alcohol-specific deaths, 2021, National Records of Scotland (external site)</a>.",
                                                                       "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is 2021.",
                                                                       # "More up to date data is available at source.",
-                                                                      "<br><br>These data are available at a Scotland level with additional breakdown by sex. ",
+                                                                      "<br><br>These data are available at a Scotland level with additional breakdown by sex and age group. ",
                                                                       "<br><br> More detailed information can be found in the accompanying",
                                                                       "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                                          fluidRow(
                                            column(4,
                                                   selectInput("alcohol_deaths_sex",
-                                                              "Select sex",
+                                                              "Step 1. Select sex",
                                                               choices = unique(alcohol_deaths$sex),
                                                               selected = "All sexes",
                                                               selectize = FALSE,
-                                                              width = "100%"))
+                                                              width = "100%")),
+                                           column(4,
+                                                  radioButtons("alcohol_deaths_rate_number",
+                                                                           "Step 2. View rate per 100,000 population or number of deaths",
+                                                                           choices = c("Rate", "Number"),
+                                                                           width = "100%"))
                                          ),
 
                                          altTextUI("alcohol_deaths_sex_alt"),
