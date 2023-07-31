@@ -1064,12 +1064,12 @@ output$alcohol_deaths_sex_plot = renderPlotly({
 
   if(input$alcohol_deaths_rate_number == "Rate") {
 
-    title_start = "Age-sex standerdised deaths rates per 100,000 population of "
+    title_start = "Age-sex standardised rates per 100,000 population of alcohol-specific deaths of "
     indicator_y = "rate"
     y_title = "Age-sex standardised rate of deaths <br> per 100,000 population"
   } else {
 
-    title_start = "Total number of deaths of "
+    title_start = "Total number of alcohol-specific deaths of "
     indicator_y = "number"
     y_title = "Total number of deaths"
   }
@@ -1087,11 +1087,23 @@ output$alcohol_deaths_sex_plot = renderPlotly({
     rename("lower_confidence_interval" = lower_ci,
            "upper_confidence_interval" = upper_ci,
            "date" = year,
-           "indicator" = indicator_y) %>%
-    confidence_line_function(y_title = y_title,
+           "indicator" = indicator_y)
+
+  if(input$alcohol_deaths_rate_number == "Rate") {
+
+    data %>% confidence_line_function(y_title = y_title,
                              x_title = "Year",
                              title=title) %>%
-    layout(xaxis = list(dtick = 1, tickangle = -30))
+      layout(xaxis = list(dtick = 1, tickangle = -30))
+  } else {
+    data %>%
+      line_chart_function(y_title = y_title,
+                          x_title = "Year",
+                          title=title
+                                  )
+
+  }
+
 
 })
 
@@ -1103,7 +1115,7 @@ altTextServer("alcohol_deaths_age_alt",
                                         standardised rate per 100,000 population."),
                                 tags$li("If instead, number is chosen then the y axis
                                         is number of deaths."),
-                                tags$li("There are five lines showing the five age breakdowns: '10-24', '25-44', '45'64', '65-75' and '75+'."),
+                                tags$li("There are five lines showing the five age breakdowns: '10-24', '25-44', '45-64', '65-75' and '75+'."),
                                 tags$li("The dropdown above the previous plot indicates which sex the plot is showing, the choices are",
                                         "'All sexes', 'Female' and 'Male'. The default is 'All sexes' .")
               ))
@@ -1113,12 +1125,12 @@ output$alcohol_deaths_age_plot = renderPlotly({
 
   if(input$alcohol_deaths_rate_number == "Rate") {
 
-    title_start = "Age-sex standerdised deaths rates per 100,000 population of "
+    title_start = "Age-sex standardised rates per 100,000 population of alcohol-specific deaths of "
     indicator_y = "rate"
     y_title = "Age-sex standardised rate of deaths <br> per 100,000 population"
   } else {
 
-    title_start = "Total number of deaths of "
+    title_start = "Total number of alcohol-specific deaths of "
     indicator_y = "number"
     y_title = "Total number of deaths"
   }
