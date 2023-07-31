@@ -102,7 +102,13 @@ tagList(
                                                               "Step 2: Select national or local geography area",
                                                               choices = c("Scotland"),
                                                               selectize = FALSE,
-                                                              width = "100%"))),
+                                                              width = "100%")),
+                                           column(4,
+                                                  radioButtons("alcohol_admissions_rate_number",
+                                                               "Step 3. View rate per 100,000 population or number of deaths",
+                                                               choices = c("Rate",
+                                                                           "Number"),
+                                                               width = "100%"))),
 
                                          altTextUI("alcohol_admissions_alt"),
                                          withSpinner(plotlyOutput("alcohol_admissions_plot")),
@@ -685,16 +691,30 @@ tagList(
                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                      "2021.",
                                                      #"More up to date data is available at source.",
-                                                     "<br><br>These data are available at a Scotland level.",
+                                                     "<br><br>These data are available at Scotland level",
+                                                     " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
+
                         altTextUI("adult_long_term_condition_alt"),
                         withSpinner(plotlyOutput("adult_long_term_condition_plot")),
 
+                        altTextUI("adult_long_term_condition_simd_alt"),
+                        simdQuintileDefinitionUI("adult_self_assessed_simd"),
+                        withSpinner(plotlyOutput("adult_long_term_condition_simd_plot")),
+
                         br(),
                         h3("Data table: Percentage of adults with a limiting long-term condition in Scotland"),
-                        br(),
-                        dataDownloadUI("limiting_ltcs")
+
+                        tabBox(
+                          id = "adult_long_term_condition_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("limiting_ltcs")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("limiting_ltcs_simd"))
+                        )
                ),
 
                ##############################################.
@@ -713,7 +733,7 @@ tagList(
                                                      "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                      "2021.",
                                                      #"More up to date data is available at source.",
-                                                     "<br><br>These data are available at a Scotland level,",
+                                                     "<br><br>These data are available at Scotland level,",
                                                      " with additional breakdowns by sex and SIMD quintile.",
                                                      "<br><br> More detailed information can be found in the accompanying",
                                                      "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata</a> file."))),
@@ -976,7 +996,8 @@ tagList(
                                                     "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is ",
                                                     "2021.",
                                                     #"More up to date data is available at source.",
-                                                    "<br><br>These data are available at a Scotland level.",
+                                                    "<br><br>These data are available at Scotland level,",
+                                                    " with additional breakdowns by sex and SIMD quintile.",
                                                     #"and NHS Health Board level.",
                                                     "<br><br> More detailed information can be found in the accompanying",
                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
@@ -984,10 +1005,21 @@ tagList(
                         altTextUI("adult_self_assessed_health_alt"),
                         withSpinner(plotlyOutput("adult_self_assessed_health_plot")),
 
+                        altTextUI("adult_self_assessed_health_simd_alt"),
+                        simdQuintileDefinitionUI("adult_self_assessed_simd"),
+                        withSpinner(plotlyOutput("adult_self_assessed_health_simd_plot")),
+
                         br(),
                         h3("Data table: Percentage of adults in Scotland who describe their general health as 'good' or 'very good'"),
-                        br(),
-                        dataDownloadUI("adult_self_assessed_health")
+                        tabBox(
+                          id = "adult_self_assessed_tabBox", height = "250px", width=12,
+                          tabPanel("Sex",
+                                   br(),
+                                   dataDownloadUI("adult_self_assessed_health")),
+                          tabPanel("SIMD",
+                                   br(),
+                                   dataDownloadUI("adult_self_assessed_health_simd"))
+                        )
                ),
 
                ##############################################.

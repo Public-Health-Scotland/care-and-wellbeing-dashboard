@@ -138,27 +138,27 @@ tagList(
                    h2("Create fair employment and good work for all"),
 
                    fluidRow(
-                     column(4,
-                            h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
-                            summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
-                                         button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
-                                                                "This data is available at Scotland and council area level. Further information is available under ",
-                                                                "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
-                                                                "<br> <br> {strong('Click again to close.')}"))
-                     ),
+                     # column(4,
+                     #        h3(actionLink("jump_summary_to_economic_inactivity_cw_want", "Economic inactivity")),
+                     #        summaryBoxUI("economic_inactivity_cw_want", title = "Percentage who want to work",
+                     #                     button_title =  "Economic inactivity",
+                     #                     button_content =  glue("This is the percentage of economically inactive people who want to work in {max(economic_inactivity$year)}. <br> <br>",
+                     #                                            "This data is available at Scotland and council area level. Further information is available under ",
+                     #                                            "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
+                     #                                            "<br> <br> {strong('Click again to close.')}"))
+                     # ),
 
-                     column(4,
+                     column(6,
                             h3(actionLink("jump_summary_to_economic_inactivity_cw_not_want", "Economic inactivity")),
                             summaryBoxUI("economic_inactivity_cw_not_want", title = "Percentage who don't want to work",
                                          button_title =  "Economic inactivity",
-                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$year)}. <br> <br>",
+                                         button_content =  glue("This is the percentage of economically inactive people who don`t want to work in {max(economic_inactivity$Year)}. <br> <br>",
                                                                 "This data is available at Scotland and council area level. Further information is available under ",
                                                                 "`Create fair employment and good work for all` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
 
-                     column(4,
+                     column(6,
                             h3(actionLink("jump_summary_to_employees_living_wage_cw", "Employees on the living wage")),
                             summaryBoxUI("employees_living_wage_cw", title = "Percentage of employees earning less than the living wage",
                                          button_title =  "Employees on the living wage",
@@ -375,7 +375,7 @@ tagList(
                                                                 "A limiting long-term condition is defined as a physical or mental condition & health condition or illness lasting, ",
                                                                 "or expected to last 12 limiting months or more. <br> <br> A long-term condition is defined as limiting if the respondent reported ",
                                                                 "that it limited their activities in any way. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
+                                                                "This data is available at Scotland level. Further breakdown by SIMD is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),
@@ -448,7 +448,7 @@ tagList(
                                          button_content =  glue("This is the percentage of adults who rated their health as `good` or `very good` in the ",
                                                                 "Scottish Health Survey in {max(adult_self_assessed_health$Year)}. Participants who are aged 13 years ",
                                                                 "and over are asked to rate their health in general with answer options ranging from `very good` to `very bad`. <br> <br>",
-                                                                "This data is available at Scotland level. Further information is ",
+                                                                "This data is available at Scotland level. Further breakdown by SIMD is ",
                                                                 "available under `Strengthen the role and impact of ill health prevention` on the `Care and Wellbeing` tab.",
                                                                 "<br> <br> {strong('Click again to close.')}"))
                      ),

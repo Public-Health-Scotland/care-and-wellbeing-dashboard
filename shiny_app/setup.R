@@ -39,7 +39,8 @@ xaxis_plots <- list(title = FALSE, tickfont = list(size=14), titlefont = list(si
                     showline = TRUE)
 
 yaxis_plots <- list(title = FALSE, rangemode="tozero", size = 4,
-                    tickfont = list(size=14), titlefont = list(size=14))
+                    tickfont = list(size=14), titlefont = list(size=14),
+                    tickformat = ",")
 
 # Buttons to remove from plotly plots
 bttn_remove <-  list('select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d',
@@ -189,7 +190,8 @@ yaxis_number = list(title = FALSE,
                     rangemode="tozero",
                     tickfont = list(size=14),
                     titlefont = list(size=18),
-                    showline = FALSE)
+                    showline = FALSE,
+                    tickformat = ",")
 
 yaxis_number_normal = list(rangemode="normal",
                            tickfont = list(size=14),

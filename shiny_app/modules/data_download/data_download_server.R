@@ -6,6 +6,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
                                add_separator_cols_1dp = NULL, # with , separator and 1dp
                                add_separator_cols_2dp = NULL, # with , separator and 2dp,
                                add_percentage_cols = NULL, # with % symbol and 2dp
+                               add_percentage_cols_1dp = NULL, # with % symbol and 1dp
                                maxrows = 10, # max rows displayed on page
                                order_by_firstcol = NULL, # asc, desc or NULL
                                filter_cols = NULL, # columns to have filters for
@@ -47,7 +48,7 @@ dataDownloadServer <- function(data, data_download = data, id, filename,
             data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=2, perc=T)
           }
 
-          for (i in add_percentage_cols){
+          for (i in add_percentage_cols_1dp){
             data[i] <- apply(data[i], MARGIN=1, FUN=format_entry, dp=1, perc=T)
           }
 

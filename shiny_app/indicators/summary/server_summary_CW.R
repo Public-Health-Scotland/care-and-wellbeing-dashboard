@@ -710,38 +710,38 @@ observeEvent(input$geog_name_summary_CW,{
 
 ##### Economic inactivity #####
 
+# observeEvent(input$geog_name_summary_CW,{
+#
+#   recent_date <- max(economic_inactivity$Year)
+#   previous_date <- max(economic_inactivity %>% filter(Year != recent_date) %>% .$Year)
+#
+#   recent_value <- economic_inactivity %>%
+#     filter(geography == input$geog_name_summary_CW, breakdown == "Wants to Work", Year == recent_date) %>%
+#     .$percent %>% round_half_up(2)
+#   previous_value <- economic_inactivity %>%
+#     filter(geography == input$geog_name_summary_CW, breakdown == "Wants to Work", Year == previous_date) %>%
+#     .$percent %>% round_half_up(2)
+#
+#   summaryBoxServer("economic_inactivity_cw_want",
+#                    recent_date = recent_date,
+#                    previous_date = previous_date,
+#                    recent_value = recent_value,
+#                    previous_value = previous_value,
+#                    percentage = TRUE)
+# })
+
+
 observeEvent(input$geog_name_summary_CW,{
 
-  recent_date <- max(economic_inactivity$year)
-  previous_date <- max(economic_inactivity %>% filter(year != recent_date) %>% .$year)
+  recent_date <- max(economic_inactivity$Year)
+  previous_date <- max(economic_inactivity %>% filter(Year != recent_date) %>% .$Year)
 
   recent_value <- economic_inactivity %>%
-    filter(geography == input$geog_name_summary_CW, breakdown == "Wants to Work", year == recent_date) %>%
-    .$percent %>% round_half_up(2)
+    filter(geography == input$geog_name_summary_CW, Year == recent_date) %>%
+    .$percentage %>% round_half_up(2)
   previous_value <- economic_inactivity %>%
-    filter(geography == input$geog_name_summary_CW, breakdown == "Wants to Work", year == previous_date) %>%
-    .$percent %>% round_half_up(2)
-
-  summaryBoxServer("economic_inactivity_cw_want",
-                   recent_date = recent_date,
-                   previous_date = previous_date,
-                   recent_value = recent_value,
-                   previous_value = previous_value,
-                   percentage = TRUE)
-})
-
-
-observeEvent(input$geog_name_summary_CW,{
-
-  recent_date <- max(economic_inactivity$year)
-  previous_date <- max(economic_inactivity %>% filter(year != recent_date) %>% .$year)
-
-  recent_value <- economic_inactivity %>%
-    filter(geography == input$geog_name_summary_CW, breakdown == "Does Not\r\nWant to Work", year == recent_date) %>%
-    .$percent %>% round_half_up(2)
-  previous_value <- economic_inactivity %>%
-    filter(geography == input$geog_name_summary_CW, breakdown == "Does Not\r\nWant to Work", year == previous_date) %>%
-    .$percent %>% round_half_up(2)
+    filter(geography == input$geog_name_summary_CW, Year == previous_date) %>%
+    .$percentage %>% round_half_up(2)
 
   summaryBoxServer("economic_inactivity_cw_not_want",
                    recent_date = recent_date,
