@@ -25,7 +25,7 @@ tagList(
                                                                               "<br><br>These data are available at Scotland,",
                                                                               "NHS Health Board and Council Area levels.",
                                                                               "<br><br> More detailed information can be found in the accompanying",
-                                                                              "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                              "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         # p("Select up to 3 Health Boards and Council Areas to compare on the chart using the boxes below.",
                         #   "Scotland will always be displayed"),
@@ -109,7 +109,7 @@ tagList(
                                                                         "<br><br>These data are available at a Scotland level.",
                                                                         #", NHS Health Board and Council Area level.",
                                                                      "<br><br> More detailed information can be found in the accompanying",
-                                                                     "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                     "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         altTextUI("child_obesity_alt"),
                         withSpinner(plotlyOutput("child_obesity_plot")),
@@ -141,7 +141,7 @@ tagList(
                                                                             "<br><br>These data are available at a Scotland",
                                                                             "level.",
                                                                             "<br><br> More detailed information can be found in the accompanying",
-                                                                            "<a href=https://publichealthscotland.scot/media/20052/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
+                                                                            "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
                         fluidRow(
                           column(4,
