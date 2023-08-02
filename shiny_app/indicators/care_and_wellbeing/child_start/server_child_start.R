@@ -152,38 +152,114 @@ output$child_development_cw_plot = renderPlotly({
 #                            geogtype = "council_area")
 # })
 
-observeEvent(input$child_development_cw_geog_name, {
 
-  data_unfiltered <- preschool %>%
-    select(financial_year, geography_type, geography, number_of_reviews,
-           concern_any, proportion = prop_concern_any) %>%
-    rename("Total number of reviews" = "number_of_reviews",
-           "Number of reviews with any concern" = "concern_any",
-           "Proportion of total reviews with any concern" = "proportion")
 
-  data_filtered <- data_unfiltered %>%
-    filter(geography == input$child_development_cw_geog_name) %>%
-    mutate(financial_year = factor(financial_year),
-           geography = factor(geography))
-
-  dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
-                     id = "child_development_cw", filename = "child_development",
-                     add_separator_cols = c(4,5),
-                     add_percentage_cols = c(6))
-})
 
 observeEvent(input$child_development_cw_geog_name, {
-
-  # geog_type <- ifelse(input$child_development_cw_geog_table == "Scotland",
-  #                     "in Scotland",
-  #                     paste0("by ", input$child_development_cw_geog_table))
-
-
-  output$child_development_cw_table_title <- renderUI({
-    h3(glue("Data table: Proportion of health visitor reviews where any ",
-            "form of developmental concern was raised in ", input$child_development_cw_geog_name))})
-
+  observeEvent(input$child_development_cw_breakdowns, {
+    
+    if(input$child_development_cw_breakdowns == "Yearly total") {
+      
+      title <- glue("Data table: Proportion of health visitor reviews where any form of
+                       developmental concern was raised in {input$child_development_cw_geog_name}")
+      
+      data_unfiltered <- preschool %>%
+        select(financial_year, geography_type, geography, number_of_reviews,
+               concern_any, proportion = prop_concern_any) %>%
+        rename("Total number of reviews" = "number_of_reviews",
+               "Number of reviews with any concern" = "concern_any",
+               "Proportion of total reviews with any concern" = "proportion")
+      
+      data_filtered <- data_unfiltered %>%
+        filter(geography == input$child_development_cw_geog_name) %>%
+        mutate(financial_year = factor(financial_year),
+               geography = factor(geography))
+      
+      dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                         id = "child_development_cw", filename = "child_development",
+                         add_separator_cols = c(4,5),
+                         add_percentage_cols = c(6))
+      
+      
+    } else if(input$child_development_cw_breakdowns == "SIMD breakdown"){
+      
+      title <- glue("Data table: Proportion of health visitor reviews where any form of
+                     developmental concern was raised in {input$child_development_cw_geog_name} by SIMD")
+      
+      data_unfiltered <- preschool_simd %>%
+        select(financial_year, simd_quintile, geography_type, geography, number_of_reviews,
+               concern_any, proportion = prop_concern_any) %>%
+        rename("SIMD" = "simd_quintile",
+               "Total number of reviews" = "number_of_reviews",
+               "Number of reviews with any concern" = "concern_any",
+               "Proportion of total reviews with any concern" = "proportion")
+      
+      data_filtered <- data_unfiltered %>%
+        filter(geography == input$child_development_cw_geog_name) %>%
+        mutate(financial_year = factor(financial_year),
+               geography = factor(geography))
+      
+      dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                         id = "child_development_cw", filename = "child_development_simd",
+                         add_separator_cols = c(5,6),
+                         add_percentage_cols = c(7))
+      
+      
+    } else if(input$child_development_cw_breakdowns == "Sex breakdown"){
+      
+      title <- glue("Data table: Proportion of health visitor reviews where any form of
+                     developmental concern was raised in {input$child_development_cw_geog_name} by sex")
+      
+      data_unfiltered <- preschool_sex %>%
+        select(financial_year, sex, geography_type, geography, number_of_reviews,
+               concern_any, proportion = prop_concern_any) %>%
+        rename("Total number of reviews" = "number_of_reviews",
+               "Number of reviews with any concern" = "concern_any",
+               "Proportion of total reviews with any concern" = "proportion")
+      
+      data_filtered <- data_unfiltered %>%
+        filter(geography == input$child_development_cw_geog_name) %>%
+        mutate(financial_year = factor(financial_year),
+               geography = factor(geography))
+      
+      dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                         id = "child_development_cw", filename = "child_development_sex",
+                         add_separator_cols = c(5,6),
+                         add_percentage_cols = c(7))
+      
+      
+    } else if(input$child_development_cw_breakdowns == "Ethnicity breakdown"){
+      
+      title <- glue("Data table: Proportion of health visitor reviews where any form of
+                     developmental concern was raised in Scotland by ethnicity")
+      
+      data_unfiltered <- preschool_ethnicity %>%
+        select(financial_year, ethnicity, geography_type, geography, number_of_reviews,
+               concern_any, proportion = prop_concern_any) %>%
+        rename("Total number of reviews" = "number_of_reviews",
+               "Number of reviews with any concern" = "concern_any",
+               "Proportion of total reviews with any concern" = "proportion")
+      
+      data_filtered <- data_unfiltered %>%
+        mutate(financial_year = factor(financial_year),
+               geography = factor(geography))
+      
+      dataDownloadServer(data = data_filtered, data_download = data_unfiltered,
+                         id = "child_development_cw", filename = "child_development_ethnicity",
+                         add_separator_cols = c(5,6),
+                         add_percentage_cols = c(7))
+      
+      
+    }
+    
+    output$child_development_cw_table_title <- renderUI(h3(title))
+    
+  })
+  
 })
+
+
+
 
 ##############################################.
 # CHILD WELLBEING AND HAPPINESS----
