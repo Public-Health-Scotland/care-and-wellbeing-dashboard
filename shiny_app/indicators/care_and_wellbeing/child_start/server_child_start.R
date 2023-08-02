@@ -70,40 +70,75 @@ altTextServer("child_development_cw_alt",
 
 output$child_development_cw_plot = renderPlotly({
 
-  data = preschool %>% filter(geography == input$child_development_cw_geog_name)
 
+  ### Yearly total 
+  if(input$child_development_cw_breakdowns == "Yearly total") {
+  
+      data <- preschool %>% filter(geography == input$child_development_cw_geog_name)
+      title <- glue("Proportion of health visitor reviews where any form of developmental concern was raised in {input$child_development_cw_geog_name}")
+      
+      # By health board 
+      if(input$child_development_cw_geog_type == "Health Board") {
+        data_baseline = preschool %>%
+          filter(geography_type=="Scotland")
+        
+        p = make_child_development_cw_plot(data, data_baseline, baseline = TRUE,
+                                           geog_name = input$child_development_cw_geog_name,
+                                           baseline_name = "Scotland", title = title)
+        
+        # By council area
+      } else if (input$child_development_cw_geog_type == "Council Area") {
+        
+        hb <- data %>%
+          slice(1) %>%
+          .$hb2019name
+        
+        data_baseline = preschool %>%
+          filter(geography_type == "Health Board",
+                 `hb2019name` %in% hb)
+        
+        p = make_child_development_cw_plot(data, data_baseline, baseline = TRUE,
+                                           geog_name = input$child_development_cw_geog_name,
+                                           baseline_name = hb, title = title)
+        # Scotland level
+      } else {
+        
+        p = make_child_development_cw_plot(data, title = title)
+        
+      }
+  
+  ### Sex breakdown
+  } else if(input$child_development_cw_breakdowns == "Sex breakdown") {
 
-  if(input$child_development_cw_geog_type == "Health Board") {
-    data_baseline = preschool %>%
-      filter(geography_type=="Scotland")
+      data <- preschool_sex %>% filter(geography == input$child_development_cw_geog_name)
+      title <- glue("Proportion of health visitor reviews where any form of developmental concern was raised in {input$child_development_cw_geog_name} by sex")
+      p = make_child_development_cw_plot_sex(data, title = title)
+        
+        
+  ### SIMD breakdown
+  } else if(input$child_development_cw_breakdowns == "SIMD breakdown") {
+    
+      data <- preschool_simd %>% filter(geography == input$child_development_cw_geog_name)
+      title <- glue("Proportion of health visitor reviews where any form of developmental concern was raised in {input$child_development_cw_geog_name} by SIMD")
+      p = make_child_development_cw_plot_simd(data, title = title)
+      
 
-    p = make_child_development_cw_plot(data, data_baseline, TRUE,
-                                       input$child_development_cw_geog_name,
-                                       baseline_name = "Scotland")
-
-  } else if (input$child_development_cw_geog_type == "Council Area") {
-
-    hb <- data %>%
-      slice(1) %>%
-      .$hb2019name
-
-    data_baseline = preschool %>%
-      filter(geography_type == "Health Board",
-             `hb2019name` %in% hb)
-
-    p = make_child_development_cw_plot(data, data_baseline, TRUE,
-                                       input$child_development_cw_geog_name,
-                                       hb)
-  } else {
-
-    title = "Proportion of health visitor reviews where any form of developmental concern was raised in Scotland"
-
-    p = make_child_development_cw_plot(data, title = title)
+  ### Ethnicity breakdown
+  } else if(input$child_development_cw_breakdowns == "Ethnicity breakdown") {
+    
+      data <- preschool_ethnicity
+      title <- glue("Proportion of health visitor reviews where any form of developmental concern was raised in {input$child_development_cw_geog_name} by ethnicity")
+      p = make_child_development_cw_plot_ethnicity(data, title = title)
+      
+      
   }
-
+  
   return(p)
-
+  
 })
+
+
+
 
 # output$child_development_cw_data = DT::renderDataTable({
 #
