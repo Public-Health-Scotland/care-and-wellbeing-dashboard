@@ -45,7 +45,14 @@ altTextServer("child_development_cw_alt",
                                 tags$li("If Scotland is selected then there the plot will show one purple line representing the data for Scotland.",
                                         "If a health board is selected then the purple line on the plot will represent the health board chosen and the magenta line ",
                                         "will represent Scotland as a baseline. If a council area is selected then the purple line on the plot will represent",
-                                        "the council area chosen and the magenta line will represent the health board the council area is located in as a baseline.")#,
+                                        "the council area chosen and the magenta line will represent the health board the council area is located in as a baseline."),
+                                tags$li("There is an additional drop down above the chart which allows you to select a sex, SIMD quintile or",
+                                        "ethnicity breakdown. The default is the yearly total, or no breakdown, and the description above applies."),
+                                tags$li("If a sex breakdown is selected, the plot will show one purple line for females and one green line for males."),
+                                tags$li("If a SIMD breakdown is selected, the plot will show a trace for each of the five SIMD quintiles,",
+                                        "from most deprived to least deprived."),
+                                tags$li("If an ethnicity breakdown is selected, the plot will show a trace for each of the following ethnicities:",
+                                        "black, asian, mixed, white, white scottish, white british, pole, and not known")
                                 # tags$li("Since the data began for Scotland there has been a general downwards trend before levelling out.")
 
 
