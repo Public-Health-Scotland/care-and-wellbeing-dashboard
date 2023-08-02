@@ -5,17 +5,35 @@
 ##############################################.
 
 # Show geography names dependent on geography type input
+# 
 
-observeEvent(input$child_development_cw_geog_type,
-             {
 
-               areas_summary <- preschool %>%
-                 filter(geography_type == input$child_development_cw_geog_type)
+observeEvent(input$child_development_cw_breakdowns, {
 
-               updateSelectizeInput(session,
-                                    "child_development_cw_geog_name", label = "Step 2. Select national or local geography area",
-                                    choices = unique(areas_summary$geography))
-             })
+  if(input$child_development_cw_breakdowns == "Ethnicity breakdown") {
+
+       updateSelectizeInput(session,
+                          "child_development_cw_geog_type", label = "Step 1. Select national or local geography level",
+                          choices = unique(preschool_ethnicity$geography_type))
+} else {
+
+}
+
+})
+
+
+
+observeEvent(input$child_development_cw_geog_type, {
+  
+  areas_summary <- preschool %>%
+    filter(geography_type == input$child_development_cw_geog_type)
+  
+  updateSelectizeInput(session,
+                       "child_development_cw_geog_name", label = "Step 2. Select national or local geography area",
+                       choices = unique(areas_summary$geography))
+})
+
+
 
 altTextServer("child_development_cw_alt",
               title = "Child social and physical development plot",
