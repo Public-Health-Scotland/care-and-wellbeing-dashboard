@@ -15,9 +15,16 @@ observeEvent(input$child_development_cw_breakdowns, {
        updateSelectizeInput(session,
                           "child_development_cw_geog_type", label = "Step 1. Select national or local geography level",
                           choices = unique(preschool_ethnicity$geography_type))
-} else {
+    
+} else if (input$child_development_cw_breakdowns == "Yearly total") {
+  
+  updateSelectizeInput(session,
+                       "child_development_cw_geog_type", label = "Step 1. Select national or local geography level",
+                       choices = c("Scotland", "Health Board", "Council Area"))
 
-}
+} else { 
+  
+  }
 
 })
 
