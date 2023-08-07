@@ -593,9 +593,9 @@ observeEvent(input$geog_name_summary_CW,{
   previous_date <- max(preschool %>% filter(financial_year != recent_date) %>% .$financial_year)
 
   recent_value <- preschool %>% filter(geography == input$geog_name_summary_CW, financial_year == recent_date) %>%
-    .$prop_concern_any %>% round_half_up(4)*100
+    .$prop_concern_any
   previous_value <- preschool %>% filter(geography == input$geog_name_summary_CW, financial_year == previous_date) %>%
-    .$prop_concern_any %>% round_half_up(4)*100
+    .$prop_concern_any
 
   summaryBoxServer("child_development_cw",
                    recent_date = recent_date,
