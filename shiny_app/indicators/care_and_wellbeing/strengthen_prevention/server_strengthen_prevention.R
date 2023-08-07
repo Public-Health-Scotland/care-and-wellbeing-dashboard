@@ -953,7 +953,7 @@ output$drug_deaths_simd_plot = renderPlotly({
 
   }
 
-  drug_deaths_SIMD %>%
+  drug_deaths_simd %>%
     mutate(indicator = indicator_y) %>%
     make_line_chart_multi_lines(x = .$year, y = .$rate, colour = .$SIMD,
                                 y_axis_title = y_title, x_axis_title = "Year", title = title)
@@ -986,7 +986,7 @@ observeEvent(input$drug_deaths_geog_name,{
 
 
 
-data_unfiltered <- drug_deaths_SIMD %>%
+data_unfiltered <- drug_deaths_simd %>%
   select(year, SIMD, rate, number) %>%
   arrange(year) %>%
   rename("Number of drug-related deaths" = "number",

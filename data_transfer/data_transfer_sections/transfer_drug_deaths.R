@@ -178,4 +178,4 @@ deaths_SIMD <- deaths_SIMD_scotland %>%
   filter(!SIMD == "Scotland")
 
 
-drug_deaths_SIMD <- deaths_SIMD
+replace_file_fn(deaths_SIMD, paste0(path_out, "/drug_deaths_simd.rds"))
