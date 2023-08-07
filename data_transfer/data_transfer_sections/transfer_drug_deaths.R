@@ -139,3 +139,43 @@ replace_file_fn(deaths_rate_bind, paste0(path_out, "/drug_related_deaths.rds"))
 
 rm(deaths_CA_rate, deaths_CA_LCI, deaths_CA_UCI, deaths_CA_number,
    deaths_rate_CA, deaths_rate_HB, deaths_rate_bind)
+
+
+
+
+
+###############################################
+## SIMD QUINTILES
+###############################################
+
+
+col_names <- c("year", "rate_scotland", "lower_ci_scotland", "upper_ci_scotland", "number_scotland")
+
+for(i in 1:5) {
+
+  quintile_names <- c(paste0("rate_",i), paste0("lower_ci_",i),paste0("upper_ci_",i), paste0("number_",i))
+
+  col_names <- append(col_names, quintile_names)
+
+}
+
+deaths_SIMD_scotland = read_excel(paste0(path_in_pop, "drug-related-deaths.xlsx"),
+                                  sheet = "11 - SIMD Quintiles", skip = 4, col_names = col_names) %>%
+filter(!is.na(rate_scotland))
+
+
+deaths_SIMD <- deaths_SIMD_scotland %>%
+  pivot_longer(2:25) %>%
+  filter(year >= 2008) %>%
+  mutate(SIMD = str_extract(name, "\\d"),
+         name = str_remove(name, "_\\d"),
+         SIMD = ifelse(is.na(SIMD), "Scotland", SIMD),
+         SIMD = recode(SIMD, "1" = "1 - Most deprived",
+                       "5" = "5 - Least deprived"),
+         name = str_remove(name, "_scotland"),
+         value = as.double(value)) %>%
+  pivot_wider(names_from = name, values_from = value) %>%
+  filter(!SIMD == "Scotland")
+
+
+drug_deaths_SIMD <- deaths_SIMD

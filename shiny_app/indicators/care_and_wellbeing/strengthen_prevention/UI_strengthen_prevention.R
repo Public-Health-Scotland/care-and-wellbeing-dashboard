@@ -149,9 +149,9 @@ tagList(
                                                               width = "100%")),
                                            column(4,
                                                   radioButtons("alcohol_deaths_rate_number",
-                                                                           "Step 2. View rate per 100,000 population or number of deaths",
-                                                                           choices = c("Rate", "Number"),
-                                                                           width = "100%"))
+                                                               "Step 2. View rate per 100,000 population or number of deaths",
+                                                               choices = c("Rate", "Number"),
+                                                               width = "100%"))
                                          ),
 
                                          altTextUI("alcohol_deaths_sex_alt"),
@@ -368,7 +368,8 @@ tagList(
                                                                                              "the 2017-2021 year range.",
                                                                                              #"More up to date data is available at source.",
                                                                                              "<br><br>These data are available at Scotland,",
-                                                                                             " NHS Health Board and Council Area levels.",
+                                                                                             " NHS Health Board and Council Area levels with additional breakdowns ",
+                                                                                             "by SIMD quintile.",
                                                                                              "<br><br> More detailed information can be found in the accompanying",
                                                                                              "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
@@ -405,11 +406,25 @@ tagList(
                                         ciDefinitionUI("drug_deaths_ci"),
                                         withSpinner(plotlyOutput("drug_deaths_plot")),
 
+                                        altTextUI("drug_deaths_simd_alt"),
+                                        simdQuintileDefinitionUI("drug_deaths_simd"),
+                                        withSpinner(plotlyOutput("drug_deaths_simd_plot")),
+
                                         br(),
                                         uiOutput("drug_deaths_title"),
                                         p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                                         br(),
-                                        dataDownloadUI("drug_deaths")
+
+
+                                        tabBox(
+                                          id = "drug_deaths_tabBox", height = "250px", width=12,
+                                          tabPanel("Drug-related deaths",
+                                                   br(),
+                                                   dataDownloadUI("drug_deaths")),
+                                          tabPanel("SIMD",
+                                                   br(),
+                                                   dataDownloadUI("drug_deaths_simd"))
+                                        )
 
 
 

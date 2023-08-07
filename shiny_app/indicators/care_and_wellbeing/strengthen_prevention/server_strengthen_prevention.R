@@ -920,6 +920,47 @@ output$drug_deaths_plot = renderPlotly({
   }
 })
 
+altTextServer("drug_deaths_simd_alt",
+              title = "Drug-related deaths plot",
+              content = tags$ul(tags$li("This is a plot for the trend in drug-related deaths by SIMD in Scotland ."),
+                                tags$li("The x axis are the years starting form 2008."),
+                                tags$li("If in the choice above the plot `Rate` is chosen,
+                                        then the y axis is the age-standerdised rate per 100,000 population. If instead `Number` is chosen, the the y
+                                        axis is the total number of deaths"),
+                                tags$li("The legend shows the 5 SIMD qunitles from 1 (Most deprived) to 5 (Least deprived) which refer
+                                        to the five lines visualised on the plot.")))
+
+
+
+output$drug_deaths_simd_plot = renderPlotly({
+
+  title_rate <- glue("Age-standardised rates per 100,000 of drug-related deaths in Scotland")
+
+  title_number <- glue("Number of drug-related deaths in Scotland")
+
+
+  if (input$drug_deaths_rate_number == "Rate") {
+
+    title = title_rate
+    indicator_y = "rate"
+    y_title = "Age-standardised rate of deaths <br> per 100,000 population"
+
+  } else if (input$drug_deaths_rate_number == "Number") {
+
+    title = title_number
+    indicator_y = "number"
+    y_title = "Total number of deaths"
+
+  }
+
+  drug_deaths_SIMD %>%
+    mutate(indicator = indicator_y) %>%
+    make_line_chart_multi_lines(x = .$year, y = .$rate, colour = .$SIMD,
+                                y_axis_title = y_title, x_axis_title = "Year", title = title)
+
+
+})
+
 #observeEvent(input$drug_deaths_geog_type,{
 observeEvent(input$drug_deaths_geog_name,{
 
@@ -943,12 +984,38 @@ observeEvent(input$drug_deaths_geog_name,{
 })
 #})
 
-observeEvent(input$drug_deaths_geog_name,{
 
-  output$drug_deaths_title <- renderUI({h3(glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths in ",
-                                                input$drug_deaths_geog_name))})
+
+data_unfiltered <- drug_deaths_SIMD %>%
+  select(year, SIMD, rate, number) %>%
+  arrange(year) %>%
+  rename("Number of drug-related deaths" = "number",
+         "Drug-related deaths rate" = "rate")
+
+dataDownloadServer(data = data_unfiltered, data_download = data_unfiltered,
+                   id = "drug_deaths_simd", filename = "drug_deaths_simd",
+                   add_separator_cols = c(4),
+                   add_separator_cols_1dp = c(3),
+                   keep_colnames = c(2))
+
+observeEvent(input$drug_deaths_tabBox,{
+  observeEvent(input$drug_deaths_geog_name,{
+
+    if (input$drug_deaths_tabBox == "SIMD"){
+
+      simd_insert =  "by SIMD"
+      geography = "Scotland"
+
+    } else {
+
+      simd_insert = ""
+      geography = glue(input$drug_deaths_geog_name)
+    }
+
+    output$drug_deaths_title <- renderUI({h3(glue("Data table: Number and age standardised rates per 100,000 of drug-related deaths ", simd_insert, " in ",
+                                                  geography))})
+  })
 })
-
 ##############################################.
 # ALCOHOL: DEATHS AND FIRST HOSPITAL ADMISSIONS ----
 ##############################################.
@@ -1092,15 +1159,15 @@ output$alcohol_deaths_sex_plot = renderPlotly({
   if(input$alcohol_deaths_rate_number == "Rate") {
 
     data %>% confidence_line_function(y_title = y_title,
-                             x_title = "Year",
-                             title=title) %>%
+                                      x_title = "Year",
+                                      title=title) %>%
       layout(xaxis = list(dtick = 1, tickangle = -30))
   } else {
     data %>%
       line_chart_function(y_title = y_title,
                           x_title = "Year",
                           title=title
-                                  )
+      )
 
   }
 
