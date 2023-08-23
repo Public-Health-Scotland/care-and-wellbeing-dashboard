@@ -18,6 +18,15 @@ preschool_sex = read_csv(paste0(path_in, "/open27mlasex.csv")) %>%
   select(ca2019 = ca, sex, financial_year, number_of_reviews, concern_any) %>%
   left_join(., lookup_LA)
 
+# Rename ethnicities
+rep_str <- c("White$" = "White Other",
+             "WhiteScot" = "White Scottish",
+             "WhiteBrit" = "White Other British",
+             "Pole" = "White Polish",
+             "Mix" = "Mixed / Multiple Ethnicity",
+             "Black" = "Black, Caribbean or African",
+             "Not Known" = "Other / Unknown")
+
 # Read in ethnicity data
 preschool_ethnicity = read_csv(paste0(path_in, "/open27mscethnicity.csv")) %>%
   clean_names() %>%
@@ -26,14 +35,9 @@ preschool_ethnicity = read_csv(paste0(path_in, "/open27mscethnicity.csv")) %>%
          ca2019 = "Scotland", ca2019name = "Scotland",
          hb2019 = "Scotland", hb2019name = "Scotland",
          geography = "Scotland",
-         ethnicity = str_replace(ethnicity, "WhiteScot", "White Scottish"),
-         ethnicity = str_replace(ethnicity, "WhiteBrit", "White Other British"),
-         ethnicity = str_replace(ethnicity, "Pole", "White Polish"),
-         ethnicity = str_replace(ethnicity, "Other", "White Other"),
-         ethnicity = str_replace(ethnicity, "Mix", "Mixed / Multiple Ethnicity"),
-         ethnicity = str_replace(ethnicity, "Black", " Black, Caribbean, or African"),
-         ethnicity = str_replace(ethnicity, "Not Known", "Other / Unknown")) %>%
+         ethnicity = str_replace_all(ethnicity, rep_str)) %>%
   filter(ethnicity != "Not Applicable")
+
 
 # Recoding unknown geographies
 preschool_unknown = preschool %>%
