@@ -30,9 +30,9 @@ preschool_ethnicity = read_csv(paste0(path_in, "/open27mscethnicity.csv")) %>%
          ethnicity = str_replace(ethnicity, "WhiteBrit", "White Other British"),
          ethnicity = str_replace(ethnicity, "Pole", "White Polish"),
          ethnicity = str_replace(ethnicity, "Other", "White Other"),
-         ethnicity = str_replace(ethnicity, "Mixed", "Mixed / Multiple Ethnicity"),
+         ethnicity = str_replace(ethnicity, "Mix", "Mixed / Multiple Ethnicity"),
          ethnicity = str_replace(ethnicity, "Black", " Black, Caribbean, or African"),
-         ethnicity = str_replace(ethnicity, "Unknown", "Other / Unknown")) %>%
+         ethnicity = str_replace(ethnicity, "Not Known", "Other / Unknown")) %>%
   filter(ethnicity != "Not Applicable")
 
 # Recoding unknown geographies
