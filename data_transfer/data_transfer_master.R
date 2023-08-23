@@ -100,7 +100,7 @@ summary_format_function = function(data, date, geog_type, geog, indicator_in, va
 
 lookup_master = readRDS(paste0(
   path_linkage,
-  "/Geography/HSCP Locality/HSCP Localities_DZ11_Lookup_20220630.rds"
+  "/Geography/HSCP Locality/Archive/HSCP Localities_DZ11_Lookup_20220630.rds"
 )) %>%
   select(hb2019name, hb2019, ca2019name, ca2019, hscp2019name, hscp2019) %>%
   unique()
