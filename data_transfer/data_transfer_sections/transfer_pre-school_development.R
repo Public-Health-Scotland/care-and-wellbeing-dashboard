@@ -26,8 +26,13 @@ preschool_ethnicity = read_csv(paste0(path_in, "/open27mscethnicity.csv")) %>%
          ca2019 = "Scotland", ca2019name = "Scotland",
          hb2019 = "Scotland", hb2019name = "Scotland",
          geography = "Scotland",
-         ethnicity = str_replace(ethnicity, "WhiteBrit", "White British"),
-         ethnicity = str_replace(ethnicity, "WhiteScot", "White Scottish")) %>%
+         ethnicity = str_replace(ethnicity, "WhiteScot", "White Scottish"),
+         ethnicity = str_replace(ethnicity, "WhiteBrit", "White Other British"),
+         ethnicity = str_replace(ethnicity, "Pole", "White Polish"),
+         ethnicity = str_replace(ethnicity, "Other", "White Other"),
+         ethnicity = str_replace(ethnicity, "Mixed", "Mixed / Multiple Ethnicity"),
+         ethnicity = str_replace(ethnicity, "Black", " Black, Caribbean, or African"),
+         ethnicity = str_replace(ethnicity, "Unknown", "Other / Unknown")) %>%
   filter(ethnicity != "Not Applicable")
 
 # Recoding unknown geographies
