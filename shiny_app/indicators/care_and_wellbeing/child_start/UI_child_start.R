@@ -18,12 +18,13 @@ tagList(
                            iButtonUI("child_development_cw", content =  paste("This indicator provides data on Health Visitors\\'",
                                                                               "assesments of any developmental concerns in children aged 27-30 months.",
                                                                               "<br><br>Source:",
-                                                                              "<a href= https://publichealthscotland.scot/publications/early-child-development/early-child-development-statistics-scotland-2020-to-2021/ target = _blank> Early child development, Public Health Scotland (external site)</a>.",
+                                                                              "<a href= https://publichealthscotland.scot/publications/early-child-development/early-child-development-statistics-scotland-2021-to-2022/ target = _blank> Early child development, Public Health Scotland (external site)</a>.",
                                                                               "<br><br>The most current data available displayed in the Care and Wellbeing dashboard is",
                                                                               "the year range 2021/22.",
                                                                               # "More up to date data is available at source.",
                                                                               "<br><br>These data are available at Scotland,",
-                                                                              "NHS Health Board and Council Area levels.",
+                                                                              "NHS Health Board and Council Area levels,",
+                                                                              "with additional breakdowns by sex, SIMD quintile and ethnicity.",
                                                                               "<br><br> More detailed information can be found in the accompanying",
                                                                               "<a href=https://www.publichealthscotland.scot/media/20214/care-and-wellbeing-dashboard-metadata.xlsx target = blank> metadata </a> file."))),
 
@@ -66,8 +67,15 @@ tagList(
                                              label = "Step 2. Select national or local geography area",
                                              choices = unique(geog_lookup %>% filter(geography_type == "Scotland") %>% .$geography),
                                              selectize = FALSE,
-                                             width = "100%",
-                                 ))),
+                                             width = "100%")),
+                          column(4,
+                                 selectInput("child_development_cw_breakdowns",
+                                             label = "Step 3. Select a breakdown",
+                                             choices = c("Yearly total", "Sex breakdown", "SIMD breakdown", "Ethnicity breakdown"),
+                                             selectize = FALSE,
+                                             width = "100%"))
+
+                                 ),
 
 
                         # plot_title("Proportion of health visitor reviews where any form of developmental concern was raised",
@@ -78,17 +86,16 @@ tagList(
 
 
                         altTextUI("child_development_cw_alt"),
+                        simdQuintileDefinitionUI("child_development_cw_simd"),
                         withSpinner(plotlyOutput("child_development_cw_plot")),
+                        
 
 
 
                         uiOutput("child_development_cw_table_title"),
-                        p("To view the full dataset, please use the download buttons below."),
-                        # radioButtons("child_development_cw_geog_table",
-                        #              "Select geography type for data table",
-                        #              choices = unique(preschool$geography_type),
-                        #              inline = TRUE),
+                        p("The data table is based on the selections above. To view the full dataset, please use the download buttons below."),
                         dataDownloadUI("child_development_cw")
+
                ),
 
                ##############################################.

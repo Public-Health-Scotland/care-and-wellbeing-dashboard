@@ -22,7 +22,7 @@ output$home_about <- renderUI({
             "ambitions of the ",
             tags$a(href= "https://www.gov.scot/groups/care-and-wellbeing-portfolio-board/", "Care & Wellbeing Portfolio"),
             "to improve population health, address health inequalities and improve the health and care system."),
-          p("Many of the influences on health outcomes lie out with health and social care.",
+          p("Many of the influences on health outcomes lie outwith health and social care.",
             "Collective action across government, with health boards, local government partners and the wider",
             "public sector, is fundamental to improving population health and reducing health inequalities."),
           p("A range of indicators are included in this dashboard structured around the evidence-based",
@@ -327,7 +327,7 @@ output$home_further_info <- renderUI({
 
           p("The underpinning framework of the Portfolio is the evidence-based Marmot model of factors – \"policy objectives\"",
             "that create health and reduce inequalities.  This globally recognised framework was first set out in",
-            tags$a(href= "https://www.instituteofhealthequity.org/resources-reports/fair-society-healthy-lives-the-marmot-review", "Fair Society, Health Lives"),
+            tags$a(href= "https://www.instituteofhealthequity.org/resources-reports/fair-society-healthy-lives-the-marmot-review", "Fair Society, Healthy Lives"),
             "in 2010, updated in a", tags$a(href = "https://www.health.org.uk/publications/reports/the-marmot-review-10-years-on", "10 year on report."),
             "These include good early years; good education; good work; good income; healthy places; tackling discrimination",
             "and racism; and good ill health prevention."),
