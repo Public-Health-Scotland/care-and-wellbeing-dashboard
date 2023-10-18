@@ -40,7 +40,7 @@ tagList(
                         fluidRow(
                           column(4,
                                  radioButtons("asthma_admissions_rate_number",
-                                              "Step 4. View rate per 100,000 population or number of deaths",
+                                              "Step 4. View rate per 100,000 population or number of admissions",
                                               choices = c("Rate",
                                                           "Number"),
                                               width = "100%"))),
@@ -105,7 +105,7 @@ tagList(
                                                               width = "100%")),
                                            column(4,
                                                   radioButtons("alcohol_admissions_rate_number",
-                                                               "Step 3. View rate per 100,000 population or number of deaths",
+                                                               "Step 3. View rate per 100,000 population or number of admissions",
                                                                choices = c("Rate",
                                                                            "Number"),
                                                                width = "100%"))),
@@ -487,7 +487,7 @@ tagList(
                         fluidRow(
                           column(4,
                                  radioButtons("hospital_admission_heart_attack_rate_number",
-                                              "View rate per 100,000 population or number of deaths",
+                                              "View rate per 100,000 population or number of admissions",
                                               choices = c("Rate",
                                                           "Number"),
                                               width = "100%")
