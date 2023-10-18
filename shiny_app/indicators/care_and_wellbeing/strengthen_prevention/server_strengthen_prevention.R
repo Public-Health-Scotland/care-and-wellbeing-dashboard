@@ -934,9 +934,9 @@ altTextServer("drug_deaths_simd_alt",
 
 output$drug_deaths_simd_plot = renderPlotly({
 
-  title_rate <- glue("Age-standardised rates per 100,000 of drug-related deaths in Scotland")
+  title_rate <- glue("Age-standardised rates per 100,000 of drug-related deaths in Scotland by SIMD")
 
-  title_number <- glue("Number of drug-related deaths in Scotland")
+  title_number <- glue("Number of drug-related deaths in Scotland by SIMD")
 
 
   if (input$drug_deaths_rate_number == "Rate") {
