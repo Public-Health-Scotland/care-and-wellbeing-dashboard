@@ -10,11 +10,13 @@ output$home_about <- renderUI({
               fluidRow(column(1, style = 'margin-right: -15px',
                               p(icon("inbox", style = "color: #4B006E"))),
                        (column(11, style = 'margin-left: -15px',
-                               "This is an early release of the dashboard and it will be further developed following",
-                               "user feedback. The dashboard and indicators will continue to be updated over the coming months.",
-                               "Please note the indicator set is not final and is subject to ongoing review.",
-                               "Please send any feedback to",
-                               tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot."))))),
+                               "The Scottish Government and",
+                               tags$a(href = "https://www.scotpho.org.uk/", "ScotPHO"),
+                               "will be working together on the future development of the Care and Wellbeing dashboard.",
+                               "The Care and Wellbeing dashboard will be integrated into the",
+                               tags$a(href = "https://scotland.shinyapps.io/ScotPHO_profiles_tool/", "ScotPHO online profiles tool"),
+                               "and further developed following user feedback. Please send any feedback to",
+                               tags$a(href = "mailto:phs.scotpho@phs.scot?subject=Care%20and%20Wellbeing%20Feedback", "phs.scotpho@phs.scot."))))),
           br(),
           br(),
 
@@ -258,13 +260,13 @@ output$home_dashboard <- renderUI({
 output$home_news_updates <- renderUI({
 
   tagList(h3(tags$b("News and future updates")),
-          p("This is an early release of the dashboard and it will be further developed following user feedback."),
-          p("Over the coming months, we are planning to:",
-            tags$li("Review and add further equalities breakdowns where data exists"),
-            tags$li("Develop the ‘at a glance’ section to make it easier to gain a quick overview and assessment of progress across the Marmot policy objectives"),
-            tags$li("Review and add new indicators where needed")),
-          p("We are keen to develop the dashboard in an agile way and hear feedback from users."),
-          p("Please send any feedback to", tags$a(href = "mailto:phs.Covid19Data&Analytics@phs.scot?subject=Care%20and%20Wellbeing%20Dashboard%20Feedback", "phs.Covid19Data&Analytics@phs.scot.")),
+          p("The Scottish Government and", tags$a(href = "https://www.scotpho.org.uk/", "ScotPHO"),
+            "will be working together on the future development of the Care and Wellbeing dashboard.",
+            "The Care and Wellbeing dashboard will be integrated into the",
+             tags$a(href = "https://scotland.shinyapps.io/ScotPHO_profiles_tool/", "ScotPHO online profiles tool"),
+             "and further developed following user feedback."),
+
+          p("Please send any feedback to", tags$a(href = "mailto:phs.scotpho@phs.scot?subject=Care%20and%20Wellbeing%20Feedback", "phs.scotpho@phs.scot.")),
 
           h3(tags$b("Recent updates on the 31st July 2023")),
           h4("Data updates"),
@@ -327,7 +329,7 @@ output$home_further_info <- renderUI({
 
           p("The underpinning framework of the Portfolio is the evidence-based Marmot model of factors – \"policy objectives\"",
             "that create health and reduce inequalities.  This globally recognised framework was first set out in",
-            tags$a(href= "https://www.instituteofhealthequity.org/resources-reports/fair-society-healthy-lives-the-marmot-review", "Fair Society, Health Lives"),
+            tags$a(href= "https://www.instituteofhealthequity.org/resources-reports/fair-society-healthy-lives-the-marmot-review", "Fair Society, Healthy Lives"),
             "in 2010, updated in a", tags$a(href = "https://www.health.org.uk/publications/reports/the-marmot-review-10-years-on", "10 year on report."),
             "These include good early years; good education; good work; good income; healthy places; tackling discrimination",
             "and racism; and good ill health prevention."),
